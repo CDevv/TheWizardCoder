@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkmomdkodys8p"]
+
+[ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="1_rbxpk"]
+[ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="2_y37u4"]
+
+[node name="MainMenuDisplay" type="CanvasLayer"]
+
+[node name="GameTitle" type="Label" parent="."]
+offset_left = 16.0
+offset_top = 64.0
+offset_right = 277.0
+offset_bottom = 100.0
+theme = ExtResource("1_rbxpk")
+theme_override_font_sizes/font_size = 36
+text = "The Wizard Coder
+"
+
+[node name="MainMenuRect" type="NinePatchRect" parent="."]
+offset_left = 16.0
+offset_top = 112.0
+offset_right = 104.0
+offset_bottom = 204.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_y37u4")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenuRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuRect/MarginContainer"]
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="MainMenuRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_rbxpk")
+theme_override_font_sizes/font_size = 16
+text = "Play"
+
+[node name="OptionsButton" type="Button" parent="MainMenuRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_rbxpk")
+theme_override_font_sizes/font_size = 16
+text = "Options
+"

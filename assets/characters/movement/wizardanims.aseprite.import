@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bpb30wr60k58v"
+path="res://.godot/imported/wizardanims.aseprite-a40d0608a217cea73faf72fd55fa9dae.res"
+
+[deps]
+
+source_file="res://assets/characters/movement/wizardanims.aseprite"
+dest_files=["res://.godot/imported/wizardanims.aseprite-a40d0608a217cea73faf72fd55fa9dae.res"]
+
+[params]
+

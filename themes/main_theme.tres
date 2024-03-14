@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://db7w42eb47dby"]
+
+[ext_resource type="FontFile" uid="uid://bj4nc33227547" path="res://fonts/DisposableDroidBB.ttf" id="1_kahlf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4btd0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yml05"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0vj7p"]
+
+[resource]
+Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/colors/font_focus_color = Color(0.94902, 0.94902, 0.94902, 0.372549)
+Button/colors/font_hover_color = Color(0.94902, 0.94902, 0.94902, 0.372549)
+Button/fonts/font = ExtResource("1_kahlf")
+Button/styles/focus = SubResource("StyleBoxEmpty_4btd0")
+Button/styles/hover = SubResource("StyleBoxEmpty_yml05")
+Button/styles/normal = SubResource("StyleBoxEmpty_0vj7p")
+Label/fonts/font = ExtResource("1_kahlf")
