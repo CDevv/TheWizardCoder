@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2saopq748u80"]
+[gd_scene load_steps=11 format=3 uid="uid://d2saopq748u80"]
 
 [ext_resource type="Texture2D" uid="uid://dqkr47csbh7xv" path="res://assets/tilesets/wizardhouseassets.png" id="1_74y2w"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="1_m6ahu"]
 [ext_resource type="Texture2D" uid="uid://b8p3fns1qo732" path="res://assets/props/homebed.png" id="3_dkk2o"]
 [ext_resource type="Texture2D" uid="uid://d0f653x8qwacd" path="res://assets/props/homelamp.png" id="4_dq5hh"]
+[ext_resource type="PackedScene" uid="uid://c7s1i2ervmbqe" path="res://scenes/prefabs/interactable.tscn" id="5_ppylh"]
+[ext_resource type="Resource" uid="uid://bqgh81grm43r" path="res://dialogue/test.dialogue" id="6_q2f0n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1uwmu"]
 texture = ExtResource("1_74y2w")
@@ -138,3 +140,9 @@ position = Vector2(232, 184)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomCollision"]
 polygon = PackedVector2Array(160, 168, 128, 168, 128, 416, 192, 416, 192, 448, 304, 448, 304, 416, 480, 416, 480, 160, 448, 160, 448, 384, 272, 384, 272, 400, 224, 400, 224, 384, 160, 384)
+
+[node name="Interactable" parent="." instance=ExtResource("5_ppylh")]
+position = Vector2(272, 198)
+scale = Vector2(1.52169, -0.970062)
+DialogueResource = ExtResource("6_q2f0n")
+DialogueTitle = "demo"

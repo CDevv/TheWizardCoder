@@ -6,10 +6,12 @@ public partial class Player : CharacterBody2D
 	public const int Speed = 2;
 
 	private AnimationTree animationTree;
+	private Area2D interactableFinder;
 
     public override void _Ready()	
     {
         animationTree = GetNode<AnimationTree>("AnimationTree");
+		interactableFinder = GetNode<Area2D>("InteractableFinder");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -36,4 +38,17 @@ public partial class Player : CharacterBody2D
 
 		MoveAndCollide(velocity);
 	}
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        if (Input.IsActionJustPressed("ui_accept"))
+		{
+			var overlappingAreas = interactableFinder.GetOverlappingAreas();
+			if (overlappingAreas.Count > 0)
+			{
+				//global.CanWalk = false;
+				(overlappingAreas[0] as Interactable).ShowDialogue();
+			}
+		}
+    }
 }

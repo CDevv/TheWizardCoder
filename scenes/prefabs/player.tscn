@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dk58pi6w8qy72"]
+[gd_scene load_steps=29 format=3 uid="uid://dk58pi6w8qy72"]
 
 [ext_resource type="Texture2D" uid="uid://dhrgn37kqbfws" path="res://assets/characters/movement/wizard.png" id="1_e1ryk"]
 [ext_resource type="Script" path="res://scripts/prefabs/Player.cs" id="1_ed4f5"]
@@ -230,8 +230,12 @@ tracks/1/keys = {
 "values": [5]
 }
 
+[sub_resource type="Animation" id="Animation_qygld"]
+length = 0.001
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kk854"]
 _data = {
+"RESET": SubResource("Animation_qygld"),
 "down": SubResource("Animation_cfaem"),
 "down_idle": SubResource("Animation_tmhon"),
 "left": SubResource("Animation_ug6i7"),
@@ -310,6 +314,9 @@ states/Move/node = SubResource("AnimationNodeBlendSpace2D_1ygcj")
 states/Move/position = Vector2(681.333, 110)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ms05w"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_s8i4f"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_3fsii")]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2bwc"]
+size = Vector2(41, 29)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ed4f5")
 
@@ -354,3 +361,11 @@ parameters/conditions/idle = false
 parameters/conditions/move = false
 parameters/Idle/blend_position = Vector2(-0.0208817, 0.873529)
 parameters/Move/blend_position = Vector2(-0.00696057, 0.808824)
+
+[node name="InteractableFinder" type="Area2D" parent="."]
+position = Vector2(0, 25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableFinder"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_o2bwc")
+debug_color = Color(1, 0, 0, 0.419608)

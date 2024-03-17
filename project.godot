@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
+[dialogue_manager]
+
+general/balloon_path="res://scenes/prefabs/Balloon.tscn"
+
 [display]
 
 window/size/viewport_width=640
@@ -33,6 +37,10 @@ project/assembly_name="TheWizardCoder"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg")
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://dialogue/test.dialogue")
 
 [rendering]
 
