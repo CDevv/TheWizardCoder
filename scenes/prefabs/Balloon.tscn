@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://73jm5qjy52vq"]
+[gd_scene load_steps=15 format=3 uid="uid://73jm5qjy52vq"]
 
 [ext_resource type="Script" path="res://scripts/prefabs/DialogueBalloon.cs" id="1_8me32"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_27tc2"]
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="2_dj4qj"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="3_0uekm"]
 [ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="3_ax520"]
+[ext_resource type="Texture2D" uid="uid://c2qot3pr0oxof" path="res://assets/characters/portraits/nolan.png" id="5_et0dt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -67,6 +68,21 @@ Panel/styles/panel = SubResource("StyleBoxFlat_uy0d5")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rxvao"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_65rxj"]
+atlas = ExtResource("5_et0dt")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_udqnk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65rxj")
+}],
+"loop": true,
+"name": &"nolan",
+"speed": 5.0
+}]
+
 [node name="ExampleBalloon" type="CanvasLayer"]
 layer = 100
 script = ExtResource("1_8me32")
@@ -114,48 +130,72 @@ patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Balloon/Panel/Dialogue"]
+[node name="TextMarginContainer" type="MarginContainer" parent="Balloon/Panel/Dialogue"]
+unique_name_in_owner = true
 layout_mode = 0
-offset_right = 600.0
+offset_right = 601.0
 offset_bottom = 164.0
 scale = Vector2(0.5, 0.5)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/Panel/Dialogue/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/Panel/Dialogue/TextMarginContainer"]
 layout_mode = 2
 
-[node name="CharacterLabel" type="RichTextLabel" parent="Balloon/Panel/Dialogue/MarginContainer/VBoxContainer"]
+[node name="CharacterLabel" type="RichTextLabel" parent="Balloon/Panel/Dialogue/TextMarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
-mouse_filter = 1
+mouse_filter = 2
 theme = ExtResource("3_0uekm")
+theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "Character"
 fit_content = true
 scroll_active = false
 
-[node name="DialogueLabel" parent="Balloon/Panel/Dialogue/MarginContainer/VBoxContainer" instance=ExtResource("2_27tc2")]
+[node name="DialogueLabel" parent="Balloon/Panel/Dialogue/TextMarginContainer/VBoxContainer" instance=ExtResource("2_27tc2")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("3_0uekm")
+theme_override_font_sizes/normal_font_size = 24
 text = "Dialogue..."
 
-[node name="ResponsesRect" type="NinePatchRect" parent="Balloon"]
+[node name="Portrait" type="AnimatedSprite2D" parent="Balloon/Panel/Dialogue"]
 unique_name_in_owner = true
+visible = false
+position = Vector2(40, 32.5)
+sprite_frames = SubResource("SpriteFrames_udqnk")
+animation = &"nolan"
+
+[node name="Responses" type="MarginContainer" parent="Balloon"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchors_preset = -1
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 60.0
-offset_top = -316.0
-offset_right = 182.0
+offset_left = 320.0
+offset_top = 164.0
+offset_right = -169.0
 offset_bottom = -261.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 scale = Vector2(2, 2)
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="BoxContainer" type="BoxContainer" parent="."]
+offset_left = 320.0
+offset_top = 164.0
+offset_right = 471.0
+offset_bottom = 219.0
+scale = Vector2(2, 2)
+
+[node name="ResponsesRect" type="NinePatchRect" parent="BoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 texture = ExtResource("2_dj4qj")
 region_rect = Rect2(0, 0, 16, 16)
 patch_margin_left = 3
@@ -163,30 +203,35 @@ patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 
-[node name="Responses" type="MarginContainer" parent="Balloon/ResponsesRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 119.0
-offset_bottom = 129.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Responses" type="MarginContainer" parent="BoxContainer/ResponsesRect"]
+layout_mode = 2
+offset_right = 301.0
+offset_bottom = 110.0
 scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
 
-[node name="ResponsesMenu" type="VBoxContainer" parent="Balloon/ResponsesRect/Responses" node_paths=PackedStringArray("response_template")]
+[node name="ResponsesMenu" type="VBoxContainer" parent="BoxContainer/ResponsesRect/Responses" node_paths=PackedStringArray("response_template")]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 0
+size_flags_stretch_ratio = 0.5
 theme_override_constants/separation = 2
 script = ExtResource("3_ax520")
 response_template = NodePath("ResponseExample")
 
-[node name="ResponseExample" type="Button" parent="Balloon/ResponsesRect/Responses/ResponsesMenu"]
+[node name="ResponseExample" type="Button" parent="BoxContainer/ResponsesRect/Responses/ResponsesMenu"]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
 mouse_filter = 2
 theme = ExtResource("3_0uekm")
+theme_override_font_sizes/font_size = 24
 text = "Response example"
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
-[connection signal="response_selected" from="Balloon/ResponsesRect/Responses/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]
+[connection signal="response_selected" from="BoxContainer/ResponsesRect/Responses/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]

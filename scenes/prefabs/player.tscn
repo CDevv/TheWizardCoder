@@ -6,6 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vnlqn"]
 size = Vector2(30, 20)
 
+[sub_resource type="Animation" id="Animation_qygld"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_cfaem"]
 length = 0.9
 loop_mode = 1
@@ -229,9 +232,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [5]
 }
-
-[sub_resource type="Animation" id="Animation_qygld"]
-length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kk854"]
 _data = {

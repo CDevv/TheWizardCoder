@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://d2saopq748u80"]
+[gd_scene load_steps=12 format=3 uid="uid://d2saopq748u80"]
 
 [ext_resource type="Texture2D" uid="uid://dqkr47csbh7xv" path="res://assets/tilesets/wizardhouseassets.png" id="1_74y2w"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="1_m6ahu"]
 [ext_resource type="Texture2D" uid="uid://b8p3fns1qo732" path="res://assets/props/homebed.png" id="3_dkk2o"]
 [ext_resource type="Texture2D" uid="uid://d0f653x8qwacd" path="res://assets/props/homelamp.png" id="4_dq5hh"]
 [ext_resource type="PackedScene" uid="uid://c7s1i2ervmbqe" path="res://scenes/prefabs/interactable.tscn" id="5_ppylh"]
-[ext_resource type="Resource" uid="uid://bqgh81grm43r" path="res://dialogue/test.dialogue" id="6_q2f0n"]
+[ext_resource type="Resource" uid="uid://b3qxogmareoxv" path="res://dialogue/first_room.dialogue" id="7_7fahn"]
+[ext_resource type="PackedScene" uid="uid://de21qftn035us" path="res://scenes/displays/game_display.tscn" id="7_purf7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1uwmu"]
 texture = ExtResource("1_74y2w")
@@ -105,6 +106,11 @@ size = Vector2(16, 26)
 
 [node name="FirstRoom" type="Node2D"]
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 640.0
+offset_bottom = 480.0
+color = Color(0.0745098, 0.0745098, 0.0745098, 1)
+
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(2, 2)
 tile_set = SubResource("TileSet_um14e")
@@ -141,8 +147,17 @@ position = Vector2(232, 184)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomCollision"]
 polygon = PackedVector2Array(160, 168, 128, 168, 128, 416, 192, 416, 192, 448, 304, 448, 304, 416, 480, 416, 480, 160, 448, 160, 448, 384, 272, 384, 272, 400, 224, 400, 224, 384, 160, 384)
 
-[node name="Interactable" parent="." instance=ExtResource("5_ppylh")]
+[node name="InteractableLamp" parent="." groups=["interactables"] instance=ExtResource("5_ppylh")]
 position = Vector2(272, 198)
 scale = Vector2(1.52169, -0.970062)
-DialogueResource = ExtResource("6_q2f0n")
-DialogueTitle = "demo"
+DialogueResource = ExtResource("7_7fahn")
+DialogueTitle = "lamp"
+
+[node name="InteractableBed" parent="." groups=["interactables"] instance=ExtResource("5_ppylh")]
+position = Vector2(176, 216)
+scale = Vector2(1.60712, -0.770067)
+DialogueResource = ExtResource("7_7fahn")
+DialogueTitle = "bed"
+
+[node name="GameDisplay" parent="." instance=ExtResource("7_purf7")]
+visible = false

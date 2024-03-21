@@ -5,17 +5,25 @@ public partial class Player : CharacterBody2D
 {
 	public const int Speed = 2;
 
+	private Global global;
+
 	private AnimationTree animationTree;
 	private Area2D interactableFinder;
 
     public override void _Ready()	
     {
+		global = GetNode<Global>("/root/Global");
         animationTree = GetNode<AnimationTree>("AnimationTree");
 		interactableFinder = GetNode<Area2D>("InteractableFinder");
     }
 
     public override void _PhysicsProcess(double delta)
 	{
+		if (!global.CanWalk)
+		{
+			return;
+		}
+
 		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down").Normalized();
 		Vector2 velocity = direction * Speed;
 
@@ -46,7 +54,7 @@ public partial class Player : CharacterBody2D
 			var overlappingAreas = interactableFinder.GetOverlappingAreas();
 			if (overlappingAreas.Count > 0)
 			{
-				//global.CanWalk = false;
+				global.CanWalk = false;
 				(overlappingAreas[0] as Interactable).ShowDialogue();
 			}
 		}

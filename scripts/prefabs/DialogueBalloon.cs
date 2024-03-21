@@ -8,12 +8,14 @@ namespace DialogueManagerRuntime
     const string NEXT_ACTION = "ui_accept";
     const string SKIP_ACTION = "ui_cancel";
 
-
+    Global global;
     Control balloon;
     RichTextLabel characterLabel;
     RichTextLabel dialogueLabel;
     VBoxContainer responsesMenu;
     NinePatchRect responsesRect;
+    MarginContainer textMarginContainer;
+    AnimatedSprite2D portrait;
 
     Resource resource;
     Array<Variant> temporaryGameStates = new Array<Variant>();
@@ -44,11 +46,14 @@ namespace DialogueManagerRuntime
 
     public override void _Ready()
     {
+      global = GetNode<Global>("/root/Global");
       balloon = GetNode<Control>("%Balloon");
       characterLabel = GetNode<RichTextLabel>("%CharacterLabel");
       dialogueLabel = GetNode<RichTextLabel>("%DialogueLabel");
       responsesMenu = GetNode<VBoxContainer>("%ResponsesMenu");
       responsesRect = GetNode<NinePatchRect>("%ResponsesRect");
+      textMarginContainer = GetNode<MarginContainer>("%TextMarginContainer");
+      portrait = GetNode<AnimatedSprite2D>("%Portrait");
 
       balloon.Hide();
 
@@ -84,6 +89,13 @@ namespace DialogueManagerRuntime
       responsesMenu.Connect("response_selected", Callable.From((DialogueResponse response) =>
       {
         Next(response.NextId);
+      }));
+
+      Engine.GetSingleton("DialogueManager").Connect("dialogue_ended", Callable.From((Resource dialogueResource) =>
+      {
+        balloon.Hide();
+
+        global.CanWalk = true;
       }));
 
       DialogueManager.Mutated += OnMutated;
@@ -142,6 +154,26 @@ namespace DialogueManagerRuntime
       responsesMenu.Hide();
       responsesMenu.Set("responses", dialogueLine.Responses);
 
+      //Set up portrait
+      string portraitTag = DialogueLine.GetTagValue("portrait");
+      if (!string.IsNullOrEmpty(portraitTag))
+      {
+        textMarginContainer.Set(MarginContainer.PropertyName.Position, new Vector2(58, 0));
+        textMarginContainer.Set(MarginContainer.PropertyName.Size, new Vector2(485, 164));
+
+        portrait.Show();
+        //SpriteFrames spriteFrames = GD.Load<SpriteFrames>($"res://sprites/characters/portraits/{DialogueLine.Character.ToLower()}");
+        portrait.Set(AnimatedSprite2D.PropertyName.Animation, DialogueLine.Character.ToLower());
+        portrait.Set(AnimatedSprite2D.PropertyName.Frame, int.Parse(portraitTag));
+      }
+      else
+      {
+        textMarginContainer.Set(MarginContainer.PropertyName.Position, new Vector2(0, 0));
+        textMarginContainer.Set(MarginContainer.PropertyName.Size, new Vector2(600, 164));
+
+        portrait.Hide();   
+      }
+
       // Type out the text
       balloon.Show();
       willHideBalloon = false;
@@ -192,6 +224,8 @@ namespace DialogueManagerRuntime
       {
         if (willHideBalloon)
         {
+          global.CanWalk = true;
+
           willHideBalloon = false;
           balloon.Hide();
         }
