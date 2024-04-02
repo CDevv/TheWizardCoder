@@ -16,6 +16,7 @@ namespace DialogueManagerRuntime
     NinePatchRect responsesRect;
     MarginContainer textMarginContainer;
     AnimatedSprite2D portrait;
+    AudioStreamPlayer2D audioPlayer;
 
     Resource resource;
     Array<Variant> temporaryGameStates = new Array<Variant>();
@@ -54,6 +55,7 @@ namespace DialogueManagerRuntime
       responsesRect = GetNode<NinePatchRect>("%ResponsesRect");
       textMarginContainer = GetNode<MarginContainer>("%TextMarginContainer");
       portrait = GetNode<AnimatedSprite2D>("%Portrait");
+      audioPlayer = GetNode<AudioStreamPlayer2D>("AudioPlayer");
 
       balloon.Hide();
 
@@ -174,6 +176,18 @@ namespace DialogueManagerRuntime
         portrait.Hide();   
       }
 
+      //Set up audio
+      var audioStream = GD.Load<AudioStream>($"res://sounds/voices/{dialogueLine.Character.ToLower()}_voice.wav");
+      if (audioStream != null)
+      {
+        audioPlayer.Set("stream", audioStream);
+      }
+      else
+      {
+        var unknownVoice = GD.Load<AudioStream>($"res://sounds/voices/nolan_voice.wav");
+        audioPlayer.Set("stream", unknownVoice);
+      }  
+
       // Type out the text
       balloon.Show();
       willHideBalloon = false;
@@ -234,5 +248,13 @@ namespace DialogueManagerRuntime
 
 
     #endregion
+
+    public void OnSpokeCharacter(string letter, int letterIndex, float speed)
+    {
+      if (letter != " ")
+      {
+        audioPlayer.Play();
+      }
+    }
   }
 }

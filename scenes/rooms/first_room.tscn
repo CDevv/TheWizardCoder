@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d2saopq748u80"]
+[gd_scene load_steps=13 format=3 uid="uid://d2saopq748u80"]
 
 [ext_resource type="Texture2D" uid="uid://dqkr47csbh7xv" path="res://assets/tilesets/wizardhouseassets.png" id="1_74y2w"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="1_m6ahu"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c7s1i2ervmbqe" path="res://scenes/prefabs/interactable.tscn" id="5_ppylh"]
 [ext_resource type="Resource" uid="uid://b3qxogmareoxv" path="res://dialogue/first_room.dialogue" id="7_7fahn"]
 [ext_resource type="PackedScene" uid="uid://de21qftn035us" path="res://scenes/displays/game_display.tscn" id="7_purf7"]
+[ext_resource type="AudioStream" uid="uid://cuc2f1rrwg8tb" path="res://music/home.wav" id="8_sjmk7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1uwmu"]
 texture = ExtResource("1_74y2w")
@@ -161,3 +162,7 @@ DialogueTitle = "bed"
 
 [node name="GameDisplay" parent="." instance=ExtResource("7_purf7")]
 visible = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_sjmk7")
+autoplay = true

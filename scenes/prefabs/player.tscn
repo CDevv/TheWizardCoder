@@ -36,6 +36,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 2, 1, 0, 3, 4, 3, 0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InteractableFinder:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_tmhon"]
 length = 0.15
@@ -63,6 +75,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InteractableFinder:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_ug6i7"]
@@ -92,6 +116,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [10, 11, 12, 11, 10, 13, 14, 13, 10]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InteractableFinder:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
 
 [sub_resource type="Animation" id="Animation_hin5s"]
 length = 0.15
@@ -119,6 +155,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [10]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InteractableFinder:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
 }
 
 [sub_resource type="Animation" id="Animation_fctvk"]
@@ -148,6 +196,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [15, 16, 17, 16, 15, 18, 19, 18, 15]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InteractableFinder:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5708]
+}
 
 [sub_resource type="Animation" id="Animation_suexh"]
 length = 0.15
@@ -175,6 +235,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [15]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InteractableFinder:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5708]
 }
 
 [sub_resource type="Animation" id="Animation_j6ulv"]
@@ -204,6 +276,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [5, 6, 7, 6, 5, 8, 9, 8, 5]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InteractableFinder:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.14159]
+}
 
 [sub_resource type="Animation" id="Animation_f8akm"]
 length = 0.15
@@ -231,6 +315,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InteractableFinder:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.14159]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kk854"]
@@ -315,7 +411,7 @@ states/Move/position = Vector2(681.333, 110)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ms05w"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_s8i4f"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_3fsii")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o2bwc"]
-size = Vector2(41, 29)
+size = Vector2(30, 7)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ed4f5")
@@ -363,9 +459,10 @@ parameters/Idle/blend_position = Vector2(-0.0208817, 0.873529)
 parameters/Move/blend_position = Vector2(-0.00696057, 0.808824)
 
 [node name="InteractableFinder" type="Area2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0, 25)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableFinder"]
-position = Vector2(0, -0.5)
+position = Vector2(0, 13.5)
 shape = SubResource("RectangleShape2D_o2bwc")
 debug_color = Color(1, 0, 0, 0.419608)

@@ -233,5 +233,8 @@ theme = ExtResource("3_0uekm")
 theme_override_font_sizes/font_size = 24
 text = "Response example"
 
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
+[connection signal="spoke" from="Balloon/Panel/Dialogue/TextMarginContainer/VBoxContainer/DialogueLabel" to="." method="OnSpokeCharacter"]
 [connection signal="response_selected" from="BoxContainer/ResponsesRect/Responses/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]

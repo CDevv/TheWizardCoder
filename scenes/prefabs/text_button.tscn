@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://capppjgr8n1ew"]
+
+[ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="1_qrw0m"]
+
+[node name="TextButton" type="Button"]
+unique_name_in_owner = true
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme = ExtResource("1_qrw0m")
+theme_override_font_sizes/font_size = 24
+text = "Text"

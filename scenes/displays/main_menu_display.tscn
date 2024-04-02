@@ -18,7 +18,7 @@ text = "The Wizard Coder
 [node name="MainMenuRect" type="NinePatchRect" parent="."]
 offset_left = 16.0
 offset_top = 112.0
-offset_right = 104.0
+offset_right = 84.0
 offset_bottom = 204.0
 scale = Vector2(2, 2)
 texture = ExtResource("2_y37u4")
@@ -33,7 +33,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 88.0
+offset_right = 68.0
 offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -47,12 +47,12 @@ theme_override_constants/separation = 5
 [node name="PlayButton" type="Button" parent="MainMenuRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_rbxpk")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "Play"
 
 [node name="OptionsButton" type="Button" parent="MainMenuRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_rbxpk")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "Options
 "

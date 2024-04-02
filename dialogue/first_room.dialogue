@@ -1,9 +1,11 @@
+using Global
+
 ~ lamp
 Nolan: [#portrait=0] Cool lamp.
 	
 => END!
 
 ~ bed
-Nolan: [#portrait=0] Ah, this where I woke up!
-
+Nolan: [#portrait=0] Ah, this is where I woke up!
+do AddToInventory("item")
 => END!
