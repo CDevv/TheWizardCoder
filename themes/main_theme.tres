@@ -1,9 +1,11 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://db7w42eb47dby"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://db7w42eb47dby"]
 
 [ext_resource type="FontFile" uid="uid://bj4nc33227547" path="res://fonts/DisposableDroidBB.ttf" id="1_kahlf"]
 [ext_resource type="FontFile" uid="uid://c60hc5rsak1x8" path="res://fonts/DisposableDroidBB_bld.ttf" id="2_fshnb"]
 [ext_resource type="FontFile" uid="uid://bf8imh6bfv4xj" path="res://fonts/DisposableDroidBB_bldital.ttf" id="3_u7nkr"]
 [ext_resource type="FontFile" uid="uid://drwg87uepn1u2" path="res://fonts/DisposableDroidBB_ital.ttf" id="4_kc516"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wgl6t"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4btd0"]
 
@@ -11,14 +13,18 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0vj7p"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k5ey1"]
+
 [resource]
-Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/colors/font_color = Color(0.87451, 0.87451, 0.87451, 1)
 Button/colors/font_focus_color = Color(0.94902, 0.94902, 0.94902, 0.372549)
 Button/colors/font_hover_color = Color(0.94902, 0.94902, 0.94902, 0.372549)
 Button/fonts/font = ExtResource("1_kahlf")
+Button/styles/disabled = SubResource("StyleBoxEmpty_wgl6t")
 Button/styles/focus = SubResource("StyleBoxEmpty_4btd0")
 Button/styles/hover = SubResource("StyleBoxEmpty_yml05")
 Button/styles/normal = SubResource("StyleBoxEmpty_0vj7p")
+Button/styles/pressed = SubResource("StyleBoxEmpty_k5ey1")
 Label/fonts/font = ExtResource("1_kahlf")
 RichTextLabel/fonts/bold_font = ExtResource("2_fshnb")
 RichTextLabel/fonts/bold_italics_font = ExtResource("3_u7nkr")

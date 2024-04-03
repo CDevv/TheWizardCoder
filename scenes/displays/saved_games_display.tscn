@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=3 uid="uid://dc44aibe82cqn"]
+
+[ext_resource type="Script" path="res://scripts/displays/SavedGamesDisplay.cs" id="1_q5563"]
+[ext_resource type="PackedScene" uid="uid://bshn67cvbvii5" path="res://scenes/prefabs/save_file_option.tscn" id="2_hq5uw"]
+[ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="3_f7ehm"]
+[ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="4_0wjab"]
+
+[node name="SavedGamesDisplay" type="CanvasLayer"]
+script = ExtResource("1_q5563")
+
+[node name="Save1" parent="." instance=ExtResource("2_hq5uw")]
+offset_left = 128.0
+offset_top = 104.0
+offset_right = 512.0
+offset_bottom = 176.0
+focus_neighbor_top = NodePath("../Save3")
+focus_neighbor_bottom = NodePath("../Save2")
+mouse_filter = 2
+
+[node name="Save2" parent="." instance=ExtResource("2_hq5uw")]
+offset_left = 128.0
+offset_top = 184.0
+offset_right = 512.0
+offset_bottom = 256.0
+focus_neighbor_top = NodePath("../Save1")
+focus_neighbor_bottom = NodePath("../Save3")
+mouse_filter = 2
+
+[node name="Save3" parent="." instance=ExtResource("2_hq5uw")]
+offset_left = 128.0
+offset_top = 264.0
+offset_right = 512.0
+offset_bottom = 336.0
+focus_neighbor_top = NodePath("../Save2")
+focus_neighbor_bottom = NodePath("../Save1")
+mouse_filter = 2
+
+[node name="OptionsRect" type="NinePatchRect" parent="."]
+offset_left = 128.0
+offset_top = 344.0
+offset_right = 320.0
+offset_bottom = 368.0
+scale = Vector2(2, 2)
+texture = ExtResource("3_f7ehm")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OptionsRect/MarginContainer"]
+layout_mode = 2
+
+[node name="SaveButton" type="Button" parent="OptionsRect/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("4_0wjab")
+theme_override_font_sizes/font_size = 16
+text = "Save"
+
+[connection signal="pressed" from="Save1" to="." method="OnSave1"]
+[connection signal="pressed" from="Save2" to="." method="OnSave2"]
+[connection signal="pressed" from="Save3" to="." method="OnSave3"]
+[connection signal="pressed" from="OptionsRect/MarginContainer/HBoxContainer/SaveButton" to="." method="OnSaveButton"]

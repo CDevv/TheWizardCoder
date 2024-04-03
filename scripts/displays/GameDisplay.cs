@@ -68,6 +68,12 @@ public partial class GameDisplay : CanvasLayer
 					break;
 			}
 		}
+		if (Input.IsKeyPressed(Key.Q))
+		{
+			var savedGamesDisplay = global.CurrentRoom.SavedGamesDisplay;
+			savedGamesDisplay.Show();
+			savedGamesDisplay.FocusOnFirstSave();
+		}
     }
 
 	public void ToggleInventoryMenu()

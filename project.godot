@@ -12,6 +12,8 @@ config_version=5
 
 config/name="TheWizardCoder"
 run/main_scene="res://scenes/rooms/first_room.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="TheWizardCoder"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
