@@ -1,17 +1,13 @@
 using Godot;
 using System;
-using DialogueManagerRuntime;
 
-public partial class Interactable : Area2D
+public abstract partial class Interactable : Area2D
 {
-	[Export]
-	public Resource DialogueResource { get; set; }
-	[Export]
-	public string DialogueTitle { get; set; }
-
+	protected Global global;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		global = GetNode<Global>("/root/Global");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,8 +15,5 @@ public partial class Interactable : Area2D
 	{
 	}
 
-	public void ShowDialogue()
-	{
-		DialogueManager.ShowDialogueBalloon(DialogueResource, DialogueTitle);
-	}
+	public abstract void Action();
 }

@@ -71,6 +71,7 @@ public partial class GameDisplay : CanvasLayer
 		if (Input.IsKeyPressed(Key.Q))
 		{
 			var savedGamesDisplay = global.CurrentRoom.SavedGamesDisplay;
+			savedGamesDisplay.UpdateDisplay();
 			savedGamesDisplay.Show();
 			savedGamesDisplay.FocusOnFirstSave();
 		}

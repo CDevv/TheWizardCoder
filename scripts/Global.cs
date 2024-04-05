@@ -7,6 +7,7 @@ public partial class Global : Node
 	public BaseRoom CurrentRoom { get; set; }
 	public bool CanWalk = true;
 	public string SaveName { get; set; }
+	public DateTime LastSaved { get; set; }
 	public DateTime StartedOn { get; set; }
 	public TimeSpan TimeSpent { get; set; }
 	public string Location { get; set; }
@@ -43,14 +44,18 @@ public partial class Global : Node
 
 	public void SaveGame(string saveName)
 	{
-		TimeSpent = DateTime.Now.Subtract(StartedOn);
+		GD.Print(LastSaved.ToString());
+		GD.Print(DateTime.Now.ToString());
+		TimeSpent = TimeSpent.Add(DateTime.Now - LastSaved);
+		LastSaved = DateTime.Now;
 
 		using var writeSaveFile = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Write);
 
 		//Save to file
 		writeSaveFile.StoreVar(SaveName);
+		writeSaveFile.StoreVar(LastSaved.ToBinary());
 		writeSaveFile.StoreVar(StartedOn.ToBinary());
-		writeSaveFile.StoreVar(TimeSpent.Seconds);
+		writeSaveFile.StoreVar(TimeSpent.TotalSeconds);
 		writeSaveFile.StoreVar(Location);
 		writeSaveFile.StoreVar(Health);
 		writeSaveFile.StoreVar(inventory);
@@ -74,6 +79,7 @@ public partial class Global : Node
 
 	public void LoadGame(string saveName)
 	{
+		LastSaved = DateTime.Now;
 		if (!FileAccess.FileExists($"user://{saveName}.wand"))
         {
             GD.PushWarning($"File {saveName}.wand does not exist");
@@ -106,8 +112,11 @@ public partial class Global : Node
 
             GD.Print($"{saveName}.wand: save loaded");
 			SaveName = (string)readSave.GetVar();
+			//LastSaved = DateTime.FromBinary((long)readSave.GetVar());
+			readSave.GetVar();
+			LastSaved = DateTime.Now;
 			StartedOn = DateTime.FromBinary((long)readSave.GetVar());
-			TimeSpent = TimeSpan.FromSeconds((long)readSave.GetVar());
+			TimeSpent = TimeSpan.FromSeconds((double)readSave.GetVar());
 			Location = (string)readSave.GetVar();
             Health = (int)readSave.GetVar();
 			inventory = (Array<string>)readSave.GetVar();
@@ -153,7 +162,8 @@ public partial class Global : Node
 
 			data.SaveName = (string)readSave.GetVar();
 			readSave.GetVar();
-			data.TimeSpent = new TimeSpan((long)readSave.GetVar());
+			readSave.GetVar();
+			data.TimeSpent = TimeSpan.FromSeconds((double)readSave.GetVar());
 			data.Location = (string)readSave.GetVar();
 		}
 		else

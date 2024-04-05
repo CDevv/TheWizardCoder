@@ -25,6 +25,18 @@ public partial class SavedGamesDisplay : CanvasLayer
 	{
 	}
 
+	public void UpdateDisplay()
+	{
+		SaveFileOption[] buttons = { save1button, save2button, save3button };
+		for (int i = 0; i < buttons.Length; i++)
+		{
+			SaveFileOption button = buttons[i];
+			string fileName = buttons[i].Name.ToString().ToLower();
+			SaveFileData save1data = global.ReadSaveFileData(fileName);
+			button.ShowData(save1data);
+		}
+	}
+
 	public void FocusOnFirstSave()
 	{
 		save1button.GrabFocus();
@@ -34,6 +46,7 @@ public partial class SavedGamesDisplay : CanvasLayer
 	{
 		global.SaveGame(selectedSaveFileName);
 		Hide();
+		global.CanWalk = true;
 	}
 
 	public void OnSave1()

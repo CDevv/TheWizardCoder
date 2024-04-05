@@ -1,12 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://d2saopq748u80"]
+[gd_scene load_steps=13 format=3 uid="uid://d2saopq748u80"]
 
 [ext_resource type="Texture2D" uid="uid://dqkr47csbh7xv" path="res://assets/tilesets/wizardhouseassets.png" id="1_74y2w"]
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_e1o4e"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="1_m6ahu"]
 [ext_resource type="Texture2D" uid="uid://b8p3fns1qo732" path="res://assets/props/homebed.png" id="3_dkk2o"]
 [ext_resource type="Texture2D" uid="uid://d0f653x8qwacd" path="res://assets/props/homelamp.png" id="4_dq5hh"]
-[ext_resource type="PackedScene" uid="uid://c7s1i2ervmbqe" path="res://scenes/prefabs/interactable.tscn" id="5_ppylh"]
+[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/prefabs/dialogue_point.tscn" id="6_4o6l1"]
 [ext_resource type="Resource" uid="uid://b3qxogmareoxv" path="res://dialogue/first_room.dialogue" id="7_7fahn"]
+[ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/prefabs/save_point.tscn" id="8_5r6ba"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1uwmu"]
 texture = ExtResource("1_74y2w")
@@ -105,6 +106,7 @@ size = Vector2(16, 26)
 size = Vector2(16, 26)
 
 [node name="FirstRoom" instance=ExtResource("1_e1o4e")]
+LocationName = "Home"
 
 [node name="ColorRect" type="ColorRect" parent="." index="3"]
 offset_right = 640.0
@@ -139,22 +141,25 @@ texture = ExtResource("4_dq5hh")
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_o73s6")
 
-[node name="Player" parent="." index="7" instance=ExtResource("1_m6ahu")]
+[node name="SavePoint" parent="." index="7" instance=ExtResource("8_5r6ba")]
+position = Vector2(416, 192)
+
+[node name="Player" parent="." index="8" instance=ExtResource("1_m6ahu")]
 position = Vector2(232, 184)
 
-[node name="RoomCollision" type="StaticBody2D" parent="." index="8"]
+[node name="RoomCollision" type="StaticBody2D" parent="." index="9"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomCollision" index="0"]
 polygon = PackedVector2Array(160, 168, 128, 168, 128, 416, 192, 416, 192, 448, 304, 448, 304, 416, 480, 416, 480, 160, 448, 160, 448, 384, 272, 384, 272, 400, 224, 400, 224, 384, 160, 384)
 
-[node name="InteractableLamp" parent="." index="9" groups=["interactables"] instance=ExtResource("5_ppylh")]
-position = Vector2(272, 198)
-scale = Vector2(1.52169, -0.970062)
+[node name="LampDialoguePoint" parent="." index="10" instance=ExtResource("6_4o6l1")]
+position = Vector2(272, 192)
+scale = Vector2(1.5, 1.5)
 DialogueResource = ExtResource("7_7fahn")
 DialogueTitle = "lamp"
 
-[node name="InteractableBed" parent="." index="10" groups=["interactables"] instance=ExtResource("5_ppylh")]
-position = Vector2(176, 216)
-scale = Vector2(1.60712, -0.770067)
+[node name="BedDialoguePoint" parent="." index="11" instance=ExtResource("6_4o6l1")]
+position = Vector2(176, 209)
+scale = Vector2(1.5, 1.5)
 DialogueResource = ExtResource("7_7fahn")
 DialogueTitle = "bed"

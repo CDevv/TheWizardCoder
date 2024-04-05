@@ -52,10 +52,10 @@ public partial class Player : CharacterBody2D
         if (Input.IsActionJustPressed("ui_accept"))
 		{
 			var overlappingAreas = interactableFinder.GetOverlappingAreas();
-			if (overlappingAreas.Count > 0)
+			if (overlappingAreas.Count > 0 && global.CanWalk)
 			{
 				global.CanWalk = false;
-				(overlappingAreas[0] as Interactable).ShowDialogue();
+				(overlappingAreas[0] as Interactable).Action();
 			}
 		}
     }

@@ -51,6 +51,8 @@ public partial class SaveFileOption : Button
 
 	public void ShowData(SaveFileData saveFile)
 	{
+		//var duration = saveFile.TimeSpent.Duration();
+		var duration = saveFile.TimeSpent;
 		if (saveFile.IsSaveEmpty)
 		{
 			ShowAsEmptyFile();
@@ -60,7 +62,7 @@ public partial class SaveFileOption : Button
 			ShowAsExistingFile();
 			SetSaveNameText(saveFile.SaveName);
 			SetLocationText(saveFile.Location);
-			SetTimeSpentText($"{saveFile.TimeSpent.Hours}:{saveFile.TimeSpent.Minutes}:{saveFile.TimeSpent.Seconds}");
+			SetTimeSpentText($"{duration.Hours}:{duration.Minutes}:{duration.Seconds}");
 		}
 	}
 

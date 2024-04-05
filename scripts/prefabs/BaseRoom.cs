@@ -3,8 +3,8 @@ using System;
 
 public partial class BaseRoom : Node2D
 {
-	[Signal]
-	public delegate void SceneChangedEventHandler();
+	[Export]
+	public string LocationName { get; set; }
 
 	private Global global;
 	public GameDisplay GameDisplay { get; private set; }
@@ -19,6 +19,7 @@ public partial class BaseRoom : Node2D
 		SavedGamesDisplay = GetNode<SavedGamesDisplay>("SavedGamesDisplay");
 
 		global.CurrentRoom = this;
+		global.Location = LocationName;
 	}
 
 	public override void _Process(double delta)
