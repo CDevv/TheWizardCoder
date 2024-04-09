@@ -16,6 +16,7 @@ public partial class GameDisplay : CanvasLayer
 	private AudioStreamPlayer audioPlayer;
 	private NinePatchRect inventoryMenu;
 	private GridContainer itemsContainer;
+	private Button noItemsButton;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -26,6 +27,7 @@ public partial class GameDisplay : CanvasLayer
 		audioPlayer = GetNode<AudioStreamPlayer>("AudioPlayer");
 		inventoryMenu = GetNode<NinePatchRect>("InventoryRect");
 		itemsContainer = GetNode<GridContainer>("%ItemsContainer");
+		noItemsButton = GetNode<Button>("%NoItemsButton");
 
 		inventoryMenu.Hide();
 		Hide();
@@ -68,13 +70,6 @@ public partial class GameDisplay : CanvasLayer
 					break;
 			}
 		}
-		if (Input.IsKeyPressed(Key.Q))
-		{
-			var savedGamesDisplay = global.CurrentRoom.SavedGamesDisplay;
-			savedGamesDisplay.UpdateDisplay();
-			savedGamesDisplay.Show();
-			savedGamesDisplay.FocusOnFirstSave();
-		}
     }
 
 	public void ToggleInventoryMenu()
@@ -89,6 +84,7 @@ public partial class GameDisplay : CanvasLayer
 		{
 			level = 1;
 			inventoryMenu.Show();
+			noItemsButton.Hide();
 
 			Array<Node> items = itemsContainer.GetChildren();
 			if (items.Count > 0)
@@ -97,7 +93,8 @@ public partial class GameDisplay : CanvasLayer
 			}
 			else
 			{
-				inventoryMenu.GrabFocus();
+				noItemsButton.Show();
+				noItemsButton.GrabFocus();
 			}
 		}
 	}

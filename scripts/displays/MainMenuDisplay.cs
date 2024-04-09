@@ -10,6 +10,7 @@ public partial class MainMenuDisplay : CanvasLayer
 	private Control main;
 	private Control savedGames;
 	private Button playButton;
+	private Button loadButton;
 	private SaveFileOption save1button;
 	private SaveFileOption save2button;
 	private SaveFileOption save3button;
@@ -22,6 +23,7 @@ public partial class MainMenuDisplay : CanvasLayer
 		main = GetNode<Control>("%Main");
 		savedGames = GetNode<Control>("%SavedGames");
 		playButton = GetNode<Button>("%PlayButton");
+		loadButton = GetNode<Button>("%LoadButton");
 		save1button = GetNode<SaveFileOption>("%Save1");
 		save2button = GetNode<SaveFileOption>("%Save2");
 		save3button = GetNode<SaveFileOption>("%Save3");
@@ -51,7 +53,6 @@ public partial class MainMenuDisplay : CanvasLayer
 	{
 		main.Show();
 		savedGames.Hide();
-
 		playButton.GrabFocus();
 	}
 
@@ -59,8 +60,17 @@ public partial class MainMenuDisplay : CanvasLayer
 	{
 		main.Hide();
 		savedGames.Show();
+		loadButton.GrabFocus();
+	}
 
+	public void OnLoad()
+	{
 		save1button.GrabFocus();
+	}
+
+	public void OnGoBack()
+	{
+		ShowMainMenu();
 	}
 
 	public void OnSave1()

@@ -9,6 +9,7 @@ public partial class SavedGamesDisplay : CanvasLayer
 	private SaveFileOption save2button;
 	private SaveFileOption save3button;
 	private Button saveButton;
+	private Button closeButton;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -18,6 +19,7 @@ public partial class SavedGamesDisplay : CanvasLayer
 		save2button = GetNode<SaveFileOption>("Save2");
 		save3button = GetNode<SaveFileOption>("Save3");
 		saveButton = GetNode<Button>("%SaveButton");
+		closeButton = GetNode<Button>("%CloseButton");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -37,33 +39,37 @@ public partial class SavedGamesDisplay : CanvasLayer
 		}
 	}
 
-	public void FocusOnFirstSave()
+	public void FocusOnSaveButton()
 	{
-		save1button.GrabFocus();
+		saveButton.GrabFocus();
 	}
 
 	public void OnSaveButton()
 	{
-		global.SaveGame(selectedSaveFileName);
+		save1button.GrabFocus();
+	}
+
+	public void OnCloseButton()
+	{
 		Hide();
 		global.CanWalk = true;
 	}
 
 	public void OnSave1()
 	{
-		selectedSaveFileName = "save1";
-		saveButton.GrabFocus();
+		global.SaveGame("save1");
+		OnCloseButton();
 	}
 
 	public void OnSave2()
 	{
-		selectedSaveFileName = "save2";
-		saveButton.GrabFocus();
+		global.SaveGame("save2");
+		OnCloseButton();
 	}
 
 	public void OnSave3()
 	{
-		selectedSaveFileName = "save3";
-		saveButton.GrabFocus();
+		global.SaveGame("save3");
+		OnCloseButton();
 	}
 }

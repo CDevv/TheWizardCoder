@@ -15,7 +15,6 @@ offset_right = 512.0
 offset_bottom = 176.0
 focus_neighbor_top = NodePath("../Save3")
 focus_neighbor_bottom = NodePath("../Save2")
-mouse_filter = 2
 
 [node name="Save2" parent="." instance=ExtResource("2_hq5uw")]
 offset_left = 128.0
@@ -24,7 +23,6 @@ offset_right = 512.0
 offset_bottom = 256.0
 focus_neighbor_top = NodePath("../Save1")
 focus_neighbor_bottom = NodePath("../Save3")
-mouse_filter = 2
 
 [node name="Save3" parent="." instance=ExtResource("2_hq5uw")]
 offset_left = 128.0
@@ -33,7 +31,6 @@ offset_right = 512.0
 offset_bottom = 336.0
 focus_neighbor_top = NodePath("../Save2")
 focus_neighbor_bottom = NodePath("../Save1")
-mouse_filter = 2
 
 [node name="OptionsRect" type="NinePatchRect" parent="."]
 offset_left = 128.0
@@ -52,10 +49,15 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 192.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.5, 0.5)
 theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="OptionsRect/MarginContainer"]
 layout_mode = 2
@@ -63,11 +65,25 @@ layout_mode = 2
 [node name="SaveButton" type="Button" parent="OptionsRect/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_left = NodePath("../CloseButton")
+focus_neighbor_right = NodePath("../CloseButton")
+mouse_filter = 2
 theme = ExtResource("4_0wjab")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "Save"
+
+[node name="CloseButton" type="Button" parent="OptionsRect/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_left = NodePath("../SaveButton")
+focus_neighbor_right = NodePath("../SaveButton")
+mouse_filter = 2
+theme = ExtResource("4_0wjab")
+theme_override_font_sizes/font_size = 24
+text = "Close"
 
 [connection signal="pressed" from="Save1" to="." method="OnSave1"]
 [connection signal="pressed" from="Save2" to="." method="OnSave2"]
 [connection signal="pressed" from="Save3" to="." method="OnSave3"]
 [connection signal="pressed" from="OptionsRect/MarginContainer/HBoxContainer/SaveButton" to="." method="OnSaveButton"]
+[connection signal="pressed" from="OptionsRect/MarginContainer/HBoxContainer/CloseButton" to="." method="OnCloseButton"]

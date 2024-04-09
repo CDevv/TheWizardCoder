@@ -112,7 +112,6 @@ public partial class Global : Node
 
             GD.Print($"{saveName}.wand: save loaded");
 			SaveName = (string)readSave.GetVar();
-			//LastSaved = DateTime.FromBinary((long)readSave.GetVar());
 			readSave.GetVar();
 			LastSaved = DateTime.Now;
 			StartedOn = DateTime.FromBinary((long)readSave.GetVar());

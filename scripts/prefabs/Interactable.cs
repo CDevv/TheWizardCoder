@@ -10,10 +10,5 @@ public abstract partial class Interactable : Area2D
 		global = GetNode<Global>("/root/Global");
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-
 	public abstract void Action();
 }

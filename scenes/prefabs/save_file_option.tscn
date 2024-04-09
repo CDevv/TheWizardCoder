@@ -17,6 +17,7 @@
 [node name="SaveFileButton" type="Button"]
 offset_right = 384.0
 offset_bottom = 72.0
+mouse_filter = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_h16u0")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q2jjq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_s4h6y")
