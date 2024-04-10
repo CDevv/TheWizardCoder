@@ -1,103 +1,15 @@
 [gd_scene load_steps=13 format=3 uid="uid://d2saopq748u80"]
 
-[ext_resource type="Texture2D" uid="uid://dqkr47csbh7xv" path="res://assets/tilesets/wizardhouseassets.png" id="1_74y2w"]
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_e1o4e"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="1_m6ahu"]
+[ext_resource type="TileSet" uid="uid://p3r4qlypubeo" path="res://tilesets/house_tiles.tres" id="2_w6po7"]
 [ext_resource type="Texture2D" uid="uid://b8p3fns1qo732" path="res://assets/props/homebed.png" id="3_dkk2o"]
 [ext_resource type="Texture2D" uid="uid://d0f653x8qwacd" path="res://assets/props/homelamp.png" id="4_dq5hh"]
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/prefabs/dialogue_point.tscn" id="6_4o6l1"]
 [ext_resource type="Resource" uid="uid://b3qxogmareoxv" path="res://dialogue/first_room.dialogue" id="7_7fahn"]
 [ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/prefabs/save_point.tscn" id="8_5r6ba"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1uwmu"]
-texture = ExtResource("1_74y2w")
-0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_1/angular_velocity = 0.0
-1:0/0 = 0
-1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_0/angular_velocity = 0.0
-1:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_1/angular_velocity = 0.0
-2:0/0 = 0
-2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:0/0/physics_layer_0/angular_velocity = 0.0
-2:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
-2:0/0/physics_layer_1/angular_velocity = 0.0
-3:0/0 = 0
-3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:0/0/physics_layer_0/angular_velocity = 0.0
-3:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
-3:0/0/physics_layer_1/angular_velocity = 0.0
-4:0/0 = 0
-4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-4:0/0/physics_layer_0/angular_velocity = 0.0
-4:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
-4:0/0/physics_layer_1/angular_velocity = 0.0
-1:1/0 = 0
-1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:1/0/physics_layer_0/angular_velocity = 0.0
-1:1/0/physics_layer_1/linear_velocity = Vector2(0, 0)
-1:1/0/physics_layer_1/angular_velocity = 0.0
-2:1/0 = 0
-2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:1/0/physics_layer_0/angular_velocity = 0.0
-2:1/0/physics_layer_1/linear_velocity = Vector2(0, 0)
-2:1/0/physics_layer_1/angular_velocity = 0.0
-3:1/0 = 0
-3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:1/0/physics_layer_0/angular_velocity = 0.0
-3:1/0/physics_layer_1/linear_velocity = Vector2(0, 0)
-3:1/0/physics_layer_1/angular_velocity = 0.0
-4:1/0 = 0
-4:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-4:1/0/physics_layer_0/angular_velocity = 0.0
-4:1/0/physics_layer_1/linear_velocity = Vector2(0, 0)
-4:1/0/physics_layer_1/angular_velocity = 0.0
-1:2/0 = 0
-1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:2/0/physics_layer_0/angular_velocity = 0.0
-1:2/0/physics_layer_1/linear_velocity = Vector2(0, 0)
-1:2/0/physics_layer_1/angular_velocity = 0.0
-2:2/0 = 0
-2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:2/0/physics_layer_0/angular_velocity = 0.0
-2:2/0/physics_layer_1/linear_velocity = Vector2(0, 0)
-2:2/0/physics_layer_1/angular_velocity = 0.0
-3:2/0 = 0
-3:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:2/0/physics_layer_0/angular_velocity = 0.0
-3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 1.94454, -8, 1.94454)
-3:2/0/physics_layer_1/linear_velocity = Vector2(0, 0)
-3:2/0/physics_layer_1/angular_velocity = 0.0
-4:2/0 = 0
-4:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-4:2/0/physics_layer_0/angular_velocity = 0.0
-4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 1.94454, -8, 1.94454)
-4:2/0/physics_layer_1/linear_velocity = Vector2(0, 0)
-4:2/0/physics_layer_1/angular_velocity = 0.0
-5:2/0 = 0
-5:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-5:2/0/physics_layer_0/angular_velocity = 0.0
-5:2/0/physics_layer_1/linear_velocity = Vector2(0, 0)
-5:2/0/physics_layer_1/angular_velocity = 0.0
-2:3/0 = 0
-2:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:3/0/physics_layer_0/angular_velocity = 0.0
-2:3/0/physics_layer_1/linear_velocity = Vector2(0, 0)
-2:3/0/physics_layer_1/angular_velocity = 0.0
-3:3/0 = 0
-3:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:3/0/physics_layer_0/angular_velocity = 0.0
-3:3/0/physics_layer_1/linear_velocity = Vector2(0, 0)
-3:3/0/physics_layer_1/angular_velocity = 0.0
-
-[sub_resource type="TileSet" id="TileSet_rlk44"]
-physics_layer_0/collision_layer = 1
-physics_layer_1/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_1uwmu")
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="9_od3ub"]
+[ext_resource type="PackedScene" uid="uid://c0iqpqhuxgcn7" path="res://scenes/rooms/second_room.tscn" id="10_b483a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fhq1v"]
 size = Vector2(16, 26)
@@ -115,7 +27,7 @@ color = Color(0.0745098, 0.0745098, 0.0745098, 1)
 
 [node name="TileMap" type="TileMap" parent="." index="4"]
 scale = Vector2(2, 2)
-tile_set = SubResource("TileSet_rlk44")
+tile_set = ExtResource("2_w6po7")
 format = 2
 layer_0/tile_data = PackedInt32Array(393223, 131072, 2, 393224, 131072, 2, 393222, 131072, 2, 458758, 131072, 2, 458759, 131072, 2, 458760, 131072, 2, 393225, 131072, 2, 458761, 131072, 2, 327689, 196608, 2, 327688, 196608, 2, 327687, 196608, 2, 327686, 196608, 2, 262153, 262144, 2, 262152, 262144, 2, 262151, 262144, 2, 262150, 262144, 2, 262149, 262144, 2, 327685, 196608, 2, 393221, 131072, 2, 458757, 131072, 2, 393226, 131072, 2, 393227, 131072, 2, 393228, 131072, 2, 393229, 131072, 2, 458762, 131072, 2, 458763, 131072, 2, 458764, 131072, 2, 458765, 131072, 2, 196613, 262144, 2, 196614, 262144, 2, 196615, 262144, 2, 196616, 262144, 2, 196617, 262144, 2, 196618, 262144, 2, 196619, 262144, 2, 196620, 262144, 2, 196621, 262144, 2, 262154, 262144, 2, 262155, 262144, 2, 262156, 262144, 2, 262157, 262144, 2, 131077, 262144, 2, 131078, 262144, 2, 131079, 262144, 2, 131080, 262144, 2, 131081, 262144, 2, 131082, 262144, 2, 131083, 262144, 2, 131084, 262144, 2, 131085, 262144, 2, 327690, 196608, 2, 327691, 196608, 2, 327692, 196608, 2, 327693, 196608, 2, 786439, 131072, 3, 720903, 131072, 2, 655367, 131072, 2, 589831, 131072, 2, 524295, 131072, 2, 524294, 131072, 2, 589830, 131072, 2, 655366, 131072, 2, 720902, 131072, 2, 720901, 131072, 2, 655365, 131072, 2, 589829, 131072, 2, 524293, 131072, 2, 524296, 131072, 2, 589832, 131072, 2, 655368, 131072, 2, 720904, 131072, 2, 720905, 131072, 2, 720906, 131072, 2, 720907, 131072, 2, 720908, 131072, 2, 720909, 131072, 2, 655373, 131072, 2, 589837, 131072, 2, 524301, 131072, 2, 524300, 131072, 2, 589836, 131072, 2, 655372, 131072, 2, 655371, 131072, 2, 589835, 131072, 2, 524299, 131072, 2, 524298, 131072, 2, 589834, 131072, 2, 655370, 131072, 2, 655369, 131072, 2, 589833, 131072, 2, 524297, 131072, 2, 786440, 196608, 3)
 
@@ -150,7 +62,7 @@ position = Vector2(232, 184)
 [node name="RoomCollision" type="StaticBody2D" parent="." index="9"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomCollision" index="0"]
-polygon = PackedVector2Array(160, 168, 128, 168, 128, 416, 192, 416, 192, 448, 304, 448, 304, 416, 480, 416, 480, 160, 448, 160, 448, 384, 272, 384, 272, 400, 224, 400, 224, 384, 160, 384)
+polygon = PackedVector2Array(160, 160, 144, 160, 144, 400, 208, 400, 208, 432, 288, 432, 288, 400, 464, 400, 464, 168, 448, 168, 448, 384, 272, 384, 272, 416, 224, 416, 224, 384, 160, 384, 160, 384)
 
 [node name="LampDialoguePoint" parent="." index="10" instance=ExtResource("6_4o6l1")]
 position = Vector2(272, 192)
@@ -163,3 +75,7 @@ position = Vector2(176, 209)
 scale = Vector2(1.5, 1.5)
 DialogueResource = ExtResource("7_7fahn")
 DialogueTitle = "bed"
+
+[node name="Warper" parent="." index="12" instance=ExtResource("9_od3ub")]
+position = Vector2(248, 416)
+TargetRoom = ExtResource("10_b483a")

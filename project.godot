@@ -37,6 +37,10 @@ window/stretch/scale_mode="integer"
 
 project/assembly_name="TheWizardCoder"
 
+[editor]
+
+movie_writer/movie_file="D:/godot movies/TheWizardCoder/demo1.avi"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg")

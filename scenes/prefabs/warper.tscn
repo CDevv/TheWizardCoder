@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://vk3ye6s5pp5"]
+
+[ext_resource type="Script" path="res://scripts/prefabs/Warper.cs" id="1_y2f2b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0q31a"]
+size = Vector2(32, 32)
+
+[node name="Warper" type="StaticBody2D"]
+script = ExtResource("1_y2f2b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0q31a")
+debug_color = Color(0.764706, 0.317647, 0.803922, 0.419608)

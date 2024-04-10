@@ -44,7 +44,16 @@ public partial class Player : CharacterBody2D
 			animationTree.Set("parameters/Move/blend_position", direction);
 		}
 
-		MoveAndCollide(velocity);
+		var collision = MoveAndCollide(velocity);
+		if (collision != null)
+		{
+			if (collision.GetCollider().GetType() == typeof(Warper))
+			{
+				global.CanWalk = false;
+				GD.Print("i collided with a warper");
+				TransitionToRoom((Warper)collision.GetCollider());
+			}
+		}
 	}
 
     public override void _UnhandledInput(InputEvent @event)
@@ -59,4 +68,11 @@ public partial class Player : CharacterBody2D
 			}
 		}
     }
+
+	public async void TransitionToRoom(Warper warper)
+	{
+		global.CurrentRoom.TransitionRect.PlayAnimation();
+		await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
+		global.ChangeRoom(warper.TargetRoom);
+	}
 }
