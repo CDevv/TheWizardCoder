@@ -1,23 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://d2saopq748u80"]
+[gd_scene load_steps=9 format=3 uid="uid://d2saopq748u80"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_e1o4e"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="1_m6ahu"]
-[ext_resource type="TileSet" uid="uid://p3r4qlypubeo" path="res://tilesets/house_tiles.tres" id="2_w6po7"]
-[ext_resource type="Texture2D" uid="uid://b8p3fns1qo732" path="res://assets/props/homebed.png" id="3_dkk2o"]
-[ext_resource type="Texture2D" uid="uid://d0f653x8qwacd" path="res://assets/props/homelamp.png" id="4_dq5hh"]
+[ext_resource type="TileSet" uid="uid://b00p342wf54q8" path="res://tilesets/housetiles.tres" id="2_w6po7"]
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/prefabs/dialogue_point.tscn" id="6_4o6l1"]
 [ext_resource type="Resource" uid="uid://b3qxogmareoxv" path="res://dialogue/first_room.dialogue" id="7_7fahn"]
 [ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/prefabs/save_point.tscn" id="8_5r6ba"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="9_od3ub"]
 [ext_resource type="PackedScene" uid="uid://c0iqpqhuxgcn7" path="res://scenes/rooms/second_room.tscn" id="10_b483a"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhq1v"]
-size = Vector2(16, 26)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o73s6"]
-size = Vector2(16, 26)
-
 [node name="FirstRoom" instance=ExtResource("1_e1o4e")]
+y_sort_enabled = true
 LocationName = "Home"
 
 [node name="ColorRect" type="ColorRect" parent="." index="3"]
@@ -26,56 +19,42 @@ offset_bottom = 480.0
 color = Color(0.0745098, 0.0745098, 0.0745098, 1)
 
 [node name="TileMap" type="TileMap" parent="." index="4"]
+y_sort_enabled = true
 scale = Vector2(2, 2)
 tile_set = ExtResource("2_w6po7")
 format = 2
-layer_0/tile_data = PackedInt32Array(393223, 131072, 2, 393224, 131072, 2, 393222, 131072, 2, 458758, 131072, 2, 458759, 131072, 2, 458760, 131072, 2, 393225, 131072, 2, 458761, 131072, 2, 327689, 196608, 2, 327688, 196608, 2, 327687, 196608, 2, 327686, 196608, 2, 262153, 262144, 2, 262152, 262144, 2, 262151, 262144, 2, 262150, 262144, 2, 262149, 262144, 2, 327685, 196608, 2, 393221, 131072, 2, 458757, 131072, 2, 393226, 131072, 2, 393227, 131072, 2, 393228, 131072, 2, 393229, 131072, 2, 458762, 131072, 2, 458763, 131072, 2, 458764, 131072, 2, 458765, 131072, 2, 196613, 262144, 2, 196614, 262144, 2, 196615, 262144, 2, 196616, 262144, 2, 196617, 262144, 2, 196618, 262144, 2, 196619, 262144, 2, 196620, 262144, 2, 196621, 262144, 2, 262154, 262144, 2, 262155, 262144, 2, 262156, 262144, 2, 262157, 262144, 2, 131077, 262144, 2, 131078, 262144, 2, 131079, 262144, 2, 131080, 262144, 2, 131081, 262144, 2, 131082, 262144, 2, 131083, 262144, 2, 131084, 262144, 2, 131085, 262144, 2, 327690, 196608, 2, 327691, 196608, 2, 327692, 196608, 2, 327693, 196608, 2, 786439, 131072, 3, 720903, 131072, 2, 655367, 131072, 2, 589831, 131072, 2, 524295, 131072, 2, 524294, 131072, 2, 589830, 131072, 2, 655366, 131072, 2, 720902, 131072, 2, 720901, 131072, 2, 655365, 131072, 2, 589829, 131072, 2, 524293, 131072, 2, 524296, 131072, 2, 589832, 131072, 2, 655368, 131072, 2, 720904, 131072, 2, 720905, 131072, 2, 720906, 131072, 2, 720907, 131072, 2, 720908, 131072, 2, 720909, 131072, 2, 655373, 131072, 2, 589837, 131072, 2, 524301, 131072, 2, 524300, 131072, 2, 589836, 131072, 2, 655372, 131072, 2, 655371, 131072, 2, 589835, 131072, 2, 524299, 131072, 2, 524298, 131072, 2, 589834, 131072, 2, 655370, 131072, 2, 655369, 131072, 2, 589833, 131072, 2, 524297, 131072, 2, 786440, 196608, 3)
+layer_0/name = "top"
+layer_0/y_sort_enabled = true
+layer_0/z_index = 1
+layer_0/tile_data = PackedInt32Array(458758, 65536, 2, 458757, 0, 2, 393222, 65536, 1, 393221, 0, 1, 327686, 65536, 0, 327685, 0, 0, 393224, 131072, 0, 327688, 196608, 0, 720908, 196608, 0, 655372, 131072, 0)
+layer_1/name = "bottom"
+layer_1/tile_data = PackedInt32Array(655365, 0, 3, 655366, 0, 3, 655367, 0, 3, 655368, 0, 3, 655369, 0, 3, 655370, 0, 3, 655371, 0, 3, 655372, 0, 3, 655373, 0, 3, 589837, 0, 3, 524301, 0, 3, 458765, 0, 3, 393229, 0, 3, 393228, 0, 3, 393227, 0, 3, 393226, 0, 3, 458763, 0, 3, 524300, 0, 3, 589836, 0, 3, 589835, 0, 3, 524299, 0, 3, 458764, 0, 3, 458762, 0, 3, 393225, 0, 3, 393224, 0, 3, 393223, 0, 3, 393222, 0, 3, 393221, 0, 3, 458757, 0, 3, 458758, 0, 3, 458759, 0, 3, 458760, 0, 3, 458761, 0, 3, 524297, 0, 3, 524298, 0, 3, 524296, 0, 3, 524295, 0, 3, 524294, 0, 3, 524293, 0, 3, 589829, 0, 3, 589830, 0, 3, 589831, 0, 3, 589832, 0, 3, 589833, 0, 3, 589834, 0, 3, 720909, 0, 3, 720908, 0, 3, 720907, 0, 3, 720906, 0, 3, 720905, 0, 3, 720904, 0, 3, 720903, 0, 3, 720902, 0, 3, 720901, 0, 3, 786439, 65536, 3, 786440, 131072, 3, 327693, 131072, 2, 327692, 131072, 2, 327691, 131072, 2, 327690, 131072, 2, 327689, 131072, 2, 327688, 131072, 2, 327687, 131072, 2, 327686, 131072, 2, 327685, 131072, 2, 131077, 196608, 2, 196613, 196608, 2, 262149, 196608, 2, 262150, 196608, 2, 262151, 196608, 2, 262152, 196608, 2, 262153, 196608, 2, 262154, 196608, 2, 262155, 196608, 2, 262156, 196608, 2, 262157, 196608, 2, 196621, 196608, 2, 131085, 196608, 2, 131084, 196608, 2, 131083, 196608, 2, 131082, 196608, 2, 131081, 196608, 2, 131080, 196608, 2, 131079, 196608, 2, 131078, 196608, 2, 196614, 196608, 2, 196615, 196608, 2, 196616, 196608, 2, 196617, 196608, 2, 196618, 196608, 2, 196619, 196608, 2, 196620, 196608, 2)
 
-[node name="Bed" type="Sprite2D" parent="." index="5"]
-position = Vector2(176, 192)
-scale = Vector2(2, 2)
-texture = ExtResource("3_dkk2o")
+[node name="Player" parent="." index="5" instance=ExtResource("1_m6ahu")]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(248, 208)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Bed" index="0"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bed/StaticBody2D" index="0"]
-position = Vector2(0, 3)
-shape = SubResource("RectangleShape2D_fhq1v")
-
-[node name="Lamp" type="Sprite2D" parent="." index="6"]
-position = Vector2(272, 176)
-scale = Vector2(2, 2)
-texture = ExtResource("4_dq5hh")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Lamp" index="0"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lamp/StaticBody2D" index="0"]
-position = Vector2(0, 3)
-shape = SubResource("RectangleShape2D_o73s6")
-
-[node name="SavePoint" parent="." index="7" instance=ExtResource("8_5r6ba")]
+[node name="SavePoint" parent="." index="6" instance=ExtResource("8_5r6ba")]
 position = Vector2(416, 192)
 
-[node name="Player" parent="." index="8" instance=ExtResource("1_m6ahu")]
-position = Vector2(232, 184)
-
-[node name="RoomCollision" type="StaticBody2D" parent="." index="9"]
+[node name="RoomCollision" type="StaticBody2D" parent="." index="7"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomCollision" index="0"]
 polygon = PackedVector2Array(160, 160, 144, 160, 144, 400, 208, 400, 208, 432, 288, 432, 288, 400, 464, 400, 464, 168, 448, 168, 448, 384, 272, 384, 272, 416, 224, 416, 224, 384, 160, 384, 160, 384)
 
-[node name="LampDialoguePoint" parent="." index="10" instance=ExtResource("6_4o6l1")]
+[node name="LampDialoguePoint" parent="." index="8" instance=ExtResource("6_4o6l1")]
 position = Vector2(272, 192)
 scale = Vector2(1.5, 1.5)
 DialogueResource = ExtResource("7_7fahn")
 DialogueTitle = "lamp"
 
-[node name="BedDialoguePoint" parent="." index="11" instance=ExtResource("6_4o6l1")]
-position = Vector2(176, 209)
-scale = Vector2(1.5, 1.5)
+[node name="BedDialoguePoint" parent="." index="9" instance=ExtResource("6_4o6l1")]
+position = Vector2(192, 224)
+scale = Vector2(3, 3)
 DialogueResource = ExtResource("7_7fahn")
 DialogueTitle = "bed"
 
-[node name="Warper" parent="." index="12" instance=ExtResource("9_od3ub")]
+[node name="Warper" parent="." index="10" instance=ExtResource("9_od3ub")]
 position = Vector2(248, 416)
 TargetRoom = ExtResource("10_b483a")

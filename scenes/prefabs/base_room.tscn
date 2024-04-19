@@ -18,3 +18,4 @@ visible = false
 
 [node name="TransitionRect" parent="." instance=ExtResource("4_qu4y4")]
 visible = false
+z_index = 100
