@@ -1,5 +1,10 @@
 using Global
 
+~ intro_cutscene
+Nolan: [#portrait=0] Ah, a new day!
+
+=> END!
+
 ~ lamp
 Nolan: [#portrait=0] Cool lamp.
 	

@@ -1,16 +1,180 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2saopq748u80"]
+[gd_scene load_steps=19 format=3 uid="uid://d2saopq748u80"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_e1o4e"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="1_m6ahu"]
 [ext_resource type="TileSet" uid="uid://b00p342wf54q8" path="res://tilesets/housetiles.tres" id="2_w6po7"]
+[ext_resource type="Script" path="res://scripts/rooms/FirstRoom.cs" id="2_ykuq1"]
+[ext_resource type="Texture2D" uid="uid://ctposucfw7y80" path="res://assets/props/bed-sheet.png" id="4_d8756"]
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/prefabs/dialogue_point.tscn" id="6_4o6l1"]
-[ext_resource type="Resource" uid="uid://b3qxogmareoxv" path="res://dialogue/first_room.dialogue" id="7_7fahn"]
 [ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/prefabs/save_point.tscn" id="8_5r6ba"]
+[ext_resource type="Resource" uid="uid://b3qxogmareoxv" path="res://dialogue/first_room.dialogue" id="8_173ra"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="9_od3ub"]
 [ext_resource type="PackedScene" uid="uid://c0iqpqhuxgcn7" path="res://scenes/rooms/second_room.tscn" id="10_b483a"]
+[ext_resource type="Texture2D" uid="uid://b25d8akulcu0u" path="res://assets/props/homebed-awake.png" id="11_xs4nt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_va5vt"]
+atlas = ExtResource("4_d8756")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1e64"]
+atlas = ExtResource("4_d8756")
+region = Rect2(0, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhv8j"]
+atlas = ExtResource("4_d8756")
+region = Rect2(0, 96, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5yi8b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_va5vt")
+}],
+"loop": true,
+"name": &"bottom",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k1e64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhv8j")
+}],
+"loop": true,
+"name": &"top",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5kme"]
+size = Vector2(64, 72)
+
+[sub_resource type="Animation" id="Animation_x6rcl"]
+resource_name = "player_intro"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BedAnimationTop:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"top"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BedAnimationTop:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BedAnimationBottom:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"bottom"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BedAnimationBottom:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Player")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3.7, 4.1, 4.2, 4.4, 4.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"values": [{
+"args": ["sleeper"],
+"method": &"PlaySideAnimation"
+}, {
+"args": ["down"],
+"method": &"PlayIdleAnimation"
+}, {
+"args": ["right"],
+"method": &"PlayIdleAnimation"
+}, {
+"args": ["right"],
+"method": &"PlayMoveAnimation"
+}, {
+"args": ["right"],
+"method": &"PlayIdleAnimation"
+}, {
+"args": ["down"],
+"method": &"PlayIdleAnimation"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Player:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 4.2, 4.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(192, 176), Vector2(192, 176), Vector2(240, 176)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BedAnimationTop:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 4.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BedAnimationBottom:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 4.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oru1b"]
+_data = {
+"player_intro": SubResource("Animation_x6rcl")
+}
 
 [node name="FirstRoom" instance=ExtResource("1_e1o4e")]
 y_sort_enabled = true
+script = ExtResource("2_ykuq1")
+DialogueResource = ExtResource("8_173ra")
 LocationName = "Home"
 
 [node name="ColorRect" type="ColorRect" parent="." index="3"]
@@ -26,35 +190,67 @@ format = 2
 layer_0/name = "top"
 layer_0/y_sort_enabled = true
 layer_0/z_index = 1
-layer_0/tile_data = PackedInt32Array(458758, 65536, 2, 458757, 0, 2, 393222, 65536, 1, 393221, 0, 1, 327686, 65536, 0, 327685, 0, 0, 393224, 131072, 0, 327688, 196608, 0, 720908, 196608, 0, 655372, 131072, 0)
+layer_0/tile_data = PackedInt32Array(393224, 131072, 0, 327688, 196608, 0, 720908, 196608, 0, 655372, 131072, 0)
 layer_1/name = "bottom"
 layer_1/tile_data = PackedInt32Array(655365, 0, 3, 655366, 0, 3, 655367, 0, 3, 655368, 0, 3, 655369, 0, 3, 655370, 0, 3, 655371, 0, 3, 655372, 0, 3, 655373, 0, 3, 589837, 0, 3, 524301, 0, 3, 458765, 0, 3, 393229, 0, 3, 393228, 0, 3, 393227, 0, 3, 393226, 0, 3, 458763, 0, 3, 524300, 0, 3, 589836, 0, 3, 589835, 0, 3, 524299, 0, 3, 458764, 0, 3, 458762, 0, 3, 393225, 0, 3, 393224, 0, 3, 393223, 0, 3, 393222, 0, 3, 393221, 0, 3, 458757, 0, 3, 458758, 0, 3, 458759, 0, 3, 458760, 0, 3, 458761, 0, 3, 524297, 0, 3, 524298, 0, 3, 524296, 0, 3, 524295, 0, 3, 524294, 0, 3, 524293, 0, 3, 589829, 0, 3, 589830, 0, 3, 589831, 0, 3, 589832, 0, 3, 589833, 0, 3, 589834, 0, 3, 720909, 0, 3, 720908, 0, 3, 720907, 0, 3, 720906, 0, 3, 720905, 0, 3, 720904, 0, 3, 720903, 0, 3, 720902, 0, 3, 720901, 0, 3, 786439, 65536, 3, 786440, 131072, 3, 327693, 131072, 2, 327692, 131072, 2, 327691, 131072, 2, 327690, 131072, 2, 327689, 131072, 2, 327688, 131072, 2, 327687, 131072, 2, 327686, 131072, 2, 327685, 131072, 2, 131077, 196608, 2, 196613, 196608, 2, 262149, 196608, 2, 262150, 196608, 2, 262151, 196608, 2, 262152, 196608, 2, 262153, 196608, 2, 262154, 196608, 2, 262155, 196608, 2, 262156, 196608, 2, 262157, 196608, 2, 196621, 196608, 2, 131085, 196608, 2, 131084, 196608, 2, 131083, 196608, 2, 131082, 196608, 2, 131081, 196608, 2, 131080, 196608, 2, 131079, 196608, 2, 131078, 196608, 2, 196614, 196608, 2, 196615, 196608, 2, 196616, 196608, 2, 196617, 196608, 2, 196618, 196608, 2, 196619, 196608, 2, 196620, 196608, 2)
 
-[node name="Player" parent="." index="5" instance=ExtResource("1_m6ahu")]
-z_index = 1
-y_sort_enabled = true
-position = Vector2(248, 208)
+[node name="BedAnimationTop" type="AnimatedSprite2D" parent="." index="5"]
+visible = false
+z_index = 3
+position = Vector2(192, 208)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_5yi8b")
+animation = &"top"
+frame = 1
 
-[node name="SavePoint" parent="." index="6" instance=ExtResource("8_5r6ba")]
+[node name="Player" parent="." index="6" instance=ExtResource("1_m6ahu")]
+z_index = 1
+position = Vector2(240, 176)
+
+[node name="BedAnimationBottom" type="AnimatedSprite2D" parent="." index="7"]
+visible = false
+position = Vector2(192, 208)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_5yi8b")
+animation = &"bottom"
+
+[node name="SavePoint" parent="." index="8" instance=ExtResource("8_5r6ba")]
 position = Vector2(416, 192)
 
-[node name="RoomCollision" type="StaticBody2D" parent="." index="7"]
+[node name="RoomCollision" type="StaticBody2D" parent="." index="9"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomCollision" index="0"]
 polygon = PackedVector2Array(160, 160, 144, 160, 144, 400, 208, 400, 208, 432, 288, 432, 288, 400, 464, 400, 464, 168, 448, 168, 448, 384, 272, 384, 272, 416, 224, 416, 224, 384, 160, 384, 160, 384)
 
-[node name="LampDialoguePoint" parent="." index="8" instance=ExtResource("6_4o6l1")]
+[node name="LampDialoguePoint" parent="." index="10" instance=ExtResource("6_4o6l1")]
 position = Vector2(272, 192)
 scale = Vector2(1.5, 1.5)
-DialogueResource = ExtResource("7_7fahn")
+DialogueResource = ExtResource("8_173ra")
 DialogueTitle = "lamp"
 
-[node name="BedDialoguePoint" parent="." index="9" instance=ExtResource("6_4o6l1")]
+[node name="BedDialoguePoint" parent="." index="11" instance=ExtResource("6_4o6l1")]
 position = Vector2(192, 224)
 scale = Vector2(3, 3)
-DialogueResource = ExtResource("7_7fahn")
+DialogueResource = ExtResource("8_173ra")
 DialogueTitle = "bed"
 
-[node name="Warper" parent="." index="10" instance=ExtResource("9_od3ub")]
+[node name="Warper" parent="." index="12" instance=ExtResource("9_od3ub")]
 position = Vector2(248, 416)
 TargetRoom = ExtResource("10_b483a")
+
+[node name="Bed" type="StaticBody2D" parent="." index="13"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Bed" index="0"]
+position = Vector2(192, 208)
+scale = Vector2(2, 2)
+texture = ExtResource("11_xs4nt")
+
+[node name="BedCollision" type="CollisionShape2D" parent="Bed" index="1"]
+position = Vector2(192, 220)
+shape = SubResource("RectangleShape2D_j5kme")
+debug_color = Color(0, 0.626061, 0.43366, 0.419608)
+
+[node name="AnimationPlayer" parent="." index="15"]
+libraries = {
+"": SubResource("AnimationLibrary_oru1b")
+}

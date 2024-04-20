@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bw1fi1noshxhg"
+path="res://.godot/imported/wizardextraanims.aseprite-312efec91da94ae024bc5c92fede9600.res"
+
+[deps]
+
+source_file="res://assets/characters/movement/wizardextraanims.aseprite"
+dest_files=["res://.godot/imported/wizardextraanims.aseprite-312efec91da94ae024bc5c92fede9600.res"]
+
+[params]
+

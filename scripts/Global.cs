@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Threading.Tasks;
 
 public partial class Global : Node
 {
@@ -207,5 +208,10 @@ public partial class Global : Node
 	public void ChangeRoom(PackedScene scene)
 	{
 		GetTree().ChangeSceneToPacked(scene);
+	}
+
+	public async Task PlayRoomCutscene(string name)
+	{
+		await CurrentRoom.PlayCutscene(name);
 	}
 }
