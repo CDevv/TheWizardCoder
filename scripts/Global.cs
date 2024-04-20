@@ -14,15 +14,7 @@ public partial class Global : Node
 	public string Location { get; set; }
 	public int Health { get; set; } = 100;
 
-	private Array<string> inventory = new();
-
-	public Array<string> Inventory
-	{
-		get
-		{
-			return inventory;
-		}
-	}
+	public SaveFileData PlayerData { get; set; } = new();
 
 	public override void _Ready()
 	{
@@ -30,36 +22,31 @@ public partial class Global : Node
 
 	public void AddToInventory(string item)
 	{
-		inventory.Add(item);
+		PlayerData.AddToInventory(item);
 	}
 
 	public void RemoveFromInventory(string item)
 	{
-		inventory.Remove(item);
+		PlayerData.RemoveFromInventory(item);
 	}
 
 	public bool HasItemInInventory(string item)
 	{
-		return inventory.Contains(item);
+		return PlayerData.HasItemInInventory(item);
 	}
 
 	public void SaveGame(string saveName)
 	{
 		GD.Print(LastSaved.ToString());
 		GD.Print(DateTime.Now.ToString());
-		TimeSpent = TimeSpent.Add(DateTime.Now - LastSaved);
-		LastSaved = DateTime.Now;
+		PlayerData.TimeSpent = TimeSpent.Add(DateTime.Now - LastSaved);
+		PlayerData.LastSaved = DateTime.Now;
 
-		using var writeSaveFile = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Write);
+		Dictionary<string, Variant> saveData = PlayerData.GenerateDictionary();
 
 		//Save to file
-		writeSaveFile.StoreVar(SaveName);
-		writeSaveFile.StoreVar(LastSaved.ToBinary());
-		writeSaveFile.StoreVar(StartedOn.ToBinary());
-		writeSaveFile.StoreVar(TimeSpent.TotalSeconds);
-		writeSaveFile.StoreVar(Location);
-		writeSaveFile.StoreVar(Health);
-		writeSaveFile.StoreVar(inventory);
+		var writeSaveFile = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Write);
+		writeSaveFile.StoreVar(saveData);
 		writeSaveFile.Close();
 
 		//Compute hash
@@ -84,49 +71,15 @@ public partial class Global : Node
 		if (!FileAccess.FileExists($"user://{saveName}.wand"))
         {
             GD.PushWarning($"File {saveName}.wand does not exist");
-			SaveName = saveName;
-			StartedOn = DateTime.Now;
-			TimeSpent = TimeSpan.Zero;
+			PlayerData.SaveName = saveName;
+			PlayerData.StartedOn = DateTime.Now;
+			PlayerData.TimeSpent = TimeSpan.Zero;
             SaveGame(saveName);
             return;
         }
 
-		//Get expected hash
-		using var hashFile = FileAccess.Open($"user://{saveName}.ini", FileAccess.ModeFlags.Read);
-        byte[] expectedHash = (byte[])hashFile.GetVar();
-        hashFile.Close();
-
-		//Read save file
-		using var saveFile = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Read);
-        byte[] buffer = saveFile.GetBuffer((long)saveFile.GetLength());
-        saveFile.Close();
-
-		//Compute actual hash
-		HashingContext hashing = new();
-        hashing.Start(HashingContext.HashType.Sha256);
-        hashing.Update(buffer);
-        byte[] actualHash = hashing.Finish();
-
-		if (CompareHashes(actualHash, expectedHash))
-        {
-            using var readSave = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Read);
-
-            GD.Print($"{saveName}.wand: save loaded");
-			SaveName = (string)readSave.GetVar();
-			readSave.GetVar();
-			LastSaved = DateTime.Now;
-			StartedOn = DateTime.FromBinary((long)readSave.GetVar());
-			TimeSpent = TimeSpan.FromSeconds((double)readSave.GetVar());
-			Location = (string)readSave.GetVar();
-            Health = (int)readSave.GetVar();
-			inventory = (Array<string>)readSave.GetVar();
-        }
-        else
-        {
-            GD.PushWarning($"{saveName}.ini: The hashes don't match");
-            SaveGame(saveName);
-            return;
-        }
+		var data = ReadSaveFileData(saveName);
+		PlayerData = data;
 	}
 
 	public SaveFileData ReadSaveFileData(string saveName)
@@ -159,12 +112,8 @@ public partial class Global : Node
 		if (CompareHashes(actualHash, expectedHash))
 		{
 			using var readSave = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Read);
-
-			data.SaveName = (string)readSave.GetVar();
-			readSave.GetVar();
-			readSave.GetVar();
-			data.TimeSpent = TimeSpan.FromSeconds((double)readSave.GetVar());
-			data.Location = (string)readSave.GetVar();
+			var savedData = (Dictionary<string, Variant>)readSave.GetVar();
+			data.ApplyDictionary(savedData);
 		}
 		else
 		{

@@ -112,7 +112,7 @@ public partial class GameDisplay : CanvasLayer
 			item.QueueFree();
 		}
 
-		foreach (var item in global.Inventory)
+		foreach (var item in global.PlayerData.Inventory)
 		{
 			Button button = ItemButtonTemplate.Instantiate<Button>();
 			button.Set(Button.PropertyName.Text, item);
