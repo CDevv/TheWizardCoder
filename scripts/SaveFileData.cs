@@ -25,6 +25,9 @@ public class SaveFileData
         }
 	}
 
+    //Playthrough properties
+    public bool HasPlayedFirstCutscene { get; set; } = false;
+
     public Dictionary<string, Variant> GenerateDictionary()
     {
         return new Dictionary<string, Variant>()

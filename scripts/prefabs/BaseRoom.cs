@@ -13,6 +13,7 @@ public partial class BaseRoom : Node2D
 	public SavedGamesDisplay SavedGamesDisplay { get; set; }
 	public TransitionRect TransitionRect { get; set; }
 	public AnimationPlayer AnimationPlayer { get; set; }
+	public Player Player { get; set; }
 
 	public override void _Ready()
 	{
@@ -31,11 +32,18 @@ public partial class BaseRoom : Node2D
 		SavedGamesDisplay = GetNode<SavedGamesDisplay>("SavedGamesDisplay");
 		TransitionRect = GetNode<TransitionRect>("TransitionRect");
 		AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		Player = GetNode<Player>("Player");
 
 		TransitionRect.Show();
 
 		global.CurrentRoom = this;
 		global.Location = LocationName;
+
+		Player.PlayIdleAnimation(global.PlayerDirection);
+		if (!string.IsNullOrEmpty(global.LocationMarkerName))
+		{
+			Player.Position = GetNode<Marker2D>(global.LocationMarkerName).Position;
+		}		
 
 		TransitionRect.CallDeferred(TransitionRect.MethodName.PlayAnimationBackwards);
 		global.CanWalk = true;

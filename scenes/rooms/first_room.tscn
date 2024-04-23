@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d2saopq748u80"]
+[gd_scene load_steps=18 format=3 uid="uid://d2saopq748u80"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_e1o4e"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="1_m6ahu"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/prefabs/save_point.tscn" id="8_5r6ba"]
 [ext_resource type="Resource" uid="uid://b3qxogmareoxv" path="res://dialogue/first_room.dialogue" id="8_173ra"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="9_od3ub"]
-[ext_resource type="PackedScene" uid="uid://c0iqpqhuxgcn7" path="res://scenes/rooms/second_room.tscn" id="10_b483a"]
 [ext_resource type="Texture2D" uid="uid://b25d8akulcu0u" path="res://assets/props/homebed-awake.png" id="11_xs4nt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_va5vt"]
@@ -113,19 +112,19 @@ tracks/4/keys = {
 "args": ["sleeper"],
 "method": &"PlaySideAnimation"
 }, {
-"args": ["down"],
+"args": [1],
 "method": &"PlayIdleAnimation"
 }, {
-"args": ["right"],
+"args": [3],
 "method": &"PlayIdleAnimation"
 }, {
-"args": ["right"],
+"args": [3],
 "method": &"PlayMoveAnimation"
 }, {
-"args": ["right"],
+"args": [3],
 "method": &"PlayIdleAnimation"
 }, {
-"args": ["down"],
+"args": [1],
 "method": &"PlayIdleAnimation"
 }]
 }
@@ -195,20 +194,17 @@ layer_1/name = "bottom"
 layer_1/tile_data = PackedInt32Array(655365, 0, 3, 655366, 0, 3, 655367, 0, 3, 655368, 0, 3, 655369, 0, 3, 655370, 0, 3, 655371, 0, 3, 655372, 0, 3, 655373, 0, 3, 589837, 0, 3, 524301, 0, 3, 458765, 0, 3, 393229, 0, 3, 393228, 0, 3, 393227, 0, 3, 393226, 0, 3, 458763, 0, 3, 524300, 0, 3, 589836, 0, 3, 589835, 0, 3, 524299, 0, 3, 458764, 0, 3, 458762, 0, 3, 393225, 0, 3, 393224, 0, 3, 393223, 0, 3, 393222, 0, 3, 393221, 0, 3, 458757, 0, 3, 458758, 0, 3, 458759, 0, 3, 458760, 0, 3, 458761, 0, 3, 524297, 0, 3, 524298, 0, 3, 524296, 0, 3, 524295, 0, 3, 524294, 0, 3, 524293, 0, 3, 589829, 0, 3, 589830, 0, 3, 589831, 0, 3, 589832, 0, 3, 589833, 0, 3, 589834, 0, 3, 720909, 0, 3, 720908, 0, 3, 720907, 0, 3, 720906, 0, 3, 720905, 0, 3, 720904, 0, 3, 720903, 0, 3, 720902, 0, 3, 720901, 0, 3, 786439, 65536, 3, 786440, 131072, 3, 327693, 131072, 2, 327692, 131072, 2, 327691, 131072, 2, 327690, 131072, 2, 327689, 131072, 2, 327688, 131072, 2, 327687, 131072, 2, 327686, 131072, 2, 327685, 131072, 2, 131077, 196608, 2, 196613, 196608, 2, 262149, 196608, 2, 262150, 196608, 2, 262151, 196608, 2, 262152, 196608, 2, 262153, 196608, 2, 262154, 196608, 2, 262155, 196608, 2, 262156, 196608, 2, 262157, 196608, 2, 196621, 196608, 2, 131085, 196608, 2, 131084, 196608, 2, 131083, 196608, 2, 131082, 196608, 2, 131081, 196608, 2, 131080, 196608, 2, 131079, 196608, 2, 131078, 196608, 2, 196614, 196608, 2, 196615, 196608, 2, 196616, 196608, 2, 196617, 196608, 2, 196618, 196608, 2, 196619, 196608, 2, 196620, 196608, 2)
 
 [node name="BedAnimationTop" type="AnimatedSprite2D" parent="." index="5"]
-visible = false
 z_index = 3
 position = Vector2(192, 208)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_5yi8b")
 animation = &"top"
-frame = 1
 
 [node name="Player" parent="." index="6" instance=ExtResource("1_m6ahu")]
 z_index = 1
-position = Vector2(240, 176)
+position = Vector2(192, 176)
 
 [node name="BedAnimationBottom" type="AnimatedSprite2D" parent="." index="7"]
-visible = false
 position = Vector2(192, 208)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_5yi8b")
@@ -234,11 +230,7 @@ scale = Vector2(3, 3)
 DialogueResource = ExtResource("8_173ra")
 DialogueTitle = "bed"
 
-[node name="Warper" parent="." index="12" instance=ExtResource("9_od3ub")]
-position = Vector2(248, 416)
-TargetRoom = ExtResource("10_b483a")
-
-[node name="Bed" type="StaticBody2D" parent="." index="13"]
+[node name="Bed" type="StaticBody2D" parent="." index="12"]
 
 [node name="Sprite2D" type="Sprite2D" parent="Bed" index="0"]
 position = Vector2(192, 208)
@@ -250,7 +242,15 @@ position = Vector2(192, 220)
 shape = SubResource("RectangleShape2D_j5kme")
 debug_color = Color(0, 0.626061, 0.43366, 0.419608)
 
-[node name="AnimationPlayer" parent="." index="15"]
+[node name="AnimationPlayer" parent="." index="14"]
 libraries = {
 "": SubResource("AnimationLibrary_oru1b")
 }
+
+[node name="RoomEnterMarker" type="Marker2D" parent="." index="15"]
+position = Vector2(248, 344)
+
+[node name="Warper" parent="." index="16" instance=ExtResource("9_od3ub")]
+position = Vector2(248, 416)
+TargetRoomName = "second_room"
+TargetLocation = "FirstRoomMarker"

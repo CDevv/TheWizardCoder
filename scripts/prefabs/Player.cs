@@ -43,8 +43,7 @@ public partial class Player : CharacterBody2D
 
 		if (direction != Vector2.Zero)
 		{
-			animationTree.Set("parameters/Idle/blend_position", direction);
-			animationTree.Set("parameters/Move/blend_position", direction);
+			ChangeDirection(direction);
 		}
 
 		var collision = MoveAndCollide(velocity);
@@ -76,12 +75,45 @@ public partial class Player : CharacterBody2D
 	{
 		global.CurrentRoom.TransitionRect.PlayAnimation();
 		await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
-		global.ChangeRoom(warper.TargetRoom);
+		if (string.IsNullOrEmpty(warper.TargetLocation))
+		{
+			global.ChangeRoom(warper.TargetRoomName);
+		}
+		else
+		{
+			global.ChangeRoom(warper.TargetRoomName, warper.TargetLocation, warper.PlayerDirection);
+		}
 	}
 
-	public void EnableAnimationTree()
+	public void ChangeDirection(Vector2 vectorDirection)
 	{
-		animationTree.Set(AnimationTree.PropertyName.Active, true);
+		animationTree.Set("parameters/Idle/blend_position", vectorDirection);
+		animationTree.Set("parameters/Move/blend_position", vectorDirection);
+	}
+
+	public void ChangeDirection(Direction direction)
+	{
+		Vector2 resultVector = Vector2.Down;
+		switch (direction)
+		{
+			case Direction.Up:
+				resultVector = Vector2.Up;
+				break;
+			case Direction.Down:
+				resultVector = Vector2.Down;
+				break;
+			case Direction.Left:
+				resultVector = Vector2.Left;
+				break;
+			case Direction.Right:
+				resultVector = Vector2.Right;
+				break;
+			default:
+				break;
+		}
+
+		animationTree.Set("parameters/Idle/blend_position", resultVector);
+		animationTree.Set("parameters/Move/blend_position", resultVector);
 	}
 
 	public void DisableAnimationTree()
@@ -102,56 +134,22 @@ public partial class Player : CharacterBody2D
 		animationTree.Set("parameters/ExtraStates/state/transition_request", name);
 	}
 
-	public void PlayIdleAnimation(string directionName)
+	public void PlayIdleAnimation(Direction direction)
 	{
 		animationTree.Set("parameters/conditions/idle", true);
 		animationTree.Set("parameters/conditions/move", false);
 		animationTree.Set("parameters/conditions/extrastate", false);
 
-		Vector2 direction = Vector2.Zero;
-		switch (directionName)
-		{
-			case "down":
-				direction = Vector2.Down;
-				break;
-			case "up":
-				direction = Vector2.Up;
-				break;
-			case "left":
-				direction = Vector2.Left;
-				break;
-			case "right":
-				direction = Vector2.Right;
-				break;
-		}
-
-		animationTree.Set("parameters/Idle/blend_position", direction);
+		ChangeDirection(direction);
 	}
 
-	public void PlayMoveAnimation(string directionName)
+	public void PlayMoveAnimation(Direction direction)
 	{
 		animationTree.Set("parameters/conditions/idle", false);
 		animationTree.Set("parameters/conditions/move", true);
 		animationTree.Set("parameters/conditions/extrastate", false);
 
-		Vector2 direction = Vector2.Zero;
-		switch (directionName)
-		{
-			case "down":
-				direction = Vector2.Down;
-				break;
-			case "up":
-				direction = Vector2.Up;
-				break;
-			case "left":
-				direction = Vector2.Left;
-				break;
-			case "right":
-				direction = Vector2.Right;
-				break;
-		}
-
-		animationTree.Set("parameters/Move/blend_position", direction);
+		ChangeDirection(direction);
 	}
 
 	public void TweenToPosition(Vector2 position, double duration)

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 public partial class Global : Node
 {
 	public BaseRoom CurrentRoom { get; set; }
+	public string LocationMarkerName { get; set; }
+	public Direction PlayerDirection { get; set; }
 	public bool CanWalk = true;
 	public string SaveName { get; set; }
 	public DateTime LastSaved { get; set; }
@@ -154,9 +156,37 @@ public partial class Global : Node
         return true;
     }
 
-	public void ChangeRoom(PackedScene scene)
+	public void ChangeRoom(PackedScene room)
 	{
-		GetTree().ChangeSceneToPacked(scene);
+		GetTree().ChangeSceneToPacked(room);
+		LocationMarkerName = string.Empty;
+		PlayerDirection = Direction.Down;
+	}
+
+	public void ChangeRoom(string room)
+	{
+		GetTree().ChangeSceneToFile($"res://scenes/rooms/{room}.tscn");
+		LocationMarkerName = string.Empty;
+		PlayerDirection = Direction.Down;
+	}
+
+	public void ChangeRoom(string room, string playerLocation)
+	{
+		var result = GetTree().ChangeSceneToFile($"res://scenes/rooms/{room}.tscn");
+		if (result == Error.Ok)
+		{
+			LocationMarkerName = playerLocation;
+		}
+	}
+
+	public void ChangeRoom(string room, string playerLocation, Direction direction)
+	{
+		var result = GetTree().ChangeSceneToFile($"res://scenes/rooms/{room}.tscn");
+		if (result == Error.Ok)
+		{
+			LocationMarkerName = playerLocation;
+			PlayerDirection = direction;
+		}
 	}
 
 	public async Task PlayRoomCutscene(string name)
