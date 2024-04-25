@@ -27,7 +27,7 @@ public partial class Player : CharacterBody2D
 		}
 		animationTree.Set("parameters/conditions/extrastate", false);
 
-		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down").Normalized();
+		Vector2 direction = Input.GetVector("left", "right", "up", "down").Normalized();
 		Vector2 velocity = direction * Speed;
 
 		if (velocity == Vector2.Zero)

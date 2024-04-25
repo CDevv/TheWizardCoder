@@ -1,14 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://bkmomdkodys8p"]
+[gd_scene load_steps=8 format=3 uid="uid://bkmomdkodys8p"]
 
 [ext_resource type="Script" path="res://scripts/displays/MainMenuDisplay.cs" id="1_bltqf"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="1_rbxpk"]
 [ext_resource type="PackedScene" uid="uid://d2saopq748u80" path="res://scenes/rooms/first_room.tscn" id="2_7035h"]
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="2_y37u4"]
+[ext_resource type="Texture2D" uid="uid://b280jc176eg22" path="res://assets/ui/titlebg.png" id="3_j35pe"]
 [ext_resource type="PackedScene" uid="uid://bshn67cvbvii5" path="res://scenes/prefabs/save_file_option.tscn" id="4_8emux"]
+[ext_resource type="PackedScene" uid="uid://dhktihkxj4i2g" path="res://scenes/prefabs/control_select_button.tscn" id="7_b3iw4"]
 
 [node name="MainMenuDisplay" type="CanvasLayer"]
+follow_viewport_enabled = true
 script = ExtResource("1_bltqf")
 firstRoom = ExtResource("2_7035h")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 640.0
+offset_bottom = 480.0
+texture = ExtResource("3_j35pe")
 
 [node name="Main" type="Control" parent="."]
 unique_name_in_owner = true
@@ -20,9 +28,9 @@ offset_bottom = 40.0
 [node name="GameTitle" type="Label" parent="Main"]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 64.0
+offset_top = 112.0
 offset_right = 277.0
-offset_bottom = 100.0
+offset_bottom = 148.0
 theme = ExtResource("1_rbxpk")
 theme_override_font_sizes/font_size = 36
 text = "The Wizard Coder
@@ -31,9 +39,9 @@ text = "The Wizard Coder
 [node name="MainMenuRect" type="NinePatchRect" parent="Main"]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 112.0
+offset_top = 160.0
 offset_right = 84.0
-offset_bottom = 204.0
+offset_bottom = 252.0
 scale = Vector2(2, 2)
 texture = ExtResource("2_y37u4")
 region_rect = Rect2(0, 0, 16, 16)
@@ -166,9 +174,254 @@ theme_override_font_sizes/font_size = 24
 text = "Go Back
 "
 
+[node name="Options" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -240.0
+offset_right = -280.0
+offset_bottom = -200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OptionsRect" type="NinePatchRect" parent="Options"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 104.0
+offset_top = 64.0
+offset_right = 308.0
+offset_bottom = 240.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_y37u4")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="ResolutionOptions" type="OptionButton" parent="Options/OptionsRect"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 92.0
+offset_top = 12.0
+offset_right = 225.0
+offset_bottom = 28.0
+scale = Vector2(0.75, 0.75)
+focus_neighbor_top = NodePath("../BackButton")
+focus_neighbor_bottom = NodePath("../FullscreenCheckBox")
+mouse_filter = 2
+theme = ExtResource("1_rbxpk")
+theme_override_font_sizes/font_size = 16
+item_count = 2
+selected = 0
+popup/item_0/text = "640x480"
+popup/item_0/id = 0
+popup/item_1/text = "1280x960"
+popup/item_1/id = 1
+
+[node name="ResolutionLabel" type="Label" parent="Options/OptionsRect"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 172.0
+offset_bottom = 36.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("1_rbxpk")
+theme_override_font_sizes/font_size = 24
+text = "Resolution"
+
+[node name="FullscreenLabel" type="Label" parent="Options/OptionsRect"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 32.0
+offset_right = 172.0
+offset_bottom = 56.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("1_rbxpk")
+theme_override_font_sizes/font_size = 24
+text = "Fullscreen
+"
+
+[node name="BackButton" type="Button" parent="Options/OptionsRect"]
+layout_mode = 0
+offset_top = 156.0
+offset_right = 408.0
+offset_bottom = 188.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("1_rbxpk")
+theme_override_font_sizes/font_size = 24
+text = "Back"
+
+[node name="FullscreenCheckBox" type="CheckBox" parent="Options/OptionsRect"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 28.0
+offset_right = 116.0
+offset_bottom = 52.0
+focus_neighbor_top = NodePath("../ResolutionOptions")
+focus_neighbor_bottom = NodePath("../ControlsButton")
+mouse_filter = 2
+theme = ExtResource("1_rbxpk")
+
+[node name="ControlsButton" type="Button" parent="Options/OptionsRect"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 52.0
+offset_right = 108.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+focus_neighbor_top = NodePath("../FullscreenCheckBox")
+focus_neighbor_bottom = NodePath("../BackButton")
+theme = ExtResource("1_rbxpk")
+theme_override_font_sizes/font_size = 24
+text = "Controls.."
+
+[node name="ControlsRect" type="NinePatchRect" parent="Options"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 104.0
+offset_top = 64.0
+offset_right = 308.0
+offset_bottom = 240.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_y37u4")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="UpLabel" type="Label" parent="Options/ControlsRect"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 172.0
+offset_bottom = 36.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("1_rbxpk")
+theme_override_font_sizes/font_size = 24
+text = "Up"
+
+[node name="DownLabel" type="Label" parent="Options/ControlsRect"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 32.0
+offset_right = 172.0
+offset_bottom = 56.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("1_rbxpk")
+theme_override_font_sizes/font_size = 24
+text = "Down
+"
+
+[node name="LeftLabel" type="Label" parent="Options/ControlsRect"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 52.0
+offset_right = 172.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("1_rbxpk")
+theme_override_font_sizes/font_size = 24
+text = "Left
+"
+
+[node name="RightLabel" type="Label" parent="Options/ControlsRect"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 72.0
+offset_right = 172.0
+offset_bottom = 96.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("1_rbxpk")
+theme_override_font_sizes/font_size = 24
+text = "Right
+"
+
+[node name="BackButton" type="Button" parent="Options/ControlsRect"]
+layout_mode = 0
+offset_top = 156.0
+offset_right = 408.0
+offset_bottom = 188.0
+scale = Vector2(0.5, 0.5)
+focus_neighbor_top = NodePath("../RightButton")
+focus_neighbor_bottom = NodePath("../UpButton")
+mouse_filter = 2
+theme = ExtResource("1_rbxpk")
+theme_override_font_sizes/font_size = 24
+text = "Back"
+
+[node name="UpButton" parent="Options/ControlsRect" instance=ExtResource("7_b3iw4")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 96.0
+offset_top = 12.0
+offset_right = 280.0
+offset_bottom = 36.0
+scale = Vector2(0.5, 0.5)
+focus_neighbor_top = NodePath("../BackButton")
+focus_neighbor_bottom = NodePath("../DownButton")
+theme_override_font_sizes/font_size = 24
+text = "Up"
+ActionName = "up"
+
+[node name="LeftButton" parent="Options/ControlsRect" instance=ExtResource("7_b3iw4")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 96.0
+offset_top = 52.0
+offset_right = 280.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+focus_neighbor_top = NodePath("../DownButton")
+focus_neighbor_bottom = NodePath("../RightButton")
+theme_override_font_sizes/font_size = 24
+text = "Left
+"
+ActionName = "left"
+
+[node name="RightButton" parent="Options/ControlsRect" instance=ExtResource("7_b3iw4")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 96.0
+offset_top = 72.0
+offset_right = 280.0
+offset_bottom = 96.0
+scale = Vector2(0.5, 0.5)
+focus_neighbor_top = NodePath("../LeftButton")
+focus_neighbor_bottom = NodePath("../BackButton")
+theme_override_font_sizes/font_size = 24
+text = "Right
+"
+ActionName = "right"
+
+[node name="DownButton" parent="Options/ControlsRect" instance=ExtResource("7_b3iw4")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 96.0
+offset_top = 32.0
+offset_right = 280.0
+offset_bottom = 56.0
+scale = Vector2(0.5, 0.5)
+focus_neighbor_top = NodePath("../UpButton")
+focus_neighbor_bottom = NodePath("../LeftButton")
+theme_override_font_sizes/font_size = 24
+text = "Down"
+ActionName = "down"
+
 [connection signal="pressed" from="Main/MainMenuRect/MarginContainer/VBoxContainer/PlayButton" to="." method="ShowSavedGamesMenu"]
+[connection signal="pressed" from="Main/MainMenuRect/MarginContainer/VBoxContainer/OptionsButton" to="." method="ShowOptions"]
 [connection signal="pressed" from="SavedGames/Save1" to="." method="OnSave1"]
 [connection signal="pressed" from="SavedGames/Save2" to="." method="OnSave2"]
 [connection signal="pressed" from="SavedGames/Save3" to="." method="OnSave3"]
 [connection signal="pressed" from="SavedGames/OptionsRect/MarginContainer/HBoxContainer/LoadButton" to="." method="OnLoad"]
 [connection signal="pressed" from="SavedGames/OptionsRect/MarginContainer/HBoxContainer/GoBackButton" to="." method="OnGoBack"]
+[connection signal="item_selected" from="Options/OptionsRect/ResolutionOptions" to="." method="OnWindowSizeChanged"]
+[connection signal="pressed" from="Options/OptionsRect/BackButton" to="." method="OnGoBack"]
+[connection signal="toggled" from="Options/OptionsRect/FullscreenCheckBox" to="." method="OnFullscreenToggled"]
+[connection signal="pressed" from="Options/OptionsRect/ControlsButton" to="." method="OnControlsPage"]
+[connection signal="pressed" from="Options/ControlsRect/BackButton" to="." method="OnOptionsPage"]

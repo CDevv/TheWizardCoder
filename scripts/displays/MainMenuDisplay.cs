@@ -9,11 +9,19 @@ public partial class MainMenuDisplay : CanvasLayer
 	private Global global;
 	private Control main;
 	private Control savedGames;
+	private Control options;
 	private Button playButton;
 	private Button loadButton;
 	private SaveFileOption save1button;
 	private SaveFileOption save2button;
 	private SaveFileOption save3button;
+	private OptionButton resolutionOption;
+	private ControlSelectButton upControlOption;
+	private NinePatchRect optionsMainPage;
+	private NinePatchRect controlsPage;
+
+	private bool waitingInput = false;
+	private string actionName;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -22,11 +30,16 @@ public partial class MainMenuDisplay : CanvasLayer
 
 		main = GetNode<Control>("%Main");
 		savedGames = GetNode<Control>("%SavedGames");
+		options = GetNode<Control>("Options");
 		playButton = GetNode<Button>("%PlayButton");
 		loadButton = GetNode<Button>("%LoadButton");
 		save1button = GetNode<SaveFileOption>("%Save1");
 		save2button = GetNode<SaveFileOption>("%Save2");
 		save3button = GetNode<SaveFileOption>("%Save3");
+		resolutionOption = GetNode<OptionButton>("%ResolutionOptions");
+		upControlOption = GetNode<ControlSelectButton>("%UpButton");
+		optionsMainPage = GetNode<NinePatchRect>("%OptionsRect");
+		controlsPage = GetNode<NinePatchRect>("%ControlsRect");
 
 		UpdateSaveData();
 		playButton.CallDeferred(Button.MethodName.GrabFocus);
@@ -37,7 +50,19 @@ public partial class MainMenuDisplay : CanvasLayer
 	{
 	}
 
-	private void UpdateSaveData()
+    public override void _Input(InputEvent @event)
+    {
+        if (waitingInput)
+		{
+			if (@event is InputEventKey && @event.IsPressed())
+			{
+				global.Settings.ChangeControl(actionName, @event);
+				waitingInput = false;
+			}
+		}
+    }
+
+    private void UpdateSaveData()
 	{
 		SaveFileOption[] buttons = { save1button, save2button, save3button };
 		for (int i = 0; i < buttons.Length; i++)
@@ -53,6 +78,7 @@ public partial class MainMenuDisplay : CanvasLayer
 	{
 		main.Show();
 		savedGames.Hide();
+		options.Hide();
 		playButton.GrabFocus();
 	}
 
@@ -60,7 +86,16 @@ public partial class MainMenuDisplay : CanvasLayer
 	{
 		main.Hide();
 		savedGames.Show();
+		options.Hide();
 		loadButton.GrabFocus();
+	}
+
+	public void ShowOptions()
+	{
+		main.Hide();
+		savedGames.Hide();
+		options.Show();
+		resolutionOption.GrabFocus();
 	}
 
 	public void OnLoad()
@@ -89,5 +124,37 @@ public partial class MainMenuDisplay : CanvasLayer
 	{
 		global.LoadGame("save3");
 		global.ChangeRoom(firstRoom);
+	}
+
+	public void OnWindowSizeChanged(int optionId)
+	{
+		WindowSize size = (WindowSize)optionId;
+		global.ChangeWindowSize(size);
+		global.Settings.SaveSettings();
+	}
+
+	public void OnFullscreenToggled(bool toggled)
+	{
+		global.Settings.ToggleFullscreen(toggled);
+	}
+
+	public void OnControlsPage()
+	{
+		optionsMainPage.Hide();
+		controlsPage.Show();
+		upControlOption.GrabFocus();
+	}
+
+	public void OnOptionsPage()
+	{
+		optionsMainPage.Show();
+		controlsPage.Hide();
+		resolutionOption.GrabFocus();
+	}
+
+	public void OnControlChangeButton(string action)
+	{
+		actionName = action;
+		waitingInput = true;
 	}
 }

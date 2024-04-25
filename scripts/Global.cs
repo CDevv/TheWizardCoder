@@ -17,10 +17,13 @@ public partial class Global : Node
 	public int Health { get; set; } = 100;
 
 	public SaveFileData PlayerData { get; set; } = new();
+	public SettingsConfig Settings { get; set; } = new();
 
-	public override void _Ready()
-	{
-	}
+    public override void _Ready()
+    {
+		Settings.LoadSettings();
+		Settings.ApplySettings();
+    }
 
 	public void AddToInventory(string item)
 	{
@@ -170,15 +173,6 @@ public partial class Global : Node
 		PlayerDirection = Direction.Down;
 	}
 
-	public void ChangeRoom(string room, string playerLocation)
-	{
-		var result = GetTree().ChangeSceneToFile($"res://scenes/rooms/{room}.tscn");
-		if (result == Error.Ok)
-		{
-			LocationMarkerName = playerLocation;
-		}
-	}
-
 	public void ChangeRoom(string room, string playerLocation, Direction direction)
 	{
 		var result = GetTree().ChangeSceneToFile($"res://scenes/rooms/{room}.tscn");
@@ -192,5 +186,10 @@ public partial class Global : Node
 	public async Task PlayRoomCutscene(string name)
 	{
 		await CurrentRoom.PlayCutscene(name);
+	}
+
+	public void ChangeWindowSize(WindowSize size)
+	{
+		Settings.ChangeWindowSize(size, GetWindow());		
 	}
 }
