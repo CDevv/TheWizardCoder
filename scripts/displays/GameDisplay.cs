@@ -15,8 +15,12 @@ public partial class GameDisplay : CanvasLayer
 	private Button itemsButton;
 	private AudioStreamPlayer audioPlayer;
 	private NinePatchRect inventoryMenu;
+	private NinePatchRect optionsMenu;
+	private NinePatchRect controlsMenu;
 	private GridContainer itemsContainer;
 	private Button noItemsButton;
+	private OptionButton resolutionsOption;
+	private ControlSelectButton upButton;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -26,8 +30,12 @@ public partial class GameDisplay : CanvasLayer
 		itemsButton = GetNode<Button>("%ItemsButton");
 		audioPlayer = GetNode<AudioStreamPlayer>("AudioPlayer");
 		inventoryMenu = GetNode<NinePatchRect>("InventoryRect");
+		optionsMenu = GetNode<NinePatchRect>("OptionsRect");
+		controlsMenu = GetNode<NinePatchRect>("ControlsRect");
 		itemsContainer = GetNode<GridContainer>("%ItemsContainer");
 		noItemsButton = GetNode<Button>("%NoItemsButton");
+		resolutionsOption = GetNode<OptionButton>("%ResolutionOptions");
+		upButton = GetNode<ControlSelectButton>("%UpButton");
 
 		inventoryMenu.Hide();
 		Hide();
@@ -64,7 +72,13 @@ public partial class GameDisplay : CanvasLayer
 					}
 					break;
 				case 1:
-					ToggleInventoryMenu();
+					level = 0;
+					inventoryMenu.Hide();
+					optionsMenu.Hide();
+					itemsButton.GrabFocus();
+					break;
+				case 2:
+					OnOptionsMenu();
 					break;
 				default:
 					break;
@@ -76,8 +90,6 @@ public partial class GameDisplay : CanvasLayer
 	{
 		if (inventoryMenu.Visible)
 		{
-			level = 0;
-			inventoryMenu.Hide();
 			itemsButton.GrabFocus();
 		}
 		else
@@ -101,7 +113,14 @@ public partial class GameDisplay : CanvasLayer
 
 	public void ToggleOptionsMenu()
 	{
-		//TODO
+		if (optionsMenu.Visible)
+		{
+			itemsButton.GrabFocus();
+		}
+		else
+		{
+			OnOptionsMenu();
+		}
 	}
 
 	public void UpdateInventoryMenu()
@@ -118,5 +137,33 @@ public partial class GameDisplay : CanvasLayer
 			button.Set(Button.PropertyName.Text, item);
 			itemsContainer.AddChild(button);
 		}
+	}
+
+	public void OnOptionsMenu()
+	{
+		level = 1;
+		optionsMenu.Show();
+		controlsMenu.Hide();
+		resolutionsOption.GrabFocus();
+	}
+
+	public void OnControlsMenu()
+	{
+		level = 2;
+		optionsMenu.Hide();
+		controlsMenu.Show();
+		upButton.GrabFocus();
+	}
+
+	public void OnWindowSizeChanged(int optionId)
+	{
+		WindowSize size = (WindowSize)optionId;
+		global.ChangeWindowSize(size);
+		global.Settings.SaveSettings();
+	}
+
+	public void OnFullscreenToggled(bool toggled)
+	{
+		global.Settings.ToggleFullscreen(toggled);
 	}
 }

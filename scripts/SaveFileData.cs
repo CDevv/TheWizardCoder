@@ -26,7 +26,7 @@ public class SaveFileData
 	}
 
     //Playthrough properties
-    public bool HasPlayedFirstCutscene { get; set; } = false;
+    public bool HasPlayedIntro{ get; set; } = false;
 
     public Dictionary<string, Variant> GenerateDictionary()
     {
@@ -38,7 +38,8 @@ public class SaveFileData
             {"TimeSpent", TimeSpent.TotalSeconds},
             {"Location", Location},
             {"Health", Health},
-            {"Inventory", Inventory}
+            {"Inventory", Inventory},
+            {"HasPlayedIntro", HasPlayedIntro},
         };
     }
 
@@ -51,6 +52,9 @@ public class SaveFileData
         Location = (string)dictionary["Location"];
         Health = (int)dictionary["Health"];
         Inventory = (Array<string>)dictionary["Inventory"];
+
+        //Playthrough
+        HasPlayedIntro = (bool)dictionary["HasPlayedIntro"];
     }
 
     public void AddToInventory(string item)

@@ -40,6 +40,7 @@ public partial class ControlSelectButton : Button
 
 	public void OnPressed()
 	{
+		Text = "Waiting for input..";
 		waitingInput = true;
 	}
 }

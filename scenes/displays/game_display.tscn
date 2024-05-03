@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://de21qftn035us"]
+[gd_scene load_steps=9 format=3 uid="uid://de21qftn035us"]
 
 [ext_resource type="Script" path="res://scripts/displays/GameDisplay.cs" id="1_6dgqm"]
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_8qvuk"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://00inqs1v3lxi" path="res://assets/ui/base.png" id="3_5sira"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="4_sk2au"]
 [ext_resource type="AudioStream" uid="uid://cj1pvxtiwamdh" path="res://sounds/ui/btnoption.wav" id="6_bgthx"]
+[ext_resource type="PackedScene" uid="uid://dhktihkxj4i2g" path="res://scenes/prefabs/control_select_button.tscn" id="8_j4b7n"]
 
 [node name="GameDisplay" type="CanvasLayer"]
 script = ExtResource("1_6dgqm")
@@ -98,6 +99,7 @@ text = "Options"
 stream = ExtResource("6_bgthx")
 
 [node name="InventoryRect" type="NinePatchRect" parent="."]
+visible = false
 offset_left = 184.0
 offset_top = 72.0
 offset_right = 380.0
@@ -145,5 +147,189 @@ theme = ExtResource("4_sk2au")
 theme_override_font_sizes/font_size = 24
 text = "No items in inventory."
 
+[node name="OptionsRect" type="NinePatchRect" parent="."]
+visible = false
+offset_left = 184.0
+offset_top = 72.0
+offset_right = 380.0
+offset_bottom = 228.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_8qvuk")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="ResolutionOptions" type="OptionButton" parent="OptionsRect"]
+unique_name_in_owner = true
+offset_left = 84.0
+offset_top = 12.0
+offset_right = 217.0
+offset_bottom = 28.0
+scale = Vector2(0.75, 0.75)
+focus_neighbor_bottom = NodePath("../FullscreenCheckBox")
+mouse_filter = 2
+theme = ExtResource("4_sk2au")
+theme_override_font_sizes/font_size = 16
+item_count = 2
+selected = 0
+popup/item_0/text = "640x480"
+popup/item_0/id = 0
+popup/item_1/text = "1280x960"
+popup/item_1/id = 1
+
+[node name="ResolutionLabel" type="Label" parent="OptionsRect"]
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 172.0
+offset_bottom = 36.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("4_sk2au")
+theme_override_font_sizes/font_size = 24
+text = "Resolution"
+
+[node name="FullscreenLabel" type="Label" parent="OptionsRect"]
+offset_left = 12.0
+offset_top = 32.0
+offset_right = 172.0
+offset_bottom = 56.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("4_sk2au")
+theme_override_font_sizes/font_size = 24
+text = "Fullscreen
+"
+
+[node name="FullscreenCheckBox" type="CheckBox" parent="OptionsRect"]
+offset_left = 92.0
+offset_top = 28.0
+offset_right = 116.0
+offset_bottom = 52.0
+focus_neighbor_top = NodePath("../ResolutionOptions")
+focus_neighbor_bottom = NodePath("../ControlsButton")
+mouse_filter = 2
+theme = ExtResource("4_sk2au")
+
+[node name="ControlsButton" type="Button" parent="OptionsRect"]
+offset_left = 12.0
+offset_top = 52.0
+offset_right = 108.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+focus_neighbor_top = NodePath("../FullscreenCheckBox")
+theme = ExtResource("4_sk2au")
+theme_override_font_sizes/font_size = 24
+text = "Controls.."
+
+[node name="ControlsRect" type="NinePatchRect" parent="."]
+visible = false
+offset_left = 184.0
+offset_top = 72.0
+offset_right = 380.0
+offset_bottom = 228.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_8qvuk")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="UpLabel" type="Label" parent="ControlsRect"]
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 172.0
+offset_bottom = 36.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("4_sk2au")
+theme_override_font_sizes/font_size = 24
+text = "Up"
+
+[node name="DownLabel" type="Label" parent="ControlsRect"]
+offset_left = 12.0
+offset_top = 32.0
+offset_right = 172.0
+offset_bottom = 56.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("4_sk2au")
+theme_override_font_sizes/font_size = 24
+text = "Down
+"
+
+[node name="LeftLabel" type="Label" parent="ControlsRect"]
+offset_left = 12.0
+offset_top = 52.0
+offset_right = 172.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("4_sk2au")
+theme_override_font_sizes/font_size = 24
+text = "Left
+"
+
+[node name="RightLabel" type="Label" parent="ControlsRect"]
+offset_left = 12.0
+offset_top = 72.0
+offset_right = 172.0
+offset_bottom = 96.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("4_sk2au")
+theme_override_font_sizes/font_size = 24
+text = "Right
+"
+
+[node name="UpButton" parent="ControlsRect" instance=ExtResource("8_j4b7n")]
+unique_name_in_owner = true
+offset_left = 96.0
+offset_top = 12.0
+offset_right = 280.0
+offset_bottom = 36.0
+scale = Vector2(0.5, 0.5)
+focus_neighbor_bottom = NodePath("../DownButton")
+theme_override_font_sizes/font_size = 24
+text = "Up"
+ActionName = "up"
+
+[node name="LeftButton" parent="ControlsRect" instance=ExtResource("8_j4b7n")]
+unique_name_in_owner = true
+offset_left = 96.0
+offset_top = 52.0
+offset_right = 280.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+focus_neighbor_top = NodePath("../DownButton")
+focus_neighbor_bottom = NodePath("../RightButton")
+theme_override_font_sizes/font_size = 24
+text = "Left
+"
+ActionName = "left"
+
+[node name="RightButton" parent="ControlsRect" instance=ExtResource("8_j4b7n")]
+unique_name_in_owner = true
+offset_left = 96.0
+offset_top = 72.0
+offset_right = 280.0
+offset_bottom = 96.0
+scale = Vector2(0.5, 0.5)
+focus_neighbor_top = NodePath("../LeftButton")
+theme_override_font_sizes/font_size = 24
+text = "Right
+"
+ActionName = "right"
+
+[node name="DownButton" parent="ControlsRect" instance=ExtResource("8_j4b7n")]
+unique_name_in_owner = true
+offset_left = 96.0
+offset_top = 32.0
+offset_right = 280.0
+offset_bottom = 56.0
+scale = Vector2(0.5, 0.5)
+focus_neighbor_top = NodePath("../UpButton")
+focus_neighbor_bottom = NodePath("../LeftButton")
+theme_override_font_sizes/font_size = 24
+text = "Down"
+ActionName = "down"
+
 [connection signal="button_down" from="MenuRect/OptionsMargins/VBoxContainer/ItemsButton" to="." method="ToggleInventoryMenu"]
 [connection signal="button_down" from="MenuRect/OptionsMargins/VBoxContainer/Options" to="." method="ToggleOptionsMenu"]
+[connection signal="item_selected" from="OptionsRect/ResolutionOptions" to="." method="OnWindowSizeChanged"]
+[connection signal="toggled" from="OptionsRect/FullscreenCheckBox" to="." method="OnFullscreenToggled"]
+[connection signal="pressed" from="OptionsRect/ControlsButton" to="." method="OnControlsMenu"]

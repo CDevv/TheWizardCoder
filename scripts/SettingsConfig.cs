@@ -104,7 +104,7 @@ public class SettingsConfig
 
     public void ChangeControl(string name, InputEvent input)
     {
-        InputMap.ActionEraseEvent(name, controls[name]);
+        InputMap.ActionEraseEvents(name);
         controls[name] = input;
         InputMap.ActionAddEvent(name, input);
     }

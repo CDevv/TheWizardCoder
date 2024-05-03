@@ -1,3 +1,4 @@
+using DialogueManagerRuntime;
 using Godot;
 using System;
 
@@ -156,5 +157,10 @@ public partial class Player : CharacterBody2D
 	{
 		var tween = CreateTween();
 		tween.TweenProperty(this, "position", position, duration);
+	}
+
+	public void ShowDialogueBallon(Resource resource, string title)
+	{
+		DialogueManager.ShowDialogueBalloon(resource, title);
 	}
 }
