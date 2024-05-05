@@ -1,0 +1,87 @@
+[gd_scene load_steps=4 format=3 uid="uid://1s17ud5yxf8a"]
+
+[ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_435q7"]
+[ext_resource type="Script" path="res://scripts/subdisplays/OptionsMenu.cs" id="1_wdgsp"]
+[ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="2_mnh0l"]
+
+[node name="GameMenuOptionsMenu" type="CanvasLayer"]
+script = ExtResource("1_wdgsp")
+
+[node name="OptionsRect" type="NinePatchRect" parent="."]
+offset_left = 184.0
+offset_top = 72.0
+offset_right = 380.0
+offset_bottom = 228.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_435q7")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="ResolutionOptions" type="OptionButton" parent="OptionsRect"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 84.0
+offset_top = 12.0
+offset_right = 217.0
+offset_bottom = 28.0
+scale = Vector2(0.75, 0.75)
+focus_neighbor_bottom = NodePath("../FullscreenCheckBox")
+mouse_filter = 2
+theme = ExtResource("2_mnh0l")
+theme_override_font_sizes/font_size = 16
+item_count = 2
+selected = 0
+popup/item_0/text = "640x480"
+popup/item_0/id = 0
+popup/item_1/text = "1280x960"
+popup/item_1/id = 1
+
+[node name="ResolutionLabel" type="Label" parent="OptionsRect"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 172.0
+offset_bottom = 36.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_mnh0l")
+theme_override_font_sizes/font_size = 24
+text = "Resolution"
+
+[node name="FullscreenLabel" type="Label" parent="OptionsRect"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 32.0
+offset_right = 172.0
+offset_bottom = 56.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_mnh0l")
+theme_override_font_sizes/font_size = 24
+text = "Fullscreen
+"
+
+[node name="FullscreenCheckBox" type="CheckBox" parent="OptionsRect"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 28.0
+offset_right = 116.0
+offset_bottom = 52.0
+focus_neighbor_top = NodePath("../ResolutionOptions")
+focus_neighbor_bottom = NodePath("../ControlsButton")
+mouse_filter = 2
+theme = ExtResource("2_mnh0l")
+
+[node name="ControlsButton" type="Button" parent="OptionsRect"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 52.0
+offset_right = 108.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+focus_neighbor_top = NodePath("../FullscreenCheckBox")
+theme = ExtResource("2_mnh0l")
+theme_override_font_sizes/font_size = 24
+text = "Controls.."
+
+[connection signal="pressed" from="OptionsRect/ControlsButton" to="." method="OnControlsPage"]

@@ -1,0 +1,124 @@
+[gd_scene load_steps=5 format=3 uid="uid://ody0k6mcrmk7"]
+
+[ext_resource type="Script" path="res://scripts/subdisplays/ControlsMenu.cs" id="1_hhbrg"]
+[ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_ntoui"]
+[ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="2_2exgl"]
+[ext_resource type="PackedScene" uid="uid://dhktihkxj4i2g" path="res://scenes/prefabs/control_select_button.tscn" id="3_klxlg"]
+
+[node name="GameMenuControlsMenu" type="CanvasLayer"]
+script = ExtResource("1_hhbrg")
+
+[node name="ControlsRect" type="NinePatchRect" parent="."]
+offset_left = 184.0
+offset_top = 72.0
+offset_right = 380.0
+offset_bottom = 228.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_ntoui")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="UpLabel" type="Label" parent="ControlsRect"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 172.0
+offset_bottom = 36.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_2exgl")
+theme_override_font_sizes/font_size = 24
+text = "Up"
+
+[node name="DownLabel" type="Label" parent="ControlsRect"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 32.0
+offset_right = 172.0
+offset_bottom = 56.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_2exgl")
+theme_override_font_sizes/font_size = 24
+text = "Down
+"
+
+[node name="LeftLabel" type="Label" parent="ControlsRect"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 52.0
+offset_right = 172.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_2exgl")
+theme_override_font_sizes/font_size = 24
+text = "Left
+"
+
+[node name="RightLabel" type="Label" parent="ControlsRect"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 72.0
+offset_right = 172.0
+offset_bottom = 96.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_2exgl")
+theme_override_font_sizes/font_size = 24
+text = "Right
+"
+
+[node name="UpButton" parent="ControlsRect" instance=ExtResource("3_klxlg")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 96.0
+offset_top = 12.0
+offset_right = 280.0
+offset_bottom = 36.0
+scale = Vector2(0.5, 0.5)
+focus_neighbor_bottom = NodePath("../DownButton")
+theme_override_font_sizes/font_size = 24
+text = "Up"
+ActionName = "up"
+
+[node name="LeftButton" parent="ControlsRect" instance=ExtResource("3_klxlg")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 96.0
+offset_top = 52.0
+offset_right = 280.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+focus_neighbor_top = NodePath("../DownButton")
+focus_neighbor_bottom = NodePath("../RightButton")
+theme_override_font_sizes/font_size = 24
+text = "Left
+"
+ActionName = "left"
+
+[node name="RightButton" parent="ControlsRect" instance=ExtResource("3_klxlg")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 96.0
+offset_top = 72.0
+offset_right = 280.0
+offset_bottom = 96.0
+scale = Vector2(0.5, 0.5)
+focus_neighbor_top = NodePath("../LeftButton")
+theme_override_font_sizes/font_size = 24
+text = "Right
+"
+ActionName = "right"
+
+[node name="DownButton" parent="ControlsRect" instance=ExtResource("3_klxlg")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 96.0
+offset_top = 32.0
+offset_right = 280.0
+offset_bottom = 56.0
+scale = Vector2(0.5, 0.5)
+focus_neighbor_top = NodePath("../UpButton")
+focus_neighbor_bottom = NodePath("../LeftButton")
+theme_override_font_sizes/font_size = 24
+text = "Down"
+ActionName = "down"

@@ -15,12 +15,10 @@ public partial class GameDisplay : CanvasLayer
 	private Button itemsButton;
 	private AudioStreamPlayer audioPlayer;
 	private NinePatchRect inventoryMenu;
-	private NinePatchRect optionsMenu;
-	private NinePatchRect controlsMenu;
+	private OptionsMenu optionsMenu;
+	private ControlsMenu controlsMenu;
 	private GridContainer itemsContainer;
 	private Button noItemsButton;
-	private OptionButton resolutionsOption;
-	private ControlSelectButton upButton;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -30,12 +28,10 @@ public partial class GameDisplay : CanvasLayer
 		itemsButton = GetNode<Button>("%ItemsButton");
 		audioPlayer = GetNode<AudioStreamPlayer>("AudioPlayer");
 		inventoryMenu = GetNode<NinePatchRect>("InventoryRect");
-		optionsMenu = GetNode<NinePatchRect>("OptionsRect");
-		controlsMenu = GetNode<NinePatchRect>("ControlsRect");
 		itemsContainer = GetNode<GridContainer>("%ItemsContainer");
 		noItemsButton = GetNode<Button>("%NoItemsButton");
-		resolutionsOption = GetNode<OptionButton>("%ResolutionOptions");
-		upButton = GetNode<ControlSelectButton>("%UpButton");
+		optionsMenu = GetNode<OptionsMenu>("%OptionsMenu");
+		controlsMenu = GetNode<ControlsMenu>("%ControlsMenu");
 
 		inventoryMenu.Hide();
 		Hide();
@@ -144,7 +140,7 @@ public partial class GameDisplay : CanvasLayer
 		level = 1;
 		optionsMenu.Show();
 		controlsMenu.Hide();
-		resolutionsOption.GrabFocus();
+		optionsMenu.FocusFirst();
 	}
 
 	public void OnControlsMenu()
@@ -152,18 +148,6 @@ public partial class GameDisplay : CanvasLayer
 		level = 2;
 		optionsMenu.Hide();
 		controlsMenu.Show();
-		upButton.GrabFocus();
-	}
-
-	public void OnWindowSizeChanged(int optionId)
-	{
-		WindowSize size = (WindowSize)optionId;
-		global.ChangeWindowSize(size);
-		global.Settings.SaveSettings();
-	}
-
-	public void OnFullscreenToggled(bool toggled)
-	{
-		global.Settings.ToggleFullscreen(toggled);
+		controlsMenu.FocusFirst();
 	}
 }

@@ -15,10 +15,8 @@ public partial class MainMenuDisplay : CanvasLayer
 	private SaveFileOption save1button;
 	private SaveFileOption save2button;
 	private SaveFileOption save3button;
-	private OptionButton resolutionOption;
-	private ControlSelectButton upControlOption;
-	private NinePatchRect optionsMainPage;
-	private NinePatchRect controlsPage;
+	private OptionsMenu optionsMenu;
+	private ControlsMenu controlsMenu;
 
 	private bool waitingInput = false;
 	private string actionName;
@@ -36,10 +34,8 @@ public partial class MainMenuDisplay : CanvasLayer
 		save1button = GetNode<SaveFileOption>("%Save1");
 		save2button = GetNode<SaveFileOption>("%Save2");
 		save3button = GetNode<SaveFileOption>("%Save3");
-		resolutionOption = GetNode<OptionButton>("%ResolutionOptions");
-		upControlOption = GetNode<ControlSelectButton>("%UpButton");
-		optionsMainPage = GetNode<NinePatchRect>("%OptionsRect");
-		controlsPage = GetNode<NinePatchRect>("%ControlsRect");
+		optionsMenu = GetNode<OptionsMenu>("%OptionsMenu");
+		controlsMenu = GetNode<ControlsMenu>("%ControlsMenu");
 
 		UpdateSaveData();
 		playButton.CallDeferred(Button.MethodName.GrabFocus);
@@ -79,6 +75,8 @@ public partial class MainMenuDisplay : CanvasLayer
 		main.Show();
 		savedGames.Hide();
 		options.Hide();
+		optionsMenu.Hide();
+		controlsMenu.Hide();
 		playButton.GrabFocus();
 	}
 
@@ -95,7 +93,19 @@ public partial class MainMenuDisplay : CanvasLayer
 		main.Hide();
 		savedGames.Hide();
 		options.Show();
-		resolutionOption.GrabFocus();
+
+		optionsMenu.Show();
+		controlsMenu.Hide();
+
+		optionsMenu.FocusFirst();
+	}
+
+	public void ShowControls()
+	{
+		optionsMenu.Hide();
+		controlsMenu.Show();
+
+		controlsMenu.FocusFirst();
 	}
 
 	public void OnLoad()
@@ -124,37 +134,5 @@ public partial class MainMenuDisplay : CanvasLayer
 	{
 		global.LoadGame("save3");
 		global.ChangeRoom(firstRoom);
-	}
-
-	public void OnWindowSizeChanged(int optionId)
-	{
-		WindowSize size = (WindowSize)optionId;
-		global.ChangeWindowSize(size);
-		global.Settings.SaveSettings();
-	}
-
-	public void OnFullscreenToggled(bool toggled)
-	{
-		global.Settings.ToggleFullscreen(toggled);
-	}
-
-	public void OnControlsPage()
-	{
-		optionsMainPage.Hide();
-		controlsPage.Show();
-		upControlOption.GrabFocus();
-	}
-
-	public void OnOptionsPage()
-	{
-		optionsMainPage.Show();
-		controlsPage.Hide();
-		resolutionOption.GrabFocus();
-	}
-
-	public void OnControlChangeButton(string action)
-	{
-		actionName = action;
-		waitingInput = true;
 	}
 }
