@@ -4,6 +4,7 @@ using Godot.Collections;
 
 public class SettingsConfig
 {
+    public WindowSize WindowSize { get; set; }
     public int WindowWidth { get; set; } = 640;
     public int WindowHeight { get; set; } = 480;
     public bool Fullscreen { get; set; } = false;
@@ -28,8 +29,9 @@ public class SettingsConfig
     {
         ConfigFile configFile = new ConfigFile();
 
-        configFile.SetValue("General", "WindowWidth", WindowWidth);
-        configFile.SetValue("General", "WindowHeight", WindowHeight);
+        configFile.SetValue("General", "WindowSize", (int)WindowSize);
+        //configFile.SetValue("General", "WindowWidth", WindowWidth);
+        //configFile.SetValue("General", "WindowHeight", WindowHeight);
         configFile.SetValue("General", "Fullscreen", Fullscreen);
 
         foreach (var item in controls)
@@ -51,8 +53,9 @@ public class SettingsConfig
             return;
         }
 
-        WindowWidth = (int)configFile.GetValue("General", "WindowWidth");
-        WindowHeight = (int)configFile.GetValue("General", "WindowHeight");
+        //WindowWidth = (int)configFile.GetValue("General", "WindowWidth");
+        //WindowHeight = (int)configFile.GetValue("General", "WindowHeight");
+        WindowSize = (WindowSize)(int)configFile.GetValue("General", "WindowSize");
         Fullscreen = (bool)configFile.GetValue("General", "Fullscreen");
 
         foreach (var item in controls)
@@ -63,7 +66,9 @@ public class SettingsConfig
 
     public void ApplySettings()
     {
-        DisplayServer.WindowSetSize(new Vector2I(WindowWidth, WindowHeight));
+        //DisplayServer.WindowSetSize(new Vector2I(WindowWidth, WindowHeight));
+        ChangeWindowSize(WindowSize);
+
         ToggleFullscreen(Fullscreen);
         foreach (var item in controls)
         {
@@ -73,20 +78,53 @@ public class SettingsConfig
 
     public void ChangeWindowSize(WindowSize size, Window window)
     {
+        int windowHeight = 0;
+        int windowWidth = 0;
+
         switch (size)
         {
             case WindowSize.Size640by480:
-                WindowWidth = 640;
-                WindowHeight = 480;        
+                windowWidth = 640;
+                windowHeight = 480;        
                 break;
             case WindowSize.Size1280by960:
-                WindowWidth = 1280;
-                WindowHeight = 960;
+                windowWidth = 1280;
+                windowHeight = 960;
                 break;
             default:
                 break;
         }
+
+        WindowWidth = windowWidth;
+        WindowHeight = windowHeight;
+        WindowSize = size;
         window.Size = new Vector2I(WindowWidth, WindowHeight);
+
+    }
+
+    public void ChangeWindowSize(WindowSize size)
+    {
+        int windowHeight = 0;
+        int windowWidth = 0;
+
+        switch (size)
+        {
+            case WindowSize.Size640by480:
+                windowWidth = 640;
+                windowHeight = 480;        
+                break;
+            case WindowSize.Size1280by960:
+                windowWidth = 1280;
+                windowHeight = 960;
+                break;
+            default:
+                break;
+        }
+
+        WindowWidth = windowWidth;
+        WindowHeight = windowHeight;
+        WindowSize = size;
+        DisplayServer.WindowSetSize(new Vector2I(WindowWidth, WindowHeight));
     }
 
     public void ToggleFullscreen(bool value)

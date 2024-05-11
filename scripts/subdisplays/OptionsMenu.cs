@@ -9,17 +9,25 @@ public partial class OptionsMenu : CanvasLayer
 	public delegate void OnBackButtonPressedEventHandler();
 
 	private Global global;
-	private OptionButton firstButton;
+	private OptionButton resolutionsButton;
+	private CheckBox fullscreenButton;
 
 	public override void _Ready()
 	{
 		global = GetNode<Global>("/root/Global");
-		firstButton = GetNode<OptionButton>("%ResolutionOptions");
+		resolutionsButton = GetNode<OptionButton>("%ResolutionOptions");
+		fullscreenButton = GetNode<CheckBox>("%FullscreenCheckBox");
+	}
+
+	public void UpdateDisplay()
+	{
+		resolutionsButton.Set(OptionButton.PropertyName.Selected, (int)global.Settings.WindowSize);
+		fullscreenButton.Set(CheckBox.PropertyName.ButtonPressed, (bool)global.Settings.Fullscreen);
 	}
 
 	public void FocusFirst()
 	{
-		firstButton.GrabFocus();
+		resolutionsButton.GrabFocus();
 	}
 
 	public void OnWindowSizeChanged(int optionId)

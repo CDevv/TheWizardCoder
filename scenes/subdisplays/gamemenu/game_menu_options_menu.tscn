@@ -62,6 +62,7 @@ text = "Fullscreen
 "
 
 [node name="FullscreenCheckBox" type="CheckBox" parent="OptionsRect"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 92.0
 offset_top = 28.0
@@ -84,4 +85,6 @@ theme = ExtResource("2_mnh0l")
 theme_override_font_sizes/font_size = 24
 text = "Controls.."
 
+[connection signal="item_selected" from="OptionsRect/ResolutionOptions" to="." method="OnWindowSizeChanged"]
+[connection signal="toggled" from="OptionsRect/FullscreenCheckBox" to="." method="OnFullscreenToggled"]
 [connection signal="pressed" from="OptionsRect/ControlsButton" to="." method="OnControlsPage"]

@@ -74,6 +74,7 @@ theme_override_font_sizes/font_size = 24
 text = "Back"
 
 [node name="FullscreenCheckBox" type="CheckBox" parent="OptionsRect"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 92.0
 offset_top = 28.0

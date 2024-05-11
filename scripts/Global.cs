@@ -21,8 +21,15 @@ public partial class Global : Node
 
     public override void _Ready()
     {
-		Settings.LoadSettings();
-		Settings.ApplySettings();
+		try
+		{
+			Settings.LoadSettings();
+			Settings.ApplySettings();
+		}
+		catch (System.Exception e)
+		{
+			GD.PrintErr(e.ToString());
+		}
     }
 
 	public void AddToInventory(string item)

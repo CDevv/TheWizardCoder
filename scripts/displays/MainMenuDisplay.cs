@@ -39,6 +39,8 @@ public partial class MainMenuDisplay : CanvasLayer
 
 		UpdateSaveData();
 		playButton.CallDeferred(Button.MethodName.GrabFocus);
+		optionsMenu.UpdateDisplay();
+		controlsMenu.UpdateDisplay();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

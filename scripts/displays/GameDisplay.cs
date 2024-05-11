@@ -35,6 +35,7 @@ public partial class GameDisplay : CanvasLayer
 
 		inventoryMenu.Hide();
 		Hide();
+		optionsMenu.UpdateDisplay();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
