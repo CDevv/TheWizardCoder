@@ -47,6 +47,11 @@ public partial class Player : CharacterBody2D
 			ChangeDirection(direction);
 		}
 
+		if (global.CurrentRoom.Camera != null)
+		{
+			global.CurrentRoom.Camera.Set(Camera2D.PropertyName.Position, Position + velocity);
+		}
+
 		var collision = MoveAndCollide(velocity);
 		if (collision != null)
 		{
@@ -55,6 +60,12 @@ public partial class Player : CharacterBody2D
 				global.CanWalk = false;
 				GD.Print("i collided with a warper");
 				TransitionToRoom((Warper)collision.GetCollider());
+			}
+			else if (collision.GetCollider().GetType() == typeof(BattlePoint))
+			{
+				global.CanWalk = false;
+				GD.Print("Battle point");
+				global.CurrentRoom.BattleDisplay.ShowDisplay();
 			}
 		}
 	}

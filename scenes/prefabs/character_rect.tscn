@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://cil04fbnlnhn3"]
+
+[ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_br32s"]
+[ext_resource type="Texture2D" uid="uid://bxxj3cscesu7t" path="res://assets/ui/nolanhead.png" id="2_enjbo"]
+[ext_resource type="Texture2D" uid="uid://00inqs1v3lxi" path="res://assets/ui/base.png" id="3_obymu"]
+[ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="4_0hco1"]
+
+[node name="CharacterRect" type="NinePatchRect"]
+offset_right = 92.0
+offset_bottom = 24.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_br32s")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(11.75, 11.75)
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("2_enjbo")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 88.0
+offset_bottom = 20.0
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("3_obymu")
+texture_progress = ExtResource("3_obymu")
+tint_progress = Color(1, 0.337255, 0.309804, 1)
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 4.0
+offset_right = 152.0
+offset_bottom = 28.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("4_0hco1")
+theme_override_font_sizes/font_size = 24
+text = "Nolan"

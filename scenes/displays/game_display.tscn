@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ody0k6mcrmk7" path="res://scenes/subdisplays/gamemenu/game_menu_controls_menu.tscn" id="9_imgrl"]
 
 [node name="GameDisplay" type="CanvasLayer"]
+follow_viewport_enabled = true
 script = ExtResource("1_6dgqm")
 ItemButtonTemplate = ExtResource("2_ki8th")
 
