@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://snksmimcfhit"
+path="res://.godot/imported/battle_intro.dialogue-1f944c6d98d7a79182a80db16f0586a1.tres"
+
+[deps]
+
+source_file="res://dialogue/battle_intro.dialogue"
+dest_files=["res://.godot/imported/battle_intro.dialogue-1f944c6d98d7a79182a80db16f0586a1.tres"]
+
+[params]
+
+defaults=true

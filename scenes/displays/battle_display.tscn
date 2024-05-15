@@ -1,25 +1,78 @@
-[gd_scene load_steps=9 format=3 uid="uid://t2oe67lsq1j2"]
+[gd_scene load_steps=12 format=3 uid="uid://t2oe67lsq1j2"]
 
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_6xhfj"]
 [ext_resource type="Script" path="res://scripts/displays/BattleDisplay.cs" id="1_py1kc"]
-[ext_resource type="Texture2D" uid="uid://bxxj3cscesu7t" path="res://assets/ui/nolanhead.png" id="2_svduw"]
-[ext_resource type="Texture2D" uid="uid://00inqs1v3lxi" path="res://assets/ui/base.png" id="3_0ymox"]
+[ext_resource type="Resource" uid="uid://snksmimcfhit" path="res://dialogue/battle_intro.dialogue" id="2_6wq2r"]
+[ext_resource type="PackedScene" uid="uid://cn6qmd0lxinhs" path="res://scenes/prefabs/bullet.tscn" id="3_lb607"]
+[ext_resource type="PackedScene" uid="uid://cil04fbnlnhn3" path="res://scenes/prefabs/character_rect.tscn" id="3_xy74d"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="4_qk4re"]
-[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_label.gd" id="5_g26hu"]
+[ext_resource type="PackedScene" uid="uid://wj2f3mwtxrko" path="res://scenes/subdisplays/battle/battle_dialogue.tscn" id="6_0h536"]
 
 [sub_resource type="Animation" id="Animation_iyrke"]
 resource_name = "battle_intro"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerStats:position")
+tracks/0/path = NodePath("BattleOptions:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-200, 16), Vector2(16, 16)]
+"values": [Vector2(488, 496), Vector2(488, 304)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BattleDialogue:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(16, 496), Vector2(16, 304)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerRect:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-208, 16), Vector2(16, 16)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("EnemyRect:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(656, 16), Vector2(439, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_hb23d"]
+resource_name = "hide_bottom"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BattleDialogue:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(16, 304), Vector2(16, 496)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -28,72 +81,66 @@ tracks/1/path = NodePath("BattleOptions:position")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(488, 496), Vector2(488, 304)]
+"values": [Vector2(488, 304), Vector2(488, 496)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("BattleDialogueRect:position")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
+
+[sub_resource type="Animation" id="Animation_11o3f"]
+resource_name = "show_bottom"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BattleDialogue:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(16, 496), Vector2(16, 304)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BattleOptions:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(488, 496), Vector2(488, 304)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h5bcl"]
 _data = {
-"battle_intro": SubResource("Animation_iyrke")
+"battle_intro": SubResource("Animation_iyrke"),
+"hide_bottom": SubResource("Animation_hb23d"),
+"show_bottom": SubResource("Animation_11o3f")
 }
 
 [node name="BattleDisplay" type="CanvasLayer"]
 script = ExtResource("1_py1kc")
+DialogueResource = ExtResource("2_6wq2r")
+BulletPackedScene = ExtResource("3_lb607")
 
-[node name="PlayerStats" type="NinePatchRect" parent="."]
+[node name="PlayerRect" parent="." instance=ExtResource("3_xy74d")]
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 108.0
 offset_bottom = 40.0
-scale = Vector2(2, 2)
-texture = ExtResource("1_6xhfj")
-patch_margin_left = 3
-patch_margin_top = 3
-patch_margin_right = 3
-patch_margin_bottom = 3
 
-[node name="Sprite2D" type="Sprite2D" parent="PlayerStats"]
-position = Vector2(11.75, 11.75)
-scale = Vector2(0.33, 0.33)
-texture = ExtResource("2_svduw")
-
-[node name="HealthBar" type="TextureProgressBar" parent="PlayerStats"]
-unique_name_in_owner = true
-layout_mode = 2
-offset_left = 24.0
+[node name="EnemyRect" parent="." instance=ExtResource("3_xy74d")]
+offset_left = 439.0
 offset_top = 16.0
-offset_right = 88.0
-offset_bottom = 20.0
-value = 100.0
-nine_patch_stretch = true
-texture_under = ExtResource("3_0ymox")
-texture_progress = ExtResource("3_0ymox")
-tint_progress = Color(1, 0.337255, 0.309804, 1)
+offset_right = 531.0
+offset_bottom = 40.0
 
-[node name="NameLabel" type="Label" parent="PlayerStats"]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 4.0
-offset_right = 152.0
-offset_bottom = 28.0
-scale = Vector2(0.5, 0.5)
-theme = ExtResource("4_qk4re")
-theme_override_font_sizes/font_size = 24
-text = "Nolan"
+[node name="BattleDialogue" parent="." instance=ExtResource("6_0h536")]
+unique_name_in_owner = true
 
 [node name="BattleOptions" type="NinePatchRect" parent="."]
 offset_left = 488.0
@@ -157,41 +204,6 @@ theme = ExtResource("4_qk4re")
 theme_override_font_sizes/font_size = 24
 text = "Defend"
 
-[node name="BattleDialogueRect" type="NinePatchRect" parent="."]
-offset_left = 16.0
-offset_top = 304.0
-offset_right = 248.0
-offset_bottom = 384.0
-scale = Vector2(2, 2)
-texture = ExtResource("1_6xhfj")
-region_rect = Rect2(0, 0, 16, 16)
-patch_margin_left = 3
-patch_margin_top = 3
-patch_margin_right = 3
-patch_margin_bottom = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="BattleDialogueRect"]
-layout_mode = 0
-offset_right = 464.0
-offset_bottom = 160.0
-scale = Vector2(0.5, 0.5)
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="DialogueLabel" type="RichTextLabel" parent="BattleDialogueRect/MarginContainer"]
-layout_mode = 2
-theme = ExtResource("4_qk4re")
-theme_override_font_sizes/normal_font_size = 24
-theme_override_font_sizes/bold_font_size = 24
-theme_override_font_sizes/italics_font_size = 24
-theme_override_font_sizes/bold_italics_font_size = 24
-theme_override_font_sizes/mono_font_size = 24
-text = "Text..."
-script = ExtResource("5_g26hu")
-skip_pause_at_abbreviations = PackedStringArray("Mr", "Mrs", "Ms", "Dr", "etc", "eg", "ex")
-
 [node name="PlayerMarker" type="Marker2D" parent="."]
 position = Vector2(88, 192)
 
@@ -202,3 +214,8 @@ position = Vector2(552, 192)
 libraries = {
 "": SubResource("AnimationLibrary_h5bcl")
 }
+
+[connection signal="pressed" from="BattleOptions/MarginContainer/VBoxContainer/FightButton" to="." method="OnFightButton"]
+[connection signal="pressed" from="BattleOptions/MarginContainer/VBoxContainer/ItemsButton" to="." method="OnItemsButton"]
+[connection signal="pressed" from="BattleOptions/MarginContainer/VBoxContainer/MagicButton" to="." method="OnMagicButton"]
+[connection signal="pressed" from="BattleOptions/MarginContainer/VBoxContainer/DefendButton" to="." method="OnDefenseButton"]

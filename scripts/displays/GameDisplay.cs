@@ -47,6 +47,11 @@ public partial class GameDisplay : CanvasLayer
 
     public override void _UnhandledInput(InputEvent @event)
     {
+		if (!global.GameDisplayEnabled)
+		{
+			return;
+		}
+
         if (Input.IsActionJustPressed("ui_cancel"))
 		{
 			switch (level)

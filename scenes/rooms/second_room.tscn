@@ -33,9 +33,9 @@ TargetRoomName = "first_room"
 TargetLocation = "RoomEnterMarker"
 PlayerDirection = 0
 
-[node name="Camera" parent="." index="10"]
-limit_right = 1280
-limit_bottom = 960
-
 [node name="BattlePoint" parent="." index="11" instance=ExtResource("5_5d3xc")]
 position = Vector2(736, 624)
+
+[node name="Camera" parent="." index="12"]
+limit_right = 1280
+limit_bottom = 960

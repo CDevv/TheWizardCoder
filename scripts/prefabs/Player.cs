@@ -1,9 +1,13 @@
 using DialogueManagerRuntime;
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class Player : CharacterBody2D
 {
+	[Signal]
+	public delegate void AnimationFinishedEventHandler();
+
 	public const int Speed = 2;
 
 	private Global global;
@@ -64,6 +68,7 @@ public partial class Player : CharacterBody2D
 			else if (collision.GetCollider().GetType() == typeof(BattlePoint))
 			{
 				global.CanWalk = false;
+				global.GameDisplayEnabled = false;
 				GD.Print("Battle point");
 				global.CurrentRoom.BattleDisplay.ShowDisplay();
 			}
@@ -144,6 +149,11 @@ public partial class Player : CharacterBody2D
 		animationTree.Set("parameters/conditions/move", false);
 		animationTree.Set("parameters/conditions/extrastate", true);
 		animationTree.Set("parameters/ExtraStates/state/transition_request", name);
+
+		Task finishedAnimation = new Task(async () => {
+			await ToSignal(animationTree, AnimationTree.SignalName.AnimationFinished);
+			EmitSignal(SignalName.AnimationFinished);
+		});
 	}
 
 	public void PlayIdleAnimation(Direction direction)

@@ -1,0 +1,100 @@
+{ "frames": [
+   {
+    "filename": "wizardextraanims 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 27, "h": 37 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 27, "h": 37 },
+    "sourceSize": { "w": 27, "h": 37 },
+    "duration": 500
+   },
+   {
+    "filename": "wizardextraanims 1.aseprite",
+    "frame": { "x": 27, "y": 0, "w": 27, "h": 37 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 27, "h": 37 },
+    "sourceSize": { "w": 27, "h": 37 },
+    "duration": 500
+   },
+   {
+    "filename": "wizardextraanims 2.aseprite",
+    "frame": { "x": 54, "y": 0, "w": 27, "h": 37 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 27, "h": 37 },
+    "sourceSize": { "w": 27, "h": 37 },
+    "duration": 100
+   },
+   {
+    "filename": "wizardextraanims 3.aseprite",
+    "frame": { "x": 0, "y": 37, "w": 27, "h": 37 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 27, "h": 37 },
+    "sourceSize": { "w": 27, "h": 37 },
+    "duration": 100
+   },
+   {
+    "filename": "wizardextraanims 4.aseprite",
+    "frame": { "x": 27, "y": 37, "w": 27, "h": 37 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 27, "h": 37 },
+    "sourceSize": { "w": 27, "h": 37 },
+    "duration": 100
+   },
+   {
+    "filename": "wizardextraanims 5.aseprite",
+    "frame": { "x": 54, "y": 37, "w": 27, "h": 37 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 27, "h": 37 },
+    "sourceSize": { "w": 27, "h": 37 },
+    "duration": 100
+   },
+   {
+    "filename": "wizardextraanims 6.aseprite",
+    "frame": { "x": 0, "y": 74, "w": 27, "h": 37 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 27, "h": 37 },
+    "sourceSize": { "w": 27, "h": 37 },
+    "duration": 100
+   },
+   {
+    "filename": "wizardextraanims 7.aseprite",
+    "frame": { "x": 0, "y": 74, "w": 27, "h": 37 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 27, "h": 37 },
+    "sourceSize": { "w": 27, "h": 37 },
+    "duration": 100
+   },
+   {
+    "filename": "wizardextraanims 8.aseprite",
+    "frame": { "x": 27, "y": 74, "w": 27, "h": 37 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 27, "h": 37 },
+    "sourceSize": { "w": 27, "h": 37 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.2-dev",
+  "image": "wizardextra.png",
+  "format": "RGBA8888",
+  "size": { "w": 81, "h": 111 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "sleep", "from": 0, "to": 1, "direction": "forward", "color": "#000000ff" },
+   { "name": "attack_intro", "from": 2, "to": 6, "direction": "forward", "color": "#000000ff" },
+   { "name": "attack_idle", "from": 7, "to": 7, "direction": "forward", "color": "#000000ff" },
+   { "name": "attack_idle2", "from": 8, "to": 8, "direction": "forward", "color": "#000000ff" }
+  ],
+  "slices": [
+  ]
+ }
+}

@@ -9,9 +9,9 @@ public partial class Global : Node
 	public string LocationMarkerName { get; set; }
 	public Direction PlayerDirection { get; set; }
 	public bool CanWalk = true;
+	public bool GameDisplayEnabled { get; set; } = true;
 	public string SaveName { get; set; }
 	public DateTime LastSaved { get; set; }
-	public DateTime StartedOn { get; set; }
 	public TimeSpan TimeSpent { get; set; }
 	public string Location { get; set; }
 	public int Health { get; set; } = 100;
