@@ -11,6 +11,7 @@ public partial class BattleDisplay : CanvasLayer
 	[Export]
 	public PackedScene BulletPackedScene { get; set; }
 
+	private bool canUseDisplay = true;
 	private bool playerIsAttacking = false;
 	private Vector2 lastMousePosition;
 	private float mouseChange;
@@ -22,6 +23,8 @@ public partial class BattleDisplay : CanvasLayer
 	private CharacterRect playerRect;
 	private CharacterRect enemyRect;
 	private BattleDialogue battleDialogue;
+	private VBoxContainer optionsContainer;
+	private Label itemDescription;
 	private Button fightButton;
 
 	public override void _Ready()
@@ -30,6 +33,8 @@ public partial class BattleDisplay : CanvasLayer
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		playerMarker = GetNode<Marker2D>("PlayerMarker");
 		battleDialogue = GetNode<BattleDialogue>("%BattleDialogue");
+		optionsContainer = GetNode<VBoxContainer>("%OptionsContainer");
+		itemDescription = GetNode<Label>("%ItemDescription");
 		playerRect = GetNode<CharacterRect>("PlayerRect");
 		enemyRect = GetNode<CharacterRect>("EnemyRect");
 		fightButton = GetNode<Button>("%FightButton");
@@ -42,13 +47,18 @@ public partial class BattleDisplay : CanvasLayer
 			Vector2 newMousePosition = GetViewport().GetMousePosition();
 			float magnitude = (lastMousePosition - newMousePosition).Length();
 			lastMousePosition = newMousePosition;
-			mouseChange = magnitude;
-			battleDialogue.SetText($"Fight is WIP, {magnitude}");
+			mouseChange = Mathf.Clamp(magnitude, 0, 30);
+			battleDialogue.SetFightPowerBarValue(mouseChange);
 		}
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
+		if (!canUseDisplay)
+		{
+			return;
+		}
+
 		if (Input.IsActionJustPressed("ui_cancel"))
 		{
 			if (level == 1)
@@ -74,31 +84,36 @@ public partial class BattleDisplay : CanvasLayer
 		await ToSignal(posTween, Tween.SignalName.Finished);
 
 		battleDialogue.SetDialogueLine(await DialogueManager.GetNextDialogueLine(DialogueResource, "battle_intro"));
-		//dialogueMainText = battleDialogue.Text;
 
 		fightButton.GrabFocus();
 	}
 
 	public void OnFightButton()
 	{
-		battleDialogue.SetText("Fight is WIP.");
-		InitiatePlayerAttack();
+		canUseDisplay = false;
+		battleDialogue.ShowFightContainer();
+		InitiatePlayerAttack();		
 	}
 
 	public void OnItemsButton()
 	{
 		level = 1;
+		optionsContainer.Hide();
+		itemDescription.Show();
 		battleDialogue.ShowItems();
 	}
 
 	public void OnMagicButton()
 	{
 		level = 1;
+		optionsContainer.Hide();
+		itemDescription.Show();
 		battleDialogue.ShowMagic();
 	}
 
 	public void OnDefenseButton()
 	{
+		canUseDisplay = false;
 		animationPlayer.Play("hide_bottom");
 	}
 
@@ -118,9 +133,8 @@ public partial class BattleDisplay : CanvasLayer
 		await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
 		playerIsAttacking = false;
 		
-		mouseChange = Mathf.Clamp(mouseChange, 0, 25);
 		GD.Print(mouseChange);
-		float bulletScale = (mouseChange - 0f) * (1.5f - 0.5f) / (25f - 0f) + 0.5f;
+		float bulletScale = (mouseChange - 0f) * (1.5f - 0.5f) / (30f - 0f) + 0.5f;
 
 		global.CurrentRoom.Player.PlaySideAnimation("attack_idle2");
 		animationPlayer.Play("hide_bottom");

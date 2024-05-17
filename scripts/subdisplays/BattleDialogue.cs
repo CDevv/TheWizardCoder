@@ -8,17 +8,24 @@ public partial class BattleDialogue : NinePatchRect
 	[Export]
 	public PackedScene ItemButtonTemplate { get; set; }
 
+	[Export]
+	public Label ItemDescriptionLabel { get; set; }
+
 	private Global global;
 	private RichTextLabel dialogueLabel;
 	private GridContainer itemsContainer;
+	private Control fightContainer;
 	private Button noItemsButton;
+	private TextureProgressBar fightPowerBar;
 
 	public override void _Ready()
 	{
 		global = GetNode<Global>("/root/Global");
 		dialogueLabel = GetNode<RichTextLabel>("%DialogueLabel");
 		itemsContainer = GetNode<GridContainer>("%ItemsContainer");
+		fightContainer = GetNode<Control>("FightOptionContainer");
 		noItemsButton = GetNode<Button>("%NoItemsButton");
+		fightPowerBar = GetNode<TextureProgressBar>("%FightPowerBar");
 	}
 
 	public void ShowDialogueLabel()
@@ -26,6 +33,15 @@ public partial class BattleDialogue : NinePatchRect
 		noItemsButton.Hide();
 		dialogueLabel.Show();
 		itemsContainer.Hide();
+		fightContainer.Hide();
+	}
+
+	public void ShowFightContainer()
+	{
+		noItemsButton.Hide();
+		dialogueLabel.Hide();
+		itemsContainer.Hide();
+		fightContainer.Show();
 	}
 
 	public void ShowItems()
@@ -70,6 +86,11 @@ public partial class BattleDialogue : NinePatchRect
 		dialogueLabel.Call("type_out");
 	}
 
+	public void SetFightPowerBarValue(double value)
+	{
+		fightPowerBar.Value = value;
+	}
+
 	public void UpdateInventoryContainer()
 	{
 		Array<Node> oldNodes = itemsContainer.GetChildren();
@@ -82,6 +103,9 @@ public partial class BattleDialogue : NinePatchRect
 		{
 			Button button = ItemButtonTemplate.Instantiate<Button>();
 			button.Set(Button.PropertyName.Text, item);
+			button.FocusEntered += () => {
+				ItemDescriptionLabel.Text = "Desc.";
+			};
 			itemsContainer.AddChild(button);
 		}
 	}

@@ -139,8 +139,9 @@ offset_top = 16.0
 offset_right = 531.0
 offset_bottom = 40.0
 
-[node name="BattleDialogue" parent="." instance=ExtResource("6_0h536")]
+[node name="BattleDialogue" parent="." node_paths=PackedStringArray("ItemDescriptionLabel") instance=ExtResource("6_0h536")]
 unique_name_in_owner = true
+ItemDescriptionLabel = NodePath("../BattleOptions/MarginContainer/ItemDescription")
 
 [node name="BattleOptions" type="NinePatchRect" parent="."]
 offset_left = 488.0
@@ -165,10 +166,11 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BattleOptions/MarginContainer"]
+[node name="OptionsContainer" type="VBoxContainer" parent="BattleOptions/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="FightButton" type="Button" parent="BattleOptions/MarginContainer/VBoxContainer"]
+[node name="FightButton" type="Button" parent="BattleOptions/MarginContainer/OptionsContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../DefendButton")
@@ -177,7 +179,7 @@ theme = ExtResource("4_qk4re")
 theme_override_font_sizes/font_size = 24
 text = "Fight"
 
-[node name="ItemsButton" type="Button" parent="BattleOptions/MarginContainer/VBoxContainer"]
+[node name="ItemsButton" type="Button" parent="BattleOptions/MarginContainer/OptionsContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../FightButton")
 focus_neighbor_bottom = NodePath("../MagicButton")
@@ -186,7 +188,7 @@ theme = ExtResource("4_qk4re")
 theme_override_font_sizes/font_size = 24
 text = "Items"
 
-[node name="MagicButton" type="Button" parent="BattleOptions/MarginContainer/VBoxContainer"]
+[node name="MagicButton" type="Button" parent="BattleOptions/MarginContainer/OptionsContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../ItemsButton")
 focus_neighbor_bottom = NodePath("../DefendButton")
@@ -195,7 +197,7 @@ theme = ExtResource("4_qk4re")
 theme_override_font_sizes/font_size = 24
 text = "Magic"
 
-[node name="DefendButton" type="Button" parent="BattleOptions/MarginContainer/VBoxContainer"]
+[node name="DefendButton" type="Button" parent="BattleOptions/MarginContainer/OptionsContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../MagicButton")
 focus_neighbor_bottom = NodePath("../FightButton")
@@ -203,6 +205,13 @@ mouse_filter = 2
 theme = ExtResource("4_qk4re")
 theme_override_font_sizes/font_size = 24
 text = "Defend"
+
+[node name="ItemDescription" type="Label" parent="BattleOptions/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("4_qk4re")
+theme_override_font_sizes/font_size = 24
 
 [node name="PlayerMarker" type="Marker2D" parent="."]
 position = Vector2(88, 192)
@@ -215,7 +224,7 @@ libraries = {
 "": SubResource("AnimationLibrary_h5bcl")
 }
 
-[connection signal="pressed" from="BattleOptions/MarginContainer/VBoxContainer/FightButton" to="." method="OnFightButton"]
-[connection signal="pressed" from="BattleOptions/MarginContainer/VBoxContainer/ItemsButton" to="." method="OnItemsButton"]
-[connection signal="pressed" from="BattleOptions/MarginContainer/VBoxContainer/MagicButton" to="." method="OnMagicButton"]
-[connection signal="pressed" from="BattleOptions/MarginContainer/VBoxContainer/DefendButton" to="." method="OnDefenseButton"]
+[connection signal="pressed" from="BattleOptions/MarginContainer/OptionsContainer/FightButton" to="." method="OnFightButton"]
+[connection signal="pressed" from="BattleOptions/MarginContainer/OptionsContainer/ItemsButton" to="." method="OnItemsButton"]
+[connection signal="pressed" from="BattleOptions/MarginContainer/OptionsContainer/MagicButton" to="." method="OnMagicButton"]
+[connection signal="pressed" from="BattleOptions/MarginContainer/OptionsContainer/DefendButton" to="." method="OnDefenseButton"]
