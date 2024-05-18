@@ -1,5 +1,8 @@
 {
 	"item":{
-		"description":"Description"
+		"Name":"item",
+		"Description":"Description",
+		"Type": "Heal",
+		"Effect": 10,
 	}
 }

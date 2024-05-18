@@ -67,6 +67,11 @@ public class SaveFileData
 		inventory.Remove(item);
 	}
 
+    public void RemoveFromInventory(int id)
+	{
+		inventory.RemoveAt(id);
+	}
+
 	public bool HasItemInInventory(string item)
 	{
 		return inventory.Contains(item);

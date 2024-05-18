@@ -5,6 +5,8 @@ public partial class Bullet : Area2D
 {
 	private int speed = 3;
 
+	public float Damage { get; set; } = 10;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

@@ -18,6 +18,7 @@ public partial class Global : Node
 
 	public SaveFileData PlayerData { get; set; } = new();
 	public SettingsConfig Settings { get; set; } = new();
+	public System.Collections.Generic.Dictionary<string, Item> ItemDescriptions { get; set; } = new();
 
     public override void _Ready()
     {
@@ -25,6 +26,7 @@ public partial class Global : Node
 		{
 			Settings.LoadSettings();
 			Settings.ApplySettings();
+			LoadItemDescriptions();
 		}
 		catch (System.Exception e)
 		{
@@ -45,6 +47,37 @@ public partial class Global : Node
 	public bool HasItemInInventory(string item)
 	{
 		return PlayerData.HasItemInInventory(item);
+	}
+
+	public void LoadItemDescriptions()
+	{
+		if (!FileAccess.FileExists("res://info/item_descriptions.json"))
+		{
+			GD.PrintErr("res://info/item_descriptions.json does not exist");
+			return;
+		}
+
+		using var data = FileAccess.Open("res://info/item_descriptions.json", FileAccess.ModeFlags.Read);
+		string jsonString = data.GetAsText();
+
+		Json json = new Json();
+		Error jsonError = json.Parse(jsonString);
+
+		if (jsonError != Error.Ok)
+		{
+			GD.PrintErr($"Json parse error: {jsonError}");
+			return;
+		}
+
+		Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)json.Data;
+
+		foreach (var pair in parsedData)
+		{
+			Item item = new Item();
+			item.ApplyDictionary(pair.Value);
+			item.Name = pair.Key;
+			ItemDescriptions.Add(item.Name, item);
+		}
 	}
 
 	public void SaveGame(string saveName)

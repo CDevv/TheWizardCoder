@@ -5,6 +5,9 @@ using DialogueManagerRuntime;
 
 public partial class BattleDialogue : NinePatchRect
 {
+	[Signal]
+	public delegate void ItemTriggeredEventHandler(string itemName);
+
 	[Export]
 	public PackedScene ItemButtonTemplate { get; set; }
 
@@ -101,10 +104,22 @@ public partial class BattleDialogue : NinePatchRect
 
 		foreach (var item in global.PlayerData.Inventory)
 		{
+			
+		}
+		for (int i = 0; i < global.PlayerData.Inventory.Count; i++)
+		{
+			string item = global.PlayerData.Inventory[i];
 			Button button = ItemButtonTemplate.Instantiate<Button>();
-			button.Set(Button.PropertyName.Text, item);
+			button.Set("metadata/itemId", i);
+			button.Set(Button.PropertyName.Text, item);		
 			button.FocusEntered += () => {
-				ItemDescriptionLabel.Text = "Desc.";
+				ItemDescriptionLabel.Text = global.ItemDescriptions[item].Description;
+			};
+			button.Pressed += () => {
+				EmitSignal(SignalName.ItemTriggered, new Variant[] {item});
+				global.PlayerData.RemoveFromInventory(i);
+				button.QueueFree();
+				ShowGridContainer();
 			};
 			itemsContainer.AddChild(button);
 		}

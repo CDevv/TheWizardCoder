@@ -10,3 +10,4 @@ mouse_filter = 2
 theme = ExtResource("1_qrw0m")
 theme_override_font_sizes/font_size = 24
 text = "Text"
+metadata/itemId = 0

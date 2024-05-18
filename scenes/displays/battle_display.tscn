@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://t2oe67lsq1j2"]
+[gd_scene load_steps=13 format=3 uid="uid://t2oe67lsq1j2"]
 
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_6xhfj"]
 [ext_resource type="Script" path="res://scripts/displays/BattleDisplay.cs" id="1_py1kc"]
 [ext_resource type="Resource" uid="uid://snksmimcfhit" path="res://dialogue/battle_intro.dialogue" id="2_6wq2r"]
 [ext_resource type="PackedScene" uid="uid://cn6qmd0lxinhs" path="res://scenes/prefabs/bullet.tscn" id="3_lb607"]
 [ext_resource type="PackedScene" uid="uid://cil04fbnlnhn3" path="res://scenes/prefabs/character_rect.tscn" id="3_xy74d"]
+[ext_resource type="PackedScene" uid="uid://dxl7l67exls10" path="res://scenes/prefabs/damagable.tscn" id="4_gbiru"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="4_qk4re"]
 [ext_resource type="PackedScene" uid="uid://wj2f3mwtxrko" path="res://scenes/subdisplays/battle/battle_dialogue.tscn" id="6_0h536"]
 
@@ -126,6 +127,7 @@ _data = {
 script = ExtResource("1_py1kc")
 DialogueResource = ExtResource("2_6wq2r")
 BulletPackedScene = ExtResource("3_lb607")
+DamagablePackedScene = ExtResource("4_gbiru")
 
 [node name="PlayerRect" parent="." instance=ExtResource("3_xy74d")]
 offset_left = 16.0
@@ -224,6 +226,10 @@ libraries = {
 "": SubResource("AnimationLibrary_h5bcl")
 }
 
+[node name="Damagable" parent="." instance=ExtResource("4_gbiru")]
+position = Vector2(552, 192)
+
+[connection signal="ItemTriggered" from="BattleDialogue" to="." method="OnItemTriggered"]
 [connection signal="pressed" from="BattleOptions/MarginContainer/OptionsContainer/FightButton" to="." method="OnFightButton"]
 [connection signal="pressed" from="BattleOptions/MarginContainer/OptionsContainer/ItemsButton" to="." method="OnItemsButton"]
 [connection signal="pressed" from="BattleOptions/MarginContainer/OptionsContainer/MagicButton" to="." method="OnMagicButton"]

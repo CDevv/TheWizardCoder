@@ -10,12 +10,15 @@ public partial class BattleDisplay : CanvasLayer
 	public Resource DialogueResource { get; set; }
 	[Export]
 	public PackedScene BulletPackedScene { get; set; }
+	[Export]
+	public PackedScene DamagablePackedScene { get; set; }
 
 	private bool canUseDisplay = true;
 	private bool playerIsAttacking = false;
 	private Vector2 lastMousePosition;
 	private float mouseChange;
 	private int level = 0;
+	private int enemyHealth = 100;
 	private Global global;
 	private AnimationPlayer animationPlayer;
 	private Marker2D playerMarker;
@@ -32,6 +35,7 @@ public partial class BattleDisplay : CanvasLayer
 		global = GetNode<Global>("/root/Global");
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		playerMarker = GetNode<Marker2D>("PlayerMarker");
+		enemyMarker = GetNode<Marker2D>("EnemyMarker");
 		battleDialogue = GetNode<BattleDialogue>("%BattleDialogue");
 		optionsContainer = GetNode<VBoxContainer>("%OptionsContainer");
 		itemDescription = GetNode<Label>("%ItemDescription");
@@ -63,6 +67,9 @@ public partial class BattleDisplay : CanvasLayer
 		{
 			if (level == 1)
 			{
+				optionsContainer.Show();
+				itemDescription.Hide();
+
 				battleDialogue.ShowDialogueLabel();
 				fightButton.GrabFocus();
 				level = 0;
@@ -72,8 +79,11 @@ public partial class BattleDisplay : CanvasLayer
 
 	public async Task ShowDisplay()
 	{
+		playerRect.SetHealthValue(global.PlayerData.Health);
+
 		Vector2 resolutionVector = new Vector2(global.Settings.WindowWidth, global.Settings.WindowHeight);
-		Vector2 playerFinalPosition = global.CurrentRoom.Camera.GlobalPosition - (resolutionVector / 2) + playerMarker.Position;
+		Vector2 baseVector = global.CurrentRoom.Camera.GlobalPosition - (resolutionVector / 2);
+		Vector2 playerFinalPosition = baseVector + playerMarker.Position;
 
 		Show();
 		animationPlayer.Play("battle_intro");
@@ -86,6 +96,8 @@ public partial class BattleDisplay : CanvasLayer
 		battleDialogue.SetDialogueLine(await DialogueManager.GetNextDialogueLine(DialogueResource, "battle_intro"));
 
 		fightButton.GrabFocus();
+
+		InstantiateEnemyArea();
 	}
 
 	public void OnFightButton()
@@ -145,7 +157,36 @@ public partial class BattleDisplay : CanvasLayer
 
 		Bullet bullet = BulletPackedScene.Instantiate<Bullet>();
 		bullet.Position = finalVector;
+		bullet.Damage *= bulletScale;
+		bullet.Damage = Mathf.Ceil(bullet.Damage);
 		bullet.Scale = new Vector2(bulletScale, bulletScale);
 		global.CurrentRoom.AddChild(bullet);
+
+		GD.Print(bullet.Damage);
+	}
+
+	public void InstantiateEnemyArea()
+	{
+		Vector2 resolutionVector = new Vector2(global.Settings.WindowWidth, global.Settings.WindowHeight);
+		Vector2 pos = global.CurrentRoom.Camera.GlobalPosition - (resolutionVector / 2) + enemyMarker.Position;
+
+		Damagable enemyArea = DamagablePackedScene.Instantiate<Damagable>();
+		enemyArea.Position = pos;
+		enemyArea.Damaged += OnEnemyDamaged;
+		global.CurrentRoom.AddChild(enemyArea);
+	}
+
+	public void OnItemTriggered(string itemName)
+	{
+		global.PlayerData.Health -= global.ItemDescriptions[itemName].Effect;
+		playerRect.TweenHealthValue(global.PlayerData.Health);
+
+		animationPlayer.Play("hide_bottom");
+	}
+
+	public void OnEnemyDamaged(int value)
+	{
+		enemyHealth -= value;
+		enemyRect.TweenHealthValue(enemyHealth);
 	}
 }
