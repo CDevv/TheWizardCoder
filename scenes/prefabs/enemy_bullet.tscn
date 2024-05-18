@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://1qbi8tkkk2en"]
+
+[ext_resource type="Script" path="res://scripts/prefabs/EnemyBullet.cs" id="1_abpvr"]
+[ext_resource type="Texture2D" uid="uid://00inqs1v3lxi" path="res://assets/ui/base.png" id="1_ty5lv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0r30u"]
+size = Vector2(32, 32)
+
+[node name="EnemyBullet" type="Area2D"]
+script = ExtResource("1_abpvr")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(8, 8)
+texture = ExtResource("1_ty5lv")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0r30u")
+debug_color = Color(0.811061, 0.405048, 0.192051, 0.42)
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
+[connection signal="area_exited" from="." to="." method="OnAreaExit"]

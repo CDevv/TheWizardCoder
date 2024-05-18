@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cca0abuquow57"]
+
+[ext_resource type="Script" path="res://scripts/prefabs/PlayerBall.cs" id="1_2nc55"]
+[ext_resource type="Texture2D" uid="uid://00inqs1v3lxi" path="res://assets/ui/base.png" id="2_aklnq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8pb0s"]
+
+[node name="PlayerBall" type="Area2D"]
+script = ExtResource("1_2nc55")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(4.76837e-07, 4.76837e-07)
+scale = Vector2(4, 4)
+texture = ExtResource("2_aklnq")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8pb0s")
+debug_color = Color(0.147052, 0.263602, 0.809553, 0.42)

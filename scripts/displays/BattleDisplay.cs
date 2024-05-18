@@ -12,6 +12,12 @@ public partial class BattleDisplay : CanvasLayer
 	public PackedScene BulletPackedScene { get; set; }
 	[Export]
 	public PackedScene DamagablePackedScene { get; set; }
+	[Export]
+	public PackedScene CombatAreaPackedScene { get; set; }
+	[Export]
+	public PackedScene EnemyBulletPackedScene { get; set; }
+	[Export]
+	public PackedScene PlayerBallPackedScene { get; set; }
 
 	private bool canUseDisplay = true;
 	private bool playerIsAttacking = false;
@@ -23,12 +29,15 @@ public partial class BattleDisplay : CanvasLayer
 	private AnimationPlayer animationPlayer;
 	private Marker2D playerMarker;
 	private Marker2D enemyMarker;
+	private Marker2D areaMarker;
 	private CharacterRect playerRect;
 	private CharacterRect enemyRect;
 	private BattleDialogue battleDialogue;
 	private VBoxContainer optionsContainer;
 	private Label itemDescription;
 	private Button fightButton;
+	private NinePatchRect areaBorder;
+	private CombatArea combatArea;
 
 	public override void _Ready()
 	{
@@ -36,12 +45,14 @@ public partial class BattleDisplay : CanvasLayer
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		playerMarker = GetNode<Marker2D>("PlayerMarker");
 		enemyMarker = GetNode<Marker2D>("EnemyMarker");
+		areaMarker = GetNode<Marker2D>("CombatAreaMarker");
 		battleDialogue = GetNode<BattleDialogue>("%BattleDialogue");
 		optionsContainer = GetNode<VBoxContainer>("%OptionsContainer");
 		itemDescription = GetNode<Label>("%ItemDescription");
 		playerRect = GetNode<CharacterRect>("PlayerRect");
 		enemyRect = GetNode<CharacterRect>("EnemyRect");
 		fightButton = GetNode<Button>("%FightButton");
+		areaBorder = GetNode<NinePatchRect>("AreaBorder");
 	}
 
 	public override void _Process(double delta)
@@ -138,7 +149,6 @@ public partial class BattleDisplay : CanvasLayer
 		global.CurrentRoom.Player.PlaySideAnimation("attack_intro");
 		Thread attackAnimationThread = new Thread(async () => {
 			await ToSignal(global.CurrentRoom.Player, Player.SignalName.AnimationFinished);
-			//global.CurrentRoom.Player.PlayIdleAnimation(Direction.Right);
 			global.CurrentRoom.Player.PlaySideAnimation("attack_idle");
 		});
 
@@ -165,15 +175,32 @@ public partial class BattleDisplay : CanvasLayer
 		GD.Print(bullet.Damage);
 	}
 
+	public void InitiateEnemyAttack()
+	{
+		areaBorder.Show();
+		combatArea.DoAttack();
+	}
+
 	public void InstantiateEnemyArea()
 	{
 		Vector2 resolutionVector = new Vector2(global.Settings.WindowWidth, global.Settings.WindowHeight);
-		Vector2 pos = global.CurrentRoom.Camera.GlobalPosition - (resolutionVector / 2) + enemyMarker.Position;
+		Vector2 baseVector = global.CurrentRoom.Camera.GlobalPosition - (resolutionVector / 2);
+		Vector2 damagablePos = baseVector + enemyMarker.Position;
+		Vector2 areaPos = baseVector + areaMarker.Position;
 
 		Damagable enemyArea = DamagablePackedScene.Instantiate<Damagable>();
-		enemyArea.Position = pos;
+		enemyArea.Position = damagablePos;
 		enemyArea.Damaged += OnEnemyDamaged;
 		global.CurrentRoom.AddChild(enemyArea);
+
+		CombatArea combatArea = CombatAreaPackedScene.Instantiate<CombatArea>();
+		combatArea.Position = areaPos;
+		combatArea.EnemyBulletPackedScene = EnemyBulletPackedScene;
+		combatArea.PlayerBallPackedScene = PlayerBallPackedScene;
+		combatArea.Timeout += OnEnemyAttackFinished;
+		combatArea.PlayerGotDamaged += OnPlayerDamaged;
+		global.CurrentRoom.AddChild(combatArea);
+		this.combatArea = combatArea;
 	}
 
 	public void OnItemTriggered(string itemName)
@@ -188,5 +215,21 @@ public partial class BattleDisplay : CanvasLayer
 	{
 		enemyHealth -= value;
 		enemyRect.TweenHealthValue(enemyHealth);
+		InitiateEnemyAttack();
+	}
+
+	public void OnEnemyAttackFinished()
+	{
+		areaBorder.Hide();
+		animationPlayer.Play("show_bottom");
+		fightButton.GrabFocus();
+		battleDialogue.ShowDialogueLabel();
+		canUseDisplay = true;
+	}
+
+	public void OnPlayerDamaged(int value)
+	{
+		global.PlayerData.Health -= value;
+		playerRect.TweenHealthValue(global.PlayerData.Health);
 	}
 }

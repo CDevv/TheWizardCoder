@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://t2oe67lsq1j2"]
+[gd_scene load_steps=17 format=3 uid="uid://t2oe67lsq1j2"]
 
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_6xhfj"]
 [ext_resource type="Script" path="res://scripts/displays/BattleDisplay.cs" id="1_py1kc"]
@@ -7,7 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://cil04fbnlnhn3" path="res://scenes/prefabs/character_rect.tscn" id="3_xy74d"]
 [ext_resource type="PackedScene" uid="uid://dxl7l67exls10" path="res://scenes/prefabs/damagable.tscn" id="4_gbiru"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="4_qk4re"]
+[ext_resource type="PackedScene" uid="uid://d04usfxcnlwpx" path="res://scenes/prefabs/combat_area.tscn" id="5_y84gj"]
 [ext_resource type="PackedScene" uid="uid://wj2f3mwtxrko" path="res://scenes/subdisplays/battle/battle_dialogue.tscn" id="6_0h536"]
+[ext_resource type="PackedScene" uid="uid://1qbi8tkkk2en" path="res://scenes/prefabs/enemy_bullet.tscn" id="6_7vv51"]
+[ext_resource type="PackedScene" uid="uid://cca0abuquow57" path="res://scenes/prefabs/player_ball.tscn" id="7_6v7uh"]
+[ext_resource type="Texture2D" uid="uid://hxmst0tc6gbs" path="res://assets/ui/area_border.png" id="9_j2ovb"]
 
 [sub_resource type="Animation" id="Animation_iyrke"]
 resource_name = "battle_intro"
@@ -128,6 +132,9 @@ script = ExtResource("1_py1kc")
 DialogueResource = ExtResource("2_6wq2r")
 BulletPackedScene = ExtResource("3_lb607")
 DamagablePackedScene = ExtResource("4_gbiru")
+CombatAreaPackedScene = ExtResource("5_y84gj")
+EnemyBulletPackedScene = ExtResource("6_7vv51")
+PlayerBallPackedScene = ExtResource("7_6v7uh")
 
 [node name="PlayerRect" parent="." instance=ExtResource("3_xy74d")]
 offset_left = 16.0
@@ -215,19 +222,32 @@ size_flags_vertical = 1
 theme = ExtResource("4_qk4re")
 theme_override_font_sizes/font_size = 24
 
+[node name="AreaBorder" type="NinePatchRect" parent="."]
+visible = false
+offset_left = 152.0
+offset_top = 88.0
+offset_right = 320.0
+offset_bottom = 240.0
+scale = Vector2(2, 2)
+texture = ExtResource("9_j2ovb")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
 [node name="PlayerMarker" type="Marker2D" parent="."]
 position = Vector2(88, 192)
 
 [node name="EnemyMarker" type="Marker2D" parent="."]
 position = Vector2(552, 192)
 
+[node name="CombatAreaMarker" type="Marker2D" parent="."]
+position = Vector2(320, 240)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_h5bcl")
 }
-
-[node name="Damagable" parent="." instance=ExtResource("4_gbiru")]
-position = Vector2(552, 192)
 
 [connection signal="ItemTriggered" from="BattleDialogue" to="." method="OnItemTriggered"]
 [connection signal="pressed" from="BattleOptions/MarginContainer/OptionsContainer/FightButton" to="." method="OnFightButton"]
