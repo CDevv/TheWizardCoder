@@ -32,13 +32,11 @@ public partial class BattleDisplay : CanvasLayer
 	private Marker2D areaMarker;
 	private CharacterRect playerRect;
 	private CharacterRect enemyRect;
+	private BattleOptions battleOptions;
 	private BattleDialogue battleDialogue;
-	private VBoxContainer optionsContainer;
-	private Label itemDescription;
-	private Button fightButton;
 	private NinePatchRect areaBorder;
 	private CombatArea combatArea;
-
+	
 	public override void _Ready()
 	{
 		global = GetNode<Global>("/root/Global");
@@ -47,11 +45,9 @@ public partial class BattleDisplay : CanvasLayer
 		enemyMarker = GetNode<Marker2D>("EnemyMarker");
 		areaMarker = GetNode<Marker2D>("CombatAreaMarker");
 		battleDialogue = GetNode<BattleDialogue>("%BattleDialogue");
-		optionsContainer = GetNode<VBoxContainer>("%OptionsContainer");
-		itemDescription = GetNode<Label>("%ItemDescription");
+		battleOptions = GetNode<BattleOptions>("BattleOptions");
 		playerRect = GetNode<CharacterRect>("PlayerRect");
 		enemyRect = GetNode<CharacterRect>("EnemyRect");
-		fightButton = GetNode<Button>("%FightButton");
 		areaBorder = GetNode<NinePatchRect>("AreaBorder");
 	}
 
@@ -78,11 +74,9 @@ public partial class BattleDisplay : CanvasLayer
 		{
 			if (level == 1)
 			{
-				optionsContainer.Show();
-				itemDescription.Hide();
-
+				battleOptions.ShowOptions();
+				battleOptions.FocusFirst();
 				battleDialogue.ShowDialogueLabel();
-				fightButton.GrabFocus();
 				level = 0;
 			}
 		}
@@ -106,7 +100,7 @@ public partial class BattleDisplay : CanvasLayer
 
 		battleDialogue.SetDialogueLine(await DialogueManager.GetNextDialogueLine(DialogueResource, "battle_intro"));
 
-		fightButton.GrabFocus();
+		battleOptions.FocusFirst();
 
 		InstantiateEnemyArea();
 	}
@@ -121,16 +115,14 @@ public partial class BattleDisplay : CanvasLayer
 	public void OnItemsButton()
 	{
 		level = 1;
-		optionsContainer.Hide();
-		itemDescription.Show();
+		battleOptions.ShowItemDescription();
 		battleDialogue.ShowItems();
 	}
 
 	public void OnMagicButton()
 	{
 		level = 1;
-		optionsContainer.Hide();
-		itemDescription.Show();
+		battleOptions.ShowItemDescription();
 		battleDialogue.ShowMagic();
 	}
 
@@ -222,7 +214,7 @@ public partial class BattleDisplay : CanvasLayer
 	{
 		areaBorder.Hide();
 		animationPlayer.Play("show_bottom");
-		fightButton.GrabFocus();
+		battleOptions.FocusFirst();
 		battleDialogue.ShowDialogueLabel();
 		canUseDisplay = true;
 	}

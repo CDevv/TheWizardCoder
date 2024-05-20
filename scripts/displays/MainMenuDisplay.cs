@@ -12,9 +12,7 @@ public partial class MainMenuDisplay : CanvasLayer
 	private Control options;
 	private Button playButton;
 	private Button loadButton;
-	private SaveFileOption save1button;
-	private SaveFileOption save2button;
-	private SaveFileOption save3button;
+	private MainMenuSavedGames savedGamesMenu;
 	private OptionsMenu optionsMenu;
 	private ControlsMenu controlsMenu;
 
@@ -30,14 +28,11 @@ public partial class MainMenuDisplay : CanvasLayer
 		savedGames = GetNode<Control>("%SavedGames");
 		options = GetNode<Control>("Options");
 		playButton = GetNode<Button>("%PlayButton");
-		loadButton = GetNode<Button>("%LoadButton");
-		save1button = GetNode<SaveFileOption>("%Save1");
-		save2button = GetNode<SaveFileOption>("%Save2");
-		save3button = GetNode<SaveFileOption>("%Save3");
+		savedGamesMenu = GetNode<MainMenuSavedGames>("%SavedGamesMenu");
 		optionsMenu = GetNode<OptionsMenu>("%OptionsMenu");
 		controlsMenu = GetNode<ControlsMenu>("%ControlsMenu");
 
-		UpdateSaveData();
+		savedGamesMenu.UpdateSaveData();
 		playButton.CallDeferred(Button.MethodName.GrabFocus);
 		optionsMenu.UpdateDisplay();
 		controlsMenu.UpdateDisplay();
@@ -60,18 +55,6 @@ public partial class MainMenuDisplay : CanvasLayer
 		}
     }
 
-    private void UpdateSaveData()
-	{
-		SaveFileOption[] buttons = { save1button, save2button, save3button };
-		for (int i = 0; i < buttons.Length; i++)
-		{
-			SaveFileOption button = buttons[i];
-			string fileName = buttons[i].Name.ToString().ToLower();
-			SaveFileData save1data = global.ReadSaveFileData(fileName);
-			button.ShowData(save1data);
-		}
-	}
-
 	public void ShowMainMenu()
 	{
 		main.Show();
@@ -85,15 +68,15 @@ public partial class MainMenuDisplay : CanvasLayer
 	public void ShowSavedGamesMenu()
 	{
 		main.Hide();
-		savedGames.Show();
+		savedGamesMenu.Show();
 		options.Hide();
-		loadButton.GrabFocus();
+		savedGamesMenu.FocusFirst();
 	}
 
 	public void ShowOptions()
 	{
 		main.Hide();
-		savedGames.Hide();
+		savedGamesMenu.Hide();
 		options.Show();
 
 		optionsMenu.Show();
@@ -108,33 +91,5 @@ public partial class MainMenuDisplay : CanvasLayer
 		controlsMenu.Show();
 
 		controlsMenu.FocusFirst();
-	}
-
-	public void OnLoad()
-	{
-		save1button.GrabFocus();
-	}
-
-	public void OnGoBack()
-	{
-		ShowMainMenu();
-	}
-
-	public void OnSave1()
-	{
-		global.LoadGame("save1");
-		global.ChangeRoom(firstRoom);
-	}
-
-	public void OnSave2()
-	{
-		global.LoadGame("save2");
-		global.ChangeRoom(firstRoom);
-	}
-
-	public void OnSave3()
-	{
-		global.LoadGame("save3");
-		global.ChangeRoom(firstRoom);
 	}
 }

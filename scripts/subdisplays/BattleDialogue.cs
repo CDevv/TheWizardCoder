@@ -12,7 +12,7 @@ public partial class BattleDialogue : NinePatchRect
 	public PackedScene ItemButtonTemplate { get; set; }
 
 	[Export]
-	public Label ItemDescriptionLabel { get; set; }
+	public BattleOptions BattleOptions { get; set; }
 
 	private Global global;
 	private RichTextLabel dialogueLabel;
@@ -113,7 +113,7 @@ public partial class BattleDialogue : NinePatchRect
 			button.Set("metadata/itemId", i);
 			button.Set(Button.PropertyName.Text, item);		
 			button.FocusEntered += () => {
-				ItemDescriptionLabel.Text = global.ItemDescriptions[item].Description;
+				BattleOptions.SetItemDescription(global.ItemDescriptions[item].Description);
 			};
 			button.Pressed += () => {
 				EmitSignal(SignalName.ItemTriggered, new Variant[] {item});

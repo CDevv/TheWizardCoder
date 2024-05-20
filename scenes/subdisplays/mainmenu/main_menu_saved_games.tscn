@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2g5a1s11robp"]
+
+[ext_resource type="Script" path="res://scripts/subdisplays/MainMenuSavedGames.cs" id="1_pl0on"]
+[ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="2_5qucr"]
+[ext_resource type="PackedScene" uid="uid://d2saopq748u80" path="res://scenes/rooms/first_room.tscn" id="2_cimsm"]
+[ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="3_27vlr"]
+[ext_resource type="PackedScene" uid="uid://bshn67cvbvii5" path="res://scenes/prefabs/save_file_option.tscn" id="4_2vmto"]
+
+[node name="MainMenuSavedGames" type="CanvasLayer"]
+script = ExtResource("1_pl0on")
+FirstRoom = ExtResource("2_cimsm")
+
+[node name="OptionsRect" type="NinePatchRect" parent="."]
+offset_left = 128.0
+offset_top = 392.0
+offset_right = 320.0
+offset_bottom = 416.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_5qucr")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsRect"]
+layout_mode = 0
+offset_right = 384.0
+offset_bottom = 48.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OptionsRect/MarginContainer"]
+layout_mode = 2
+
+[node name="LoadButton" type="Button" parent="OptionsRect/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_left = NodePath("../GoBackButton")
+focus_neighbor_right = NodePath("../GoBackButton")
+mouse_filter = 2
+theme = ExtResource("3_27vlr")
+theme_override_font_sizes/font_size = 24
+text = "Load"
+
+[node name="GoBackButton" type="Button" parent="OptionsRect/MarginContainer/HBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+focus_neighbor_left = NodePath("../LoadButton")
+focus_neighbor_right = NodePath("../LoadButton")
+mouse_filter = 2
+theme = ExtResource("3_27vlr")
+theme_override_font_sizes/font_size = 24
+text = "Go Back
+"
+
+[node name="Save1" parent="." instance=ExtResource("4_2vmto")]
+unique_name_in_owner = true
+offset_left = 128.0
+offset_top = 120.0
+offset_right = 512.0
+offset_bottom = 192.0
+focus_neighbor_top = NodePath("../Save3")
+focus_neighbor_bottom = NodePath("../Save2")
+
+[node name="Save2" parent="." instance=ExtResource("4_2vmto")]
+unique_name_in_owner = true
+offset_left = 128.0
+offset_top = 208.0
+offset_right = 512.0
+offset_bottom = 280.0
+focus_neighbor_top = NodePath("../Save1")
+focus_neighbor_bottom = NodePath("../Save3")
+
+[node name="Save3" parent="." instance=ExtResource("4_2vmto")]
+unique_name_in_owner = true
+offset_left = 128.0
+offset_top = 296.0
+offset_right = 512.0
+offset_bottom = 368.0
+focus_neighbor_top = NodePath("../Save2")
+focus_neighbor_bottom = NodePath("../Save1")
+
+[connection signal="pressed" from="OptionsRect/MarginContainer/HBoxContainer/LoadButton" to="." method="OnLoadButton"]
+[connection signal="pressed" from="OptionsRect/MarginContainer/HBoxContainer/GoBackButton" to="." method="OnBackButton"]
+[connection signal="pressed" from="Save1" to="." method="OnSaveButton" binds= [1]]
+[connection signal="pressed" from="Save2" to="." method="OnSaveButton" binds= [2]]
+[connection signal="pressed" from="Save3" to="." method="OnSaveButton" binds= [3]]

@@ -5,20 +5,15 @@ using System.Linq;
 
 public partial class GameDisplay : CanvasLayer
 {
-	[Export]
-	public PackedScene ItemButtonTemplate;
-
 	private int level = 0;
 	private bool visible = false;
 	private Global global;
 	private TextureProgressBar healthBar;
 	private Button itemsButton;
 	private AudioStreamPlayer audioPlayer;
-	private NinePatchRect inventoryMenu;
+	private InventoryDisplay inventoryMenu;
 	private OptionsMenu optionsMenu;
 	private ControlsMenu controlsMenu;
-	private GridContainer itemsContainer;
-	private Button noItemsButton;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -27,11 +22,9 @@ public partial class GameDisplay : CanvasLayer
 		healthBar = GetNode<TextureProgressBar>("%HealthBar");
 		itemsButton = GetNode<Button>("%ItemsButton");
 		audioPlayer = GetNode<AudioStreamPlayer>("AudioPlayer");
-		inventoryMenu = GetNode<NinePatchRect>("InventoryRect");
-		itemsContainer = GetNode<GridContainer>("%ItemsContainer");
-		noItemsButton = GetNode<Button>("%NoItemsButton");
 		optionsMenu = GetNode<OptionsMenu>("%OptionsMenu");
 		controlsMenu = GetNode<ControlsMenu>("%ControlsMenu");
+		inventoryMenu = GetNode<InventoryDisplay>("%InventoryMenu");
 
 		inventoryMenu.Hide();
 		Hide();
@@ -71,7 +64,7 @@ public partial class GameDisplay : CanvasLayer
 						itemsButton.GrabFocus();
 						Visible = true;
 
-						UpdateInventoryMenu();
+						inventoryMenu.UpdateDisplay();
 					}
 					break;
 				case 1:
@@ -99,18 +92,7 @@ public partial class GameDisplay : CanvasLayer
 		{
 			level = 1;
 			inventoryMenu.Show();
-			noItemsButton.Hide();
-
-			Array<Node> items = itemsContainer.GetChildren();
-			if (items.Count > 0)
-			{
-				((Button)items[0]).GrabFocus();
-			}
-			else
-			{
-				noItemsButton.Show();
-				noItemsButton.GrabFocus();
-			}
+			inventoryMenu.FocusFirst();
 		}
 	}
 
@@ -123,22 +105,6 @@ public partial class GameDisplay : CanvasLayer
 		else
 		{
 			OnOptionsMenu();
-		}
-	}
-
-	public void UpdateInventoryMenu()
-	{
-		Array<Node> oldNodes = itemsContainer.GetChildren();
-		foreach (var item in oldNodes)
-		{
-			item.QueueFree();
-		}
-
-		foreach (var item in global.PlayerData.Inventory)
-		{
-			Button button = ItemButtonTemplate.Instantiate<Button>();
-			button.Set(Button.PropertyName.Text, item);
-			itemsContainer.AddChild(button);
 		}
 	}
 

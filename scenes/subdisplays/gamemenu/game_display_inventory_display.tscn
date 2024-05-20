@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=3 uid="uid://6rlgr1lwl05o"]
+
+[ext_resource type="Script" path="res://scripts/subdisplays/InventoryDisplay.cs" id="1_g3ljf"]
+[ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="2_aw6bb"]
+[ext_resource type="PackedScene" uid="uid://capppjgr8n1ew" path="res://scenes/prefabs/text_button.tscn" id="2_otadj"]
+[ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="3_ga21o"]
+
+[node name="GameDisplayInventoryDisplay" type="CanvasLayer"]
+script = ExtResource("1_g3ljf")
+ItemButtonTemplate = ExtResource("2_otadj")
+
+[node name="InventoryRect" type="NinePatchRect" parent="."]
+offset_left = 184.0
+offset_top = 72.0
+offset_right = 380.0
+offset_bottom = 228.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_aw6bb")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="InventoryRect"]
+layout_mode = 0
+offset_right = 392.0
+offset_bottom = 312.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ItemsContainer" type="GridContainer" parent="InventoryRect/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 2
+
+[node name="NoItemsButton" type="Button" parent="InventoryRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = -12.0
+offset_right = 111.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(111, 12)
+mouse_filter = 2
+theme = ExtResource("3_ga21o")
+theme_override_font_sizes/font_size = 24
+text = "No items in inventory."
+
+[node name="DescriptionRect" type="NinePatchRect" parent="."]
+unique_name_in_owner = true
+offset_left = 184.0
+offset_top = 400.0
+offset_right = 380.0
+offset_bottom = 432.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_aw6bb")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="DescriptionRect"]
+layout_mode = 0
+offset_right = 392.0
+offset_bottom = 64.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ItemDescription" type="Label" parent="DescriptionRect/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_ga21o")
+theme_override_font_sizes/font_size = 24

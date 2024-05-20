@@ -84,7 +84,7 @@ public partial class Global : Node
 	{
 		GD.Print(LastSaved.ToString());
 		GD.Print(DateTime.Now.ToString());
-		PlayerData.TimeSpent = TimeSpent.Add(DateTime.Now - LastSaved);
+		PlayerData.TimeSpent += TimeSpent.Add(DateTime.Now - LastSaved);
 		PlayerData.LastSaved = DateTime.Now;
 
 		Dictionary<string, Variant> saveData = PlayerData.GenerateDictionary();
