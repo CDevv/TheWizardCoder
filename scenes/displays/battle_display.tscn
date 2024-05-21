@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dxl7l67exls10" path="res://scenes/prefabs/damagable.tscn" id="4_gbiru"]
 [ext_resource type="PackedScene" uid="uid://d04usfxcnlwpx" path="res://scenes/prefabs/combat_area.tscn" id="5_y84gj"]
 [ext_resource type="PackedScene" uid="uid://wj2f3mwtxrko" path="res://scenes/subdisplays/battle/battle_dialogue.tscn" id="6_0h536"]
-[ext_resource type="PackedScene" uid="uid://1qbi8tkkk2en" path="res://scenes/prefabs/enemy_bullet.tscn" id="6_7vv51"]
+[ext_resource type="PackedScene" uid="uid://cimhskosuaad7" path="res://scenes/enemy_attacks/tutorial_battle.tscn" id="6_ipdqy"]
 [ext_resource type="PackedScene" uid="uid://cca0abuquow57" path="res://scenes/prefabs/player_ball.tscn" id="7_6v7uh"]
 [ext_resource type="Texture2D" uid="uid://hxmst0tc6gbs" path="res://assets/ui/area_border.png" id="9_j2ovb"]
 [ext_resource type="PackedScene" uid="uid://bgn8hk6463o4s" path="res://scenes/subdisplays/battle/battle_options.tscn" id="9_py3yx"]
@@ -128,11 +128,12 @@ _data = {
 
 [node name="BattleDisplay" type="CanvasLayer"]
 script = ExtResource("1_py1kc")
+BattleName = "tutorial_battle"
 DialogueResource = ExtResource("2_6wq2r")
 BulletPackedScene = ExtResource("3_lb607")
 DamagablePackedScene = ExtResource("4_gbiru")
 CombatAreaPackedScene = ExtResource("5_y84gj")
-EnemyBulletPackedScene = ExtResource("6_7vv51")
+EnemyBattleAttack = ExtResource("6_ipdqy")
 PlayerBallPackedScene = ExtResource("7_6v7uh")
 
 [node name="PlayerRect" parent="." instance=ExtResource("3_xy74d")]

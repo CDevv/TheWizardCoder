@@ -1,11 +1,14 @@
 using DialogueManagerRuntime;
 using Godot;
+using Godot.Collections;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 public partial class BattleDisplay : CanvasLayer
 {
+	[Export]
+	public string BattleName { get; set; }
 	[Export]
 	public Resource DialogueResource { get; set; }
 	[Export]
@@ -15,7 +18,7 @@ public partial class BattleDisplay : CanvasLayer
 	[Export]
 	public PackedScene CombatAreaPackedScene { get; set; }
 	[Export]
-	public PackedScene EnemyBulletPackedScene { get; set; }
+	public PackedScene EnemyBattleAttack { get; set; }
 	[Export]
 	public PackedScene PlayerBallPackedScene { get; set; }
 
@@ -36,6 +39,7 @@ public partial class BattleDisplay : CanvasLayer
 	private BattleDialogue battleDialogue;
 	private NinePatchRect areaBorder;
 	private CombatArea combatArea;
+	private BattleInfo battleInfo;
 	
 	public override void _Ready()
 	{
@@ -82,8 +86,12 @@ public partial class BattleDisplay : CanvasLayer
 		}
 	}
 
+
 	public async Task ShowDisplay()
 	{
+		battleInfo = new BattleInfo();
+		battleInfo.Setup(BattleName);
+
 		playerRect.SetHealthValue(global.PlayerData.Health);
 
 		Vector2 resolutionVector = new Vector2(global.Settings.WindowWidth, global.Settings.WindowHeight);
@@ -98,7 +106,7 @@ public partial class BattleDisplay : CanvasLayer
 		posTween.TweenProperty(global.CurrentRoom.Player, (string)Player.PropertyName.Position, playerFinalPosition, 1);
 		await ToSignal(posTween, Tween.SignalName.Finished);
 
-		battleDialogue.SetDialogueLine(await DialogueManager.GetNextDialogueLine(DialogueResource, "battle_intro"));
+		battleDialogue.SetDialogueLine(await DialogueManager.GetNextDialogueLine(battleInfo.DialogueResource, battleInfo.AttackNames[0].ToLower()));
 
 		battleOptions.FocusFirst();
 
@@ -175,8 +183,7 @@ public partial class BattleDisplay : CanvasLayer
 
 	public void InstantiateEnemyArea()
 	{
-		Vector2 resolutionVector = new Vector2(global.Settings.WindowWidth, global.Settings.WindowHeight);
-		Vector2 baseVector = global.CurrentRoom.Camera.GlobalPosition - (resolutionVector / 2);
+		Vector2 baseVector = GetBaseVector();
 		Vector2 damagablePos = baseVector + enemyMarker.Position;
 		Vector2 areaPos = baseVector + areaMarker.Position;
 
@@ -187,8 +194,9 @@ public partial class BattleDisplay : CanvasLayer
 
 		CombatArea combatArea = CombatAreaPackedScene.Instantiate<CombatArea>();
 		combatArea.Position = areaPos;
-		combatArea.EnemyBulletPackedScene = EnemyBulletPackedScene;
+		combatArea.EnemyAttackPackedScene = EnemyBattleAttack;
 		combatArea.PlayerBallPackedScene = PlayerBallPackedScene;
+		combatArea.BattleInfo = battleInfo;
 		combatArea.Timeout += OnEnemyAttackFinished;
 		combatArea.PlayerGotDamaged += OnPlayerDamaged;
 		global.CurrentRoom.AddChild(combatArea);
@@ -223,5 +231,12 @@ public partial class BattleDisplay : CanvasLayer
 	{
 		global.PlayerData.Health -= value;
 		playerRect.TweenHealthValue(global.PlayerData.Health);
+	}
+
+	private Vector2 GetBaseVector()
+	{
+		Vector2 resolutionVector = new Vector2(global.Settings.WindowWidth, global.Settings.WindowHeight);
+		Vector2 baseVector = global.CurrentRoom.Camera.GlobalPosition - (resolutionVector / 2);
+		return baseVector;
 	}
 }

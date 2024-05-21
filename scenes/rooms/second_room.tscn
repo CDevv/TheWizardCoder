@@ -9,6 +9,9 @@
 [node name="SecondRoom" instance=ExtResource("1_xan73")]
 LocationName = "Test Room"
 
+[node name="BattleDisplay" parent="." index="1"]
+BattleName = "tutorial_battle"
+
 [node name="ColorRect" type="ColorRect" parent="." index="3"]
 offset_right = 1280.0
 offset_bottom = 960.0

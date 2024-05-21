@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://cnev47r5okt1p"
+path="res://.godot/imported/tutorial_battle.dialogue-aa5aaa22ac9e60e52acd3648d79c01a0.tres"
+
+[deps]
+
+source_file="res://dialogue/battles/tutorial_battle.dialogue"
+dest_files=["res://.godot/imported/tutorial_battle.dialogue-aa5aaa22ac9e60e52acd3648d79c01a0.tres"]
+
+[params]
+
+defaults=true

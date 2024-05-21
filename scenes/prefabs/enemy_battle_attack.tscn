@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp73ucc4dvcss"]
+
+[ext_resource type="Script" path="res://scripts/prefabs/EnemyBattleAttack.cs" id="1_krfeu"]
+
+[node name="EnemyBattleAttack" type="Node2D"]
+script = ExtResource("1_krfeu")
