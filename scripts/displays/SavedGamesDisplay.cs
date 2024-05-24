@@ -11,7 +11,6 @@ public partial class SavedGamesDisplay : CanvasLayer
 	private Button saveButton;
 	private Button closeButton;
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		global = GetNode<Global>("/root/Global");
@@ -20,11 +19,6 @@ public partial class SavedGamesDisplay : CanvasLayer
 		save3button = GetNode<SaveFileOption>("Save3");
 		saveButton = GetNode<Button>("%SaveButton");
 		closeButton = GetNode<Button>("%CloseButton");
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
 	}
 
 	public void UpdateDisplay()
@@ -55,21 +49,9 @@ public partial class SavedGamesDisplay : CanvasLayer
 		global.CanWalk = true;
 	}
 
-	public void OnSave1()
+	public void OnSaveOption(string saveName)
 	{
-		global.SaveGame("save1");
-		OnCloseButton();
-	}
-
-	public void OnSave2()
-	{
-		global.SaveGame("save2");
-		OnCloseButton();
-	}
-
-	public void OnSave3()
-	{
-		global.SaveGame("save3");
+		global.SaveGame(saveName);
 		OnCloseButton();
 	}
 }

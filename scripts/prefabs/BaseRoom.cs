@@ -41,7 +41,7 @@ public partial class BaseRoom : Node2D
 		TransitionRect.Show();
 
 		global.CurrentRoom = this;
-		global.Location = LocationName;
+		global.PlayerData.Location = LocationName;
 
 		Player.PlayIdleAnimation(global.PlayerDirection);
 		if (!string.IsNullOrEmpty(global.LocationMarkerName))

@@ -1,12 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://d04usfxcnlwpx"]
+[gd_scene load_steps=5 format=3 uid="uid://d04usfxcnlwpx"]
 
 [ext_resource type="Script" path="res://scripts/prefabs/CombatArea.cs" id="1_bsl2d"]
+[ext_resource type="PackedScene" uid="uid://cca0abuquow57" path="res://scenes/prefabs/player_ball.tscn" id="2_01ea4"]
+[ext_resource type="PackedScene" uid="uid://1qbi8tkkk2en" path="res://scenes/prefabs/enemy_bullet.tscn" id="3_ekkhb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n10ax"]
 size = Vector2(336, 304)
 
 [node name="CombatArea" type="Area2D"]
 script = ExtResource("1_bsl2d")
+PlayerBallPackedScene = ExtResource("2_01ea4")
+EnemyBulletPackedScene = ExtResource("3_ekkhb")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_n10ax")
+
+[node name="IntervalBetweenAttacks" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="IntervalBetweenAttacks" to="." method="OnIntervalBetweenAttacks"]

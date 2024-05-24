@@ -30,8 +30,6 @@ public class SettingsConfig
         ConfigFile configFile = new ConfigFile();
 
         configFile.SetValue("General", "WindowSize", (int)WindowSize);
-        //configFile.SetValue("General", "WindowWidth", WindowWidth);
-        //configFile.SetValue("General", "WindowHeight", WindowHeight);
         configFile.SetValue("General", "Fullscreen", Fullscreen);
 
         foreach (var item in controls)
@@ -53,8 +51,6 @@ public class SettingsConfig
             return;
         }
 
-        //WindowWidth = (int)configFile.GetValue("General", "WindowWidth");
-        //WindowHeight = (int)configFile.GetValue("General", "WindowHeight");
         WindowSize = (WindowSize)(int)configFile.GetValue("General", "WindowSize");
         Fullscreen = (bool)configFile.GetValue("General", "Fullscreen");
 

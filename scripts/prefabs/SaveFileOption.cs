@@ -17,10 +17,6 @@ public partial class SaveFileOption : Button
 		timeSpentLabel = GetNode<Label>("%TimeSpentLabel");
 	}
 
-	public override void _Process(double delta)
-	{
-	}
-
 	public void SetSaveNameText(string text)
 	{
 		saveNameLabel.Set(Label.PropertyName.Text, text);
@@ -51,7 +47,6 @@ public partial class SaveFileOption : Button
 
 	public void ShowData(SaveFileData saveFile)
 	{
-		//var duration = saveFile.TimeSpent.Duration();
 		var duration = saveFile.TimeSpent;
 		if (saveFile.IsSaveEmpty)
 		{

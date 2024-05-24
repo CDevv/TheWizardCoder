@@ -10,6 +10,5 @@ public partial class TutorialBattle : EnemyBattleAttack
     public void Intro()
     {
         Area.CallDeferred(CombatArea.MethodName.SpawnBullet, EnemyBullet);
-		Thread.Sleep(5 * 1000);
     }
 }

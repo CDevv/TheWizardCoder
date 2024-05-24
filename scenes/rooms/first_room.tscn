@@ -216,7 +216,7 @@ animation = &"top"
 
 [node name="Player" parent="." index="6" instance=ExtResource("1_m6ahu")]
 z_index = 1
-position = Vector2(240, 176)
+position = Vector2(192, 176)
 
 [node name="BedAnimationBottom" type="AnimatedSprite2D" parent="." index="7"]
 position = Vector2(192, 208)

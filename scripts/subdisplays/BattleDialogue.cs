@@ -102,10 +102,6 @@ public partial class BattleDialogue : NinePatchRect
 			item.QueueFree();
 		}
 
-		foreach (var item in global.PlayerData.Inventory)
-		{
-			
-		}
 		for (int i = 0; i < global.PlayerData.Inventory.Count; i++)
 		{
 			string item = global.PlayerData.Inventory[i];

@@ -33,7 +33,7 @@ public partial class OptionsMenu : CanvasLayer
 	public void OnWindowSizeChanged(int optionId)
 	{
 		WindowSize size = (WindowSize)optionId;
-		global.ChangeWindowSize(size);
+		global.Settings.ChangeWindowSize(size);
 		global.Settings.SaveSettings();
 	}
 

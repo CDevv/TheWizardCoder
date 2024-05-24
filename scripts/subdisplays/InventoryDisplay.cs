@@ -6,14 +6,12 @@ public partial class InventoryDisplay : CanvasLayer
 {
 	[Export]
 	public PackedScene ItemButtonTemplate { get; set; }
-
 	private Global global;
 	private GridContainer itemsContainer;
 	private Button noItemsButton;
 	private NinePatchRect descriptionRect;
 	private Label itemDescription;
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		global = GetNode<Global>("/root/Global");
@@ -21,11 +19,6 @@ public partial class InventoryDisplay : CanvasLayer
 		noItemsButton = GetNode<Button>("%NoItemsButton");
 		descriptionRect = GetNode<NinePatchRect>("%DescriptionRect");
 		itemDescription = GetNode<Label>("%ItemDescription");
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
 	}
 
 	public void FocusFirst()

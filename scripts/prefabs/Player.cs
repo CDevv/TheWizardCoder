@@ -7,11 +7,8 @@ public partial class Player : CharacterBody2D
 {
 	[Signal]
 	public delegate void AnimationFinishedEventHandler();
-
 	public const int Speed = 2;
-
 	private Global global;
-
 	private AnimationPlayer animationPlayer;
 	private AnimationTree animationTree;
 	private Area2D interactableFinder;
@@ -133,16 +130,6 @@ public partial class Player : CharacterBody2D
 		animationTree.Set("parameters/Move/blend_position", resultVector);
 	}
 
-	public void DisableAnimationTree()
-	{
-		animationTree.Set(AnimationTree.PropertyName.Active, false);
-	}
-
-	public void PlayAnimation(string name)
-	{
-		animationPlayer.Play(name);
-	}
-
 	public void PlaySideAnimation(string name)
 	{
 		animationTree.Set("parameters/conditions/idle", false);
@@ -172,12 +159,6 @@ public partial class Player : CharacterBody2D
 		animationTree.Set("parameters/conditions/extrastate", false);
 
 		ChangeDirection(direction);
-	}
-
-	public void TweenToPosition(Vector2 position, double duration)
-	{
-		var tween = CreateTween();
-		tween.TweenProperty(this, "position", position, duration);
 	}
 
 	public void ShowDialogueBallon(Resource resource, string title)

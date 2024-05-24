@@ -16,17 +16,11 @@ public partial class BattleOptions : NinePatchRect
 	private Button fightButton;
 	private Label itemDescription;
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		optionsContainer = GetNode<VBoxContainer>("%OptionsContainer");
 		fightButton = GetNode<Button>("%FightButton");
 		itemDescription = GetNode<Label>("%ItemDescription");
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
 	}
 
 	public void FocusFirst()

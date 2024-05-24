@@ -10,12 +10,6 @@ public partial class Global : Node
 	public Direction PlayerDirection { get; set; }
 	public bool CanWalk = true;
 	public bool GameDisplayEnabled { get; set; } = true;
-	public string SaveName { get; set; }
-	public DateTime LastSaved { get; set; }
-	public TimeSpan TimeSpent { get; set; }
-	public string Location { get; set; }
-	public int Health { get; set; } = 100;
-
 	public SaveFileData PlayerData { get; set; } = new();
 	public SettingsConfig Settings { get; set; } = new();
 	public System.Collections.Generic.Dictionary<string, Item> ItemDescriptions { get; set; } = new();
@@ -82,9 +76,9 @@ public partial class Global : Node
 
 	public void SaveGame(string saveName)
 	{
-		GD.Print(LastSaved.ToString());
+		GD.Print(PlayerData.LastSaved.ToString());
 		GD.Print(DateTime.Now.ToString());
-		PlayerData.TimeSpent += TimeSpent.Add(DateTime.Now - LastSaved);
+		PlayerData.TimeSpent += PlayerData.TimeSpent.Add(DateTime.Now - PlayerData.LastSaved);
 		PlayerData.LastSaved = DateTime.Now;
 
 		Dictionary<string, Variant> saveData = PlayerData.GenerateDictionary();
@@ -112,7 +106,7 @@ public partial class Global : Node
 
 	public void LoadGame(string saveName)
 	{
-		LastSaved = DateTime.Now;
+		PlayerData.LastSaved = DateTime.Now;
 		if (!FileAccess.FileExists($"user://{saveName}.wand"))
         {
             GD.PushWarning($"File {saveName}.wand does not exist");
@@ -170,6 +164,21 @@ public partial class Global : Node
 		return data;
 	}
 
+	public void ChangeRoom(string room)
+	{
+		ChangeRoom(room, "DefaultPlayerPos", Direction.Down);
+	}
+
+	public void ChangeRoom(string room, string playerLocation, Direction direction)
+	{
+		var result = GetTree().ChangeSceneToFile($"res://scenes/rooms/{room}.tscn");
+		if (result == Error.Ok)
+		{
+			LocationMarkerName = playerLocation;
+			PlayerDirection = direction;
+		}
+	}
+
 	private bool CompareHashes(byte[] h1, byte[] h2)
     {
         if (h1 == null && h2 != null)
@@ -198,38 +207,4 @@ public partial class Global : Node
 
         return true;
     }
-
-	public void ChangeRoom(PackedScene room)
-	{
-		GetTree().ChangeSceneToPacked(room);
-		LocationMarkerName = string.Empty;
-		PlayerDirection = Direction.Down;
-	}
-
-	public void ChangeRoom(string room)
-	{
-		GetTree().ChangeSceneToFile($"res://scenes/rooms/{room}.tscn");
-		LocationMarkerName = string.Empty;
-		PlayerDirection = Direction.Down;
-	}
-
-	public void ChangeRoom(string room, string playerLocation, Direction direction)
-	{
-		var result = GetTree().ChangeSceneToFile($"res://scenes/rooms/{room}.tscn");
-		if (result == Error.Ok)
-		{
-			LocationMarkerName = playerLocation;
-			PlayerDirection = direction;
-		}
-	}
-
-	public async Task PlayRoomCutscene(string name)
-	{
-		await CurrentRoom.PlayCutscene(name);
-	}
-
-	public void ChangeWindowSize(WindowSize size)
-	{
-		Settings.ChangeWindowSize(size, GetWindow());		
-	}
 }

@@ -82,8 +82,8 @@ theme = ExtResource("4_0wjab")
 theme_override_font_sizes/font_size = 24
 text = "Close"
 
-[connection signal="pressed" from="Save1" to="." method="OnSave1"]
-[connection signal="pressed" from="Save2" to="." method="OnSave2"]
-[connection signal="pressed" from="Save3" to="." method="OnSave3"]
+[connection signal="pressed" from="Save1" to="." method="OnSaveOption" binds= ["save1"]]
+[connection signal="pressed" from="Save2" to="." method="OnSaveOption" binds= ["save2"]]
+[connection signal="pressed" from="Save3" to="." method="OnSaveOption" binds= ["save3"]]
 [connection signal="pressed" from="OptionsRect/MarginContainer/HBoxContainer/SaveButton" to="." method="OnSaveButton"]
 [connection signal="pressed" from="OptionsRect/MarginContainer/HBoxContainer/CloseButton" to="." method="OnCloseButton"]

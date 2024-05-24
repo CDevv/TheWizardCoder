@@ -10,8 +10,6 @@ public partial class BattleDisplay : CanvasLayer
 	[Export]
 	public string BattleName { get; set; }
 	[Export]
-	public Resource DialogueResource { get; set; }
-	[Export]
 	public PackedScene BulletPackedScene { get; set; }
 	[Export]
 	public PackedScene DamagablePackedScene { get; set; }
@@ -19,8 +17,6 @@ public partial class BattleDisplay : CanvasLayer
 	public PackedScene CombatAreaPackedScene { get; set; }
 	[Export]
 	public PackedScene EnemyBattleAttack { get; set; }
-	[Export]
-	public PackedScene PlayerBallPackedScene { get; set; }
 
 	private bool canUseDisplay = true;
 	private bool playerIsAttacking = false;
@@ -85,7 +81,6 @@ public partial class BattleDisplay : CanvasLayer
 			}
 		}
 	}
-
 
 	public async Task ShowDisplay()
 	{
@@ -195,7 +190,6 @@ public partial class BattleDisplay : CanvasLayer
 		CombatArea combatArea = CombatAreaPackedScene.Instantiate<CombatArea>();
 		combatArea.Position = areaPos;
 		combatArea.EnemyAttackPackedScene = EnemyBattleAttack;
-		combatArea.PlayerBallPackedScene = PlayerBallPackedScene;
 		combatArea.BattleInfo = battleInfo;
 		combatArea.Timeout += OnEnemyAttackFinished;
 		combatArea.PlayerGotDamaged += OnPlayerDamaged;

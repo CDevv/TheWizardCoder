@@ -60,7 +60,7 @@ public partial class GameDisplay : CanvasLayer
 					{
 						global.CanWalk = false;
 						Show();
-						healthBar.Set(TextureProgressBar.PropertyName.Value, global.Health);
+						healthBar.Set(TextureProgressBar.PropertyName.Value, global.PlayerData.Health);
 						itemsButton.GrabFocus();
 						Visible = true;
 

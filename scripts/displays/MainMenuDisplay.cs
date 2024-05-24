@@ -3,9 +3,6 @@ using System;
 
 public partial class MainMenuDisplay : CanvasLayer
 {
-	[Export]
-	public PackedScene firstRoom;
-
 	private Global global;
 	private Control main;
 	private Control savedGames;
@@ -19,7 +16,6 @@ public partial class MainMenuDisplay : CanvasLayer
 	private bool waitingInput = false;
 	private string actionName;
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		global = GetNode<Global>("/root/Global");
@@ -36,11 +32,6 @@ public partial class MainMenuDisplay : CanvasLayer
 		playButton.CallDeferred(Button.MethodName.GrabFocus);
 		optionsMenu.UpdateDisplay();
 		controlsMenu.UpdateDisplay();
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
 	}
 
     public override void _Input(InputEvent @event)
