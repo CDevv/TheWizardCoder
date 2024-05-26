@@ -1,13 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://1qbi8tkkk2en"]
 
-[ext_resource type="Script" path="res://scripts/prefabs/EnemyBullet.cs" id="1_abpvr"]
 [ext_resource type="Texture2D" uid="uid://00inqs1v3lxi" path="res://assets/ui/base.png" id="1_ty5lv"]
+[ext_resource type="Script" path="res://scripts/prefabs/Bullet.cs" id="1_xtryy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0r30u"]
 size = Vector2(32, 32)
 
 [node name="EnemyBullet" type="Area2D"]
-script = ExtResource("1_abpvr")
+script = ExtResource("1_xtryy")
+Type = 1
+Damagable = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(8, 8)

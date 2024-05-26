@@ -186,3 +186,4 @@ libraries = {
 [connection signal="ItemsButtonTriggered" from="BattleOptions" to="." method="OnItemsButton"]
 [connection signal="MagicButtonTriggered" from="BattleOptions" to="." method="OnMagicButton"]
 [connection signal="ItemTriggered" from="BattleDialogue" to="." method="OnItemTriggered"]
+[connection signal="MagicSpellTriggered" from="BattleDialogue" to="." method="OnMagicSpellTriggered"]

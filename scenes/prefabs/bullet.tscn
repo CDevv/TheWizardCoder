@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/prefabs/Bullet.cs" id="1_shxm3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cylhv"]
-size = Vector2(32, 32)
+size = Vector2(16, 16)
 
 [node name="Bullet" type="Area2D"]
 script = ExtResource("1_shxm3")
@@ -21,4 +21,5 @@ debug_color = Color(0.223354, 0.607371, 0.557588, 0.42)
 position = Vector2(1.43051e-06, 1.43051e-06)
 scale = Vector2(1.6, 1.6)
 
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnScreenExit"]

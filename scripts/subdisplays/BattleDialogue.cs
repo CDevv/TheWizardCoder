@@ -7,6 +7,8 @@ public partial class BattleDialogue : NinePatchRect
 {
 	[Signal]
 	public delegate void ItemTriggeredEventHandler(string itemName);
+	[Signal]
+	public delegate void MagicSpellTriggeredEventHandler(string spellName);
 
 	[Export]
 	public PackedScene ItemButtonTemplate { get; set; }
@@ -61,7 +63,7 @@ public partial class BattleDialogue : NinePatchRect
 		ShowGridContainer();
 	}
 
-	public void ShowGridContainer()
+	private void ShowGridContainer()
 	{
 		dialogueLabel.Hide();
 		itemsContainer.Show();
@@ -105,18 +107,14 @@ public partial class BattleDialogue : NinePatchRect
 		for (int i = 0; i < global.PlayerData.Inventory.Count; i++)
 		{
 			string item = global.PlayerData.Inventory[i];
+
 			Button button = ItemButtonTemplate.Instantiate<Button>();
 			button.Set("metadata/itemId", i);
 			button.Set(Button.PropertyName.Text, item);		
 			button.FocusEntered += () => {
 				BattleOptions.SetItemDescription(global.ItemDescriptions[item].Description);
 			};
-			button.Pressed += () => {
-				EmitSignal(SignalName.ItemTriggered, new Variant[] {item});
-				global.PlayerData.RemoveFromInventory(i);
-				button.QueueFree();
-				ShowGridContainer();
-			};
+			button.Pressed += () => OnItemPressed(button, item, i);
 			itemsContainer.AddChild(button);
 		}
 	}
@@ -129,11 +127,33 @@ public partial class BattleDialogue : NinePatchRect
 			item.QueueFree();
 		}
 
-		foreach (var item in global.PlayerData.Inventory)
+		for (int i = 0; i < global.PlayerData.MagicSpells.Count; i++)
 		{
+			string item = global.PlayerData.MagicSpells[i];
+
 			Button button = ItemButtonTemplate.Instantiate<Button>();
 			button.Set(Button.PropertyName.Text, item);
+			button.FocusEntered += () => {
+				BattleOptions.SetItemDescription(global.MagicSpells[item].Description);
+			};
+			button.Pressed += () => OnMagicSpellPressed(button, item, i);
 			itemsContainer.AddChild(button);
 		}
+	}
+
+	private void OnItemPressed(Button button, string itemName, int index)
+	{
+		EmitSignal(SignalName.ItemTriggered, itemName);
+		global.PlayerData.RemoveFromInventory(index);
+		button.QueueFree();
+		ShowItems();
+	}
+
+	private void OnMagicSpellPressed(Button button, string spellName, int index)
+	{
+		EmitSignal(SignalName.MagicSpellTriggered, spellName);
+		ShowDialogueLabel();
+		BattleOptions.ShowOptions();
+		BattleOptions.FocusFirst();
 	}
 }

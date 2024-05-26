@@ -8,10 +8,18 @@ public partial class EnemyBullet : Area2D
 
 	private int speed = 3;
 	public float Damage { get; set; } = 10;
+	public Direction DirectionOfMovement { get; set; } = Direction.Down;
+	private Global global;
+
+    public override void _Ready()
+    {
+        global = GetNode<Global>("/root/Global");
+    }
 
 	public override void _Process(double delta)
 	{
-		Position += new Vector2(0, speed);
+		Vector2 velocity = global.GetDirectionVector(DirectionOfMovement) * speed;
+		Position += velocity;
 	}
 
 	public void OnScreenExit()

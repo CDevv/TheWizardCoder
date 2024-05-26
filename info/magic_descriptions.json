@@ -1,0 +1,10 @@
+{
+	"SimpleBullet":{
+		"Name":"SimpleBullet",
+		"Description":"SimpleBullet description.",
+		"MethodName":"SpawnPlayerBullet",
+		"Type":"",
+		"OneTime":true,
+		"Effect":10
+	}
+}

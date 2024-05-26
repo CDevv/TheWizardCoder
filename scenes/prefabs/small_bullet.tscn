@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbevjyilsdupu"]
+
+[ext_resource type="PackedScene" uid="uid://cn6qmd0lxinhs" path="res://scenes/prefabs/bullet.tscn" id="1_t1tbu"]
+
+[node name="Bullet" instance=ExtResource("1_t1tbu")]
+
+[node name="Sprite2D" parent="." index="0"]
+rotation = -1.57079
+scale = Vector2(1, 1)

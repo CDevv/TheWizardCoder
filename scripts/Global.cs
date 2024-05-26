@@ -13,6 +13,7 @@ public partial class Global : Node
 	public SaveFileData PlayerData { get; set; } = new();
 	public SettingsConfig Settings { get; set; } = new();
 	public System.Collections.Generic.Dictionary<string, Item> ItemDescriptions { get; set; } = new();
+	public System.Collections.Generic.Dictionary<string, MagicSpell> MagicSpells { get; set; } = new();
 
     public override void _Ready()
     {
@@ -21,6 +22,7 @@ public partial class Global : Node
 			Settings.LoadSettings();
 			Settings.ApplySettings();
 			LoadItemDescriptions();
+			LoadMagicSpells();
 		}
 		catch (System.Exception e)
 		{
@@ -43,27 +45,15 @@ public partial class Global : Node
 		return PlayerData.HasItemInInventory(item);
 	}
 
-	public void LoadItemDescriptions()
+	public void AddMagicSpell(string name)
 	{
-		if (!FileAccess.FileExists("res://info/item_descriptions.json"))
-		{
-			GD.PrintErr("res://info/item_descriptions.json does not exist");
-			return;
-		}
+		PlayerData.AddMagicSpell(name);
+	}
 
-		using var data = FileAccess.Open("res://info/item_descriptions.json", FileAccess.ModeFlags.Read);
-		string jsonString = data.GetAsText();
-
-		Json json = new Json();
-		Error jsonError = json.Parse(jsonString);
-
-		if (jsonError != Error.Ok)
-		{
-			GD.PrintErr($"Json parse error: {jsonError}");
-			return;
-		}
-
-		Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)json.Data;
+	private void LoadItemDescriptions()
+	{
+		Variant jsonData = GetJsonData("res://info/item_descriptions.json");
+		Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
 
 		foreach (var pair in parsedData)
 		{
@@ -71,6 +61,19 @@ public partial class Global : Node
 			item.ApplyDictionary(pair.Value);
 			item.Name = pair.Key;
 			ItemDescriptions.Add(item.Name, item);
+		}
+	}
+
+	private void LoadMagicSpells()
+	{
+		Variant jsonData = GetJsonData("res://info/magic_descriptions.json");
+		Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
+
+		foreach (var pair in parsedData)
+		{
+			MagicSpell magicSpell = new MagicSpell();
+			magicSpell.ApplyDictionary(pair.Value);
+			MagicSpells.Add(pair.Key, magicSpell);
 		}
 	}
 
@@ -177,6 +180,57 @@ public partial class Global : Node
 			LocationMarkerName = playerLocation;
 			PlayerDirection = direction;
 		}
+	}
+
+	public Vector2 GetDirectionVector(Direction direction)
+	{
+		Vector2 resultVector = Vector2.Down;
+		switch (direction)
+		{
+			case Direction.Up:
+				resultVector = Vector2.Up;
+				break;
+			case Direction.Down:
+				resultVector = Vector2.Down;
+				break;
+			case Direction.Left:
+				resultVector = Vector2.Left;
+				break;
+			case Direction.Right:
+				resultVector = Vector2.Right;
+				break;
+		}
+
+		return resultVector;
+	}
+
+	public Vector2 GetCameraBaseVector()
+	{
+		Vector2 resolutionVector = new Vector2(Settings.WindowWidth, Settings.WindowHeight);
+		Vector2 baseVector = CurrentRoom.Camera.GlobalPosition - (resolutionVector / 2);
+		return baseVector;
+	}
+
+	private Variant GetJsonData(string fileName)
+	{
+		if (!FileAccess.FileExists(fileName))
+		{
+			GD.PrintErr($"{fileName} does not exist");
+			return new Json();
+		}
+
+		using var data = FileAccess.Open(fileName, FileAccess.ModeFlags.Read);
+		string jsonString = data.GetAsText();
+
+		Json json = new Json();
+		Error jsonError = json.Parse(jsonString);
+
+		if (jsonError != Error.Ok)
+		{
+			GD.PrintErr($"Json parse error: {jsonError}");
+		}
+
+		return json.Data;
 	}
 
 	private bool CompareHashes(byte[] h1, byte[] h2)

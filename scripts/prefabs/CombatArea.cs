@@ -28,6 +28,7 @@ public partial class CombatArea : Area2D
 	private Godot.Timer intervalBetweenAttacks;
 
 	public bool Active { get { return active; } }
+	public PlayerBall PlayerBall { get { return playerBall; } }
 	public BattleInfo BattleInfo { get; set; }
 
 	// Called when the node enters the scene tree for the first time.
@@ -43,16 +44,21 @@ public partial class CombatArea : Area2D
 	{
 		if (playerBall != null)
 		{
-			Vector2 resolutionVector = new Vector2(global.Settings.WindowWidth, global.Settings.WindowHeight);
-			Vector2 mousePosition = global.CurrentRoom.Camera.GlobalPosition - (resolutionVector / 2) + GetViewport().GetMousePosition();
-			//playerBall.Position = mousePosition;
-			playerBall.SetDeferred(PropertyName.Position, mousePosition);
+			Rect2 areaRect = GetRect();
+			areaRect.Position = Position - (areaRect.Size / 2);
+
+			Vector2 mousePosition = global.GetCameraBaseVector() + GetViewport().GetMousePosition();
+			if (areaRect.HasPoint(mousePosition))
+			{
+				playerBall.SetDeferred(PropertyName.Position, mousePosition);
+			}
 		}
 	}
 
 	public void DoAttack()
 	{
 		PlayerBall playerBall = PlayerBallPackedScene.Instantiate<PlayerBall>();
+		playerBall.Position = Position;
 
 		GetParent().CallDeferred(Node.MethodName.AddChild, playerBall);
 		this.playerBall = playerBall;
@@ -72,10 +78,8 @@ public partial class CombatArea : Area2D
 
 	public Vector2 GetRandomPoint()
 	{
-		Rect2 collisionRect = collisionShape.Shape.GetRect();
-
-		float x = (float)GD.RandRange(Position.X - (collisionRect.Size.X / 2), Position.X + (collisionRect.Size.X / 2));
-		float y = (float)GD.RandRange(Position.Y - (collisionRect.Size.Y / 2), Position.Y + (collisionRect.Size.Y / 2));
+		float x = (float)GD.RandRange(0, GetRect().Size.X);
+		float y = (float)GD.RandRange(0, GetRect().Size.Y);
 
 		Vector2 result = new Vector2(x, y);
 		return result;
@@ -86,16 +90,16 @@ public partial class CombatArea : Area2D
 		return collisionShape.Shape.GetRect();
 	}
 
-	public void SpawnBullet(PackedScene bulletPackedScene)
+	public void SpawnBullet(PackedScene bulletPackedScene, Vector2 pos, Direction direction = Direction.Down)
 	{
 		Rect2 collisionRect = collisionShape.Shape.GetRect();
 
-		Vector2 bulletPos = GetRandomPoint();
-		bulletPos = new Vector2(bulletPos.X, Position.Y - (collisionRect.Size.Y/2) + 2);
+		Vector2 bulletPos = Position - (collisionRect.Size / 2) + pos;
 
-		EnemyBullet bullet = bulletPackedScene.Instantiate<EnemyBullet>();
+		Bullet bullet = bulletPackedScene.Instantiate<Bullet>();
 		bullet.DamagedPlayer += OnPlayerDamaged;
 		bullet.Position = bulletPos;
+		bullet.DirectionOfMovement = direction;
 
 		GetParent().CallDeferred(Node.MethodName.AddChild, bullet);
 		bullets.Add(bullet);

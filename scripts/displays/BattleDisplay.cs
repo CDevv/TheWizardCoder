@@ -24,6 +24,7 @@ public partial class BattleDisplay : CanvasLayer
 	private float mouseChange;
 	private int level = 0;
 	private int enemyHealth = 100;
+	private string equippedMagicSpell = "";
 	private Global global;
 	private AnimationPlayer animationPlayer;
 	private Marker2D playerMarker;
@@ -65,19 +66,28 @@ public partial class BattleDisplay : CanvasLayer
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (!canUseDisplay)
+		if (canUseDisplay)
 		{
-			return;
-		}
-
-		if (Input.IsActionJustPressed("ui_cancel"))
-		{
-			if (level == 1)
+			if (Input.IsActionJustPressed("ui_cancel"))
 			{
-				battleOptions.ShowOptions();
-				battleOptions.FocusFirst();
-				battleDialogue.ShowDialogueLabel();
-				level = 0;
+				if (level == 1)
+				{
+					battleOptions.ShowOptions();
+					battleOptions.FocusFirst();
+					battleDialogue.ShowDialogueLabel();
+					level = 0;
+				}
+			}
+		}
+		else
+		{
+			if (Input.IsActionJustPressed("magic"))
+			{
+				if (equippedMagicSpell != "")
+				{
+					string methodName = global.MagicSpells[equippedMagicSpell].MethodName;
+					combatArea.PlayerBall.Call(methodName);
+				}
 			}
 		}
 	}
@@ -89,9 +99,7 @@ public partial class BattleDisplay : CanvasLayer
 
 		playerRect.SetHealthValue(global.PlayerData.Health);
 
-		Vector2 resolutionVector = new Vector2(global.Settings.WindowWidth, global.Settings.WindowHeight);
-		Vector2 baseVector = global.CurrentRoom.Camera.GlobalPosition - (resolutionVector / 2);
-		Vector2 playerFinalPosition = baseVector + playerMarker.Position;
+		Vector2 playerFinalPosition = global.GetCameraBaseVector() + playerMarker.Position;
 
 		Show();
 		animationPlayer.Play("battle_intro");
@@ -157,8 +165,7 @@ public partial class BattleDisplay : CanvasLayer
 		animationPlayer.Play("hide_bottom");
 
 		//Spawn player bullet
-		Vector2 resolutionVector = new Vector2(global.Settings.WindowWidth, global.Settings.WindowHeight);
-		Vector2 finalVector = global.CurrentRoom.Camera.GlobalPosition - (resolutionVector / 2) + playerMarker.Position;
+		Vector2 finalVector = global.GetCameraBaseVector() + playerMarker.Position;
 
 		Bullet bullet = BulletPackedScene.Instantiate<Bullet>();
 		bullet.Position = finalVector;
@@ -172,13 +179,23 @@ public partial class BattleDisplay : CanvasLayer
 
 	public void InitiateEnemyAttack()
 	{
+		//Remove magic spell if it is OneTime
+		if (equippedMagicSpell != "")
+		{
+			if (global.MagicSpells[equippedMagicSpell].OneTime)
+			{
+				global.PlayerData.RemoveMagicSpell(equippedMagicSpell);
+			}
+		}		
+
+		//Initiate
 		areaBorder.Show();
 		combatArea.DoAttack();
 	}
 
 	public void InstantiateEnemyArea()
 	{
-		Vector2 baseVector = GetBaseVector();
+		Vector2 baseVector = global.GetCameraBaseVector();
 		Vector2 damagablePos = baseVector + enemyMarker.Position;
 		Vector2 areaPos = baseVector + areaMarker.Position;
 
@@ -205,6 +222,11 @@ public partial class BattleDisplay : CanvasLayer
 		animationPlayer.Play("hide_bottom");
 	}
 
+	public void OnMagicSpellTriggered(string spellName)
+	{
+		equippedMagicSpell = spellName;
+	}
+
 	public void OnEnemyDamaged(int value)
 	{
 		enemyHealth -= value;
@@ -225,12 +247,5 @@ public partial class BattleDisplay : CanvasLayer
 	{
 		global.PlayerData.Health -= value;
 		playerRect.TweenHealthValue(global.PlayerData.Health);
-	}
-
-	private Vector2 GetBaseVector()
-	{
-		Vector2 resolutionVector = new Vector2(global.Settings.WindowWidth, global.Settings.WindowHeight);
-		Vector2 baseVector = global.CurrentRoom.Camera.GlobalPosition - (resolutionVector / 2);
-		return baseVector;
 	}
 }

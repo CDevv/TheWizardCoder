@@ -12,6 +12,7 @@ public class SaveFileData
 	public string Location { get; set; }
 	public int Health { get; set; } = 100;
     private Array<string> inventory = new();
+    private Array<string> magicSpells = new();
 
 	public Array<string> Inventory
 	{      
@@ -25,8 +26,20 @@ public class SaveFileData
         }
 	}
 
+    public Array<string> MagicSpells
+	{      
+		get
+		{
+			return magicSpells;
+		}
+        private set
+        {
+            magicSpells = value;
+        }
+	}
+
     //Playthrough properties
-    public bool HasPlayedIntro{ get; set; } = false;
+    public bool HasPlayedIntro { get; set; } = false;
 
     public Dictionary<string, Variant> GenerateDictionary()
     {
@@ -76,4 +89,14 @@ public class SaveFileData
 	{
 		return inventory.Contains(item);
 	}
+
+    public void AddMagicSpell(string name)
+    {
+        magicSpells.Add(name);
+    }
+
+    public void RemoveMagicSpell(string name)
+    {
+        magicSpells.Remove(name);
+    }
 }

@@ -7,7 +7,7 @@ Nolan: [#portrait=0] Ah, a new day!
 
 ~ lamp
 Nolan: [#portrait=0] Cool lamp.
-	
+do AddMagicSpell("SimpleBullet")
 => END!
 
 ~ bed

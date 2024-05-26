@@ -3,13 +3,15 @@ using System;
 
 public partial class PlayerBall : Area2D
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
+	[Export]
+	public PackedScene BulletPackedScene { get; set; }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public void SpawnPlayerBullet()
 	{
+		Bullet bullet = BulletPackedScene.Instantiate<Bullet>();
+		bullet.Position = Position;
+		bullet.DirectionOfMovement = Direction.Up;
+
+		GetParent().CallDeferred(Node.MethodName.AddChild, bullet);
 	}
 }

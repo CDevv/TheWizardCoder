@@ -107,24 +107,7 @@ public partial class Player : CharacterBody2D
 
 	public void ChangeDirection(Direction direction)
 	{
-		Vector2 resultVector = Vector2.Down;
-		switch (direction)
-		{
-			case Direction.Up:
-				resultVector = Vector2.Up;
-				break;
-			case Direction.Down:
-				resultVector = Vector2.Down;
-				break;
-			case Direction.Left:
-				resultVector = Vector2.Left;
-				break;
-			case Direction.Right:
-				resultVector = Vector2.Right;
-				break;
-			default:
-				break;
-		}
+		Vector2 resultVector = global.GetDirectionVector(direction);
 
 		animationTree.Set("parameters/Idle/blend_position", resultVector);
 		animationTree.Set("parameters/Move/blend_position", resultVector);
