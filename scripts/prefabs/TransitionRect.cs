@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class TransitionRect : ColorRect
+public partial class TransitionRect : CanvasLayer
 {
 	[Signal]
 	public delegate void AnimationFinishedEventHandler();
@@ -20,8 +20,10 @@ public partial class TransitionRect : ColorRect
 		EmitSignal(SignalName.AnimationFinished);
 	}
 
-	public void PlayAnimationBackwards()
+	public async void PlayAnimationBackwards()
 	{
 		animationPlayer.PlayBackwards("transition");
+		await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
+		EmitSignal(SignalName.AnimationFinished);
 	}
 }

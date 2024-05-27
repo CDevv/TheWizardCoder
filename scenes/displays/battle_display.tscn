@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://t2oe67lsq1j2"]
+[gd_scene load_steps=15 format=3 uid="uid://t2oe67lsq1j2"]
 
 [ext_resource type="Script" path="res://scripts/displays/BattleDisplay.cs" id="1_py1kc"]
 [ext_resource type="PackedScene" uid="uid://cn6qmd0lxinhs" path="res://scenes/prefabs/bullet.tscn" id="3_lb607"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cimhskosuaad7" path="res://scenes/enemy_attacks/tutorial_battle.tscn" id="6_ipdqy"]
 [ext_resource type="Texture2D" uid="uid://hxmst0tc6gbs" path="res://assets/ui/area_border.png" id="9_j2ovb"]
 [ext_resource type="PackedScene" uid="uid://bgn8hk6463o4s" path="res://scenes/subdisplays/battle/battle_options.tscn" id="9_py3yx"]
+[ext_resource type="PackedScene" uid="uid://dqgxo8eebarbi" path="res://scenes/prefabs/transition_rect.tscn" id="10_5036v"]
 
 [sub_resource type="Animation" id="Animation_iyrke"]
 resource_name = "battle_intro"
@@ -180,6 +181,9 @@ position = Vector2(320, 240)
 libraries = {
 "": SubResource("AnimationLibrary_h5bcl")
 }
+
+[node name="TransitionRect" parent="." instance=ExtResource("10_5036v")]
+visible = false
 
 [connection signal="DefenseButtonTriggered" from="BattleOptions" to="." method="OnDefenseButton"]
 [connection signal="FightButtonTriggered" from="BattleOptions" to="." method="OnFightButton"]

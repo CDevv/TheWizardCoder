@@ -83,6 +83,12 @@ public partial class Global : Node
 		GD.Print(DateTime.Now.ToString());
 		PlayerData.TimeSpent += PlayerData.TimeSpent.Add(DateTime.Now - PlayerData.LastSaved);
 		PlayerData.LastSaved = DateTime.Now;
+		if (CurrentRoom != null)
+		{
+			PlayerData.SceneFileName = CurrentRoom.SceneFileName;
+			PlayerData.SceneDefaultMarker = CurrentRoom.DefaultMarkerName;
+			PlayerData.LocationVector = CurrentRoom.Player.Position;
+		}		
 
 		Dictionary<string, Variant> saveData = PlayerData.GenerateDictionary();
 
@@ -105,6 +111,9 @@ public partial class Global : Node
         using var hashFile = FileAccess.Open($"user://{saveName}.ini", FileAccess.ModeFlags.Write);
         hashFile.StoreVar(data);
         hashFile.Close();
+
+		//Reset
+		PlayerData.LocationVector = Vector2.Zero;
 	}
 
 	public void LoadGame(string saveName)
@@ -113,6 +122,7 @@ public partial class Global : Node
 		if (!FileAccess.FileExists($"user://{saveName}.wand"))
         {
             GD.PushWarning($"File {saveName}.wand does not exist");
+			PlayerData.IsSaveEmpty = true;
 			PlayerData.SaveName = saveName;
 			PlayerData.StartedOn = DateTime.Now;
 			PlayerData.TimeSpent = TimeSpan.Zero;

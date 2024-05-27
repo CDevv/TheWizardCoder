@@ -5,7 +5,11 @@ using System.Threading.Tasks;
 public partial class BaseRoom : Node2D
 {
 	[Export]
+	public string SceneFileName { get; set;}
+	[Export]
 	public string LocationName { get; set; }
+	[Export]
+	public string DefaultMarkerName { get; set; }
 
 	protected Global global;
 	public GameDisplay GameDisplay { get; private set; }
@@ -41,13 +45,19 @@ public partial class BaseRoom : Node2D
 		TransitionRect.Show();
 
 		global.CurrentRoom = this;
+		global.PlayerData.SceneFileName = SceneFileName;
 		global.PlayerData.Location = LocationName;
 
 		Player.PlayIdleAnimation(global.PlayerDirection);
 		if (!string.IsNullOrEmpty(global.LocationMarkerName))
 		{
 			Player.Position = GetNode<Marker2D>(global.LocationMarkerName).Position;
-		}		
+		}
+		if (global.PlayerData.LocationVector != Vector2.Zero)
+		{
+			Player.Position = global.PlayerData.LocationVector;
+		}
+		global.PlayerData.LocationVector = Vector2.Zero;
 
 		TransitionRect.CallDeferred(TransitionRect.MethodName.PlayAnimationBackwards);
 		global.CanWalk = true;

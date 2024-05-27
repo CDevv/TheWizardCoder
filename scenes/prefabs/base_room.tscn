@@ -21,10 +21,6 @@ visible = false
 [node name="SavedGamesDisplay" parent="." instance=ExtResource("3_f6qho")]
 visible = false
 
-[node name="TransitionRect" parent="." instance=ExtResource("4_qu4y4")]
-visible = false
-z_index = 100
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -32,3 +28,5 @@ limit_left = 0
 limit_top = 0
 limit_right = 640
 limit_bottom = 480
+
+[node name="TransitionRect" parent="." instance=ExtResource("4_qu4y4")]

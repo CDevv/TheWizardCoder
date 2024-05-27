@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cca0abuquow57"]
 
 [ext_resource type="Script" path="res://scripts/prefabs/PlayerBall.cs" id="1_2nc55"]
-[ext_resource type="Texture2D" uid="uid://00inqs1v3lxi" path="res://assets/ui/base.png" id="2_aklnq"]
 [ext_resource type="PackedScene" uid="uid://dbevjyilsdupu" path="res://scenes/prefabs/small_bullet.tscn" id="2_tavla"]
+[ext_resource type="Texture2D" uid="uid://3m0y3rxql6v" path="res://assets/battle/yellow_ball.png" id="3_131r7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8pb0s"]
 
@@ -11,9 +11,7 @@ script = ExtResource("1_2nc55")
 BulletPackedScene = ExtResource("2_tavla")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(4.76837e-07, 4.76837e-07)
-scale = Vector2(4, 4)
-texture = ExtResource("2_aklnq")
+texture = ExtResource("3_131r7")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8pb0s")

@@ -18,14 +18,17 @@ public partial class BattleDisplay : CanvasLayer
 	[Export]
 	public PackedScene EnemyBattleAttack { get; set; }
 
+	private Vector2 playerPreviousPosition;
 	private bool canUseDisplay = true;
 	private bool playerIsAttacking = false;
 	private Vector2 lastMousePosition;
 	private float mouseChange;
 	private int level = 0;
-	private int enemyHealth = 100;
+	private int enemyHealth = 20;
 	private string equippedMagicSpell = "";
+	private bool playerIsDefending = false;
 	private Global global;
+	private TransitionRect transition;
 	private AnimationPlayer animationPlayer;
 	private Marker2D playerMarker;
 	private Marker2D enemyMarker;
@@ -41,6 +44,7 @@ public partial class BattleDisplay : CanvasLayer
 	public override void _Ready()
 	{
 		global = GetNode<Global>("/root/Global");
+		transition = GetNode<TransitionRect>("TransitionRect");
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		playerMarker = GetNode<Marker2D>("PlayerMarker");
 		enemyMarker = GetNode<Marker2D>("EnemyMarker");
@@ -94,11 +98,14 @@ public partial class BattleDisplay : CanvasLayer
 
 	public async Task ShowDisplay()
 	{
+		ShowAll();
+
 		battleInfo = new BattleInfo();
 		battleInfo.Setup(BattleName);
 
 		playerRect.SetHealthValue(global.PlayerData.Health);
 
+		playerPreviousPosition = global.CurrentRoom.Player.Position;
 		Vector2 playerFinalPosition = global.GetCameraBaseVector() + playerMarker.Position;
 
 		Show();
@@ -116,33 +123,6 @@ public partial class BattleDisplay : CanvasLayer
 		InstantiateEnemyArea();
 	}
 
-	public void OnFightButton()
-	{
-		canUseDisplay = false;
-		battleDialogue.ShowFightContainer();
-		InitiatePlayerAttack();		
-	}
-
-	public void OnItemsButton()
-	{
-		level = 1;
-		battleOptions.ShowItemDescription();
-		battleDialogue.ShowItems();
-	}
-
-	public void OnMagicButton()
-	{
-		level = 1;
-		battleOptions.ShowItemDescription();
-		battleDialogue.ShowMagic();
-	}
-
-	public void OnDefenseButton()
-	{
-		canUseDisplay = false;
-		animationPlayer.Play("hide_bottom");
-	}
-
 	public async void InitiatePlayerAttack()
 	{
 		lastMousePosition = GetViewport().GetMousePosition();
@@ -150,9 +130,9 @@ public partial class BattleDisplay : CanvasLayer
 
 		SceneTreeTimer timer = GetTree().CreateTimer(5);
 		global.CurrentRoom.Player.PlaySideAnimation("attack_intro");
-		Thread attackAnimationThread = new Thread(async () => {
+		Thread thread = new Thread(async () => {
 			await ToSignal(global.CurrentRoom.Player, Player.SignalName.AnimationFinished);
-			global.CurrentRoom.Player.PlaySideAnimation("attack_idle");
+			global.CurrentRoom.Player.CallDeferred(Player.MethodName.PlaySideAnimation, "attack_idle");
 		});
 
 		await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
@@ -200,7 +180,9 @@ public partial class BattleDisplay : CanvasLayer
 		Vector2 areaPos = baseVector + areaMarker.Position;
 
 		Damagable enemyArea = DamagablePackedScene.Instantiate<Damagable>();
+		enemyArea.Health = enemyHealth;
 		enemyArea.Position = damagablePos;
+		enemyArea.Died += OnEnemyDied;
 		enemyArea.Damaged += OnEnemyDamaged;
 		global.CurrentRoom.AddChild(enemyArea);
 
@@ -214,6 +196,36 @@ public partial class BattleDisplay : CanvasLayer
 		this.combatArea = combatArea;
 	}
 
+	public void OnFightButton()
+	{
+		canUseDisplay = false;
+		battleDialogue.ShowFightContainer();
+		InitiatePlayerAttack();		
+	}
+
+	public void OnItemsButton()
+	{
+		level = 1;
+		battleOptions.ShowItemDescription();
+		battleDialogue.ShowItems();
+	}
+
+	public void OnMagicButton()
+	{
+		level = 1;
+		battleOptions.ShowItemDescription();
+		battleDialogue.ShowMagic();
+	}
+
+	public void OnDefenseButton()
+	{
+		playerIsDefending = true;
+		canUseDisplay = false;
+		animationPlayer.Play("hide_bottom");
+		InitiateEnemyAttack();
+	}
+
+	
 	public void OnItemTriggered(string itemName)
 	{
 		global.PlayerData.Health -= global.ItemDescriptions[itemName].Effect;
@@ -229,13 +241,40 @@ public partial class BattleDisplay : CanvasLayer
 
 	public void OnEnemyDamaged(int value)
 	{
+		global.CurrentRoom.Player.PlayIdleAnimation(Direction.Right);
 		enemyHealth -= value;
 		enemyRect.TweenHealthValue(enemyHealth);
 		InitiateEnemyAttack();
 	}
 
+	public async void OnEnemyDied()
+	{
+		enemyHealth = 0;
+		enemyRect.TweenHealthValue(0);
+		battleDialogue.ShowDialogueLabel();
+		battleDialogue.SetText("You won!");
+		animationPlayer.Play("show_bottom");
+
+		SceneTreeTimer textCooldown = GetTree().CreateTimer(2);
+		await ToSignal(textCooldown, SceneTreeTimer.SignalName.Timeout);
+		transition.Show();
+		transition.PlayAnimation();
+
+		await ToSignal(transition, TransitionRect.SignalName.AnimationFinished);		
+		global.CurrentRoom.Player.Position = playerPreviousPosition;
+		global.CurrentRoom.Player.PlayIdleAnimation(Direction.Down);
+		global.CanWalk = true;
+		HideAll();
+
+		transition.PlayAnimationBackwards();
+		await ToSignal(transition, TransitionRect.SignalName.AnimationFinished);	
+		Hide();
+		transition.Hide();
+	}
+
 	public void OnEnemyAttackFinished()
 	{
+		playerIsDefending = false;
 		areaBorder.Hide();
 		animationPlayer.Play("show_bottom");
 		battleOptions.FocusFirst();
@@ -245,7 +284,27 @@ public partial class BattleDisplay : CanvasLayer
 
 	public void OnPlayerDamaged(int value)
 	{
+		if (playerIsDefending)
+		{
+			value = (int)Math.Ceiling(value * 0.7);
+		}
 		global.PlayerData.Health -= value;
 		playerRect.TweenHealthValue(global.PlayerData.Health);
+	}
+
+	private void ShowAll()
+	{
+		playerRect.Show();
+		enemyRect.Show();
+		battleDialogue.Show();
+		battleOptions.Show();
+	}
+
+	private void HideAll()
+	{
+		playerRect.Hide();
+		enemyRect.Hide();
+		battleDialogue.Hide();
+		battleOptions.Hide();
 	}
 }

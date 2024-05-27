@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://scripts/prefabs/TransitionRect.cs" id="1_h8wb0"]
 
-[sub_resource type="Animation" id="Animation_ciqtl"]
+[sub_resource type="Animation" id="Animation_ckmjw"]
 resource_name = "transition"
 length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
+tracks/0/path = NodePath("ColorRect:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -18,18 +18,21 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fowk7"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rws6h"]
 _data = {
-"transition": SubResource("Animation_ciqtl")
+"transition": SubResource("Animation_ckmjw")
 }
 
-[node name="TransitionRect" type="ColorRect"]
+[node name="TransitionRect" type="CanvasLayer"]
+script = ExtResource("1_h8wb0")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
 offset_right = 640.0
 offset_bottom = 480.0
 color = Color(0, 0, 0, 1)
-script = ExtResource("1_h8wb0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_fowk7")
+"": SubResource("AnimationLibrary_rws6h")
 }

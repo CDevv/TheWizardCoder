@@ -4,12 +4,15 @@ using Godot.Collections;
 
 public class SaveFileData
 {
-    public bool IsSaveEmpty { get; set; }
+    public bool IsSaveEmpty { get; set; } = false;
     public string SaveName { get; set; }
 	public DateTime LastSaved { get; set; }
 	public DateTime StartedOn { get; set; }
 	public TimeSpan TimeSpent { get; set; }
+    public string SceneFileName { get; set; }
+    public string SceneDefaultMarker { get; set; }
 	public string Location { get; set; }
+    public Vector2 LocationVector { get; set; }
 	public int Health { get; set; } = 100;
     private Array<string> inventory = new();
     private Array<string> magicSpells = new();
@@ -49,7 +52,10 @@ public class SaveFileData
             {"LastSaved", LastSaved.ToBinary()},
             {"StartedOn", StartedOn.ToBinary()},
             {"TimeSpent", TimeSpent.TotalSeconds},
+            {"SceneDefaultMarker", SceneDefaultMarker},
+            {"SceneFileName", SceneFileName},
             {"Location", Location},
+            {"LocationVector", LocationVector},
             {"Health", Health},
             {"Inventory", Inventory},
             {"HasPlayedIntro", HasPlayedIntro},
@@ -62,7 +68,10 @@ public class SaveFileData
         LastSaved = DateTime.FromBinary((long)(dictionary["LastSaved"]));
         StartedOn = DateTime.FromBinary((long)(dictionary["StartedOn"]));
         TimeSpent = TimeSpan.FromSeconds((double)(dictionary["TimeSpent"]));
+        SceneFileName = (string)dictionary["SceneFileName"];
+        SceneDefaultMarker = (string)dictionary["SceneDefaultMarker"];
         Location = (string)dictionary["Location"];
+        LocationVector = (Vector2)dictionary["LocationVector"];
         Health = (int)dictionary["Health"];
         Inventory = (Array<string>)dictionary["Inventory"];
 

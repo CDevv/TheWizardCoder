@@ -62,7 +62,14 @@ public partial class MainMenuSavedGames : CanvasLayer
 	public void OnSaveButton(int saveNumber)
 	{
 		global.LoadGame($"save{saveNumber}");
-		global.ChangeRoom("first_room", "AfterCutsceneMarker", Direction.Down);
+		if (!global.PlayerData.IsSaveEmpty)
+		{
+			global.ChangeRoom(global.PlayerData.SceneFileName, global.PlayerData.SceneDefaultMarker, Direction.Down);
+		}
+		else
+		{
+			global.ChangeRoom("first_room", "AfterCutsceneMarker", Direction.Down);
+		}
 	}
 
 	public void OnBackButton()

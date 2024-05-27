@@ -57,7 +57,11 @@ public partial class SaveFileOption : Button
 			ShowAsExistingFile();
 			SetSaveNameText(saveFile.SaveName);
 			SetLocationText(saveFile.Location);
-			SetTimeSpentText($"{duration.Hours}:{duration.Minutes}:{duration.Seconds}");
+
+			string hoursString = duration.Hours > 9 ? $"{duration.Hours}" : $"0{duration.Hours}";
+			string minutesString = duration.Minutes > 9 ? $"{duration.Minutes}" : $"0{duration.Minutes}";
+			string secondsString = duration.Seconds > 9 ? $"{duration.Seconds}" : $"0{duration.Seconds}";
+			SetTimeSpentText($"{hoursString}:{minutesString}:{secondsString}");
 		}
 	}
 

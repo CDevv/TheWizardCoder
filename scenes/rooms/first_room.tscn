@@ -188,7 +188,9 @@ _data = {
 y_sort_enabled = true
 script = ExtResource("2_ykuq1")
 DialogueResource = ExtResource("8_173ra")
+SceneFileName = "first_room"
 LocationName = "Home"
+DefaultMarkerName = "AfterCutsceneMarker"
 
 [node name="ColorRect" type="ColorRect" parent="." index="3"]
 offset_right = 640.0
@@ -256,6 +258,11 @@ position = Vector2(192, 220)
 shape = SubResource("RectangleShape2D_j5kme")
 debug_color = Color(0, 0.626061, 0.43366, 0.419608)
 
+[node name="AnimationPlayer" parent="." index="14"]
+libraries = {
+"": SubResource("AnimationLibrary_oru1b")
+}
+
 [node name="RoomEnterMarker" type="Marker2D" parent="." index="15"]
 position = Vector2(248, 344)
 
@@ -266,8 +273,3 @@ position = Vector2(240, 176)
 position = Vector2(248, 416)
 TargetRoomName = "second_room"
 TargetLocation = "FirstRoomMarker"
-
-[node name="AnimationPlayer" parent="." index="18"]
-libraries = {
-"": SubResource("AnimationLibrary_oru1b")
-}

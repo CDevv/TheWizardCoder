@@ -67,11 +67,12 @@ text = "Defend"
 
 [node name="ItemDescription" type="Label" parent="MarginContainer"]
 unique_name_in_owner = true
-visible = false
+custom_minimum_size = Vector2(120, 144)
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("3_6qd7x")
 theme_override_font_sizes/font_size = 24
+autowrap_mode = 2
 
 [connection signal="pressed" from="MarginContainer/OptionsContainer/FightButton" to="." method="OnFightButton"]
 [connection signal="pressed" from="MarginContainer/OptionsContainer/ItemsButton" to="." method="OnItemsButton"]
