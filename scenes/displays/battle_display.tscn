@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://t2oe67lsq1j2"]
+[gd_scene load_steps=14 format=3 uid="uid://t2oe67lsq1j2"]
 
 [ext_resource type="Script" path="res://scripts/displays/BattleDisplay.cs" id="1_py1kc"]
 [ext_resource type="PackedScene" uid="uid://cn6qmd0lxinhs" path="res://scenes/prefabs/bullet.tscn" id="3_lb607"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dxl7l67exls10" path="res://scenes/prefabs/damagable.tscn" id="4_gbiru"]
 [ext_resource type="PackedScene" uid="uid://d04usfxcnlwpx" path="res://scenes/prefabs/combat_area.tscn" id="5_y84gj"]
 [ext_resource type="PackedScene" uid="uid://wj2f3mwtxrko" path="res://scenes/subdisplays/battle/battle_dialogue.tscn" id="6_0h536"]
-[ext_resource type="PackedScene" uid="uid://cimhskosuaad7" path="res://scenes/enemy_attacks/tutorial_battle.tscn" id="6_ipdqy"]
 [ext_resource type="Texture2D" uid="uid://hxmst0tc6gbs" path="res://assets/ui/area_border.png" id="9_j2ovb"]
 [ext_resource type="PackedScene" uid="uid://bgn8hk6463o4s" path="res://scenes/subdisplays/battle/battle_options.tscn" id="9_py3yx"]
 [ext_resource type="PackedScene" uid="uid://dqgxo8eebarbi" path="res://scenes/prefabs/transition_rect.tscn" id="10_5036v"]
@@ -127,11 +126,9 @@ _data = {
 
 [node name="BattleDisplay" type="CanvasLayer"]
 script = ExtResource("1_py1kc")
-BattleName = "tutorial_battle"
 BulletPackedScene = ExtResource("3_lb607")
 DamagablePackedScene = ExtResource("4_gbiru")
 CombatAreaPackedScene = ExtResource("5_y84gj")
-EnemyBattleAttack = ExtResource("6_ipdqy")
 
 [node name="PlayerRect" parent="." instance=ExtResource("3_xy74d")]
 offset_left = 16.0
@@ -151,9 +148,8 @@ offset_top = 304.0
 offset_right = 556.0
 offset_bottom = 384.0
 
-[node name="BattleDialogue" parent="." node_paths=PackedStringArray("BattleOptions") instance=ExtResource("6_0h536")]
+[node name="BattleDialogue" parent="." instance=ExtResource("6_0h536")]
 unique_name_in_owner = true
-BattleOptions = NodePath("../BattleOptions")
 
 [node name="AreaBorder" type="NinePatchRect" parent="."]
 visible = false
@@ -190,4 +186,3 @@ visible = false
 [connection signal="ItemsButtonTriggered" from="BattleOptions" to="." method="OnItemsButton"]
 [connection signal="MagicButtonTriggered" from="BattleOptions" to="." method="OnMagicButton"]
 [connection signal="ItemTriggered" from="BattleDialogue" to="." method="OnItemTriggered"]
-[connection signal="MagicSpellTriggered" from="BattleDialogue" to="." method="OnMagicSpellTriggered"]

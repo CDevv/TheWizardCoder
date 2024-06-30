@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://bm86didgwuq7l"]
+
+[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_0may6"]
+[ext_resource type="TileSet" uid="uid://bxvx8pmnaw0ed" path="res://tilesets/nolan_house.tres" id="2_iuagk"]
+[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="3_1bi87"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="4_v7qub"]
+[ext_resource type="PackedScene" uid="uid://wj04chm4vh08" path="res://scenes/prefabs/stairs_area.tscn" id="5_nfrtk"]
+[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/prefabs/dialogue_point.tscn" id="6_efpan"]
+[ext_resource type="Resource" uid="uid://dxv3wga5qop3d" path="res://dialogue/nolan_house.dialogue" id="7_gi7ig"]
+
+[node name="BaseRoom" instance=ExtResource("1_0may6")]
+
+[node name="TransitionRect" parent="." index="6"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="." index="7"]
+offset_right = 640.0
+offset_bottom = 480.0
+color = Color(0, 0, 0, 1)
+
+[node name="TileMap" type="TileMap" parent="." index="8"]
+scale = Vector2(2, 2)
+tile_set = ExtResource("2_iuagk")
+format = 2
+layer_0/name = "top"
+layer_0/z_index = 1
+layer_0/tile_data = PackedInt32Array(327689, 196608, 5, 262150, 655360, 4)
+layer_1/name = "bottom"
+layer_1/tile_data = PackedInt32Array(131077, 0, 9, 131086, 65536, 9, 131078, 65536, 8, 131079, 65536, 8, 131080, 65536, 8, 131081, 65536, 8, 131082, 65536, 8, 131083, 65536, 8, 131084, 65536, 8, 131085, 65536, 8, 196622, 65536, 8, 262158, 65536, 8, 262157, 65536, 8, 262156, 65536, 8, 262155, 65536, 8, 262154, 65536, 8, 262153, 65536, 8, 262152, 65536, 8, 262151, 65536, 8, 262150, 65536, 8, 262149, 65536, 8, 196613, 65536, 8, 196614, 65536, 8, 196615, 65536, 8, 196616, 65536, 8, 196617, 65536, 8, 196618, 65536, 8, 196619, 65536, 8, 196620, 65536, 8, 196621, 65536, 8, 327685, 0, 8, 327686, 0, 8, 327687, 0, 8, 327688, 0, 8, 327689, 0, 8, 327690, 0, 8, 327691, 0, 8, 327692, 0, 8, 327693, 0, 8, 327694, 0, 8, 393221, 0, 4, 393222, 0, 4, 393223, 0, 4, 393224, 0, 4, 393225, 0, 4, 458762, 0, 4, 458763, 0, 4, 458764, 0, 4, 524297, 0, 4, 524296, 0, 4, 524295, 0, 4, 458761, 65536, 4, 458760, 65536, 4, 458759, 65536, 4, 458758, 65536, 4, 458757, 65536, 4, 393226, 65536, 4, 393227, 65536, 4, 393228, 65536, 4, 393229, 65536, 4, 393230, 65536, 4, 524302, 65536, 4, 524301, 65536, 4, 458766, 131072, 4, 458765, 131072, 4, 524300, 131072, 4, 524299, 131072, 4, 524298, 131072, 4, 524294, 131072, 4, 524293, 131072, 4, 589829, 131072, 4, 655365, 131072, 4, 720901, 65536, 6, 655366, 131072, 4, 589831, 131072, 4, 655367, 131072, 4, 720903, 131072, 4, 589833, 131072, 4, 655369, 131072, 4, 720905, 131072, 4, 589832, 65536, 4, 655368, 65536, 4, 720904, 65536, 4, 589830, 65536, 4, 720902, 65536, 4, 720907, 0, 4, 655372, 0, 4, 589837, 0, 4, 589835, 0, 4, 720909, 0, 4, 720908, 131072, 4, 655371, 131072, 4, 589836, 131072, 4, 655373, 131072, 4, 589834, 65536, 4, 655370, 65536, 4, 720906, 65536, 4, 589838, 65536, 4, 655374, 65536, 4, 720910, 131072, 6, 786441, 0, 7, 786442, 65536, 7, 589828, 1376256, 6, 589827, 1310720, 5, 589826, 1245184, 4, 458753, 851968, 5, 393217, 983040, 7, 327681, 983040, 6, 262145, 983040, 5)
+
+[node name="Player" parent="." index="9" instance=ExtResource("3_1bi87")]
+z_index = 1
+
+[node name="RoomCollision" type="StaticBody2D" parent="." index="10"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomCollision" index="0"]
+polygon = PackedVector2Array(480, 64, 496, 48, 496, 400, 368, 400, 368, 416, 272, 416, 272, 400, 144, 400, 144, 336, 0, 336, 0, 112, 144, 112, 144, 48, 496, 48, 480, 64, 160, 64, 160, 268, 64, 188, 64, 120, 16, 120, 16, 248, 40, 248, 64, 248, 160, 320, 160, 384, 288, 384, 288, 400, 352, 400, 352, 384, 480, 384)
+
+[node name="DoorMarker" type="Marker2D" parent="." index="11"]
+position = Vector2(312, 216)
+
+[node name="StairsMarker" type="Marker2D" parent="." index="12"]
+position = Vector2(40, 168)
+
+[node name="DoorWarper" parent="." index="13" instance=ExtResource("4_v7qub")]
+z_index = 2
+position = Vector2(312, 176)
+TargetRoomName = "first_room"
+TargetLocation = "RoomEnterMarker"
+PlayerDirection = 0
+
+[node name="StairsWarper" parent="." index="14" instance=ExtResource("4_v7qub")]
+z_index = 2
+position = Vector2(40, 112)
+TargetRoomName = "second_floor"
+TargetLocation = "StairsMarker"
+
+[node name="StairsArea" parent="." index="15" instance=ExtResource("5_nfrtk")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StairsArea" index="0"]
+polygon = PackedVector2Array(78, 201, 77, 224, 77, 256, 153, 315, 153, 296, 153, 265)
+
+[node name="PictureDialogue" parent="." index="16" instance=ExtResource("6_efpan")]
+position = Vector2(216, 182)
+DialogueResource = ExtResource("7_gi7ig")
+DialogueTitle = "haden_pic"

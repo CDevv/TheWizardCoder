@@ -1,0 +1,36 @@
+using Global
+
+~ intro_cutscene
+Nolan: [#portrait=0] Ah, a new day!
+
+=> END!
+
+~ lamp
+Nolan: [#portrait=0] Cool lamp.
+do AddMagicSpell("SimpleBullet")
+=> END!
+
+~ bed
+Nolan: [#portrait=0] Ah, this is where I woke up!
+do AddToInventory("item")
+=> END!
+
+~ haden_pic
+Nolan: [#portrait=0] Oh, this is a picture of my cousin, Haden. I wonder how's he doing?
+
+=> END!
+
+~ bookshelf
+Nolan: [#portrait=0] My bookshelf, full of books about magic. I've been studying magic for a while now.
+
+=> END!
+
+~ pot
+Nolan: [#portrait=0] I cook my magic spells here! Haven't used it in a while, though.
+
+=> END!
+
+~ potion
+Nolan: [#portrait=0] Leftover potion. Was a little experiment I did.
+
+=> END!

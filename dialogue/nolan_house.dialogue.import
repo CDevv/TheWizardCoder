@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://dxv3wga5qop3d"
+path="res://.godot/imported/nolan_house.dialogue-091295c5753a9c9c56eeb0cc3dc3667b.tres"
+
+[deps]
+
+source_file="res://dialogue/nolan_house.dialogue"
+dest_files=["res://.godot/imported/nolan_house.dialogue-091295c5753a9c9c56eeb0cc3dc3667b.tres"]
+
+[params]
+
+defaults=true

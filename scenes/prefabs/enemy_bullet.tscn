@@ -8,8 +8,6 @@ size = Vector2(32, 32)
 
 [node name="EnemyBullet" type="Area2D"]
 script = ExtResource("1_xtryy")
-Type = 1
-Damagable = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)

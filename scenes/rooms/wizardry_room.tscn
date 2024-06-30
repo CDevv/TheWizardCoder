@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6k4v7q7u8moj"]
+
+[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_o0twy"]
+[ext_resource type="TileSet" uid="uid://bxvx8pmnaw0ed" path="res://tilesets/nolan_house.tres" id="2_dnwfs"]
+[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="3_p7vdy"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="4_kyj06"]
+[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/prefabs/dialogue_point.tscn" id="5_5sl18"]
+[ext_resource type="Resource" uid="uid://dxv3wga5qop3d" path="res://dialogue/nolan_house.dialogue" id="6_wkcyk"]
+
+[node name="BaseRoom" instance=ExtResource("1_o0twy")]
+y_sort_enabled = true
+SceneFileName = "wizardry_room"
+LocationName = "Home"
+DefaultMarkerName = "DefaultMarker"
+
+[node name="TransitionRect" parent="." index="6"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="." index="7"]
+offset_right = 640.0
+offset_bottom = 480.0
+color = Color(0, 0, 0, 1)
+
+[node name="TileMap" type="TileMap" parent="." index="8"]
+y_sort_enabled = true
+scale = Vector2(2, 2)
+tile_set = ExtResource("2_dnwfs")
+format = 2
+layer_0/name = "topper"
+layer_0/y_sort_enabled = true
+layer_0/z_index = 2
+layer_0/tile_data = PackedInt32Array(393222, 393216, 6, 393229, 458752, 6, 393224, 524288, 6, 589833, 655360, 1)
+layer_1/name = "top"
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array(393221, 393216, 3, 393230, 524288, 3, 393229, 458752, 3, 393228, 458752, 3, 393227, 458752, 3, 393226, 458752, 3, 393225, 458752, 3, 393224, 458752, 3, 393223, 458752, 3, 393222, 458752, 3)
+layer_2/name = "bottom"
+layer_2/tile_data = PackedInt32Array(131077, 0, 9, 131086, 65536, 9, 196613, 65536, 8, 262149, 65536, 8, 262150, 65536, 8, 262151, 65536, 8, 262152, 65536, 8, 262153, 65536, 8, 262154, 65536, 8, 262155, 65536, 8, 262156, 65536, 8, 262157, 65536, 8, 262158, 65536, 8, 196622, 65536, 8, 196621, 65536, 8, 196620, 65536, 8, 196619, 65536, 8, 196618, 65536, 8, 196617, 65536, 8, 196616, 65536, 8, 196615, 65536, 8, 196614, 65536, 8, 131078, 65536, 8, 131079, 65536, 8, 131080, 65536, 8, 131081, 65536, 8, 131082, 65536, 8, 131083, 65536, 8, 131084, 65536, 8, 131085, 65536, 8, 327685, 0, 8, 327686, 0, 8, 327687, 0, 8, 327688, 0, 8, 327689, 0, 8, 327690, 0, 8, 327691, 0, 8, 327692, 0, 8, 327693, 0, 8, 327694, 0, 8, 720901, 65536, 6, 720910, 131072, 6, 720902, 65536, 4, 720903, 65536, 4, 720904, 65536, 4, 720905, 65536, 4, 720909, 65536, 4, 720908, 65536, 4, 720907, 65536, 4, 720906, 65536, 4, 458760, 131072, 4, 524297, 131072, 4, 524298, 131072, 4, 589834, 131072, 4, 589833, 131072, 4, 655368, 131072, 4, 458764, 65536, 4, 458763, 131072, 4, 655371, 131072, 4, 655370, 65536, 4, 655369, 65536, 4, 524299, 65536, 4, 589835, 65536, 4, 458762, 65536, 4, 458761, 65536, 4, 524296, 65536, 4, 589832, 65536, 4, 524300, 65536, 4, 589836, 65536, 4, 655372, 65536, 4, 458759, 65536, 4, 524295, 65536, 4, 589831, 0, 4, 655366, 0, 4, 524301, 0, 4, 458766, 0, 4, 589838, 65536, 4, 589837, 65536, 4, 655367, 65536, 4, 589830, 65536, 4, 524294, 65536, 4, 458758, 65536, 4, 589829, 65536, 4, 655365, 0, 4, 524293, 0, 4, 458757, 0, 4, 524302, 0, 4, 458765, 0, 4, 655373, 131072, 4, 655374, 131072, 4, 393226, 131072, 4, 393225, 131072, 4, 393224, 131072, 4, 393221, 0, 4, 393222, 0, 4, 393223, 0, 4, 393228, 131072, 4, 393229, 131072, 4, 393230, 131072, 4, 393227, 65536, 4, 786441, 0, 7, 786442, 131072, 7)
+
+[node name="Player" parent="." index="9" instance=ExtResource("3_p7vdy")]
+z_index = 2
+
+[node name="RoomCollision" type="StaticBody2D" parent="." index="10"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomCollision" index="0"]
+polygon = PackedVector2Array(480, 64, 496, 48, 496, 400, 352, 400, 352, 432, 272, 432, 272, 400, 144, 400, 144, 48, 496, 48, 480, 64, 160, 64, 160, 384, 288, 384, 288, 416, 336, 416, 336, 384, 480, 384)
+
+[node name="DefaultMarker" type="Marker2D" parent="." index="11"]
+position = Vector2(312, 352)
+
+[node name="Warper" parent="." index="12" instance=ExtResource("4_kyj06")]
+position = Vector2(312, 416)
+TargetRoomName = "second_floor"
+TargetLocation = "DoorMarker"
+
+[node name="PotDialogue" parent="." index="13" instance=ExtResource("5_5sl18")]
+z_index = 3
+position = Vector2(320, 312)
+DialogueResource = ExtResource("6_wkcyk")
+DialogueTitle = "pot"
+
+[node name="PotionDialogue" parent="." index="14" instance=ExtResource("5_5sl18")]
+z_index = 3
+position = Vector2(212, 214)
+DialogueResource = ExtResource("6_wkcyk")
+DialogueTitle = "potion"

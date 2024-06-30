@@ -53,6 +53,18 @@ public partial class Player : CharacterBody2D
 			global.CurrentRoom.Camera.Set(Camera2D.PropertyName.Position, Position + velocity);
 		}
 
+		if (global.PlayerIsOnStairs && velocity.X != 0)
+		{
+			if (velocity.X > 0)
+			{
+				velocity.Y += (float)(100 * delta);
+			}
+			else
+			{
+				velocity.Y -= (float)(100 * delta);
+			}
+		}
+
 		var collision = MoveAndCollide(velocity);
 		if (collision != null)
 		{
@@ -70,6 +82,8 @@ public partial class Player : CharacterBody2D
 				await global.CurrentRoom.BattleDisplay.ShowDisplay();
 			}
 		}
+
+		
 	}
 
     public override void _UnhandledInput(InputEvent @event)

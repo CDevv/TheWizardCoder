@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ej73cgate0jw" path="res://assets/characters/movement/wizardextra.png" id="2_md4m4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vnlqn"]
-size = Vector2(30, 20)
+size = Vector2(22, 20)
 
 [sub_resource type="Animation" id="Animation_qygld"]
 length = 0.001
