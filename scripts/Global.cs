@@ -132,6 +132,7 @@ public partial class Global : Node
         }
 
 		var data = ReadSaveFileData(saveName);
+		data.LastSaved = DateTime.Now;
 		PlayerData = data;
 	}
 

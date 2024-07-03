@@ -89,7 +89,6 @@ text = "Options
 "
 
 [node name="SavedGames" type="Control" parent="."]
-unique_name_in_owner = true
 visible = false
 layout_mode = 3
 anchors_preset = 0

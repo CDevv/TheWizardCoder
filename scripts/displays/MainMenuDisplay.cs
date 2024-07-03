@@ -21,7 +21,6 @@ public partial class MainMenuDisplay : CanvasLayer
 		global = GetNode<Global>("/root/Global");
 
 		main = GetNode<Control>("%Main");
-		savedGames = GetNode<Control>("%SavedGames");
 		options = GetNode<Control>("Options");
 		playButton = GetNode<Button>("%PlayButton");
 		savedGamesMenu = GetNode<MainMenuSavedGames>("%SavedGamesMenu");
@@ -49,7 +48,7 @@ public partial class MainMenuDisplay : CanvasLayer
 	public void ShowMainMenu()
 	{
 		main.Show();
-		savedGames.Hide();
+		savedGamesMenu.Hide();
 		options.Hide();
 		optionsMenu.Hide();
 		controlsMenu.Hide();

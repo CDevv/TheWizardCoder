@@ -34,7 +34,7 @@ z_index = 1
 [node name="RoomCollision" type="StaticBody2D" parent="." index="10"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomCollision" index="0"]
-polygon = PackedVector2Array(480, 64, 496, 48, 496, 400, 368, 400, 368, 416, 272, 416, 272, 400, 144, 400, 144, 336, 0, 336, 0, 112, 144, 112, 144, 48, 496, 48, 480, 64, 160, 64, 160, 268, 64, 188, 64, 120, 16, 120, 16, 248, 40, 248, 64, 248, 160, 320, 160, 384, 288, 384, 288, 400, 352, 400, 352, 384, 480, 384)
+polygon = PackedVector2Array(480, 64, 496, 48, 496, 400, 368, 400, 368, 432, 272, 432, 272, 400, 144, 400, 144, 336, 0, 336, 0, 112, 144, 112, 144, 48, 496, 48, 480, 64, 160, 64, 160, 268, 64, 188, 64, 120, 16, 120, 16, 248, 40, 248, 64, 248, 160, 320, 160, 384, 288, 384, 288, 416, 352, 416, 352, 384, 480, 384)
 
 [node name="DoorMarker" type="Marker2D" parent="." index="11"]
 position = Vector2(312, 216)
@@ -42,25 +42,35 @@ position = Vector2(312, 216)
 [node name="StairsMarker" type="Marker2D" parent="." index="12"]
 position = Vector2(40, 168)
 
-[node name="DoorWarper" parent="." index="13" instance=ExtResource("4_v7qub")]
+[node name="EntranceMarker" type="Marker2D" parent="." index="13"]
+position = Vector2(320, 344)
+
+[node name="DoorWarper" parent="." index="14" instance=ExtResource("4_v7qub")]
 z_index = 2
 position = Vector2(312, 176)
 TargetRoomName = "first_room"
 TargetLocation = "RoomEnterMarker"
 PlayerDirection = 0
 
-[node name="StairsWarper" parent="." index="14" instance=ExtResource("4_v7qub")]
+[node name="StairsWarper" parent="." index="15" instance=ExtResource("4_v7qub")]
 z_index = 2
 position = Vector2(40, 112)
 TargetRoomName = "second_floor"
 TargetLocation = "StairsMarker"
+PlayerDirection = 0
 
-[node name="StairsArea" parent="." index="15" instance=ExtResource("5_nfrtk")]
+[node name="StairsArea" parent="." index="16" instance=ExtResource("5_nfrtk")]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StairsArea" index="0"]
 polygon = PackedVector2Array(78, 201, 77, 224, 77, 256, 153, 315, 153, 296, 153, 265)
 
-[node name="PictureDialogue" parent="." index="16" instance=ExtResource("6_efpan")]
+[node name="PictureDialogue" parent="." index="17" instance=ExtResource("6_efpan")]
 position = Vector2(216, 182)
 DialogueResource = ExtResource("7_gi7ig")
 DialogueTitle = "haden_pic"
+
+[node name="FrontDoorWarper" parent="." index="18" instance=ExtResource("4_v7qub")]
+position = Vector2(320, 416)
+scale = Vector2(2, 1)
+TargetRoomName = "outside_home"
+TargetLocation = "DoorMarker"

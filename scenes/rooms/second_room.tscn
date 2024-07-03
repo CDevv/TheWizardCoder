@@ -43,3 +43,6 @@ limit_bottom = 960
 
 [node name="BattlePoint" parent="." index="12" instance=ExtResource("5_5d3xc")]
 position = Vector2(736, 624)
+
+[node name="TransitionRect" parent="." index="13"]
+visible = false
