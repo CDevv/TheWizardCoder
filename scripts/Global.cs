@@ -10,7 +10,9 @@ public partial class Global : Node
 	public Direction PlayerDirection { get; set; }
 	public bool CanWalk = true;
 	public bool GameDisplayEnabled { get; set; } = true;
-	public bool PlayerIsOnStairs { get; set; }
+	public bool PlayerIsOnStairs { get; set; } = false;
+	public bool StairsInverted { get; set; } = false;
+	public bool StairsGoUp { get; set; } = true;
 	public SaveFileData PlayerData { get; set; } = new();
 	public SettingsConfig Settings { get; set; } = new();
 	public System.Collections.Generic.Dictionary<string, Item> ItemDescriptions { get; set; } = new();

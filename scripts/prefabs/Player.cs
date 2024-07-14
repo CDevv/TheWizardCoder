@@ -55,13 +55,17 @@ public partial class Player : CharacterBody2D
 
 		if (global.PlayerIsOnStairs && velocity.X != 0)
 		{
+			float addedY = (float)(100 * delta);
 			if (velocity.X > 0)
 			{
-				velocity.Y += (float)(100 * delta);
+				if (global.StairsGoUp)
+				{
+					velocity.Y += global.StairsInverted ? -addedY : addedY;
+				}
 			}
 			else
 			{
-				velocity.Y -= (float)(100 * delta);
+				velocity.Y -= global.StairsInverted ? -addedY : addedY;
 			}
 		}
 
@@ -81,9 +85,7 @@ public partial class Player : CharacterBody2D
 				GD.Print("Battle point");
 				await global.CurrentRoom.BattleDisplay.ShowDisplay();
 			}
-		}
-
-		
+		}	
 	}
 
     public override void _UnhandledInput(InputEvent @event)

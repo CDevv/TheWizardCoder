@@ -3,6 +3,13 @@ using System;
 
 public partial class StairsArea : Area2D
 {
+	[Export]
+	public bool Invert { get; set; } = false;
+	[Export]
+	public float Factor { get; set; } = 100f;
+	[Export]
+	public bool Up { get; set; } = true;
+
 	private Global global;
 
 	public override void _Ready()
@@ -16,6 +23,8 @@ public partial class StairsArea : Area2D
 		if (body.Name == "Player")
 		{
 			global.PlayerIsOnStairs = true;
+			global.StairsInverted = Invert;
+			global.StairsGoUp = Up;
 		}
 	}
 
