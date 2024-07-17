@@ -1057,7 +1057,7 @@ parameters/conditions/move = false
 parameters/ExtraStates/state/current_state = "sleeper"
 parameters/ExtraStates/state/transition_request = "sleep"
 parameters/ExtraStates/state/current_index = 0
-parameters/Idle/blend_position = Vector2(-0.00319999, 0.902116)
+parameters/Idle/blend_position = Vector2(-0.00231481, 1.09488)
 parameters/Move/blend_position = Vector2(-0.00480002, 0.960317)
 
 [node name="InteractableFinder" type="Area2D" parent="."]

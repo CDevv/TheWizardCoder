@@ -7,6 +7,12 @@ Nolan: [#portrait=0] Ah, a new day!
 
 ~ lamp
 Nolan: [#portrait=0] Cool lamp.
+Nolan: Choose a Response...
+- Option 1
+	Nolan: You chose option 1
+- Option 2
+	Nolan: You chose option 2
+
 do AddMagicSpell("SimpleBullet")
 => END!
 

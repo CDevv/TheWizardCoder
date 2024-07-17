@@ -7,6 +7,7 @@ public partial class Player : CharacterBody2D
 {
 	[Signal]
 	public delegate void AnimationFinishedEventHandler();
+	public Direction Direction { get; private set; }
 	public const int Speed = 2;
 	private Global global;
 	private AnimationPlayer animationPlayer;
@@ -46,6 +47,7 @@ public partial class Player : CharacterBody2D
 		if (direction != Vector2.Zero)
 		{
 			ChangeDirection(direction);
+			Direction = global.GetDirectionFromVector(direction);
 		}
 
 		if (global.CurrentRoom.Camera != null)

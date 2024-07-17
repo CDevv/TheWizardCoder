@@ -9,8 +9,16 @@ public partial class DialoguePoint : Interactable
 	[Export]
 	public string DialogueTitle { get; set; }
 
+    private Global global;
+
+    public override void _Ready()
+    {
+        global = GetNode<Global>("/root/Global");
+    }
+
     public override void Action()
     {
-        DialogueManager.ShowDialogueBalloon(DialogueResource, DialogueTitle);
+        //DialogueManager.ShowDialogueBalloon(DialogueResource, DialogueTitle);
+        global.CurrentRoom.Dialogue.ShowDisplay(DialogueResource, DialogueTitle);
     }
 }

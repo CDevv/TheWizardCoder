@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0exi6balg5um"]
+
+[ext_resource type="Script" path="res://scripts/interactables/CharacterDialoguePoint.cs" id="1_qu56j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fly64"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yl0hy"]
+size = Vector2(22, 14)
+
+[node name="CharacterDialoguePoint" type="Area2D"]
+y_sort_enabled = true
+script = ExtResource("1_qu56j")
+
+[node name="Detection" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fly64")
+debug_color = Color(0.252721, 0.952149, 0.851056, 0.42)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_yl0hy")

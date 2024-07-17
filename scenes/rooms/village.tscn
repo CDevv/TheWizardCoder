@@ -1,10 +1,49 @@
-[gd_scene load_steps=6 format=3 uid="uid://bnrpcmnrkhx3q"]
+[gd_scene load_steps=14 format=3 uid="uid://bnrpcmnrkhx3q"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_6off3"]
 [ext_resource type="TileSet" uid="uid://bnilncsva6t64" path="res://tilesets/env.tres" id="2_483cr"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="3_3an4a"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="4_l1utu"]
 [ext_resource type="PackedScene" uid="uid://wj04chm4vh08" path="res://scenes/prefabs/stairs_area.tscn" id="5_pf8dv"]
+[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/prefabs/character_dialogue_point.tscn" id="6_1ds2a"]
+[ext_resource type="Resource" uid="uid://dxv3wga5qop3d" path="res://dialogue/nolan_house.dialogue" id="7_55033"]
+[ext_resource type="Texture2D" uid="uid://dhrgn37kqbfws" path="res://assets/characters/movement/wizard.png" id="8_55omc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5u7f"]
+atlas = ExtResource("8_55omc")
+region = Rect2(0, 37, 27, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rp8m"]
+atlas = ExtResource("8_55omc")
+region = Rect2(0, 0, 27, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7pxi"]
+atlas = ExtResource("8_55omc")
+region = Rect2(0, 74, 27, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6v5p3"]
+atlas = ExtResource("8_55omc")
+region = Rect2(0, 111, 27, 37)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c2v1d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5u7f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5rp8m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7pxi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6v5p3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="BaseRoom" instance=ExtResource("1_6off3")]
 y_sort_enabled = true
@@ -51,3 +90,15 @@ Invert = true
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StairsArea" index="0"]
 z_index = 3
 polygon = PackedVector2Array(1128, 1236, 1200, 1236, 1200, 1170, 1190, 1170, 1190, 1166, 1128, 1166)
+
+[node name="CharacterDialoguePoint" parent="." index="12" instance=ExtResource("6_1ds2a")]
+z_index = 1
+position = Vector2(1072, 752)
+DialogueResource = ExtResource("7_55033")
+DialogueTitle = "intro_cutscene"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="CharacterDialoguePoint" index="2"]
+position = Vector2(0, -21)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_c2v1d")
+frame = 1

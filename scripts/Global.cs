@@ -17,6 +17,7 @@ public partial class Global : Node
 	public SettingsConfig Settings { get; set; } = new();
 	public System.Collections.Generic.Dictionary<string, Item> ItemDescriptions { get; set; } = new();
 	public System.Collections.Generic.Dictionary<string, MagicSpell> MagicSpells { get; set; } = new();
+	public int[] ReverseDirections { get; } = { 1, 0, 3, 2 };
 
     public override void _Ready()
     {
@@ -216,6 +217,34 @@ public partial class Global : Node
 		}
 
 		return resultVector;
+	}
+
+	public Direction GetDirectionFromVector(Vector2 vector)
+	{
+		float radianAngle = vector.Angle();
+		float angle = Mathf.RadToDeg(radianAngle);
+		Direction direction = Direction.Down;
+		
+		switch (angle)
+		{
+			case 0:
+				direction = Direction.Right;
+				break;
+			case 90:
+				direction = Direction.Down;
+				break;
+			case 180:
+				direction = Direction.Left;
+				break;
+			case -90:
+				direction = Direction.Up;
+				break;
+			default:
+				direction = Direction.Down;
+				break;
+		}
+	
+		return direction;
 	}
 
 	public Vector2 GetCameraBaseVector()

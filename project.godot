@@ -89,7 +89,7 @@ magic={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://dialogue/test.dialogue", "res://dialogue/first_room.dialogue", "res://dialogue/battle_intro.dialogue", "res://dialogue/battles/tutorial_battle.dialogue", "res://dialogue/nolan_house.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialogue/test.dialogue", "res://dialogue/first_room.dialogue", "res://dialogue/battle_intro.dialogue", "res://dialogue/battles/tutorial_battle.dialogue", "res://dialogue/nolan_house.dialogue", "res://dialogue/village.dialogue")
 
 [layer_names]
 
