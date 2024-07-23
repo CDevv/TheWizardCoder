@@ -1,3 +1,13 @@
 using Global
 
-~ title
+~ intro_village
+Nathan: HEY!
+Nathan: Oh wait it's you, Nolan! Thought you were an intruder for a bit.
+Nathan: Anyway.. We were having some issues in the village and yeah..
+Nathan: You're a wizard, though. Right?
+Nathan: Maybe you can fix it!
+=> END!
+
+~ intro_shimble
+MrShimble: Ah, hello Nolan! I was expecting you!
+Nolan: Yes, I got your message.

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://drwg87uepn1u2"
-path="res://.godot/imported/DisposableDroidBB_ital.ttf-e2bff42bf2aa36d483d49a06dc4ad3ac.fontdata"
+uid="uid://c04w2wmex8kg"
+path="res://.godot/imported/Silver.ttf-e86112895925d94211f102ce0cc558b8.fontdata"
 
 [deps]
 
-source_file="res://fonts/DisposableDroidBB_ital.ttf"
-dest_files=["res://.godot/imported/DisposableDroidBB_ital.ttf-e2bff42bf2aa36d483d49a06dc4ad3ac.fontdata"]
+source_file="res://fonts/Silver.ttf"
+dest_files=["res://.godot/imported/Silver.ttf-e86112895925d94211f102ce0cc558b8.fontdata"]
 
 [params]
 
@@ -27,7 +27,12 @@ Fallbacks=null
 fallbacks=[]
 Compress=null
 compress=true
-preload=[]
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "Нова конфигурация",
+"size": Vector2i(16, 0)
+}]
 language_support={}
 script_support={}
 opentype_features={}

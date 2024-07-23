@@ -26,6 +26,17 @@ public partial class CharacterDialoguePoint : Interactable
 		global.CurrentRoom.Dialogue.DialogueEnded += OnDialogueEnded;
 	}
 
+	private void PlayAnimation(string name)
+	{
+		sprite.Play(name);
+	}
+
+	private void PlayIdleAnimation(Direction direction)
+	{
+		sprite.Animation = "default";
+		sprite.Frame = (int)direction;
+	}
+
 	private void OnDialogueEnded()
 	{
 		sprite.Frame = (int)Direction.Down;

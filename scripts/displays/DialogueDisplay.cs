@@ -13,7 +13,6 @@ public partial class DialogueDisplay : CanvasLayer
 
 	private Global global;
 	private RichTextLabel label;
-	private MarginContainer labelContainer;
 	private AnimatedSprite2D portrait;
 	private NinePatchRect responsesRect;
 	private VBoxContainer responsesMenu;
@@ -30,7 +29,6 @@ public partial class DialogueDisplay : CanvasLayer
 	{
 		global = GetNode<Global>("/root/Global");
 		label = GetNode<RichTextLabel>("%DialogueText");
-		labelContainer = GetNode<MarginContainer>("%TextContainer");
 		portrait = GetNode<AnimatedSprite2D>("%Portrait");
 		responsesRect = GetNode<NinePatchRect>("%ResponsesRect");
 		responsesMenu = GetNode<VBoxContainer>("%Responses");
@@ -46,6 +44,11 @@ public partial class DialogueDisplay : CanvasLayer
 			if (label.VisibleRatio == 1)
 			{
 				isTyping = false;
+				if (dialogueLine.Responses.Count > 0)
+				{
+					responsesRect.Show();
+					UpdateResponses(dialogueLine.Responses);
+				}
 				return;
 			}
 
@@ -72,7 +75,7 @@ public partial class DialogueDisplay : CanvasLayer
 				label.VisibleCharacters = 0;
 				index = 0;
 				string nextId = dialogueLine.NextId;
-				GD.Print(nextId);
+
 				if (nextId == "END!" || nextId == "END")
 				{
 					OnDialogueEnded();
@@ -83,6 +86,12 @@ public partial class DialogueDisplay : CanvasLayer
 					UpdateDisplay(dialogueLine);
 				}
 			}
+		}
+
+		if (Input.IsActionJustPressed("ui_cancel"))
+		{
+			label.VisibleCharacters = -1;
+			index = dialogueLine.Text.Length - 1;
 		}
 	}
 
@@ -103,6 +112,7 @@ public partial class DialogueDisplay : CanvasLayer
 			return;
 		}
 
+		responsesRect.Hide();
 		label.VisibleCharacters = 0;
 		label.Text = line.Text;
 		index = -1;
@@ -111,8 +121,8 @@ public partial class DialogueDisplay : CanvasLayer
 		string portraitTag = line.GetTagValue("portrait");
 		if (!string.IsNullOrEmpty(portraitTag))
 		{
-			labelContainer.Set(MarginContainer.PropertyName.Position, new Vector2(64, 0));
-			labelContainer.Set(MarginContainer.PropertyName.Size, new Vector2(576, 144));
+			label.Set(MarginContainer.PropertyName.Position, new Vector2(72, 8));
+			label.Set(MarginContainer.PropertyName.Size, new Vector2(416, 112));
 
 			portrait.Show();
 			portrait.Set(AnimatedSprite2D.PropertyName.Animation, line.Character.ToLower());
@@ -120,8 +130,8 @@ public partial class DialogueDisplay : CanvasLayer
 		}
 		else
 		{
-			labelContainer.Set(MarginContainer.PropertyName.Position, new Vector2(0, 0));
-			labelContainer.Set(MarginContainer.PropertyName.Size, new Vector2(448, 144));
+			label.Set(MarginContainer.PropertyName.Position, new Vector2(8, 8));
+			label.Set(MarginContainer.PropertyName.Size, new Vector2(544, 112));
 
 			portrait.Hide();   
 		}
@@ -138,18 +148,7 @@ public partial class DialogueDisplay : CanvasLayer
 			audioPlayer.Set("stream", unknownVoice);
 		}
 
-		if (line.Responses.Count > 0)
-		{
-			hasResponses = true;
-			responsesRect.Show();
-			UpdateResponses(line.Responses);
-		}
-		else
-		{
-			hasResponses = false;
-			responsesRect.Hide();
-		}
-
+		hasResponses = line.Responses.Count > 0;
 		isTyping = true;
 	}
 
@@ -165,19 +164,42 @@ public partial class DialogueDisplay : CanvasLayer
 
 	private void UpdateResponses(Array<DialogueResponse> responses)
 	{
+		ClearResponses();
+		
+		Array<Button> buttons = new Array<Button>();
 		for (int i = 0; i < responses.Count; i++)
 		{
 			DialogueResponse response = responses[i];
 			Button button = ResponseTemplate.Instantiate<Button>();
 			button.Text = response.Text;
-			button.Set("theme_override_font_sizes/font_size", 24);
+			button.Set("theme_override_font_sizes/font_size", 32);
 			button.Pressed += () => OnResponseSelected(response.NextId);
 			responsesMenu.AddChild(button);
+			buttons.Add(button);
 
 			if (i == 0)
 			{
 				button.GrabFocus();
 			}
+		}
+
+		buttons[0].FocusNeighborTop = buttons[buttons.Count - 1].GetPath();
+		buttons[0].FocusNeighborBottom = buttons[1].GetPath();
+		for (int i = 1; i < buttons.Count - 1; i++)
+		{
+			buttons[i].FocusNeighborTop = buttons[i-1].GetPath();
+			buttons[i].FocusNeighborBottom = buttons[i+1].GetPath();
+		}
+		buttons[buttons.Count - 1].FocusNeighborTop = buttons[buttons.Count - 2].GetPath();
+		buttons[buttons.Count - 1].FocusNeighborBottom = buttons[0].GetPath();
+	}
+
+	private void ClearResponses()
+	{
+		Array<Node> oldResponses = responsesMenu.GetChildren();
+		foreach (Node item in oldResponses)
+		{
+			item.QueueFree();
 		}
 	}
 

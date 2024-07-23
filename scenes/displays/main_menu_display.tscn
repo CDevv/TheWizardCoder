@@ -66,7 +66,7 @@ theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Main/MainMenuRect/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 5
+theme_override_constants/separation = -10
 
 [node name="PlayButton" type="Button" parent="Main/MainMenuRect/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -75,7 +75,7 @@ focus_neighbor_top = NodePath("../OptionsButton")
 focus_neighbor_bottom = NodePath("../OptionsButton")
 mouse_filter = 2
 theme = ExtResource("1_rbxpk")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Play"
 
 [node name="OptionsButton" type="Button" parent="Main/MainMenuRect/MarginContainer/VBoxContainer"]
@@ -84,7 +84,7 @@ focus_neighbor_top = NodePath("../PlayButton")
 focus_neighbor_bottom = NodePath("../PlayButton")
 mouse_filter = 2
 theme = ExtResource("1_rbxpk")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Options
 "
 

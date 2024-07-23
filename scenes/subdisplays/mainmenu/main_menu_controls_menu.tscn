@@ -29,7 +29,7 @@ offset_right = 172.0
 offset_bottom = 36.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("3_8e0wt")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 35
 text = "Up"
 
 [node name="DownLabel" type="Label" parent="ControlsRect"]
@@ -40,7 +40,7 @@ offset_right = 172.0
 offset_bottom = 56.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("3_8e0wt")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 35
 text = "Down
 "
 
@@ -52,7 +52,7 @@ offset_right = 172.0
 offset_bottom = 76.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("3_8e0wt")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 35
 text = "Left
 "
 
@@ -64,7 +64,7 @@ offset_right = 172.0
 offset_bottom = 96.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("3_8e0wt")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 35
 text = "Right
 "
 
@@ -78,7 +78,7 @@ focus_neighbor_top = NodePath("../RightButton")
 focus_neighbor_bottom = NodePath("../UpButton")
 mouse_filter = 2
 theme = ExtResource("3_8e0wt")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 35
 text = "Back"
 
 [node name="UpButton" parent="ControlsRect" instance=ExtResource("4_44bvh")]
@@ -91,7 +91,7 @@ offset_bottom = 36.0
 scale = Vector2(0.5, 0.5)
 focus_neighbor_top = NodePath("../BackButton")
 focus_neighbor_bottom = NodePath("../DownButton")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 35
 text = "Up"
 ActionName = "up"
 
@@ -105,7 +105,7 @@ offset_bottom = 76.0
 scale = Vector2(0.5, 0.5)
 focus_neighbor_top = NodePath("../DownButton")
 focus_neighbor_bottom = NodePath("../RightButton")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 35
 text = "Left
 "
 ActionName = "left"
@@ -120,7 +120,7 @@ offset_bottom = 96.0
 scale = Vector2(0.5, 0.5)
 focus_neighbor_top = NodePath("../LeftButton")
 focus_neighbor_bottom = NodePath("../BackButton")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 35
 text = "Right
 "
 ActionName = "right"
@@ -135,7 +135,7 @@ offset_bottom = 56.0
 scale = Vector2(0.5, 0.5)
 focus_neighbor_top = NodePath("../UpButton")
 focus_neighbor_bottom = NodePath("../LeftButton")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 35
 text = "Down"
 ActionName = "down"
 

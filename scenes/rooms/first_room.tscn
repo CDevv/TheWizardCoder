@@ -278,6 +278,3 @@ position = Vector2(240, 176)
 position = Vector2(248, 416)
 TargetRoomName = "first_floor"
 TargetLocation = "DoorMarker"
-
-[node name="TransitionRect" parent="." index="19"]
-visible = false

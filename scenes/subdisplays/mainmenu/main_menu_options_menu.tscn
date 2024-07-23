@@ -24,15 +24,15 @@ patch_margin_bottom = 3
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 92.0
-offset_top = 12.0
+offset_top = 8.0
 offset_right = 225.0
-offset_bottom = 28.0
+offset_bottom = 36.0
 scale = Vector2(0.75, 0.75)
 focus_neighbor_top = NodePath("../BackButton")
 focus_neighbor_bottom = NodePath("../FullscreenCheckBox")
 mouse_filter = 2
 theme = ExtResource("3_boxau")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 item_count = 2
 selected = 0
 popup/item_0/text = "640x480"
@@ -48,7 +48,7 @@ offset_right = 172.0
 offset_bottom = 36.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("3_boxau")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Resolution"
 
 [node name="FullscreenLabel" type="Label" parent="OptionsRect"]
@@ -59,7 +59,7 @@ offset_right = 172.0
 offset_bottom = 56.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("3_boxau")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Fullscreen
 "
 
@@ -70,7 +70,7 @@ offset_right = 408.0
 offset_bottom = 188.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("3_boxau")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Back"
 
 [node name="FullscreenCheckBox" type="CheckBox" parent="OptionsRect"]
@@ -95,7 +95,7 @@ scale = Vector2(0.5, 0.5)
 focus_neighbor_top = NodePath("../FullscreenCheckBox")
 focus_neighbor_bottom = NodePath("../BackButton")
 theme = ExtResource("3_boxau")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Controls.."
 
 [connection signal="item_selected" from="OptionsRect/ResolutionOptions" to="." method="OnWindowSizeChanged"]

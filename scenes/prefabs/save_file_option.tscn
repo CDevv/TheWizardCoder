@@ -46,8 +46,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 186.0
+offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.5, 0.5)
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
@@ -55,30 +60,45 @@ theme_override_constants/margin_bottom = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = -4
+theme_override_constants/separation = -16
 
-[node name="SaveNameLabel" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+[node name="SaveNameLabel" type="Label" parent="NinePatchRect"]
 unique_name_in_owner = true
 layout_mode = 2
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 372.0
+offset_bottom = 45.0
+scale = Vector2(0.5, 0.5)
 theme = ExtResource("2_h17fv")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 36
 text = "SAVENAME"
 
-[node name="LocationLabel" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+[node name="LocationLabel" type="Label" parent="NinePatchRect"]
 unique_name_in_owner = true
 layout_mode = 2
+offset_left = 4.0
+offset_top = 15.0
+offset_right = 372.0
+offset_bottom = 34.0
+scale = Vector2(0.5, 0.5)
 theme = ExtResource("2_h17fv")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 24
 text = "SAVENAME"
 
-[node name="TimeSpentLabel" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+[node name="TimeSpentLabel" type="Label" parent="NinePatchRect"]
 unique_name_in_owner = true
 layout_mode = 2
+offset_left = 4.0
+offset_top = 22.0
+offset_right = 376.0
+offset_bottom = 50.0
+scale = Vector2(0.5, 0.5)
 theme = ExtResource("2_h17fv")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 24
 text = "SAVENAME"
 
 [connection signal="focus_entered" from="." to="." method="OnFocusEntered"]

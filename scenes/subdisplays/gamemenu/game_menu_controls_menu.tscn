@@ -28,7 +28,7 @@ offset_right = 172.0
 offset_bottom = 36.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("2_2exgl")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Up"
 
 [node name="DownLabel" type="Label" parent="ControlsRect"]
@@ -39,7 +39,7 @@ offset_right = 172.0
 offset_bottom = 56.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("2_2exgl")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Down
 "
 
@@ -51,7 +51,7 @@ offset_right = 172.0
 offset_bottom = 76.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("2_2exgl")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Left
 "
 
@@ -63,7 +63,7 @@ offset_right = 172.0
 offset_bottom = 96.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("2_2exgl")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Right
 "
 
@@ -76,7 +76,7 @@ offset_right = 280.0
 offset_bottom = 36.0
 scale = Vector2(0.5, 0.5)
 focus_neighbor_bottom = NodePath("../DownButton")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Up"
 ActionName = "up"
 
@@ -90,7 +90,7 @@ offset_bottom = 76.0
 scale = Vector2(0.5, 0.5)
 focus_neighbor_top = NodePath("../DownButton")
 focus_neighbor_bottom = NodePath("../RightButton")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Left
 "
 ActionName = "left"
@@ -104,7 +104,7 @@ offset_right = 280.0
 offset_bottom = 96.0
 scale = Vector2(0.5, 0.5)
 focus_neighbor_top = NodePath("../LeftButton")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Right
 "
 ActionName = "right"
@@ -119,6 +119,6 @@ offset_bottom = 56.0
 scale = Vector2(0.5, 0.5)
 focus_neighbor_top = NodePath("../UpButton")
 focus_neighbor_bottom = NodePath("../LeftButton")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Down"
 ActionName = "down"

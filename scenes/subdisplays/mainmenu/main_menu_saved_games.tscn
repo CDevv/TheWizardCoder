@@ -34,6 +34,7 @@ theme_override_constants/margin_bottom = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="OptionsRect/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="LoadButton" type="Button" parent="OptionsRect/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -44,7 +45,7 @@ focus_neighbor_right = NodePath("../GoBackButton")
 focus_neighbor_bottom = NodePath(".")
 mouse_filter = 2
 theme = ExtResource("3_27vlr")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Load"
 
 [node name="GoBackButton" type="Button" parent="OptionsRect/MarginContainer/HBoxContainer"]
@@ -56,7 +57,7 @@ focus_neighbor_right = NodePath("../LoadButton")
 focus_neighbor_bottom = NodePath(".")
 mouse_filter = 2
 theme = ExtResource("3_27vlr")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Go Back
 "
 

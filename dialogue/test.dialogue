@@ -1,13 +1,13 @@
 ~ demo
 
-Nathan: [[Hi|Hello|Howdy]], this is some dialogue.
-Nathan: Here are some choices.
+Nolan: [#portrait=0] [[Hi|Hello|Howdy]], this is some dialogue.
+Nolan: [#portrait=0] Here are some choices.
 - First one
-	Nathan: You picked the first one.
+	Nolan: [#portrait=0] You picked the first one.
 - Second one
-	Nathan: You picked the second one.
+	Nolan: [#portrait=0] You picked the second one.
 - Start again => demo
 - End the conversation => END
-Nathan: For more information see the online documentation.
+Nolan: [#portrait=0] For more information see the online documentation.
 
 => END

@@ -15,9 +15,6 @@ DefaultMarkerName = "DoorMarker"
 limit_right = 992
 limit_bottom = 608
 
-[node name="TransitionRect" parent="." index="6"]
-visible = false
-
 [node name="TileMap" type="TileMap" parent="." index="7"]
 y_sort_enabled = true
 scale = Vector2(2, 2)

@@ -53,9 +53,6 @@ SceneFileName = "Village"
 limit_right = 2432
 limit_bottom = 1792
 
-[node name="TransitionRect" parent="." index="6"]
-visible = false
-
 [node name="TileMap" type="TileMap" parent="." index="7"]
 y_sort_enabled = true
 scale = Vector2(2, 2)

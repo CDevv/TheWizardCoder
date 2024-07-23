@@ -40,3 +40,16 @@ Nolan: [#portrait=0] I cook my magic spells here! Haven't used it in a while, th
 Nolan: [#portrait=0] Leftover potion. Was a little experiment I did.
 
 => END!
+
+~ intro_mailman
+Zen: Hello, err.. wizard man. I have a message from you. It's from Mr. Shimble.
+Nolan: [#portrait=0] A message?
+Zen: Yes. Here.
+Nolan: [#portrait=0] Hmm, let me see..
+Nolan: [#portrait=0] Oh.. A danger that needs to be discussed?
+Zen: Maybe something important. Who knows?
+=> END!
+
+~ nolan_hmm
+Nolan: [#portrait=0] Hmm..
+=> END!
