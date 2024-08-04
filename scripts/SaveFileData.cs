@@ -43,6 +43,7 @@ public class SaveFileData
 
     //Playthrough properties
     public bool HasPlayedIntro { get; set; } = false;
+    public bool HasMessageFromShimble { get; set; } = false;
 
     public Dictionary<string, Variant> GenerateDictionary()
     {

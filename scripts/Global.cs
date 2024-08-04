@@ -13,6 +13,7 @@ public partial class Global : Node
 	public bool PlayerIsOnStairs { get; set; } = false;
 	public bool StairsInverted { get; set; } = false;
 	public bool StairsGoUp { get; set; } = true;
+	public bool IsInCutscene { get; set; } = false;
 	public SaveFileData PlayerData { get; set; } = new();
 	public SettingsConfig Settings { get; set; } = new();
 	public System.Collections.Generic.Dictionary<string, Item> ItemDescriptions { get; set; } = new();

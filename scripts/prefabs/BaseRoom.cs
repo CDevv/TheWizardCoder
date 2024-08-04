@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Threading.Tasks;
+using DialogueManagerRuntime;
 
 public partial class BaseRoom : Node2D
 {
@@ -59,6 +60,7 @@ public partial class BaseRoom : Node2D
 		{
 			Player.Position = global.PlayerData.LocationVector;
 		}
+		Camera.Position = Player.Position;
 		global.PlayerData.LocationVector = Vector2.Zero;
 
 		TransitionRect.CallDeferred(TransitionRect.MethodName.PlayAnimationBackwards);
@@ -70,6 +72,11 @@ public partial class BaseRoom : Node2D
 		global.CanWalk = false;
 		AnimationPlayer.Play(name, -1, 0.5f);
         await ToSignal(AnimationPlayer, AnimationPlayer.SignalName.AnimationFinished);
-		//global.CanWalk = true;
+		global.CanWalk = true;
+	}
+
+	public void ShowDialogue(Resource resource, string title)
+	{
+		Dialogue.ShowDisplay(resource, title);
 	}
 }

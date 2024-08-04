@@ -10,13 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://dhrgn37kqbfws" path="res://assets/characters/movement/wizard.png" id="8_5nbo5"]
 [ext_resource type="Resource" uid="uid://bqgh81grm43r" path="res://dialogue/test.dialogue" id="8_bj7jj"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hbyya"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(0, 37, 27, 37)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_n63b5"]
 atlas = ExtResource("8_5nbo5")
 region = Rect2(0, 0, 27, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbyya"]
+atlas = ExtResource("8_5nbo5")
+region = Rect2(0, 37, 27, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jji4x"]
 atlas = ExtResource("8_5nbo5")
@@ -110,10 +110,10 @@ region = Rect2(108, 37, 27, 37)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hbyya")
+"texture": SubResource("AtlasTexture_n63b5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_n63b5")
+"texture": SubResource("AtlasTexture_hbyya")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jji4x")
@@ -238,7 +238,6 @@ z_index = 2
 position = Vector2(176, 208)
 TargetRoomName = "first_room"
 TargetLocation = "RoomEnterMarker"
-PlayerDirection = 0
 
 [node name="Camera" parent="." index="11"]
 limit_right = 1280
@@ -257,4 +256,3 @@ DialogueTitle = "demo"
 position = Vector2(0, -21)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_os5t3")
-frame = 1

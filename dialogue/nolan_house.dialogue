@@ -7,11 +7,6 @@ Nolan: [#portrait=0] Ah, a new day!
 
 ~ lamp
 Nolan: [#portrait=0] Cool lamp.
-Nolan: Choose a Response...
-- Option 1
-	Nolan: You chose option 1
-- Option 2
-	Nolan: You chose option 2
 
 do AddMagicSpell("SimpleBullet")
 => END!
@@ -42,14 +37,19 @@ Nolan: [#portrait=0] Leftover potion. Was a little experiment I did.
 => END!
 
 ~ intro_mailman
-Zen: Hello, err.. wizard man. I have a message from you. It's from Mr. Shimble.
-Nolan: [#portrait=0] A message?
-Zen: Yes. Here.
-Nolan: [#portrait=0] Hmm, let me see..
-Nolan: [#portrait=0] Oh.. A danger that needs to be discussed?
-Zen: Maybe something important. Who knows?
+Zen: [#portrait=0] Heya, wizard man. I got a message for you. It's from Mr. Shimble.
+Nolan: [#portrait=0] A message from Uncle Shimble?
+Zen: [#portrait=0] Yep. Here..
+Nolan:  [#portrait=0] Hmm, let me see..
+Message: The message reads:
+	My dear Nolan, 
+	There is a matter that we need to discuss.
+Message: It is best we meet face to face for this matter.
+Zen: [#portrait=0] Anyway I'm gonna go now. Bye!
 => END!
 
 ~ nolan_hmm
 Nolan: [#portrait=0] Hmm..
 => END!
+
+

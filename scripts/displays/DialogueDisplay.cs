@@ -137,6 +137,7 @@ public partial class DialogueDisplay : CanvasLayer
 		}
 
 		//Set up audio
+		/*
 		var audioStream = GD.Load<AudioStream>($"res://sounds/voices/{dialogueLine.Character.ToLower()}_voice.wav");
 		if (audioStream != null)
 		{
@@ -147,6 +148,9 @@ public partial class DialogueDisplay : CanvasLayer
 			var unknownVoice = GD.Load<AudioStream>($"res://sounds/voices/nolan_voice.wav");
 			audioPlayer.Set("stream", unknownVoice);
 		}
+		*/
+		var audioStream = GD.Load<AudioStream>($"res://sounds/voices/base_voice.wav");
+		audioPlayer.Set("stream", audioStream);
 
 		hasResponses = line.Responses.Count > 0;
 		isTyping = true;

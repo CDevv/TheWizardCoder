@@ -1,0 +1,28 @@
+using DialogueManagerRuntime;
+using Godot;
+using System;
+
+public partial class OutsideHome : BaseRoom
+{
+	[Export]
+    public Resource DialogueResource { get; set; }
+	public override async void OnReady()
+	{
+		base.OnReady();
+
+		if (!global.PlayerData.HasMessageFromShimble)
+		{
+			global.IsInCutscene = true;
+
+			await PlayCutscene("intro_1");
+			Dialogue.ShowDisplay(DialogueResource, "intro_mailman");
+			await ToSignal(Dialogue, DialogueDisplay.SignalName.DialogueEnded);
+			await PlayCutscene("intro_2");
+			Dialogue.ShowDisplay(DialogueResource, "nolan_hmm");
+
+			global.IsInCutscene = false;
+			global.PlayerData.HasMessageFromShimble = true;
+		}
+		
+	}
+}

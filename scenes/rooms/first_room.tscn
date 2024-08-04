@@ -113,7 +113,7 @@ tracks/4/keys = {
 "args": ["sleeper"],
 "method": &"PlaySideAnimation"
 }, {
-"args": [1],
+"args": [0],
 "method": &"PlayIdleAnimation"
 }, {
 "args": [3],
@@ -125,7 +125,7 @@ tracks/4/keys = {
 "args": [3],
 "method": &"PlayIdleAnimation"
 }, {
-"args": [1],
+"args": [0],
 "method": &"PlayIdleAnimation"
 }]
 }

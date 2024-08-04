@@ -94,6 +94,11 @@ public partial class Player : CharacterBody2D
     {
         if (Input.IsActionJustPressed("ui_accept"))
 		{
+			if (global.IsInCutscene)
+			{
+				return;
+			}
+
 			var overlappingAreas = interactableFinder.GetOverlappingAreas();
 			if (overlappingAreas.Count > 0 && global.CanWalk)
 			{

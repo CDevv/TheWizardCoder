@@ -1,5 +1,6 @@
-[gd_resource type="Theme" load_steps=18 format=3 uid="uid://db7w42eb47dby"]
+[gd_resource type="Theme" load_steps=19 format=3 uid="uid://db7w42eb47dby"]
 
+[ext_resource type="FontFile" uid="uid://d1rrvpkh666x8" path="res://fonts/m5x7.ttf" id="1_pm0sf"]
 [ext_resource type="Texture2D" uid="uid://c68cdtpwokyfu" path="res://assets/ui/checkbox-checked.png" id="2_1whyy"]
 [ext_resource type="Texture2D" uid="uid://ckyx1xmfe16kk" path="res://assets/ui/arrow.png" id="2_354l1"]
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="2_clfd2"]
@@ -40,7 +41,7 @@ default_font = ExtResource("9_s1tdw")
 Button/colors/font_color = Color(0.87451, 0.87451, 0.87451, 1)
 Button/colors/font_focus_color = Color(0.94902, 0.94902, 0.94902, 0.372549)
 Button/colors/font_hover_color = Color(0.94902, 0.94902, 0.94902, 0.372549)
-Button/fonts/font = ExtResource("9_s1tdw")
+Button/fonts/font = ExtResource("1_pm0sf")
 Button/styles/disabled = SubResource("StyleBoxEmpty_wgl6t")
 Button/styles/focus = SubResource("StyleBoxEmpty_4btd0")
 Button/styles/hover = SubResource("StyleBoxEmpty_yml05")
@@ -48,11 +49,11 @@ Button/styles/normal = SubResource("StyleBoxEmpty_0vj7p")
 Button/styles/pressed = SubResource("StyleBoxEmpty_k5ey1")
 CheckBox/icons/checked = ExtResource("2_1whyy")
 CheckBox/icons/unchecked = ExtResource("3_hi2wl")
-Label/fonts/font = ExtResource("9_s1tdw")
+Label/fonts/font = ExtResource("1_pm0sf")
 OptionButton/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 OptionButton/colors/font_focus_color = Color(0.94902, 0.94902, 0.94902, 0.372549)
 OptionButton/colors/font_hover_color = Color(0.94902, 0.94902, 0.94902, 0.372549)
-OptionButton/fonts/font = ExtResource("9_s1tdw")
+OptionButton/fonts/font = ExtResource("1_pm0sf")
 OptionButton/icons/arrow = ExtResource("2_354l1")
 OptionButton/styles/disabled = SubResource("StyleBoxEmpty_p72k0")
 OptionButton/styles/focus = SubResource("StyleBoxEmpty_2byh1")
@@ -61,7 +62,7 @@ OptionButton/styles/normal = SubResource("StyleBoxEmpty_kywyt")
 OptionButton/styles/normal_mirrored = SubResource("StyleBoxEmpty_vv2hv")
 PopupMenu/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 PopupMenu/colors/font_hover_color = Color(0.87451, 0.87451, 0.87451, 0.372549)
-PopupMenu/fonts/font = ExtResource("9_s1tdw")
+PopupMenu/fonts/font = ExtResource("1_pm0sf")
 PopupMenu/styles/hover = SubResource("StyleBoxEmpty_wlh06")
 PopupMenu/styles/panel = SubResource("StyleBoxTexture_ls0no")
-RichTextLabel/fonts/normal_font = ExtResource("9_s1tdw")
+RichTextLabel/fonts/normal_font = ExtResource("1_pm0sf")

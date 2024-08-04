@@ -1,47 +1,60 @@
 {
     "version": "2.0.0",
     "configurations": [
-        {
-            "name": "Play in Editor",
-            "type": "godot-mono",
-            "mode": "playInEditor",
-            "request": "launch"
-        },
+
         {
             "name": "Launch",
-            "type": "godot-mono",
+            "type": "coreclr",
             "request": "launch",
-            "mode": "executable",
             "preLaunchTask": "build",
-            "executable": "D:\\Programs\\Godot_v4.2.2-stable_mono_win64\\Godot_v4.2.2-stable_mono_win64\\Godot_v4.2.2-stable_mono_win64.exe",
-            // See which arguments are available here:
-            // https://docs.godotengine.org/en/stable/getting_started/editor/command_line_tutorial.html
-            "executableArguments": [
-                "--path",
-                "${workspaceRoot}"
-            ]
+            "program": "D:\\Programs\\Godot_v4.2.2-stable_mono_win64\\Godot_v4.2.2-stable_mono_win64\\Godot_v4.2.2-stable_mono_win64.exe",
+            "args": [
+                        "--path",
+                        "${workspaceRoot}"
+                    ],
+            "stopAtEntry": false,
         },
         {
             "name": "Launch (Select Scene)",
-            "type": "godot-mono",
+            "type": "coreclr",
             "request": "launch",
-            "mode": "executable",
             "preLaunchTask": "build",
-            "executable": "D:\\Programs\\Godot_v4.2.2-stable_mono_win64\\Godot_v4.2.2-stable_mono_win64\\Godot_v4.2.2-stable_mono_win64.exe",
-            // See which arguments are available here:
-            // https://docs.godotengine.org/en/stable/getting_started/editor/command_line_tutorial.html
-            "executableArguments": [
-                "--path",
-                "${workspaceRoot}",
-                "${command:SelectLaunchScene}"
-            ]
+            "program": "D:\\Programs\\Godot_v4.2.2-stable_mono_win64\\Godot_v4.2.2-stable_mono_win64\\Godot_v4.2.2-stable_mono_win64.exe",
+            "args": [
+                        "--path",
+                        "${workspaceRoot}",
+                        "${command:godot.csharp.getLaunchScene}"
+                    ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceRoot}",
+            "console": "internalConsole",
         },
         {
-            "name": "Attach",
+            "name": "Auto Attach",
             "type": "godot-mono",
             "request": "attach",
             "address": "localhost",
-            "port": 23685
+            "port": 6007
+        },
+        {
+            "name": "Attach",
+            "type": "coreclr",
+            "request": "attach"
+        },
+        {
+            "name": "Launch in Editor",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${env:GODOT4}",
+            "args": [
+                        "--path",
+                        "${workspaceRoot}",
+                        "--editor"
+                    ],
+            "stopAtEntry": false,
+            "cwd":"${workspaceFolder}",
+            "console": "internalConsole",
         }
     ]
 }
