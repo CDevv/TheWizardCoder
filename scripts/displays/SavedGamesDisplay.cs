@@ -51,7 +51,7 @@ public partial class SavedGamesDisplay : CanvasLayer
 
 	public void OnSaveOption(string saveName)
 	{
-		global.SaveGame(saveName);
+		global.UpdateSaveFile(saveName);
 		OnCloseButton();
 	}
 }

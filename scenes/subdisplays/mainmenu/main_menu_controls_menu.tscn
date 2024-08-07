@@ -29,7 +29,7 @@ offset_right = 172.0
 offset_bottom = 36.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("3_8e0wt")
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 36
 text = "Up"
 
 [node name="DownLabel" type="Label" parent="ControlsRect"]

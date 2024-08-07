@@ -97,6 +97,7 @@ public partial class DialogueDisplay : CanvasLayer
 
 	public async void ShowDisplay(Resource dialogueResource, string title)
 	{
+		global.CanWalk = false;
 		global.GameDisplayEnabled = false;
 		this.dialogueResource = dialogueResource;
 		dialogueLine = await DialogueManager.GetNextDialogueLine(dialogueResource, title, new Array<Variant>());

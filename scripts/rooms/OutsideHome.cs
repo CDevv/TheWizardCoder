@@ -14,15 +14,20 @@ public partial class OutsideHome : BaseRoom
 		{
 			global.IsInCutscene = true;
 
+			global.CanWalk = false;
 			await PlayCutscene("intro_1");
 			Dialogue.ShowDisplay(DialogueResource, "intro_mailman");
 			await ToSignal(Dialogue, DialogueDisplay.SignalName.DialogueEnded);
+			global.CanWalk = false;
 			await PlayCutscene("intro_2");
 			Dialogue.ShowDisplay(DialogueResource, "nolan_hmm");
 
 			global.IsInCutscene = false;
 			global.PlayerData.HasMessageFromShimble = true;
 		}
-		
+		else
+		{
+			AnimationPlayer.Play("hide_zen");
+		}
 	}
 }

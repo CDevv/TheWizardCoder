@@ -8,6 +8,7 @@ public partial class Global : Node
 	public BaseRoom CurrentRoom { get; set; }
 	public string LocationMarkerName { get; set; }
 	public Direction PlayerDirection { get; set; }
+	public bool HasLoadedGame { get; set; } = false;
 	public bool CanWalk = true;
 	public bool GameDisplayEnabled { get; set; } = true;
 	public bool PlayerIsOnStairs { get; set; } = false;
@@ -82,67 +83,62 @@ public partial class Global : Node
 		}
 	}
 
-	public void SaveGame(string saveName)
+	public void CreateSaveFile(string saveName)
 	{
-		GD.Print(PlayerData.LastSaved.ToString());
-		GD.Print(DateTime.Now.ToString());
-		PlayerData.TimeSpent += PlayerData.TimeSpent.Add(DateTime.Now - PlayerData.LastSaved);
-		PlayerData.LastSaved = DateTime.Now;
-		if (CurrentRoom != null)
-		{
-			PlayerData.SceneFileName = CurrentRoom.SceneFileName;
-			PlayerData.SceneDefaultMarker = CurrentRoom.DefaultMarkerName;
-			PlayerData.LocationVector = CurrentRoom.Player.Position;
-		}		
+		SaveFileData data = new SaveFileData();
+		data.SaveName = saveName;
+		var dictionary = data.GenerateDictionary();
+		
+		FileAccess file = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Write);
+		file.StoreVar(dictionary);
+		file.Close();
 
-		Dictionary<string, Variant> saveData = PlayerData.GenerateDictionary();
-
-		//Save to file
-		var writeSaveFile = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Write);
-		writeSaveFile.StoreVar(saveData);
-		writeSaveFile.Close();
-
-		//Compute hash
-		using var readSaveFile = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Read);
-        var bytes = readSaveFile.GetBuffer((long)readSaveFile.GetLength());
-        readSaveFile.Close();
-
-        HashingContext hashing = new();
-        hashing.Start(HashingContext.HashType.Sha256);
-        hashing.Update(bytes);
-        byte[] data = hashing.Finish();
-
-		//Save hash
-        using var hashFile = FileAccess.Open($"user://{saveName}.ini", FileAccess.ModeFlags.Write);
-        hashFile.StoreVar(data);
-        hashFile.Close();
-
-		//Reset
-		PlayerData.LocationVector = Vector2.Zero;
+		FileAccess hashFile = FileAccess.Open($"user://{saveName}.ini", FileAccess.ModeFlags.Write);
+		byte[] hash = CalculateHash(saveName);
+		hashFile.StoreVar(hash);
+		hashFile.Close();
 	}
 
-	public void LoadGame(string saveName)
+	public void UpdateSaveFile(string saveName)
 	{
+		PlayerData.TimeSpent = PlayerData.TimeSpent.Add(DateTime.Now - PlayerData.LastSaved);
 		PlayerData.LastSaved = DateTime.Now;
-		if (!FileAccess.FileExists($"user://{saveName}.wand"))
-        {
-            GD.PushWarning($"File {saveName}.wand does not exist");
-			PlayerData.IsSaveEmpty = true;
-			PlayerData.SaveName = saveName;
-			PlayerData.StartedOn = DateTime.Now;
-			PlayerData.TimeSpent = TimeSpan.Zero;
-            SaveGame(saveName);
-            return;
-        }
+		PlayerData.LocationVector = CurrentRoom.Player.Position;
+		PlayerData.SceneDefaultMarker = CurrentRoom.DefaultMarkerName;
+		SaveFileData data = PlayerData;		
+		var dictionary = data.GenerateDictionary();
 
-		var data = ReadSaveFileData(saveName);
-		data.LastSaved = DateTime.Now;
+		FileAccess file = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Write);
+		file.StoreVar(dictionary);
+		file.Close();
+
+		FileAccess hashFile = FileAccess.Open($"user://{saveName}.ini", FileAccess.ModeFlags.Write);
+		byte[] hash = CalculateHash(saveName);
+		hashFile.StoreVar(hash);
+		hashFile.Close();
+	}
+
+	public void LoadSaveFile(string saveName)
+	{
+		SaveFileData data = ReadSaveFileData(saveName);
 		PlayerData = data;
+
+		if (data.IsSaveEmpty)
+		{
+			PlayerData.SaveName = saveName;
+			CreateSaveFile(saveName);
+		}
 	}
 
+	public void DeleteSaveFile(string saveName)
+	{
+		DirAccess dir = DirAccess.Open("user://");
+		dir.Remove($"{saveName}.ini");
+		dir.Remove($"{saveName}.wand");
+	}
 	public SaveFileData ReadSaveFileData(string saveName)
 	{
-		SaveFileData data = new();
+		SaveFileData data = new SaveFileData();
 
 		if (!FileAccess.FileExists($"user://{saveName}.wand"))
         {
@@ -156,22 +152,15 @@ public partial class Global : Node
         byte[] expectedHash = (byte[])hashFile.GetVar();
         hashFile.Close();
 
-		//Read save file
-		using var saveFile = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Read);
-        byte[] buffer = saveFile.GetBuffer((long)saveFile.GetLength());
-        saveFile.Close();
-
-		//Compute actual hash
-		HashingContext hashing = new();
-        hashing.Start(HashingContext.HashType.Sha256);
-        hashing.Update(buffer);
-        byte[] actualHash = hashing.Finish();
+		//Actual hash
+		byte[] actualHash = CalculateHash(saveName);
 
 		if (CompareHashes(actualHash, expectedHash))
 		{
 			using var readSave = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Read);
 			var savedData = (Dictionary<string, Variant>)readSave.GetVar();
 			data.ApplyDictionary(savedData);
+			data.IsSaveEmpty = false;
 		}
 		else
 		{
@@ -179,6 +168,20 @@ public partial class Global : Node
 			data.IsSaveEmpty = true;
             return data;
 		}
+
+		return data;
+	}
+
+	private byte[] CalculateHash(string saveName)
+	{
+		using FileAccess file = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Read);
+        byte[] buffer = file.GetBuffer((long)file.GetLength());
+        file.Close();
+
+		HashingContext hashing = new();
+        hashing.Start(HashingContext.HashType.Sha256);
+        hashing.Update(buffer);
+        byte[] data = hashing.Finish();
 
 		return data;
 	}

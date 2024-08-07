@@ -45,6 +45,19 @@ public class SaveFileData
     public bool HasPlayedIntro { get; set; } = false;
     public bool HasMessageFromShimble { get; set; } = false;
 
+    public SaveFileData()
+    {
+        IsSaveEmpty = true;
+        
+        StartedOn = DateTime.Now;
+        LastSaved = DateTime.Now;
+        TimeSpent = TimeSpan.Zero;
+
+        SceneFileName = "first_room";
+        Location = "Home";
+        SceneDefaultMarker = "AfterCutsceneMarker";
+    }
+
     public Dictionary<string, Variant> GenerateDictionary()
     {
         return new Dictionary<string, Variant>()

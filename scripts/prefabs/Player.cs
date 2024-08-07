@@ -9,6 +9,7 @@ public partial class Player : CharacterBody2D
 	public delegate void AnimationFinishedEventHandler();
 	public Direction Direction { get; private set; }
 	public const int Speed = 2;
+	private bool isSprinting = false;
 	private Global global;
 	private AnimationPlayer animationPlayer;
 	private AnimationTree animationTree;
@@ -33,15 +34,18 @@ public partial class Player : CharacterBody2D
 		Vector2 direction = Input.GetVector("left", "right", "up", "down").Normalized();
 		Vector2 velocity = direction * Speed;
 
+		if (isSprinting)
+		{
+			velocity *= 2;
+		}
+
 		if (velocity == Vector2.Zero)
 		{
-			animationTree.Set("parameters/conditions/idle", true);
-			animationTree.Set("parameters/conditions/move", false);
+			animationTree.Set("parameters/Transition/transition_request", "idle");
 		}
 		else
 		{
-			animationTree.Set("parameters/conditions/move", true);
-			animationTree.Set("parameters/conditions/idle", false);
+			animationTree.Set("parameters/Transition/transition_request", "move");
 		}
 
 		if (direction != Vector2.Zero)
@@ -106,6 +110,17 @@ public partial class Player : CharacterBody2D
 				(overlappingAreas[0] as Interactable).Action();
 			}
 		}
+
+		if (Input.IsActionPressed("sprint"))
+		{
+			isSprinting = true;
+			animationTree.Set("parameters/TimeScale/scale", 2);
+		}
+		else 
+		{
+			isSprinting = false;
+			animationTree.Set("parameters/TimeScale/scale", 1);
+		}
     }
 
 	public async void TransitionToRoom(Warper warper)
@@ -138,10 +153,8 @@ public partial class Player : CharacterBody2D
 
 	public void PlaySideAnimation(string name)
 	{
-		animationTree.Set("parameters/conditions/idle", false);
-		animationTree.Set("parameters/conditions/move", false);
-		animationTree.Set("parameters/conditions/extrastate", true);
-		animationTree.Set("parameters/ExtraStates/state/transition_request", name);
+		animationTree.Set("parameters/Transition/transition_request", "extra");
+		animationTree.Set("parameters/Extra/transition_request", name);
 
 		Task finishedAnimation = new Task(async () => {
 			await ToSignal(animationTree, AnimationTree.SignalName.AnimationFinished);
@@ -151,19 +164,13 @@ public partial class Player : CharacterBody2D
 
 	public void PlayIdleAnimation(Direction direction)
 	{
-		animationTree.Set("parameters/conditions/idle", true);
-		animationTree.Set("parameters/conditions/move", false);
-		animationTree.Set("parameters/conditions/extrastate", false);
-
+		animationTree.Set("parameters/Transition/transition_request", "idle");
 		ChangeDirection(direction);
 	}
 
 	public void PlayMoveAnimation(Direction direction)
 	{
-		animationTree.Set("parameters/conditions/idle", false);
-		animationTree.Set("parameters/conditions/move", true);
-		animationTree.Set("parameters/conditions/extrastate", false);
-
+		animationTree.Set("parameters/Transition/transition_request", "move");
 		ChangeDirection(direction);
 	}
 

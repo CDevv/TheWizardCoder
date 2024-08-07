@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dk58pi6w8qy72"]
+[gd_scene load_steps=35 format=3 uid="uid://dk58pi6w8qy72"]
 
 [ext_resource type="Texture2D" uid="uid://dhrgn37kqbfws" path="res://assets/characters/movement/wizard.png" id="1_e1ryk"]
 [ext_resource type="Script" path="res://scripts/prefabs/Player.cs" id="1_ed4f5"]
@@ -890,126 +890,94 @@ _data = {
 "up_idle": SubResource("Animation_f8akm")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gbtwt"]
-animation = &"attack_idle"
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2bwc"]
+size = Vector2(30, 7)
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f5unv"]
-animation = &"attack_idle2"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0h7ii"]
-animation = &"attack_intro"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yw3rm"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_23fnt"]
 animation = &"sleep"
 
-[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_tyclo"]
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_jpgmo"]
 input_0/name = "sleeper"
 input_0/auto_advance = false
 input_0/reset = true
-input_1/name = "attack_intro"
-input_1/auto_advance = false
-input_1/reset = true
-input_2/name = "attack_idle"
-input_2/auto_advance = false
-input_2/reset = true
-input_3/name = "attack_idle2"
-input_3/auto_advance = false
-input_3/reset = true
 
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_4267a"]
-graph_offset = Vector2(-503.769, -71.7405)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_0h7ii")
-nodes/Animation/position = Vector2(-160, 186.667)
-"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_gbtwt")
-"nodes/Animation 2/position" = Vector2(-160, 346.667)
-"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_f5unv")
-"nodes/Animation 3/position" = Vector2(-160, 506.667)
-nodes/sleep/node = SubResource("AnimationNodeAnimation_yw3rm")
-nodes/sleep/position = Vector2(-160, 53.3333)
-nodes/state/node = SubResource("AnimationNodeTransition_tyclo")
-nodes/state/position = Vector2(160, 213.333)
-node_connections = [&"output", 0, &"state", &"state", 0, &"sleep", &"state", 1, &"Animation", &"state", 2, &"Animation 2", &"state", 3, &"Animation 3"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dqnyn"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qvekn"]
 animation = &"down_idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d3jdc"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hdw2b"]
 animation = &"up_idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vdlqj"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l35l6"]
 animation = &"right_idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fhy6a"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dm0wc"]
 animation = &"left_idle"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_l8ktb"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_dqnyn")
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_tdovn"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_qvekn")
 blend_point_0/pos = Vector2(0, 1.1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_d3jdc")
+blend_point_1/node = SubResource("AnimationNodeAnimation_hdw2b")
 blend_point_1/pos = Vector2(0, -1.1)
-blend_point_2/node = SubResource("AnimationNodeAnimation_vdlqj")
+blend_point_2/node = SubResource("AnimationNodeAnimation_l35l6")
 blend_point_2/pos = Vector2(1, 0)
-blend_point_3/node = SubResource("AnimationNodeAnimation_fhy6a")
+blend_point_3/node = SubResource("AnimationNodeAnimation_dm0wc")
 blend_point_3/pos = Vector2(-1, 0)
 min_space = Vector2(-1, -1.1)
 max_space = Vector2(1, 1.1)
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3qx8y"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s7hce"]
 animation = &"down"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1i6uw"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cttk6"]
 animation = &"up"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g81up"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8lial"]
 animation = &"right"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a28il"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pbp7g"]
 animation = &"left"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_1ygcj"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_3qx8y")
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_c615t"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_s7hce")
 blend_point_0/pos = Vector2(0, 1.1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_1i6uw")
+blend_point_1/node = SubResource("AnimationNodeAnimation_cttk6")
 blend_point_1/pos = Vector2(0, -1.1)
-blend_point_2/node = SubResource("AnimationNodeAnimation_g81up")
+blend_point_2/node = SubResource("AnimationNodeAnimation_8lial")
 blend_point_2/pos = Vector2(1, 0)
-blend_point_3/node = SubResource("AnimationNodeAnimation_a28il")
+blend_point_3/node = SubResource("AnimationNodeAnimation_pbp7g")
 blend_point_3/pos = Vector2(-1, 0)
 min_space = Vector2(-1, -1.1)
 max_space = Vector2(1, 1.1)
 blend_mode = 1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ms05w"]
-advance_mode = 2
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_hkqak"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s8i4f"]
-advance_mode = 2
-advance_condition = &"move"
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_qfnum"]
+input_0/name = "idle"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "move"
+input_1/auto_advance = false
+input_1/reset = true
+input_2/name = "extra"
+input_2/auto_advance = false
+input_2/reset = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3fsii"]
-advance_mode = 2
-advance_condition = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_532mu"]
-advance_mode = 2
-advance_condition = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ari4k"]
-advance_mode = 2
-advance_condition = &"extrastate"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8irx2"]
-states/ExtraStates/node = SubResource("AnimationNodeBlendTree_4267a")
-states/ExtraStates/position = Vector2(373, 43)
-states/Idle/node = SubResource("AnimationNodeBlendSpace2D_l8ktb")
-states/Idle/position = Vector2(459.667, 110)
-states/Move/node = SubResource("AnimationNodeBlendSpace2D_1ygcj")
-states/Move/position = Vector2(681.333, 110)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ms05w"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_s8i4f"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_3fsii"), "ExtraStates", "Idle", SubResource("AnimationNodeStateMachineTransition_532mu"), "Idle", "ExtraStates", SubResource("AnimationNodeStateMachineTransition_ari4k")]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2bwc"]
-size = Vector2(30, 7)
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yayhs"]
+nodes/Animation/node = SubResource("AnimationNodeAnimation_23fnt")
+nodes/Animation/position = Vector2(-160, 560)
+nodes/Extra/node = SubResource("AnimationNodeTransition_jpgmo")
+nodes/Extra/position = Vector2(26.6667, 400)
+nodes/Idle/node = SubResource("AnimationNodeBlendSpace2D_tdovn")
+nodes/Idle/position = Vector2(-533.333, 320)
+nodes/Move/node = SubResource("AnimationNodeBlendSpace2D_c615t")
+nodes/Move/position = Vector2(-293.333, 320)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_hkqak")
+nodes/TimeScale/position = Vector2(133.333, 133.333)
+nodes/Transition/node = SubResource("AnimationNodeTransition_qfnum")
+nodes/Transition/position = Vector2(-26.6667, 160)
+node_connections = [&"Extra", 0, &"Animation", &"TimeScale", 0, &"Transition", &"Transition", 0, &"Idle", &"Transition", 1, &"Move", &"Transition", 2, &"Extra", &"output", 0, &"TimeScale"]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ed4f5")
@@ -1048,18 +1016,6 @@ libraries = {
 "": SubResource("AnimationLibrary_kk854")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_8irx2")
-anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/extrastate = false
-parameters/conditions/idle = false
-parameters/conditions/move = false
-parameters/ExtraStates/state/current_state = "sleeper"
-parameters/ExtraStates/state/transition_request = "sleep"
-parameters/ExtraStates/state/current_index = 0
-parameters/Idle/blend_position = Vector2(-0.00231481, 1.09488)
-parameters/Move/blend_position = Vector2(-0.00480002, 0.960317)
-
 [node name="InteractableFinder" type="Area2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(0, 25)
@@ -1068,3 +1024,16 @@ position = Vector2(0, 25)
 position = Vector2(0, 13.5)
 shape = SubResource("RectangleShape2D_o2bwc")
 debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_yayhs")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Extra/current_state = ""
+parameters/Extra/transition_request = "sleeper"
+parameters/Extra/current_index = -1
+parameters/Idle/blend_position = Vector2(-0.00925928, 0.791463)
+parameters/Move/blend_position = Vector2(0, 0)
+parameters/TimeScale/scale = 1.0
+parameters/Transition/current_state = "idle"
+parameters/Transition/transition_request = ""
+parameters/Transition/current_index = 0

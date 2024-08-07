@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkmomdkodys8p"]
+[gd_scene load_steps=9 format=3 uid="uid://bkmomdkodys8p"]
 
 [ext_resource type="Script" path="res://scripts/displays/MainMenuDisplay.cs" id="1_bltqf"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="1_rbxpk"]
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="2_y37u4"]
 [ext_resource type="Texture2D" uid="uid://b280jc176eg22" path="res://assets/ui/titlebg.png" id="3_j35pe"]
+[ext_resource type="PackedScene" uid="uid://gkilwd8fd2s7" path="res://scenes/subdisplays/mainmenu/delete_file_confirmation.tscn" id="6_ddegt"]
 [ext_resource type="PackedScene" uid="uid://d2g5a1s11robp" path="res://scenes/subdisplays/mainmenu/main_menu_saved_games.tscn" id="6_drqyd"]
 [ext_resource type="PackedScene" uid="uid://b62mtle3y15o2" path="res://scenes/subdisplays/mainmenu/main_menu_options_menu.tscn" id="7_3t87n"]
 [ext_resource type="PackedScene" uid="uid://dqeyfgob3oyld" path="res://scenes/subdisplays/mainmenu/main_menu_controls_menu.tscn" id="8_1jpdt"]
@@ -66,7 +67,7 @@ theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Main/MainMenuRect/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = -10
+theme_override_constants/separation = 0
 
 [node name="PlayButton" type="Button" parent="Main/MainMenuRect/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -95,8 +96,12 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="SavedGamesMenu" parent="SavedGames" instance=ExtResource("6_drqyd")]
+[node name="SavedGamesMenu" parent="SavedGames" node_paths=PackedStringArray("confirmation") instance=ExtResource("6_drqyd")]
 unique_name_in_owner = true
+visible = false
+confirmation = NodePath("../DeleteFileConfirmation")
+
+[node name="DeleteFileConfirmation" parent="SavedGames" instance=ExtResource("6_ddegt")]
 visible = false
 
 [node name="Options" type="Control" parent="."]
@@ -125,6 +130,8 @@ visible = false
 [connection signal="pressed" from="Main/MainMenuRect/MarginContainer/VBoxContainer/PlayButton" to="." method="ShowSavedGamesMenu"]
 [connection signal="pressed" from="Main/MainMenuRect/MarginContainer/VBoxContainer/OptionsButton" to="." method="ShowOptions"]
 [connection signal="BackButtonTrigerred" from="SavedGames/SavedGamesMenu" to="." method="ShowMainMenu"]
+[connection signal="FileDeleted" from="SavedGames/DeleteFileConfirmation" to="SavedGames/SavedGamesMenu" method="OnFileDeleted"]
+[connection signal="visibility_changed" from="SavedGames/DeleteFileConfirmation" to="SavedGames/SavedGamesMenu" method="OnFileDeleted"]
 [connection signal="OnBackButtonPressed" from="Options/OptionsMenu" to="." method="ShowMainMenu"]
 [connection signal="OnControlsButtonPressed" from="Options/OptionsMenu" to="." method="ShowControls"]
 [connection signal="OnBackButtonPressed" from="Options/ControlsMenu" to="." method="ShowOptions"]
