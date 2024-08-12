@@ -1,0 +1,155 @@
+[gd_scene load_steps=8 format=3 uid="uid://c7roc1nqcr3w0"]
+
+[ext_resource type="Script" path="res://scripts/displays/CodeProblemPanel.cs" id="1_8o5lf"]
+[ext_resource type="Texture2D" uid="uid://seqdoffkhcdd" path="res://assets/ui/base_console_ui.png" id="1_caexv"]
+[ext_resource type="Theme" uid="uid://yvr5k4rix6lw" path="res://themes/console_theme.tres" id="2_cm4ur"]
+[ext_resource type="PackedScene" uid="uid://rajwk4hoe67" path="res://scenes/prefabs/pickable_button.tscn" id="3_s8dc8"]
+[ext_resource type="PackedScene" uid="uid://bt58me5k7oep2" path="res://scenes/prefabs/pickable_button_area.tscn" id="4_vm0ji"]
+
+[sub_resource type="Animation" id="Animation_hp7nb"]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ItemsRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CodeRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jv6l8"]
+_data = {
+"show": SubResource("Animation_hp7nb")
+}
+
+[node name="CodeProblemPanel" type="CanvasLayer"]
+script = ExtResource("1_8o5lf")
+PickableButtonScene = ExtResource("3_s8dc8")
+PickableButtonAreaScene = ExtResource("4_vm0ji")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 640.0
+offset_bottom = 480.0
+color = Color(0.101961, 0.101961, 0.101961, 0.592157)
+
+[node name="CodeRect" type="NinePatchRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -176.0
+offset_right = 80.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture = ExtResource("1_caexv")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="ColorRect" type="ColorRect" parent="CodeRect"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 168.0
+offset_bottom = 152.0
+color = Color(0.0784314, 0.133333, 0.0784314, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CodeRect"]
+visible = false
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 168.0
+offset_bottom = 152.0
+mouse_filter = 2
+mouse_default_cursor_shape = 13
+theme = ExtResource("2_cm4ur")
+text = "chair"
+
+[node name="CodeEdit" type="CodeEdit" parent="CodeRect"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 168.0
+offset_bottom = 152.0
+mouse_filter = 2
+theme = ExtResource("2_cm4ur")
+text = "Nolan.Test = "
+editable = false
+context_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+wrap_mode = 1
+
+[node name="PickableButtonArea" parent="CodeRect/CodeEdit" instance=ExtResource("4_vm0ji")]
+visible = false
+position = Vector2(84, -20)
+
+[node name="ItemsRect" type="NinePatchRect" parent="."]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 128.0
+offset_bottom = 224.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_caexv")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="BaseListRect" type="ColorRect" parent="ItemsRect"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 56.0
+offset_bottom = 152.0
+color = Color(0.0784314, 0.133333, 0.0784314, 1)
+
+[node name="PickableButton" parent="ItemsRect" instance=ExtResource("3_s8dc8")]
+visible = false
+position = Vector2(8, 8)
+scale = Vector2(0.5, 0.5)
+Text = "item"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jv6l8")
+}

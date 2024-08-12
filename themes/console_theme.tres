@@ -1,0 +1,37 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://yvr5k4rix6lw"]
+
+[ext_resource type="FontFile" uid="uid://dym5hwje8vnwp" path="res://fonts/pixeldroidMenuRegular.ttf" id="1_f58qp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q3ngl"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_77xhe"]
+bg_color = Color(0.0923971, 0.0923971, 0.0923971, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sy4ts"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5haex"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qjht0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dhorp"]
+
+[resource]
+Button/colors/font_color = Color(0, 1, 0, 1)
+Button/fonts/font = ExtResource("1_f58qp")
+Button/styles/focus = SubResource("StyleBoxFlat_q3ngl")
+Button/styles/hover = SubResource("StyleBoxFlat_77xhe")
+Button/styles/normal = SubResource("StyleBoxFlat_sy4ts")
+Button/styles/pressed = SubResource("StyleBoxFlat_5haex")
+CodeEdit/colors/background_color = Color(0, 0, 0, 0)
+CodeEdit/colors/font_color = Color(0, 1, 0, 1)
+CodeEdit/colors/font_readonly_color = Color(0, 1, 0, 1)
+CodeEdit/fonts/font = ExtResource("1_f58qp")
+CodeEdit/styles/normal = SubResource("StyleBoxEmpty_qjht0")
+CodeEdit/styles/read_only = SubResource("StyleBoxEmpty_dhorp")
+Label/colors/font_color = Color(0, 1, 0, 1)
+Label/fonts/font = ExtResource("1_f58qp")
+RichTextLabel/colors/default_color = Color(0, 1, 0, 1)
+RichTextLabel/fonts/normal_font = ExtResource("1_f58qp")

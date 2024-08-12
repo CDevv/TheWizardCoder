@@ -18,7 +18,6 @@ public partial class DialoguePoint : Interactable
 
     public override void Action()
     {
-        //DialogueManager.ShowDialogueBalloon(DialogueResource, DialogueTitle);
         global.CurrentRoom.Dialogue.ShowDisplay(DialogueResource, DialogueTitle);
     }
 }

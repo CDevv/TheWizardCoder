@@ -40,7 +40,7 @@ public partial class GameDisplay : CanvasLayer
 
     public override void _UnhandledInput(InputEvent @event)
     {
-		if (!global.GameDisplayEnabled)
+		if (!global.GameDisplayEnabled || global.IsInCutscene)
 		{
 			return;
 		}

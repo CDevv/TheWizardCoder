@@ -17,6 +17,7 @@ public partial class BaseRoom : Node2D
 	public AudioStreamPlayer AudioPlayer { get; set; }
 	public SavedGamesDisplay SavedGamesDisplay { get; set; }
 	public BattleDisplay BattleDisplay { get; set; }
+	public CodeProblemPanel CodeProblemPanel { get; set; }
 	public TransitionRect TransitionRect { get; set; }
 	public AnimationPlayer AnimationPlayer { get; set; }
 	public DialogueDisplay Dialogue { get; set; }
@@ -39,6 +40,7 @@ public partial class BaseRoom : Node2D
 		AudioPlayer = GetNode<AudioStreamPlayer>("AudioPlayer");
 		SavedGamesDisplay = GetNode<SavedGamesDisplay>("SavedGamesDisplay");
 		BattleDisplay = GetNode<BattleDisplay>("BattleDisplay");
+		CodeProblemPanel = GetNode<CodeProblemPanel>("CodeProblemPanel");
 		TransitionRect = GetNode<TransitionRect>("TransitionRect");
 		AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		Dialogue = GetNode<DialogueDisplay>("Dialogue");

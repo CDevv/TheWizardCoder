@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://rajwk4hoe67"]
+
+[ext_resource type="Script" path="res://scripts/prefabs/PickableButton.cs" id="1_q8y88"]
+[ext_resource type="Theme" uid="uid://yvr5k4rix6lw" path="res://themes/console_theme.tres" id="1_qfr6j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wvgmw"]
+bg_color = Color(0.0784314, 0.133333, 0.0784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8872v"]
+bg_color = Color(0.0784314, 0.133333, 0.0784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sx6jg"]
+bg_color = Color(0.0784314, 0.133333, 0.0784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_np7qq"]
+bg_color = Color(0.0784314, 0.133333, 0.0784314, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oxc4w"]
+size = Vector2(96, 32)
+
+[node name="PickableButton" type="Area2D"]
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("1_q8y88")
+Text = "true"
+
+[node name="Button" type="Button" parent="."]
+z_index = 1
+offset_right = 48.0
+offset_bottom = 16.0
+scale = Vector2(2, 2)
+mouse_default_cursor_shape = 6
+theme = ExtResource("1_qfr6j")
+theme_override_styles/normal = SubResource("StyleBoxFlat_wvgmw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8872v")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sx6jg")
+theme_override_styles/focus = SubResource("StyleBoxFlat_np7qq")
+text = "true"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+position = Vector2(48, 16)
+shape = SubResource("RectangleShape2D_oxc4w")
+debug_color = Color(0.860185, 0.242689, 0.67432, 0.42)
+
+[connection signal="mouse_entered" from="." to="." method="OnMouseEntered"]
+[connection signal="mouse_exited" from="." to="." method="OnMouseExited"]
+[connection signal="button_down" from="Button" to="." method="OnButtonDown"]
+[connection signal="button_up" from="Button" to="." method="OnButtonUp"]

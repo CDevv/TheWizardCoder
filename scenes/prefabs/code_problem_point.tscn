@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmwn0c57lgamm"]
+
+[ext_resource type="Script" path="res://scripts/interactables/CodeProblemPoint.cs" id="1_salqj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vcgwr"]
+size = Vector2(32, 32)
+
+[node name="CodeProblemPoint" type="Area2D"]
+script = ExtResource("1_salqj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vcgwr")
+debug_color = Color(0.1397, 0.0443444, 0.226841, 0.42)
