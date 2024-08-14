@@ -33,6 +33,7 @@ public partial class CharacterDialoguePoint : Interactable
 
 	private void PlayIdleAnimation(Direction direction)
 	{
+		sprite.Stop();
 		sprite.Animation = "default";
 		sprite.Frame = (int)direction;
 	}

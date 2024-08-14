@@ -8,6 +8,32 @@ Nathan: You're a wizard, though. Right?
 Nathan: Maybe you can fix it!
 => END!
 
-~ intro_shimble
-MrShimble: Ah, hello Nolan! I was expecting you!
-Nolan: Yes, I got your message.
+~ intro_shimble_1
+Shimble: [#portrait=0] Ah, hello Nolan! I was expecting you!
+Nolan: [#portrait=0] Yes, I got your message. What is the issue?
+=> END!
+
+~ intro_shimble_2
+Shimble: [#portrait=0] So.. You might have not seen the damage that has been done to the village yet..
+Shimble: [#portrait=0] But weird things has been happening in the village.
+Shimble: [#portrait=0] You might be able to help out with this.. right?
+Nolan: [#portrait=0] ...
+Nolan: [#portrait=0] I guess I can try.
+do SetPlayerData("HasQuestFromShimble", true)
+=> END!
+
+~ shimble_chair_solved
+Shimble: [#portrait=0] ...
+Shimble: [#portrait=0] You actually did it!
+Shimble: [#portrait=0] I knew I could trust you! Thank you!
+Nolan: [#portrait=0] ..I actually don't know how I did it. Like it suddenly disappeared out of nowhere.
+do SetPlayerData("HasSolvedShimbleChair", true)
+=> END!
+
+~ shimble_point
+if GetPlayerData("HasQuestFromShimble") and not GetPlayerData("HasSolvedShimbleChair"):
+	Shimble: [#portrait=0] You might be able to help out with this.. right?
+	Nolan: [#portrait=0] I guess I can try.
+elif GetPlayerData("HasSolvedShimbleChair"):
+	Shimble: [#portrait=0] Thank you!
+	Nolan: [#portrait=0] No problem!

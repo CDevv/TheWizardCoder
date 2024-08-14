@@ -308,4 +308,14 @@ public partial class Global : Node
 
         return true;
     }
+
+	public Variant GetPlayerData(string key)
+	{
+		return PlayerData.Get(key);
+	}
+
+	public void SetPlayerData(string key, Variant value)
+	{
+		PlayerData.Set(key, value);
+	}
 }

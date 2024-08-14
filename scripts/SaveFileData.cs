@@ -2,7 +2,7 @@ using System;
 using Godot;
 using Godot.Collections;
 
-public class SaveFileData
+public partial class SaveFileData : Node
 {
     public bool IsSaveEmpty { get; set; } = false;
     public string SaveName { get; set; }
@@ -44,6 +44,8 @@ public class SaveFileData
     //Playthrough properties
     public bool HasPlayedIntro { get; set; } = false;
     public bool HasMessageFromShimble { get; set; } = false;
+    public bool HasQuestFromShimble { get; set; } = false;
+    public bool HasSolvedShimbleChair { get; set; } = false;
 
     public SaveFileData()
     {

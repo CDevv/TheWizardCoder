@@ -4,6 +4,12 @@ using System.Collections.Generic;
 
 public partial class CodeProblemPoint : Interactable
 {
+	[Signal]
+	public delegate void ProblemSolvedEventHandler();
+
+	[Export]
+	public string UniqueIdentifier { get; set; }
+
 	[Export(PropertyHint.MultilineText)]
 	public string Code { get; set; }
 
@@ -14,8 +20,19 @@ public partial class CodeProblemPoint : Interactable
 	[Export]
 	public Godot.Collections.Dictionary<string, Vector2> SolvableAreas { get; set; }
 
+	public bool Solved { get; set; } = false;
+
     public override void Action()
     {
-        global.CurrentRoom.CodeProblemPanel.ShowDisplay(Code, Items, SolvableAreas);
+        if (!Solved)
+		{
+			global.CurrentRoom.CodeProblemPanel.Point = this;
+			global.CurrentRoom.CodeProblemPanel.ProblemId = UniqueIdentifier;
+			global.CurrentRoom.CodeProblemPanel.ShowDisplay(Code, Items, SolvableAreas);
+		}
+		else
+		{
+			global.CanWalk = true;
+		}
     }
 }

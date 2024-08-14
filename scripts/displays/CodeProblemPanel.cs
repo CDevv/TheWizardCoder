@@ -5,10 +5,15 @@ using System.Collections.Generic;
 
 public partial class CodeProblemPanel : CanvasLayer
 {
+	[Signal]
+	public delegate void ProblemSolvedEventHandler();
+
 	[Export]
 	public PackedScene PickableButtonScene { get; set; }
 	[Export]
 	public PackedScene PickableButtonAreaScene { get; set; }
+	public string ProblemId { get; set; }
+	public CodeProblemPoint Point { get; set; }
 
 	private Global global;
 	private CodeEdit codeEdit;
@@ -140,6 +145,9 @@ public partial class CodeProblemPanel : CanvasLayer
 		global.GameDisplayEnabled = true;
 		animationPlayer.PlayBackwards("show");
 		await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
+		Point.Solved = true;
+		Point.EmitSignal(CodeProblemPoint.SignalName.ProblemSolved);
+		EmitSignal(SignalName.ProblemSolved);
 		Reset();
 		Hide();
 	}

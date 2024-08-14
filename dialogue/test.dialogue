@@ -1,3 +1,5 @@
+using Global
+
 ~ demo
 
 Nolan: [#portrait=0] [[Hi|Hello|Howdy]], this is some dialogue.
@@ -9,5 +11,11 @@ Nolan: [#portrait=0] Here are some choices.
 - Start again => demo
 - End the conversation => END
 Nolan: [#portrait=0] For more information see the online documentation.
+
+=> END
+
+~ demo_playerdata
+
+Nolan: Howdy, {{Global.GetPlayerData("HasQuestFromShimble")}}
 
 => END
