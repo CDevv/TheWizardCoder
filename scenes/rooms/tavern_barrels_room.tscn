@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://bcj5uv21jfnna"]
+
+[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_dlif2"]
+[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="2_if4ef"]
+[ext_resource type="TileSet" uid="uid://clhrfovy5lcgu" path="res://tilesets/houses_interiors.tres" id="3_w0hq8"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="4_l2p8p"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_u0iq7"]
+a = Vector2(160, 224)
+b = Vector2(160, 352)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_0ojft"]
+a = Vector2(160, 352)
+b = Vector2(192, 352)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_vhbev"]
+a = Vector2(240, 352)
+b = Vector2(480, 352)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4ghnq"]
+a = Vector2(480, 224)
+b = Vector2(480, 352)
+
+[node name="TavernBarrelsRoom" instance=ExtResource("1_dlif2")]
+y_sort_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="." index="9"]
+offset_right = 640.0
+offset_bottom = 480.0
+color = Color(0, 0, 0, 1)
+
+[node name="Player" parent="." index="10" instance=ExtResource("2_if4ef")]
+z_index = 1
+position = Vector2(216, 313)
+
+[node name="TileMap" type="TileMap" parent="." index="11"]
+y_sort_enabled = true
+scale = Vector2(2, 2)
+tile_set = ExtResource("3_w0hq8")
+format = 2
+layer_0/name = "props"
+layer_0/y_sort_enabled = true
+layer_0/z_index = 1
+layer_0/tile_data = PackedInt32Array(458758, 720896, 5, 458759, 720896, 5, 458760, 720896, 5, 458763, 720896, 5, 458764, 720896, 5, 458766, 720896, 5)
+layer_1/name = "floor"
+layer_1/tile_data = PackedInt32Array(524293, 0, 0, 589829, 0, 1, 655365, 0, 4, 524294, 65536, 0, 589830, 65536, 1, 655366, 65536, 2, 524295, 131072, 0, 589831, 131072, 1, 655367, 131072, 2, 524296, 0, 0, 589832, 0, 1, 655368, 0, 2, 524297, 65536, 0, 589833, 65536, 1, 655369, 65536, 2, 524298, 131072, 0, 589834, 131072, 1, 655370, 131072, 2, 524299, 0, 0, 589835, 0, 1, 655371, 0, 2, 524300, 65536, 0, 589836, 65536, 1, 655372, 65536, 2, 524301, 131072, 0, 589837, 131072, 1, 655373, 131072, 2, 458757, 0, 2, 458758, 65536, 2, 458759, 131072, 2, 458760, 0, 2, 458761, 65536, 2, 458762, 131072, 2, 458763, 0, 2, 458764, 65536, 2, 458765, 131072, 2, 393221, 196608, 2, 393222, 196608, 2, 393223, 196608, 2, 393224, 196608, 2, 393225, 196608, 2, 393226, 196608, 2, 393227, 196608, 2, 393228, 196608, 2, 393229, 196608, 2, 327693, 196608, 1, 327692, 196608, 1, 327691, 196608, 1, 327690, 196608, 1, 327689, 196608, 1, 327688, 196608, 1, 327687, 196608, 1, 327686, 196608, 1, 327685, 196608, 1, 262149, 196608, 1, 262150, 196608, 1, 262151, 196608, 1, 262152, 196608, 1, 262153, 196608, 1, 262154, 196608, 1, 262155, 196608, 1, 262156, 196608, 1, 262157, 196608, 1, 655374, 65536, 4, 589838, 131072, 0, 524302, 65536, 1, 458766, 65536, 2, 393230, 196608, 2, 327694, 196608, 1, 262158, 196608, 1, 720902, 131072, 3, 720903, 131072, 4)
+
+[node name="EnterMarker" type="Marker2D" parent="." index="12"]
+position = Vector2(216, 313)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="13"]
+
+[node name="Wall1" type="CollisionShape2D" parent="StaticBody2D" index="0"]
+shape = SubResource("SegmentShape2D_u0iq7")
+
+[node name="Wall2" type="CollisionShape2D" parent="StaticBody2D" index="1"]
+shape = SubResource("SegmentShape2D_0ojft")
+
+[node name="Wall3" type="CollisionShape2D" parent="StaticBody2D" index="2"]
+shape = SubResource("SegmentShape2D_vhbev")
+
+[node name="Wall4" type="CollisionShape2D" parent="StaticBody2D" index="3"]
+shape = SubResource("SegmentShape2D_4ghnq")
+
+[node name="Warper" parent="." index="14" instance=ExtResource("4_l2p8p")]
+position = Vector2(216, 384)
+scale = Vector2(1.5, 1)
+TargetRoomName = "tavern"
+TargetLocation = "BarrelsMarker"
