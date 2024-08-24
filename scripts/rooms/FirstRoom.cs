@@ -13,7 +13,8 @@ public partial class FirstRoom : BaseRoom
         if (!global.PlayerData.HasPlayedIntro)
         {
             global.CanWalk = false;      
-            await PlayCutscene("player_intro");    
+            await PlayCutscene("player_intro");
+            ShowDialogue(DialogueResource, "intro_cutscene");   
             global.PlayerData.HasPlayedIntro = true;
         }
         else

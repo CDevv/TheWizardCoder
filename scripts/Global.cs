@@ -116,6 +116,8 @@ public partial class Global : Node
 		byte[] hash = CalculateHash(saveName);
 		hashFile.StoreVar(hash);
 		hashFile.Close();
+
+		PlayerData.LocationVector = Vector2.Zero;
 	}
 
 	public void LoadSaveFile(string saveName)

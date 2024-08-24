@@ -7,6 +7,8 @@ public partial class CodeProblemPanel : CanvasLayer
 {
 	[Signal]
 	public delegate void ProblemSolvedEventHandler();
+	[Signal]
+	public delegate void ProblemItemsChangedEventHandler();
 
 	[Export]
 	public PackedScene PickableButtonScene { get; set; }
@@ -21,11 +23,15 @@ public partial class CodeProblemPanel : CanvasLayer
 	private AnimationPlayer animationPlayer;
 	private int itemCount = 0;
 	private int areasCount = 0;
-	private List<PickableButton> items = new List<PickableButton>();
+	private List<PickableButton> buttonItems = new List<PickableButton>();
 	private List<PickableButtonArea> areas = new List<PickableButtonArea>();
-	private List<string> correctAnswers = new List<string>();
-	private List<bool> solvedAreas = new List<bool>();
-	// Called when the node enters the scene tree for the first time.
+	private List<CodeProblemItem> items = new List<CodeProblemItem>();
+
+	public List<CodeProblemItem> ProblemItems 
+	{
+		get { return items; }
+	}
+
 	public override void _Ready()
 	{
 		global = GetNode<Global>("/root/Global");
@@ -34,7 +40,6 @@ public partial class CodeProblemPanel : CanvasLayer
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override async void _Process(double delta)
 	{
 		if (Input.IsActionPressed("ui_cancel"))
@@ -75,7 +80,7 @@ public partial class CodeProblemPanel : CanvasLayer
 		Vector2 buttonPosition = new Vector2(baseListRect.GlobalPosition.X, baseListRect.GlobalPosition.Y + (itemCount * 32));
 		button.GlobalPosition = buttonPosition;
 		AddChild(button);
-		items.Add(button);
+		buttonItems.Add(button);
 		itemCount++;
 	}
 	
@@ -85,24 +90,45 @@ public partial class CodeProblemPanel : CanvasLayer
 		PickableButtonArea area = PickableButtonAreaScene.Instantiate<PickableButtonArea>();
 		codeEdit.AddChild(area);
 		area.Position = position;
-		area.ButtonAdded += (string buttonText) => {
-			if (correctAnswers[currentIndex] == buttonText)
-			{
-				solvedAreas[currentIndex] = true;
-			}
-			if (AreAllAreasSolved())
-			{
-				OnProblemSolved();
-			}
-		};
-		area.ButtonRemoved += () => {
-			solvedAreas[currentIndex] = false;
-		};
+		area.ButtonAdded += (string buttonText) => OnAreaButtonAdded(currentIndex, buttonText);
+		area.ButtonRemoved += () => OnAreaButtonRemoved(currentIndex);
 		areas.Add(area);
-		correctAnswers.Add(correctAnswer);
-		solvedAreas.Add(false);
+
+		CodeProblemItem item = new CodeProblemItem();
+		item.CurrentAnswer = "";
+		item.CorrectAnswer = correctAnswer;
+		item.IsSolved = false;
+		items.Add(item);
+
 		areasCount++;
 		GD.Print(areasCount);
+	}
+
+	private void OnAreaButtonAdded(int index, string buttonText)
+	{
+		if (items[index].CorrectAnswer == buttonText)
+		{
+			items[index].CurrentAnswer = buttonText;
+			items[index].IsSolved = true;
+			EmitSignal(SignalName.ProblemItemsChanged);
+		}
+		if (AreAllAreasSolved())
+		{
+			OnProblemSolved();
+		}
+	}
+
+	private void OnAreaButtonRemoved(int index)
+	{
+		if (!Point.Solved)
+		{
+			if (items.Count > index)
+			{
+				items[index].CurrentAnswer = "";
+				items[index].IsSolved = false;
+				EmitSignal(SignalName.ProblemItemsChanged);
+			}
+		}
 	}
 
 	public void Reset()
@@ -111,26 +137,27 @@ public partial class CodeProblemPanel : CanvasLayer
 		areasCount = 0;
 		codeEdit.Text = "No code to see here :)";
 
-		foreach (PickableButton item in items)
-		{
-			item.QueueFree();
-		}
-		items.Clear();
-
 		foreach (PickableButtonArea area in areas)
 		{
 			area.QueueFree();
 		}
 		areas.Clear();
-		correctAnswers.Clear();
+
+		foreach (PickableButton item in buttonItems)
+		{
+			item.QueueFree();
+		}
+		buttonItems.Clear();
+
+		items.Clear();
 	}
 
 	private bool AreAllAreasSolved()
 	{
 		int solvedCount = 0;
-		foreach (var item in solvedAreas)
+		foreach (var item in items)
 		{
-			if (item)
+			if (item.IsSolved)
 			{
 				solvedCount++;
 			}

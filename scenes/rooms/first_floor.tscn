@@ -27,11 +27,12 @@ layer_1/tile_data = PackedInt32Array(131077, 0, 9, 131086, 65536, 9, 131078, 655
 
 [node name="Player" parent="." index="9" instance=ExtResource("3_1bi87")]
 z_index = 1
+position = Vector2(183, 255)
 
 [node name="RoomCollision" type="StaticBody2D" parent="." index="10"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomCollision" index="0"]
-polygon = PackedVector2Array(480, 64, 496, 48, 496, 400, 368, 400, 368, 432, 272, 432, 272, 400, 144, 400, 144, 336, 0, 336, 0, 112, 144, 112, 144, 48, 496, 48, 480, 64, 160, 64, 160, 268, 64, 188, 64, 120, 16, 120, 16, 248, 40, 248, 64, 248, 160, 320, 160, 384, 288, 384, 288, 416, 352, 416, 352, 384, 480, 384)
+polygon = PackedVector2Array(480, 64, 496, 48, 496, 400, 368, 400, 368, 432, 272, 432, 272, 400, 144, 400, 144, 336, 0, 336, 0, 112, 144, 112, 144, 48, 496, 48, 480, 64, 160, 64, 160, 268, 88.0595, 208.05, 64, 208, 64, 188, 64, 120, 16, 120, 16, 248, 40, 248, 64, 248, 160, 320, 160, 384, 288, 384, 288, 416, 352, 416, 352, 384, 480, 384)
 
 [node name="DoorMarker" type="Marker2D" parent="." index="11"]
 position = Vector2(312, 216)
@@ -57,7 +58,7 @@ TargetLocation = "StairsMarker"
 [node name="StairsArea" parent="." index="16" instance=ExtResource("5_nfrtk")]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StairsArea" index="0"]
-polygon = PackedVector2Array(78, 201, 77, 224, 77, 256, 153, 315, 153, 296, 153, 265)
+polygon = PackedVector2Array(88, 209, 88, 248, 65, 248, 160, 320, 160, 268)
 
 [node name="PictureDialogue" parent="." index="17" instance=ExtResource("6_efpan")]
 position = Vector2(216, 182)

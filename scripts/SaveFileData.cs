@@ -46,6 +46,8 @@ public partial class SaveFileData : Node
     public bool HasMessageFromShimble { get; set; } = false;
     public bool HasQuestFromShimble { get; set; } = false;
     public bool HasSolvedShimbleChair { get; set; } = false;
+    public bool HasVisitedZenHouse { get; set; } = false;
+    public bool HasSolvedZenHouse { get; set; } = false;
 
     public SaveFileData()
     {
@@ -74,7 +76,13 @@ public partial class SaveFileData : Node
             {"LocationVector", LocationVector},
             {"Health", Health},
             {"Inventory", Inventory},
+
             {"HasPlayedIntro", HasPlayedIntro},
+            {"HasMessageFromShimble", HasMessageFromShimble},
+            {"HasQuestFromShimble", HasQuestFromShimble},
+            {"HasSolvedShimbleChair", HasSolvedShimbleChair},
+            {"HasVisitedZenHouse", HasVisitedZenHouse},
+            {"HasSolvedZenHouse", HasSolvedZenHouse},
         };
     }
 
@@ -93,6 +101,11 @@ public partial class SaveFileData : Node
 
         //Playthrough
         HasPlayedIntro = (bool)dictionary["HasPlayedIntro"];
+        HasMessageFromShimble = (bool)dictionary["HasMessageFromShimble"];
+        HasQuestFromShimble = (bool)dictionary["HasQuestFromShimble"];
+        HasSolvedShimbleChair = (bool)dictionary["HasSolvedShimbleChair"];
+        HasVisitedZenHouse = (bool)dictionary["HasVisitedZenHouse"];
+        HasSolvedZenHouse = (bool)dictionary["HasSolvedZenHouse"];
     }
 
     public void AddToInventory(string item)

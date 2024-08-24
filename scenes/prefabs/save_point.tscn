@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjynvky1n76b2"]
+[gd_scene load_steps=5 format=3 uid="uid://bjynvky1n76b2"]
 
 [ext_resource type="Texture2D" uid="uid://daiclynbb78s6" path="res://assets/props/save.png" id="1_14lta"]
 [ext_resource type="Script" path="res://scripts/interactables/SavePoint.cs" id="1_pqubm"]
@@ -6,19 +6,24 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rq7ry"]
 size = Vector2(32, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67ebt"]
+size = Vector2(32, 16)
+
 [node name="SavePoint" type="Area2D"]
+y_sort_enabled = true
 script = ExtResource("1_pqubm")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
 texture = ExtResource("1_14lta")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_rq7ry")
 debug_color = Color(1, 0, 0, 0.419608)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="PointCollision" type="StaticBody2D" parent="."]
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_rq7ry")
+[node name="Shape" type="CollisionShape2D" parent="PointCollision"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_67ebt")
 debug_color = Color(0.415686, 0.501961, 0.882353, 0.419608)

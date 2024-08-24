@@ -66,14 +66,21 @@ TargetRoomName = "village_2"
 TargetLocation = "Section1Marker"
 PlayerDirection = 3
 
-[node name="Warper" parent="." index="12" instance=ExtResource("4_ohjtn")]
+[node name="ShimbleWarper" parent="." index="12" instance=ExtResource("4_ohjtn")]
 z_index = 1
 position = Vector2(720, 719)
 TargetRoomName = "shimble_house"
 TargetLocation = "EnterHouseMarker"
 PlayerDirection = 1
 
-[node name="RoomCollision" type="StaticBody2D" parent="." index="13"]
+[node name="ZenWarper" parent="." index="13" instance=ExtResource("4_ohjtn")]
+z_index = 2
+position = Vector2(832, 420)
+TargetRoomName = "zen_house"
+TargetLocation = "EnterHouseMarker"
+PlayerDirection = 2
+
+[node name="RoomCollision" type="StaticBody2D" parent="." index="14"]
 position = Vector2(0, 32)
 
 [node name="Wall1" type="CollisionShape2D" parent="RoomCollision" index="0"]
@@ -85,17 +92,21 @@ shape = SubResource("SegmentShape2D_gtpcj")
 [node name="Wall3" type="CollisionShape2D" parent="RoomCollision" index="2"]
 shape = SubResource("SegmentShape2D_tdlu8")
 
-[node name="EnterVillageMarker" type="Marker2D" parent="." index="14"]
+[node name="EnterVillageMarker" type="Marker2D" parent="." index="15"]
 position = Vector2(80, 880)
 
-[node name="Section2Marker" type="Marker2D" parent="." index="15"]
+[node name="Section2Marker" type="Marker2D" parent="." index="16"]
 position = Vector2(1648, 880)
 
-[node name="ShimbleHouseMarker" type="Marker2D" parent="." index="16"]
+[node name="ShimbleHouseMarker" type="Marker2D" parent="." index="17"]
 position = Vector2(720, 721)
 
-[node name="Player" parent="." index="17" instance=ExtResource("5_7m8xg")]
+[node name="ZenHouseMarker" type="Marker2D" parent="." index="18"]
+position = Vector2(887, 400)
+
+[node name="Player" parent="." index="19" instance=ExtResource("5_7m8xg")]
 z_index = 1
 
-[node name="SavePoint" parent="." index="19" instance=ExtResource("6_ddf0g")]
+[node name="SavePoint" parent="." index="21" instance=ExtResource("6_ddf0g")]
+z_index = 1
 position = Vector2(272, 816)

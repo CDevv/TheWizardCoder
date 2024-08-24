@@ -61,6 +61,7 @@ public partial class BaseRoom : Node2D
 		if (global.PlayerData.LocationVector != Vector2.Zero)
 		{
 			Player.Position = global.PlayerData.LocationVector;
+			global.PlayerData.LocationVector = Vector2.Zero;
 		}
 		Camera.Position = Player.Position;
 		global.PlayerData.LocationVector = Vector2.Zero;
@@ -72,13 +73,16 @@ public partial class BaseRoom : Node2D
 	public async Task PlayCutscene(string name)
 	{
 		global.CanWalk = false;
+		global.GameDisplayEnabled = false;
 		AnimationPlayer.Play(name, -1, 0.5f);
         await ToSignal(AnimationPlayer, AnimationPlayer.SignalName.AnimationFinished);
 		global.CanWalk = true;
+		global.GameDisplayEnabled = true;
 	}
 
-	public void ShowDialogue(Resource resource, string title)
+	public async Task ShowDialogue(Resource resource, string title)
 	{
 		Dialogue.ShowDisplay(resource, title);
+		await ToSignal(Dialogue, DialogueDisplay.SignalName.DialogueEnded);
 	}
 }

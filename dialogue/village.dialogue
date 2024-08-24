@@ -27,6 +27,8 @@ Shimble: [#portrait=0] ...
 Shimble: [#portrait=0] You actually did it!
 Shimble: [#portrait=0] I knew I could trust you! Thank you!
 Nolan: [#portrait=0] ..I actually don't know how I did it. Like it suddenly disappeared out of nowhere.
+Shimble: [#portrait=0] Surely you can help elsewhere, right?
+Shimble: [#portrait=0] Take a look around the village and fix the issues if you can!
 do SetPlayerData("HasSolvedShimbleChair", true)
 => END!
 
@@ -37,3 +39,46 @@ if GetPlayerData("HasQuestFromShimble") and not GetPlayerData("HasSolvedShimbleC
 elif GetPlayerData("HasSolvedShimbleChair"):
 	Shimble: [#portrait=0] Thank you!
 	Nolan: [#portrait=0] No problem!
+=> END!
+		
+~ zen_intro_1
+Zen: [#portrait=0] Oh! [wait=1]Wizard man! 
+Zen: [#portrait=0] Good thing you're here! I was wondering what this thing is..
+=> END!
+	
+~ zen_intro_2
+Zen: [#portrait=0] Yeah..
+Zen: [#portrait=0] Think you can cast a spell or something?
+Nolan: [#portrait=0] I will.. [wait=3]see..
+do SetPlayerData("HasVisitedZenHouse", true)
+=> END!
+
+~ zen_code_solved
+Zen: [#portrait=0] Oh! You did it! Thank you!
+Zen: [#portrait=0] I was wondering where my groceries went. Purchased them from Nara and Keenelm.
+Zen: [#portrait=0] They are pretty nice. They might also be experiencing this kind of issue though..
+Nolan: [#portrait=0] I see..
+Zen: [#portrait=0] Mind helping them aswell?
+Nolan: [#portrait=0] Sure thing!
+do SetPlayerData("HasSolvedZenHouse", true)
+=> END!
+
+~ zen_point
+if GetPlayerData("HasSolvedZenHouse"):
+	Zen: [#portrait=0] Cool, you did it!
+else:
+	Zen: [#portrait=0] Think you can cast a spell or something?
+	Nolan: [#portrait=0] I will try..
+=> END!
+
+~ basket_empty
+Narrator: An empty basket.
+=> END!
+
+~ basket_full
+Narrator: Basket with just the right amount of groceries.
+=> END!
+
+~ basket_corrupted
+Narrator: A basket that seems wrong.
+=> END!

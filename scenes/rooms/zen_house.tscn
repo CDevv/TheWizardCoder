@@ -1,10 +1,136 @@
-[gd_scene load_steps=17 format=3 uid="uid://dp36q41issq5x"]
+[gd_scene load_steps=31 format=3 uid="uid://dp36q41issq5x"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_76m4h"]
+[ext_resource type="Script" path="res://scripts/rooms/ZenHouse.cs" id="2_1auo6"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="2_kf2x7"]
 [ext_resource type="TileSet" uid="uid://clhrfovy5lcgu" path="res://tilesets/houses_interiors.tres" id="3_1ycko"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="4_5nhse"]
 [ext_resource type="Texture2D" uid="uid://bobyoupoe6ukp" path="res://assets/props/basket.png" id="5_4drfq"]
+[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/prefabs/character_dialogue_point.tscn" id="6_1uugv"]
+[ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="7_h6001"]
+[ext_resource type="SpriteFrames" uid="uid://bep08a0upkydb" path="res://assets/characters/movement/spriteframes/zenith.tres" id="8_21sgk"]
+[ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="10_5j3uc"]
+[ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/prefabs/code_problem_point.tscn" id="11_1n5do"]
+[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/prefabs/dialogue_point.tscn" id="12_di0gj"]
+
+[sub_resource type="Animation" id="Animation_hoyvw"]
+resource_name = "code_solved"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Glitch:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Zen")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [2],
+"method": &"PlayIdleAnimation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_uhg8f"]
+resource_name = "final_pos"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Glitch/GlitchCollision/GlitchShape:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Basket:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Glitch:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_668k4"]
+resource_name = "zen_down"
+length = 0.01
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Zen")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0],
+"method": &"PlayIdleAnimation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_n6wut"]
+resource_name = "zen_intro"
+length = 2.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Zen")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [0],
+"method": &"PlayIdleAnimation"
+}, {
+"args": [3],
+"method": &"PlayIdleAnimation"
+}, {
+"args": [0],
+"method": &"PlayIdleAnimation"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ijerk"]
+_data = {
+"code_solved": SubResource("Animation_hoyvw"),
+"final_pos": SubResource("Animation_uhg8f"),
+"zen_down": SubResource("Animation_668k4"),
+"zen_intro": SubResource("Animation_n6wut")
+}
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_p4qp1"]
 a = Vector2(160, 32)
@@ -69,8 +195,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o0v1m"]
+size = Vector2(17, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aljoa"]
+size = Vector2(32, 32)
+
 [node name="ZenHouse" instance=ExtResource("1_76m4h")]
 y_sort_enabled = true
+script = ExtResource("2_1auo6")
+DialogueResource = ExtResource("7_h6001")
+
+[node name="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_ijerk")
+}
 
 [node name="ColorRect" type="ColorRect" parent="." index="9"]
 offset_right = 640.0
@@ -79,7 +218,6 @@ color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." index="10" instance=ExtResource("2_kf2x7")]
 z_index = 1
-position = Vector2(328, 173)
 
 [node name="TileMap" type="TileMap" parent="." index="11"]
 y_sort_enabled = true
@@ -116,8 +254,61 @@ shape = SubResource("SegmentShape2D_qwetc")
 [node name="Warper" parent="." index="14" instance=ExtResource("4_5nhse")]
 position = Vector2(416, 200)
 scale = Vector2(1, 1.5)
+TargetRoomName = "village_1"
+TargetLocation = "ZenHouseMarker"
+PlayerDirection = 3
 
 [node name="Basket" type="AnimatedSprite2D" parent="." index="15"]
 position = Vector2(312, 120)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_qygsj")
+
+[node name="BasketCollision" type="StaticBody2D" parent="Basket" index="0"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Basket/BasketCollision" index="0"]
+position = Vector2(1, 7)
+shape = SubResource("RectangleShape2D_o0v1m")
+
+[node name="Zen" parent="." index="16" instance=ExtResource("6_1uugv")]
+position = Vector2(275, 153)
+DialogueResource = ExtResource("7_h6001")
+DialogueTitle = "zen_point"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Zen" index="2"]
+position = Vector2(0, -18)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("8_21sgk")
+
+[node name="Glitch" type="Sprite2D" parent="." index="17"]
+position = Vector2(184, 216)
+scale = Vector2(2, 2)
+texture = ExtResource("10_5j3uc")
+
+[node name="GlitchCollision" type="StaticBody2D" parent="Glitch" index="0"]
+
+[node name="GlitchShape" type="CollisionShape2D" parent="Glitch/GlitchCollision" index="0"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_aljoa")
+
+[node name="CodeProblemPoint" parent="." index="18" instance=ExtResource("11_1n5do")]
+z_index = 2
+position = Vector2(192, 216)
+scale = Vector2(2, 2)
+Code = "int a = 5 + 		 11;
+int b = a / 4;
+Basket.Fill	  (b);"
+Items = Array[String](["+", "-", ".Remove", ".Fill"])
+SolvableAreas = {
+"+": Vector2(56, 4),
+".Fill": Vector2(44, 36)
+}
+
+[node name="BasketDialoguePoint" parent="." index="19" instance=ExtResource("12_di0gj")]
+unique_name_in_owner = true
+position = Vector2(314, 132)
+scale = Vector2(2, 1)
+DialogueResource = ExtResource("7_h6001")
+DialogueTitle = "basket_empty"
+
+[connection signal="ProblemItemsChanged" from="CodeProblemPanel" to="." method="OnCodeProblemItemsChanged"]
+[connection signal="ProblemSolved" from="CodeProblemPanel" to="." method="OnCodeProblemSolved"]

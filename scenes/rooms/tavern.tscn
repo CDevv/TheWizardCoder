@@ -83,6 +83,8 @@ shape = SubResource("SegmentShape2D_prx2w")
 [node name="Warper" parent="." index="14" instance=ExtResource("4_p74cn")]
 position = Vector2(704, 352)
 scale = Vector2(2, 1)
+TargetRoomName = "village_3"
+TargetLocation = "TavernMarker"
 
 [node name="BarrelsWarper" parent="." index="15" instance=ExtResource("4_p74cn")]
 z_index = 1
@@ -91,7 +93,7 @@ TargetRoomName = "tavern_barrels_room"
 TargetLocation = "EnterMarker"
 PlayerDirection = 1
 
-[node name="EnterHouseMarker" type="Marker2D" parent="." index="16"]
+[node name="EnterMarker" type="Marker2D" parent="." index="16"]
 position = Vector2(704, 284)
 
 [node name="BarrelsRoomMarker" type="Marker2D" parent="." index="17"]

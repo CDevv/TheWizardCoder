@@ -59,11 +59,25 @@ TargetRoomName = "village_2"
 TargetLocation = "Section3Marker"
 PlayerDirection = 2
 
-[node name="ForestWarper" parent="." index="11" instance=ExtResource("4_85gv2")]
+[node name="TavernWarper" parent="." index="11" instance=ExtResource("4_85gv2")]
+z_index = 2
+position = Vector2(512, 785)
+scale = Vector2(2, 1)
+TargetRoomName = "tavern"
+TargetLocation = "EnterMarker"
+PlayerDirection = 1
+
+[node name="ForestWarper" parent="." index="12" instance=ExtResource("4_85gv2")]
 position = Vector2(1904, 864)
 scale = Vector2(1, 12)
 
-[node name="RoomCollision" type="StaticBody2D" parent="." index="12"]
+[node name="Section2Marker" type="Marker2D" parent="." index="13"]
+position = Vector2(40, 840)
+
+[node name="TavernMarker" type="Marker2D" parent="." index="14"]
+position = Vector2(512, 800)
+
+[node name="RoomCollision" type="StaticBody2D" parent="." index="15"]
 position = Vector2(0, 320)
 
 [node name="Wall1" type="CollisionShape2D" parent="RoomCollision" index="0"]
@@ -77,6 +91,3 @@ shape = SubResource("SegmentShape2D_k4fos")
 
 [node name="Wall4" type="CollisionShape2D" parent="RoomCollision" index="3"]
 shape = SubResource("SegmentShape2D_r4c2u")
-
-[node name="Section2Marker" type="Marker2D" parent="." index="13"]
-position = Vector2(40, 840)

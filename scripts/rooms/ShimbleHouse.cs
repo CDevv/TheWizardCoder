@@ -14,11 +14,9 @@ public partial class ShimbleHouse : BaseRoom
 		if (!global.PlayerData.HasQuestFromShimble)
 		{
 			await PlayCutscene("shimble_1");
-			ShowDialogue(DialogueResource, "intro_shimble_1");
-			await ToSignal(Dialogue, DialogueDisplay.SignalName.DialogueEnded);
+			await ShowDialogue(DialogueResource, "intro_shimble_1");
 			await PlayCutscene("shimble_2");
-			ShowDialogue(DialogueResource, "intro_shimble_2");
-			await ToSignal(Dialogue, DialogueDisplay.SignalName.DialogueEnded);
+			await ShowDialogue(DialogueResource, "intro_shimble_2");
 		}
 		else if (global.PlayerData.HasQuestFromShimble && !global.PlayerData.HasSolvedShimbleChair)
 		{
@@ -34,7 +32,6 @@ public partial class ShimbleHouse : BaseRoom
 	private async void OnProblemSolved()
 	{
 		await PlayCutscene("problem_solved");
-		ShowDialogue(DialogueResource, "shimble_chair_solved");
-		await ToSignal(Dialogue, DialogueDisplay.SignalName.DialogueEnded);
+		await ShowDialogue(DialogueResource, "shimble_chair_solved");
 	}
 }
