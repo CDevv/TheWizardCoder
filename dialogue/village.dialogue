@@ -1,11 +1,27 @@
 using Global
 
-~ intro_village
-Nathan: HEY!
-Nathan: Oh wait it's you, Nolan! Thought you were an intruder for a bit.
-Nathan: Anyway.. We were having some issues in the village and yeah..
-Nathan: You're a wizard, though. Right?
-Nathan: Maybe you can fix it!
+~ locked
+Narrator: It's locked
+=> END!
+
+~ basket_empty
+Narrator: An empty basket.
+=> END!
+
+~ basket_full
+Narrator: Basket with just the right amount of groceries.
+=> END!
+
+~ basket_corrupted
+Narrator: A basket that seems wrong.
+=> END!
+
+~ basket
+Narrator: A basket full of fruits
+=> END!
+
+~ hay_bale
+Narrator: A hay bale.
 => END!
 
 ~ intro_shimble_1
@@ -69,16 +85,4 @@ if GetPlayerData("HasSolvedZenHouse"):
 else:
 	Zen: [#portrait=0] Think you can cast a spell or something?
 	Nolan: [#portrait=0] I will try..
-=> END!
-
-~ basket_empty
-Narrator: An empty basket.
-=> END!
-
-~ basket_full
-Narrator: Basket with just the right amount of groceries.
-=> END!
-
-~ basket_corrupted
-Narrator: A basket that seems wrong.
 => END!
