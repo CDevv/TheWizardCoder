@@ -1,11 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8wix4lm5g767"]
+[gd_scene load_steps=14 format=3 uid="uid://b8wix4lm5g767"]
 
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_q5vyp"]
 [ext_resource type="Script" path="res://scripts/displays/DialogueDisplay.cs" id="1_u23wf"]
 [ext_resource type="Texture2D" uid="uid://c2qot3pr0oxof" path="res://assets/characters/portraits/nolan.png" id="2_ts8x8"]
 [ext_resource type="PackedScene" uid="uid://capppjgr8n1ew" path="res://scenes/prefabs/text_button.tscn" id="2_y60jh"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="3_0qck7"]
+[ext_resource type="Texture2D" uid="uid://dnwl13wb4jxy2" path="res://assets/characters/portraits/keenelm.png" id="4_7t36c"]
 [ext_resource type="Texture2D" uid="uid://yyw2mjmjrp8x" path="res://assets/characters/portraits/shimble.png" id="5_dsymk"]
+[ext_resource type="Texture2D" uid="uid://b82ubblioamoo" path="res://assets/characters/portraits/nara.png" id="5_iw7gq"]
 [ext_resource type="Texture2D" uid="uid://qbru1t4okg4k" path="res://assets/characters/portraits/zenith.png" id="5_wun3d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hlsid"]
@@ -22,6 +24,22 @@ region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_td2l1"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_7t36c")
+}],
+"loop": true,
+"name": &"keenelm",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_iw7gq")
+}],
+"loop": true,
+"name": &"nara",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hlsid")

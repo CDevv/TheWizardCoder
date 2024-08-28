@@ -108,7 +108,10 @@ offset_right = 168.0
 offset_bottom = 152.0
 mouse_filter = 2
 theme = ExtResource("2_cm4ur")
-text = "code"
+text = "int humidity =    		   ;
+
+ 		 (humidity >= 50)
+	Plant.Grow();"
 editable = false
 context_menu_enabled = false
 shortcut_keys_enabled = false
@@ -120,11 +123,11 @@ wrap_mode = 1
 
 [node name="PickableButtonArea" parent="CodeRect/CodeEdit" instance=ExtResource("4_vm0ji")]
 visible = false
-position = Vector2(56, 4)
+position = Vector2(86, 4)
 
 [node name="PickableButtonArea2" parent="CodeRect/CodeEdit" instance=ExtResource("4_vm0ji")]
 visible = false
-position = Vector2(44, 36)
+position = Vector2(0, 36)
 
 [node name="ItemsRect" type="NinePatchRect" parent="."]
 offset_left = 64.0

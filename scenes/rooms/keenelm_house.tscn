@@ -1,9 +1,149 @@
-[gd_scene load_steps=9 format=3 uid="uid://b20hcmy6ye7g5"]
+[gd_scene load_steps=18 format=3 uid="uid://b20hcmy6ye7g5"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_ruu63"]
+[ext_resource type="Script" path="res://scripts/rooms/KeenelmHouse.cs" id="2_jc32x"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="2_v3u7x"]
 [ext_resource type="TileSet" uid="uid://clhrfovy5lcgu" path="res://tilesets/houses_interiors.tres" id="3_8tqe0"]
+[ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="3_q634i"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="4_wdwse"]
+[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/prefabs/character_dialogue_point.tscn" id="5_n7tql"]
+[ext_resource type="SpriteFrames" uid="uid://bt3t7i7iwmqu4" path="res://assets/characters/movement/spriteframes/nara.tres" id="6_hism1"]
+
+[sub_resource type="Animation" id="Animation_6eqtr"]
+resource_name = "nara_1"
+length = 0.01
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Nara")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [3],
+"method": &"PlayIdleAnimation"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [2],
+"method": &"PlayIdleAnimation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_53aou"]
+resource_name = "nara_2"
+length = 0.01
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Nara")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0],
+"method": &"PlayIdleAnimation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_uxbi7"]
+resource_name = "nara_code_solved_1"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Nara:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(152, 288), Vector2(320, 288), Vector2(320, 337)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Nara")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": ["right"],
+"method": &"PlayAnimation"
+}, {
+"args": ["down"],
+"method": &"PlayAnimation"
+}, {
+"args": [0],
+"method": &"PlayIdleAnimation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ouqwt"]
+resource_name = "nara_code_solved_2"
+length = 2.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Nara:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.2, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(320, 337), Vector2(160, 337), Vector2(160, 337), Vector2(320, 337)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Nara")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.2, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"values": [{
+"args": ["left"],
+"method": &"PlayAnimation"
+}, {
+"args": [2],
+"method": &"PlayIdleAnimation"
+}, {
+"args": ["right"],
+"method": &"PlayAnimation"
+}, {
+"args": [3],
+"method": &"PlayIdleAnimation"
+}, {
+"args": [0],
+"method": &"PlayIdleAnimation"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6ye3v"]
+_data = {
+"nara_1": SubResource("Animation_6eqtr"),
+"nara_2": SubResource("Animation_53aou"),
+"nara_code_solved_1": SubResource("Animation_uxbi7"),
+"nara_code_solved_2": SubResource("Animation_ouqwt")
+}
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qoop0"]
 a = Vector2(96, 224)
@@ -23,6 +163,13 @@ b = Vector2(544, 384)
 
 [node name="KeenelmHouse" instance=ExtResource("1_ruu63")]
 y_sort_enabled = true
+script = ExtResource("2_jc32x")
+DialogueResource = ExtResource("3_q634i")
+
+[node name="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_6ye3v")
+}
 
 [node name="ColorRect" type="ColorRect" parent="." index="9"]
 offset_right = 640.0
@@ -67,3 +214,14 @@ TargetLocation = "HouseMarker"
 
 [node name="EnterHouseMarker" type="Marker2D" parent="." index="14"]
 position = Vector2(320, 344)
+
+[node name="Nara" parent="." index="15" instance=ExtResource("5_n7tql")]
+z_index = 1
+position = Vector2(152, 288)
+DialogueResource = ExtResource("3_q634i")
+DialogueTitle = "nara_point"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Nara" index="2"]
+position = Vector2(0, -17)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("6_hism1")

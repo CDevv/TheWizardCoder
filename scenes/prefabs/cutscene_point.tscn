@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://mmm0k3msmmm5"]
+
+[ext_resource type="Script" path="res://scripts/prefabs/CutscenePoint.cs" id="1_q8f4p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5gslg"]
+size = Vector2(32, 32)
+
+[node name="CutscenePoint" type="Area2D"]
+script = ExtResource("1_q8f4p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5gslg")
+debug_color = Color(0.996078, 1, 0, 0.419608)
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]

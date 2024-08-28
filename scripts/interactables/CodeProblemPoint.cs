@@ -33,6 +33,7 @@ public partial class CodeProblemPoint : Interactable
 		else
 		{
 			global.CanWalk = true;
+			global.GameDisplayEnabled = true;
 		}
     }
 }

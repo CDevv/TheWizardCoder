@@ -4,5 +4,11 @@
 		"Description":"Description",
 		"Type": "Heal",
 		"Effect": 10,
+	},
+	"Apple":{
+		"Name": "Apple",
+		"Description":"Apple from Nara.",
+		"Type": "Heal",
+		"Effect": 10,
 	}
 }

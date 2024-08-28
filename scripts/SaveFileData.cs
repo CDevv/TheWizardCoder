@@ -48,6 +48,11 @@ public partial class SaveFileData : Node
     public bool HasSolvedShimbleChair { get; set; } = false;
     public bool HasVisitedZenHouse { get; set; } = false;
     public bool HasSolvedZenHouse { get; set; } = false;
+    public bool HasEncounteredKeenelm { get; set; } = false;
+    public bool HasEncounteredNara { get; set; } = false;
+    public bool HasPlayedKeenelmCutscene { get; set; } = false;
+    public bool HasSolvedFarmGlitch { get; set; } = false;
+    public bool HasReceivedAppleFromNara { get; set; } = false;
 
     public SaveFileData()
     {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c0iqpqhuxgcn7"]
+[gd_scene load_steps=38 format=3 uid="uid://c0iqpqhuxgcn7"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_xan73"]
 [ext_resource type="TileSet" uid="uid://b00p342wf54q8" path="res://tilesets/housetiles.tres" id="2_m8now"]
@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://bqgh81grm43r" path="res://dialogue/test.dialogue" id="8_bj7jj"]
 [ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/prefabs/code_problem_point.tscn" id="11_5aqh3"]
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/prefabs/dialogue_point.tscn" id="11_67j7s"]
+[ext_resource type="PackedScene" uid="uid://mmm0k3msmmm5" path="res://scenes/prefabs/cutscene_point.tscn" id="12_8300v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n63b5"]
 atlas = ExtResource("8_5nbo5")
@@ -275,3 +276,7 @@ z_index = 1
 position = Vector2(288, 214)
 DialogueResource = ExtResource("8_bj7jj")
 DialogueTitle = "demo_playerdata"
+
+[node name="CutscenePoint" parent="." index="19" instance=ExtResource("12_8300v")]
+z_index = 1
+position = Vector2(432, 272)

@@ -24,6 +24,10 @@ Narrator: A basket full of fruits
 Narrator: A hay bale.
 => END!
 
+~ niko
+Narrator: A cat child's favourite wheat field.
+=> END!
+
 ~ intro_shimble_1
 Shimble: [#portrait=0] Ah, hello Nolan! I was expecting you!
 Nolan: [#portrait=0] Yes, I got your message. What is the issue?
@@ -85,4 +89,91 @@ if GetPlayerData("HasSolvedZenHouse"):
 else:
 	Zen: [#portrait=0] Think you can cast a spell or something?
 	Nolan: [#portrait=0] I will try..
+=> END!
+
+~ keenelm_1
+Keenelm: [#portrait=0] Hey, you!
+Nolan: [#portrait=0] Yeah?
+=> END!
+
+~ keenelm_2
+if not GetPlayerData("HasEncounteredNara"):
+	Keenelm: [#portrait=0] You a wizard, right?
+	Keenelm: [#portrait=0] You gotta help! Have you seen that thing over there in the crops?
+	Keenelm: [#portrait=0] Please try to fix it!
+	Nolan: [#portrait=0] Okay, I guess I can try.
+else:
+	Keenelm: [#portrait=0] You a wizard, right?
+	Keenelm: [#portrait=0] You gotta help! Have you seen that thing over there in the crops?
+	Nolan: [#portrait=0] Yeah, I already got told by your wife.
+	Keenelm: [#portrait=0] Oh, okay then!
+do SetPlayerData("HasEncounteredKeenelm", true)
+do CallRoomMethod("DisableCutscene")
+=> END!
+
+~ keenelm_code_solved
+Keenelm: [#portrait=0] Oh! You managed to get red of it! Pretty nice!
+Nolan: [#portrait=0] Yeah!
+=> END!
+
+~ keenelm_point
+if GetPlayerData("HasSolvedFarmGlitch"):
+	Keenelm: [#portrait=0] Thank you!
+elif GetPlayerData("HasEncounteredKeenelm"):
+	Keenelm: [#portrait=0] Will you fix it, please?
+	Nolan: [#portrait=0] Yep!
+elif GetPlayerData("HasEncounteredKeenelm") == false:
+	=> keenelm_2
+=> END!
+
+~ nara_1
+if not GetPlayerData("HasEncounteredKeenelm"):
+	Nara: [#portrait=0] Oh, hello! 
+	Nara: [#portrait=0] I haven't seen a wizard in a while. You must be one, right?
+	Nara: [#portrait=0] Mr. Shimble said he would call a wizard to do something about this.
+	if GetPlayerData("HasSolvedShimbleChair"):
+		Nolan: [#portrait=0] Yep, I've already been to his house. I managed to fix the issue there.
+		Nara: [#portrait=0] Oh, that's great! Can you fix the one in our farm as well?
+		Nolan: [#portrait=0] Sure!
+	else:
+		Nolan: [#portrait=0] I have received a mail from him about this.
+		Nara: [#portrait=0] Oh! It must be you then. Can you try to fix the black thing in our farm? It is outside the house.
+		Nolan: [#portrait=0] I can try.
+else:
+	Nara: [#portrait=0] Oh, hello! 
+	Nara: [#portrait=0] I haven't seen a wizard in a while. You must be one, right?
+	Nara: [#portrait=0] Mr. Shimble said he would call a wizard to do something about this.
+	Nolan: [#portrait=0] Yep, Keenelm already told me about the black thing in the farm.
+	Nara: [#portrait=0] Can you fix it then?
+	Nolan: [#portrait=0] I can try.
+do SetPlayerData("HasEncounteredNara", true)
+=> END!
+
+~ nara_code_solved_1
+Nolan: [#portrait=0] I fixed it!
+=> END!
+
+~ nara_code_solved_2
+Nara: [#portrait=0] Oh, you did? I am pleased to hear that. [next=auto]
+Nara: [#portrait=0] Hold on for a moment.
+=> END!
+
+~ nara_code_solved_3
+Nara: [#portrait=0] Here, take this apple as a sign of gratitude.
+Narrator: You received an Apple.
+do AddToInventory("Apple")
+Nolan: [#portrait=0] Oh. Thanks!
+Nara: [#portrait=0] There are other places in this village that need fixing. 
+Nara: [#portrait=0] Some say that the further you go to the castle town, the more 'glitches' you will meet.
+Nolan: [#portrait=0] Oh?
+Nara: [#portrait=0] Indeed, you may be the one who will be able to heal them all.
+Nara: [#portrait=0] I wish you best of luck!
+Nolan: [#portrait=0] Thanks! 
+=> END!
+
+~ nara_point
+if GetPlayerData("HasSolvedFarmGlitch"):
+	Nara: [#portrait=0] Thank you, kind wizard!
+else:
+	Nara: [#portrait=0] I hope you can fix it.
 => END!

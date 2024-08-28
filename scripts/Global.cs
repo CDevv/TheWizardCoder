@@ -320,4 +320,9 @@ public partial class Global : Node
 	{
 		PlayerData.Set(key, value);
 	}
+
+	public void CallRoomMethod(string methodName)
+	{
+		CurrentRoom.CallDeferred(methodName);
+	}
 }
