@@ -177,3 +177,30 @@ if GetPlayerData("HasSolvedFarmGlitch"):
 else:
 	Nara: [#portrait=0] I hope you can fix it.
 => END!
+
+~ berry_1
+Berry: [#portrait=0] Oh! 
+Berry: [#portrait=0] Hello there, dear wizard! What brings you here?
+Nolan: [#portrait=0] I'm just checking the village around to see if there are things to 'fix'..
+Berry: [#portrait=0] I see.. 
+Berry: [#portrait=0] There actually is something that you may try fixing.
+Berry: [#portrait=0] I was wondering why my supply is so low..
+Berry: [#portrait=0] Come with me.
+=> END!
+
+~ berry_2
+Berry: [#portrait=0] So, this is the storage room.
+Berry: [#portrait=0] You can probably see that 'glitch' over there.
+Berry: [#portrait=0] But you're a wizard so you probably know what to do.
+Berry: [#portrait=0] Good luck!
+=> END!
+
+~ berry_point
+if GetPlayerData("HasSolvedTavernGlitch"):
+	Berry: [#portrait=0] Fixed it yet?
+	Nolan: [#portrait=0] Yep, it's no longer there!
+	Berry: [#portrait=0] Oh, that's great!
+else:
+	Berry: [#portrait=0] Fixed it yet?
+	Nolan: [#portrait=0] Not yet..
+=> END!

@@ -53,6 +53,9 @@ public partial class SaveFileData : Node
     public bool HasPlayedKeenelmCutscene { get; set; } = false;
     public bool HasSolvedFarmGlitch { get; set; } = false;
     public bool HasReceivedAppleFromNara { get; set; } = false;
+    public bool HasMetBerry { get; set; } = false;
+    public bool TavernPuzzleIntro { get; set; } = false;
+    public bool HasSolvedTavernGlitch { get; set; } = false;
 
     public SaveFileData()
     {

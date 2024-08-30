@@ -1,9 +1,114 @@
-[gd_scene load_steps=9 format=3 uid="uid://ck5s4o4tgxht7"]
+[gd_scene load_steps=16 format=3 uid="uid://ck5s4o4tgxht7"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_k3jai"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="2_laksc"]
+[ext_resource type="Script" path="res://scripts/rooms/Tavern.cs" id="2_nc0um"]
 [ext_resource type="TileSet" uid="uid://clhrfovy5lcgu" path="res://tilesets/houses_interiors.tres" id="3_5p0mu"]
+[ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="3_r2aa2"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="4_p74cn"]
+[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/prefabs/character_dialogue_point.tscn" id="5_ioijf"]
+[ext_resource type="SpriteFrames" uid="uid://bmnwdib5t7mxq" path="res://assets/characters/movement/spriteframes/berry.tres" id="6_k8d6i"]
+[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/prefabs/dialogue_point.tscn" id="9_i3ugo"]
+
+[sub_resource type="Animation" id="Animation_dr4ux"]
+resource_name = "berry_1"
+length = 4.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Berry:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.7, 3.4, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(677, 180), Vector2(783, 180), Vector2(783, 240), Vector2(528, 240), Vector2(528, 165)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.1, 2.5, 3.6, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(704, 284), Vector2(704, 284), Vector2(704, 221), Vector2(528, 221), Vector2(528, 165)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Berry")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 1.7, 3.4, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"values": [{
+"args": ["right"],
+"method": &"PlayAnimation"
+}, {
+"args": ["down"],
+"method": &"PlayAnimation"
+}, {
+"args": ["left"],
+"method": &"PlayAnimation"
+}, {
+"args": ["up"],
+"method": &"PlayAnimation"
+}, {
+"args": [1],
+"method": &"PlayIdleAnimation"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Player")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.1, 2.5, 3.6, 4, 4.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [1],
+"method": &"PlayIdleAnimation"
+}, {
+"args": [1],
+"method": &"PlayMoveAnimation"
+}, {
+"args": [2],
+"method": &"PlayMoveAnimation"
+}, {
+"args": [1],
+"method": &"PlayMoveAnimation"
+}, {
+"args": [1],
+"method": &"PlayIdleAnimation"
+}, {
+"args": ["tavern_barrels_room", "EnterMarker", 1],
+"method": &"TransitionToRoomName"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Camera:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.1, 2.5, 3.6, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(704, 284), Vector2(704, 284), Vector2(704, 221), Vector2(528, 221), Vector2(528, 165)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kj6sk"]
+_data = {
+"berry_1": SubResource("Animation_dr4ux")
+}
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_uwpbm"]
 a = Vector2(64, 96)
@@ -23,6 +128,13 @@ b = Vector2(800, 320)
 
 [node name="Tavern" instance=ExtResource("1_k3jai")]
 y_sort_enabled = true
+script = ExtResource("2_nc0um")
+DialogueResource = ExtResource("3_r2aa2")
+
+[node name="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_kj6sk")
+}
 
 [node name="Camera" parent="." index="5"]
 limit_right = 864
@@ -34,7 +146,6 @@ color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." index="10" instance=ExtResource("2_laksc")]
 z_index = 2
-position = Vector2(704, 272)
 
 [node name="TileMap" type="TileMap" parent="." index="11"]
 y_sort_enabled = true
@@ -98,3 +209,21 @@ position = Vector2(704, 284)
 
 [node name="BarrelsRoomMarker" type="Marker2D" parent="." index="17"]
 position = Vector2(528, 160)
+
+[node name="Berry" parent="." index="18" instance=ExtResource("5_ioijf")]
+z_index = 2
+position = Vector2(677, 180)
+DialogueResource = ExtResource("3_r2aa2")
+DialogueTitle = "berry_point"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Berry" index="2"]
+position = Vector2(0, -16)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("6_k8d6i")
+
+[node name="BerryDialoguePoint" parent="." index="19" instance=ExtResource("9_i3ugo")]
+z_index = 2
+position = Vector2(677, 214)
+scale = Vector2(2, 1)
+DialogueResource = ExtResource("3_r2aa2")
+DialogueTitle = "berry_point"

@@ -137,6 +137,20 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
+	public async void TransitionToRoomName(string roomName, string markerName, Direction direction)
+	{
+		global.CurrentRoom.TransitionRect.PlayAnimation();
+		await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
+		if (string.IsNullOrEmpty(markerName))
+		{
+			global.ChangeRoom(roomName);
+		}
+		else
+		{
+			global.ChangeRoom(roomName, markerName, direction);
+		}
+	}
+
 	public void ChangeDirection(Vector2 vectorDirection)
 	{
 		animationTree.Set("parameters/Idle/blend_position", vectorDirection);
