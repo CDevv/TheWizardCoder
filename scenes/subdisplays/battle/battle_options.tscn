@@ -1,80 +1,125 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgn8hk6463o4s"]
+[gd_scene load_steps=5 format=3 uid="uid://cevwsglbjkiip"]
 
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_cfhdv"]
 [ext_resource type="Script" path="res://scripts/subdisplays/BattleOptions.cs" id="2_j8jgq"]
+[ext_resource type="PackedScene" uid="uid://capppjgr8n1ew" path="res://scenes/prefabs/text_button.tscn" id="2_mrvjk"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="3_6qd7x"]
 
 [node name="BattleOptions" type="NinePatchRect"]
-offset_right = 68.0
-offset_bottom = 80.0
+offset_left = 208.0
+offset_top = 384.0
+offset_right = 416.0
+offset_bottom = 424.0
 scale = Vector2(2, 2)
 texture = ExtResource("1_cfhdv")
-patch_margin_left = 3
-patch_margin_top = 3
-patch_margin_right = 3
-patch_margin_bottom = 3
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
 script = ExtResource("2_j8jgq")
+ButtonTemplate = ExtResource("2_mrvjk")
+
+[node name="InfoLabel" type="Label" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 204.0
+offset_bottom = 36.0
+theme = ExtResource("3_6qd7x")
+theme_override_font_sizes/font_size = 16
+text = "Label"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_right = 136.0
-offset_bottom = 160.0
+offset_right = 416.0
+offset_bottom = 80.0
 scale = Vector2(0.5, 0.5)
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="OptionsContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="MainOptions" type="GridContainer" parent="MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+columns = 2
 
-[node name="FightButton" type="Button" parent="MarginContainer/OptionsContainer"]
-unique_name_in_owner = true
+[node name="AttackButton" parent="MarginContainer/MainOptions" instance=ExtResource("2_mrvjk")]
 layout_mode = 2
-focus_neighbor_top = NodePath("../DefendButton")
-mouse_filter = 2
-theme = ExtResource("3_6qd7x")
-theme_override_font_sizes/font_size = 24
-text = "Fight"
+text = "Attack
+"
 
-[node name="ItemsButton" type="Button" parent="MarginContainer/OptionsContainer"]
+[node name="DefendButton" parent="MarginContainer/MainOptions" instance=ExtResource("2_mrvjk")]
+unique_name_in_owner = false
 layout_mode = 2
-focus_neighbor_top = NodePath("../FightButton")
-focus_neighbor_bottom = NodePath("../MagicButton")
-mouse_filter = 2
-theme = ExtResource("3_6qd7x")
-theme_override_font_sizes/font_size = 24
-text = "Items"
-
-[node name="MagicButton" type="Button" parent="MarginContainer/OptionsContainer"]
-layout_mode = 2
-focus_neighbor_top = NodePath("../ItemsButton")
-focus_neighbor_bottom = NodePath("../DefendButton")
-mouse_filter = 2
-theme = ExtResource("3_6qd7x")
-theme_override_font_sizes/font_size = 24
-text = "Magic"
-
-[node name="DefendButton" type="Button" parent="MarginContainer/OptionsContainer"]
-layout_mode = 2
-focus_neighbor_top = NodePath("../MagicButton")
-focus_neighbor_bottom = NodePath("../FightButton")
-mouse_filter = 2
-theme = ExtResource("3_6qd7x")
-theme_override_font_sizes/font_size = 24
 text = "Defend"
 
-[node name="ItemDescription" type="Label" parent="MarginContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(120, 144)
+[node name="ItemsButton" parent="MarginContainer/MainOptions" instance=ExtResource("2_mrvjk")]
+unique_name_in_owner = false
 layout_mode = 2
-size_flags_vertical = 1
-theme = ExtResource("3_6qd7x")
-theme_override_font_sizes/font_size = 24
-autowrap_mode = 2
+text = "Items"
 
-[connection signal="pressed" from="MarginContainer/OptionsContainer/FightButton" to="." method="OnFightButton"]
-[connection signal="pressed" from="MarginContainer/OptionsContainer/ItemsButton" to="." method="OnItemsButton"]
-[connection signal="pressed" from="MarginContainer/OptionsContainer/MagicButton" to="." method="OnMagicButton"]
-[connection signal="pressed" from="MarginContainer/OptionsContainer/DefendButton" to="." method="OnDefenseButton"]
+[node name="MagicButton" parent="MarginContainer/MainOptions" instance=ExtResource("2_mrvjk")]
+unique_name_in_owner = false
+layout_mode = 2
+text = "Magic"
+
+[node name="Items" type="GridContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+columns = 2
+
+[node name="TextButton" parent="MarginContainer/Items" instance=ExtResource("2_mrvjk")]
+unique_name_in_owner = false
+visible = false
+layout_mode = 2
+
+[node name="Magic" type="GridContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+columns = 2
+
+[node name="TextButton" parent="MarginContainer/Magic" instance=ExtResource("2_mrvjk")]
+unique_name_in_owner = false
+visible = false
+layout_mode = 2
+
+[node name="Info" type="GridContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Info"]
+layout_mode = 2
+
+[node name="TextContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="DescriptionContainer" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 0
+offset_top = -28.0
+offset_right = 208.0
+offset_bottom = -4.0
+texture = ExtResource("1_cfhdv")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Description" type="Label" parent="DescriptionContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 4.0
+offset_right = 204.0
+offset_bottom = 24.0
+theme = ExtResource("3_6qd7x")
+text = "Description"
+
+[connection signal="pressed" from="MarginContainer/MainOptions/AttackButton" to="." method="OnAttackButton"]
+[connection signal="pressed" from="MarginContainer/MainOptions/ItemsButton" to="." method="ShowItems"]
+[connection signal="pressed" from="MarginContainer/MainOptions/MagicButton" to="." method="OnMagicButton"]

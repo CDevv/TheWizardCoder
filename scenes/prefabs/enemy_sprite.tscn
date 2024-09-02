@@ -1,0 +1,76 @@
+[gd_scene load_steps=13 format=3 uid="uid://iglkgt85o6wb"]
+
+[ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="1_ku343"]
+[ext_resource type="Script" path="res://scripts/prefabs/EnemySprite.cs" id="2_4knon"]
+[ext_resource type="Texture2D" uid="uid://b67wi1vffqdfq" path="res://assets/ui/select-arrow.png" id="3_05okl"]
+[ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="4_r6dll"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phjk0"]
+atlas = ExtResource("3_05okl")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dpit2"]
+atlas = ExtResource("3_05okl")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ym4up"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_phjk0")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_dpit2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_to5rt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m668q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4dwvg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2om4p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uetb3"]
+
+[node name="EnemySprite" type="Sprite2D"]
+scale = Vector2(2, 2)
+texture = ExtResource("1_ku343")
+script = ExtResource("2_4knon")
+
+[node name="SelectionArrow" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -24)
+sprite_frames = SubResource("SpriteFrames_ym4up")
+frame_progress = 0.662759
+
+[node name="Button" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_to5rt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m668q")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4dwvg")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_2om4p")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uetb3")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -56.0
+offset_top = -44.0
+offset_right = -8.0
+offset_bottom = -21.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_r6dll")
+text = "Label"
+horizontal_alignment = 1
+
+[connection signal="focus_exited" from="Button" to="." method="OnFocusExited"]
+[connection signal="pressed" from="Button" to="." method="OnButtonPressed"]

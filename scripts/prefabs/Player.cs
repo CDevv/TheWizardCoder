@@ -23,7 +23,7 @@ public partial class Player : CharacterBody2D
 		interactableFinder = GetNode<Area2D>("InteractableFinder");
     }
 
-    public override async void _PhysicsProcess(double delta)
+    public override void _PhysicsProcess(double delta)
 	{
 		if (!global.CanWalk)
 		{
@@ -89,7 +89,7 @@ public partial class Player : CharacterBody2D
 				global.CanWalk = false;
 				global.GameDisplayEnabled = false;
 				GD.Print("Battle point");
-				await global.CurrentRoom.BattleDisplay.ShowDisplay();
+				global.CurrentRoom.BattleDisplay.ShowDisplay();
 			}
 		}	
 	}

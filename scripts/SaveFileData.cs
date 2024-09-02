@@ -13,7 +13,7 @@ public partial class SaveFileData : Node
     public string SceneDefaultMarker { get; set; }
 	public string Location { get; set; }
     public Vector2 LocationVector { get; set; }
-	public int Health { get; set; } = 100;
+    public CharacterData Stats { get; set; }
     private Array<string> inventory = new();
     private Array<string> magicSpells = new();
 
@@ -68,6 +68,13 @@ public partial class SaveFileData : Node
         SceneFileName = "first_room";
         Location = "Home";
         SceneDefaultMarker = "AfterCutsceneMarker";
+
+        Stats = new CharacterData() {
+            Name = "Nolan",
+            MaxHealth = 50, Health = 50,
+            MaxPoints = 10, Points = 10,
+            AttackPoints = 20
+        };
     }
 
     public Dictionary<string, Variant> GenerateDictionary()
@@ -82,7 +89,7 @@ public partial class SaveFileData : Node
             {"SceneFileName", SceneFileName},
             {"Location", Location},
             {"LocationVector", LocationVector},
-            {"Health", Health},
+            {"Health", Stats.Health},
             {"Inventory", Inventory},
 
             {"HasPlayedIntro", HasPlayedIntro},
@@ -104,7 +111,7 @@ public partial class SaveFileData : Node
         SceneDefaultMarker = (string)dictionary["SceneDefaultMarker"];
         Location = (string)dictionary["Location"];
         LocationVector = (Vector2)dictionary["LocationVector"];
-        Health = (int)dictionary["Health"];
+        Stats.Health = (int)dictionary["Health"];
         Inventory = (Array<string>)dictionary["Inventory"];
 
         //Playthrough

@@ -1,6 +1,7 @@
-[gd_scene load_steps=38 format=3 uid="uid://c0iqpqhuxgcn7"]
+[gd_scene load_steps=41 format=3 uid="uid://c0iqpqhuxgcn7"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_xan73"]
+[ext_resource type="Script" path="res://scripts/rooms/TestRoom.cs" id="2_eh4xc"]
 [ext_resource type="TileSet" uid="uid://b00p342wf54q8" path="res://tilesets/housetiles.tres" id="2_m8now"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="3_bjkae"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="4_m8w0m"]
@@ -12,6 +13,27 @@
 [ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/prefabs/code_problem_point.tscn" id="11_5aqh3"]
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/prefabs/dialogue_point.tscn" id="11_67j7s"]
 [ext_resource type="PackedScene" uid="uid://mmm0k3msmmm5" path="res://scenes/prefabs/cutscene_point.tscn" id="12_8300v"]
+
+[sub_resource type="Animation" id="Animation_h6tmq"]
+resource_name = "test_anim"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterDialoguePoint:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(592, 200), Vector2(512, 200)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_atiyj"]
+_data = {
+"test_anim": SubResource("Animation_h6tmq")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n63b5"]
 atlas = ExtResource("8_5nbo5")
@@ -209,11 +231,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="SecondRoom" instance=ExtResource("1_xan73")]
+[node name="TestRoom" instance=ExtResource("1_xan73")]
 y_sort_enabled = true
+script = ExtResource("2_eh4xc")
 SceneFileName = "second_room"
-LocationName = "Test Room"
-DefaultMarkerName = "FirstRoomMarker"
+LocationName = "TestRoom"
 
 [node name="ColorRect" type="ColorRect" parent="." index="3"]
 offset_right = 1280.0
@@ -235,6 +257,11 @@ position = Vector2(736, 200)
 z_index = 1
 position = Vector2(224, 216)
 
+[node name="AnimationPlayer" parent="." index="8"]
+libraries = {
+"": SubResource("AnimationLibrary_atiyj")
+}
+
 [node name="FirstRoomMarker" type="Marker2D" parent="." index="9"]
 position = Vector2(176, 241)
 
@@ -249,6 +276,7 @@ limit_right = 1280
 limit_bottom = 960
 
 [node name="BattlePoint" parent="." index="12" instance=ExtResource("5_5d3xc")]
+z_index = 2
 position = Vector2(736, 624)
 
 [node name="CharacterDialoguePoint" parent="." index="15" instance=ExtResource("7_odkvl")]
@@ -271,12 +299,23 @@ SolvableAreas = {
 "true": Vector2(84, 4)
 }
 
-[node name="DialoguePoint" parent="." index="18" instance=ExtResource("11_67j7s")]
+[node name="ItemsProblem" parent="." index="17" instance=ExtResource("11_5aqh3")]
+z_index = 1
+position = Vector2(112, 208)
+Code = "Nolan.Test ="
+Items = Array[String](["true", "false"])
+SolvableAreas = {
+"item": Vector2(84, 4)
+}
+UseInventory = true
+
+[node name="DialoguePoint" parent="." index="19" instance=ExtResource("11_67j7s")]
 z_index = 1
 position = Vector2(288, 214)
 DialogueResource = ExtResource("8_bj7jj")
 DialogueTitle = "demo_playerdata"
 
-[node name="CutscenePoint" parent="." index="19" instance=ExtResource("12_8300v")]
+[node name="CutscenePoint" parent="." index="20" instance=ExtResource("12_8300v")]
 z_index = 1
 position = Vector2(432, 272)
+RoomMethodName = "TestCutscene"

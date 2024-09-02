@@ -2,13 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_br32s"]
 [ext_resource type="Script" path="res://scripts/prefabs/CharacterRect.cs" id="2_142cy"]
-[ext_resource type="Texture2D" uid="uid://bxxj3cscesu7t" path="res://assets/ui/nolanhead.png" id="2_enjbo"]
-[ext_resource type="Texture2D" uid="uid://00inqs1v3lxi" path="res://assets/ui/base.png" id="3_obymu"]
+[ext_resource type="Texture2D" uid="uid://b3icfmgjqjfwf" path="res://assets/battle/battle-portraits/nolan.png" id="3_5y2tx"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="4_0hco1"]
+[ext_resource type="PackedScene" uid="uid://beu5pufxcqifb" path="res://scenes/prefabs/damage_indicator.tscn" id="5_yx2xm"]
 
 [node name="CharacterRect" type="NinePatchRect"]
 offset_right = 92.0
-offset_bottom = 24.0
+offset_bottom = 28.0
 scale = Vector2(2, 2)
 texture = ExtResource("1_br32s")
 region_rect = Rect2(0, 0, 16, 16)
@@ -18,23 +18,19 @@ patch_margin_right = 3
 patch_margin_bottom = 3
 script = ExtResource("2_142cy")
 
-[node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(11.75, 11.75)
-scale = Vector2(0.33, 0.33)
-texture = ExtResource("2_enjbo")
-
-[node name="HealthBar" type="TextureProgressBar" parent="."]
-unique_name_in_owner = true
+[node name="BackgroundColor" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 24.0
-offset_top = 16.0
+offset_left = 4.0
+offset_top = 4.0
 offset_right = 88.0
-offset_bottom = 20.0
-value = 100.0
-nine_patch_stretch = true
-texture_under = ExtResource("3_obymu")
-texture_progress = ExtResource("3_obymu")
-tint_progress = Color(1, 0.337255, 0.309804, 1)
+offset_bottom = 24.0
+color = Color(0.694704, 2.64719e-06, 3.85046e-07, 1)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(12, 12)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_5y2tx")
 
 [node name="NameLabel" type="Label" parent="."]
 layout_mode = 0
@@ -46,3 +42,32 @@ scale = Vector2(0.5, 0.5)
 theme = ExtResource("4_0hco1")
 theme_override_font_sizes/font_size = 24
 text = "Nolan"
+
+[node name="HealthLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 4.0
+offset_right = 128.0
+offset_bottom = 28.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("4_0hco1")
+theme_override_font_sizes/font_size = 24
+text = "100 HP"
+horizontal_alignment = 2
+
+[node name="PointsLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 13.5
+offset_right = 128.0
+offset_bottom = 37.5
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("4_0hco1")
+theme_override_font_sizes/font_size = 24
+text = "50 MP"
+horizontal_alignment = 2
+
+[node name="DamageIndicator" parent="." instance=ExtResource("5_yx2xm")]
+layout_mode = 0
+offset_top = 0.0
+offset_bottom = 23.0

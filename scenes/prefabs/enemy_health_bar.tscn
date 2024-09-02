@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpiouthd683jq"]
+
+[ext_resource type="Texture2D" uid="uid://hxmst0tc6gbs" path="res://assets/ui/area_border.png" id="1_qhy4s"]
+[ext_resource type="Script" path="res://scripts/prefabs/EnemyHealthBar.cs" id="2_g8r32"]
+[ext_resource type="Texture2D" uid="uid://00inqs1v3lxi" path="res://assets/ui/base.png" id="2_u3i0l"]
+
+[node name="EnemyHealthBar" type="NinePatchRect"]
+z_index = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -240.0
+offset_right = -208.0
+offset_bottom = -224.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_qhy4s")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+script = ExtResource("2_g8r32")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="ProgressBar" type="TextureProgressBar" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_u3i0l")
+texture_progress = ExtResource("2_u3i0l")
+tint_under = Color(0.719076, 0.719076, 0.719076, 1)
+tint_progress = Color(1, 0, 0, 1)

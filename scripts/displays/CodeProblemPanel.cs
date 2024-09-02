@@ -56,15 +56,27 @@ public partial class CodeProblemPanel : CanvasLayer
 		}
 	}
 
-	public void ShowDisplay(string code, Array<string> items, Godot.Collections.Dictionary<string, Vector2> areas)
+	public void ShowDisplay(string code, Array<string> items, Godot.Collections.Dictionary<string, Vector2> areas, bool useInventory)
 	{
 		global.GameDisplayEnabled = false;
 
 		codeEdit.Text = code;
-		foreach (string item in items)
+
+		if (useInventory)
 		{
-			AddItem(item);
+			foreach (string item in global.PlayerData.Inventory)
+			{
+				AddItem(item);
+			}
 		}
+		else
+		{
+			foreach (string item in items)
+			{
+				AddItem(item);
+			}
+		}
+
 		foreach (var item in areas)
 		{
 			AddArea(item.Key, item.Value);
