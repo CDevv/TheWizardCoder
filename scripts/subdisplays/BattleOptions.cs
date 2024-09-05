@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class BattleOptions : NinePatchRect
@@ -9,9 +10,9 @@ public partial class BattleOptions : NinePatchRect
 	[Signal]
 	public delegate void FightButtonTriggeredEventHandler();
 	[Signal]
-	public delegate void ItemsButtonTriggeredEventHandler();
+	public delegate void ItemsButtonTriggeredEventHandler(int itemIndex);
 	[Signal]
-	public delegate void MagicButtonTriggeredEventHandler();
+	public delegate void MagicButtonTriggeredEventHandler(int index);
 	[Signal]
 	public delegate void DefenseButtonTriggeredEventHandler();
 
@@ -20,6 +21,7 @@ public partial class BattleOptions : NinePatchRect
 	private Button attackButton;
 	private NinePatchRect descriptionContainer;
 	private Label itemDescription;
+	private Label costLabel;
 	private GridContainer itemsContainer;
 	private GridContainer magicContainer;
 	private Label infoLabel;
@@ -34,6 +36,7 @@ public partial class BattleOptions : NinePatchRect
 		attackButton = GetNode<Button>("%AttackButton");
 		descriptionContainer = GetNode<NinePatchRect>("DescriptionContainer");
 		itemDescription = GetNode<Label>("%Description");
+		costLabel = GetNode<Label>("%CostLabel");
 		itemsContainer = GetNode<GridContainer>("%Items");
 		magicContainer = GetNode<GridContainer>("%Magic");
 		infoLabel = GetNode<Label>("InfoLabel");
@@ -88,13 +91,14 @@ public partial class BattleOptions : NinePatchRect
 	{
 		optionsContainer.Hide();
 		magicContainer.Hide();
+		costLabel.Hide();
 		itemsContainer.Show();
-		descriptionContainer.Show();
 
-		Button button = itemsContainer.GetChildOrNull<Button>(1);
+		Button button = itemsContainer.GetChildOrNull<Button>(0);
 		if (button == null)
 		{
-			descriptionContainer.Hide();			
+			descriptionContainer.Hide();
+			ShowInfoLabel("You have no items");			
 		}
 		else
 		{
@@ -108,29 +112,81 @@ public partial class BattleOptions : NinePatchRect
 		optionsContainer.Hide();
 		itemsContainer.Hide();
 		magicContainer.Show();
-		descriptionContainer.Show();
 
-		Button button = magicContainer.GetChild<Button>(0);
-		button.GrabFocus();
+		Button button = magicContainer.GetChildOrNull<Button>(0);
+		if (button == null)
+		{
+			descriptionContainer.Hide();
+			ShowInfoLabel("You have no magic spells");	
+		}
+		else
+		{
+			descriptionContainer.Show();
+			costLabel.Show();
+			button.GrabFocus();
+		}
 	}
 
-	public void UpdateDisplay()
+	public void UpdateDisplay(CharacterData characterData)
 	{
-		foreach (string item in global.PlayerData.Inventory)
+		ClearContainers();
+
+		for (int i = 0; i < global.PlayerData.Inventory.Count; i++)
 		{
+			int currentIndex = i;
+
+			string item = global.PlayerData.Inventory[i];
 			Button buttonItem = ButtonTemplate.Instantiate<Button>();
 			buttonItem.Text = item;
 			buttonItem.FocusEntered += () => {
 				itemDescription.Text = global.ItemDescriptions[item].Description;
 			};
+			buttonItem.Pressed += () => {
+				EmitSignal(SignalName.ItemsButtonTriggered, currentIndex);
+			};
 			itemsContainer.AddChild(buttonItem);
 		}
 
-		foreach (string item in global.PlayerData.MagicSpells)
+		for (int i = 0; i < characterData.MagicSpells.Count; i++)
 		{
+			int currentIndex = i;
+			string magicSpellName = characterData.MagicSpells[i];
+			MagicSpell magicSpell = global.MagicSpells[magicSpellName];
+
 			Button buttonItem = ButtonTemplate.Instantiate<Button>();
-			buttonItem.Text = item;
+			buttonItem.Text = magicSpellName;
+			buttonItem.Pressed += () => {
+				EmitSignal(SignalName.MagicButtonTriggered, currentIndex);
+			};
+
+			if (characterData.Points >= magicSpell.Cost)
+			{
+				buttonItem.FocusEntered += () => {
+					itemDescription.Text = global.MagicSpells[magicSpellName].Description;
+					costLabel.Text = $"{global.MagicSpells[magicSpellName].Cost} MP";
+				};
+			}
+			else
+			{
+				buttonItem.Disabled = true;
+			}
+
 			magicContainer.AddChild(buttonItem);
+		}
+	}
+
+	private void ClearContainers()
+	{
+		Array<Node> itemButtons = itemsContainer.GetChildren();
+		foreach (var item in itemButtons)
+		{
+			item.QueueFree();
+		}
+
+		Array<Node> magicSpellsButtons = magicContainer.GetChildren();
+		foreach (var item in magicSpellsButtons)
+		{
+			item.QueueFree();
 		}
 	}
 
@@ -142,13 +198,11 @@ public partial class BattleOptions : NinePatchRect
 	public void OnItemsButton()
 	{
 		ShowItems();
-		EmitSignal(SignalName.ItemsButtonTriggered);
 	}
 
 	public void OnMagicButton()
 	{
 		ShowMagicSpells();
-		EmitSignal(SignalName.MagicButtonTriggered);
 	}
 
 	public void OnDefenseButton()

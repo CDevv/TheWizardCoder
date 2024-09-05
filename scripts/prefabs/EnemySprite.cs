@@ -19,6 +19,8 @@ public partial class EnemySprite : Sprite2D
 	public void ApplyData(CharacterData data)
 	{
 		nameLabel.Text = data.Name;
+		Texture = (Texture2D)ResourceLoader.LoadThreadedGet($"res://assets/battle/enemies/{data.Name}.png");
+		GD.Print($"res://assets/battle/enemies/{data.Name}.png");
 	}
 
 	public void GrabFocus()

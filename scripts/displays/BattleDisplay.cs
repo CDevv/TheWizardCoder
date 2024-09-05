@@ -4,6 +4,7 @@ using Godot.Collections;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 public partial class BattleDisplay : CanvasLayer
 {
@@ -13,20 +14,22 @@ public partial class BattleDisplay : CanvasLayer
 	public PackedScene CharacterRectScene { get; set; }
 	[Export]
 	public PackedScene EnemySpriteScene { get; set; }
+	[Export]
+	public AlliesContainer Allies { get; set; }
+	[Export]
+	public EnemiesContainer Enemies { get; set; }
+
+	public bool BattleEnded { get; private set; } = false;
 
 	private Global global;
+	private AlliesContainer alliesContainer;
+	private EnemiesContainer enemiesContainer;
 	private BattleOptions battleOptions;
 	private EnemyHealthBar enemyHealthContainer;
 	private TextureProgressBar enemyHealthBar;
 	private DamageIndicator damageIndicator;
 	private Marker2D enemySpritePoint;
 	private Button invisButton;
-
-	private Array<CharacterData> allies = new();
-	private Array<CharacterData> enemies = new();
-	private Array<CharacterRect> alliesCards = new();
-	private Array<EnemySprite> enemySprites = new();
-	private int selectedEnemy = 0;
 
 	public override void _Ready()
 	{
@@ -46,115 +49,69 @@ public partial class BattleDisplay : CanvasLayer
 		}
 	}
 
-	public async void ShowDisplay()
+	public async void ShowDisplay(Array<string> enemies)
 	{
+		BattleEnded = false;
 		//Add allies
-		AddCharacterRect(global.PlayerData.Stats);
+		Allies.AddAlly(global.PlayerData.Stats);
+		Allies.AddAlly(global.PlayerData.Stats);
 
 		//Add enemies
-		CharacterData newEnemy = new() {
-			Name = "Glitch", Health = 100, MaxHealth = 100, Points = 0, MaxPoints = 0, AttackPoints = 20
-		};
-		AddEnemy(newEnemy);
+		foreach (string enemyName in enemies)
+		{
+			CharacterData newEnemy = global.Characters[enemyName];
+			Enemies.AddEnemy(newEnemy);
+		}
 
-		battleOptions.UpdateDisplay();
 		global.CurrentRoom.TransitionRect.PlayAnimation();
 		await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
 		Show();
 		global.CurrentRoom.TransitionRect.PlayAnimationBackwards();
-		battleOptions.ShowOptions();
+
+		Allies.StartTurn();
 	}
 
-	private void AddCharacterRect(CharacterData data)
+	private void Clear()
 	{
-		CharacterRect rect = CharacterRectScene.Instantiate<CharacterRect>();
-		rect.Position = startingPoint - new Vector2(0, allies.Count * 98);
-		AddChild(rect);
-		rect.ApplyData(data);
-		alliesCards.Add(rect);
-
-		allies.Add(data);
+		Allies.Clear();
+		Enemies.Clear();
 	}
 
-	private void AddEnemy(CharacterData data)
-	{
-		int currentIndex = enemySprites.Count;
-
-		EnemySprite enemySprite = EnemySpriteScene.Instantiate<EnemySprite>();
-		enemySprite.Position = enemySpritePoint.Position;
-		
-		AddChild(enemySprite);
-		enemySprite.ApplyData(data);
-		enemySprite.ButtonPressed += () => {
-			AttackEnemy(currentIndex);
-		};
-		enemySprites.Add(enemySprite);
-
-		enemies.Add(data);
-	}
-
-	private void OnAttackButton()
-	{
-		enemySprites[0].GrabFocus();
-		battleOptions.ShowInfoLabel("Select an enemy!");
-	}
-
-	private async void AttackEnemy(int index)
+	public async Task Routine()
 	{
 		invisButton.GrabFocus();
 
-		EnemySprite sprite = enemySprites[index];
-		CharacterData enemyData = enemies[index];
+		await Allies.AlliesTurn();
+		await Enemies.EnemiesTurn();
 
-		battleOptions.ShowInfoLabel($"Nolan used sword on {enemyData.Name}!");	
-		SpawnDamageIndicator(allies[0].AttackPoints, sprite.Position - new Vector2(damageIndicator.Size.X, 10));
-
-		Vector2 barPosition = sprite.Position - new Vector2(enemyHealthContainer.Size.X/2, -20);
-		enemyHealthContainer.Position = barPosition;
-		await enemyHealthContainer.ShowHealthBar(enemyData.Health, enemyData.Health - allies[0].AttackPoints, enemyData.MaxHealth);
-
-		enemyData.Health -= allies[0].AttackPoints;
-		enemies[index] = enemyData;
-
-		EnemyTurn();
-	}
-
-	private async void EnemyTurn()
-	{
-		//Choose target
-		int index = (int)(GD.Randi() % allies.Count);
-		battleOptions.ShowInfoLabel($"Glitch used glitch on {allies[index].Name}");
-
-		allies[index].Health -= enemies[0].AttackPoints;
-		GD.Print(global.PlayerData.Stats.Health);
-
-		//Visuals
-		SpawnDamageIndicator(enemies[0].AttackPoints, alliesCards[index].Position + new Vector2(64, 0));
-		alliesCards[index].SetHealthValue(global.PlayerData.Stats.Health);
-		await alliesCards[index].TweenDamage();
-
-		battleOptions.ShowOptions();
-	}
-
-	private void Reset()
-	{
-		foreach (CharacterData item in allies)
+		if (Enemies.GetTotalHealth() <= 0)
 		{
-			item.Free();
+			HideDisplay();
 		}
-		allies.Clear();
-
-		foreach (CharacterData item in enemies)
+		else if (Allies.GetTotalHealth() <= 0)
 		{
-			item.Free();
+			global.CurrentRoom.TransitionRect.PlayAnimation();
+			await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
+
+			global.CurrentRoom.GameOverDisplay.ShowDisplay();
+			Clear();
 		}
-		enemies.Clear();
+		else
+		{
+			Allies.StartTurn();
+		}
 	}
 
-	private void SpawnDamageIndicator(int damage, Vector2 position)
+	public async void HideDisplay()
 	{
-		damageIndicator.Position = position;
-		damageIndicator.Text = $"{damage}";
-		damageIndicator.PlayAnimation();
+		BattleEnded = true;
+		global.CurrentRoom.TransitionRect.PlayAnimation();
+		await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
+		Hide();
+		Clear();
+		global.CanWalk = true;
+		global.GameDisplayEnabled = true;
+
+		global.CurrentRoom.TransitionRect.PlayAnimationBackwards();
 	}
 }

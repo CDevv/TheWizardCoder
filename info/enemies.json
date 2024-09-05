@@ -1,0 +1,11 @@
+{
+	"Glitch": {
+		"Health": 50,
+		"MaxHealth": 50,
+		"Points": 0,
+		"MaxPoints": 0,
+		"AttackPoints": 5,
+		"DefensePoints": 5,
+		"MagicSpells": {}
+	}
+}

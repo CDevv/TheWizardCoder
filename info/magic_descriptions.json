@@ -1,10 +1,9 @@
 {
-	"SimpleBullet":{
-		"Name":"SimpleBullet",
-		"Description":"SimpleBullet description.",
-		"MethodName":"SpawnPlayerBullet",
-		"Type":"",
-		"OneTime":true,
-		"Effect":10
+	"Fireball":{
+		"Name":"Fireball",
+		"Description":"A simple fireball that does small damage on enemy.",
+		"Effect":15,
+		"Cost": 5,
+		"TargetType": "Enemy"
 	}
 }

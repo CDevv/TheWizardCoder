@@ -73,7 +73,10 @@ public partial class SaveFileData : Node
             Name = "Nolan",
             MaxHealth = 50, Health = 50,
             MaxPoints = 10, Points = 10,
-            AttackPoints = 20
+            AttackPoints = 20, DefensePoints = 10,
+            MagicSpells = new() {
+                "Fireball"
+            }
         };
     }
 

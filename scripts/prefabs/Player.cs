@@ -89,7 +89,7 @@ public partial class Player : CharacterBody2D
 				global.CanWalk = false;
 				global.GameDisplayEnabled = false;
 				GD.Print("Battle point");
-				global.CurrentRoom.BattleDisplay.ShowDisplay();
+				global.CurrentRoom.BattleDisplay.ShowDisplay(new() { "Glitch" });
 			}
 		}	
 	}

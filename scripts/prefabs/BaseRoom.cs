@@ -21,6 +21,7 @@ public partial class BaseRoom : Node2D
 	public TransitionRect TransitionRect { get; set; }
 	public AnimationPlayer AnimationPlayer { get; set; }
 	public DialogueDisplay Dialogue { get; set; }
+	public GameOverDisplay GameOverDisplay { get; set; }
 	public Player Player { get; set; }
 	public Camera2D Camera { get; set; }
 
@@ -44,6 +45,7 @@ public partial class BaseRoom : Node2D
 		TransitionRect = GetNode<TransitionRect>("TransitionRect");
 		AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		Dialogue = GetNode<DialogueDisplay>("Dialogue");
+		GameOverDisplay = GetNode<GameOverDisplay>("GameOverDisplay");
 		Player = GetNode<Player>("Player");
 		Camera = GetNode<Camera2D>("Camera");
 

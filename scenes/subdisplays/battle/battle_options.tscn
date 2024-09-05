@@ -102,7 +102,7 @@ layout_mode = 2
 [node name="DescriptionContainer" type="NinePatchRect" parent="."]
 visible = false
 layout_mode = 0
-offset_top = -28.0
+offset_top = -44.0
 offset_right = 208.0
 offset_bottom = -4.0
 texture = ExtResource("1_cfhdv")
@@ -115,11 +115,27 @@ patch_margin_bottom = 4
 unique_name_in_owner = true
 layout_mode = 2
 offset_left = 4.0
+offset_top = 4.0
 offset_right = 204.0
-offset_bottom = 24.0
+offset_bottom = 36.0
 theme = ExtResource("3_6qd7x")
 text = "Description"
+autowrap_mode = 3
+
+[node name="CostLabel" type="Label" parent="DescriptionContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+offset_left = 4.0
+offset_right = 204.0
+offset_bottom = 36.0
+theme = ExtResource("3_6qd7x")
+theme_override_colors/font_color = Color(0.563429, 0.000118739, 0.517197, 1)
+text = "100 MP"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [connection signal="pressed" from="MarginContainer/MainOptions/AttackButton" to="." method="OnAttackButton"]
-[connection signal="pressed" from="MarginContainer/MainOptions/ItemsButton" to="." method="ShowItems"]
+[connection signal="pressed" from="MarginContainer/MainOptions/DefendButton" to="." method="OnDefenseButton"]
+[connection signal="pressed" from="MarginContainer/MainOptions/ItemsButton" to="." method="OnItemsButton"]
 [connection signal="pressed" from="MarginContainer/MainOptions/MagicButton" to="." method="OnMagicButton"]

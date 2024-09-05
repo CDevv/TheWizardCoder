@@ -17,8 +17,9 @@ public partial class Global : Node
 	public bool IsInCutscene { get; set; } = false;
 	public SaveFileData PlayerData { get; set; } = new();
 	public SettingsConfig Settings { get; set; } = new();
-	public System.Collections.Generic.Dictionary<string, Item> ItemDescriptions { get; set; } = new();
-	public System.Collections.Generic.Dictionary<string, MagicSpell> MagicSpells { get; set; } = new();
+	public System.Collections.Generic.Dictionary<string, Item> ItemDescriptions { get; private set; } = new();
+	public System.Collections.Generic.Dictionary<string, MagicSpell> MagicSpells { get; private set; } = new();
+	public System.Collections.Generic.Dictionary<string, CharacterData> Characters { get; private set; } = new();
 	public int[] ReverseDirections { get; } = { 1, 0, 3, 2 };
 
     public override void _Ready()
@@ -29,6 +30,7 @@ public partial class Global : Node
 			Settings.ApplySettings();
 			LoadItemDescriptions();
 			LoadMagicSpells();
+			LoadCharactersData();
 		}
 		catch (System.Exception e)
 		{
@@ -80,6 +82,24 @@ public partial class Global : Node
 			MagicSpell magicSpell = new MagicSpell();
 			magicSpell.ApplyDictionary(pair.Value);
 			MagicSpells.Add(pair.Key, magicSpell);
+		}
+	}
+
+	public void LoadCharactersData()
+	{
+		Variant jsonData = GetJsonData("res://info/enemies.json");
+		Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
+
+		foreach (var pair in parsedData)
+		{
+			Dictionary<string, Variant> dict = pair.Value;
+			dict["Name"] = pair.Key;
+			CharacterData character = new();
+			character.ApplyDictionary(dict);
+			Characters.Add(pair.Key, character);
+
+			ResourceLoader.LoadThreadedRequest($"res://assets/battle/enemies/{pair.Key}.png");
+			GD.Print($"res://assets/battle/enemies/{pair.Key}.png");
 		}
 	}
 

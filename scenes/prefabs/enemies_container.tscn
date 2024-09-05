@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://lj6v8jcpq0gm"]
+
+[ext_resource type="Script" path="res://scripts/prefabs/EnemiesContainer.cs" id="1_2psnk"]
+
+[node name="EnemiesContainer" type="Node"]
+script = ExtResource("1_2psnk")

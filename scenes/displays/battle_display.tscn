@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://t2oe67lsq1j2"]
+[gd_scene load_steps=14 format=3 uid="uid://t2oe67lsq1j2"]
 
 [ext_resource type="Script" path="res://scripts/displays/BattleDisplay.cs" id="1_py1kc"]
 [ext_resource type="Texture2D" uid="uid://buwq8pssigdcx" path="res://assets/battle/battle-bg.png" id="2_8bsa4"]
 [ext_resource type="PackedScene" uid="uid://iglkgt85o6wb" path="res://scenes/prefabs/enemy_sprite.tscn" id="3_xj7hs"]
 [ext_resource type="PackedScene" uid="uid://cil04fbnlnhn3" path="res://scenes/prefabs/character_rect.tscn" id="3_xy74d"]
 [ext_resource type="PackedScene" uid="uid://bpiouthd683jq" path="res://scenes/prefabs/enemy_health_bar.tscn" id="6_s2ji1"]
+[ext_resource type="PackedScene" uid="uid://dbc02qtax1to" path="res://scenes/prefabs/allies_container.tscn" id="8_xfudy"]
+[ext_resource type="PackedScene" uid="uid://lj6v8jcpq0gm" path="res://scenes/prefabs/enemies_container.tscn" id="9_aigq0"]
 [ext_resource type="PackedScene" uid="uid://cevwsglbjkiip" path="res://scenes/subdisplays/battle/battle_options.tscn" id="9_py3yx"]
 [ext_resource type="PackedScene" uid="uid://beu5pufxcqifb" path="res://scenes/prefabs/damage_indicator.tscn" id="10_bocww"]
 
@@ -16,9 +18,27 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kjwpl"]
 
-[node name="BattleDisplay" type="CanvasLayer"]
+[node name="BattleDisplay" type="CanvasLayer" node_paths=PackedStringArray("Allies", "Enemies")]
 script = ExtResource("1_py1kc")
 CharacterRectScene = ExtResource("3_xy74d")
+EnemySpriteScene = ExtResource("3_xj7hs")
+Allies = NodePath("AlliesContainer")
+Enemies = NodePath("EnemiesContainer")
+
+[node name="AlliesContainer" parent="." node_paths=PackedStringArray("Enemies", "DamageIndicator", "BattleOptions", "BattleDisplay", "BaseCardPosition") instance=ExtResource("8_xfudy")]
+Enemies = NodePath("../EnemiesContainer")
+DamageIndicator = NodePath("../DamageIndicator")
+BattleOptions = NodePath("../BattleOptions")
+BattleDisplay = NodePath("..")
+BaseCardPosition = NodePath("../RectPoint")
+CharacterRectScene = ExtResource("3_xy74d")
+
+[node name="EnemiesContainer" parent="." node_paths=PackedStringArray("Allies", "BattleDisplay", "EnemyHealthBar", "DamageIndicator", "BaseEnemyPosition") instance=ExtResource("9_aigq0")]
+Allies = NodePath("../AlliesContainer")
+BattleDisplay = NodePath("..")
+EnemyHealthBar = NodePath("../EnemyHealthBar")
+DamageIndicator = NodePath("../DamageIndicator")
+BaseEnemyPosition = NodePath("../EnemySpritePoint")
 EnemySpriteScene = ExtResource("3_xj7hs")
 
 [node name="Background" type="TextureRect" parent="."]
@@ -51,4 +71,8 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_t1bdu")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_jm34i")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_kjwpl")
 
-[connection signal="FightButtonTriggered" from="BattleOptions" to="." method="OnAttackButton"]
+[connection signal="EnemyPressed" from="EnemiesContainer" to="AlliesContainer" method="OnEnemyPressed"]
+[connection signal="DefenseButtonTriggered" from="BattleOptions" to="AlliesContainer" method="OnDefendButton"]
+[connection signal="FightButtonTriggered" from="BattleOptions" to="AlliesContainer" method="OnAttackButton"]
+[connection signal="ItemsButtonTriggered" from="BattleOptions" to="AlliesContainer" method="OnItemButton"]
+[connection signal="MagicButtonTriggered" from="BattleOptions" to="AlliesContainer" method="OnMagicButton"]

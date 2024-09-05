@@ -1,10 +1,44 @@
-[gd_scene load_steps=6 format=3 uid="uid://cil04fbnlnhn3"]
+[gd_scene load_steps=11 format=3 uid="uid://cil04fbnlnhn3"]
 
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_br32s"]
 [ext_resource type="Script" path="res://scripts/prefabs/CharacterRect.cs" id="2_142cy"]
 [ext_resource type="Texture2D" uid="uid://b3icfmgjqjfwf" path="res://assets/battle/battle-portraits/nolan.png" id="3_5y2tx"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="4_0hco1"]
 [ext_resource type="PackedScene" uid="uid://beu5pufxcqifb" path="res://scenes/prefabs/damage_indicator.tscn" id="5_yx2xm"]
+[ext_resource type="Texture2D" uid="uid://d2febklhq5ewk" path="res://assets/ui/select-arrow-right.png" id="6_e428k"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4sfbf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5y2tx")
+}],
+"loop": true,
+"name": &"Nolan",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hry5j"]
+atlas = ExtResource("6_e428k")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3m7e"]
+atlas = ExtResource("6_e428k")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_joupr"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_hry5j")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_o3m7e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="CharacterRect" type="NinePatchRect"]
 offset_right = 92.0
@@ -25,12 +59,12 @@ offset_left = 4.0
 offset_top = 4.0
 offset_right = 88.0
 offset_bottom = 24.0
-color = Color(0.694704, 2.64719e-06, 3.85046e-07, 1)
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(12, 12)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_5y2tx")
+sprite_frames = SubResource("SpriteFrames_4sfbf")
+animation = &"Nolan"
 
 [node name="NameLabel" type="Label" parent="."]
 layout_mode = 0
@@ -71,3 +105,13 @@ horizontal_alignment = 2
 layout_mode = 0
 offset_top = 0.0
 offset_bottom = 23.0
+
+[node name="SelectArrow" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, 13.5)
+sprite_frames = SubResource("SpriteFrames_joupr")
+frame_progress = 0.19676
+
+[connection signal="focus_entered" from="." to="." method="OnFocusEntered"]
+[connection signal="focus_exited" from="." to="." method="OnFocusExited"]
+[connection signal="gui_input" from="." to="." method="OnGuiInput"]
