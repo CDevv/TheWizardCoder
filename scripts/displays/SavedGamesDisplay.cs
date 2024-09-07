@@ -33,8 +33,10 @@ public partial class SavedGamesDisplay : CanvasLayer
 		}
 	}
 
-	public void FocusOnSaveButton()
+	public void ShowDisplay()
 	{
+		global.GameDisplayEnabled = false;
+		Show();
 		saveButton.GrabFocus();
 	}
 
@@ -47,6 +49,7 @@ public partial class SavedGamesDisplay : CanvasLayer
 	{
 		Hide();
 		global.CanWalk = true;
+		global.GameDisplayEnabled = true;
 	}
 
 	public void OnSaveOption(string saveName)

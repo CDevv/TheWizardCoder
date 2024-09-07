@@ -54,7 +54,7 @@ scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(111, 12)
 mouse_filter = 2
 theme = ExtResource("3_ga21o")
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 32
 text = "No items in inventory."
 
 [node name="DescriptionRect" type="NinePatchRect" parent="."]

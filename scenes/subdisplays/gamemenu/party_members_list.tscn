@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://prxu22vjqfni"]
+
+[ext_resource type="PackedScene" uid="uid://bxatavt47tq1n" path="res://scenes/prefabs/character_party_member.tscn" id="1_5usm2"]
+[ext_resource type="Script" path="res://scripts/subdisplays/PartyMembersList.cs" id="1_wihky"]
+
+[node name="PartyMembersList" type="CanvasLayer"]
+script = ExtResource("1_wihky")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(184, 72)
+
+[node name="CharacterPartyMember" parent="." instance=ExtResource("1_5usm2")]
+offset_left = 184.0
+offset_top = 72.0
+offset_right = 380.0
+offset_bottom = 112.0
+
+[connection signal="Pressed" from="CharacterPartyMember" to="." method="OnCharacterPressed"]

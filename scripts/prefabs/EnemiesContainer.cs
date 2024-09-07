@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 public partial class EnemiesContainer : Node
@@ -25,7 +26,7 @@ public partial class EnemiesContainer : Node
 	private Vector2 enemySpritePoint = Vector2.Zero;
 
 	private Array<EnemySprite> enemySprites = new();
-	private Array<CharacterData> enemies = new();
+	private List<CharacterData> enemies = new();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

@@ -5,23 +5,26 @@
 [ext_resource type="PackedScene" uid="uid://capppjgr8n1ew" path="res://scenes/prefabs/text_button.tscn" id="2_mrvjk"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="3_6qd7x"]
 
-[node name="BattleOptions" type="NinePatchRect"]
+[node name="BattleOptions" type="CanvasLayer"]
+script = ExtResource("2_j8jgq")
+ButtonTemplate = ExtResource("2_mrvjk")
+
+[node name="Container" type="NinePatchRect" parent="."]
 offset_left = 208.0
 offset_top = 384.0
 offset_right = 416.0
 offset_bottom = 424.0
 scale = Vector2(2, 2)
 texture = ExtResource("1_cfhdv")
+region_rect = Rect2(0, 0, 16, 16)
 patch_margin_left = 4
 patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
-script = ExtResource("2_j8jgq")
-ButtonTemplate = ExtResource("2_mrvjk")
 
-[node name="InfoLabel" type="Label" parent="."]
+[node name="InfoLabel" type="Label" parent="Container"]
+unique_name_in_owner = true
 visible = false
-layout_mode = 2
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 204.0
@@ -30,8 +33,7 @@ theme = ExtResource("3_6qd7x")
 theme_override_font_sizes/font_size = 16
 text = "Label"
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
+[node name="MarginContainer" type="MarginContainer" parent="Container"]
 offset_right = 416.0
 offset_bottom = 80.0
 scale = Vector2(0.5, 0.5)
@@ -40,68 +42,68 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="MainOptions" type="GridContainer" parent="MarginContainer"]
+[node name="MainOptions" type="GridContainer" parent="Container/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 columns = 2
 
-[node name="AttackButton" parent="MarginContainer/MainOptions" instance=ExtResource("2_mrvjk")]
+[node name="AttackButton" parent="Container/MarginContainer/MainOptions" instance=ExtResource("2_mrvjk")]
 layout_mode = 2
 text = "Attack
 "
 
-[node name="DefendButton" parent="MarginContainer/MainOptions" instance=ExtResource("2_mrvjk")]
+[node name="DefendButton" parent="Container/MarginContainer/MainOptions" instance=ExtResource("2_mrvjk")]
 unique_name_in_owner = false
 layout_mode = 2
 text = "Defend"
 
-[node name="ItemsButton" parent="MarginContainer/MainOptions" instance=ExtResource("2_mrvjk")]
+[node name="ItemsButton" parent="Container/MarginContainer/MainOptions" instance=ExtResource("2_mrvjk")]
 unique_name_in_owner = false
 layout_mode = 2
 text = "Items"
 
-[node name="MagicButton" parent="MarginContainer/MainOptions" instance=ExtResource("2_mrvjk")]
+[node name="MagicButton" parent="Container/MarginContainer/MainOptions" instance=ExtResource("2_mrvjk")]
 unique_name_in_owner = false
 layout_mode = 2
 text = "Magic"
 
-[node name="Items" type="GridContainer" parent="MarginContainer"]
+[node name="Items" type="GridContainer" parent="Container/MarginContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 columns = 2
 
-[node name="TextButton" parent="MarginContainer/Items" instance=ExtResource("2_mrvjk")]
+[node name="TextButton" parent="Container/MarginContainer/Items" instance=ExtResource("2_mrvjk")]
 unique_name_in_owner = false
 visible = false
 layout_mode = 2
 
-[node name="Magic" type="GridContainer" parent="MarginContainer"]
+[node name="Magic" type="GridContainer" parent="Container/MarginContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 columns = 2
 
-[node name="TextButton" parent="MarginContainer/Magic" instance=ExtResource("2_mrvjk")]
+[node name="TextButton" parent="Container/MarginContainer/Magic" instance=ExtResource("2_mrvjk")]
 unique_name_in_owner = false
 visible = false
 layout_mode = 2
 
-[node name="Info" type="GridContainer" parent="MarginContainer"]
+[node name="Info" type="GridContainer" parent="Container/MarginContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="MarginContainer/Info"]
+[node name="Label" type="Label" parent="Container/MarginContainer/Info"]
 layout_mode = 2
 
-[node name="TextContainer" type="MarginContainer" parent="MarginContainer"]
+[node name="TextContainer" type="MarginContainer" parent="Container/MarginContainer"]
 layout_mode = 2
 
-[node name="DescriptionContainer" type="NinePatchRect" parent="."]
+[node name="DescriptionContainer" type="NinePatchRect" parent="Container"]
+unique_name_in_owner = true
 visible = false
-layout_mode = 0
 offset_top = -44.0
 offset_right = 208.0
 offset_bottom = -4.0
@@ -111,7 +113,7 @@ patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="Description" type="Label" parent="DescriptionContainer"]
+[node name="Description" type="Label" parent="Container/DescriptionContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 offset_left = 4.0
@@ -122,7 +124,7 @@ theme = ExtResource("3_6qd7x")
 text = "Description"
 autowrap_mode = 3
 
-[node name="CostLabel" type="Label" parent="DescriptionContainer"]
+[node name="CostLabel" type="Label" parent="Container/DescriptionContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -135,7 +137,7 @@ text = "100 MP"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[connection signal="pressed" from="MarginContainer/MainOptions/AttackButton" to="." method="OnAttackButton"]
-[connection signal="pressed" from="MarginContainer/MainOptions/DefendButton" to="." method="OnDefenseButton"]
-[connection signal="pressed" from="MarginContainer/MainOptions/ItemsButton" to="." method="OnItemsButton"]
-[connection signal="pressed" from="MarginContainer/MainOptions/MagicButton" to="." method="OnMagicButton"]
+[connection signal="pressed" from="Container/MarginContainer/MainOptions/AttackButton" to="." method="OnAttackButton"]
+[connection signal="pressed" from="Container/MarginContainer/MainOptions/DefendButton" to="." method="OnDefenseButton"]
+[connection signal="pressed" from="Container/MarginContainer/MainOptions/ItemsButton" to="." method="OnItemsButton"]
+[connection signal="pressed" from="Container/MarginContainer/MainOptions/MagicButton" to="." method="OnMagicButton"]

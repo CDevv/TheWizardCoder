@@ -56,6 +56,7 @@ public partial class PickableButton : Area2D
 
 	private void OnButtonDown()
 	{
+		GD.Print("guh");
 		offset = GetViewport().GetMousePosition() - button.GlobalPosition;
 		isDragging = true;
 	}

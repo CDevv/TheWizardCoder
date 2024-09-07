@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class MainMenuSavedGames : CanvasLayer
+public partial class MainMenuSavedGames : Display
 {
 	[Signal]
 	public delegate void BackButtonTrigerredEventHandler();
@@ -11,14 +11,13 @@ public partial class MainMenuSavedGames : CanvasLayer
 	[Export]
 	public DeleteFileConfirmation confirmation;
 
-	private Global global;
 	private Button loadButton;
 	private SaveFileOption[] saveButtons = new SaveFileOption[3];
 	private SaveFileAction mode;
 
 	public override void _Ready()
 	{
-		global = GetNode<Global>("/root/Global");
+		base._Ready();
 		loadButton = GetNode<Button>("%LoadButton");
 		saveButtons = new SaveFileOption[3] {
 			GetNode<SaveFileOption>("Save1"),
@@ -35,12 +34,13 @@ public partial class MainMenuSavedGames : CanvasLayer
 		}
     }
 
-	public void FocusFirst()
+	public override void ShowDisplay()
 	{
+		Show();
 		loadButton.GrabFocus();
 	}
 
-    public void UpdateSaveData()
+    public override void UpdateDisplay()
 	{
 		for (int i = 0; i < saveButtons.Length; i++)
 		{
@@ -51,7 +51,12 @@ public partial class MainMenuSavedGames : CanvasLayer
 		}
 	}
 
-	private void OnLoadButton()
+	public void FocusFirst()
+	{
+		loadButton.GrabFocus();
+	}
+
+    private void OnLoadButton()
 	{
 		mode = SaveFileAction.Load;
 		saveButtons[0].GrabFocus();
@@ -83,7 +88,7 @@ public partial class MainMenuSavedGames : CanvasLayer
 
 	private void OnFileDeleted()
 	{
-		UpdateSaveData();
+		UpdateDisplay();
 		loadButton.GrabFocus();
 	}
 }

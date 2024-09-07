@@ -2,7 +2,7 @@ using Godot;
 using Godot.Collections;
 using System;
 
-public partial class BattleOptions : NinePatchRect
+public partial class BattleOptions : Display
 {
 	[Export]
 	public PackedScene ButtonTemplate { get; set; }
@@ -34,12 +34,12 @@ public partial class BattleOptions : NinePatchRect
 		global = GetNode<Global>("/root/Global");
 		optionsContainer = GetNode<GridContainer>("%MainOptions");
 		attackButton = GetNode<Button>("%AttackButton");
-		descriptionContainer = GetNode<NinePatchRect>("DescriptionContainer");
+		descriptionContainer = GetNode<NinePatchRect>("%DescriptionContainer");
 		itemDescription = GetNode<Label>("%Description");
 		costLabel = GetNode<Label>("%CostLabel");
 		itemsContainer = GetNode<GridContainer>("%Items");
 		magicContainer = GetNode<GridContainer>("%Magic");
-		infoLabel = GetNode<Label>("InfoLabel");
+		infoLabel = GetNode<Label>("%InfoLabel");
 	}
 
 	public override void _Process(double delta)
@@ -64,7 +64,13 @@ public partial class BattleOptions : NinePatchRect
 		}
 	}
 
-	public void ShowInfoLabel(string text)
+    public override void ShowDisplay()
+    {
+		Show();
+        ShowOptions();
+    }
+
+    public void ShowInfoLabel(string text)
 	{
 		optionsContainer.Hide();
 		descriptionContainer.Hide();
@@ -127,7 +133,12 @@ public partial class BattleOptions : NinePatchRect
 		}
 	}
 
-	public void UpdateDisplay(CharacterData characterData)
+    public override void UpdateDisplay()
+    {
+        UpdateDisplay(global.PlayerData.Stats);
+    }
+
+    public void UpdateDisplay(CharacterData characterData)
 	{
 		ClearContainers();
 

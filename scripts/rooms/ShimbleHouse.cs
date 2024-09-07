@@ -33,5 +33,6 @@ public partial class ShimbleHouse : BaseRoom
 	{
 		await PlayCutscene("problem_solved");
 		await ShowDialogue(DialogueResource, "shimble_chair_solved");
+		global.PlayerData.AddToInventory("'s'");
 	}
 }

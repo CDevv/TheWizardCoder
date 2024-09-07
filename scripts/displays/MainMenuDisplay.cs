@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class MainMenuDisplay : CanvasLayer
+public partial class MainMenuDisplay : Display
 {
 	private Global global;
 	private Control main;
@@ -27,7 +27,7 @@ public partial class MainMenuDisplay : CanvasLayer
 		optionsMenu = GetNode<OptionsMenu>("%OptionsMenu");
 		controlsMenu = GetNode<ControlsMenu>("%ControlsMenu");
 
-		savedGamesMenu.UpdateSaveData();
+		savedGamesMenu.UpdateDisplay();
 		playButton.CallDeferred(Button.MethodName.GrabFocus);
 		optionsMenu.UpdateDisplay();
 		controlsMenu.UpdateDisplay();
@@ -45,41 +45,46 @@ public partial class MainMenuDisplay : CanvasLayer
 		}
     }
 
-	public void ShowMainMenu()
+    public override void ShowDisplay()
+    {
+        Show();
+		ShowMainMenu();
+    }
+
+    public override void UpdateDisplay()
+    {
+        optionsMenu.UpdateDisplay();
+		controlsMenu.UpdateDisplay();
+		savedGamesMenu.UpdateDisplay();
+    }
+
+    public void ShowMainMenu()
 	{
 		main.Show();
-		savedGamesMenu.Hide();
-		options.Hide();
-		optionsMenu.Hide();
-		controlsMenu.Hide();
+		savedGamesMenu.HideDisplay();
+		optionsMenu.HideDisplay();
+		controlsMenu.HideDisplay();
 		playButton.GrabFocus();
 	}
 
 	public void ShowSavedGamesMenu()
 	{
 		main.Hide();
-		savedGamesMenu.Show();
-		options.Hide();
-		savedGamesMenu.FocusFirst();
+		optionsMenu.HideDisplay();
+		savedGamesMenu.ShowDisplay();	
 	}
 
 	public void ShowOptions()
 	{
 		main.Hide();
-		savedGamesMenu.Hide();
-		options.Show();
-
-		optionsMenu.Show();
-		controlsMenu.Hide();
-
-		optionsMenu.FocusFirst();
+		savedGamesMenu.HideDisplay();
+		controlsMenu.HideDisplay();
+		optionsMenu.ShowDisplay();
 	}
 
 	public void ShowControls()
 	{
-		optionsMenu.Hide();
-		controlsMenu.Show();
-
-		controlsMenu.FocusFirst();
+		optionsMenu.HideDisplay();
+		controlsMenu.ShowDisplay();
 	}
 }

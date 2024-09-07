@@ -51,5 +51,6 @@ public partial class ZenHouse : BaseRoom
 		await PlayCutscene("code_solved");
 		await ShowDialogue(DialogueResource, "zen_code_solved");
 		AnimationPlayer.Play("zen_down");
+		global.PlayerData.AddToInventory("'t'");
 	}
 }

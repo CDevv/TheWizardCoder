@@ -51,6 +51,7 @@ _data = {
 }
 
 [node name="CodeProblemPanel" type="CanvasLayer"]
+layer = 4
 script = ExtResource("1_8o5lf")
 PickableButtonScene = ExtResource("3_s8dc8")
 PickableButtonAreaScene = ExtResource("4_vm0ji")

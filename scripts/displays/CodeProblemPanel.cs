@@ -3,7 +3,7 @@ using Godot.Collections;
 using System;
 using System.Collections.Generic;
 
-public partial class CodeProblemPanel : CanvasLayer
+public partial class CodeProblemPanel : Display
 {
 	[Signal]
 	public delegate void ProblemSolvedEventHandler();
@@ -56,7 +56,12 @@ public partial class CodeProblemPanel : CanvasLayer
 		}
 	}
 
-	public void ShowDisplay(string code, Array<string> items, Godot.Collections.Dictionary<string, Vector2> areas, bool useInventory)
+    public override void ShowDisplay()
+    {
+        Show();
+    }
+
+    public void ShowDisplay(string code, Array<string> items, Godot.Collections.Dictionary<string, Vector2> areas, bool useInventory)
 	{
 		global.GameDisplayEnabled = false;
 
@@ -190,4 +195,9 @@ public partial class CodeProblemPanel : CanvasLayer
 		Reset();
 		Hide();
 	}
+
+    public override void UpdateDisplay()
+    {
+        throw new NotImplementedException();
+    }
 }

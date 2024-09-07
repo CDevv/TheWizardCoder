@@ -1,7 +1,7 @@
 using Godot;
 using Godot.Collections;
 
-public partial class CharacterData : GodotObject
+public partial class CharacterData
 {
     public string Name { get; set; }
     public int Health { get; set; }
@@ -22,5 +22,11 @@ public partial class CharacterData : GodotObject
         AttackPoints = (int)dict["AttackPoints"];
         DefensePoints = (int)dict["DefensePoints"];
         MagicSpells = (Array<string>)dict["MagicSpells"];
+    }
+
+    public void AddHealth(int value)
+    {
+        int newValue = Mathf.Clamp(Health + value, 0, MaxHealth);
+        Health = newValue;
     }
 }

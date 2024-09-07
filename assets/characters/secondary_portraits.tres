@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://c3e5witb4onuf"]
+
+[ext_resource type="Texture2D" uid="uid://b3icfmgjqjfwf" path="res://assets/battle/battle-portraits/nolan.png" id="1_h658e"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_h658e")
+}],
+"loop": true,
+"name": &"Nolan",
+"speed": 5.0
+}]

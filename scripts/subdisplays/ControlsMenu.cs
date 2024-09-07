@@ -1,12 +1,11 @@
 using Godot;
 using System;
 
-public partial class ControlsMenu : CanvasLayer
+public partial class ControlsMenu : Display
 {
 	[Signal]
 	public delegate void OnBackButtonPressedEventHandler();
 
-	private Global global;
 	private ControlSelectButton upButton;
 	private ControlSelectButton downButton;
 	private ControlSelectButton leftButton;
@@ -14,14 +13,19 @@ public partial class ControlsMenu : CanvasLayer
 
 	public override void _Ready()
 	{
-		global = GetNode<Global>("/root/Global");
+		base._Ready();
 		upButton = GetNode<ControlSelectButton>("%UpButton");
 		downButton = GetNode<ControlSelectButton>("%DownButton");
 		leftButton = GetNode<ControlSelectButton>("%LeftButton");
 		rightButton = GetNode<ControlSelectButton>("%RightButton");
 	}
 
-	public void UpdateDisplay()
+    public override void ShowDisplay()
+    {
+        Show();
+    }
+
+    public override void UpdateDisplay()
 	{
 		upButton.Text = ((InputEventKey)global.Settings.Controls["up"]).AsTextKeycode();
 		downButton.Text = ((InputEventKey)global.Settings.Controls["down"]).AsTextKeycode();
@@ -29,7 +33,7 @@ public partial class ControlsMenu : CanvasLayer
 		rightButton.Text = ((InputEventKey)global.Settings.Controls["right"]).AsTextKeycode();
 	}
 
-	public void FocusFirst()
+    public void FocusFirst()
 	{
 		upButton.GrabFocus();
 	}

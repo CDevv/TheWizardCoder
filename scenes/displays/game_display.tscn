@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://de21qftn035us"]
+[gd_scene load_steps=11 format=3 uid="uid://de21qftn035us"]
 
 [ext_resource type="Script" path="res://scripts/displays/GameDisplay.cs" id="1_6dgqm"]
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_8qvuk"]
@@ -9,12 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://6rlgr1lwl05o" path="res://scenes/subdisplays/gamemenu/game_display_inventory_display.tscn" id="7_7y2ae"]
 [ext_resource type="PackedScene" uid="uid://1s17ud5yxf8a" path="res://scenes/subdisplays/gamemenu/game_menu_options_menu.tscn" id="8_v3vvj"]
 [ext_resource type="PackedScene" uid="uid://ody0k6mcrmk7" path="res://scenes/subdisplays/gamemenu/game_menu_controls_menu.tscn" id="9_imgrl"]
+[ext_resource type="PackedScene" uid="uid://prxu22vjqfni" path="res://scenes/subdisplays/gamemenu/party_members_list.tscn" id="10_foxtn"]
 
 [node name="GameDisplay" type="CanvasLayer"]
 follow_viewport_enabled = true
 script = ExtResource("1_6dgqm")
 
 [node name="TopStatsRect" type="NinePatchRect" parent="."]
+visible = false
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 108.0
@@ -88,7 +90,7 @@ focus_neighbor_top = NodePath("../Options")
 focus_neighbor_bottom = NodePath("../Options")
 mouse_filter = 2
 theme = ExtResource("4_sk2au")
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 32
 text = "Items"
 
 [node name="Options" type="Button" parent="MenuRect/OptionsMargins/VBoxContainer"]
@@ -98,7 +100,7 @@ focus_neighbor_top = NodePath("../ItemsButton")
 focus_neighbor_bottom = NodePath("../ItemsButton")
 mouse_filter = 2
 theme = ExtResource("4_sk2au")
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 32
 text = "Options"
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
@@ -116,6 +118,11 @@ visible = false
 unique_name_in_owner = true
 visible = false
 
+[node name="PartyMembersList" parent="." instance=ExtResource("10_foxtn")]
+visible = false
+
 [connection signal="button_down" from="MenuRect/OptionsMargins/VBoxContainer/ItemsButton" to="." method="ToggleInventoryMenu"]
 [connection signal="button_down" from="MenuRect/OptionsMargins/VBoxContainer/Options" to="." method="ToggleOptionsMenu"]
+[connection signal="ItemPressed" from="InventoryMenu" to="." method="OnItemPressed"]
 [connection signal="OnControlsButtonPressed" from="OptionsMenu" to="." method="OnControlsMenu"]
+[connection signal="CharacterPressed" from="PartyMembersList" to="." method="OnCharacterPressed"]

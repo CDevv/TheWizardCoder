@@ -10,5 +10,29 @@
 		"Description":"Apple from Nara.",
 		"Type": "Heal",
 		"Effect": 10,
-	}
+	},
+	"'s'":{
+		"Name": "'s'",
+		"Description":"return 's';",
+		"Type": "Key",
+		"Effect": 0,
+	},
+	"'t'":{
+		"Name": "'t'",
+		"Description":"return 't';",
+		"Type": "Key",
+		"Effect": 0,
+	},
+	"'a'":{
+		"Name": "'a'",
+		"Description":"return 'a';",
+		"Type": "Key",
+		"Effect": 0,
+	},
+	"'r'":{
+		"Name": "'r'",
+		"Description":"return 'r';",
+		"Type": "Key",
+		"Effect": 0,
+	},
 }

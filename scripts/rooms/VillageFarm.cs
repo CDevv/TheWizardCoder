@@ -50,5 +50,6 @@ public partial class VillageFarm : BaseRoom
 		}
 		await ShowDialogue(DialogueResource, "keenelm_code_solved");
 		global.PlayerData.HasSolvedFarmGlitch = true;
+		global.PlayerData.AddToInventory("'a'");
 	}
 }

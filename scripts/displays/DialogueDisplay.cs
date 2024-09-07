@@ -3,7 +3,7 @@ using Godot.Collections;
 using System;
 using DialogueManagerRuntime;
 
-public partial class DialogueDisplay : CanvasLayer
+public partial class DialogueDisplay : Display
 {
 	[Signal]
 	public delegate void DialogueEndedEventHandler();
@@ -95,7 +95,12 @@ public partial class DialogueDisplay : CanvasLayer
 		}
 	}
 
-	public async void ShowDisplay(Resource dialogueResource, string title)
+    public override void ShowDisplay()
+    {
+        Show();
+    }
+
+    public async void ShowDisplay(Resource dialogueResource, string title)
 	{
 		global.CanWalk = false;
 		global.GameDisplayEnabled = false;
@@ -105,7 +110,12 @@ public partial class DialogueDisplay : CanvasLayer
 		Show();
 	}
 
-	private void UpdateDisplay(DialogueLine line)
+    public override void UpdateDisplay()
+    {
+        UpdateDisplay(dialogueLine);
+    }
+
+    private void UpdateDisplay(DialogueLine line)
 	{
 		if (line == null)
 		{
@@ -138,18 +148,6 @@ public partial class DialogueDisplay : CanvasLayer
 		}
 
 		//Set up audio
-		/*
-		var audioStream = GD.Load<AudioStream>($"res://sounds/voices/{dialogueLine.Character.ToLower()}_voice.wav");
-		if (audioStream != null)
-		{
-			audioPlayer.Set("stream", audioStream);
-		}
-		else
-		{
-			var unknownVoice = GD.Load<AudioStream>($"res://sounds/voices/nolan_voice.wav");
-			audioPlayer.Set("stream", unknownVoice);
-		}
-		*/
 		var audioStream = GD.Load<AudioStream>($"res://sounds/voices/base_voice.wav");
 		audioPlayer.Set("stream", audioStream);
 

@@ -26,7 +26,7 @@ public partial class AlliesContainer : Node
 	private Vector2 startingPoint = Vector2.Zero;
 	private int currentCharacter = 0;
 	private Array<CharacterRect> alliesCards = new();
-	private Array<CharacterData> allies = new();
+	private List<CharacterData> allies = new();
 	private List<CharacterBattleState> battleStates = new();
 
 	public override void _Ready()

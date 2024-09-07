@@ -35,5 +35,6 @@ public partial class TavernBarrelsRoom : BaseRoom
 	{
 		await PlayCutscene("code_solved");
 		global.PlayerData.HasSolvedTavernGlitch = true;
+		global.PlayerData.AddToInventory("'r'");
 	}
 }

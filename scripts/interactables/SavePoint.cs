@@ -7,7 +7,6 @@ public partial class SavePoint : Interactable
     {
         var savedGames = global.CurrentRoom.SavedGamesDisplay;
         savedGames.UpdateDisplay();
-        savedGames.Show();
-        savedGames.FocusOnSaveButton();
+        savedGames.ShowDisplay();
     }
 }

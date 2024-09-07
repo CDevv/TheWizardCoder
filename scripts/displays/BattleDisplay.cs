@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-public partial class BattleDisplay : CanvasLayer
+public partial class BattleDisplay : Display
 {
 	private Vector2 startingPoint = new Vector2(16, 408);
 
@@ -49,11 +49,15 @@ public partial class BattleDisplay : CanvasLayer
 		}
 	}
 
-	public async void ShowDisplay(Array<string> enemies)
+    public override void ShowDisplay()
+    {
+        ShowDisplay(new() {"Glitch"});
+    }
+
+    public async void ShowDisplay(Array<string> enemies)
 	{
 		BattleEnded = false;
 		//Add allies
-		Allies.AddAlly(global.PlayerData.Stats);
 		Allies.AddAlly(global.PlayerData.Stats);
 
 		//Add enemies
@@ -66,12 +70,18 @@ public partial class BattleDisplay : CanvasLayer
 		global.CurrentRoom.TransitionRect.PlayAnimation();
 		await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
 		Show();
+		battleOptions.ShowDisplay();
 		global.CurrentRoom.TransitionRect.PlayAnimationBackwards();
 
 		Allies.StartTurn();
 	}
 
-	private void Clear()
+    public override void UpdateDisplay()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void Clear()
 	{
 		Allies.Clear();
 		Enemies.Clear();
@@ -102,12 +112,13 @@ public partial class BattleDisplay : CanvasLayer
 		}
 	}
 
-	public async void HideDisplay()
+	public override async void HideDisplay()
 	{
 		BattleEnded = true;
 		global.CurrentRoom.TransitionRect.PlayAnimation();
 		await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
 		Hide();
+		battleOptions.HideDisplay();
 		Clear();
 		global.CanWalk = true;
 		global.GameDisplayEnabled = true;

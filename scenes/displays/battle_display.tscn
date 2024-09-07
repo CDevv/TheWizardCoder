@@ -47,6 +47,7 @@ offset_bottom = 480.0
 texture = ExtResource("2_8bsa4")
 
 [node name="BattleOptions" parent="." instance=ExtResource("9_py3yx")]
+visible = false
 
 [node name="EnemyHealthBar" parent="." instance=ExtResource("6_s2ji1")]
 visible = false

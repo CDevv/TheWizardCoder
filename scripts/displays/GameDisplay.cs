@@ -3,39 +3,37 @@ using Godot.Collections;
 using System;
 using System.Linq;
 
-public partial class GameDisplay : CanvasLayer
+public partial class GameDisplay : Display
 {
 	private int level = 0;
 	private bool visible = false;
-	private Global global;
 	private TextureProgressBar healthBar;
 	private Button itemsButton;
 	private AudioStreamPlayer audioPlayer;
 	private InventoryDisplay inventoryMenu;
 	private OptionsMenu optionsMenu;
 	private ControlsMenu controlsMenu;
+	private PartyMembersList partyMembers;
+	private MenuAction action;
+	private int itemIndex;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		global = GetNode<Global>("/root/Global");
+		base._Ready();
 		healthBar = GetNode<TextureProgressBar>("%HealthBar");
 		itemsButton = GetNode<Button>("%ItemsButton");
 		audioPlayer = GetNode<AudioStreamPlayer>("AudioPlayer");
 		optionsMenu = GetNode<OptionsMenu>("%OptionsMenu");
 		controlsMenu = GetNode<ControlsMenu>("%ControlsMenu");
 		inventoryMenu = GetNode<InventoryDisplay>("%InventoryMenu");
+		partyMembers = GetNode<PartyMembersList>("PartyMembersList"); 
 
 		inventoryMenu.Hide();
 		Hide();
 		optionsMenu.UpdateDisplay();
 		controlsMenu.UpdateDisplay();
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-		
+		partyMembers.UpdateDisplay();
 	}
 
     public override void _UnhandledInput(InputEvent @event)
@@ -54,23 +52,26 @@ public partial class GameDisplay : CanvasLayer
 					{
 						global.CanWalk = true;
 						Hide();
+						partyMembers.Hide();
 						Visible = false;
 					}
 					else
 					{
 						global.CanWalk = false;
 						Show();
-						//healthBar.Set(TextureProgressBar.PropertyName.Value, global.PlayerData.Health);
+						partyMembers.Show();
 						itemsButton.GrabFocus();
 						Visible = true;
 
 						inventoryMenu.UpdateDisplay();
+						partyMembers.UpdateDisplay();
 					}
 					break;
 				case 1:
 					level = 0;
 					inventoryMenu.Hide();
 					optionsMenu.Hide();
+					partyMembers.Show();
 					itemsButton.GrabFocus();
 					break;
 				case 2:
@@ -82,7 +83,20 @@ public partial class GameDisplay : CanvasLayer
 		}
     }
 
-	public void ToggleInventoryMenu()
+    public override void ShowDisplay()
+    {
+        Show();
+		partyMembers.Show();
+		itemsButton.GrabFocus();
+    }
+
+    public override void UpdateDisplay()
+    {
+        partyMembers.UpdateDisplay();
+		inventoryMenu.UpdateDisplay();
+    }
+
+    public void ToggleInventoryMenu()
 	{
 		if (inventoryMenu.Visible)
 		{
@@ -91,8 +105,8 @@ public partial class GameDisplay : CanvasLayer
 		else
 		{
 			level = 1;
-			inventoryMenu.Show();
-			inventoryMenu.FocusFirst();
+			inventoryMenu.ShowDisplay();
+			partyMembers.Hide();
 		}
 	}
 
@@ -111,16 +125,39 @@ public partial class GameDisplay : CanvasLayer
 	public void OnOptionsMenu()
 	{
 		level = 1;
-		optionsMenu.Show();
+		optionsMenu.ShowDisplay();
 		controlsMenu.Hide();
-		optionsMenu.FocusFirst();
+		partyMembers.Hide();
 	}
 
 	public void OnControlsMenu()
 	{
 		level = 2;
 		optionsMenu.Hide();
-		controlsMenu.Show();
-		controlsMenu.FocusFirst();
+		controlsMenu.ShowDisplay();
+	}
+
+	private void OnItemPressed(int index)
+	{
+		itemIndex = index;
+		level = 1;
+		action = MenuAction.Items;
+		inventoryMenu.Hide();
+		partyMembers.ShowDisplay();
+	}
+
+	private void OnCharacterPressed()
+	{
+		level = 0;
+
+		string itemName = global.PlayerData.Inventory[itemIndex];
+		Item itemData = global.ItemDescriptions[itemName];
+
+		global.PlayerData.Stats.AddHealth(itemData.Effect);
+		global.PlayerData.RemoveFromInventory(itemIndex);
+
+		inventoryMenu.UpdateDisplay();
+		partyMembers.UpdateDisplay();
+		itemsButton.GrabFocus();
 	}
 }

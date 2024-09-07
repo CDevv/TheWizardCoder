@@ -1,31 +1,36 @@
 using Godot;
 using System;
 
-public partial class OptionsMenu : CanvasLayer
+public partial class OptionsMenu : Display
 {
 	[Signal]
 	public delegate void OnControlsButtonPressedEventHandler();
 	[Signal]
 	public delegate void OnBackButtonPressedEventHandler();
 
-	private Global global;
 	private OptionButton resolutionsButton;
 	private CheckBox fullscreenButton;
 
 	public override void _Ready()
 	{
-		global = GetNode<Global>("/root/Global");
+		base._Ready();
 		resolutionsButton = GetNode<OptionButton>("%ResolutionOptions");
 		fullscreenButton = GetNode<CheckBox>("%FullscreenCheckBox");
 	}
 
-	public void UpdateDisplay()
+    public override void ShowDisplay()
+    {
+        Show();
+		FocusFirst();
+    }
+
+    public override void UpdateDisplay()
 	{
 		resolutionsButton.Set(OptionButton.PropertyName.Selected, (int)global.Settings.WindowSize);
 		fullscreenButton.Set(CheckBox.PropertyName.ButtonPressed, (bool)global.Settings.Fullscreen);
 	}
 
-	public void FocusFirst()
+    public void FocusFirst()
 	{
 		resolutionsButton.GrabFocus();
 	}

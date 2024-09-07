@@ -31,6 +31,10 @@ SceneFileName = "village_3"
 LocationName = "Village"
 DefaultMarkerName = "Section2Marker"
 
+[node name="BattleDisplay" parent="." index="1"]
+CharacterRectScene = null
+EnemySpriteScene = null
+
 [node name="Camera" parent="." index="5"]
 limit_right = 1888
 limit_bottom = 1952

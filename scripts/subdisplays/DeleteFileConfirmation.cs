@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class DeleteFileConfirmation : CanvasLayer
+public partial class DeleteFileConfirmation : Display
 {
 	[Signal]
 	public delegate void FileDeletedEventHandler();
@@ -18,7 +18,12 @@ public partial class DeleteFileConfirmation : CanvasLayer
 		yesButton = GetNode<Button>("%YesButton");
 	}
 
-	public void ShowDisplay(string saveName)
+    public override void ShowDisplay()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void ShowDisplay(string saveName)
 	{
 		this.saveName = saveName;
 		label.Text = $"Are you sure you want to delete {saveName}?";		
@@ -26,7 +31,12 @@ public partial class DeleteFileConfirmation : CanvasLayer
 		yesButton.GrabFocus();
 	}
 
-	private void ConfirmAction(bool fileIsDeleted)
+    public override void UpdateDisplay()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void ConfirmAction(bool fileIsDeleted)
 	{
 		if (fileIsDeleted)
 		{
