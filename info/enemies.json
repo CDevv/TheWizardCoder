@@ -4,7 +4,7 @@
 		"MaxHealth": 50,
 		"Points": 0,
 		"MaxPoints": 0,
-		"AttackPoints": 5,
+		"AttackPoints": 25,
 		"DefensePoints": 5,
 		"MagicSpells": {}
 	}

@@ -99,13 +99,13 @@ public partial class Global : Node
 			Characters.Add(pair.Key, character);
 
 			ResourceLoader.LoadThreadedRequest($"res://assets/battle/enemies/{pair.Key}.png");
-			GD.Print($"res://assets/battle/enemies/{pair.Key}.png");
 		}
 	}
 
 	public void CreateSaveFile(string saveName)
 	{
 		SaveFileData data = new SaveFileData();
+		data.FileName = saveName;
 		data.SaveName = saveName;
 		var dictionary = data.GenerateDictionary();
 		
@@ -221,6 +221,11 @@ public partial class Global : Node
 			LocationMarkerName = playerLocation;
 			PlayerDirection = direction;
 		}
+	}
+
+	public void GoToMainMenu()
+	{
+		GetTree().ChangeSceneToFile("res://scenes/rooms/main_menu.tscn");
 	}
 
 	public Vector2 GetDirectionVector(Direction direction)

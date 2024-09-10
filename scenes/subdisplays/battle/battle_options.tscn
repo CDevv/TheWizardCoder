@@ -25,6 +25,7 @@ patch_margin_bottom = 4
 [node name="InfoLabel" type="Label" parent="Container"]
 unique_name_in_owner = true
 visible = false
+layout_mode = 0
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 204.0
@@ -34,6 +35,7 @@ theme_override_font_sizes/font_size = 16
 text = "Label"
 
 [node name="MarginContainer" type="MarginContainer" parent="Container"]
+layout_mode = 0
 offset_right = 416.0
 offset_bottom = 80.0
 scale = Vector2(0.5, 0.5)
@@ -104,6 +106,7 @@ layout_mode = 2
 [node name="DescriptionContainer" type="NinePatchRect" parent="Container"]
 unique_name_in_owner = true
 visible = false
+layout_mode = 0
 offset_top = -44.0
 offset_right = 208.0
 offset_bottom = -4.0

@@ -13,6 +13,22 @@
 [ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/prefabs/code_problem_point.tscn" id="10_qkqpl"]
 [ext_resource type="PackedScene" uid="uid://mmm0k3msmmm5" path="res://scenes/prefabs/cutscene_point.tscn" id="12_1wghb"]
 
+[sub_resource type="Animation" id="Animation_0u8bh"]
+resource_name = "final_pos"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Glitch:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_2ls41"]
 resource_name = "keenelm_1"
 length = 0.9
@@ -126,38 +142,6 @@ tracks/0/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_e4lbd"]
-resource_name = "problem_solved"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Glitch:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_0u8bh"]
-resource_name = "final_pos"
-length = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Glitch:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_7vuls"]
 resource_name = "keenelm_code_solved"
 length = 1.5
@@ -237,6 +221,22 @@ tracks/1/keys = {
 "args": [1],
 "method": &"PlayIdleAnimation"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_e4lbd"]
+resource_name = "problem_solved"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Glitch:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h0k27"]
@@ -395,5 +395,12 @@ SolvableAreas = {
 position = Vector2(1040, 960)
 scale = Vector2(1, 4)
 RoomMethodName = "OnKeenelmEncounter"
+
+[node name="LockedHouse" parent="." index="24" instance=ExtResource("5_hwpiv")]
+z_index = 2
+position = Vector2(232, 560)
+scale = Vector2(1, 2)
+DialogueResource = ExtResource("6_eeq7a")
+DialogueTitle = "locked"
 
 [connection signal="ProblemSolved" from="CodeProblemPoint" to="." method="OnProblemSolved"]

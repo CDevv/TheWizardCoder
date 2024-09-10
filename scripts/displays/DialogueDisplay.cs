@@ -11,28 +11,30 @@ public partial class DialogueDisplay : Display
 	[Export]
 	private PackedScene ResponseTemplate { get; set; }
 
-	private Global global;
 	private RichTextLabel label;
 	private AnimatedSprite2D portrait;
-	private NinePatchRect responsesRect;
+	private MarginContainer responsesRect;
 	private VBoxContainer responsesMenu;
 	private AudioStreamPlayer audioPlayer;
 	private DialogueLine dialogueLine;
 	private Resource dialogueResource;
+	private Marker2D responsesRectMarker;
 	private bool isTyping = false;
 	private double waitingTime = 0.02;
 	private string text = "";
 	private int index = -1;
 	private bool hasResponses = false;
+	private float maxSize = 0;
 
 	public override void _Ready()
 	{
-		global = GetNode<Global>("/root/Global");
+		base._Ready();
 		label = GetNode<RichTextLabel>("%DialogueText");
 		portrait = GetNode<AnimatedSprite2D>("%Portrait");
-		responsesRect = GetNode<NinePatchRect>("%ResponsesRect");
+		responsesRect = GetNode<MarginContainer>("%ResponsesRect");
 		responsesMenu = GetNode<VBoxContainer>("%Responses");
 		audioPlayer = GetNode<AudioStreamPlayer>("%AudioPlayer");
+		responsesRectMarker = GetNode<Marker2D>("ResponsesContainerMarker");
 	}
 
 	public override async void _Process(double delta)
@@ -47,7 +49,10 @@ public partial class DialogueDisplay : Display
 				if (dialogueLine.Responses.Count > 0)
 				{
 					responsesRect.Show();
-					UpdateResponses(dialogueLine.Responses);
+					UpdateResponses(dialogueLine.Responses);				
+					//responsesRect.Size = new Vector2(responsesRect.Size.X, 68);
+					//responsesRect.Position = responsesRectMarker.Position - new Vector2(responsesRect.Size.X * 2, 0);
+					responsesRect.Position = responsesRectMarker.Position - new Vector2((maxSize + (8 * 2)) * 2, 0);
 				}
 				return;
 			}
@@ -168,21 +173,27 @@ public partial class DialogueDisplay : Display
 	private void UpdateResponses(Array<DialogueResponse> responses)
 	{
 		ClearResponses();
-		
+
+		maxSize = 0;
 		Array<Button> buttons = new Array<Button>();
 		for (int i = 0; i < responses.Count; i++)
 		{
 			DialogueResponse response = responses[i];
 			Button button = ResponseTemplate.Instantiate<Button>();
 			button.Text = response.Text;
-			button.Set("theme_override_font_sizes/font_size", 32);
+			button.Set("theme_override_font_sizes/font_size", 16);
 			button.Pressed += () => OnResponseSelected(response.NextId);
 			responsesMenu.AddChild(button);
 			buttons.Add(button);
 
 			if (i == 0)
 			{
+				maxSize = button.Size.X;
 				button.GrabFocus();
+			}
+			else if (button.Size.X > maxSize)
+			{
+				maxSize = button.Size.X;
 			}
 		}
 
@@ -195,6 +206,8 @@ public partial class DialogueDisplay : Display
 		}
 		buttons[buttons.Count - 1].FocusNeighborTop = buttons[buttons.Count - 2].GetPath();
 		buttons[buttons.Count - 1].FocusNeighborBottom = buttons[0].GetPath();
+
+		GD.Print(responsesRect.Size);
 	}
 
 	private void ClearResponses()

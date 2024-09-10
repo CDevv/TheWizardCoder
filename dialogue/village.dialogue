@@ -24,6 +24,14 @@ Narrator: A basket full of fruits
 Narrator: A hay bale.
 => END!
 
+~ water_bucket
+Narrator: A bucket full of water. Possibly for crops.
+=> END!
+
+~ seeds
+Narrator: A bag of wheat seeds.
+=> END!
+
 ~ niko
 Narrator: A cat child's favourite wheat field.
 => END!
@@ -203,4 +211,28 @@ if GetPlayerData("HasSolvedTavernGlitch"):
 else:
 	Berry: [#portrait=0] Fixed it yet?
 	Nolan: [#portrait=0] Not yet..
+=> END!
+
+~ dudeley_point
+Dudeley: [#portrait=0] Hello, dear wizard! What bothers you?
+- What are you doing here?
+	Nolan: [#portrait=0] What are you doing here, Dude?
+	Dudeley: [#portrait=0] I am looking over my wheat field, of course!
+	Dudeley: [#portrait=0] Isn't it glorious?
+	=> dudeley_point
+- What's with all these 'glitches'?
+	Nolan: [#portrait=0] What is with all those 'glitches' around the village?
+	Dudeley: [#portrait=0] *sigh*
+	Dudeley: [#portrait=0] Unfortunately I cannot give you a proper answer.
+	Dudeley: [#portrait=0] What I do know is that they.. well.. appeared as if out of nowhere.
+	Dudeley: [#portrait=0] I've also heard the forest and beyond it has even more of them.
+	Dudeley: [#portrait=0] But I never go to the forest so I can't tell for sure.
+	=> dudeley_point
+- Goodbye.
+	Nolan: [#portrait=0] Goodbye, Dudeley!
+	Dudeley: [#portrait=0] See ya around!
+	=> END!
+
+~ dudeley_bookshelf
+Narrator: This bookshelf has two books: "The Art of Sculpting" and "How To Garden Like a Pro"
 => END!

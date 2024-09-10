@@ -3,7 +3,6 @@ using System;
 
 public partial class MainMenuDisplay : Display
 {
-	private Global global;
 	private Control main;
 	private Control savedGames;
 	private Control options;
@@ -18,7 +17,7 @@ public partial class MainMenuDisplay : Display
 
 	public override void _Ready()
 	{
-		global = GetNode<Global>("/root/Global");
+		base._Ready();
 
 		main = GetNode<Control>("%Main");
 		options = GetNode<Control>("Options");
@@ -45,10 +44,12 @@ public partial class MainMenuDisplay : Display
 		}
     }
 
-    public override void ShowDisplay()
+    public override async void ShowDisplay()
     {
         Show();
 		ShowMainMenu();
+		global.CurrentRoom.TransitionRect.PlayAnimation();
+		await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
     }
 
     public override void UpdateDisplay()

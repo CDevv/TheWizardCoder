@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://bilbnrsqgec23"]
+
+[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_d10el"]
+[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="2_h36mt"]
+[ext_resource type="TileSet" uid="uid://clhrfovy5lcgu" path="res://tilesets/houses_interiors.tres" id="3_jqcmy"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="4_xgklm"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_uvme0"]
+a = Vector2(96, 96)
+b = Vector2(96, 416)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_v1agm"]
+a = Vector2(544, 96)
+b = Vector2(544, 352)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ldxda"]
+a = Vector2(288, 352)
+b = Vector2(544, 352)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_83pbx"]
+a = Vector2(288, 352)
+b = Vector2(288, 416)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_xdccb"]
+a = Vector2(96, 416)
+b = Vector2(160, 416)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_jk8uq"]
+a = Vector2(224, 416)
+b = Vector2(288, 416)
+
+[node name="Village2House1" instance=ExtResource("1_d10el")]
+y_sort_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="." index="10"]
+offset_right = 640.0
+offset_bottom = 480.0
+color = Color(0, 0, 0, 1)
+
+[node name="Player" parent="." index="11" instance=ExtResource("2_h36mt")]
+z_index = 1
+
+[node name="TileMap" type="TileMap" parent="." index="12"]
+y_sort_enabled = true
+scale = Vector2(2, 2)
+tile_set = ExtResource("3_jqcmy")
+format = 2
+layer_0/name = "props"
+layer_0/y_sort_enabled = true
+layer_0/z_index = 1
+layer_0/tile_data = PackedInt32Array(393219, 720896, 7, 393227, 327680, 3, 393228, 458752, 3, 393226, 589824, 5, 393229, 524288, 5, 393222, 720896, 3, 393231, 720896, 5)
+layer_1/name = "floor"
+layer_1/tile_data = PackedInt32Array(262147, 196608, 1, 327683, 196608, 2, 393219, 131072, 0, 458755, 65536, 2, 524291, 65536, 2, 589827, 0, 2, 655363, 0, 0, 720899, 65536, 0, 786435, 0, 4, 262148, 196608, 1, 327684, 196608, 2, 393220, 131072, 0, 458756, 0, 1, 524292, 65536, 1, 589828, 131072, 2, 655364, 131072, 2, 720900, 0, 0, 786436, 65536, 0, 262149, 196608, 1, 327685, 196608, 2, 393221, 65536, 2, 458757, 131072, 0, 524293, 0, 1, 589829, 131072, 2, 655365, 0, 2, 720901, 65536, 0, 786437, 0, 0, 851973, 131072, 3, 262150, 196608, 1, 327686, 196608, 2, 393222, 0, 0, 458758, 131072, 1, 524294, 65536, 0, 589830, 65536, 0, 655366, 0, 1, 720902, 65536, 1, 786438, 131072, 2, 851974, 196608, 3, 262151, 196608, 1, 327687, 196608, 2, 393223, 131072, 1, 458759, 131072, 2, 524295, 131072, 0, 589831, 0, 1, 655367, 65536, 1, 720903, 0, 0, 786439, 131072, 1, 262152, 196608, 1, 327688, 196608, 2, 393224, 0, 0, 458760, 131072, 0, 524296, 65536, 2, 589832, 0, 0, 655368, 131072, 2, 720904, 65536, 1, 786440, 65536, 4, 262153, 196608, 1, 327689, 196608, 2, 393225, 131072, 1, 458761, 0, 2, 524297, 0, 2, 589833, 65536, 1, 655369, 65536, 0, 262154, 196608, 1, 327690, 196608, 2, 393226, 65536, 0, 458762, 65536, 1, 524298, 131072, 0, 589834, 0, 2, 655370, 131072, 1, 262155, 196608, 1, 327691, 196608, 2, 393227, 131072, 1, 458763, 131072, 2, 524299, 65536, 0, 589835, 65536, 1, 655371, 131072, 2, 262156, 196608, 1, 327692, 196608, 2, 393228, 0, 1, 458764, 131072, 0, 524300, 65536, 0, 589836, 65536, 2, 655372, 65536, 1, 262157, 196608, 1, 327693, 196608, 2, 393229, 131072, 0, 458765, 0, 2, 524301, 131072, 1, 589837, 131072, 1, 655373, 0, 2, 262158, 196608, 1, 327694, 196608, 2, 393230, 65536, 2, 458766, 65536, 1, 524302, 0, 0, 589838, 131072, 2, 655374, 0, 2, 262159, 196608, 1, 327695, 196608, 2, 393231, 131072, 2, 458767, 0, 1, 524303, 65536, 1, 589839, 131072, 2, 655375, 0, 0, 262160, 196608, 1, 327696, 196608, 2, 393232, 0, 1, 458768, 131072, 0, 524304, 131072, 1, 589840, 131072, 1, 655376, 65536, 4, 196611, 196608, 1, 196612, 196608, 1, 196613, 196608, 1, 196614, 196608, 1, 196615, 196608, 1, 196616, 196608, 1, 196617, 196608, 1, 196618, 196608, 1, 196619, 196608, 1, 196620, 196608, 1, 196621, 196608, 1, 196622, 196608, 1, 196623, 196608, 1, 196624, 196608, 1)
+
+[node name="RoomCollision" type="StaticBody2D" parent="." index="13"]
+
+[node name="Wall1" type="CollisionShape2D" parent="RoomCollision" index="0"]
+shape = SubResource("SegmentShape2D_uvme0")
+
+[node name="Wall2" type="CollisionShape2D" parent="RoomCollision" index="1"]
+shape = SubResource("SegmentShape2D_v1agm")
+
+[node name="Wall3" type="CollisionShape2D" parent="RoomCollision" index="2"]
+shape = SubResource("SegmentShape2D_ldxda")
+
+[node name="Wall4" type="CollisionShape2D" parent="RoomCollision" index="3"]
+shape = SubResource("SegmentShape2D_83pbx")
+
+[node name="Wall5" type="CollisionShape2D" parent="RoomCollision" index="4"]
+shape = SubResource("SegmentShape2D_xdccb")
+
+[node name="Wall6" type="CollisionShape2D" parent="RoomCollision" index="5"]
+shape = SubResource("SegmentShape2D_jk8uq")
+
+[node name="Warper" parent="." index="14" instance=ExtResource("4_xgklm")]
+position = Vector2(192, 448)
+scale = Vector2(2, 1)
+TargetRoomName = "village_2"
+TargetLocation = "House1Marker"
+
+[node name="EnterMarker" type="Marker2D" parent="." index="15"]
+position = Vector2(192, 368)

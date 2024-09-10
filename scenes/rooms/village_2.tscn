@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://mjxcn0ruvtm"]
+[gd_scene load_steps=13 format=3 uid="uid://mjxcn0ruvtm"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_gnf0r"]
 [ext_resource type="TileSet" uid="uid://bnilncsva6t64" path="res://tilesets/env.tres" id="2_q1wcb"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="3_caurf"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="4_h52wr"]
+[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/prefabs/dialogue_point.tscn" id="5_k8g1s"]
+[ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="6_yfn2r"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_twr40"]
 a = Vector2(0, 784)
@@ -85,7 +87,13 @@ position = Vector2(1776, 904)
 [node name="FarmMarker" type="Marker2D" parent="." index="15"]
 position = Vector2(1216, 1280)
 
-[node name="RoomCollision" type="StaticBody2D" parent="." index="16"]
+[node name="House1Marker" type="Marker2D" parent="." index="16"]
+position = Vector2(720, 872)
+
+[node name="House2Marker" type="Marker2D" parent="." index="17"]
+position = Vector2(1360, 872)
+
+[node name="RoomCollision" type="StaticBody2D" parent="." index="18"]
 position = Vector2(0, 32)
 
 [node name="Wall1" type="CollisionShape2D" parent="RoomCollision" index="0"]
@@ -106,3 +114,31 @@ shape = SubResource("SegmentShape2D_sel21")
 
 [node name="Wall6" type="CollisionShape2D" parent="RoomCollision" index="5"]
 shape = SubResource("SegmentShape2D_pkh3d")
+
+[node name="LockedHouse1" parent="." index="21" instance=ExtResource("5_k8g1s")]
+z_index = 2
+position = Vector2(208, 853)
+scale = Vector2(2, 1)
+DialogueResource = ExtResource("6_yfn2r")
+DialogueTitle = "locked"
+
+[node name="LockedHouse2" parent="." index="22" instance=ExtResource("5_k8g1s")]
+z_index = 2
+position = Vector2(880, 1000)
+scale = Vector2(2, 1)
+DialogueResource = ExtResource("6_yfn2r")
+DialogueTitle = "locked"
+
+[node name="UnlockedHouse1" parent="." index="23" instance=ExtResource("4_h52wr")]
+z_index = 2
+position = Vector2(720, 850)
+TargetRoomName = "village_2_house_1"
+TargetLocation = "EnterMarker"
+PlayerDirection = 1
+
+[node name="UnlockedHouse2" parent="." index="24" instance=ExtResource("4_h52wr")]
+z_index = 2
+position = Vector2(1360, 850)
+TargetRoomName = "village_2_house_2"
+TargetLocation = "EnterMarker"
+PlayerDirection = 1

@@ -80,9 +80,13 @@ public partial class Player : CharacterBody2D
 		{
 			if (collision.GetCollider().GetType() == typeof(Warper))
 			{
-				global.CanWalk = false;
-				GD.Print("i collided with a warper");
-				TransitionToRoom((Warper)collision.GetCollider());
+				Warper warper = (Warper)collision.GetCollider();
+				if (warper.Enabled)
+				{
+					global.CanWalk = false;
+					GD.Print("i collided with a warper");
+					TransitionToRoom(warper);
+				}
 			}
 			else if (collision.GetCollider().GetType() == typeof(BattlePoint))
 			{

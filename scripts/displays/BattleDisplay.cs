@@ -21,7 +21,7 @@ public partial class BattleDisplay : Display
 
 	public bool BattleEnded { get; private set; } = false;
 
-	private Global global;
+
 	private AlliesContainer alliesContainer;
 	private EnemiesContainer enemiesContainer;
 	private BattleOptions battleOptions;
@@ -33,7 +33,7 @@ public partial class BattleDisplay : Display
 
 	public override void _Ready()
 	{
-		global = GetNode<Global>("/root/Global");
+		base._Ready();
 		battleOptions = GetNode<BattleOptions>("BattleOptions");
 		enemyHealthContainer = GetNode<EnemyHealthBar>("EnemyHealthBar");
 		damageIndicator = GetNode<DamageIndicator>("DamageIndicator");

@@ -1,0 +1,159 @@
+[gd_scene load_steps=19 format=3 uid="uid://b05udpdv73fsj"]
+
+[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_87xyq"]
+[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="2_i5ijb"]
+[ext_resource type="TileSet" uid="uid://clhrfovy5lcgu" path="res://tilesets/houses_interiors.tres" id="3_1x8jx"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="4_at8po"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_5buyk"]
+a = Vector2(160, 152)
+b = Vector2(224, 152)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_dd2wv"]
+a = Vector2(160, 152)
+b = Vector2(160, 352)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_rsb4f"]
+a = Vector2(224, 152)
+b = Vector2(224, 352)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_5e22a"]
+a = Vector2(320, 256)
+b = Vector2(224, 264)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ouwsp"]
+a = Vector2(320, 256)
+b = Vector2(424, 264)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_xh4ch"]
+a = Vector2(496, 288)
+b = Vector2(424, 264)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_sruag"]
+a = Vector2(512, 336)
+b = Vector2(496, 288)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_i5nnb"]
+a = Vector2(496, 384)
+b = Vector2(512, 336)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_825ys"]
+a = Vector2(496, 384)
+b = Vector2(424, 408)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ixjdn"]
+a = Vector2(424, 408)
+b = Vector2(352, 416)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_sxa0p"]
+a = Vector2(216, 408)
+b = Vector2(288, 416)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_gsl0h"]
+a = Vector2(144, 384)
+b = Vector2(216, 408)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_rqvbg"]
+a = Vector2(144, 384)
+b = Vector2(128, 336)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_weii1"]
+a = Vector2(160, 280)
+b = Vector2(128, 336)
+
+[node name="BaseRoom" instance=ExtResource("1_87xyq")]
+y_sort_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="." index="10"]
+offset_right = 640.0
+offset_bottom = 480.0
+color = Color(0, 0, 0, 1)
+
+[node name="Player" parent="." index="11" instance=ExtResource("2_i5ijb")]
+z_index = 2
+
+[node name="TileMap" type="TileMap" parent="." index="12"]
+y_sort_enabled = true
+scale = Vector2(2, 2)
+tile_set = ExtResource("3_1x8jx")
+format = 2
+layer_0/name = "fade"
+layer_0/z_index = 3
+layer_0/tile_data = PackedInt32Array(327685, 1114112, 9, 196613, 1245184, 9)
+layer_1/name = "props"
+layer_1/y_sort_enabled = true
+layer_1/z_index = 2
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "stairs"
+layer_2/z_index = 1
+layer_2/tile_data = PackedInt32Array(655365, 983040, 10, 262149, 983040, 9)
+layer_3/name = "floor"
+layer_3/tile_data = PackedInt32Array(786437, 0, 16, 524293, 0, 12, 196613, 0, 11, 262149, 0, 13, 327685, 0, 13, 393221, 0, 13, 458757, 0, 13, 262150, 0, 13, 327686, 0, 13, 393222, 0, 13, 458758, 0, 13, 262151, 0, 13, 327687, 0, 13, 393223, 0, 13, 458759, 0, 13, 262152, 0, 13, 327688, 0, 13, 393224, 0, 13, 458760, 0, 13, 262153, 0, 13, 393225, 327680, 13, 458761, 0, 13, 262154, 0, 13, 458762, 0, 13, 262155, 0, 13, 327691, 0, 13, 393227, 0, 13, 458763, 0, 13, 262156, 0, 13, 327692, 0, 13, 393228, 0, 13, 458764, 0, 13, 262157, 0, 13, 327693, 0, 13, 393229, 0, 13, 458765, 0, 13, 262158, 0, 13, 327694, 0, 13, 393230, 0, 13, 458766, 0, 13, 589829, 131072, 13, 655365, 262144, 13, 720901, 262144, 14, 589830, 65536, 14, 655366, 65536, 13, 720902, 262144, 14, 589831, 131072, 14, 655367, 196608, 14, 720903, 262144, 13, 589832, 262144, 13, 655368, 131072, 13, 720904, 65536, 13, 589833, 131072, 14, 655369, 262144, 13, 720905, 65536, 14, 589834, 196608, 13, 655370, 262144, 14, 720906, 131072, 14, 589835, 65536, 13, 655371, 131072, 13, 720907, 65536, 14, 589836, 65536, 14, 655372, 196608, 13, 720908, 196608, 13, 589837, 196608, 14, 655373, 196608, 13, 720909, 196608, 14, 589838, 65536, 13, 655374, 196608, 14, 720910, 131072, 13, 786447, 655360, 11, 786436, 720896, 11, 327695, 786432, 11, 327684, 851968, 11, 393220, 0, 13, 393231, 0, 13, 851977, 262144, 17)
+
+[node name="Warper" parent="." index="13" instance=ExtResource("4_at8po")]
+position = Vector2(320, 448)
+scale = Vector2(2, 1)
+TargetRoomName = "village_4"
+TargetLocation = "WatchtowerMarker"
+
+[node name="EnterMarker" type="Marker2D" parent="." index="14"]
+position = Vector2(320, 360)
+
+[node name="StairsCollision" type="StaticBody2D" parent="." index="15"]
+z_index = 5
+
+[node name="Wall1" type="CollisionShape2D" parent="StairsCollision" index="0"]
+shape = SubResource("SegmentShape2D_5buyk")
+
+[node name="Wall2" type="CollisionShape2D" parent="StairsCollision" index="1"]
+shape = SubResource("SegmentShape2D_dd2wv")
+
+[node name="Wall3" type="CollisionShape2D" parent="StairsCollision" index="2"]
+shape = SubResource("SegmentShape2D_rsb4f")
+
+[node name="RoomCollision" type="StaticBody2D" parent="." index="16"]
+z_index = 5
+
+[node name="Wall1" type="CollisionShape2D" parent="RoomCollision" index="0"]
+shape = SubResource("SegmentShape2D_5e22a")
+
+[node name="Wall2" type="CollisionShape2D" parent="RoomCollision" index="1"]
+shape = SubResource("SegmentShape2D_ouwsp")
+
+[node name="Wall3" type="CollisionShape2D" parent="RoomCollision" index="2"]
+shape = SubResource("SegmentShape2D_xh4ch")
+
+[node name="Wall4" type="CollisionShape2D" parent="RoomCollision" index="3"]
+shape = SubResource("SegmentShape2D_sruag")
+
+[node name="Wall5" type="CollisionShape2D" parent="RoomCollision" index="4"]
+shape = SubResource("SegmentShape2D_i5nnb")
+
+[node name="Wall6" type="CollisionShape2D" parent="RoomCollision" index="5"]
+shape = SubResource("SegmentShape2D_825ys")
+
+[node name="Wall7" type="CollisionShape2D" parent="RoomCollision" index="6"]
+shape = SubResource("SegmentShape2D_ixjdn")
+
+[node name="Wall8" type="CollisionShape2D" parent="RoomCollision" index="7"]
+shape = SubResource("SegmentShape2D_sxa0p")
+
+[node name="Wall9" type="CollisionShape2D" parent="RoomCollision" index="8"]
+shape = SubResource("SegmentShape2D_gsl0h")
+
+[node name="Wall10" type="CollisionShape2D" parent="RoomCollision" index="9"]
+shape = SubResource("SegmentShape2D_rqvbg")
+
+[node name="Wall11" type="CollisionShape2D" parent="RoomCollision" index="10"]
+shape = SubResource("SegmentShape2D_weii1")
+
+[node name="Floor2Warper" parent="." index="17" instance=ExtResource("4_at8po")]
+z_index = 5
+position = Vector2(192, 152)
+scale = Vector2(2, 0.5)
+TargetRoomName = "watchtower_2"
+TargetLocation = "Floor1Marker"
+PlayerDirection = 1
+
+[node name="Floor2Marker" type="Marker2D" parent="." index="18"]
+position = Vector2(192, 165)

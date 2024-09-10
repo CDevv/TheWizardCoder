@@ -9,4 +9,7 @@ public partial class Warper : StaticBody2D
 	public string TargetLocation { get; set; }
 	[Export]
 	public Direction PlayerDirection { get; set; } = Direction.Down;
+
+	[Export]
+	public bool Enabled { get; set; } = true;
 }

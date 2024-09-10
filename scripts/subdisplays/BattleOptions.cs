@@ -16,7 +16,6 @@ public partial class BattleOptions : Display
 	[Signal]
 	public delegate void DefenseButtonTriggeredEventHandler();
 
-	private Global global;
 	private GridContainer optionsContainer;
 	private Button attackButton;
 	private NinePatchRect descriptionContainer;
@@ -31,7 +30,7 @@ public partial class BattleOptions : Display
 
 	public override void _Ready()
 	{
-		global = GetNode<Global>("/root/Global");
+		base._Ready();
 		optionsContainer = GetNode<GridContainer>("%MainOptions");
 		attackButton = GetNode<Button>("%AttackButton");
 		descriptionContainer = GetNode<NinePatchRect>("%DescriptionContainer");

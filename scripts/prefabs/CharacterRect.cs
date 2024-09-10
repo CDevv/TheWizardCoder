@@ -96,7 +96,8 @@ public partial class CharacterRect : NinePatchRect
 		Tween tween = CreateTween();
 		tween.TweenProperty(background, "modulate", new Color(color.R, color.G, color.B, 0.5f), 0.3);
 		tween.TweenProperty(background, "modulate", new Color(color.R, color.G, color.B, 0), 0.3);
-		await ToSignal(tween, PropertyTweener.SignalName.Finished);
+		SceneTreeTimer timer = GetTree().CreateTimer(2);
+		await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
 		tween.Stop();
 	}
 }

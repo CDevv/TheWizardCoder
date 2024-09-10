@@ -43,3 +43,4 @@ visible = false
 visible = false
 
 [node name="GameOverDisplay" parent="." instance=ExtResource("8_w5sia")]
+visible = false

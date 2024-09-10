@@ -17,7 +17,6 @@ public partial class CodeProblemPanel : Display
 	public string ProblemId { get; set; }
 	public CodeProblemPoint Point { get; set; }
 
-	private Global global;
 	private CodeEdit codeEdit;
 	private ColorRect baseListRect;
 	private AnimationPlayer animationPlayer;
@@ -34,7 +33,7 @@ public partial class CodeProblemPanel : Display
 
 	public override void _Ready()
 	{
-		global = GetNode<Global>("/root/Global");
+		base._Ready();
 		codeEdit = GetNode<CodeEdit>("%CodeEdit");
 		baseListRect = GetNode<ColorRect>("%BaseListRect");
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");

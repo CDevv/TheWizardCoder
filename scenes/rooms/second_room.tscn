@@ -270,6 +270,7 @@ z_index = 2
 position = Vector2(176, 208)
 TargetRoomName = "first_room"
 TargetLocation = "RoomEnterMarker"
+Enabled = false
 
 [node name="Camera" parent="." index="11"]
 limit_right = 1280

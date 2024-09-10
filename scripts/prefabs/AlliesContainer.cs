@@ -146,7 +146,7 @@ public partial class AlliesContainer : Node
 		int newHealth = Mathf.Clamp(target.Health + item.Effect, target.Health, target.MaxHealth);
 		allies[state.Target].Health = newHealth;
 
-		alliesCards[state.Target].TweenDamage(new Color(0, 255, 0));
+		await alliesCards[state.Target].TweenDamage(new Color(0, 255, 0));
 		DamageIndicator.PlayAnimation(target.MaxHealth - newHealth, alliesCards[state.Target].Position + new Vector2(64, 0), new Color(0, 255, 0));
 		
 		alliesCards[state.Target].SetHealthValue(newHealth);

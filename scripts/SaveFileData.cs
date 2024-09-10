@@ -5,6 +5,7 @@ using Godot.Collections;
 public partial class SaveFileData : Node
 {
     public bool IsSaveEmpty { get; set; } = false;
+    public string FileName { get; set; }
     public string SaveName { get; set; }
 	public DateTime LastSaved { get; set; }
 	public DateTime StartedOn { get; set; }
