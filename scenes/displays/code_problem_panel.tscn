@@ -68,9 +68,8 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -96.0
-offset_top = -176.0
+offset_top = -192.0
 offset_right = 80.0
-offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
@@ -85,7 +84,7 @@ layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 168.0
-offset_bottom = 152.0
+offset_bottom = 184.0
 color = Color(0.0784314, 0.133333, 0.0784314, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CodeRect"]
@@ -106,13 +105,18 @@ layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 168.0
-offset_bottom = 152.0
+offset_bottom = 184.0
 mouse_filter = 2
 theme = ExtResource("2_cm4ur")
-text = "//Barrel capacity is 50
+theme_override_font_sizes/font_size = 16
+text = "char[] code = {
+          ,		     ,
 
-for (int i = 0;     ;    i++)
-	Barrel.Fill(  );"
+		  ,
+};
+string strCode = code.ToString();
+		 (strCode == this.AccessCode)
+	Door.Unlock();"
 editable = false
 context_menu_enabled = false
 shortcut_keys_enabled = false
@@ -123,18 +127,13 @@ middle_mouse_paste_enabled = false
 wrap_mode = 1
 
 [node name="PickableButtonArea" parent="CodeRect/CodeEdit" instance=ExtResource("4_vm0ji")]
-visible = false
-position = Vector2(83, 36)
-
-[node name="PickableButtonArea2" parent="CodeRect/CodeEdit" instance=ExtResource("4_vm0ji")]
-visible = false
-position = Vector2(64, 72)
+position = Vector2(0, -32)
 
 [node name="ItemsRect" type="NinePatchRect" parent="."]
 offset_left = 64.0
-offset_top = 64.0
+offset_top = 48.0
 offset_right = 128.0
-offset_bottom = 224.0
+offset_bottom = 240.0
 scale = Vector2(2, 2)
 texture = ExtResource("1_caexv")
 patch_margin_left = 4
@@ -148,7 +147,7 @@ layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 56.0
-offset_bottom = 152.0
+offset_bottom = 184.0
 color = Color(0.0784314, 0.133333, 0.0784314, 1)
 
 [node name="PickableButton" parent="ItemsRect" instance=ExtResource("3_s8dc8")]

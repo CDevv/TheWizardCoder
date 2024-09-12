@@ -236,3 +236,52 @@ Dudeley: [#portrait=0] Hello, dear wizard! What bothers you?
 ~ dudeley_bookshelf
 Narrator: This bookshelf has two books: "The Art of Sculpting" and "How To Garden Like a Pro"
 => END!
+
+~ linton_1
+Linton: [#portrait=0]  WHO'S THERE?
+=> END!
+
+~ linton_2
+Linton: [#portrait=0] Oh, a wizard.. 
+Linton: [#portrait=0] Hold on, you got here? You probably used some magic or something.
+Nolan: [#portrait=0] Yep, I did.
+Linton: [#portrait=0] That's good.. 
+Linton: [#portrait=0] I've been stuck here for a while. Thank you for saving me.
+Nolan: [#portrait=0] No problem!
+Linton: [#portrait=0] Follow me. I will show you something.
+=> END!
+
+~ linton_3
+Nolan: [#portrait=0] So.. this dummy?
+Linton: [#portrait=0] I will show you how to fight. 
+Linton: [#portrait=0] The forest may hide dangers for you.
+Nolan: [#portrait=0] But I am a wizar-
+Linton: [#portrait=0] Bla bla! If you run out of mana, you must know how to continue fighting back.
+Nolan: [#portrait=0] Alrighty then..
+Linton: [#portrait=0] So! Let's start!
+=> END!
+
+~ linton_4
+Nolan: [#portrait=0] Huh..
+Nolan: [#portrait=0] I guess I did it
+Linton: [#portrait=0] Good job!
+Nolan: [#portrait=0] I think I gotta go..
+Linton: [#portrait=0] Goodbye, wizard man!
+Nolan: [#portrait=0] Goodbye!
+=> END!
+
+~ tutorial_battle_0
+Linton: [#portrait=0] You should try attacking first!
+=> END!
+
+~ tutorial_battle_1
+Linton: [#portrait=0] Good job! Now try defending! Defense makes you lose less health!
+=> END!
+
+~ tutorial_battle_2
+Linton: [#portrait=0] Good! Now finish it off!
+=> END!
+
+~ linton_point
+Linton: [#portrait=0] Good luck on your jounrey!
+=> END!

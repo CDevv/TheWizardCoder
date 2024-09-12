@@ -202,7 +202,10 @@ public partial class BattleOptions : Display
 
 	public void OnAttackButton()
 	{
-		EmitSignal(SignalName.FightButtonTriggered);
+		if (!global.CurrentRoom.Dialogue.Visible)
+		{
+			EmitSignal(SignalName.FightButtonTriggered);
+		}
 	}
 
 	public void OnItemsButton()
@@ -217,6 +220,9 @@ public partial class BattleOptions : Display
 
 	public void OnDefenseButton()
 	{
-		EmitSignal(SignalName.DefenseButtonTriggered);
+		if (!global.CurrentRoom.Dialogue.Visible)
+		{
+			EmitSignal(SignalName.DefenseButtonTriggered);
+		}
 	}
 }

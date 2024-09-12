@@ -66,16 +66,13 @@ public partial class CodeProblemPanel : Display
 
 		codeEdit.Text = code;
 
+		foreach (string item in items)
+		{
+			AddItem(item);
+		}
 		if (useInventory)
 		{
 			foreach (string item in global.PlayerData.Inventory)
-			{
-				AddItem(item);
-			}
-		}
-		else
-		{
-			foreach (string item in items)
 			{
 				AddItem(item);
 			}

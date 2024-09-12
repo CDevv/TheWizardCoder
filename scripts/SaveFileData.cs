@@ -1,6 +1,7 @@
 using System;
 using Godot;
 using Godot.Collections;
+using Newtonsoft.Json;
 
 public partial class SaveFileData : Node
 {
@@ -57,6 +58,9 @@ public partial class SaveFileData : Node
     public bool HasMetBerry { get; set; } = false;
     public bool TavernPuzzleIntro { get; set; } = false;
     public bool HasSolvedTavernGlitch { get; set; } = false;
+    public bool HasSolvedWatchtowerGlitch { get; set; } = false;
+    public bool HasMetLinton { get; set; } = false;
+    public bool LintonDummyCutscene { get; set; } = false;
 
     public SaveFileData()
     {
@@ -74,57 +78,11 @@ public partial class SaveFileData : Node
             Name = "Nolan",
             MaxHealth = 50, Health = 50,
             MaxPoints = 10, Points = 10,
-            AttackPoints = 20, DefensePoints = 10,
+            AttackPoints = 10, DefensePoints = 5,
             MagicSpells = new() {
                 "Fireball"
             }
         };
-    }
-
-    public Dictionary<string, Variant> GenerateDictionary()
-    {
-        return new Dictionary<string, Variant>()
-        {
-            {"SaveName", SaveName},
-            {"LastSaved", LastSaved.ToBinary()},
-            {"StartedOn", StartedOn.ToBinary()},
-            {"TimeSpent", TimeSpent.TotalSeconds},
-            {"SceneDefaultMarker", SceneDefaultMarker},
-            {"SceneFileName", SceneFileName},
-            {"Location", Location},
-            {"LocationVector", LocationVector},
-            {"Health", Stats.Health},
-            {"Inventory", Inventory},
-
-            {"HasPlayedIntro", HasPlayedIntro},
-            {"HasMessageFromShimble", HasMessageFromShimble},
-            {"HasQuestFromShimble", HasQuestFromShimble},
-            {"HasSolvedShimbleChair", HasSolvedShimbleChair},
-            {"HasVisitedZenHouse", HasVisitedZenHouse},
-            {"HasSolvedZenHouse", HasSolvedZenHouse},
-        };
-    }
-
-    public void ApplyDictionary(Dictionary<string, Variant> dictionary)
-    {
-        SaveName = (string)dictionary["SaveName"];
-        LastSaved = DateTime.FromBinary((long)(dictionary["LastSaved"]));
-        StartedOn = DateTime.FromBinary((long)(dictionary["StartedOn"]));
-        TimeSpent = TimeSpan.FromSeconds((double)(dictionary["TimeSpent"]));
-        SceneFileName = (string)dictionary["SceneFileName"];
-        SceneDefaultMarker = (string)dictionary["SceneDefaultMarker"];
-        Location = (string)dictionary["Location"];
-        LocationVector = (Vector2)dictionary["LocationVector"];
-        Stats.Health = (int)dictionary["Health"];
-        Inventory = (Array<string>)dictionary["Inventory"];
-
-        //Playthrough
-        HasPlayedIntro = (bool)dictionary["HasPlayedIntro"];
-        HasMessageFromShimble = (bool)dictionary["HasMessageFromShimble"];
-        HasQuestFromShimble = (bool)dictionary["HasQuestFromShimble"];
-        HasSolvedShimbleChair = (bool)dictionary["HasSolvedShimbleChair"];
-        HasVisitedZenHouse = (bool)dictionary["HasVisitedZenHouse"];
-        HasSolvedZenHouse = (bool)dictionary["HasSolvedZenHouse"];
     }
 
     public void AddToInventory(string item)

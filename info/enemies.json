@@ -7,5 +7,14 @@
 		"AttackPoints": 25,
 		"DefensePoints": 5,
 		"MagicSpells": {}
-	}
+	},
+	"Dummy": {
+		"Health": 20,
+		"MaxHealth": 20,
+		"Points": 0,
+		"MaxPoints": 0,
+		"AttackPoints": 10,
+		"DefensePoints": 5,
+		"MagicSpells": {}
+	},
 }

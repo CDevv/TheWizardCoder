@@ -29,6 +29,11 @@ public partial class AlliesContainer : Node
 	private List<CharacterData> allies = new();
 	private List<CharacterBattleState> battleStates = new();
 
+	public List<CharacterBattleState> BattleStates 
+	{
+		get { return battleStates; }	
+	}
+
 	public override void _Ready()
 	{
 		global = GetNode<Global>("/root/Global");

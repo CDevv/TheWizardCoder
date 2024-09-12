@@ -2,6 +2,7 @@ using Godot;
 using Godot.Collections;
 using System;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 public partial class Global : Node
 {
@@ -107,10 +108,9 @@ public partial class Global : Node
 		SaveFileData data = new SaveFileData();
 		data.FileName = saveName;
 		data.SaveName = saveName;
-		var dictionary = data.GenerateDictionary();
 		
 		FileAccess file = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Write);
-		file.StoreVar(dictionary);
+		file.StoreVar(JsonConvert.SerializeObject(data));
 		file.Close();
 
 		FileAccess hashFile = FileAccess.Open($"user://{saveName}.ini", FileAccess.ModeFlags.Write);
@@ -126,10 +126,9 @@ public partial class Global : Node
 		PlayerData.LocationVector = CurrentRoom.Player.Position;
 		PlayerData.SceneDefaultMarker = CurrentRoom.DefaultMarkerName;
 		SaveFileData data = PlayerData;		
-		var dictionary = data.GenerateDictionary();
 
 		FileAccess file = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Write);
-		file.StoreVar(dictionary);
+		file.StoreVar(JsonConvert.SerializeObject(data));
 		file.Close();
 
 		FileAccess hashFile = FileAccess.Open($"user://{saveName}.ini", FileAccess.ModeFlags.Write);
@@ -180,8 +179,8 @@ public partial class Global : Node
 		if (CompareHashes(actualHash, expectedHash))
 		{
 			using var readSave = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Read);
-			var savedData = (Dictionary<string, Variant>)readSave.GetVar();
-			data.ApplyDictionary(savedData);
+			string savedData = (string)readSave.GetVar();
+			data = JsonConvert.DeserializeObject<SaveFileData>(savedData);
 			data.IsSaveEmpty = false;
 		}
 		else

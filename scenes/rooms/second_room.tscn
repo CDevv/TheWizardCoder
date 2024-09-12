@@ -304,7 +304,7 @@ SolvableAreas = {
 z_index = 1
 position = Vector2(112, 208)
 Code = "Nolan.Test ="
-Items = Array[String](["true", "false"])
+Items = Array[String]([])
 SolvableAreas = {
 "item": Vector2(84, 4)
 }

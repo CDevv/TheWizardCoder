@@ -10,16 +10,24 @@ public partial class BattleDisplay : Display
 {
 	private Vector2 startingPoint = new Vector2(16, 408);
 
+	[Signal]
+	public delegate void BattleFinishedEventHandler();
+	[Signal]
+	public delegate void TurnFinishedEventHandler();
+
+	[Export]
+	public Resource TutorialDialogueResource { get; set; }
 	[Export]
 	public PackedScene CharacterRectScene { get; set; }
 	[Export]
 	public PackedScene EnemySpriteScene { get; set; }
 	[Export]
-	public AlliesContainer Allies { get; set; }
+	public AlliesContainer Allies { get; private set; }
 	[Export]
-	public EnemiesContainer Enemies { get; set; }
+	public EnemiesContainer Enemies { get; private set; }
 
 	public bool BattleEnded { get; private set; } = false;
+	public bool IsTutorial { get; set; } = false;
 
 
 	private AlliesContainer alliesContainer;
@@ -73,6 +81,13 @@ public partial class BattleDisplay : Display
 		battleOptions.ShowDisplay();
 		global.CurrentRoom.TransitionRect.PlayAnimationBackwards();
 
+		if (IsTutorial)
+		{
+
+			await global.CurrentRoom.ShowDialogue(TutorialDialogueResource, "tutorial_battle_0");
+			global.GameDisplayEnabled = false;
+		}
+
 		Allies.StartTurn();
 	}
 
@@ -110,11 +125,17 @@ public partial class BattleDisplay : Display
 		{
 			Allies.StartTurn();
 		}
+
+		if (Visible)
+		{
+			EmitSignal(SignalName.TurnFinished);
+		}
 	}
 
 	public override async void HideDisplay()
 	{
 		BattleEnded = true;
+		IsTutorial = false;
 		global.CurrentRoom.TransitionRect.PlayAnimation();
 		await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
 		Hide();
@@ -124,5 +145,6 @@ public partial class BattleDisplay : Display
 		global.GameDisplayEnabled = true;
 
 		global.CurrentRoom.TransitionRect.PlayAnimationBackwards();
+		EmitSignal(SignalName.BattleFinished);
 	}
 }

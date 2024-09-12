@@ -1,9 +1,277 @@
-[gd_scene load_steps=7 format=3 uid="uid://ddwumkhu3bon7"]
+[gd_scene load_steps=21 format=3 uid="uid://ddwumkhu3bon7"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_ujid1"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="2_ehys0"]
+[ext_resource type="Script" path="res://scripts/rooms/Village4.cs" id="2_yr3rd"]
+[ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="3_3hq0k"]
 [ext_resource type="TileSet" uid="uid://bnilncsva6t64" path="res://tilesets/env.tres" id="3_bfau6"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="4_yvi7c"]
+[ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="6_87sv2"]
+[ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/prefabs/code_problem_point.tscn" id="7_nooi4"]
+[ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/prefabs/save_point.tscn" id="8_h5iky"]
+[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/prefabs/character_dialogue_point.tscn" id="9_hrcjo"]
+[ext_resource type="SpriteFrames" uid="uid://b7q7c8vycomy0" path="res://assets/characters/movement/spriteframes/linton.tres" id="10_yrt8o"]
+
+[sub_resource type="Animation" id="Animation_m84pa"]
+resource_name = "code_solved"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Glitch:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_l5odc"]
+resource_name = "final_pos"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Glitch:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ceunq"]
+resource_name = "linton_4"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 2.1, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1200, 760), Vector2(1200, 813), Vector2(968, 813), Vector2(968, 717)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 2.1, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [0],
+"method": &"PlayMoveAnimation"
+}, {
+"args": [2],
+"method": &"PlayMoveAnimation"
+}, {
+"args": [1],
+"method": &"PlayMoveAnimation"
+}, {
+"args": [1],
+"method": &"PlayIdleAnimation"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Linton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 2.1, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1200, 816), Vector2(1200, 832), Vector2(928, 832), Vector2(928, 736)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Linton")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 2.1, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": ["down"],
+"method": &"PlayAnimation"
+}, {
+"args": ["left"],
+"method": &"PlayAnimation"
+}, {
+"args": ["up"],
+"method": &"PlayAnimation"
+}, {
+"args": [1],
+"method": &"PlayIdleAnimation"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Camera:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.6, 2.1, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1200, 760), Vector2(1200, 813), Vector2(968, 813), Vector2(968, 717)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Glitch:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gndkv"]
+resource_name = "linton_5"
+length = 0.01
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BattleDisplay")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [["Dummy"]],
+"method": &"ShowDisplay"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_tfx0q"]
+resource_name = "linton_6"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(968, 717)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [1],
+"method": &"PlayIdleAnimation"
+}, {
+"args": [2],
+"method": &"PlayIdleAnimation"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Linton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(928, 736)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Linton")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [1],
+"method": &"PlayIdleAnimation"
+}, {
+"args": [3],
+"method": &"PlayIdleAnimation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_dr3en"]
+resource_name = "linton_7"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Linton:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(928, 736)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Linton")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [1],
+"method": &"PlayIdleAnimation"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Glitch:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_psa2p"]
+_data = {
+"code_solved": SubResource("Animation_m84pa"),
+"final_pos": SubResource("Animation_l5odc"),
+"linton_4": SubResource("Animation_ceunq"),
+"linton_5": SubResource("Animation_gndkv"),
+"linton_6": SubResource("Animation_tfx0q"),
+"linton_7": SubResource("Animation_dr3en")
+}
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ifwh2"]
 a = Vector2(0, 640)
@@ -15,6 +283,15 @@ b = Vector2(0, 1856)
 
 [node name="Village4" instance=ExtResource("1_ujid1")]
 y_sort_enabled = true
+script = ExtResource("2_yr3rd")
+DialogueResource = ExtResource("3_3hq0k")
+SceneFileName = "village_4"
+LocationName = "Village Watchtower"
+
+[node name="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_psa2p")
+}
 
 [node name="Camera" parent="." index="5"]
 limit_right = 2240
@@ -22,7 +299,6 @@ limit_bottom = 1952
 
 [node name="Player" parent="." index="10" instance=ExtResource("2_ehys0")]
 z_index = 1
-position = Vector2(1024, 776)
 
 [node name="TileMap" type="TileMap" parent="." index="11"]
 y_sort_enabled = true
@@ -58,9 +334,55 @@ position = Vector2(1200, 754)
 TargetRoomName = "watchtower_1"
 TargetLocation = "EnterMarker"
 PlayerDirection = 1
+Enabled = false
 
 [node name="Section3Marker" type="Marker2D" parent="." index="15"]
 position = Vector2(40, 800)
 
 [node name="WatchtowerMarker" type="Marker2D" parent="." index="16"]
 position = Vector2(1200, 800)
+
+[node name="Glitch" type="Sprite2D" parent="." index="17"]
+z_index = 2
+position = Vector2(1176, 712)
+scale = Vector2(2, 2)
+texture = ExtResource("6_87sv2")
+
+[node name="CodeProblemPoint" parent="." index="18" instance=ExtResource("7_nooi4")]
+z_index = 2
+position = Vector2(1176, 754)
+scale = Vector2(2, 1)
+Code = "char[] code = {
+          ,		     ,
+
+		  ,
+};
+string strCode = code.ToString();
+		 (strCode == this.AccessCode)
+	Door.Unlock();"
+Items = Array[String](["if"])
+SolvableAreas = {
+"'a'": Vector2(0, 52),
+"'r'": Vector2(56, 52),
+"'s'": Vector2(0, 20),
+"'t'": Vector2(56, 20),
+"if": Vector2(0, 120)
+}
+UseInventory = true
+
+[node name="SavePoint" parent="." index="19" instance=ExtResource("8_h5iky")]
+position = Vector2(1368, 752)
+
+[node name="Linton" parent="." index="20" instance=ExtResource("9_hrcjo")]
+z_index = 1
+DialogueResource = ExtResource("3_3hq0k")
+DialogueTitle = "linton_point"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Linton" index="2"]
+position = Vector2(0, -16)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("10_yrt8o")
+
+[connection signal="BattleFinished" from="BattleDisplay" to="." method="OnBattleFinished"]
+[connection signal="TurnFinished" from="BattleDisplay" to="." method="OnTurnFinished"]
+[connection signal="ProblemSolved" from="CodeProblemPoint" to="." method="OnCodeSolved"]
