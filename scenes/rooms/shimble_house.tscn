@@ -348,6 +348,7 @@ shape = SubResource("RectangleShape2D_1dids")
 z_index = 2
 position = Vector2(144, 248)
 scale = Vector2(1, 2)
+UniqueIdentifier = "HasSolvedShimbleChair"
 Code = "chair.Visible = "
 Items = Array[String](["true", "false"])
 SolvableAreas = {

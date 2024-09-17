@@ -8,6 +8,8 @@ public partial class CharacterDialoguePoint : Interactable
 	public Resource DialogueResource { get; set; }
 	[Export]
 	public string DialogueTitle { get; set; }
+	[Export]
+	public Direction DefaultDirection { get; set; } = Direction.Down;
 
 	private AnimatedSprite2D sprite;
 
@@ -15,13 +17,15 @@ public partial class CharacterDialoguePoint : Interactable
 	{
 		base._Ready();
 		sprite = GetNode<AnimatedSprite2D>("Sprite");
+
+		sprite.Animation = "default";
+		sprite.Frame = (int)DefaultDirection;
 	}
 
 	public override void Action()
 	{
 		Player player = global.CurrentRoom.Player;
 		sprite.Frame = global.ReverseDirections[(int)player.Direction];
-		//DialogueManager.ShowDialogueBalloon(DialogueResource, DialogueTitle);
 		global.CurrentRoom.Dialogue.ShowDisplay(DialogueResource, DialogueTitle);
 		global.CurrentRoom.Dialogue.DialogueEnded += OnDialogueEnded;
 	}
@@ -40,7 +44,7 @@ public partial class CharacterDialoguePoint : Interactable
 
 	private void OnDialogueEnded()
 	{
-		sprite.Frame = (int)Direction.Down;
+		sprite.Frame = (int)DefaultDirection;
 		global.CurrentRoom.Dialogue.DialogueEnded -= OnDialogueEnded;
 	}
 }

@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Collections.Generic;
 using DialogueManagerRuntime;
 
 public partial class DialogueDisplay : Display
@@ -21,10 +22,14 @@ public partial class DialogueDisplay : Display
 	private Marker2D responsesRectMarker;
 	private bool isTyping = false;
 	private double waitingTime = 0.02;
+	private double lineTime = 0;
+	private bool hasAutoAdvance = false;
+	private double typingSpeed = 1;
 	private string text = "";
 	private int index = -1;
 	private bool hasResponses = false;
 	private float maxSize = 0;
+	private List<string> format = new();
 
 	public override void _Ready()
 	{
@@ -50,8 +55,6 @@ public partial class DialogueDisplay : Display
 				{
 					responsesRect.Show();
 					UpdateResponses(dialogueLine.Responses);				
-					//responsesRect.Size = new Vector2(responsesRect.Size.X, 68);
-					//responsesRect.Position = responsesRectMarker.Position - new Vector2(responsesRect.Size.X * 2, 0);
 					responsesRect.Position = responsesRectMarker.Position - new Vector2((maxSize + (8 * 2)) * 2, 0);
 				}
 				return;
@@ -59,12 +62,33 @@ public partial class DialogueDisplay : Display
 
 			if (waitingTime > 0)
 			{
-				waitingTime = waitingTime - delta;
+				waitingTime = waitingTime - (delta * typingSpeed);
 			}
 			else
 			{
 				TypeCharacter();
 				waitingTime = 0.02;
+			}
+
+			if (hasAutoAdvance)
+			{
+				if (lineTime > 0)
+				{
+					lineTime -= delta;
+				}
+				else
+				{
+					lineTime = 0;
+					isTyping = false;
+					hasAutoAdvance = false;
+
+					label.VisibleCharacters = 0;
+					index = 0;
+					string nextId = dialogueLine.NextId;
+
+					dialogueLine = await DialogueManager.GetNextDialogueLine(dialogueResource, nextId);
+					UpdateDisplay(dialogueLine);
+				}
 			}
 		}
 
@@ -81,15 +105,8 @@ public partial class DialogueDisplay : Display
 				index = 0;
 				string nextId = dialogueLine.NextId;
 
-				if (nextId == "END!" || nextId == "END")
-				{
-					OnDialogueEnded();
-				}
-				else
-				{
-					dialogueLine = await DialogueManager.GetNextDialogueLine(dialogueResource, nextId);
-					UpdateDisplay(dialogueLine);
-				}
+				dialogueLine = await DialogueManager.GetNextDialogueLine(dialogueResource, nextId);
+				UpdateDisplay(dialogueLine);
 			}
 		}
 
@@ -113,6 +130,13 @@ public partial class DialogueDisplay : Display
 		dialogueLine = await DialogueManager.GetNextDialogueLine(dialogueResource, title, new Array<Variant>());
 		UpdateDisplay(dialogueLine);
 		Show();
+		format = new();
+	}
+
+	public void ShowDisplay(Resource dialogueResource, string title, List<string> format)
+	{
+		ShowDisplay(dialogueResource, title);
+		this.format = format;
 	}
 
     public override void UpdateDisplay()
@@ -130,8 +154,17 @@ public partial class DialogueDisplay : Display
 
 		responsesRect.Hide();
 		label.VisibleCharacters = 0;
-		label.Text = line.Text;
 		index = -1;
+		typingSpeed = 1;
+
+		if (format.Count == 0)
+		{
+			label.Text = line.Text;
+		}
+		else
+		{
+			label.Text = string.Format(line.Text, format.ToArray());
+		}
 
 		//Set up portrait
 		string portraitTag = line.GetTagValue("portrait");
@@ -158,15 +191,26 @@ public partial class DialogueDisplay : Display
 
 		hasResponses = line.Responses.Count > 0;
 		isTyping = true;
+
+		if (!string.IsNullOrEmpty(line.Time))
+		{
+			hasAutoAdvance = true;
+			lineTime = double.Parse(line.Time);
+		}
 	}
 
 	private void TypeCharacter()
 	{
 		label.VisibleCharacters++;
 		index++;
-		if (dialogueLine.Text[index] != ' ')
+		if (label.Text[index] != ' ')
 		{
 			audioPlayer.Play();
+		}
+
+		if (dialogueLine.Speeds.ContainsKey(index))
+		{
+			typingSpeed = double.Parse((string)dialogueLine.Speeds[index]);
 		}
 	}
 
@@ -206,8 +250,6 @@ public partial class DialogueDisplay : Display
 		}
 		buttons[buttons.Count - 1].FocusNeighborTop = buttons[buttons.Count - 2].GetPath();
 		buttons[buttons.Count - 1].FocusNeighborBottom = buttons[0].GetPath();
-
-		GD.Print(responsesRect.Size);
 	}
 
 	private void ClearResponses()

@@ -294,6 +294,7 @@ shape = SubResource("RectangleShape2D_aljoa")
 z_index = 2
 position = Vector2(192, 216)
 scale = Vector2(2, 2)
+UniqueIdentifier = "HasSolvedZenHouse"
 Code = "int a = 5 + 		 11;
 int b = a / 4;
 Basket.Fill	  (b);"

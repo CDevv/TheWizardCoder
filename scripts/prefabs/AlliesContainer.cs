@@ -26,12 +26,11 @@ public partial class AlliesContainer : Node
 	private Vector2 startingPoint = Vector2.Zero;
 	private int currentCharacter = 0;
 	private Array<CharacterRect> alliesCards = new();
-	private List<CharacterData> allies = new();
-	private List<CharacterBattleState> battleStates = new();
+	private List<CharacterBattleState> allies = new();
 
-	public List<CharacterBattleState> BattleStates 
+	public List<CharacterBattleState> Characters 
 	{
-		get { return battleStates; }	
+		get { return allies; }	
 	}
 
 	public override void _Ready()
@@ -52,15 +51,14 @@ public partial class AlliesContainer : Node
 		rect.Pressed += () => OnCharacterCardPressed(currentIndex);
 		alliesCards.Add(rect);
 
-		allies.Add(data);
-		CharacterBattleState state = new();
-		battleStates.Add(state);
+		CharacterBattleState state = new(data, currentIndex);
+		allies.Add(state);
 	}
 
 	public void StartTurn()
 	{
 		alliesCards[currentCharacter].ShowAsCurrentCharacter();
-		BattleOptions.UpdateDisplay(allies[currentCharacter]);
+		BattleOptions.UpdateDisplay(allies[currentCharacter].Character);
 		BattleOptions.ShowOptions();
 	}
 
@@ -85,6 +83,40 @@ public partial class AlliesContainer : Node
 		}
 	}
 
+	public async Task AllyTurn(int i)
+	{
+		if (BattleDisplay.BattleEnded)
+		{
+			return;
+		}
+
+		CharacterBattleState state = allies[i];
+		CharacterData ally = state.Character;
+		switch (allies[i].Action)
+		{
+			case CharacterAction.Attack:
+				BattleOptions.ShowInfoLabel($"{ally.Name} attacks {Enemies.GetEnemyName(state.Target)}!");
+				await Enemies.DamageEnemy(state.Target, ally.AttackPoints);
+				break;
+			case CharacterAction.Defend:
+				await DefendAlly(i);
+				break;
+			case CharacterAction.Items:
+				await HealAlly(i);
+				break;
+			case CharacterAction.Magic:
+				string currentMagicSpellName = ally.MagicSpells[allies[i].ActionModifier];
+				MagicSpell currentMagicSpell = global.MagicSpells[currentMagicSpellName];
+				if (currentMagicSpell.TargetType == CharacterType.Enemy)
+				{
+					string enemyName = Enemies.GetEnemyName(state.Target);
+					BattleOptions.ShowInfoLabel($"{ally.Name} casted {currentMagicSpellName} on {enemyName}!");
+					await Enemies.DamageEnemy(state.Target, currentMagicSpell.Effect);
+				}
+				break;
+		}
+	}
+
 	public async Task AlliesTurn()
 	{
 		for (int i = 0; i < allies.Count; i++)
@@ -94,12 +126,13 @@ public partial class AlliesContainer : Node
 				break;
 			}
 
-			CharacterData ally = allies[i];
-			switch (battleStates[i].Action)
+			CharacterBattleState state = allies[i];
+			CharacterData ally = state.Character;
+			switch (allies[i].Action)
 			{
 				case CharacterAction.Attack:
-					BattleOptions.ShowInfoLabel($"{ally.Name} attacks {Enemies.GetEnemyName(battleStates[i].Target)}!");
-					await Enemies.DamageEnemy(battleStates[i].Target, allies[i].AttackPoints);
+					BattleOptions.ShowInfoLabel($"{ally.Name} attacks {Enemies.GetEnemyName(state.Target)}!");
+					await Enemies.DamageEnemy(state.Target, ally.AttackPoints);
 					break;
 				case CharacterAction.Defend:
 					await DefendAlly(i);
@@ -108,13 +141,13 @@ public partial class AlliesContainer : Node
 					await HealAlly(i);
 					break;
 				case CharacterAction.Magic:
-					string currentMagicSpellName = allies[i].MagicSpells[battleStates[i].ActionModifier];
+					string currentMagicSpellName = ally.MagicSpells[allies[i].ActionModifier];
 					MagicSpell currentMagicSpell = global.MagicSpells[currentMagicSpellName];
-					if (currentMagicSpell.TargetType == TargetType.Enemy)
+					if (currentMagicSpell.TargetType == CharacterType.Enemy)
 					{
-						string enemyName = Enemies.GetEnemyName(battleStates[i].Target);
+						string enemyName = Enemies.GetEnemyName(state.Target);
 						BattleOptions.ShowInfoLabel($"{ally.Name} casted {currentMagicSpellName} on {enemyName}!");
-						await Enemies.DamageEnemy(battleStates[i].Target, currentMagicSpell.Effect);
+						await Enemies.DamageEnemy(state.Target, currentMagicSpell.Effect);
 					}
 					break;
 			}
@@ -128,28 +161,28 @@ public partial class AlliesContainer : Node
 
 	private async Task DefendAlly(int index)
 	{
-		BattleOptions.ShowInfoLabel($"{allies[index].Name} defends!");
+		BattleOptions.ShowInfoLabel($"{allies[index].Character.Name} defends!");
 		SceneTreeTimer timer = GetTree().CreateTimer(3);
 		await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
 	}
 
-	public async Task HealAlly(int index)
+	public async Task HealAlly(int healerIndex)
 	{
-		CharacterBattleState state = battleStates[index];
+		CharacterBattleState state = allies[healerIndex];
 		string itemName = global.PlayerData.Inventory[state.ActionModifier];
 		Item item = global.ItemDescriptions[itemName];
-		CharacterData target = allies[state.Target];
-		if (state.Target == index)
+		CharacterData target = allies[state.Target].Character;
+		if (state.Target == healerIndex)
 		{
-			BattleOptions.ShowInfoLabel($"{allies[index].Name} gave {itemName} to themselves!");
+			BattleOptions.ShowInfoLabel($"{state.Character.Name} gave {itemName} to themselves!");
 		}
 		else
 		{
-			BattleOptions.ShowInfoLabel($"{allies[index].Name} gave {itemName} to {target.Name}!");
+			BattleOptions.ShowInfoLabel($"{state.Character.Name} gave {itemName} to {target.Name}!");
 		}
 		
 		int newHealth = Mathf.Clamp(target.Health + item.Effect, target.Health, target.MaxHealth);
-		allies[state.Target].Health = newHealth;
+		allies[state.Target].Character.Health = newHealth;
 
 		await alliesCards[state.Target].TweenDamage(new Color(0, 255, 0));
 		DamageIndicator.PlayAnimation(target.MaxHealth - newHealth, alliesCards[state.Target].Position + new Vector2(64, 0), new Color(0, 255, 0));
@@ -166,14 +199,14 @@ public partial class AlliesContainer : Node
 	{
 		int targetIndex = (int)(GD.Randi() % allies.Count);
 
-		if (battleStates[targetIndex].Action == CharacterAction.Defend)
+		if (allies[targetIndex].Action == CharacterAction.Defend)
 		{
-			damage = Mathf.Clamp(damage - allies[targetIndex].DefensePoints, 0, damage);
+			damage = Mathf.Clamp(damage - allies[targetIndex].Character.DefensePoints, 0, damage);
 		}
-		allies[targetIndex].Health -= damage;
+		allies[targetIndex].Character.Health -= damage;
 
 		//Visuals
-		BattleOptions.ShowInfoLabel($"{enemyName} attacks {allies[targetIndex].Name}!");
+		BattleOptions.ShowInfoLabel($"{enemyName} attacks {allies[targetIndex].Character.Name}!");
 		DamageIndicator.PlayAnimation(damage, alliesCards[targetIndex].Position + new Vector2(64, 0), new Color(255, 0, 0));
 		alliesCards[targetIndex].SetHealthValue(global.PlayerData.Stats.Health);
 		await alliesCards[targetIndex].TweenDamage(new Color(255, 0, 0));
@@ -181,23 +214,23 @@ public partial class AlliesContainer : Node
 
 	private void OnCharacterCardPressed(int index)
 	{
-		battleStates[currentCharacter].Target = index;
+		allies[currentCharacter].Target = index;
 		PassToNextAlly();
 		EmitSignal(SignalName.AllyPressed, index);
 	}
 
 	private void OnEnemyPressed(int index)
 	{
-		battleStates[currentCharacter].Target = index;
-		if (battleStates[currentCharacter].Action == CharacterAction.Magic)
+		allies[currentCharacter].Target = index;
+		if (allies[currentCharacter].Action == CharacterAction.Magic)
 		{
-			int indexInInventory = battleStates[currentCharacter].ActionModifier;
+			int indexInInventory = allies[currentCharacter].ActionModifier;
 			
-			string magicSpellName = allies[currentCharacter].MagicSpells[indexInInventory];
+			string magicSpellName = allies[currentCharacter].Character.MagicSpells[indexInInventory];
 			MagicSpell magicSpell = global.MagicSpells[magicSpellName];
 
-			allies[currentCharacter].Points -= magicSpell.Cost;
-			alliesCards[currentCharacter].SetPointsValue(allies[currentCharacter].Points);
+			allies[currentCharacter].Character.Points -= magicSpell.Cost;
+			alliesCards[currentCharacter].SetPointsValue(allies[currentCharacter].Character.Points);
 		}
 
 		PassToNextAlly();
@@ -205,35 +238,35 @@ public partial class AlliesContainer : Node
 
 	private void OnAttackButton()
 	{
-		battleStates[currentCharacter].Action = CharacterAction.Attack;
+		allies[currentCharacter].Action = CharacterAction.Attack;
 		Enemies.FocusOnFirst();
 		BattleOptions.ShowInfoLabel("Select an enemy!");
 	}
 
 	private void OnDefendButton()
 	{
-		battleStates[currentCharacter].Action = CharacterAction.Defend;
+		allies[currentCharacter].Action = CharacterAction.Defend;
 		PassToNextAlly();
 	}
 
 	private void OnItemButton(int index)
 	{
-		battleStates[currentCharacter].Action = CharacterAction.Items;
-		battleStates[currentCharacter].ActionModifier = index;
+		allies[currentCharacter].Action = CharacterAction.Items;
+		allies[currentCharacter].ActionModifier = index;
 		alliesCards[0].GrabFocus();
 		BattleOptions.ShowInfoLabel("Select an ally!");
 	}
 
 	private void OnMagicButton(int index)
 	{
-		CharacterData ally = allies[currentCharacter];
+		CharacterData ally = allies[currentCharacter].Character;
 
-		battleStates[currentCharacter].Action = CharacterAction.Magic;
-		battleStates[currentCharacter].ActionModifier = index;
+		allies[currentCharacter].Action = CharacterAction.Magic;
+		allies[currentCharacter].ActionModifier = index;
 
 		string magicSpellName = ally.MagicSpells[index];
 		MagicSpell magicSpell = global.MagicSpells[magicSpellName];
-		if (magicSpell.TargetType == TargetType.Enemy)
+		if (magicSpell.TargetType == CharacterType.Enemy)
 		{
 			Enemies.FocusOnFirst();
 			BattleOptions.ShowInfoLabel("Select an enemy to cast on!");
@@ -243,9 +276,9 @@ public partial class AlliesContainer : Node
 	public int GetTotalHealth()
 	{
 		int result = 0;
-		foreach (CharacterData ally in allies)
+		foreach (CharacterBattleState ally in allies)
 		{
-			result += ally.Health;
+			result += ally.Character.Health;
 		}
 		return result;
 	}
@@ -254,6 +287,6 @@ public partial class AlliesContainer : Node
 	{
 		allies.Clear();
 		alliesCards.Clear();
-		battleStates.Clear();
+		allies.Clear();
 	}
 }

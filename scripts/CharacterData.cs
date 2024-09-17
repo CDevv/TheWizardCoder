@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using System;
 
 public partial class CharacterData
 {
@@ -10,7 +11,9 @@ public partial class CharacterData
     public int MaxPoints { get; set; }
     public int AttackPoints { get; set; }
     public int DefensePoints { get; set; }
+    public int AgilityPoints { get; set; }
     public Array<string> MagicSpells { get; set; }
+    public CharacterType Type { get; set; }
 
     public void ApplyDictionary(Dictionary<string, Variant> dict)
     {
@@ -21,7 +24,9 @@ public partial class CharacterData
         MaxPoints = (int)dict["MaxPoints"];
         AttackPoints = (int)dict["AttackPoints"];
         DefensePoints = (int)dict["DefensePoints"];
+        AgilityPoints = (int)dict["AgilityPoints"];
         MagicSpells = (Array<string>)dict["MagicSpells"];
+        Type = Enum.Parse<CharacterType>((string)dict["Type"]);
     }
 
     public void AddHealth(int value)

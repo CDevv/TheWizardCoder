@@ -57,7 +57,6 @@ Shimble: [#portrait=0] I knew I could trust you! Thank you!
 Nolan: [#portrait=0] ..I actually don't know how I did it. Like it suddenly disappeared out of nowhere.
 Shimble: [#portrait=0] Surely you can help elsewhere, right?
 Shimble: [#portrait=0] Take a look around the village and fix the issues if you can!
-do SetPlayerData("HasSolvedShimbleChair", true)
 => END!
 
 ~ shimble_point
@@ -88,7 +87,6 @@ Zen: [#portrait=0] They are pretty nice. They might also be experiencing this ki
 Nolan: [#portrait=0] I see..
 Zen: [#portrait=0] Mind helping them aswell?
 Nolan: [#portrait=0] Sure thing!
-do SetPlayerData("HasSolvedZenHouse", true)
 => END!
 
 ~ zen_point

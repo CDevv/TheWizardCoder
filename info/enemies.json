@@ -6,7 +6,9 @@
 		"MaxPoints": 0,
 		"AttackPoints": 25,
 		"DefensePoints": 5,
-		"MagicSpells": {}
+		"AgilityPoints": 15,
+		"MagicSpells": {},
+		"Type": "Enemy",
 	},
 	"Dummy": {
 		"Health": 20,
@@ -15,6 +17,8 @@
 		"MaxPoints": 0,
 		"AttackPoints": 10,
 		"DefensePoints": 5,
-		"MagicSpells": {}
+		"AgilityPoints": 5,
+		"MagicSpells": {},
+		"Type": "Enemy",
 	},
 }

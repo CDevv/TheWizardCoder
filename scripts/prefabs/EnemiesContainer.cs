@@ -26,17 +26,17 @@ public partial class EnemiesContainer : Node
 	private Vector2 enemySpritePoint = Vector2.Zero;
 
 	private Array<EnemySprite> enemySprites = new();
-	private List<CharacterData> enemies = new();
-	// Called when the node enters the scene tree for the first time.
+	private List<CharacterBattleState> enemies = new();
+
+	public List<CharacterBattleState> Characters
+	{
+		get { return enemies; }
+	}
+
 	public override void _Ready()
 	{
 		global = GetNode<Global>("/root/Global");
 		enemySpritePoint = BaseEnemyPosition.Position;
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
 	}
 
 	public void AddEnemy(CharacterData data)
@@ -53,12 +53,23 @@ public partial class EnemiesContainer : Node
 		};
 		enemySprites.Add(enemySprite);
 
-		enemies.Add(data);
+		CharacterBattleState state = new(data, currentIndex);
+		enemies.Add(state);
 	}
 
 	public void FocusOnFirst()
 	{
 		enemySprites[0].GrabFocus();
+	}
+
+	public async Task EnemyTurn(int i)
+	{
+		if (BattleDisplay.BattleEnded)
+		{
+			return;
+		}
+
+		await Allies.DamageRandomAlly(enemies[i].Character.Name, enemies[i].Character.AttackPoints);
 	}
 
 	public async Task EnemiesTurn()
@@ -70,18 +81,18 @@ public partial class EnemiesContainer : Node
 				break;
 			}
 
-			await Allies.DamageRandomAlly(enemies[i].Name, enemies[i].AttackPoints);
+			await Allies.DamageRandomAlly(enemies[i].Character.Name, enemies[i].Character.AttackPoints);
 		}
 	}
 
 	public string GetEnemyName(int index)
 	{
-		return enemies[index].Name;
+		return enemies[index].Character.Name;
 	}
 
 	public async Task DamageEnemy(int index, int damage)
 	{
-		CharacterData enemyData = enemies[index];
+		CharacterData enemyData = enemies[index].Character;
 		EnemySprite sprite = enemySprites[index];
 		
 		DamageIndicator.PlayAnimation(damage, sprite.Position - new Vector2(DamageIndicator.Size.X, 10), new Color(255, 0, 0));
@@ -91,15 +102,15 @@ public partial class EnemiesContainer : Node
 		await EnemyHealthBar.ShowHealthBar(enemyData.Health, enemyData.Health - damage, enemyData.MaxHealth);
 
 		enemyData.Health -= damage;
-		enemies[index] = enemyData;
+		enemies[index].Character = enemyData;
 	}
 
 	public int GetTotalHealth()
 	{
 		int result = 0;
-		foreach(CharacterData data in enemies)
+		foreach(CharacterBattleState state in enemies)
 		{
-			result += data.Health;
+			result += state.Character.Health;
 		}
 		return result;
 	}

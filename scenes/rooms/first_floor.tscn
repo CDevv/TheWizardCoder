@@ -48,6 +48,7 @@ z_index = 2
 position = Vector2(312, 176)
 TargetRoomName = "first_room"
 TargetLocation = "RoomEnterMarker"
+PlayerDirection = 1
 
 [node name="StairsWarper" parent="." index="15" instance=ExtResource("4_v7qub")]
 z_index = 2

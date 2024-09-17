@@ -75,27 +75,7 @@ public partial class Player : CharacterBody2D
 			}
 		}
 
-		var collision = MoveAndCollide(velocity);
-		if (collision != null)
-		{
-			if (collision.GetCollider().GetType() == typeof(Warper))
-			{
-				Warper warper = (Warper)collision.GetCollider();
-				if (warper.Enabled)
-				{
-					global.CanWalk = false;
-					GD.Print("i collided with a warper");
-					TransitionToRoom(warper);
-				}
-			}
-			else if (collision.GetCollider().GetType() == typeof(BattlePoint))
-			{
-				global.CanWalk = false;
-				global.GameDisplayEnabled = false;
-				GD.Print("Battle point");
-				global.CurrentRoom.BattleDisplay.ShowDisplay(new() { "Glitch" });
-			}
-		}	
+		MoveAndCollide(velocity); 
 	}
 
     public override void _UnhandledInput(InputEvent @event)
@@ -111,7 +91,7 @@ public partial class Player : CharacterBody2D
 			if (overlappingAreas.Count > 0 && global.CanWalk)
 			{
 				global.CanWalk = false;
-				(overlappingAreas[0] as Interactable).Action();
+				(overlappingAreas[0] as Interactable).Interact();
 			}
 		}
 

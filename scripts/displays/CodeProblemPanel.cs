@@ -133,7 +133,7 @@ public partial class CodeProblemPanel : Display
 
 	private void OnAreaButtonRemoved(int index)
 	{
-		if (!Point.Solved)
+		if (!Point.Active)
 		{
 			if (items.Count > index)
 			{
@@ -185,8 +185,6 @@ public partial class CodeProblemPanel : Display
 		global.GameDisplayEnabled = true;
 		animationPlayer.PlayBackwards("show");
 		await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
-		Point.Solved = true;
-		Point.EmitSignal(CodeProblemPoint.SignalName.ProblemSolved);
 		EmitSignal(SignalName.ProblemSolved);
 		Reset();
 		Hide();

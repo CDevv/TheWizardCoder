@@ -29,7 +29,6 @@ public partial class VillageFarm : BaseRoom
 		await ShowDialogue(DialogueResource, "keenelm_1");
 		await PlayCutscene("keenelm_2");
 		await ShowDialogue(DialogueResource, "keenelm_2");
-		global.PlayerData.HasPlayedKeenelmCutscene = true;
 	}
 
 	private void DisableCutscene()
@@ -49,7 +48,6 @@ public partial class VillageFarm : BaseRoom
 			await PlayCutscene("keenelm_code_solved");
 		}
 		await ShowDialogue(DialogueResource, "keenelm_code_solved");
-		global.PlayerData.HasSolvedFarmGlitch = true;
 		global.PlayerData.AddToInventory("'a'");
 	}
 }

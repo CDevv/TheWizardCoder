@@ -8,7 +8,7 @@ public class MagicSpell
     public string Description { get; private set; }
     public int Effect { get; private set; }
     public int Cost { get; private set; }
-    public TargetType TargetType { get; private set; }
+    public CharacterType TargetType { get; private set; }
 
     public void ApplyDictionary(Dictionary<string, Variant> dict)
     {
@@ -16,6 +16,6 @@ public class MagicSpell
         Description = (string)dict["Description"];
         Effect = (int)dict["Effect"];
         Cost = (int)dict["Cost"];
-        TargetType = Enum.Parse<TargetType>((string)dict["TargetType"]);
+        TargetType = Enum.Parse<CharacterType>((string)dict["TargetType"]);
     }
 }

@@ -28,6 +28,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Glitch/Collision/CollisionShape:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_2ls41"]
 resource_name = "keenelm_1"
@@ -238,6 +250,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Glitch/Collision/CollisionShape:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h0k27"]
 _data = {
@@ -365,6 +389,7 @@ texture = ExtResource("7_bewxe")
 [node name="CollisionShape" type="CollisionShape2D" parent="Glitch/Collision" index="0"]
 position = Vector2(2, 0)
 shape = SubResource("RectangleShape2D_gwoj0")
+disabled = true
 
 [node name="Keenelm" parent="." index="20" instance=ExtResource("8_qga0w")]
 z_index = 1
@@ -381,6 +406,7 @@ sprite_frames = ExtResource("9_73pyg")
 z_index = 2
 position = Vector2(1156, 632)
 scale = Vector2(2, 2)
+UniqueIdentifier = "HasSolvedFarmGlitch"
 Code = "int humidity =    		   ;
 
  		 (humidity >= 50)
@@ -394,6 +420,7 @@ SolvableAreas = {
 [node name="CutscenePoint" parent="." index="22" instance=ExtResource("12_1wghb")]
 position = Vector2(1040, 960)
 scale = Vector2(1, 4)
+PlaythroughPropertyName = "HasPlayedKeenelmCutscene"
 RoomMethodName = "OnKeenelmEncounter"
 
 [node name="LockedHouse" parent="." index="24" instance=ExtResource("5_hwpiv")]

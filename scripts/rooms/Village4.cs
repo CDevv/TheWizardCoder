@@ -19,8 +19,7 @@ public partial class Village4 : BaseRoom
 		if (global.PlayerData.HasSolvedWatchtowerGlitch)
 		{
 			AnimationPlayer.Play("final_pos");
-			codeProblem.Solved = true;
-			watchtowerWarper.Enabled = true;
+			watchtowerWarper.Active = true;
 
 			if (!global.PlayerData.LintonDummyCutscene && global.PlayerData.HasMetLinton)
 			{
@@ -40,8 +39,7 @@ public partial class Village4 : BaseRoom
 	private async void OnCodeSolved()
 	{
 		await PlayCutscene("code_solved");
-		watchtowerWarper.Enabled = true;
-		global.PlayerData.HasSolvedWatchtowerGlitch = true;
+		watchtowerWarper.Active = true;
 	}
 
 	private async void OnBattleFinished()

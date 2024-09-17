@@ -14,6 +14,13 @@ Nolan: [#portrait=0] For more information see the online documentation.
 
 ~ demo_playerdata
 Nolan: Howdy, {{GetPlayerData("HasQuestFromShimble")}}
-Narrator: You received an item.
+Narrator: [next=0.5] You received an item.
 do AddToInventory("item")
-=> END
+=> END!
+
+~ demo_dialogueextra
+Narrator: [next=1] Auto advance in 1.
+Narrator: Lorem ipsum dolor sit amet, [speed=2] consectetur adipiscing elit. Nam eros sapien..
+Narrator: W[wait=0.2]H[wait=0.2]A[wait=0.2]T
+Narrator: [speed=0.1]WHAT
+=> END!

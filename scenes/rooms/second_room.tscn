@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://c0iqpqhuxgcn7"]
+[gd_scene load_steps=42 format=3 uid="uid://c0iqpqhuxgcn7"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_xan73"]
 [ext_resource type="Script" path="res://scripts/rooms/TestRoom.cs" id="2_eh4xc"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/prefabs/code_problem_point.tscn" id="11_5aqh3"]
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/prefabs/dialogue_point.tscn" id="11_67j7s"]
 [ext_resource type="PackedScene" uid="uid://mmm0k3msmmm5" path="res://scenes/prefabs/cutscene_point.tscn" id="12_8300v"]
+[ext_resource type="PackedScene" uid="uid://b5a45cgte66g5" path="res://scenes/prefabs/chest.tscn" id="14_lefl4"]
 
 [sub_resource type="Animation" id="Animation_h6tmq"]
 resource_name = "test_anim"
@@ -270,7 +271,6 @@ z_index = 2
 position = Vector2(176, 208)
 TargetRoomName = "first_room"
 TargetLocation = "RoomEnterMarker"
-Enabled = false
 
 [node name="Camera" parent="." index="11"]
 limit_right = 1280
@@ -294,6 +294,7 @@ sprite_frames = SubResource("SpriteFrames_os5t3")
 [node name="CodeProblemPoint" parent="." index="16" instance=ExtResource("11_5aqh3")]
 z_index = 1
 position = Vector2(400, 207)
+UniqueIdentifier = "TestCodeProblem"
 Code = "Nolan.Test ="
 Items = Array[String](["true", "false"])
 SolvableAreas = {
@@ -316,7 +317,18 @@ position = Vector2(288, 214)
 DialogueResource = ExtResource("8_bj7jj")
 DialogueTitle = "demo_playerdata"
 
-[node name="CutscenePoint" parent="." index="20" instance=ExtResource("12_8300v")]
+[node name="DialoguePoint2" parent="." index="20" instance=ExtResource("11_67j7s")]
+z_index = 1
+position = Vector2(672, 214)
+DialogueResource = ExtResource("8_bj7jj")
+DialogueTitle = "demo_dialogueextra"
+
+[node name="CutscenePoint" parent="." index="21" instance=ExtResource("12_8300v")]
 z_index = 1
 position = Vector2(432, 272)
 RoomMethodName = "TestCutscene"
+
+[node name="Chest" parent="." index="23" instance=ExtResource("14_lefl4")]
+z_index = 1
+position = Vector2(784, 208)
+PlaythroughPropertyName = "TestChest"

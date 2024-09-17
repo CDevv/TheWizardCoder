@@ -5,6 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class BattleDisplay : Display
 {
@@ -106,25 +107,43 @@ public partial class BattleDisplay : Display
 	{
 		invisButton.GrabFocus();
 
-		await Allies.AlliesTurn();
-		await Enemies.EnemiesTurn();
+		List<CharacterBattleState> participants = new();
+		participants.AddRange(Allies.Characters);
+		participants.AddRange(Enemies.Characters);
+		participants = participants.OrderByDescending((p) => p.Character.AgilityPoints).ToList();
 
-		if (Enemies.GetTotalHealth() <= 0)
+		foreach (CharacterBattleState participant in participants)
 		{
-			HideDisplay();
-		}
-		else if (Allies.GetTotalHealth() <= 0)
-		{
-			global.CurrentRoom.TransitionRect.PlayAnimation();
-			await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
+			switch (participant.Character.Type)
+			{
+				case CharacterType.Ally:
+					await Allies.AllyTurn(participant.InternalIndex);
+					break;
+				case CharacterType.Enemy:
+					await Enemies.EnemyTurn(participant.InternalIndex);
+					break;
+			}
 
-			global.CurrentRoom.GameOverDisplay.ShowDisplay();
-			Clear();
+			if (Enemies.GetTotalHealth() <= 0)
+			{
+				HideDisplay();
+			}
+			else if (Allies.GetTotalHealth() <= 0)
+			{
+				BattleEnded = true;
+				global.CurrentRoom.TransitionRect.PlayAnimation();
+				await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
+
+				global.CurrentRoom.GameOverDisplay.ShowDisplay();
+				Clear();
+			}
+			else
+			{
+				Allies.StartTurn();
+			}
 		}
-		else
-		{
-			Allies.StartTurn();
-		}
+
+		
 
 		if (Visible)
 		{

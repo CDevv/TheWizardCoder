@@ -16,6 +16,7 @@ public partial class SaveFileData : Node
 	public string Location { get; set; }
     public Vector2 LocationVector { get; set; }
     public CharacterData Stats { get; set; }
+    public int Gold { get; set; }
     private Array<string> inventory = new();
     private Array<string> magicSpells = new();
 
@@ -42,6 +43,9 @@ public partial class SaveFileData : Node
             magicSpells = value;
         }
 	}
+
+    public bool TestCodeProblem { get; set; } = false;
+    public bool TestChest { get; set; } = false;
 
     //Playthrough properties
     public bool HasPlayedIntro { get; set; } = false;
@@ -79,10 +83,13 @@ public partial class SaveFileData : Node
             MaxHealth = 50, Health = 50,
             MaxPoints = 10, Points = 10,
             AttackPoints = 10, DefensePoints = 5,
+            AgilityPoints = 10,
             MagicSpells = new() {
                 "Fireball"
-            }
+            },
+            Type = CharacterType.Ally
         };
+        Gold = 0;
     }
 
     public void AddToInventory(string item)

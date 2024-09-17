@@ -292,6 +292,7 @@ shape = SubResource("RectangleShape2D_rc6yv")
 z_index = 2
 position = Vector2(444, 333)
 scale = Vector2(2.5, 2)
+UniqueIdentifier = "HasSolvedTavernGlitch"
 Code = "//Barrel capacity is 50
 
 for (int i = 0;     ;    i++)

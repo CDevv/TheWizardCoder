@@ -334,7 +334,6 @@ position = Vector2(1200, 754)
 TargetRoomName = "watchtower_1"
 TargetLocation = "EnterMarker"
 PlayerDirection = 1
-Enabled = false
 
 [node name="Section3Marker" type="Marker2D" parent="." index="15"]
 position = Vector2(40, 800)
@@ -352,6 +351,7 @@ texture = ExtResource("6_87sv2")
 z_index = 2
 position = Vector2(1176, 754)
 scale = Vector2(2, 1)
+UniqueIdentifier = "HasSolvedWatchtowerGlitch"
 Code = "char[] code = {
           ,		     ,
 
