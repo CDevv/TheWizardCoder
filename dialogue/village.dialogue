@@ -280,6 +280,14 @@ Linton: [#portrait=0] Good job! Now try defending! Defense makes you lose less h
 Linton: [#portrait=0] Good! Now finish it off!
 => END!
 
+~ tutorial_unnecessary_magic
+Linton: [#portrait=0] You didn't have to use magic..
+=> END!
+
+~ tutorial_bad_decision
+Linton: [#portrait=0] That was.. unnecessary.
+=> END!
+
 ~ linton_point
 Linton: [#portrait=0] Good luck on your jounrey!
 => END!

@@ -2,60 +2,18 @@
 
 [ext_resource type="Script" path="res://scripts/displays/GameDisplay.cs" id="1_6dgqm"]
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_8qvuk"]
-[ext_resource type="Texture2D" uid="uid://bxxj3cscesu7t" path="res://assets/ui/nolanhead.png" id="2_x7kl6"]
-[ext_resource type="Texture2D" uid="uid://00inqs1v3lxi" path="res://assets/ui/base.png" id="3_5sira"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="4_sk2au"]
 [ext_resource type="AudioStream" uid="uid://cj1pvxtiwamdh" path="res://sounds/ui/btnoption.wav" id="6_bgthx"]
 [ext_resource type="PackedScene" uid="uid://6rlgr1lwl05o" path="res://scenes/subdisplays/gamemenu/game_display_inventory_display.tscn" id="7_7y2ae"]
 [ext_resource type="PackedScene" uid="uid://1s17ud5yxf8a" path="res://scenes/subdisplays/gamemenu/game_menu_options_menu.tscn" id="8_v3vvj"]
+[ext_resource type="PackedScene" uid="uid://bd6352ak6gjj6" path="res://scenes/subdisplays/gamemenu/character_status.tscn" id="9_7xm2m"]
 [ext_resource type="PackedScene" uid="uid://ody0k6mcrmk7" path="res://scenes/subdisplays/gamemenu/game_menu_controls_menu.tscn" id="9_imgrl"]
+[ext_resource type="PackedScene" uid="uid://dkuycnlm3he16" path="res://scenes/subdisplays/gamemenu/character_magic.tscn" id="10_13uox"]
 [ext_resource type="PackedScene" uid="uid://prxu22vjqfni" path="res://scenes/subdisplays/gamemenu/party_members_list.tscn" id="10_foxtn"]
 
 [node name="GameDisplay" type="CanvasLayer"]
 follow_viewport_enabled = true
 script = ExtResource("1_6dgqm")
-
-[node name="TopStatsRect" type="NinePatchRect" parent="."]
-visible = false
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 108.0
-offset_bottom = 40.0
-scale = Vector2(2, 2)
-texture = ExtResource("1_8qvuk")
-patch_margin_left = 3
-patch_margin_top = 3
-patch_margin_right = 3
-patch_margin_bottom = 3
-
-[node name="Sprite2D" type="Sprite2D" parent="TopStatsRect"]
-position = Vector2(11.75, 11.75)
-scale = Vector2(0.33, 0.33)
-texture = ExtResource("2_x7kl6")
-
-[node name="HealthBar" type="TextureProgressBar" parent="TopStatsRect"]
-unique_name_in_owner = true
-layout_mode = 2
-offset_left = 24.0
-offset_top = 16.0
-offset_right = 88.0
-offset_bottom = 20.0
-value = 100.0
-nine_patch_stretch = true
-texture_under = ExtResource("3_5sira")
-texture_progress = ExtResource("3_5sira")
-tint_progress = Color(1, 0.337255, 0.309804, 1)
-
-[node name="NameLabel" type="Label" parent="TopStatsRect"]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 4.0
-offset_right = 152.0
-offset_bottom = 28.0
-scale = Vector2(0.5, 0.5)
-theme = ExtResource("4_sk2au")
-theme_override_font_sizes/font_size = 24
-text = "Nolan"
 
 [node name="MenuRect" type="NinePatchRect" parent="."]
 offset_left = 16.0
@@ -87,16 +45,36 @@ theme_override_constants/separation = 0
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../Options")
-focus_neighbor_bottom = NodePath("../Options")
+focus_neighbor_bottom = NodePath("../Status")
 mouse_filter = 2
 theme = ExtResource("4_sk2au")
 theme_override_font_sizes/font_size = 32
 text = "Items"
 
-[node name="Options" type="Button" parent="MenuRect/OptionsMargins/VBoxContainer"]
+[node name="Status" type="Button" parent="MenuRect/OptionsMargins/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../ItemsButton")
+focus_neighbor_bottom = NodePath("../Magic")
+mouse_filter = 2
+theme = ExtResource("4_sk2au")
+theme_override_font_sizes/font_size = 32
+text = "Status"
+
+[node name="Magic" type="Button" parent="MenuRect/OptionsMargins/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../Status")
+focus_neighbor_bottom = NodePath("../Options")
+mouse_filter = 2
+theme = ExtResource("4_sk2au")
+theme_override_font_sizes/font_size = 32
+text = "Magic"
+
+[node name="Options" type="Button" parent="MenuRect/OptionsMargins/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../Magic")
 focus_neighbor_bottom = NodePath("../ItemsButton")
 mouse_filter = 2
 theme = ExtResource("4_sk2au")
@@ -121,8 +99,45 @@ visible = false
 [node name="PartyMembersList" parent="." instance=ExtResource("10_foxtn")]
 visible = false
 
-[connection signal="button_down" from="MenuRect/OptionsMargins/VBoxContainer/ItemsButton" to="." method="ToggleInventoryMenu"]
-[connection signal="button_down" from="MenuRect/OptionsMargins/VBoxContainer/Options" to="." method="ToggleOptionsMenu"]
+[node name="CharacterStatus" parent="." instance=ExtResource("9_7xm2m")]
+visible = false
+
+[node name="CharacterMagic" parent="." instance=ExtResource("10_13uox")]
+visible = false
+
+[node name="GoldRect" type="NinePatchRect" parent="."]
+offset_left = 16.0
+offset_top = 256.0
+offset_right = 84.0
+offset_bottom = 280.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_8qvuk")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="GoldRect"]
+layout_mode = 0
+offset_right = 136.0
+offset_bottom = 48.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="GoldLabel" type="Label" parent="GoldRect/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("4_sk2au")
+theme_override_font_sizes/font_size = 32
+text = "Gold: 00000"
+
+[connection signal="pressed" from="MenuRect/OptionsMargins/VBoxContainer/ItemsButton" to="." method="OnItemsMenu"]
+[connection signal="pressed" from="MenuRect/OptionsMargins/VBoxContainer/Status" to="." method="OnStatusMenu"]
+[connection signal="pressed" from="MenuRect/OptionsMargins/VBoxContainer/Magic" to="." method="OnMagicMenu"]
+[connection signal="pressed" from="MenuRect/OptionsMargins/VBoxContainer/Options" to="." method="OnOptionsMenu"]
 [connection signal="ItemPressed" from="InventoryMenu" to="." method="OnItemPressed"]
 [connection signal="OnControlsButtonPressed" from="OptionsMenu" to="." method="OnControlsMenu"]
 [connection signal="CharacterPressed" from="PartyMembersList" to="." method="OnCharacterPressed"]

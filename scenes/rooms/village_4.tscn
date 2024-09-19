@@ -299,6 +299,7 @@ limit_bottom = 1952
 
 [node name="Player" parent="." index="10" instance=ExtResource("2_ehys0")]
 z_index = 1
+position = Vector2(1451, 800)
 
 [node name="TileMap" type="TileMap" parent="." index="11"]
 y_sort_enabled = true
@@ -334,6 +335,7 @@ position = Vector2(1200, 754)
 TargetRoomName = "watchtower_1"
 TargetLocation = "EnterMarker"
 PlayerDirection = 1
+Active = false
 
 [node name="Section3Marker" type="Marker2D" parent="." index="15"]
 position = Vector2(40, 800)

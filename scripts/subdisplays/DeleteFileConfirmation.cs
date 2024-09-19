@@ -6,14 +6,13 @@ public partial class DeleteFileConfirmation : Display
 	[Signal]
 	public delegate void FileDeletedEventHandler();
 
-	private Global global;
 	private Label label;
 	private Button yesButton;
 	private string saveName;
 
 	public override void _Ready()
 	{
-		global = GetNode<Global>("/root/Global");
+		base._Ready();
 		label = GetNode<Label>("%WarningLabel");
 		yesButton = GetNode<Button>("%YesButton");
 	}

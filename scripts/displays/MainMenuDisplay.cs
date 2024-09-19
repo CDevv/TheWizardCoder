@@ -3,15 +3,12 @@ using System;
 
 public partial class MainMenuDisplay : Display
 {
+	private TransitionRect transition;
 	private Control main;
 	private Control savedGames;
 	private Control options;
 	private Button playButton;
 	private Button loadButton;
-	private MainMenuSavedGames savedGamesMenu;
-	private OptionsMenu optionsMenu;
-	private ControlsMenu controlsMenu;
-
 	private bool waitingInput = false;
 	private string actionName;
 
@@ -19,17 +16,18 @@ public partial class MainMenuDisplay : Display
 	{
 		base._Ready();
 
-		main = GetNode<Control>("%Main");
-		options = GetNode<Control>("Options");
+		transition = GetNode<TransitionRect>("TransitionRect");
+		main = GetNode<Control>("Main");
 		playButton = GetNode<Button>("%PlayButton");
-		savedGamesMenu = GetNode<MainMenuSavedGames>("%SavedGamesMenu");
-		optionsMenu = GetNode<OptionsMenu>("%OptionsMenu");
-		controlsMenu = GetNode<ControlsMenu>("%ControlsMenu");
 
-		savedGamesMenu.UpdateDisplay();
+		AddSubdisplay("SavedGames", GetNode<MainMenuSavedGames>("SavedGamesMenu"));
+		AddSubdisplay("Options", GetNode<OptionsMenu>("OptionsMenu"));
+		AddSubdisplay("Controls", GetNode<ControlsMenu>("ControlsMenu"));
+
 		playButton.CallDeferred(Button.MethodName.GrabFocus);
-		optionsMenu.UpdateDisplay();
-		controlsMenu.UpdateDisplay();
+
+		UpdateDisplay();
+		ShowDisplay();
 	}
 
     public override void _Input(InputEvent @event)
@@ -48,44 +46,36 @@ public partial class MainMenuDisplay : Display
     {
         Show();
 		ShowMainMenu();
-		global.CurrentRoom.TransitionRect.PlayAnimation();
-		await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
+		transition.PlayAnimation();
+		await ToSignal(transition, TransitionRect.SignalName.AnimationFinished);
     }
 
     public override void UpdateDisplay()
     {
-        optionsMenu.UpdateDisplay();
-		controlsMenu.UpdateDisplay();
-		savedGamesMenu.UpdateDisplay();
+        UpdateAllSubdisplays();
     }
 
     public void ShowMainMenu()
 	{
 		main.Show();
-		savedGamesMenu.HideDisplay();
-		optionsMenu.HideDisplay();
-		controlsMenu.HideDisplay();
+		HideAllSubdisplays();
 		playButton.GrabFocus();
 	}
 
 	public void ShowSavedGamesMenu()
 	{
 		main.Hide();
-		optionsMenu.HideDisplay();
-		savedGamesMenu.ShowDisplay();	
+		ChangeSubdisplay("SavedGames");
 	}
 
 	public void ShowOptions()
 	{
 		main.Hide();
-		savedGamesMenu.HideDisplay();
-		controlsMenu.HideDisplay();
-		optionsMenu.ShowDisplay();
+		ChangeSubdisplay("Options");
 	}
 
 	public void ShowControls()
 	{
-		optionsMenu.HideDisplay();
-		controlsMenu.ShowDisplay();
+		ChangeSubdisplay("Controls");
 	}
 }

@@ -1,3 +1,7 @@
 ~ chest
 Narrator: You got a {0} from this chest.
 => END!
+
+~ chest_gold
+Narrator: You got {0} gold from this chest.
+=> END!

@@ -151,11 +151,6 @@ public partial class AlliesContainer : Node
 					}
 					break;
 			}
-
-			if (Enemies.GetTotalHealth() <= 0)
-			{
-				BattleDisplay.HideDisplay();
-			}
 		}
 	}
 

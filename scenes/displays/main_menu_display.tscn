@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bkmomdkodys8p"]
+[gd_scene load_steps=10 format=3 uid="uid://bkmomdkodys8p"]
 
 [ext_resource type="Script" path="res://scripts/displays/MainMenuDisplay.cs" id="1_bltqf"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="1_rbxpk"]
+[ext_resource type="PackedScene" uid="uid://dqgxo8eebarbi" path="res://scenes/prefabs/transition_rect.tscn" id="2_l65rp"]
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="2_y37u4"]
 [ext_resource type="Texture2D" uid="uid://b280jc176eg22" path="res://assets/ui/titlebg.png" id="3_j35pe"]
 [ext_resource type="PackedScene" uid="uid://gkilwd8fd2s7" path="res://scenes/subdisplays/mainmenu/delete_file_confirmation.tscn" id="6_ddegt"]
@@ -13,13 +14,15 @@
 follow_viewport_enabled = true
 script = ExtResource("1_bltqf")
 
+[node name="TransitionRect" parent="." instance=ExtResource("2_l65rp")]
+visible = false
+
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 640.0
 offset_bottom = 480.0
 texture = ExtResource("3_j35pe")
 
 [node name="Main" type="Control" parent="."]
-unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -89,49 +92,24 @@ theme_override_font_sizes/font_size = 36
 text = "Options
 "
 
-[node name="SavedGames" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="SavedGamesMenu" parent="SavedGames" node_paths=PackedStringArray("confirmation") instance=ExtResource("6_drqyd")]
-unique_name_in_owner = true
+[node name="SavedGamesMenu" parent="." node_paths=PackedStringArray("confirmation") instance=ExtResource("6_drqyd")]
 visible = false
 confirmation = NodePath("../DeleteFileConfirmation")
 
-[node name="DeleteFileConfirmation" parent="SavedGames" instance=ExtResource("6_ddegt")]
+[node name="DeleteFileConfirmation" parent="." instance=ExtResource("6_ddegt")]
 visible = false
 
-[node name="Options" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -320.0
-offset_top = -240.0
-offset_right = -280.0
-offset_bottom = -200.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="OptionsMenu" parent="Options" instance=ExtResource("7_3t87n")]
-unique_name_in_owner = true
+[node name="OptionsMenu" parent="." instance=ExtResource("7_3t87n")]
 visible = false
 
-[node name="ControlsMenu" parent="Options" instance=ExtResource("8_1jpdt")]
-unique_name_in_owner = true
+[node name="ControlsMenu" parent="." instance=ExtResource("8_1jpdt")]
 visible = false
 
 [connection signal="pressed" from="Main/MainMenuRect/MarginContainer/VBoxContainer/PlayButton" to="." method="ShowSavedGamesMenu"]
 [connection signal="pressed" from="Main/MainMenuRect/MarginContainer/VBoxContainer/OptionsButton" to="." method="ShowOptions"]
-[connection signal="BackButtonTrigerred" from="SavedGames/SavedGamesMenu" to="." method="ShowMainMenu"]
-[connection signal="FileDeleted" from="SavedGames/DeleteFileConfirmation" to="SavedGames/SavedGamesMenu" method="OnFileDeleted"]
-[connection signal="visibility_changed" from="SavedGames/DeleteFileConfirmation" to="SavedGames/SavedGamesMenu" method="OnFileDeleted"]
-[connection signal="OnBackButtonPressed" from="Options/OptionsMenu" to="." method="ShowMainMenu"]
-[connection signal="OnControlsButtonPressed" from="Options/OptionsMenu" to="." method="ShowControls"]
-[connection signal="OnBackButtonPressed" from="Options/ControlsMenu" to="." method="ShowOptions"]
+[connection signal="BackButtonTrigerred" from="SavedGamesMenu" to="." method="ShowMainMenu"]
+[connection signal="FileDeleted" from="DeleteFileConfirmation" to="SavedGamesMenu" method="OnFileDeleted"]
+[connection signal="visibility_changed" from="DeleteFileConfirmation" to="SavedGamesMenu" method="OnFileDeleted"]
+[connection signal="OnBackButtonPressed" from="OptionsMenu" to="." method="ShowMainMenu"]
+[connection signal="OnControlsButtonPressed" from="OptionsMenu" to="." method="ShowControls"]
+[connection signal="OnBackButtonPressed" from="ControlsMenu" to="." method="ShowOptions"]

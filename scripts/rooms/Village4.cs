@@ -49,13 +49,95 @@ public partial class Village4 : BaseRoom
 		await PlayCutscene("linton_7");		
 	}
 
-	private async void OnTurnFinished()
+	private void OnTurnFinished()
 	{
+		if (tutorialProgress < 3)
+		{
+			if (global.CurrentRoom.BattleDisplay.BattleEnded)
+			{
+				return;
+			}
+			
+			switch (tutorialProgress)
+			{
+				case 1:
+					ProgressCheckpointOne();
+					break;
+				case 2:
+					ProgressCheckpointTwo();
+					break;
+				case 3:
+					ProgressCheckpointThree();
+					break;
+			}
+		}
+		/*
 		if (tutorialProgress < 3)
 		{
 			await ShowDialogue(DialogueResource, $"tutorial_battle_{tutorialProgress}");
 			global.GameDisplayEnabled = false;
 			tutorialProgress++;
+		} */
+	}
+
+	private async void NextTutorialStep()
+	{
+		await ShowDialogue(DialogueResource, $"tutorial_battle_{tutorialProgress}");
+		global.GameDisplayEnabled = false;
+		tutorialProgress++;
+	}
+
+	private async void ProgressCheckpointOne()
+	{
+		switch (global.CurrentRoom.BattleDisplay.Allies.Characters[0].Action)
+		{
+			case CharacterAction.Attack:
+				NextTutorialStep();
+				break;
+			case CharacterAction.Magic:
+				await ShowDialogue(DialogueResource, $"tutorial_unnecessary_magic");
+				global.GameDisplayEnabled = false;
+				break;
+			default:
+				await ShowDialogue(DialogueResource, $"tutorial_bad_decision");
+				global.GameDisplayEnabled = false;
+				break;
+		}
+	}
+
+	private async void ProgressCheckpointTwo()
+	{
+		switch (global.CurrentRoom.BattleDisplay.Allies.Characters[0].Action)
+		{
+			case CharacterAction.Defend:
+				NextTutorialStep();
+				break;
+			case CharacterAction.Magic:
+				await ShowDialogue(DialogueResource, $"tutorial_unnecessary_magic");
+				global.GameDisplayEnabled = false;
+				break;
+			default:
+				await ShowDialogue(DialogueResource, $"tutorial_bad_decision");
+				global.GameDisplayEnabled = false;
+				break;
+		}
+	}
+
+	private async void ProgressCheckpointThree()
+	{
+		switch (global.CurrentRoom.BattleDisplay.Allies.Characters[0].Action)
+		{
+			case CharacterAction.Attack:
+				NextTutorialStep();
+				break;
+			case CharacterAction.Magic:
+				await ShowDialogue(DialogueResource, $"tutorial_unnecessary_magic");
+				global.GameDisplayEnabled = false;
+				break;
+			default:
+				await ShowDialogue(DialogueResource, $"tutorial_bad_decision");
+				global.GameDisplayEnabled = false;
+				break;
 		}
 	}
 }

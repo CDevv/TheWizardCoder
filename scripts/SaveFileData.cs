@@ -17,7 +17,7 @@ public partial class SaveFileData : Node
     public Vector2 LocationVector { get; set; }
     public CharacterData Stats { get; set; }
     public int Gold { get; set; }
-    private Array<string> inventory = new();
+    private Array<string> inventory = new() {"'s'","'t'","'a'","'r'"};
     private Array<string> magicSpells = new();
 
 	public Array<string> Inventory
@@ -46,6 +46,7 @@ public partial class SaveFileData : Node
 
     public bool TestCodeProblem { get; set; } = false;
     public bool TestChest { get; set; } = false;
+    public bool TestChest2 { get; set; } = false;
 
     //Playthrough properties
     public bool HasPlayedIntro { get; set; } = false;

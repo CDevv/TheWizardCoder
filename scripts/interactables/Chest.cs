@@ -6,9 +6,13 @@ public partial class Chest : Interactable
 	[Export]
 	public string PlaythroughPropertyName { get; set; }
 	[Export]
-	public Resource DialogueResource { get; set;}
+	public Resource DialogueResource { get; set; }
+	[Export]
+	public ChestType ChestType { get; set; } = ChestType.Item;
 	[Export]
 	public string ItemName { get; set; }
+	[Export]
+	public int GoldAmount { get; set; }
 
 	private AnimatedSprite2D sprite;
 
@@ -26,8 +30,17 @@ public partial class Chest : Interactable
 
 	public override void Action()
 	{
-		global.CurrentRoom.Dialogue.ShowDisplay(DialogueResource, "chest", new() { ItemName });
-		global.PlayerData.AddToInventory(ItemName);
+		switch (ChestType)
+		{
+			case ChestType.Item:
+				global.CurrentRoom.Dialogue.ShowDisplay(DialogueResource, "chest", new() { ItemName });
+				global.PlayerData.AddToInventory(ItemName);
+				break;
+			case ChestType.Gold:
+				global.CurrentRoom.Dialogue.ShowDisplay(DialogueResource, "chest_gold", new() { GoldAmount.ToString() });
+				global.PlayerData.Gold += GoldAmount;
+				break;
+		}
 		DisabledState();
 
 		if (!string.IsNullOrEmpty(PlaythroughPropertyName))

@@ -6,34 +6,29 @@ using System.Linq;
 public partial class GameDisplay : Display
 {
 	private int level = 0;
-	private bool visible = false;
-	private TextureProgressBar healthBar;
 	private Button itemsButton;
 	private AudioStreamPlayer audioPlayer;
-	private InventoryDisplay inventoryMenu;
-	private OptionsMenu optionsMenu;
-	private ControlsMenu controlsMenu;
-	private PartyMembersList partyMembers;
+	private Label gold;
 	private MenuAction action;
 	private int itemIndex;
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		base._Ready();
-		healthBar = GetNode<TextureProgressBar>("%HealthBar");
 		itemsButton = GetNode<Button>("%ItemsButton");
 		audioPlayer = GetNode<AudioStreamPlayer>("AudioPlayer");
-		optionsMenu = GetNode<OptionsMenu>("%OptionsMenu");
-		controlsMenu = GetNode<ControlsMenu>("%ControlsMenu");
-		inventoryMenu = GetNode<InventoryDisplay>("%InventoryMenu");
-		partyMembers = GetNode<PartyMembersList>("PartyMembersList"); 
+		gold = GetNode<Label>("%GoldLabel");
 
-		inventoryMenu.Hide();
+		AddSubdisplay("Inventory", GetNode<InventoryDisplay>("%InventoryMenu"));
+		AddSubdisplay("Options", GetNode<OptionsMenu>("%OptionsMenu"));
+		AddSubdisplay("Controls", GetNode<ControlsMenu>("%ControlsMenu"));
+		AddSubdisplay("PartyMembers", GetNode<PartyMembersList>("PartyMembersList"));
+		AddSubdisplay("Status", GetNode<CharacterStatus>("CharacterStatus"));
+		AddSubdisplay("Magic", GetNode<CharacterMagicSpells>("CharacterMagic"));
+
+		HideAllSubdisplays();
 		Hide();
-		optionsMenu.UpdateDisplay();
-		controlsMenu.UpdateDisplay();
-		partyMembers.UpdateDisplay();
+		UpdateAllSubdisplays();
 	}
 
     public override void _UnhandledInput(InputEvent @event)
@@ -52,26 +47,18 @@ public partial class GameDisplay : Display
 					{
 						global.CanWalk = true;
 						Hide();
-						partyMembers.Hide();
-						Visible = false;
+						HideAllSubdisplays();
 					}
 					else
 					{
 						global.CanWalk = false;
-						Show();
-						partyMembers.Show();
-						itemsButton.GrabFocus();
-						Visible = true;
-
-						inventoryMenu.UpdateDisplay();
-						partyMembers.UpdateDisplay();
+						ShowDisplay();
 					}
 					break;
 				case 1:
 					level = 0;
-					inventoryMenu.Hide();
-					optionsMenu.Hide();
-					partyMembers.Show();
+					HideAllSubdisplays();
+					Subdisplays["PartyMembers"].Show();
 					itemsButton.GrabFocus();
 					break;
 				case 2:
@@ -86,55 +73,34 @@ public partial class GameDisplay : Display
     public override void ShowDisplay()
     {
         Show();
-		partyMembers.Show();
+		HideAllSubdisplays();
+		UpdateDisplay();
+		Subdisplays["PartyMembers"].Show();
 		itemsButton.GrabFocus();
     }
 
     public override void UpdateDisplay()
     {
-        partyMembers.UpdateDisplay();
-		inventoryMenu.UpdateDisplay();
+		gold.Text = $"Gold: {global.PlayerData.Gold}";
+        UpdateAllSubdisplays();
     }
 
-    public void ToggleInventoryMenu()
+	public void OnItemsMenu()
 	{
-		if (inventoryMenu.Visible)
-		{
-			itemsButton.GrabFocus();
-		}
-		else
-		{
-			level = 1;
-			inventoryMenu.ShowDisplay();
-			partyMembers.Hide();
-		}
-	}
-
-	public void ToggleOptionsMenu()
-	{
-		if (optionsMenu.Visible)
-		{
-			itemsButton.GrabFocus();
-		}
-		else
-		{
-			OnOptionsMenu();
-		}
+		level = 1;
+		ChangeSubdisplay("Inventory");
 	}
 
 	public void OnOptionsMenu()
 	{
 		level = 1;
-		optionsMenu.ShowDisplay();
-		controlsMenu.Hide();
-		partyMembers.Hide();
+		ChangeSubdisplay("Options");
 	}
 
 	public void OnControlsMenu()
 	{
 		level = 2;
-		optionsMenu.Hide();
-		controlsMenu.ShowDisplay();
+		ChangeSubdisplay("Controls");
 	}
 
 	private void OnItemPressed(int index)
@@ -142,22 +108,51 @@ public partial class GameDisplay : Display
 		itemIndex = index;
 		level = 1;
 		action = MenuAction.Items;
-		inventoryMenu.Hide();
-		partyMembers.ShowDisplay();
+		ChangeSubdisplay("PartyMembers");
+	}
+
+	private void OnStatusMenu()
+	{
+		level = 1;
+		action = MenuAction.Stats;
+		ChangeSubdisplay("PartyMembers");
+	}
+
+	private void OnMagicMenu()
+	{
+		level = 1;
+		action = MenuAction.Magic;
+		ChangeSubdisplay("PartyMembers");
 	}
 
 	private void OnCharacterPressed()
 	{
-		level = 0;
+		switch (action)
+		{
+			case MenuAction.Items:
+				level = 0;
+				string itemName = global.PlayerData.Inventory[itemIndex];
+				Item itemData = global.ItemDescriptions[itemName];
 
-		string itemName = global.PlayerData.Inventory[itemIndex];
-		Item itemData = global.ItemDescriptions[itemName];
+				global.PlayerData.Stats.AddHealth(itemData.Effect);
+				global.PlayerData.RemoveFromInventory(itemIndex);
 
-		global.PlayerData.Stats.AddHealth(itemData.Effect);
-		global.PlayerData.RemoveFromInventory(itemIndex);
+				UpdateAllSubdisplays();
+				itemsButton.GrabFocus();
 
-		inventoryMenu.UpdateDisplay();
-		partyMembers.UpdateDisplay();
-		itemsButton.GrabFocus();
+				break;
+			
+			case MenuAction.Stats:
+				HideAllSubdisplays();
+				((CharacterStatus)Subdisplays["Status"]).ShowDisplay(global.PlayerData.Stats);
+
+				break;
+
+			case MenuAction.Magic:
+				HideAllSubdisplays();
+				((CharacterMagicSpells)Subdisplays["Magic"]).ShowDisplay(global.PlayerData.Stats);
+
+				break;
+		}
 	}
 }

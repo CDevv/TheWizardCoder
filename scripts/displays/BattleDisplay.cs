@@ -127,6 +127,7 @@ public partial class BattleDisplay : Display
 			if (Enemies.GetTotalHealth() <= 0)
 			{
 				HideDisplay();
+				break;
 			}
 			else if (Allies.GetTotalHealth() <= 0)
 			{
@@ -143,8 +144,6 @@ public partial class BattleDisplay : Display
 			}
 		}
 
-		
-
 		if (Visible)
 		{
 			EmitSignal(SignalName.TurnFinished);
@@ -155,14 +154,19 @@ public partial class BattleDisplay : Display
 	{
 		BattleEnded = true;
 		IsTutorial = false;
+		battleOptions.ShowInfoLabel("You won! 50 Gold obtained.");
+
+		SceneTreeTimer timer = GetTree().CreateTimer(2);
+		await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
 		global.CurrentRoom.TransitionRect.PlayAnimation();
 		await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
 		Hide();
 		battleOptions.HideDisplay();
 		Clear();
+		global.PlayerData.Gold += 50;
+
 		global.CanWalk = true;
 		global.GameDisplayEnabled = true;
-
 		global.CurrentRoom.TransitionRect.PlayAnimationBackwards();
 		EmitSignal(SignalName.BattleFinished);
 	}

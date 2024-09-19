@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class SavedGamesDisplay : CanvasLayer
+public partial class SavedGamesDisplay : Display
 {
 	private string selectedSaveFileName;
 	private Global global;
@@ -21,7 +21,7 @@ public partial class SavedGamesDisplay : CanvasLayer
 		closeButton = GetNode<Button>("%CloseButton");
 	}
 
-	public void UpdateDisplay()
+	public override void UpdateDisplay()
 	{
 		SaveFileOption[] buttons = { save1button, save2button, save3button };
 		for (int i = 0; i < buttons.Length; i++)
@@ -33,7 +33,7 @@ public partial class SavedGamesDisplay : CanvasLayer
 		}
 	}
 
-	public void ShowDisplay()
+	public override void ShowDisplay()
 	{
 		global.GameDisplayEnabled = false;
 		Show();
@@ -57,4 +57,5 @@ public partial class SavedGamesDisplay : CanvasLayer
 		global.UpdateSaveFile(saveName);
 		OnCloseButton();
 	}
+
 }

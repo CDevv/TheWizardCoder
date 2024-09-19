@@ -1,0 +1,110 @@
+[gd_scene load_steps=6 format=3 uid="uid://bd6352ak6gjj6"]
+
+[ext_resource type="Script" path="res://scripts/subdisplays/CharacterStatus.cs" id="1_epibd"]
+[ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_ki4qp"]
+[ext_resource type="SpriteFrames" uid="uid://c3e5witb4onuf" path="res://assets/characters/secondary_portraits.tres" id="2_0c146"]
+[ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="3_1vr5o"]
+[ext_resource type="Texture2D" uid="uid://00inqs1v3lxi" path="res://assets/ui/base.png" id="4_cr4wu"]
+
+[node name="CharacterStatus" type="CanvasLayer"]
+script = ExtResource("1_epibd")
+
+[node name="Container" type="NinePatchRect" parent="."]
+offset_left = 184.0
+offset_top = 72.0
+offset_right = 380.0
+offset_bottom = 228.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_ki4qp")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Portrait" type="AnimatedSprite2D" parent="Container"]
+unique_name_in_owner = true
+position = Vector2(24, 24)
+sprite_frames = ExtResource("2_0c146")
+animation = &"Nolan"
+
+[node name="NameLabel" type="Label" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 44.0
+offset_top = 8.0
+offset_right = 84.0
+offset_bottom = 31.0
+theme = ExtResource("3_1vr5o")
+text = "Label"
+
+[node name="PointsLabel" type="Label" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 148.0
+offset_top = 40.0
+offset_right = 188.0
+offset_bottom = 63.0
+theme = ExtResource("3_1vr5o")
+theme_override_colors/font_color = Color(0.564706, 0, 0.517647, 1)
+text = "Label"
+horizontal_alignment = 2
+
+[node name="AttackPointsLabel" type="Label" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 64.0
+offset_right = 98.0
+offset_bottom = 80.0
+theme = ExtResource("3_1vr5o")
+text = "Attack:
+"
+
+[node name="DefensePointsLabel" type="Label" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 98.0
+offset_top = 64.0
+offset_right = 188.0
+offset_bottom = 80.0
+theme = ExtResource("3_1vr5o")
+text = "Defense:
+"
+
+[node name="AgilityPointsLabel" type="Label" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 80.0
+offset_right = 98.0
+offset_bottom = 96.0
+theme = ExtResource("3_1vr5o")
+text = "Agility:
+"
+
+[node name="HealthLabel" type="Label" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 120.0
+offset_top = 8.0
+offset_right = 188.0
+offset_bottom = 31.0
+theme = ExtResource("3_1vr5o")
+text = "Label"
+horizontal_alignment = 2
+
+[node name="HealthBar" type="TextureProgressBar" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 88.0
+offset_top = 28.0
+offset_right = 188.0
+offset_bottom = 36.0
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("4_cr4wu")
+texture_over = ExtResource("4_cr4wu")
+texture_progress = ExtResource("4_cr4wu")
+tint_under = Color(0.685835, 0.685835, 0.685835, 1)
+tint_over = Color(1, 1, 1, 0)
+tint_progress = Color(0.999914, 0.394572, 0.326194, 1)

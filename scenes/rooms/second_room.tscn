@@ -332,3 +332,10 @@ RoomMethodName = "TestCutscene"
 z_index = 1
 position = Vector2(784, 208)
 PlaythroughPropertyName = "TestChest"
+
+[node name="Chest2" parent="." index="24" instance=ExtResource("14_lefl4")]
+z_index = 1
+position = Vector2(848, 208)
+PlaythroughPropertyName = "TestChest2"
+ChestType = 1
+GoldAmount = 10

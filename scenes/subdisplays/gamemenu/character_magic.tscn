@@ -1,0 +1,113 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkuycnlm3he16"]
+
+[ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_85rhe"]
+[ext_resource type="Script" path="res://scripts/subdisplays/CharacterMagicSpells.cs" id="1_qd3pq"]
+[ext_resource type="PackedScene" uid="uid://capppjgr8n1ew" path="res://scenes/prefabs/text_button.tscn" id="2_qp4mg"]
+[ext_resource type="SpriteFrames" uid="uid://c3e5witb4onuf" path="res://assets/characters/secondary_portraits.tres" id="3_d5jbl"]
+[ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="4_hxthu"]
+
+[node name="CharacterMagic" type="CanvasLayer"]
+script = ExtResource("1_qd3pq")
+TextButtonTemplate = ExtResource("2_qp4mg")
+
+[node name="Container" type="NinePatchRect" parent="."]
+offset_left = 184.0
+offset_top = 72.0
+offset_right = 380.0
+offset_bottom = 204.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_85rhe")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Portrait" type="AnimatedSprite2D" parent="Container"]
+unique_name_in_owner = true
+position = Vector2(24, 24)
+sprite_frames = ExtResource("3_d5jbl")
+animation = &"Nolan"
+
+[node name="NameLabel" type="Label" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 44.0
+offset_top = 8.0
+offset_right = 84.0
+offset_bottom = 31.0
+theme = ExtResource("4_hxthu")
+text = "Label"
+
+[node name="PointsLabel" type="Label" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 8.0
+offset_right = 188.0
+offset_bottom = 31.0
+theme = ExtResource("4_hxthu")
+theme_override_colors/font_color = Color(0.564706, 0, 0.517647, 1)
+text = "Label"
+horizontal_alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Container"]
+layout_mode = 0
+offset_top = 44.0
+offset_right = 392.0
+offset_bottom = 220.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="SpellsGridContainer" type="GridContainer" parent="Container/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 2
+
+[node name="DescriptionRect" type="NinePatchRect" parent="."]
+unique_name_in_owner = true
+offset_left = 184.0
+offset_top = 352.0
+offset_right = 380.0
+offset_bottom = 408.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_85rhe")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="DescriptionRect"]
+layout_mode = 0
+offset_right = 392.0
+offset_bottom = 112.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="MagicDescription" type="Label" parent="DescriptionRect/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(376, 96)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("4_hxthu")
+theme_override_font_sizes/font_size = 36
+autowrap_mode = 3
+
+[node name="MagicCost" type="Label" parent="DescriptionRect/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(376, 96)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("4_hxthu")
+theme_override_colors/font_color = Color(0.564706, 0, 0.517647, 1)
+theme_override_font_sizes/font_size = 36
+text = "MP Cost: 00"
+horizontal_alignment = 2
+vertical_alignment = 2
+autowrap_mode = 3

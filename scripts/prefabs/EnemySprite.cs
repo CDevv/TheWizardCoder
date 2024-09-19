@@ -20,7 +20,6 @@ public partial class EnemySprite : Sprite2D
 	{
 		nameLabel.Text = data.Name;
 		Texture = (Texture2D)ResourceLoader.LoadThreadedGet($"res://assets/battle/enemies/{data.Name}.png");
-		GD.Print($"res://assets/battle/enemies/{data.Name}.png");
 	}
 
 	public void GrabFocus()

@@ -1,4 +1,4 @@
 public enum MenuAction
 {
-    Items, Stats
+    Items, Stats, Magic
 }

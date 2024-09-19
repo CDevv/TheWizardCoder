@@ -23,6 +23,7 @@ public partial class ControlsMenu : Display
     public override void ShowDisplay()
     {
         Show();
+		FocusFirst();
     }
 
     public override void UpdateDisplay()
