@@ -116,7 +116,7 @@ tracks/0/keys = {
 "args": [0],
 "method": &"PlayIdleAnimation"
 }, {
-"args": [3],
+"args": [2],
 "method": &"PlayIdleAnimation"
 }, {
 "args": [0],
@@ -218,6 +218,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." index="10" instance=ExtResource("2_kf2x7")]
 z_index = 1
+position = Vector2(344, 168)
 
 [node name="TileMap" type="TileMap" parent="." index="11"]
 y_sort_enabled = true

@@ -1,12 +1,12 @@
 using Global
 
 ~ intro_cutscene
-Nolan: [#portrait=0] Ah, a new day!
+Nolan: [#portrait=1] Ah, a new day!
 
 => END!
 
 ~ lamp
-Nolan: [#portrait=0] Cool lamp.
+Nolan: [#portrait=1] Cool lamp.
 
 do AddMagicSpell("SimpleBullet")
 => END!

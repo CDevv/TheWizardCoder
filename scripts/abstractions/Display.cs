@@ -28,11 +28,6 @@ public abstract partial class Display : CanvasLayer
     {
         Subdisplays[name].ShowDisplay();
     }
-    
-    public void ShowSubdisplay(string name, params Variant[] args)
-    {
-        Subdisplays[name].Call(Display.MethodName.ShowDisplay, args);
-    }
 
     public void HideAllSubdisplays()
     {
@@ -46,12 +41,6 @@ public abstract partial class Display : CanvasLayer
     {
         HideAllSubdisplays();
         ShowSubdisplay(name);
-    }
-
-    public void ChangeSubdisplay(string name, params Variant[] args)
-    {
-        HideAllSubdisplays();
-        ShowSubdisplay(name, args);
     }
 
     public void UpdateAllSubdisplays()

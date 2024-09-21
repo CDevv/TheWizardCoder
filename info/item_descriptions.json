@@ -35,4 +35,10 @@
 		"Type": "Key",
 		"Effect": 0,
 	},
+	"Nobe's key":{
+		"Name": "Nobe's key",
+		"Description":"A key that you found within a village house",
+		"Type": "Key",
+		"Effect": 0,
+	},
 }

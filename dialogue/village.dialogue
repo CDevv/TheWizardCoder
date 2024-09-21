@@ -32,6 +32,34 @@ Narrator: A bucket full of water. Possibly for crops.
 Narrator: A bag of wheat seeds.
 => END!
 
+~ dusty_shelf
+Narrator: A dusty shelf.
+=> END!
+
+~ table_drink
+Narrator: There is a glass on this table. Do you want to try it?
+- Yes
+	Narrator: ...
+	Narrator: It was so yucky you didn't get any benefits from it.
+- No
+	Narrator: You aren't thirsty today.
+=> END!
+
+~ curious_note
+if HasItemInInventory("Nobe's key"):
+	Narrator: You already got something from here.
+else:	
+	Narrator: There is a note here. Read it?
+	- Yes
+		Narrator: "Hello, Nobe. If you're reading this, I can tell you where you can find your keys!-
+		Narrator: Just check this drawer. And don't miss out your keys next time!"
+		Narrator: -Por
+		Narrator: You received Nobe's key
+		do AddToInventory("Nobe's key")
+	- No
+		Narrator: You don't want to read a note today
+=> END!
+
 ~ niko
 Narrator: A cat child's favourite wheat field.
 => END!
@@ -44,8 +72,8 @@ Nolan: [#portrait=0] Yes, I got your message. What is the issue?
 ~ intro_shimble_2
 Shimble: [#portrait=0] So.. You might have not seen the damage that has been done to the village yet..
 Shimble: [#portrait=0] But weird things has been happening in the village.
-Shimble: [#portrait=0] You might be able to help out with this.. right?
-Nolan: [#portrait=0] ...
+Shimble: [#portrait=1] You might be able to help out with this.. right?
+Nolan: [#portrait=2] ...
 Nolan: [#portrait=0] I guess I can try.
 do SetPlayerData("HasQuestFromShimble", true)
 => END!
@@ -54,14 +82,14 @@ do SetPlayerData("HasQuestFromShimble", true)
 Shimble: [#portrait=0] ...
 Shimble: [#portrait=0] You actually did it!
 Shimble: [#portrait=0] I knew I could trust you! Thank you!
-Nolan: [#portrait=0] ..I actually don't know how I did it. Like it suddenly disappeared out of nowhere.
+Nolan: [#portrait=2] ..I actually don't know how I did it. Like it suddenly disappeared out of nowhere.
 Shimble: [#portrait=0] Surely you can help elsewhere, right?
 Shimble: [#portrait=0] Take a look around the village and fix the issues if you can!
 => END!
 
 ~ shimble_point
 if GetPlayerData("HasQuestFromShimble") and not GetPlayerData("HasSolvedShimbleChair"):
-	Shimble: [#portrait=0] You might be able to help out with this.. right?
+	Shimble: [#portrait=1] You might be able to help out with this.. right?
 	Nolan: [#portrait=0] I guess I can try.
 elif GetPlayerData("HasSolvedShimbleChair"):
 	Shimble: [#portrait=0] Thank you!
@@ -69,20 +97,20 @@ elif GetPlayerData("HasSolvedShimbleChair"):
 => END!
 		
 ~ zen_intro_1
-Zen: [#portrait=0] Oh! [wait=1]Wizard man! 
+Zen: [#portrait=2] Oh! [wait=1]Wizard man! 
 Zen: [#portrait=0] Good thing you're here! I was wondering what this thing is..
 => END!
 	
 ~ zen_intro_2
 Zen: [#portrait=0] Yeah..
-Zen: [#portrait=0] Think you can cast a spell or something?
+Zen: [#portrait=1] Think you can cast a spell or something?
 Nolan: [#portrait=0] I will.. [wait=3]see..
 do SetPlayerData("HasVisitedZenHouse", true)
 => END!
 
 ~ zen_code_solved
-Zen: [#portrait=0] Oh! You did it! Thank you!
-Zen: [#portrait=0] I was wondering where my groceries went. Purchased them from Nara and Keenelm.
+Zen: [#portrait=2] Oh! You did it! Thank you!
+Zen: [#portrait=1] I was wondering where my groceries went. Purchased them from Nara and Keenelm.
 Zen: [#portrait=0] They are pretty nice. They might also be experiencing this kind of issue though..
 Nolan: [#portrait=0] I see..
 Zen: [#portrait=0] Mind helping them aswell?
@@ -91,26 +119,26 @@ Nolan: [#portrait=0] Sure thing!
 
 ~ zen_point
 if GetPlayerData("HasSolvedZenHouse"):
-	Zen: [#portrait=0] Cool, you did it!
+	Zen: [#portrait=2] Cool, you did it!
 else:
-	Zen: [#portrait=0] Think you can cast a spell or something?
+	Zen: [#portrait=1] Think you can cast a spell or something?
 	Nolan: [#portrait=0] I will try..
 => END!
 
 ~ keenelm_1
-Keenelm: [#portrait=0] Hey, you!
+Keenelm: [#portrait=1] Hey, you!
 Nolan: [#portrait=0] Yeah?
 => END!
 
 ~ keenelm_2
 if not GetPlayerData("HasEncounteredNara"):
-	Keenelm: [#portrait=0] You a wizard, right?
-	Keenelm: [#portrait=0] You gotta help! Have you seen that thing over there in the crops?
-	Keenelm: [#portrait=0] Please try to fix it!
-	Nolan: [#portrait=0] Okay, I guess I can try.
+	Keenelm: [#portrait=1] You a wizard, right?
+	Keenelm: [#portrait=1] You gotta help! Have you seen that thing over there in the crops?
+	Keenelm: [#portrait=1] Please try to fix it!
+	Nolan: [#portrait=2] Okay, I guess I can try.
 else:
-	Keenelm: [#portrait=0] You a wizard, right?
-	Keenelm: [#portrait=0] You gotta help! Have you seen that thing over there in the crops?
+	Keenelm: [#portrait=1] You a wizard, right?
+	Keenelm: [#portrait=1] You gotta help! Have you seen that thing over there in the crops?
 	Nolan: [#portrait=0] Yeah, I already got told by your wife.
 	Keenelm: [#portrait=0] Oh, okay then!
 do SetPlayerData("HasEncounteredKeenelm", true)
@@ -118,15 +146,15 @@ do CallRoomMethod("DisableCutscene")
 => END!
 
 ~ keenelm_code_solved
-Keenelm: [#portrait=0] Oh! You managed to get red of it! Pretty nice!
+Keenelm: [#portrait=2] Oh! You managed to get red of it! Pretty nice!
 Nolan: [#portrait=0] Yeah!
 => END!
 
 ~ keenelm_point
 if GetPlayerData("HasSolvedFarmGlitch"):
-	Keenelm: [#portrait=0] Thank you!
+	Keenelm: [#portrait=2] Thank you!
 elif GetPlayerData("HasEncounteredKeenelm"):
-	Keenelm: [#portrait=0] Will you fix it, please?
+	Keenelm: [#portrait=3] Will you fix it, please?
 	Nolan: [#portrait=0] Yep!
 elif GetPlayerData("HasEncounteredKeenelm") == false:
 	=> keenelm_2
@@ -135,7 +163,7 @@ elif GetPlayerData("HasEncounteredKeenelm") == false:
 ~ nara_1
 if not GetPlayerData("HasEncounteredKeenelm"):
 	Nara: [#portrait=0] Oh, hello! 
-	Nara: [#portrait=0] I haven't seen a wizard in a while. You must be one, right?
+	Nara: [#portrait=1] I haven't seen a wizard in a while. You must be one, right?
 	Nara: [#portrait=0] Mr. Shimble said he would call a wizard to do something about this.
 	if GetPlayerData("HasSolvedShimbleChair"):
 		Nolan: [#portrait=0] Yep, I've already been to his house. I managed to fix the issue there.
@@ -150,7 +178,7 @@ else:
 	Nara: [#portrait=0] I haven't seen a wizard in a while. You must be one, right?
 	Nara: [#portrait=0] Mr. Shimble said he would call a wizard to do something about this.
 	Nolan: [#portrait=0] Yep, Keenelm already told me about the black thing in the farm.
-	Nara: [#portrait=0] Can you fix it then?
+	Nara: [#portrait=1] Can you fix it then?
 	Nolan: [#portrait=0] I can try.
 do SetPlayerData("HasEncounteredNara", true)
 => END!
@@ -160,7 +188,7 @@ Nolan: [#portrait=0] I fixed it!
 => END!
 
 ~ nara_code_solved_2
-Nara: [#portrait=0] Oh, you did? I am pleased to hear that. [next=auto]
+Nara: [#portrait=0] Oh, you did? I am pleased to hear that.
 Nara: [#portrait=0] Hold on for a moment.
 => END!
 
@@ -168,7 +196,7 @@ Nara: [#portrait=0] Hold on for a moment.
 Nara: [#portrait=0] Here, take this apple as a sign of gratitude.
 Narrator: You received an Apple.
 do AddToInventory("Apple")
-Nolan: [#portrait=0] Oh. Thanks!
+Nolan: [#portrait=1] Oh. Thanks!
 Nara: [#portrait=0] There are other places in this village that need fixing. 
 Nara: [#portrait=0] Some say that the further you go to the castle town, the more 'glitches' you will meet.
 Nolan: [#portrait=0] Oh?
@@ -186,11 +214,11 @@ else:
 
 ~ berry_1
 Berry: [#portrait=0] Oh! 
-Berry: [#portrait=0] Hello there, dear wizard! What brings you here?
+Berry: [#portrait=2] Hello there, dear wizard! What brings you here?
 Nolan: [#portrait=0] I'm just checking the village around to see if there are things to 'fix'..
 Berry: [#portrait=0] I see.. 
 Berry: [#portrait=0] There actually is something that you may try fixing.
-Berry: [#portrait=0] I was wondering why my supply is so low..
+Berry: [#portrait=3] I was wondering why my supply is so low..
 Berry: [#portrait=0] Come with me.
 => END!
 
@@ -198,16 +226,16 @@ Berry: [#portrait=0] Come with me.
 Berry: [#portrait=0] So, this is the storage room.
 Berry: [#portrait=0] You can probably see that 'glitch' over there.
 Berry: [#portrait=0] But you're a wizard so you probably know what to do.
-Berry: [#portrait=0] Good luck!
+Berry: [#portrait=2] Good luck!
 => END!
 
 ~ berry_point
 if GetPlayerData("HasSolvedTavernGlitch"):
-	Berry: [#portrait=0] Fixed it yet?
+	Berry: [#portrait=1] Fixed it yet?
 	Nolan: [#portrait=0] Yep, it's no longer there!
-	Berry: [#portrait=0] Oh, that's great!
+	Berry: [#portrait=2] Oh, that's great!
 else:
-	Berry: [#portrait=0] Fixed it yet?
+	Berry: [#portrait=1] Fixed it yet?
 	Nolan: [#portrait=0] Not yet..
 => END!
 
@@ -215,12 +243,12 @@ else:
 Dudeley: [#portrait=0] Hello, dear wizard! What bothers you?
 - What are you doing here?
 	Nolan: [#portrait=0] What are you doing here, Dude?
-	Dudeley: [#portrait=0] I am looking over my wheat field, of course!
-	Dudeley: [#portrait=0] Isn't it glorious?
+	Dudeley: [#portrait=2] I am looking over my wheat field, of course!
+	Dudeley: [#portrait=2] Isn't it glorious?
 	=> dudeley_point
 - What's with all these 'glitches'?
 	Nolan: [#portrait=0] What is with all those 'glitches' around the village?
-	Dudeley: [#portrait=0] *sigh*
+	Dudeley: [#portrait=1] *sigh*
 	Dudeley: [#portrait=0] Unfortunately I cannot give you a proper answer.
 	Dudeley: [#portrait=0] What I do know is that they.. well.. appeared as if out of nowhere.
 	Dudeley: [#portrait=0] I've also heard the forest and beyond it has even more of them.
@@ -228,7 +256,7 @@ Dudeley: [#portrait=0] Hello, dear wizard! What bothers you?
 	=> dudeley_point
 - Goodbye.
 	Nolan: [#portrait=0] Goodbye, Dudeley!
-	Dudeley: [#portrait=0] See ya around!
+	Dudeley: [#portrait=2] See ya around!
 	=> END!
 
 ~ dudeley_bookshelf
@@ -236,12 +264,12 @@ Narrator: This bookshelf has two books: "The Art of Sculpting" and "How To Garde
 => END!
 
 ~ linton_1
-Linton: [#portrait=0]  WHO'S THERE?
+Linton: [#portrait=1]  WHO'S THERE?
 => END!
 
 ~ linton_2
 Linton: [#portrait=0] Oh, a wizard.. 
-Linton: [#portrait=0] Hold on, you got here? You probably used some magic or something.
+Linton: [#portrait=4] Hold on, you got here? You probably used some magic or something.
 Nolan: [#portrait=0] Yep, I did.
 Linton: [#portrait=0] That's good.. 
 Linton: [#portrait=0] I've been stuck here for a while. Thank you for saving me.
@@ -253,8 +281,8 @@ Linton: [#portrait=0] Follow me. I will show you something.
 Nolan: [#portrait=0] So.. this dummy?
 Linton: [#portrait=0] I will show you how to fight. 
 Linton: [#portrait=0] The forest may hide dangers for you.
-Nolan: [#portrait=0] But I am a wizar-
-Linton: [#portrait=0] Bla bla! If you run out of mana, you must know how to continue fighting back.
+Nolan: [#portrait=0] [next=1] But I am a wizar-
+Linton: [#portrait=2] Bla bla! If you run out of mana, you must know how to continue fighting back.
 Nolan: [#portrait=0] Alrighty then..
 Linton: [#portrait=0] So! Let's start!
 => END!
@@ -262,7 +290,7 @@ Linton: [#portrait=0] So! Let's start!
 ~ linton_4
 Nolan: [#portrait=0] Huh..
 Nolan: [#portrait=0] I guess I did it
-Linton: [#portrait=0] Good job!
+Linton: [#portrait=3] Good job!
 Nolan: [#portrait=0] I think I gotta go..
 Linton: [#portrait=0] Goodbye, wizard man!
 Nolan: [#portrait=0] Goodbye!
@@ -277,17 +305,24 @@ Linton: [#portrait=0] Good job! Now try defending! Defense makes you lose less h
 => END!
 
 ~ tutorial_battle_2
-Linton: [#portrait=0] Good! Now finish it off!
+Linton: [#portrait=3] Good! Now finish it off!
 => END!
 
 ~ tutorial_unnecessary_magic
-Linton: [#portrait=0] You didn't have to use magic..
+Linton: [#portrait=4] You didn't have to use magic..
 => END!
 
 ~ tutorial_bad_decision
-Linton: [#portrait=0] That was.. unnecessary.
+Linton: [#portrait=4] That was.. unnecessary.
 => END!
 
 ~ linton_point
 Linton: [#portrait=0] Good luck on your jounrey!
+=> END!
+
+~ dummy_point
+if GetPlayerData("LintonDummyCutscene"):
+	Narrator: This dummy seems a lil' defeated.
+else:
+	Narrator: A dummy, seemingly for training. 
 => END!

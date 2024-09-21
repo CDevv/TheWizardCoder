@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ddwumkhu3bon7"]
+[gd_scene load_steps=22 format=3 uid="uid://ddwumkhu3bon7"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_ujid1"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="2_ehys0"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/prefabs/save_point.tscn" id="8_h5iky"]
 [ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/prefabs/character_dialogue_point.tscn" id="9_hrcjo"]
 [ext_resource type="SpriteFrames" uid="uid://b7q7c8vycomy0" path="res://assets/characters/movement/spriteframes/linton.tres" id="10_yrt8o"]
+[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/prefabs/dialogue_point.tscn" id="12_53b5a"]
 
 [sub_resource type="Animation" id="Animation_m84pa"]
 resource_name = "code_solved"
@@ -299,7 +300,6 @@ limit_bottom = 1952
 
 [node name="Player" parent="." index="10" instance=ExtResource("2_ehys0")]
 z_index = 1
-position = Vector2(1451, 800)
 
 [node name="TileMap" type="TileMap" parent="." index="11"]
 y_sort_enabled = true
@@ -379,11 +379,18 @@ position = Vector2(1368, 752)
 z_index = 1
 DialogueResource = ExtResource("3_3hq0k")
 DialogueTitle = "linton_point"
+DefaultDirection = 1
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Linton" index="2"]
 position = Vector2(0, -16)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("10_yrt8o")
+
+[node name="DummyDialogue" parent="." index="21" instance=ExtResource("12_53b5a")]
+z_index = 2
+position = Vector2(951, 694)
+DialogueResource = ExtResource("3_3hq0k")
+DialogueTitle = "dummy_point"
 
 [connection signal="BattleFinished" from="BattleDisplay" to="." method="OnBattleFinished"]
 [connection signal="TurnFinished" from="BattleDisplay" to="." method="OnTurnFinished"]

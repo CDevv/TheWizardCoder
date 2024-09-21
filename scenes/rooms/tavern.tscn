@@ -146,6 +146,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." index="10" instance=ExtResource("2_laksc")]
 z_index = 2
+position = Vector2(704, 264)
 
 [node name="TileMap" type="TileMap" parent="." index="11"]
 y_sort_enabled = true

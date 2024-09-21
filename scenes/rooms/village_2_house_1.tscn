@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bilbnrsqgec23"]
+[gd_scene load_steps=13 format=3 uid="uid://bilbnrsqgec23"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_d10el"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="2_h36mt"]
 [ext_resource type="TileSet" uid="uid://clhrfovy5lcgu" path="res://tilesets/houses_interiors.tres" id="3_jqcmy"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="4_xgklm"]
+[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/prefabs/dialogue_point.tscn" id="5_8ii8n"]
+[ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="6_x1l51"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_uvme0"]
 a = Vector2(96, 96)
@@ -80,3 +82,17 @@ TargetLocation = "House1Marker"
 
 [node name="EnterMarker" type="Marker2D" parent="." index="15"]
 position = Vector2(192, 368)
+
+[node name="Basket" parent="." index="16" instance=ExtResource("5_8ii8n")]
+z_index = 2
+position = Vector2(212, 214)
+scale = Vector2(1.5, 1)
+DialogueResource = ExtResource("6_x1l51")
+DialogueTitle = "basket_empty"
+
+[node name="Basket2" parent="." index="17" instance=ExtResource("5_8ii8n")]
+z_index = 2
+position = Vector2(128, 214)
+scale = Vector2(3, 1)
+DialogueResource = ExtResource("6_x1l51")
+DialogueTitle = "dusty_shelf"

@@ -12,6 +12,8 @@ public partial class DialogueDisplay : Display
 	[Export]
 	private PackedScene ResponseTemplate { get; set; }
 
+	private Vector2 responsesRectBasePosition;
+
 	private RichTextLabel label;
 	private AnimatedSprite2D portrait;
 	private MarginContainer responsesRect;
@@ -40,6 +42,8 @@ public partial class DialogueDisplay : Display
 		responsesMenu = GetNode<VBoxContainer>("%Responses");
 		audioPlayer = GetNode<AudioStreamPlayer>("%AudioPlayer");
 		responsesRectMarker = GetNode<Marker2D>("ResponsesContainerMarker");
+
+		responsesRectBasePosition = responsesRectMarker.Position;
 	}
 
 	public override async void _Process(double delta)
@@ -55,7 +59,7 @@ public partial class DialogueDisplay : Display
 				{
 					responsesRect.Show();
 					UpdateResponses(dialogueLine.Responses);				
-					responsesRect.Position = responsesRectMarker.Position - new Vector2((maxSize + (8 * 2)) * 2, 0);
+					
 				}
 				return;
 			}
@@ -156,6 +160,8 @@ public partial class DialogueDisplay : Display
 		label.VisibleCharacters = 0;
 		index = -1;
 		typingSpeed = 1;
+		lineTime = 0;
+		hasAutoAdvance = false;
 
 		if (format.Count == 0)
 		{
@@ -218,7 +224,7 @@ public partial class DialogueDisplay : Display
 	{
 		ClearResponses();
 
-		maxSize = 0;
+		maxSize = 48;
 		Array<Button> buttons = new Array<Button>();
 		for (int i = 0; i < responses.Count; i++)
 		{
@@ -232,10 +238,10 @@ public partial class DialogueDisplay : Display
 
 			if (i == 0)
 			{
-				maxSize = button.Size.X;
 				button.GrabFocus();
 			}
-			else if (button.Size.X > maxSize)
+			
+			if (button.Size.X > maxSize)
 			{
 				maxSize = button.Size.X;
 			}
@@ -250,6 +256,8 @@ public partial class DialogueDisplay : Display
 		}
 		buttons[buttons.Count - 1].FocusNeighborTop = buttons[buttons.Count - 2].GetPath();
 		buttons[buttons.Count - 1].FocusNeighborBottom = buttons[0].GetPath();
+
+		responsesRect.Position = responsesRectBasePosition - new Vector2((maxSize + (8 * 2)) * 2, 0);
 	}
 
 	private void ClearResponses()

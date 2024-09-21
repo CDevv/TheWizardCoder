@@ -17,7 +17,7 @@ public partial class SaveFileData : Node
     public Vector2 LocationVector { get; set; }
     public CharacterData Stats { get; set; }
     public int Gold { get; set; }
-    private Array<string> inventory = new() {"'s'","'t'","'a'","'r'"};
+    private Array<string> inventory = new();
     private Array<string> magicSpells = new();
 
 	public Array<string> Inventory
@@ -66,6 +66,7 @@ public partial class SaveFileData : Node
     public bool HasSolvedWatchtowerGlitch { get; set; } = false;
     public bool HasMetLinton { get; set; } = false;
     public bool LintonDummyCutscene { get; set; } = false;
+    public bool WatchtowerChest { get; set; } = false;
 
     public SaveFileData()
     {

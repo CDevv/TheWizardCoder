@@ -13,7 +13,7 @@ ItemButtonTemplate = ExtResource("2_otadj")
 offset_left = 184.0
 offset_top = 72.0
 offset_right = 380.0
-offset_bottom = 228.0
+offset_bottom = 216.0
 scale = Vector2(2, 2)
 texture = ExtResource("2_aw6bb")
 patch_margin_left = 3
@@ -60,9 +60,9 @@ text = "No items in inventory."
 [node name="DescriptionRect" type="NinePatchRect" parent="."]
 unique_name_in_owner = true
 offset_left = 184.0
-offset_top = 400.0
+offset_top = 368.0
 offset_right = 380.0
-offset_bottom = 432.0
+offset_bottom = 416.0
 scale = Vector2(2, 2)
 texture = ExtResource("2_aw6bb")
 region_rect = Rect2(0, 0, 16, 16)
@@ -83,7 +83,10 @@ theme_override_constants/margin_bottom = 8
 
 [node name="ItemDescription" type="Label" parent="DescriptionRect/MarginContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(376, 84)
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("3_ga21o")
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 32
+text = "Desc."
+autowrap_mode = 3
