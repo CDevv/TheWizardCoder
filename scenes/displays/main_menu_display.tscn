@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bkmomdkodys8p"]
+[gd_scene load_steps=11 format=3 uid="uid://bkmomdkodys8p"]
 
 [ext_resource type="Script" path="res://scripts/displays/MainMenuDisplay.cs" id="1_bltqf"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="1_rbxpk"]
 [ext_resource type="PackedScene" uid="uid://dqgxo8eebarbi" path="res://scenes/prefabs/transition_rect.tscn" id="2_l65rp"]
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="2_y37u4"]
 [ext_resource type="Texture2D" uid="uid://b280jc176eg22" path="res://assets/ui/titlebg.png" id="3_j35pe"]
+[ext_resource type="Texture2D" uid="uid://c01a02c4hikf2" path="res://assets/ui/gamelogo.png" id="4_4lcj8"]
 [ext_resource type="PackedScene" uid="uid://gkilwd8fd2s7" path="res://scenes/subdisplays/mainmenu/delete_file_confirmation.tscn" id="6_ddegt"]
 [ext_resource type="PackedScene" uid="uid://d2g5a1s11robp" path="res://scenes/subdisplays/mainmenu/main_menu_saved_games.tscn" id="6_drqyd"]
 [ext_resource type="PackedScene" uid="uid://b62mtle3y15o2" path="res://scenes/subdisplays/mainmenu/main_menu_options_menu.tscn" id="7_3t87n"]
@@ -28,23 +29,20 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="GameTitle" type="Label" parent="Main"]
+[node name="GameTitle" type="TextureRect" parent="Main"]
 layout_mode = 0
-offset_left = 16.0
-offset_top = 112.0
-offset_right = 277.0
-offset_bottom = 148.0
-theme = ExtResource("1_rbxpk")
-theme_override_font_sizes/font_size = 36
-text = "The Wizard Coder
-"
+offset_left = 224.0
+offset_top = 392.0
+offset_right = 396.0
+offset_bottom = 454.0
+texture = ExtResource("4_4lcj8")
 
 [node name="MainMenuRect" type="NinePatchRect" parent="Main"]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 160.0
+offset_top = 384.0
 offset_right = 84.0
-offset_bottom = 252.0
+offset_bottom = 423.0
 scale = Vector2(2, 2)
 texture = ExtResource("2_y37u4")
 region_rect = Rect2(0, 0, 16, 16)
@@ -59,7 +57,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 68.0
-offset_bottom = 92.0
+offset_bottom = 39.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)

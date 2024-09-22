@@ -40,6 +40,11 @@ public partial class Village4 : BaseRoom
 	{
 		await PlayCutscene("code_solved");
 		watchtowerWarper.Active = true;
+
+		global.PlayerData.RemoveFromInventory("'s'");
+		global.PlayerData.RemoveFromInventory("'t'");
+		global.PlayerData.RemoveFromInventory("'a'");
+		global.PlayerData.RemoveFromInventory("'r'");
 	}
 
 	private async void OnBattleFinished()
@@ -71,13 +76,6 @@ public partial class Village4 : BaseRoom
 					break;
 			}
 		}
-		/*
-		if (tutorialProgress < 3)
-		{
-			await ShowDialogue(DialogueResource, $"tutorial_battle_{tutorialProgress}");
-			global.GameDisplayEnabled = false;
-			tutorialProgress++;
-		} */
 	}
 
 	private async void NextTutorialStep()

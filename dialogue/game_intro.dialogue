@@ -1,0 +1,13 @@
+~ game_intro
+Narrator: Loading TheWizardCoder..
+Narrator: Would you like to read the instructions? (y/n)
+- y
+	Narrator: Okay. This is an experimental software. 
+	Narrator: This software will test opening a socket to another 'world'
+	Narrator: You will also test controlling a being from that world.
+	Narrator: Your task is to prevent attacks and preserve the ecosystem.
+- n
+	Narrator: Instructions skipped..
+Narrator: [#input] How will you name this file?
+Narrator: [#format] Good luck, {0}.
+=> END!

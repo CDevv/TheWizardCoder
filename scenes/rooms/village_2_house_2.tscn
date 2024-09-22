@@ -48,7 +48,7 @@ offset_bottom = 480.0
 color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." index="11" instance=ExtResource("2_rywfw")]
-z_index = 1
+z_index = 2
 
 [node name="TileMap" type="TileMap" parent="." index="12"]
 y_sort_enabled = true
@@ -58,6 +58,7 @@ format = 2
 layer_0/name = "props"
 layer_0/y_sort_enabled = true
 layer_0/z_index = 2
+layer_0/tile_data = PackedInt32Array(327695, 851968, 3, 327692, 458752, 8)
 layer_1/name = "side-props"
 layer_1/y_sort_enabled = true
 layer_1/z_index = 2
@@ -103,9 +104,23 @@ TargetLocation = "House2Marker"
 [node name="EnterMarker" type="Marker2D" parent="." index="15"]
 position = Vector2(192, 368)
 
-[node name="DialoguePoint" parent="." index="16" instance=ExtResource("5_2bo3y")]
+[node name="DrinkDialogue" parent="." index="16" instance=ExtResource("5_2bo3y")]
 z_index = 2
 position = Vector2(144, 184)
 scale = Vector2(3, 1)
 DialogueResource = ExtResource("6_c0hhj")
 DialogueTitle = "table_drink"
+
+[node name="Wardrobe" parent="." index="17" instance=ExtResource("5_2bo3y")]
+z_index = 2
+position = Vector2(416, 184)
+scale = Vector2(3, 1)
+DialogueResource = ExtResource("6_c0hhj")
+DialogueTitle = "wardrobe"
+
+[node name="Basket" parent="." index="18" instance=ExtResource("5_2bo3y")]
+z_index = 2
+position = Vector2(504, 184)
+scale = Vector2(2, 1)
+DialogueResource = ExtResource("6_c0hhj")
+DialogueTitle = "basket"

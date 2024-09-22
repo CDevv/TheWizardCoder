@@ -72,8 +72,20 @@ public partial class MainMenuSavedGames : Display
 	{
 		if (mode == SaveFileAction.Load)
 		{
-			global.LoadSaveFile($"save{saveNumber}");
-			global.ChangeRoom(global.PlayerData.SceneFileName, global.PlayerData.SceneDefaultMarker, Direction.Down);
+			//global.LoadSaveFile($"save{saveNumber}");
+			//global.ChangeRoom(global.PlayerData.SceneFileName, global.PlayerData.SceneDefaultMarker, Direction.Down);
+
+			SaveFileData data = global.ReadSaveFileData($"save{saveNumber}");
+			if (data.IsSaveEmpty)
+			{
+				global.ChosenSaveSlot = $"save{saveNumber}";
+				global.GoToGameIntro();
+			}
+			else
+			{
+				global.LoadSaveFile($"save{saveNumber}");
+				global.ChangeRoom(global.PlayerData.SceneFileName, global.PlayerData.SceneDefaultMarker, Direction.Down);
+			}
 		}
 		else
 		{

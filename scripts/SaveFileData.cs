@@ -67,6 +67,7 @@ public partial class SaveFileData : Node
     public bool HasMetLinton { get; set; } = false;
     public bool LintonDummyCutscene { get; set; } = false;
     public bool WatchtowerChest { get; set; } = false;
+    public bool VillageAppleChest { get; set; } = false;
 
     public SaveFileData()
     {

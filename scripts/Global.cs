@@ -9,6 +9,7 @@ public partial class Global : Node
 	public BaseRoom CurrentRoom { get; set; }
 	public string LocationMarkerName { get; set; }
 	public Direction PlayerDirection { get; set; }
+	public string ChosenSaveSlot { get; set; }
 	public bool HasLoadedGame { get; set; } = false;
 	public bool CanWalk = true;
 	public bool GameDisplayEnabled { get; set; } = true;
@@ -103,18 +104,18 @@ public partial class Global : Node
 		}
 	}
 
-	public void CreateSaveFile(string saveName)
+	public void CreateSaveFile(string fileName, string saveName)
 	{
 		SaveFileData data = new SaveFileData();
-		data.FileName = saveName;
+		data.FileName = fileName;
 		data.SaveName = saveName;
 		
-		FileAccess file = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Write);
+		FileAccess file = FileAccess.Open($"user://{fileName}.wand", FileAccess.ModeFlags.Write);
 		file.StoreVar(JsonConvert.SerializeObject(data));
 		file.Close();
 
-		FileAccess hashFile = FileAccess.Open($"user://{saveName}.ini", FileAccess.ModeFlags.Write);
-		byte[] hash = CalculateHash(saveName);
+		FileAccess hashFile = FileAccess.Open($"user://{fileName}.ini", FileAccess.ModeFlags.Write);
+		byte[] hash = CalculateHash(fileName);
 		hashFile.StoreVar(hash);
 		hashFile.Close();
 	}
@@ -147,7 +148,7 @@ public partial class Global : Node
 		if (data.IsSaveEmpty)
 		{
 			PlayerData.SaveName = saveName;
-			CreateSaveFile(saveName);
+			CreateSaveFile(saveName, saveName);
 		}
 	}
 
@@ -225,6 +226,11 @@ public partial class Global : Node
 	public void GoToMainMenu()
 	{
 		GetTree().ChangeSceneToFile("res://scenes/rooms/main_menu.tscn");
+	}
+
+	public void GoToGameIntro()
+	{
+		GetTree().ChangeSceneToFile("res://scenes/rooms/game_intro.tscn");
 	}
 
 	public Vector2 GetDirectionVector(Direction direction)

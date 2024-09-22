@@ -23,4 +23,9 @@ public partial class Warper : Interactable
 		await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
         global.ChangeRoom(TargetRoomName, TargetLocation, PlayerDirection);
     }
+
+	public override void OnNotActive()
+	{
+		global.CanWalk = true;
+	}
 }

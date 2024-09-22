@@ -60,6 +60,10 @@ else:
 		Narrator: You don't want to read a note today
 => END!
 
+~ wardrobe
+Narrator: An empty wardrobe.
+=> END!
+
 ~ niko
 Narrator: A cat child's favourite wheat field.
 => END!

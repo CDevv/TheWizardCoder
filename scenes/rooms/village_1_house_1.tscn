@@ -33,7 +33,6 @@ color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." index="11" instance=ExtResource("2_7s6wu")]
 z_index = 1
-position = Vector2(191, 264)
 
 [node name="TileMap" type="TileMap" parent="." index="12"]
 y_sort_enabled = true
@@ -80,3 +79,10 @@ position = Vector2(144, 214)
 scale = Vector2(2, 1)
 DialogueResource = ExtResource("6_ymcka")
 DialogueTitle = "curious_note"
+
+[node name="Wardrobe" parent="." index="17" instance=ExtResource("5_twk0r")]
+z_index = 2
+position = Vector2(512, 214)
+scale = Vector2(3, 1)
+DialogueResource = ExtResource("6_ymcka")
+DialogueTitle = "wardrobe"

@@ -15,7 +15,7 @@ run/main_scene="res://scenes/rooms/main_menu.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="TheWizardCoder"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://logo.png"
 
 [autoload]
 
@@ -94,7 +94,7 @@ sprint={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://dialogue/test.dialogue", "res://dialogue/first_room.dialogue", "res://dialogue/battle_intro.dialogue", "res://dialogue/battles/tutorial_battle.dialogue", "res://dialogue/nolan_house.dialogue", "res://dialogue/village.dialogue", "res://dialogue/snippets.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialogue/test.dialogue", "res://dialogue/first_room.dialogue", "res://dialogue/battle_intro.dialogue", "res://dialogue/battles/tutorial_battle.dialogue", "res://dialogue/nolan_house.dialogue", "res://dialogue/village.dialogue", "res://dialogue/snippets.dialogue", "res://dialogue/game_intro.dialogue")
 
 [layer_names]
 
