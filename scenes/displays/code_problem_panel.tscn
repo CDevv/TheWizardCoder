@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scripts/displays/CodeProblemPanel.cs" id="1_8o5lf"]
 [ext_resource type="Texture2D" uid="uid://seqdoffkhcdd" path="res://assets/ui/base_console_ui.png" id="1_caexv"]
 [ext_resource type="Theme" uid="uid://yvr5k4rix6lw" path="res://themes/console_theme.tres" id="2_cm4ur"]
-[ext_resource type="PackedScene" uid="uid://rajwk4hoe67" path="res://scenes/prefabs/pickable_button.tscn" id="3_s8dc8"]
-[ext_resource type="PackedScene" uid="uid://bt58me5k7oep2" path="res://scenes/prefabs/pickable_button_area.tscn" id="4_vm0ji"]
+[ext_resource type="PackedScene" uid="uid://rajwk4hoe67" path="res://scenes/ui/pickable_button.tscn" id="3_s8dc8"]
+[ext_resource type="PackedScene" uid="uid://bt58me5k7oep2" path="res://scenes/ui/pickable_button_area.tscn" id="4_vm0ji"]
 
 [sub_resource type="Animation" id="Animation_hp7nb"]
 resource_name = "show"

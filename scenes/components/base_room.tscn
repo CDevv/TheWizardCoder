@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://bb1itrnd1e8am"]
+
+[ext_resource type="PackedScene" uid="uid://de21qftn035us" path="res://scenes/displays/game_display.tscn" id="1_hid6f"]
+[ext_resource type="Script" path="res://scripts/abstractions/BaseRoom.cs" id="1_rfc1d"]
+[ext_resource type="PackedScene" uid="uid://dc44aibe82cqn" path="res://scenes/displays/saved_games_display.tscn" id="3_f6qho"]
+[ext_resource type="PackedScene" uid="uid://t2oe67lsq1j2" path="res://scenes/displays/battle_display.tscn" id="3_pm83n"]
+[ext_resource type="PackedScene" uid="uid://dqgxo8eebarbi" path="res://scenes/ui/transition_rect.tscn" id="4_qu4y4"]
+[ext_resource type="PackedScene" uid="uid://c7roc1nqcr3w0" path="res://scenes/displays/code_problem_panel.tscn" id="6_244tq"]
+[ext_resource type="PackedScene" uid="uid://b8wix4lm5g767" path="res://scenes/displays/dialogue_display.tscn" id="6_wcmrr"]
+[ext_resource type="PackedScene" uid="uid://o37pcggx0jjm" path="res://scenes/displays/game_over_display.tscn" id="8_w5sia"]
+
+[node name="BaseRoom" type="Node2D"]
+script = ExtResource("1_rfc1d")
+
+[node name="GameDisplay" parent="." instance=ExtResource("1_hid6f")]
+visible = false
+follow_viewport_enabled = false
+
+[node name="BattleDisplay" parent="." instance=ExtResource("3_pm83n")]
+visible = false
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="SavedGamesDisplay" parent="." instance=ExtResource("3_f6qho")]
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Camera" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+limit_right = 640
+limit_bottom = 480
+
+[node name="TransitionRect" parent="." instance=ExtResource("4_qu4y4")]
+layer = 2
+visible = false
+
+[node name="CodeProblemPanel" parent="." instance=ExtResource("6_244tq")]
+visible = false
+
+[node name="Dialogue" parent="." instance=ExtResource("6_wcmrr")]
+visible = false
+
+[node name="GameOverDisplay" parent="." instance=ExtResource("8_w5sia")]
+visible = false

@@ -1,39 +1,44 @@
 using Godot;
 using System;
+using TheWizardCoder.Abstractions;
+using TheWizardCoder.Interactables;
 
-public partial class TavernBarrelsRoom : BaseRoom
+namespace TheWizardCoder.Rooms
 {
-	[Export]
-	public Resource DialogueResource { get; set; }
-
-	private CharacterDialoguePoint berry;
-
-	public override async void OnReady()
+	public partial class TavernBarrelsRoom : BaseRoom
 	{
-		base.OnReady();
-		berry = GetNode<CharacterDialoguePoint>("Berry");
-		if (!global.PlayerData.TavernPuzzleIntro)
+		[Export]
+		public Resource DialogueResource { get; set; }
+
+		private CharacterDialoguePoint berry;
+
+		public override async void OnReady()
 		{
-			await PlayCutscene("berry_2");
-			await ShowDialogue(DialogueResource, "berry_2");
-			await PlayCutscene("berry_3");
-			global.PlayerData.TavernPuzzleIntro = true;
-			berry.Position = Vector2.Zero;
-		}
-		else
-		{
-			berry.Visible = false;
+			base.OnReady();
+			berry = GetNode<CharacterDialoguePoint>("Berry");
+			if (!global.PlayerData.TavernPuzzleIntro)
+			{
+				await PlayCutscene("berry_2");
+				await ShowDialogue(DialogueResource, "berry_2");
+				await PlayCutscene("berry_3");
+				global.PlayerData.TavernPuzzleIntro = true;
+				berry.Position = Vector2.Zero;
+			}
+			else
+			{
+				berry.Visible = false;
+			}
+
+			if (global.PlayerData.HasSolvedTavernGlitch)
+			{
+				AnimationPlayer.Play("final_pos");
+			}
 		}
 
-		if (global.PlayerData.HasSolvedTavernGlitch)
+		private async void OnProblemSolved()
 		{
-			AnimationPlayer.Play("final_pos");
+			await PlayCutscene("code_solved");
+			global.PlayerData.AddToInventory("'r'");
 		}
-	}
-
-	private async void OnProblemSolved()
-	{
-		await PlayCutscene("code_solved");
-		global.PlayerData.AddToInventory("'r'");
 	}
 }

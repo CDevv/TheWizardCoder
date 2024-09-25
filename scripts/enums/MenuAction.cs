@@ -1,4 +1,7 @@
-public enum MenuAction
+namespace TheWizardCoder.Enums
 {
-    Items, Stats, Magic
+    public enum MenuAction
+    {
+        Items, Stats, Magic
+    }
 }

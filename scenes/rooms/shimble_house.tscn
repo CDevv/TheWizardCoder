@@ -1,16 +1,16 @@
 [gd_scene load_steps=24 format=3 uid="uid://cnctvguq8i315"]
 
-[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_iguy1"]
-[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="2_smlwp"]
+[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_iguy1"]
+[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_smlwp"]
 [ext_resource type="Script" path="res://scripts/rooms/ShimbleHouse.cs" id="2_t54dc"]
 [ext_resource type="TileSet" uid="uid://clhrfovy5lcgu" path="res://tilesets/houses_interiors.tres" id="3_7bms3"]
-[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/prefabs/character_dialogue_point.tscn" id="4_nfibm"]
+[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/character_dialogue_point.tscn" id="4_nfibm"]
 [ext_resource type="SpriteFrames" uid="uid://be1stqnv5fl5x" path="res://assets/characters/movement/spriteframes/shimble.tres" id="5_yi567"]
-[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="6_c5qg6"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="6_c5qg6"]
 [ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="6_hk72q"]
 [ext_resource type="Texture2D" uid="uid://c5utkt0vcydin" path="res://assets/props/shimble-chair.png" id="7_eb42j"]
 [ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="8_1qi5c"]
-[ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/prefabs/code_problem_point.tscn" id="9_nro25"]
+[ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/components/code_problem_point.tscn" id="9_nro25"]
 
 [sub_resource type="Animation" id="Animation_3htsh"]
 resource_name = "problem_solved"

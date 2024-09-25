@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://b3krr10lhup6d"]
 
-[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_yru05"]
-[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="2_xwxrw"]
+[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_yru05"]
+[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_xwxrw"]
 [ext_resource type="TileSet" uid="uid://bnilncsva6t64" path="res://tilesets/env.tres" id="3_f52od"]
-[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="4_t00ui"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_t00ui"]
 
 [node name="BaseRoom" instance=ExtResource("1_yru05")]
 y_sort_enabled = true

@@ -1,33 +1,38 @@
 using DialogueManagerRuntime;
 using Godot;
 using System;
+using TheWizardCoder.Abstractions;
+using TheWizardCoder.Displays;
 
-public partial class OutsideHome : BaseRoom
+namespace TheWizardCoder.Rooms
 {
-	[Export]
-    public Resource DialogueResource { get; set; }
-	public override async void OnReady()
+	public partial class OutsideHome : BaseRoom
 	{
-		base.OnReady();
-
-		if (!global.PlayerData.HasMessageFromShimble)
+		[Export]
+		public Resource DialogueResource { get; set; }
+		public override async void OnReady()
 		{
-			global.IsInCutscene = true;
+			base.OnReady();
 
-			global.CanWalk = false;
-			await PlayCutscene("intro_1");
-			Dialogue.ShowDisplay(DialogueResource, "intro_mailman");
-			await ToSignal(Dialogue, DialogueDisplay.SignalName.DialogueEnded);
-			global.CanWalk = false;
-			await PlayCutscene("intro_2");
-			Dialogue.ShowDisplay(DialogueResource, "nolan_hmm");
+			if (!global.PlayerData.HasMessageFromShimble)
+			{
+				global.IsInCutscene = true;
 
-			global.IsInCutscene = false;
-			global.PlayerData.HasMessageFromShimble = true;
-		}
-		else
-		{
-			AnimationPlayer.Play("hide_zen");
+				global.CanWalk = false;
+				await PlayCutscene("intro_1");
+				Dialogue.ShowDisplay(DialogueResource, "intro_mailman");
+				await ToSignal(Dialogue, DialogueDisplay.SignalName.DialogueEnded);
+				global.CanWalk = false;
+				await PlayCutscene("intro_2");
+				Dialogue.ShowDisplay(DialogueResource, "nolan_hmm");
+
+				global.IsInCutscene = false;
+				global.PlayerData.HasMessageFromShimble = true;
+			}
+			else
+			{
+				AnimationPlayer.Play("hide_zen");
+			}
 		}
 	}
 }

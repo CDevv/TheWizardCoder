@@ -1,13 +1,13 @@
 [gd_scene load_steps=18 format=3 uid="uid://d2saopq748u80"]
 
-[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_e1o4e"]
-[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="1_m6ahu"]
+[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_e1o4e"]
+[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="1_m6ahu"]
 [ext_resource type="Script" path="res://scripts/rooms/FirstRoom.cs" id="2_ykuq1"]
 [ext_resource type="Texture2D" uid="uid://ctposucfw7y80" path="res://assets/props/bed-sheet.png" id="4_d8756"]
 [ext_resource type="TileSet" uid="uid://bxvx8pmnaw0ed" path="res://tilesets/nolan_house.tres" id="4_w5xs7"]
-[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/prefabs/dialogue_point.tscn" id="6_4o6l1"]
-[ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/prefabs/save_point.tscn" id="8_5r6ba"]
-[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="9_od3ub"]
+[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="6_4o6l1"]
+[ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/components/save_point.tscn" id="8_5r6ba"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="9_od3ub"]
 [ext_resource type="Resource" uid="uid://dxv3wga5qop3d" path="res://dialogue/nolan_house.dialogue" id="9_qmulg"]
 [ext_resource type="Texture2D" uid="uid://b25d8akulcu0u" path="res://assets/props/homebed-awake.png" id="11_xs4nt"]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_85rhe"]
 [ext_resource type="Script" path="res://scripts/subdisplays/CharacterMagicSpells.cs" id="1_qd3pq"]
-[ext_resource type="PackedScene" uid="uid://capppjgr8n1ew" path="res://scenes/prefabs/text_button.tscn" id="2_qp4mg"]
+[ext_resource type="PackedScene" uid="uid://capppjgr8n1ew" path="res://scenes/ui/text_button.tscn" id="2_qp4mg"]
 [ext_resource type="SpriteFrames" uid="uid://c3e5witb4onuf" path="res://assets/characters/secondary_portraits.tres" id="3_d5jbl"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="4_hxthu"]
 

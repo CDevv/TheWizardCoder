@@ -1,18 +1,22 @@
 using Godot;
 using System;
+using TheWizardCoder.Abstractions;
 
-public partial class Tavern : BaseRoom
+namespace TheWizardCoder.Rooms
 {
-	[Export]
-	public Resource DialogueResource { get; set; }
-	public override async void OnReady()
+	public partial class Tavern : BaseRoom
 	{
-		base.OnReady();
-		if (!global.PlayerData.HasMetBerry)
+		[Export]
+		public Resource DialogueResource { get; set; }
+		public override async void OnReady()
 		{
-			await ShowDialogue(DialogueResource, "berry_1");
-			await PlayCutscene("berry_1");
-			global.PlayerData.HasMetBerry = true;
+			base.OnReady();
+			if (!global.PlayerData.HasMetBerry)
+			{
+				await ShowDialogue(DialogueResource, "berry_1");
+				await PlayCutscene("berry_1");
+				global.PlayerData.HasMetBerry = true;
+			}
 		}
 	}
 }

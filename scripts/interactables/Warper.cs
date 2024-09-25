@@ -1,31 +1,37 @@
 using Godot;
 using System;
+using TheWizardCoder.Abstractions;
+using TheWizardCoder.Enums;
+using TheWizardCoder.UI;
 
-public partial class Warper : Interactable
+namespace TheWizardCoder.Interactables
 {
-	[Export]
-	public string TargetRoomName { get; set; }
-	[Export]
-	public string TargetLocation { get; set; }
-	[Export]
-	public Direction PlayerDirection { get; set; } = Direction.Down;
-
-	public override void _Ready()
+	public partial class Warper : Interactable
 	{
-		base._Ready();
-	}
+		[Export]
+		public string TargetRoomName { get; set; }
+		[Export]
+		public string TargetLocation { get; set; }
+		[Export]
+		public Direction PlayerDirection { get; set; } = Direction.Down;
 
-    public override async void Action()
-    {
-		global.CanWalk = false;
+		public override void _Ready()
+		{
+			base._Ready();
+		}
 
-		global.CurrentRoom.TransitionRect.PlayAnimation();
-		await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
-        global.ChangeRoom(TargetRoomName, TargetLocation, PlayerDirection);
-    }
+		public override async void Action()
+		{
+			global.CanWalk = false;
 
-	public override void OnNotActive()
-	{
-		global.CanWalk = true;
+			global.CurrentRoom.TransitionRect.PlayAnimation();
+			await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
+			global.ChangeRoom(TargetRoomName, TargetLocation, PlayerDirection);
+		}
+
+		public override void OnNotActive()
+		{
+			global.CanWalk = true;
+		}
 	}
 }

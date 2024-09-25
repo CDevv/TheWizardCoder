@@ -1,59 +1,64 @@
 using Godot;
 using System;
+using TheWizardCoder.Abstractions;
+using TheWizardCoder.Enums;
 
-public partial class OptionsMenu : Display
+namespace TheWizardCoder.Subdisplays
 {
-	[Signal]
-	public delegate void OnControlsButtonPressedEventHandler();
-	[Signal]
-	public delegate void OnBackButtonPressedEventHandler();
-
-	private OptionButton resolutionsButton;
-	private CheckBox fullscreenButton;
-
-	public override void _Ready()
+	public partial class OptionsMenu : Display
 	{
-		base._Ready();
-		resolutionsButton = GetNode<OptionButton>("%ResolutionOptions");
-		fullscreenButton = GetNode<CheckBox>("%FullscreenCheckBox");
-	}
+		[Signal]
+		public delegate void OnControlsButtonPressedEventHandler();
+		[Signal]
+		public delegate void OnBackButtonPressedEventHandler();
 
-    public override void ShowDisplay()
-    {
-        Show();
-		FocusFirst();
-    }
+		private OptionButton resolutionsButton;
+		private CheckBox fullscreenButton;
 
-    public override void UpdateDisplay()
-	{
-		resolutionsButton.Set(OptionButton.PropertyName.Selected, (int)global.Settings.WindowSize);
-		fullscreenButton.Set(CheckBox.PropertyName.ButtonPressed, (bool)global.Settings.Fullscreen);
-	}
+		public override void _Ready()
+		{
+			base._Ready();
+			resolutionsButton = GetNode<OptionButton>("%ResolutionOptions");
+			fullscreenButton = GetNode<CheckBox>("%FullscreenCheckBox");
+		}
 
-    public void FocusFirst()
-	{
-		resolutionsButton.GrabFocus();
-	}
+		public override void ShowDisplay()
+		{
+			Show();
+			FocusFirst();
+		}
 
-	public void OnWindowSizeChanged(int optionId)
-	{
-		WindowSize size = (WindowSize)optionId;
-		global.Settings.ChangeWindowSize(size);
-		global.Settings.SaveSettings();
-	}
+		public override void UpdateDisplay()
+		{
+			resolutionsButton.Set(OptionButton.PropertyName.Selected, (int)global.Settings.WindowSize);
+			fullscreenButton.Set(CheckBox.PropertyName.ButtonPressed, (bool)global.Settings.Fullscreen);
+		}
 
-	public void OnFullscreenToggled(bool toggled)
-	{
-		global.Settings.ToggleFullscreen(toggled);
-	}
+		public void FocusFirst()
+		{
+			resolutionsButton.GrabFocus();
+		}
 
-	public void OnBackButton()
-	{
-		EmitSignal(SignalName.OnBackButtonPressed);
-	}
+		public void OnWindowSizeChanged(int optionId)
+		{
+			WindowSize size = (WindowSize)optionId;
+			global.Settings.ChangeWindowSize(size);
+			global.Settings.SaveSettings();
+		}
 
-	public void OnControlsPage()
-	{
-		EmitSignal(SignalName.OnControlsButtonPressed);
+		public void OnFullscreenToggled(bool toggled)
+		{
+			global.Settings.ToggleFullscreen(toggled);
+		}
+
+		public void OnBackButton()
+		{
+			EmitSignal(SignalName.OnBackButtonPressed);
+		}
+
+		public void OnControlsPage()
+		{
+			EmitSignal(SignalName.OnControlsButtonPressed);
+		}
 	}
 }

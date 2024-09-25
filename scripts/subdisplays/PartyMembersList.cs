@@ -1,31 +1,36 @@
 using Godot;
 using System;
+using TheWizardCoder.Abstractions;
+using TheWizardCoder.UI;
 
-public partial class PartyMembersList : Display
+namespace TheWizardCoder.Subdisplays
 {
-	[Signal]
-	public delegate void CharacterPressedEventHandler();
-
-	private CharacterPartyMember partyMember;
-	public override void _Ready()
+	public partial class PartyMembersList : Display
 	{
-		base._Ready();
-		partyMember = GetNode<CharacterPartyMember>("CharacterPartyMember");
-	}
+		[Signal]
+		public delegate void CharacterPressedEventHandler();
 
-	public override void ShowDisplay()
-	{
-		Show();
-		partyMember.GrabFocus();
-	}
+		private CharacterPartyMember partyMember;
+		public override void _Ready()
+		{
+			base._Ready();
+			partyMember = GetNode<CharacterPartyMember>("CharacterPartyMember");
+		}
 
-	public override void UpdateDisplay()
-	{
-		partyMember.ApplyData(global.PlayerData.Stats);
-	}
+		public override void ShowDisplay()
+		{
+			Show();
+			partyMember.GrabFocus();
+		}
 
-	private void OnCharacterPressed()
-	{
-		EmitSignal(SignalName.CharacterPressed);
+		public override void UpdateDisplay()
+		{
+			partyMember.ApplyData(global.PlayerData.Stats);
+		}
+
+		private void OnCharacterPressed()
+		{
+			EmitSignal(SignalName.CharacterPressed);
+		}
 	}
 }

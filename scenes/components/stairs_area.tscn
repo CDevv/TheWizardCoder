@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://wj04chm4vh08"]
+
+[ext_resource type="Script" path="res://scripts/components/StairsArea.cs" id="1_ljyoe"]
+
+[node name="StairsArea" type="Area2D"]
+script = ExtResource("1_ljyoe")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="." to="." method="OnBodyExited"]

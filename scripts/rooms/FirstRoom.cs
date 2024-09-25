@@ -1,26 +1,30 @@
 using DialogueManagerRuntime;
 using Godot;
 using System;
+using TheWizardCoder.Abstractions;
 
-public partial class FirstRoom : BaseRoom
+namespace TheWizardCoder.Rooms
 {
-    [Export]
-    public Resource DialogueResource { get; set; }
-
-    public override async void OnReady()
+    public partial class FirstRoom : BaseRoom
     {
-        base.OnReady();
-        if (!global.PlayerData.HasPlayedIntro)
+        [Export]
+        public Resource DialogueResource { get; set; }
+
+        public override async void OnReady()
         {
-            global.CanWalk = false;      
-            await PlayCutscene("player_intro");
-            await ShowDialogue(DialogueResource, "intro_cutscene");   
-            global.PlayerData.HasPlayedIntro = true;
-        }
-        else
-        {
-            GetNode<AnimatedSprite2D>("BedAnimationTop").Set(AnimatedSprite2D.PropertyName.Visible, false);
-            GetNode<AnimatedSprite2D>("BedAnimationBottom").Set(AnimatedSprite2D.PropertyName.Visible, false);
+            base.OnReady();
+            if (!global.PlayerData.HasPlayedIntro)
+            {
+                global.CanWalk = false;      
+                await PlayCutscene("player_intro");
+                await ShowDialogue(DialogueResource, "intro_cutscene");   
+                global.PlayerData.HasPlayedIntro = true;
+            }
+            else
+            {
+                GetNode<AnimatedSprite2D>("BedAnimationTop").Set(AnimatedSprite2D.PropertyName.Visible, false);
+                GetNode<AnimatedSprite2D>("BedAnimationBottom").Set(AnimatedSprite2D.PropertyName.Visible, false);
+            }
         }
     }
 }

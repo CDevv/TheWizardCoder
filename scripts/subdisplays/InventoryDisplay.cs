@@ -1,75 +1,80 @@
 using Godot;
 using Godot.Collections;
 using System;
+using TheWizardCoder.Autoload;
+using TheWizardCoder.Abstractions;
 
-public partial class InventoryDisplay : Display
+namespace TheWizardCoder.Subdisplays
 {
-	[Signal]
-	public delegate void ItemPressedEventHandler(int index);
-	[Export]
-	public PackedScene ItemButtonTemplate { get; set; }
-
-	private GridContainer itemsContainer;
-	private Button noItemsButton;
-	private NinePatchRect descriptionRect;
-	private Label itemDescription;
-
-	public override void _Ready()
+	public partial class InventoryDisplay : Display
 	{
-		base._Ready();
-		itemsContainer = GetNode<GridContainer>("%ItemsContainer");
-		noItemsButton = GetNode<Button>("%NoItemsButton");
-		descriptionRect = GetNode<NinePatchRect>("%DescriptionRect");
-		itemDescription = GetNode<Label>("%ItemDescription");
-	}
+		[Signal]
+		public delegate void ItemPressedEventHandler(int index);
+		[Export]
+		public PackedScene ItemButtonTemplate { get; set; }
 
-    public override void ShowDisplay()
-    {
-        Show();
-		FocusFirst();
-    }
+		private GridContainer itemsContainer;
+		private Button noItemsButton;
+		private NinePatchRect descriptionRect;
+		private Label itemDescription;
 
-    public override void UpdateDisplay()
-	{
-		Array<Node> oldNodes = itemsContainer.GetChildren();
-		foreach (var item in oldNodes)
+		public override void _Ready()
 		{
-			item.QueueFree();
+			base._Ready();
+			itemsContainer = GetNode<GridContainer>("%ItemsContainer");
+			noItemsButton = GetNode<Button>("%NoItemsButton");
+			descriptionRect = GetNode<NinePatchRect>("%DescriptionRect");
+			itemDescription = GetNode<Label>("%ItemDescription");
 		}
 
-		for (int i = 0; i < global.PlayerData.Inventory.Count; i++)
+		public override void ShowDisplay()
 		{
-			int currentIndex = i;
-			string item = global.PlayerData.Inventory[i];
-
-			Button button = ItemButtonTemplate.Instantiate<Button>();
-			button.Set(Button.PropertyName.Text, item);
-			button.Set("theme_override_font_sizes/font_size", 32);
-			button.FocusEntered += () => {
-				itemDescription.Text = global.ItemDescriptions[item].Description;
-			};
-			button.Pressed += () => {
-				EmitSignal(SignalName.ItemPressed, currentIndex);
-			};
-			itemsContainer.AddChild(button);
+			Show();
+			FocusFirst();
 		}
-	}
 
-    private void FocusFirst()
-	{
-		descriptionRect.Show();
-		noItemsButton.Hide();
-
-		Button item = itemsContainer.GetChildOrNull<Button>(0);
-		if (item == null)
+		public override void UpdateDisplay()
 		{
-			descriptionRect.Hide();
-			noItemsButton.Show();
-			noItemsButton.GrabFocus();
+			Array<Node> oldNodes = itemsContainer.GetChildren();
+			foreach (var item in oldNodes)
+			{
+				item.QueueFree();
+			}
+
+			for (int i = 0; i < global.PlayerData.Inventory.Count; i++)
+			{
+				int currentIndex = i;
+				string item = global.PlayerData.Inventory[i];
+
+				Button button = ItemButtonTemplate.Instantiate<Button>();
+				button.Set(Button.PropertyName.Text, item);
+				button.Set("theme_override_font_sizes/font_size", 32);
+				button.FocusEntered += () => {
+					itemDescription.Text = global.ItemDescriptions[item].Description;
+				};
+				button.Pressed += () => {
+					EmitSignal(SignalName.ItemPressed, currentIndex);
+				};
+				itemsContainer.AddChild(button);
+			}
 		}
-		else
+
+		private void FocusFirst()
 		{
-			item.GrabFocus();
+			descriptionRect.Show();
+			noItemsButton.Hide();
+
+			Button item = itemsContainer.GetChildOrNull<Button>(0);
+			if (item == null)
+			{
+				descriptionRect.Hide();
+				noItemsButton.Show();
+				noItemsButton.GrabFocus();
+			}
+			else
+			{
+				item.GrabFocus();
+			}
 		}
 	}
 }

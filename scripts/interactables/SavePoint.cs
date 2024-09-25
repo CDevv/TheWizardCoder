@@ -1,12 +1,16 @@
 using Godot;
 using System;
+using TheWizardCoder.Abstractions;
 
-public partial class SavePoint : Interactable
+namespace TheWizardCoder.Interactables
 {
-    public override void Action()
+    public partial class SavePoint : Interactable
     {
-        var savedGames = global.CurrentRoom.SavedGamesDisplay;
-        savedGames.UpdateDisplay();
-        savedGames.ShowDisplay();
+        public override void Action()
+        {
+            var savedGames = global.CurrentRoom.SavedGamesDisplay;
+            savedGames.UpdateDisplay();
+            savedGames.ShowDisplay();
+        }
     }
 }

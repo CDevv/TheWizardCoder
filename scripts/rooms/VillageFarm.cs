@@ -1,53 +1,58 @@
 using Godot;
 using System;
+using TheWizardCoder.Abstractions;
+using TheWizardCoder.Interactables;
 
-public partial class VillageFarm : BaseRoom
+namespace TheWizardCoder.Rooms
 {
-	[Export]
-	public Resource DialogueResource { get; set; }
-
-	private CutscenePoint cutscenePoint;
-
-	public override void OnReady()
+	public partial class VillageFarm : BaseRoom
 	{
-		base.OnReady();
-		cutscenePoint = GetNode<CutscenePoint>("CutscenePoint");
+		[Export]
+		public Resource DialogueResource { get; set; }
 
-		if (global.PlayerData.HasEncounteredKeenelm)
-		{
-			DisableCutscene();
-		}
-		if (global.PlayerData.HasSolvedFarmGlitch)
-		{
-			AnimationPlayer.Play("final_pos");
-		}
-	}
+		private CutscenePoint cutscenePoint;
 
-	private async void OnKeenelmEncounter()
-	{
-		await PlayCutscene("keenelm_1");
-		await ShowDialogue(DialogueResource, "keenelm_1");
-		await PlayCutscene("keenelm_2");
-		await ShowDialogue(DialogueResource, "keenelm_2");
-	}
-
-	private void DisableCutscene()
-	{
-		cutscenePoint.Active = false;
-	}
-
-	private async void OnProblemSolved()
-	{
-		await PlayCutscene("problem_solved");
-		if (global.PlayerData.HasPlayedKeenelmCutscene)
+		public override void OnReady()
 		{
-			await PlayCutscene("keenelm_code_solved_cutscene");
+			base.OnReady();
+			cutscenePoint = GetNode<CutscenePoint>("CutscenePoint");
+
+			if (global.PlayerData.HasEncounteredKeenelm)
+			{
+				DisableCutscene();
+			}
+			if (global.PlayerData.HasSolvedFarmGlitch)
+			{
+				AnimationPlayer.Play("final_pos");
+			}
 		}
-		else
+
+		private async void OnKeenelmEncounter()
 		{
-			await PlayCutscene("keenelm_code_solved");
+			await PlayCutscene("keenelm_1");
+			await ShowDialogue(DialogueResource, "keenelm_1");
+			await PlayCutscene("keenelm_2");
+			await ShowDialogue(DialogueResource, "keenelm_2");
 		}
-		await ShowDialogue(DialogueResource, "keenelm_code_solved");
-		global.PlayerData.AddToInventory("'a'");
+
+		private void DisableCutscene()
+		{
+			cutscenePoint.Active = false;
+		}
+
+		private async void OnProblemSolved()
+		{
+			await PlayCutscene("problem_solved");
+			if (global.PlayerData.HasPlayedKeenelmCutscene)
+			{
+				await PlayCutscene("keenelm_code_solved_cutscene");
+			}
+			else
+			{
+				await PlayCutscene("keenelm_code_solved");
+			}
+			await ShowDialogue(DialogueResource, "keenelm_code_solved");
+			global.PlayerData.AddToInventory("'a'");
+		}
 	}
 }

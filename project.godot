@@ -19,12 +19,12 @@ config/icon="res://logo.png"
 
 [autoload]
 
-Global="*res://scripts/Global.cs"
+Global="*res://scripts/autoload/Global.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [dialogue_manager]
 
-general/balloon_path="res://scenes/prefabs/Balloon.tscn"
+general/balloon_path="res://scenes/components/Balloon.tscn"
 
 [display]
 

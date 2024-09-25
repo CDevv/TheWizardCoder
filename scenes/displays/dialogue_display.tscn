@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_q5vyp"]
 [ext_resource type="Script" path="res://scripts/displays/DialogueDisplay.cs" id="1_u23wf"]
 [ext_resource type="Texture2D" uid="uid://c2qot3pr0oxof" path="res://assets/characters/portraits/nolan.png" id="2_ts8x8"]
-[ext_resource type="PackedScene" uid="uid://capppjgr8n1ew" path="res://scenes/prefabs/text_button.tscn" id="2_y60jh"]
+[ext_resource type="PackedScene" uid="uid://capppjgr8n1ew" path="res://scenes/ui/text_button.tscn" id="2_y60jh"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="3_0qck7"]
 [ext_resource type="Texture2D" uid="uid://dnwl13wb4jxy2" path="res://assets/characters/portraits/keenelm.png" id="4_7t36c"]
 [ext_resource type="Texture2D" uid="uid://dr0pu0n4whup7" path="res://assets/characters/portraits/berry.png" id="4_mfeyw"]

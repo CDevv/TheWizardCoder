@@ -1,81 +1,87 @@
 using Godot;
 using System;
+using TheWizardCoder.Abstractions;
+using TheWizardCoder.UI;
+using TheWizardCoder.Subdisplays;
 
-public partial class MainMenuDisplay : Display
+namespace TheWizardCoder.Displays
 {
-	private TransitionRect transition;
-	private Control main;
-	private Control savedGames;
-	private Control options;
-	private Button playButton;
-	private Button loadButton;
-	private bool waitingInput = false;
-	private string actionName;
-
-	public override void _Ready()
+	public partial class MainMenuDisplay : Display
 	{
-		base._Ready();
+		private TransitionRect transition;
+		private Control main;
+		private Control savedGames;
+		private Control options;
+		private Button playButton;
+		private Button loadButton;
+		private bool waitingInput = false;
+		private string actionName;
 
-		transition = GetNode<TransitionRect>("TransitionRect");
-		main = GetNode<Control>("Main");
-		playButton = GetNode<Button>("%PlayButton");
-
-		AddSubdisplay("SavedGames", GetNode<MainMenuSavedGames>("SavedGamesMenu"));
-		AddSubdisplay("Options", GetNode<OptionsMenu>("OptionsMenu"));
-		AddSubdisplay("Controls", GetNode<ControlsMenu>("ControlsMenu"));
-
-		playButton.CallDeferred(Button.MethodName.GrabFocus);
-
-		UpdateDisplay();
-		ShowDisplay();
-	}
-
-    public override void _Input(InputEvent @event)
-    {
-        if (waitingInput)
+		public override void _Ready()
 		{
-			if (@event is InputEventKey && @event.IsPressed())
+			base._Ready();
+
+			transition = GetNode<TransitionRect>("TransitionRect");
+			main = GetNode<Control>("Main");
+			playButton = GetNode<Button>("%PlayButton");
+
+			AddSubdisplay("SavedGames", GetNode<MainMenuSavedGames>("SavedGamesMenu"));
+			AddSubdisplay("Options", GetNode<OptionsMenu>("OptionsMenu"));
+			AddSubdisplay("Controls", GetNode<ControlsMenu>("ControlsMenu"));
+
+			playButton.CallDeferred(Button.MethodName.GrabFocus);
+
+			UpdateDisplay();
+			ShowDisplay();
+		}
+
+		public override void _Input(InputEvent @event)
+		{
+			if (waitingInput)
 			{
-				global.Settings.ChangeControl(actionName, @event);
-				waitingInput = false;
+				if (@event is InputEventKey && @event.IsPressed())
+				{
+					global.Settings.ChangeControl(actionName, @event);
+					waitingInput = false;
+				}
 			}
 		}
-    }
 
-    public override async void ShowDisplay()
-    {
-        Show();
-		ShowMainMenu();
-		transition.PlayAnimation();
-		await ToSignal(transition, TransitionRect.SignalName.AnimationFinished);
-    }
+		public override async void ShowDisplay()
+		{
+			Show();
+			ShowMainMenu();
+			transition.PlayAnimation();
+			await ToSignal(transition, TransitionRect.SignalName.AnimationFinished);
+		}
 
-    public override void UpdateDisplay()
-    {
-        UpdateAllSubdisplays();
-    }
+		public override void UpdateDisplay()
+		{
+			UpdateAllSubdisplays();
+		}
 
-    public void ShowMainMenu()
-	{
-		main.Show();
-		HideAllSubdisplays();
-		playButton.GrabFocus();
-	}
+		public void ShowMainMenu()
+		{
+			main.Show();
+			HideAllSubdisplays();
+			playButton.GrabFocus();
+		}
 
-	public void ShowSavedGamesMenu()
-	{
-		main.Hide();
-		ChangeSubdisplay("SavedGames");
-	}
+		public void ShowSavedGamesMenu()
+		{
+			main.Hide();
+			ChangeSubdisplay("SavedGames");
+		}
 
-	public void ShowOptions()
-	{
-		main.Hide();
-		ChangeSubdisplay("Options");
-	}
+		public void ShowOptions()
+		{
+			main.Hide();
+			ChangeSubdisplay("Options");
+		}
 
-	public void ShowControls()
-	{
-		ChangeSubdisplay("Controls");
+		public void ShowControls()
+		{
+			ChangeSubdisplay("Controls");
+		}
 	}
 }

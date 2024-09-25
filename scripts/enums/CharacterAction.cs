@@ -1,4 +1,7 @@
-public enum CharacterAction
+namespace TheWizardCoder.Enums
 {
-    Attack, Defend, Items, Magic
+    public enum CharacterAction
+    {
+        Attack, Defend, Items, Magic
+    }
 }

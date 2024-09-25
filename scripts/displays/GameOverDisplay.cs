@@ -1,41 +1,42 @@
 using Godot;
 using System;
+using TheWizardCoder.Abstractions;
+using TheWizardCoder.Enums;
+using TheWizardCoder.UI;
 
-public partial class GameOverDisplay : Display
+namespace TheWizardCoder.Displays
 {
-	private Button retryButton;
-
-	public override void _Ready()
+	public partial class GameOverDisplay : Display
 	{
-		base._Ready();
-		retryButton = GetNode<Button>("RetryButton");
-	}
+		private Button retryButton;
 
-	public override void ShowDisplay()
-	{
-		global.CurrentRoom.TransitionRect.PlayAnimationBackwards();
-		Show();
-		retryButton.GrabFocus();
-	}
+		public override void _Ready()
+		{
+			base._Ready();
+			retryButton = GetNode<Button>("RetryButton");
+		}
 
-    public override void UpdateDisplay()
-    {
-        throw new NotImplementedException();
-    }
+		public override void ShowDisplay()
+		{
+			global.CurrentRoom.TransitionRect.PlayAnimationBackwards();
+			Show();
+			retryButton.GrabFocus();
+		}
 
-    private async void OnLoadGame()
-	{
-		global.CurrentRoom.TransitionRect.PlayAnimation();
-		await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
-		global.LoadSaveFile(global.PlayerData.SaveName);
-		global.ChangeRoom(global.PlayerData.SceneFileName, global.PlayerData.SceneDefaultMarker, Direction.Down);
-		Hide();
-	}
+		private async void OnLoadGame()
+		{
+			global.CurrentRoom.TransitionRect.PlayAnimation();
+			await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
+			global.LoadSaveFile(global.PlayerData.SaveName);
+			global.ChangeRoom(global.PlayerData.SceneFileName, global.PlayerData.SceneDefaultMarker, Direction.Down);
+			Hide();
+		}
 
-	private async void OnMainMenu()
-	{
-		global.CurrentRoom.TransitionRect.PlayAnimation();
-		await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
-		global.GoToMainMenu();
+		private async void OnMainMenu()
+		{
+			global.CurrentRoom.TransitionRect.PlayAnimation();
+			await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
+			global.GoToMainMenu();
+		}
 	}
 }

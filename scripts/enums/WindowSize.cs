@@ -1,5 +1,8 @@
-public enum WindowSize
+namespace TheWizardCoder.Enums
 {
-    Size640by480 = 0,
-    Size1280by960 = 1,
+    public enum WindowSize
+    {
+        Size640by480 = 0,
+        Size1280by960 = 1,
+    }
 }

@@ -1,47 +1,46 @@
 using Godot;
 using System;
+using TheWizardCoder.Abstractions;
 
-public partial class DeleteFileConfirmation : Display
+namespace TheWizardCoder.Subdisplays
 {
-	[Signal]
-	public delegate void FileDeletedEventHandler();
-
-	private Label label;
-	private Button yesButton;
-	private string saveName;
-
-	public override void _Ready()
+	public partial class DeleteFileConfirmation : Display
 	{
-		base._Ready();
-		label = GetNode<Label>("%WarningLabel");
-		yesButton = GetNode<Button>("%YesButton");
-	}
+		[Signal]
+		public delegate void FileDeletedEventHandler();
 
-    public override void ShowDisplay()
-    {
-        throw new NotImplementedException();
-    }
+		private Label label;
+		private Button yesButton;
+		private string saveName;
 
-    public void ShowDisplay(string saveName)
-	{
-		this.saveName = saveName;
-		label.Text = $"Are you sure you want to delete {saveName}?";		
-		Show();
-		yesButton.GrabFocus();
-	}
-
-    public override void UpdateDisplay()
-    {
-        throw new NotImplementedException();
-    }
-
-    private void ConfirmAction(bool fileIsDeleted)
-	{
-		if (fileIsDeleted)
+		public override void _Ready()
 		{
-			global.DeleteSaveFile(saveName);
-			EmitSignal(SignalName.FileDeleted);
+			base._Ready();
+			label = GetNode<Label>("%WarningLabel");
+			yesButton = GetNode<Button>("%YesButton");
 		}
-		Hide();
+
+		public override void ShowDisplay()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void ShowDisplay(string saveName)
+		{
+			this.saveName = saveName;
+			label.Text = $"Are you sure you want to delete {saveName}?";		
+			Show();
+			yesButton.GrabFocus();
+		}
+
+		private void ConfirmAction(bool fileIsDeleted)
+		{
+			if (fileIsDeleted)
+			{
+				global.DeleteSaveFile(saveName);
+				EmitSignal(SignalName.FileDeleted);
+			}
+			Hide();
+		}
 	}
 }

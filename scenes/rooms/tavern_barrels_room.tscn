@@ -1,15 +1,15 @@
 [gd_scene load_steps=21 format=3 uid="uid://bcj5uv21jfnna"]
 
-[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_dlif2"]
-[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="2_if4ef"]
+[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_dlif2"]
+[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_if4ef"]
 [ext_resource type="Script" path="res://scripts/rooms/TavernBarrelsRoom.cs" id="2_mx4en"]
 [ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="3_cb2u5"]
 [ext_resource type="TileSet" uid="uid://clhrfovy5lcgu" path="res://tilesets/houses_interiors.tres" id="3_w0hq8"]
-[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="4_l2p8p"]
-[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/prefabs/character_dialogue_point.tscn" id="5_fppg3"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_l2p8p"]
+[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/character_dialogue_point.tscn" id="5_fppg3"]
 [ext_resource type="SpriteFrames" uid="uid://bmnwdib5t7mxq" path="res://assets/characters/movement/spriteframes/berry.tres" id="6_hi0d1"]
 [ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="9_5dtpd"]
-[ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/prefabs/code_problem_point.tscn" id="10_etg8e"]
+[ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/components/code_problem_point.tscn" id="10_etg8e"]
 
 [sub_resource type="Animation" id="Animation_m7day"]
 resource_name = "berry_2"

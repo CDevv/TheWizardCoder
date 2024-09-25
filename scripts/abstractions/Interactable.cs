@@ -1,45 +1,50 @@
 using Godot;
 using System;
+using TheWizardCoder.Autoload;
+using TheWizardCoder.Components;
 
-public abstract partial class Interactable : Area2D
+namespace TheWizardCoder.Abstractions
 {
-	protected Global global;
-
-	[Export]
-	public bool Active { get; set; } = true;
-
-	[Export]
-	public bool OnCollision { get; set; } = false;
-
-	public override void _Ready()
+	public abstract partial class Interactable : Area2D
 	{
-		global = GetNode<Global>("/root/Global");
-	}
+		protected Global global;
 
-	public void Interact()
-	{
-		if (Active)
+		[Export]
+		public bool Active { get; set; } = true;
+
+		[Export]
+		public bool OnCollision { get; set; } = false;
+
+		public override void _Ready()
 		{
-			Action();
+			global = GetNode<Global>("/root/Global");
 		}
-		else
-		{
-			OnNotActive();
-		}
-	}
 
-	public abstract void Action();
-
-	private void OnBodyEntered(Node2D node)
-	{
-		if (Active && OnCollision)
+		public void Interact()
 		{
-			if (node.GetType() == typeof(Player))
+			if (Active)
 			{
 				Action();
 			}
+			else
+			{
+				OnNotActive();
+			}
 		}
-	}
 
-	public virtual void OnNotActive() {}
+		public abstract void Action();
+
+		private void OnBodyEntered(Node2D node)
+		{
+			if (Active && OnCollision)
+			{
+				if (node.GetType() == typeof(Player))
+				{
+					Action();
+				}
+			}
+		}
+
+		public virtual void OnNotActive() {}
+	}
 }

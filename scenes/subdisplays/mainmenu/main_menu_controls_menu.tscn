@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/subdisplays/ControlsMenu.cs" id="1_u0xpt"]
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="2_kb3t1"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="3_8e0wt"]
-[ext_resource type="PackedScene" uid="uid://dhktihkxj4i2g" path="res://scenes/prefabs/control_select_button.tscn" id="4_44bvh"]
+[ext_resource type="PackedScene" uid="uid://dhktihkxj4i2g" path="res://scenes/ui/control_select_button.tscn" id="4_44bvh"]
 
 [node name="MainMenuControlsMenu" type="CanvasLayer"]
 script = ExtResource("1_u0xpt")

@@ -1,26 +1,30 @@
 using Godot;
 using System;
+using TheWizardCoder.Abstractions;
 
-public partial class Watchtower3 : BaseRoom
+namespace TheWizardCoder.Rooms
 {
-	[Export]
-	public Resource DialogueResource { get; set; }
-
-	public override async void OnReady()
+	public partial class Watchtower3 : BaseRoom
 	{
-		base.OnReady();
-		if (!global.PlayerData.HasMetLinton)
+		[Export]
+		public Resource DialogueResource { get; set; }
+
+		public override async void OnReady()
 		{
-			global.PlayerData.HasMetLinton = true;
-			await PlayCutscene("linton_1");
-			await ShowDialogue(DialogueResource, "linton_1");
-			await PlayCutscene("linton_2");
-			await ShowDialogue(DialogueResource, "linton_2");
-			await PlayCutscene("linton_3");
-		}
-		else
-		{
-			AnimationPlayer.Play("final_pos");
+			base.OnReady();
+			if (!global.PlayerData.HasMetLinton)
+			{
+				global.PlayerData.HasMetLinton = true;
+				await PlayCutscene("linton_1");
+				await ShowDialogue(DialogueResource, "linton_1");
+				await PlayCutscene("linton_2");
+				await ShowDialogue(DialogueResource, "linton_2");
+				await PlayCutscene("linton_3");
+			}
+			else
+			{
+				AnimationPlayer.Play("final_pos");
+			}
 		}
 	}
 }

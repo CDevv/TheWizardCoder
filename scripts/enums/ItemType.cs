@@ -1,4 +1,7 @@
-public enum ItemType
+namespace TheWizardCoder.Enums
 {
-    Heal, Key
+    public enum ItemType
+    {
+        Heal, Key
+    }
 }

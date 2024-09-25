@@ -1,50 +1,56 @@
 using Godot;
 using System;
 using DialogueManagerRuntime;
+using TheWizardCoder.Abstractions;
+using TheWizardCoder.Enums;
+using TheWizardCoder.Components;
 
-public partial class CharacterDialoguePoint : Interactable
+namespace TheWizardCoder.Interactables
 {
-	[Export]
-	public Resource DialogueResource { get; set; }
-	[Export]
-	public string DialogueTitle { get; set; }
-	[Export]
-	public Direction DefaultDirection { get; set; } = Direction.Down;
-
-	private AnimatedSprite2D sprite;
-
-	public override void _Ready()
+	public partial class CharacterDialoguePoint : Interactable
 	{
-		base._Ready();
-		sprite = GetNode<AnimatedSprite2D>("Sprite");
+		[Export]
+		public Resource DialogueResource { get; set; }
+		[Export]
+		public string DialogueTitle { get; set; }
+		[Export]
+		public Direction DefaultDirection { get; set; } = Direction.Down;
 
-		sprite.Animation = "default";
-		sprite.Frame = (int)DefaultDirection;
-	}
+		private AnimatedSprite2D sprite;
 
-	public override void Action()
-	{
-		Player player = global.CurrentRoom.Player;
-		sprite.Frame = global.ReverseDirections[(int)player.Direction];
-		global.CurrentRoom.Dialogue.ShowDisplay(DialogueResource, DialogueTitle);
-		global.CurrentRoom.Dialogue.DialogueEnded += OnDialogueEnded;
-	}
+		public override void _Ready()
+		{
+			base._Ready();
+			sprite = GetNode<AnimatedSprite2D>("Sprite");
 
-	private void PlayAnimation(string name)
-	{
-		sprite.Play(name);
-	}
+			sprite.Animation = "default";
+			sprite.Frame = (int)DefaultDirection;
+		}
 
-	private void PlayIdleAnimation(Direction direction)
-	{
-		sprite.Stop();
-		sprite.Animation = "default";
-		sprite.Frame = (int)direction;
-	}
+		public override void Action()
+		{
+			Player player = global.CurrentRoom.Player;
+			sprite.Frame = global.ReverseDirections[(int)player.Direction];
+			global.CurrentRoom.Dialogue.ShowDisplay(DialogueResource, DialogueTitle);
+			global.CurrentRoom.Dialogue.DialogueEnded += OnDialogueEnded;
+		}
 
-	private void OnDialogueEnded()
-	{
-		sprite.Frame = (int)DefaultDirection;
-		global.CurrentRoom.Dialogue.DialogueEnded -= OnDialogueEnded;
+		private void PlayAnimation(string name)
+		{
+			sprite.Play(name);
+		}
+
+		private void PlayIdleAnimation(Direction direction)
+		{
+			sprite.Stop();
+			sprite.Animation = "default";
+			sprite.Frame = (int)direction;
+		}
+
+		private void OnDialogueEnded()
+		{
+			sprite.Frame = (int)DefaultDirection;
+			global.CurrentRoom.Dialogue.DialogueEnded -= OnDialogueEnded;
+		}
 	}
 }

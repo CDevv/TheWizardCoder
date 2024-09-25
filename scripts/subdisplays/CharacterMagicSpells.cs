@@ -1,94 +1,94 @@
 using Godot;
 using Godot.Collections;
 using System;
+using TheWizardCoder.Abstractions;
+using TheWizardCoder.Data;
 
-public partial class CharacterMagicSpells : Display
+namespace TheWizardCoder.Subdisplays
 {
-	[Export]
-	public PackedScene TextButtonTemplate { get; set; }
-
-	private AnimatedSprite2D portrait;
-	private Label name;
-	private GridContainer magicContainer;
-	private NinePatchRect descriptionRect;
-	private Label magicDescription;
-	private Label characterPoints;
-	private Label pointsCost;
-
-	public override void _Ready()
+	public partial class CharacterMagicSpells : Display
 	{
-		base._Ready();
+		[Export]
+		public PackedScene TextButtonTemplate { get; set; }
 
-		portrait = GetNode<AnimatedSprite2D>("%Portrait");
-		name = GetNode<Label>("%NameLabel");
-		characterPoints = GetNode<Label>("%PointsLabel");
-		magicContainer = GetNode<GridContainer>("%SpellsGridContainer");
-		descriptionRect = GetNode<NinePatchRect>("%DescriptionRect");
-		magicDescription = GetNode<Label>("%MagicDescription");
-		pointsCost = GetNode<Label>("%MagicCost");
-	}
+		private AnimatedSprite2D portrait;
+		private Label name;
+		private GridContainer magicContainer;
+		private NinePatchRect descriptionRect;
+		private Label magicDescription;
+		private Label characterPoints;
+		private Label pointsCost;
 
-	public void ShowDisplay(CharacterData character)
-	{
-		portrait.Animation = character.Name;
-		name.Text = character.Name;
-		characterPoints.Text = $"MP: {character.Points}";
-
-		magicDescription.Text = "No magic spells.";
-		ClearContainer();
-		for (int i = 0; i < character.MagicSpells.Count; i++)
+		public override void _Ready()
 		{
-			AddItem(character.MagicSpells[i]);
+			base._Ready();
+
+			portrait = GetNode<AnimatedSprite2D>("%Portrait");
+			name = GetNode<Label>("%NameLabel");
+			characterPoints = GetNode<Label>("%PointsLabel");
+			magicContainer = GetNode<GridContainer>("%SpellsGridContainer");
+			descriptionRect = GetNode<NinePatchRect>("%DescriptionRect");
+			magicDescription = GetNode<Label>("%MagicDescription");
+			pointsCost = GetNode<Label>("%MagicCost");
 		}
 
-		Show();
-		FocusOnFirstItem();
-	}
-
-    public override void ShowDisplay()
-    {
-        Show();
-    }
-
-    public override void UpdateDisplay()
-    {
-        
-    }
-
-	private void FocusOnFirstItem()
-	{
-		Button button = magicContainer.GetChildOrNull<Button>(0);
-		if (button != null)
+		public void ShowDisplay(CharacterData character)
 		{
-			button.GrabFocus();
-		}
-		else
-		{
+			portrait.Animation = character.Name;
+			name.Text = character.Name;
+			characterPoints.Text = $"MP: {character.Points}";
+
 			magicDescription.Text = "No magic spells.";
-		}
-	}
+			ClearContainer();
+			for (int i = 0; i < character.MagicSpells.Count; i++)
+			{
+				AddItem(character.MagicSpells[i]);
+			}
 
-	private void ClearContainer()
-	{
-		Array<Node> nodes = magicContainer.GetChildren();
-		foreach (Node node in nodes)
+			Show();
+			FocusOnFirstItem();
+		}
+
+		public override void ShowDisplay()
 		{
-			node.QueueFree();
+			Show();
 		}
-	}
 
-	private void AddItem(string name)
-	{
-		MagicSpell magicSpell = global.MagicSpells[name];
+		private void FocusOnFirstItem()
+		{
+			Button button = magicContainer.GetChildOrNull<Button>(0);
+			if (button != null)
+			{
+				button.GrabFocus();
+			}
+			else
+			{
+				magicDescription.Text = "No magic spells.";
+			}
+		}
 
-		Button button = TextButtonTemplate.Instantiate<Button>();
-		button.Text = name;
-		button.Set("theme_override_font_sizes/font_size", 32);
-		button.FocusEntered += () => {
-			magicDescription.Text = magicSpell.Description;
-			pointsCost.Text = $"MP Cost: {magicSpell.Cost}";
-		};
+		private void ClearContainer()
+		{
+			Array<Node> nodes = magicContainer.GetChildren();
+			foreach (Node node in nodes)
+			{
+				node.QueueFree();
+			}
+		}
 
-		magicContainer.AddChild(button);
+		private void AddItem(string name)
+		{
+			MagicSpell magicSpell = global.MagicSpells[name];
+
+			Button button = TextButtonTemplate.Instantiate<Button>();
+			button.Text = name;
+			button.Set("theme_override_font_sizes/font_size", 32);
+			button.FocusEntered += () => {
+				magicDescription.Text = magicSpell.Description;
+				pointsCost.Text = $"MP Cost: {magicSpell.Cost}";
+			};
+
+			magicContainer.AddChild(button);
+		}
 	}
 }

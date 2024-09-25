@@ -1,61 +1,67 @@
 using Godot;
 using System;
+using TheWizardCoder.Autoload;
+using TheWizardCoder.Data;
+using TheWizardCoder.Abstractions;
+using TheWizardCoder.UI;
 
-public partial class SavedGamesDisplay : Display
+namespace TheWizardCoder.Displays
 {
-	private string selectedSaveFileName;
-	private Global global;
-	private SaveFileOption save1button;
-	private SaveFileOption save2button;
-	private SaveFileOption save3button;
-	private Button saveButton;
-	private Button closeButton;
-
-	public override void _Ready()
+	public partial class SavedGamesDisplay : Display
 	{
-		global = GetNode<Global>("/root/Global");
-		save1button = GetNode<SaveFileOption>("Save1");
-		save2button = GetNode<SaveFileOption>("Save2");
-		save3button = GetNode<SaveFileOption>("Save3");
-		saveButton = GetNode<Button>("%SaveButton");
-		closeButton = GetNode<Button>("%CloseButton");
-	}
+		private string selectedSaveFileName;
+		private SaveFileOption save1button;
+		private SaveFileOption save2button;
+		private SaveFileOption save3button;
+		private Button saveButton;
+		private Button closeButton;
 
-	public override void UpdateDisplay()
-	{
-		SaveFileOption[] buttons = { save1button, save2button, save3button };
-		for (int i = 0; i < buttons.Length; i++)
+		public override void _Ready()
 		{
-			SaveFileOption button = buttons[i];
-			string fileName = buttons[i].Name.ToString().ToLower();
-			SaveFileData save1data = global.ReadSaveFileData(fileName);
-			button.ShowData(save1data);
+			base._Ready();
+			save1button = GetNode<SaveFileOption>("Save1");
+			save2button = GetNode<SaveFileOption>("Save2");
+			save3button = GetNode<SaveFileOption>("Save3");
+			saveButton = GetNode<Button>("%SaveButton");
+			closeButton = GetNode<Button>("%CloseButton");
 		}
-	}
 
-	public override void ShowDisplay()
-	{
-		global.GameDisplayEnabled = false;
-		Show();
-		saveButton.GrabFocus();
-	}
+		public override void UpdateDisplay()
+		{
+			SaveFileOption[] buttons = { save1button, save2button, save3button };
+			for (int i = 0; i < buttons.Length; i++)
+			{
+				SaveFileOption button = buttons[i];
+				string fileName = buttons[i].Name.ToString().ToLower();
+				SaveFileData save1data = global.ReadSaveFileData(fileName);
+				button.ShowData(save1data);
+			}
+		}
 
-	public void OnSaveButton()
-	{
-		save1button.GrabFocus();
-	}
+		public override void ShowDisplay()
+		{
+			global.GameDisplayEnabled = false;
+			Show();
+			saveButton.GrabFocus();
+		}
 
-	public void OnCloseButton()
-	{
-		Hide();
-		global.CanWalk = true;
-		global.GameDisplayEnabled = true;
-	}
+		public void OnSaveButton()
+		{
+			save1button.GrabFocus();
+		}
 
-	public void OnSaveOption(string saveName)
-	{
-		global.UpdateSaveFile(saveName);
-		OnCloseButton();
-	}
+		public void OnCloseButton()
+		{
+			Hide();
+			global.CanWalk = true;
+			global.GameDisplayEnabled = true;
+		}
 
+		public void OnSaveOption(string saveName)
+		{
+			global.UpdateSaveFile(saveName);
+			OnCloseButton();
+		}
+
+	}
 }

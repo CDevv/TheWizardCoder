@@ -1,10 +1,14 @@
 using Godot;
 using System;
+using TheWizardCoder.Abstractions;
 
-public partial class TestRoom : BaseRoom
+namespace TheWizardCoder.Rooms
 {
-	private async void TestCutscene()
+	public partial class TestRoom : BaseRoom
 	{
-		await PlayCutscene("test_anim");
+		private async void TestCutscene()
+		{
+			await PlayCutscene("test_anim");
+		}
 	}
 }

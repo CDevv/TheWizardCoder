@@ -1,34 +1,38 @@
 using Godot;
 using System;
+using TheWizardCoder.Abstractions;
 
-public partial class CutscenePoint : Interactable
+namespace TheWizardCoder.Interactables
 {
-	[Export]
-	public string PlaythroughPropertyName { get; set; }
-	[Export]
-	public string RoomMethodName { get; set; }
-
-	public override void _Ready()
+	public partial class CutscenePoint : Interactable
 	{
-		base._Ready();
+		[Export]
+		public string PlaythroughPropertyName { get; set; }
+		[Export]
+		public string RoomMethodName { get; set; }
 
-		if (!string.IsNullOrEmpty(PlaythroughPropertyName))
+		public override void _Ready()
 		{
-			if (global.PlayerData.Get(PlaythroughPropertyName).AsBool())
+			base._Ready();
+
+			if (!string.IsNullOrEmpty(PlaythroughPropertyName))
 			{
-				Active = false;
+				if (global.PlayerData.Get(PlaythroughPropertyName).AsBool())
+				{
+					Active = false;
+				}
 			}
 		}
-	}
 
-	public override void Action()
-	{
-		global.CurrentRoom.CallDeferred(RoomMethodName);
-		Active = false;
-
-		if (!string.IsNullOrEmpty(PlaythroughPropertyName))
+		public override void Action()
 		{
-			global.PlayerData.Set(PlaythroughPropertyName, true);
+			global.CurrentRoom.CallDeferred(RoomMethodName);
+			Active = false;
+
+			if (!string.IsNullOrEmpty(PlaythroughPropertyName))
+			{
+				global.PlayerData.Set(PlaythroughPropertyName, true);
+			}
 		}
 	}
 }

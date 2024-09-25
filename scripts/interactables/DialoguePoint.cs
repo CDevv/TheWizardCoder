@@ -1,16 +1,20 @@
 using Godot;
 using System;
 using DialogueManagerRuntime;
+using TheWizardCoder.Abstractions;
 
-public partial class DialoguePoint : Interactable
+namespace TheWizardCoder.Interactables
 {
-	[Export]
-	public Resource DialogueResource { get; set; }
-	[Export]
-	public string DialogueTitle { get; set; }
-
-    public override void Action()
+    public partial class DialoguePoint : Interactable
     {
-        global.CurrentRoom.Dialogue.ShowDisplay(DialogueResource, DialogueTitle);
+        [Export]
+        public Resource DialogueResource { get; set; }
+        [Export]
+        public string DialogueTitle { get; set; }
+
+        public override void Action()
+        {
+            global.CurrentRoom.Dialogue.ShowDisplay(DialogueResource, DialogueTitle);
+        }
     }
 }

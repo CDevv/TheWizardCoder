@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://bm86didgwuq7l"]
 
-[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/prefabs/base_room.tscn" id="1_0may6"]
+[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_0may6"]
 [ext_resource type="TileSet" uid="uid://bxvx8pmnaw0ed" path="res://tilesets/nolan_house.tres" id="2_iuagk"]
-[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/prefabs/player.tscn" id="3_1bi87"]
-[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/prefabs/warper.tscn" id="4_v7qub"]
-[ext_resource type="PackedScene" uid="uid://wj04chm4vh08" path="res://scenes/prefabs/stairs_area.tscn" id="5_nfrtk"]
-[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/prefabs/dialogue_point.tscn" id="6_efpan"]
+[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="3_1bi87"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_v7qub"]
+[ext_resource type="PackedScene" uid="uid://wj04chm4vh08" path="res://scenes/components/stairs_area.tscn" id="5_nfrtk"]
+[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="6_efpan"]
 [ext_resource type="Resource" uid="uid://dxv3wga5qop3d" path="res://dialogue/nolan_house.dialogue" id="7_gi7ig"]
 
 [node name="BaseRoom" instance=ExtResource("1_0may6")]

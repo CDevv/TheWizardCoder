@@ -1,5 +1,8 @@
-public enum BulletType
+namespace TheWizardCoder.Enums
 {
-    PlayerBullet = 0,
-    EnemyBullet = 1,
+    public enum BulletType
+    {
+        PlayerBullet = 0,
+        EnemyBullet = 1,
+    }
 }

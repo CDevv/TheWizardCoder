@@ -1,4 +1,7 @@
-public enum ChestType
+namespace TheWizardCoder.Enums
 {
-    Item, Gold
+    public enum ChestType
+    {
+        Item, Gold
+    }
 }

@@ -1,4 +1,7 @@
-public enum CharacterType
+namespace TheWizardCoder.Enums
 {
-    Enemy, Ally
+    public enum CharacterType
+    {
+        Enemy, Ally
+    }
 }
