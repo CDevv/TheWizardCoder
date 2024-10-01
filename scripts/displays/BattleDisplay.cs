@@ -20,7 +20,7 @@ namespace TheWizardCoder.Displays
 		private Vector2 startingPoint = new Vector2(16, 408);
 
 		[Signal]
-		public delegate void BattleFinishedEventHandler();
+		public delegate void BattleEndedEventHandler();
 		[Signal]
 		public delegate void TurnFinishedEventHandler();
 
@@ -35,7 +35,7 @@ namespace TheWizardCoder.Displays
 		[Export]
 		public EnemiesContainer Enemies { get; private set; }
 
-		public bool BattleEnded { get; private set; } = false;
+		public bool IsBattleEnded { get; private set; } = false;
 		public bool IsTutorial { get; set; } = false;
 
 
@@ -73,9 +73,16 @@ namespace TheWizardCoder.Displays
 
 		public async void ShowDisplay(Array<string> enemies)
 		{
-			BattleEnded = false;
+			IsBattleEnded = false;
 			//Add allies
 			Allies.AddAlly(global.PlayerData.Stats);
+			if (global.PlayerData.Allies.Count > 0)
+			{
+				foreach (CharacterData ally in global.PlayerData.Allies)
+				{
+					Allies.AddAlly(ally);
+				}
+			}
 
 			//Add enemies
 			foreach (string enemyName in enemies)
@@ -134,7 +141,7 @@ namespace TheWizardCoder.Displays
 				}
 				else if (Allies.GetTotalHealth() <= 0)
 				{
-					BattleEnded = true;
+					IsBattleEnded = true;
 					global.CurrentRoom.TransitionRect.PlayAnimation();
 					await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
 
@@ -155,7 +162,7 @@ namespace TheWizardCoder.Displays
 
 		public override async void HideDisplay()
 		{
-			BattleEnded = true;
+			IsBattleEnded = true;
 			IsTutorial = false;
 			battleOptions.ShowInfoLabel("You won! 50 Gold obtained.");
 
@@ -171,7 +178,7 @@ namespace TheWizardCoder.Displays
 			global.CanWalk = true;
 			global.GameDisplayEnabled = true;
 			global.CurrentRoom.TransitionRect.PlayAnimationBackwards();
-			EmitSignal(SignalName.BattleFinished);
+			EmitSignal(SignalName.BattleEnded);
 		}
 	}
 }

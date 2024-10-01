@@ -392,6 +392,5 @@ position = Vector2(951, 694)
 DialogueResource = ExtResource("3_3hq0k")
 DialogueTitle = "dummy_point"
 
-[connection signal="BattleFinished" from="BattleDisplay" to="." method="OnBattleFinished"]
 [connection signal="TurnFinished" from="BattleDisplay" to="." method="OnTurnFinished"]
 [connection signal="ProblemSolved" from="CodeProblemPoint" to="." method="OnCodeSolved"]

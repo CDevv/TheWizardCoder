@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://c0iqpqhuxgcn7"]
+[gd_scene load_steps=16 format=3 uid="uid://c0iqpqhuxgcn7"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_xan73"]
 [ext_resource type="Script" path="res://scripts/rooms/TestRoom.cs" id="2_eh4xc"]
@@ -7,28 +7,39 @@
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_m8w0m"]
 [ext_resource type="PackedScene" uid="uid://ceblrxu7x4fvc" path="res://scenes/components/battle_point.tscn" id="5_5d3xc"]
 [ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/components/save_point.tscn" id="6_3k7j6"]
-[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/character_dialogue_point.tscn" id="7_odkvl"]
-[ext_resource type="Texture2D" uid="uid://dhrgn37kqbfws" path="res://assets/characters/movement/wizard.png" id="8_5nbo5"]
 [ext_resource type="Resource" uid="uid://bqgh81grm43r" path="res://dialogue/test.dialogue" id="8_bj7jj"]
 [ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/components/code_problem_point.tscn" id="11_5aqh3"]
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="11_67j7s"]
 [ext_resource type="PackedScene" uid="uid://mmm0k3msmmm5" path="res://scenes/components/cutscene_point.tscn" id="12_8300v"]
 [ext_resource type="PackedScene" uid="uid://b5a45cgte66g5" path="res://scenes/components/chest.tscn" id="14_lefl4"]
+[ext_resource type="PackedScene" uid="uid://d38oq7utuerxp" path="res://scenes/components/ground_enemy.tscn" id="15_dhyf2"]
 
 [sub_resource type="Animation" id="Animation_h6tmq"]
 resource_name = "test_anim"
-length = 0.5
+length = 2.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterDialoguePoint:position")
+tracks/0/path = NodePath("ZenDummy:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(592, 200), Vector2(512, 200)]
+"values": [Vector2(592, 200), Vector2(512, 200), Vector2(512, 240), Vector2(385, 241), Vector2(385, 274)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(405, 253)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_atiyj"]
@@ -36,207 +47,14 @@ _data = {
 "test_anim": SubResource("Animation_h6tmq")
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n63b5"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(0, 0, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hbyya"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(0, 37, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jji4x"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(0, 74, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_usn6k"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(0, 111, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_aoabt"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(0, 0, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_knpuk"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(27, 0, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g61bq"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(54, 0, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3o3yj"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(81, 0, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yjgms"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(108, 0, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4lhjf"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(0, 74, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0brgd"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(27, 74, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mjljt"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(54, 74, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_osqmg"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(81, 74, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f115p"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(108, 74, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v73uy"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(0, 111, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v7cel"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(27, 111, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i251j"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(54, 111, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3w6jh"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(81, 111, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j0fvq"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(108, 111, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xnmfr"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(0, 37, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_li50m"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(27, 37, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8w1ci"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(54, 37, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fodu8"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(81, 37, 27, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bl781"]
-atlas = ExtResource("8_5nbo5")
-region = Rect2(108, 37, 27, 37)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_os5t3"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n63b5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hbyya")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jji4x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_usn6k")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_aoabt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_knpuk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g61bq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3o3yj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yjgms")
-}],
-"loop": true,
-"name": &"down",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4lhjf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0brgd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mjljt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_osqmg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f115p")
-}],
-"loop": true,
-"name": &"left",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v73uy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v7cel")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i251j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3w6jh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j0fvq")
-}],
-"loop": true,
-"name": &"right",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xnmfr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_li50m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8w1ci")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fodu8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bl781")
-}],
-"loop": true,
-"name": &"up",
-"speed": 5.0
-}]
-
 [node name="TestRoom" instance=ExtResource("1_xan73")]
 y_sort_enabled = true
 script = ExtResource("2_eh4xc")
 SceneFileName = "second_room"
 LocationName = "TestRoom"
+
+[node name="BattleDisplay" parent="." index="1"]
+TutorialDialogueResource = null
 
 [node name="ColorRect" type="ColorRect" parent="." index="3"]
 offset_right = 1280.0
@@ -256,7 +74,7 @@ position = Vector2(736, 200)
 
 [node name="Player" parent="." index="6" instance=ExtResource("3_bjkae")]
 z_index = 1
-position = Vector2(224, 216)
+position = Vector2(232, 210)
 
 [node name="AnimationPlayer" parent="." index="8"]
 libraries = {
@@ -272,24 +90,20 @@ position = Vector2(176, 208)
 TargetRoomName = "first_room"
 TargetLocation = "RoomEnterMarker"
 
-[node name="Camera" parent="." index="11"]
+[node name="Warper2" parent="." index="11" instance=ExtResource("4_m8w0m")]
+z_index = 2
+position = Vector2(912, 207)
+TargetRoomName = "village_1"
+TargetLocation = "EnterVillageMarker"
+
+[node name="Camera" parent="." index="12"]
 limit_right = 1280
 limit_bottom = 960
 
-[node name="BattlePoint" parent="." index="12" instance=ExtResource("5_5d3xc")]
+[node name="BattlePoint" parent="." index="13" instance=ExtResource("5_5d3xc")]
 z_index = 2
 position = Vector2(736, 624)
-
-[node name="CharacterDialoguePoint" parent="." index="15" instance=ExtResource("7_odkvl")]
-z_index = 1
-position = Vector2(592, 200)
-DialogueResource = ExtResource("8_bj7jj")
-DialogueTitle = "demo"
-
-[node name="Sprite" type="AnimatedSprite2D" parent="CharacterDialoguePoint" index="2"]
-position = Vector2(0, -21)
-scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_os5t3")
+OnCollision = false
 
 [node name="CodeProblemPoint" parent="." index="16" instance=ExtResource("11_5aqh3")]
 z_index = 1
@@ -326,6 +140,7 @@ DialogueTitle = "demo_dialogueextra"
 [node name="CutscenePoint" parent="." index="21" instance=ExtResource("12_8300v")]
 z_index = 1
 position = Vector2(432, 272)
+PlaythroughPropertyName = "TestCutscene"
 RoomMethodName = "TestCutscene"
 
 [node name="Chest" parent="." index="23" instance=ExtResource("14_lefl4")]
@@ -339,3 +154,13 @@ position = Vector2(848, 208)
 PlaythroughPropertyName = "TestChest2"
 ChestType = 1
 GoldAmount = 10
+
+[node name="GroundEnemy" parent="." index="25" instance=ExtResource("15_dhyf2")]
+z_index = 1
+position = Vector2(704, 416)
+
+[node name="ZenDummy" parent="." index="26"]
+visible = true
+position = Vector2(592, 200)
+DialogueResource = ExtResource("8_bj7jj")
+DialogueTitle = "demo"

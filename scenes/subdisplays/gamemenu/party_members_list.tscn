@@ -5,14 +5,15 @@
 
 [node name="PartyMembersList" type="CanvasLayer"]
 script = ExtResource("1_wihky")
+PartyMemberPackedScene = ExtResource("1_5usm2")
 
-[node name="Marker2D" type="Marker2D" parent="."]
+[node name="BasePos" type="Marker2D" parent="."]
 position = Vector2(184, 72)
 
-[node name="CharacterPartyMember" parent="." instance=ExtResource("1_5usm2")]
+[node name="Nolan" parent="." instance=ExtResource("1_5usm2")]
 offset_left = 184.0
 offset_top = 72.0
 offset_right = 380.0
 offset_bottom = 112.0
 
-[connection signal="Pressed" from="CharacterPartyMember" to="." method="OnCharacterPressed"]
+[connection signal="Pressed" from="Nolan" to="." method="OnCharacterPressed" binds= [true, 0]]

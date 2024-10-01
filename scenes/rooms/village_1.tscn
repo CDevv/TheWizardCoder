@@ -27,6 +27,9 @@ SceneFileName = "village_1"
 LocationName = "Village"
 DefaultMarkerName = "EnterVillageMarker"
 
+[node name="BattleDisplay" parent="." index="1"]
+TutorialDialogueResource = null
+
 [node name="Camera" parent="." index="5"]
 limit_right = 1696
 limit_bottom = 1312
@@ -129,3 +132,6 @@ position = Vector2(1104, 824)
 scale = Vector2(2, 1)
 DialogueResource = ExtResource("8_xxkd1")
 DialogueTitle = "locked"
+
+[node name="ZenDummy" parent="." index="26"]
+visible = true

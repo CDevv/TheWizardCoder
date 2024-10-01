@@ -11,4 +11,12 @@ animations = [{
 "loop": true,
 "name": &"Nolan",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_h658e")
+}],
+"loop": true,
+"name": &"ZenDummy",
+"speed": 5.0
 }]

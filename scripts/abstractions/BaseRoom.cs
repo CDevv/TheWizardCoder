@@ -6,6 +6,8 @@ using TheWizardCoder.Autoload;
 using TheWizardCoder.Displays;
 using TheWizardCoder.Components;
 using TheWizardCoder.UI;
+using TheWizardCoder.Interactables;
+using TheWizardCoder.Data;
 
 namespace TheWizardCoder.Abstractions
 {
@@ -34,10 +36,6 @@ namespace TheWizardCoder.Abstractions
 		public override void _Ready()
 		{
 			OnReady();
-		}
-
-		public override void _Process(double delta)
-		{
 		}
 
 		public virtual void OnReady()
@@ -73,6 +71,15 @@ namespace TheWizardCoder.Abstractions
 			}
 			Camera.Position = Player.Position;
 			global.PlayerData.LocationVector = Vector2.Zero;
+
+			if (global.PlayerData.Allies.Count > 0)
+			{
+				foreach (CharacterData ally in global.PlayerData.Allies)
+				{
+					Player.AddAlly(ally.Name, true);
+				}
+			}
+			Player.DistanceWalked = 0;
 
 			TransitionRect.CallDeferred(TransitionRect.MethodName.PlayAnimationBackwards);
 			global.CanWalk = true;

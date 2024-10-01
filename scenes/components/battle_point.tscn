@@ -18,7 +18,8 @@ debug_color = Color(0.518102, 0, 0.215001, 0.42)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape" type="CollisionShape2D" parent="StaticBody2D"]
+unique_name_in_owner = true
 shape = SubResource("RectangleShape2D_odm6c")
 debug_color = Color(0.518102, 0, 0.215001, 0.42)
 

@@ -1,4 +1,15 @@
 {
+	"ZenDummy": {
+		"Health": 10,
+		"MaxHealth": 20,
+		"Points": 0,
+		"MaxPoints": 0,
+		"AttackPoints": 10,
+		"DefensePoints": 5,
+		"AgilityPoints": 2,
+		"MagicSpells": {},
+		"Type": "Ally",
+	},
 	"Glitch": {
 		"Health": 50,
 		"MaxHealth": 50,

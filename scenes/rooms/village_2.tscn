@@ -36,6 +36,9 @@ SceneFileName = "village_2"
 LocationName = "Village"
 DefaultMarkerName = "Section1Marker"
 
+[node name="BattleDisplay" parent="." index="1"]
+TutorialDialogueResource = null
+
 [node name="Camera" parent="." index="5"]
 limit_right = 1824
 limit_bottom = 1312
@@ -67,7 +70,6 @@ PlayerDirection = 2
 [node name="Section3Warper" parent="." index="11" instance=ExtResource("4_h52wr")]
 position = Vector2(1840, 928)
 scale = Vector2(1, 7)
-constant_linear_velocity = Vector2(6.285, 0)
 TargetRoomName = "village_3"
 TargetLocation = "Section2Marker"
 PlayerDirection = 3

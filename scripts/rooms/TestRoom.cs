@@ -1,14 +1,22 @@
 using Godot;
 using System;
 using TheWizardCoder.Abstractions;
+using TheWizardCoder.Interactables;
 
 namespace TheWizardCoder.Rooms
 {
 	public partial class TestRoom : BaseRoom
 	{
-		private async void TestCutscene()
+        public override void _Ready()
+        {
+            base._Ready();
+        }
+
+        private async void TestCutscene()
 		{
 			await PlayCutscene("test_anim");
+			//testDummy.MakeFollower();
+			global.CurrentRoom.Player.AddAlly("ZenDummy", false);
 		}
 	}
 }

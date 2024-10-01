@@ -6,6 +6,9 @@ namespace TheWizardCoder.UI
 {
 	public partial class PickableButton : Area2D
 	{
+		[Signal]
+		public delegate void TweenFinishedEventHandler();
+
 		private string text = String.Empty;
 
 		public string Text
@@ -44,6 +47,15 @@ namespace TheWizardCoder.UI
 		{
 			this.text = text;
 			button.Text = text;
+		}
+
+		public void TweenDisappearance()
+		{
+			Tween tween = CreateTween();
+			tween.TweenProperty(this, "modulate", new Color(20, 34, 20, 0), 1);
+			tween.Finished += () => {
+				EmitSignal(SignalName.TweenFinished);
+			};
 		}
 
 		private void OnButtonDown()

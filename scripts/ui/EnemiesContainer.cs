@@ -69,11 +69,11 @@ namespace TheWizardCoder.UI
 
 		public async Task EnemyTurn(int i)
 		{
-			if (BattleDisplay.BattleEnded)
+			if (BattleDisplay.IsBattleEnded)
 			{
 				return;
 			}
-
+			GD.Print(enemies.Count);
 			await Allies.DamageRandomAlly(enemies[i].Character.Name, enemies[i].Character.AttackPoints);
 		}
 
@@ -81,7 +81,7 @@ namespace TheWizardCoder.UI
 		{
 			for (int i = 0; i < enemies.Count; i++)
 			{
-				if (BattleDisplay.BattleEnded)
+				if (BattleDisplay.IsBattleEnded)
 				{
 					break;
 				}

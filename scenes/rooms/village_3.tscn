@@ -32,6 +32,7 @@ LocationName = "Village"
 DefaultMarkerName = "Section2Marker"
 
 [node name="BattleDisplay" parent="." index="1"]
+TutorialDialogueResource = null
 CharacterRectScene = null
 EnemySpriteScene = null
 

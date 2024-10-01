@@ -1,13 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://ba1ui2geu8rdc"]
+[gd_scene load_steps=6 format=3 uid="uid://ba1ui2geu8rdc"]
 
 [ext_resource type="Texture2D" uid="uid://seqdoffkhcdd" path="res://assets/ui/base_console_ui.png" id="1_7dgyl"]
 [ext_resource type="Script" path="res://scripts/displays/GameIntroDisplay.cs" id="1_454je"]
 [ext_resource type="Theme" uid="uid://yvr5k4rix6lw" path="res://themes/console_theme.tres" id="2_1ma8e"]
 [ext_resource type="Resource" uid="uid://db8b7wteav1mo" path="res://dialogue/game_intro.dialogue" id="2_ek8gt"]
+[ext_resource type="PackedScene" uid="uid://dqgxo8eebarbi" path="res://scenes/ui/transition_rect.tscn" id="3_4ytsv"]
 
 [node name="GameIntroDisplay" type="CanvasLayer"]
 script = ExtResource("1_454je")
 DialogueResource = ExtResource("2_ek8gt")
+
+[node name="TransitionRect" parent="." instance=ExtResource("3_4ytsv")]
+visible = false
 
 [node name="Rect" type="NinePatchRect" parent="."]
 offset_right = 320.0

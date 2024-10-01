@@ -90,9 +90,10 @@ theme_override_font_sizes/font_size = 36
 text = "Options
 "
 
-[node name="SavedGamesMenu" parent="." node_paths=PackedStringArray("confirmation") instance=ExtResource("6_drqyd")]
+[node name="SavedGamesMenu" parent="." node_paths=PackedStringArray("confirmation", "Transition") instance=ExtResource("6_drqyd")]
 visible = false
 confirmation = NodePath("../DeleteFileConfirmation")
+Transition = NodePath("../TransitionRect")
 
 [node name="DeleteFileConfirmation" parent="." instance=ExtResource("6_ddegt")]
 visible = false

@@ -111,10 +111,16 @@ namespace TheWizardCoder.Displays
 
 		private void OnItemPressed(int index)
 		{
-			itemIndex = index;
-			level = 1;
-			action = MenuAction.Items;
-			ChangeSubdisplay("PartyMembers");
+			string itemName = global.PlayerData.Inventory[index];
+			Item item = global.ItemDescriptions[itemName];
+
+			if (item.Type == ItemType.Heal)
+			{
+				itemIndex = index;
+				level = 1;
+				action = MenuAction.Items;
+				ChangeSubdisplay("PartyMembers");
+			}
 		}
 
 		private void OnStatusMenu()
@@ -131,8 +137,18 @@ namespace TheWizardCoder.Displays
 			ChangeSubdisplay("PartyMembers");
 		}
 
-		private void OnCharacterPressed()
+		private void OnCharacterPressed(bool isProtagonist, int allyIndex)
 		{
+			CharacterData character;
+			if (isProtagonist)
+			{
+				character = global.PlayerData.Stats;
+			}
+			else
+			{
+				character = global.PlayerData.Allies[allyIndex-1];
+			}
+
 			switch (action)
 			{
 				case MenuAction.Items:
@@ -140,7 +156,7 @@ namespace TheWizardCoder.Displays
 					string itemName = global.PlayerData.Inventory[itemIndex];
 					Item itemData = global.ItemDescriptions[itemName];
 
-					global.PlayerData.Stats.AddHealth(itemData.Effect);
+					character.AddHealth(itemData.Effect);
 					global.PlayerData.RemoveFromInventory(itemIndex);
 
 					UpdateAllSubdisplays();
@@ -150,13 +166,13 @@ namespace TheWizardCoder.Displays
 				
 				case MenuAction.Stats:
 					HideAllSubdisplays();
-					((CharacterStatus)Subdisplays["Status"]).ShowDisplay(global.PlayerData.Stats);
+					((CharacterStatus)Subdisplays["Status"]).ShowDisplay(character);
 
 					break;
 
 				case MenuAction.Magic:
 					HideAllSubdisplays();
-					((CharacterMagicSpells)Subdisplays["Magic"]).ShowDisplay(global.PlayerData.Stats);
+					((CharacterMagicSpells)Subdisplays["Magic"]).ShowDisplay(character);
 
 					break;
 			}

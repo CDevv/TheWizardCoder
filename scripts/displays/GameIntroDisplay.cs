@@ -4,28 +4,36 @@ using DialogueManagerRuntime;
 using System.Linq;
 using TheWizardCoder.Autoload;
 using TheWizardCoder.Enums;
+using TheWizardCoder.UI;
 
 namespace TheWizardCoder.Displays
 {
 	public partial class GameIntroDisplay : CanvasLayer
 	{
+		private const double DefaultWaitingTime = 2;
+
 
 		[Export]
 		public Resource DialogueResource { get; set; }
 
 		private Global global;
+		private TransitionRect transition;
 		private Label label;
 		private DialogueLine line;
-		private double waitingTime = 5;
+		private double waitingTime = DefaultWaitingTime;
 		private bool waitingForInput = false;
 		private string userInput;
 
 		public override async void _Ready()
 		{
 			global = GetNode<Global>("/root/Global");
+			transition = GetNode<TransitionRect>("TransitionRect");
 			label = GetNode<Label>("%IntroLabel");
 
 			line = await DialogueManager.GetNextDialogueLine(DialogueResource, "game_intro");
+
+			transition.Show();
+			transition.PlayAnimationBackwards();
 		}
 
 		public override async void _Process(double delta)
@@ -47,7 +55,7 @@ namespace TheWizardCoder.Displays
 			}
 			else
 			{
-				waitingTime = 5;
+				waitingTime = DefaultWaitingTime;
 				if (line.Tags.Contains("format"))
 				{
 					label.Text += $"{string.Format(line.Text, userInput)}\n";

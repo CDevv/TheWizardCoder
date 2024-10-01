@@ -16,6 +16,8 @@ namespace TheWizardCoder.Subdisplays
 		public PackedScene FirstRoom { get; set; }
 		[Export]
 		public DeleteFileConfirmation confirmation;
+		[Export]
+		public TransitionRect Transition;
 
 		private Button loadButton;
 		private SaveFileOption[] saveButtons = new SaveFileOption[3];
@@ -74,13 +76,17 @@ namespace TheWizardCoder.Subdisplays
 			saveButtons[0].GrabFocus();
 		}
 
-		private void OnSaveButton(int saveNumber)
+		private async void OnSaveButton(int saveNumber)
 		{
 			if (mode == SaveFileAction.Load)
 			{
 				SaveFileData data = global.ReadSaveFileData($"save{saveNumber}");
 				if (data.IsSaveEmpty)
 				{
+					Transition.Show();
+					Transition.PlayAnimation();
+					await ToSignal(Transition, TransitionRect.SignalName.AnimationFinished);
+
 					global.ChosenSaveSlot = $"save{saveNumber}";
 					global.GoToGameIntro();
 				}

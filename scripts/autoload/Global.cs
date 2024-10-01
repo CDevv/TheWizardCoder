@@ -105,7 +105,10 @@ namespace TheWizardCoder.Autoload
 				character.ApplyDictionary(dict);
 				Characters.Add(pair.Key, character);
 
-				ResourceLoader.LoadThreadedRequest($"res://assets/battle/enemies/{pair.Key}.png");
+				if (character.Type == CharacterType.Enemy)
+				{
+					ResourceLoader.LoadThreadedRequest($"res://assets/battle/enemies/{pair.Key}.png");
+				}
 			}
 		}
 

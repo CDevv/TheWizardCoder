@@ -92,7 +92,7 @@ namespace TheWizardCoder.UI
 
 		public async Task AllyTurn(int i)
 		{
-			if (BattleDisplay.BattleEnded)
+			if (BattleDisplay.IsBattleEnded)
 			{
 				return;
 			}
@@ -128,7 +128,7 @@ namespace TheWizardCoder.UI
 		{
 			for (int i = 0; i < allies.Count; i++)
 			{
-				if (BattleDisplay.BattleEnded)
+				if (BattleDisplay.IsBattleEnded)
 				{
 					break;
 				}

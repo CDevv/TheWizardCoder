@@ -155,7 +155,6 @@ namespace TheWizardCoder.Displays
 		{
 			itemCount = 0;
 			areasCount = 0;
-			codeEdit.Text = "No code to see here :)";
 
 			foreach (PickableButtonArea area in areas)
 			{
@@ -165,7 +164,10 @@ namespace TheWizardCoder.Displays
 
 			foreach (PickableButton item in buttonItems)
 			{
-				item.QueueFree();
+				item.TweenDisappearance();
+				item.TweenFinished += () => {
+					item.QueueFree();
+				};
 			}
 			buttonItems.Clear();
 
@@ -190,10 +192,10 @@ namespace TheWizardCoder.Displays
 			GD.Print("SOLVED!!");
 			global.CanWalk = true;
 			global.GameDisplayEnabled = true;
+			Reset();
 			animationPlayer.PlayBackwards("show");
 			await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
-			EmitSignal(SignalName.ProblemSolved);
-			Reset();
+			EmitSignal(SignalName.ProblemSolved);			
 			Hide();
 		}
 	}

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
 using Newtonsoft.Json;
@@ -47,9 +48,12 @@ namespace TheWizardCoder.Data
             }
         }
 
+        public List<CharacterData> Allies { get; set; } = new();
+
         public bool TestCodeProblem { get; set; } = false;
         public bool TestChest { get; set; } = false;
         public bool TestChest2 { get; set; } = false;
+        public bool TestCutscene { get; set; } = false;
 
         //Playthrough properties
         public bool HasPlayedIntro { get; set; } = false;

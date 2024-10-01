@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TheWizardCoder.Autoload;
 using TheWizardCoder.Abstractions;
 using TheWizardCoder.Enums;
+using TheWizardCoder.Data;
 using TheWizardCoder.Interactables;
 using TheWizardCoder.UI;
 
@@ -15,12 +16,18 @@ namespace TheWizardCoder.Components
 		[Signal]
 		public delegate void AnimationFinishedEventHandler();
 		public Direction Direction { get; private set; }
-		public const int Speed = 2;
+		public const int DefaultSpeed = 2;
 		private bool isSprinting = false;
 		private Global global;
 		private AnimationPlayer animationPlayer;
 		private AnimationTree animationTree;
 		private Area2D interactableFinder;
+
+		public CharacterDialoguePoint Follower { get; set; }
+		public GroundEnemy Enemy { get; set; }
+
+		public int PlayerSpeed { get; private set; } = DefaultSpeed;
+		public float DistanceWalked { get; set; } = 0;
 
 		public override void _Ready()	
 		{
@@ -28,6 +35,8 @@ namespace TheWizardCoder.Components
 			animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 			animationTree = GetNode<AnimationTree>("AnimationTree");
 			interactableFinder = GetNode<Area2D>("InteractableFinder");
+
+			DistanceWalked = 0;
 		}
 
 		public override void _PhysicsProcess(double delta)
@@ -39,12 +48,19 @@ namespace TheWizardCoder.Components
 			animationTree.Set("parameters/conditions/extrastate", false);
 
 			Vector2 direction = Input.GetVector("left", "right", "up", "down").Normalized();
-			Vector2 velocity = direction * Speed;
+			Vector2 velocity = direction * DefaultSpeed;
 
 			if (isSprinting)
 			{
 				velocity *= 2;
+				PlayerSpeed = DefaultSpeed * 2;
 			}
+			else
+			{
+				PlayerSpeed = DefaultSpeed;
+			}
+
+			DistanceWalked += Position.DistanceTo(Position + velocity);
 
 			if (velocity == Vector2.Zero)
 			{
@@ -83,6 +99,19 @@ namespace TheWizardCoder.Components
 			}
 
 			MoveAndCollide(velocity); 
+
+			if (Follower != null && DistanceWalked >= 24)
+			{
+				if (velocity == Vector2.Zero)
+				{
+					Follower.PlayIdleAnimation(Follower.PeekPathway().Direction);
+				}
+				else
+				{
+					Follower.AddPathwayPoint(global.GetDirectionFromVector(velocity), GlobalPosition + new Vector2(0, 21), PlayerSpeed);
+					Follower.FollowPlayer();
+				}
+			}
 		}
 
 		public override void _UnhandledInput(InputEvent @event)
@@ -182,6 +211,24 @@ namespace TheWizardCoder.Components
 		public void ShowDialogueBallon(Resource resource, string title)
 		{
 			DialogueManager.ShowDialogueBalloon(resource, title);
+		}
+
+		public CharacterDialoguePoint AddAlly(string name, bool setPos)
+		{
+			Follower = global.CurrentRoom.GetNode<CharacterDialoguePoint>(name);	
+			if (!global.PlayerData.Allies.Exists(x => x.Name == name))
+			{
+				global.PlayerData.Allies.Add(global.Characters[name]);
+			}
+
+			if (setPos)
+			{
+				Follower.GlobalPosition = GlobalPosition + new Vector2(0, 21);
+			}
+			Follower.MakeFollower();
+			Follower.Show();
+
+			return Follower;
 		}
 	}
 }

@@ -63,7 +63,7 @@ namespace TheWizardCoder.Rooms
 		{
 			if (tutorialProgress < 3)
 			{
-				if (global.CurrentRoom.BattleDisplay.BattleEnded)
+				if (global.CurrentRoom.BattleDisplay.IsBattleEnded)
 				{
 					return;
 				}
