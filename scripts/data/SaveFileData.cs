@@ -99,7 +99,7 @@ namespace TheWizardCoder.Data
                 },
                 Type = CharacterType.Ally
             };
-            Gold = 0;
+            Gold = 100;
         }
 
         public void AddToInventory(string item)

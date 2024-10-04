@@ -27,6 +27,7 @@ namespace TheWizardCoder.Autoload
 		public System.Collections.Generic.Dictionary<string, Item> ItemDescriptions { get; private set; } = new();
 		public System.Collections.Generic.Dictionary<string, MagicSpell> MagicSpells { get; private set; } = new();
 		public System.Collections.Generic.Dictionary<string, CharacterData> Characters { get; private set; } = new();
+		public System.Collections.Generic.Dictionary<string, Shop> Shops { get; set; } = new();
 		public int[] ReverseDirections { get; } = { 1, 0, 3, 2 };
 
 		public override void _Ready()
@@ -38,6 +39,7 @@ namespace TheWizardCoder.Autoload
 				LoadItemDescriptions();
 				LoadMagicSpells();
 				LoadCharactersData();
+				LoadShops();
 			}
 			catch (System.Exception e)
 			{
@@ -109,6 +111,23 @@ namespace TheWizardCoder.Autoload
 				{
 					ResourceLoader.LoadThreadedRequest($"res://assets/battle/enemies/{pair.Key}.png");
 				}
+			}
+		}
+
+		public void LoadShops()
+		{
+			Variant jsonData = GetJsonData("res://info/shops.json");
+			Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
+
+			foreach (var pair in parsedData)
+			{
+				Dictionary<string, Variant> dict = pair.Value;
+				dict["Name"] = pair.Key;
+
+				Shop shop = new();
+				shop.ApplyDictionary(dict);
+
+				Shops.Add(pair.Key, shop);
 			}
 		}
 
@@ -365,6 +384,13 @@ namespace TheWizardCoder.Autoload
 		public void CallRoomMethod(string methodName)
 		{
 			CurrentRoom.CallDeferred(methodName);
+		}
+
+		public void OpenShop(string shopName)
+		{
+			CanWalk = false;
+			GameDisplayEnabled = false;
+			CurrentRoom.ShopDisplay.ShowDisplay(shopName);
 		}
 	}
 }

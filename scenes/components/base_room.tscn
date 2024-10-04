@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bb1itrnd1e8am"]
+[gd_scene load_steps=12 format=3 uid="uid://bb1itrnd1e8am"]
 
 [ext_resource type="PackedScene" uid="uid://de21qftn035us" path="res://scenes/displays/game_display.tscn" id="1_hid6f"]
 [ext_resource type="Script" path="res://scripts/abstractions/BaseRoom.cs" id="1_rfc1d"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b8wix4lm5g767" path="res://scenes/displays/dialogue_display.tscn" id="6_wcmrr"]
 [ext_resource type="PackedScene" uid="uid://o37pcggx0jjm" path="res://scenes/displays/game_over_display.tscn" id="8_w5sia"]
 [ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/character_dialogue_point.tscn" id="9_7x1rq"]
+[ext_resource type="PackedScene" uid="uid://behqc54w4kgkd" path="res://scenes/displays/shop_display.tscn" id="9_0461u"]
 [ext_resource type="SpriteFrames" uid="uid://bep08a0upkydb" path="res://assets/characters/movement/spriteframes/zenith.tres" id="10_hkyc4"]
 
 [node name="BaseRoom" type="Node2D"]
@@ -45,6 +46,9 @@ visible = false
 visible = false
 
 [node name="GameOverDisplay" parent="." instance=ExtResource("8_w5sia")]
+visible = false
+
+[node name="ShopDisplay" parent="." instance=ExtResource("9_0461u")]
 visible = false
 
 [node name="ZenDummy" parent="." instance=ExtResource("9_7x1rq")]

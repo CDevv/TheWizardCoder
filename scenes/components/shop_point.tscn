@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxu3d2rf6wicc"]
+
+[ext_resource type="Script" path="res://scripts/interactables/ShopPoint.cs" id="1_brqhr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nx8w6"]
+size = Vector2(32, 32)
+
+[node name="ShopPoint" type="Area2D"]
+script = ExtResource("1_brqhr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nx8w6")
+debug_color = Color(0.362758, 0.360503, 0.378749, 0.42)

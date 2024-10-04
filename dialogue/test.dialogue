@@ -24,3 +24,8 @@ Narrator: Lorem ipsum dolor sit amet, [speed=2] consectetur adipiscing elit. Nam
 Narrator: W[wait=0.2]H[wait=0.2]A[wait=0.2]T
 Narrator: [speed=0.1]WHAT
 => END!
+
+~ demo_shop
+Narrator: I will open a shop now.
+do OpenShop("TestShop")
+=> END!

@@ -60,8 +60,6 @@ namespace TheWizardCoder.Components
 				PlayerSpeed = DefaultSpeed;
 			}
 
-			DistanceWalked += Position.DistanceTo(Position + velocity);
-
 			if (velocity == Vector2.Zero)
 			{
 				animationTree.Set("parameters/Transition/transition_request", "idle");
@@ -99,8 +97,9 @@ namespace TheWizardCoder.Components
 			}
 
 			MoveAndCollide(velocity); 
+			DistanceWalked += Position.DistanceTo(Position + velocity);
 
-			if (Follower != null && DistanceWalked >= 24)
+			if (Follower != null)
 			{
 				if (velocity == Vector2.Zero)
 				{
@@ -109,7 +108,11 @@ namespace TheWizardCoder.Components
 				else
 				{
 					Follower.AddPathwayPoint(global.GetDirectionFromVector(velocity), GlobalPosition + new Vector2(0, 21), PlayerSpeed);
-					Follower.FollowPlayer();
+					
+					if (DistanceWalked >= 24)
+					{
+						Follower.FollowPlayer();
+					}
 				}
 			}
 		}

@@ -183,16 +183,12 @@ namespace TheWizardCoder.UI
 				BattleOptions.ShowInfoLabel($"{state.Character.Name} gave {itemName} to {target.Name}!");
 			}
 			
-			int newHealth = Mathf.Clamp(target.Health + item.Effect, target.Health, target.MaxHealth);
-			allies[state.Target].Character.Health = newHealth;
-
-			await alliesCards[state.Target].TweenDamage(new Color(0, 255, 0));
-			DamageIndicator.PlayAnimation(target.MaxHealth - newHealth, alliesCards[state.Target].Position + new Vector2(64, 0), new Color(0, 255, 0));
-			
-			alliesCards[state.Target].SetHealthValue(newHealth);
-
+			int healthChange = Mathf.Clamp(item.Effect, 0, target.MaxHealth - target.Health);
+			allies[state.Target].Character.AddHealth(healthChange);
 			global.PlayerData.RemoveFromInventory(state.ActionModifier);
-			
+
+			await DisplayHealthChange(state.Target, healthChange);
+
 			SceneTreeTimer timer = GetTree().CreateTimer(3);
 			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
 		}
@@ -209,9 +205,20 @@ namespace TheWizardCoder.UI
 
 			//Visuals
 			BattleOptions.ShowInfoLabel($"{enemyName} attacks {allies[targetIndex].Character.Name}!");
-			DamageIndicator.PlayAnimation(damage, alliesCards[targetIndex].Position + new Vector2(64, 0), new Color(255, 0, 0));
-			alliesCards[targetIndex].SetHealthValue(global.PlayerData.Stats.Health);
-			await alliesCards[targetIndex].TweenDamage(new Color(255, 0, 0));
+			await DisplayHealthChange(targetIndex, -damage);
+		}
+
+		private async Task DisplayHealthChange(int index, int healthChange)
+		{
+			Color backgroundColor = new(0, 255, 0);
+			if (healthChange < 0)
+			{
+				backgroundColor = new(255, 0, 0);
+			}
+
+			alliesCards[index].SetHealthValue(allies[index].Character.Health);
+			DamageIndicator.PlayAnimation(healthChange, alliesCards[index].Position + new Vector2(64, 0), backgroundColor);
+			await alliesCards[index].TweenDamage(backgroundColor);
 		}
 
 		private void OnCharacterCardPressed(int index)

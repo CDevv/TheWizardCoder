@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c0iqpqhuxgcn7"]
+[gd_scene load_steps=17 format=3 uid="uid://c0iqpqhuxgcn7"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_xan73"]
 [ext_resource type="Script" path="res://scripts/rooms/TestRoom.cs" id="2_eh4xc"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/components/code_problem_point.tscn" id="11_5aqh3"]
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="11_67j7s"]
 [ext_resource type="PackedScene" uid="uid://mmm0k3msmmm5" path="res://scenes/components/cutscene_point.tscn" id="12_8300v"]
+[ext_resource type="PackedScene" uid="uid://bxu3d2rf6wicc" path="res://scenes/components/shop_point.tscn" id="14_0us7x"]
 [ext_resource type="PackedScene" uid="uid://b5a45cgte66g5" path="res://scenes/components/chest.tscn" id="14_lefl4"]
 [ext_resource type="PackedScene" uid="uid://d38oq7utuerxp" path="res://scenes/components/ground_enemy.tscn" id="15_dhyf2"]
 
@@ -135,7 +136,7 @@ DialogueTitle = "demo_playerdata"
 z_index = 1
 position = Vector2(672, 214)
 DialogueResource = ExtResource("8_bj7jj")
-DialogueTitle = "demo_dialogueextra"
+DialogueTitle = "demo_shop"
 
 [node name="CutscenePoint" parent="." index="21" instance=ExtResource("12_8300v")]
 z_index = 1
@@ -159,8 +160,11 @@ GoldAmount = 10
 z_index = 1
 position = Vector2(704, 416)
 
-[node name="ZenDummy" parent="." index="26"]
+[node name="ZenDummy" parent="." index="27"]
 visible = true
 position = Vector2(592, 200)
 DialogueResource = ExtResource("8_bj7jj")
 DialogueTitle = "demo"
+
+[node name="ShopPoint" parent="." index="28" instance=ExtResource("14_0us7x")]
+position = Vector2(80, 264)
