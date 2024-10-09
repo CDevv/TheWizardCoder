@@ -320,7 +320,7 @@ TargetLocation = "ShimbleHouseMarker"
 position = Vector2(448, 304)
 
 [node name="MissingChair" type="StaticBody2D" parent="." index="15"]
-z_index = 1
+z_index = 2
 y_sort_enabled = true
 
 [node name="CollisionShape" type="CollisionShape2D" parent="MissingChair" index="0"]
@@ -328,8 +328,10 @@ z_index = 1
 position = Vector2(208, 204)
 scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_m6nok")
+disabled = true
 
 [node name="Sprite" type="Sprite2D" parent="MissingChair" index="1"]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(208, 176)
 scale = Vector2(2, 2)
 texture = ExtResource("7_eb42j")

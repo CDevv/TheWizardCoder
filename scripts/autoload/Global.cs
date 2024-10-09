@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using TheWizardCoder.Data;
 using TheWizardCoder.Enums;
 using TheWizardCoder.Abstractions;
+using TheWizardCoder.Utils;
 
 namespace TheWizardCoder.Autoload
 {
@@ -142,7 +143,7 @@ namespace TheWizardCoder.Autoload
 			file.Close();
 
 			FileAccess hashFile = FileAccess.Open($"user://{fileName}.ini", FileAccess.ModeFlags.Write);
-			byte[] hash = CalculateHash(fileName);
+			byte[] hash = HashUtils.CalculateHash(fileName);
 			hashFile.StoreVar(hash);
 			hashFile.Close();
 
@@ -162,7 +163,7 @@ namespace TheWizardCoder.Autoload
 			file.Close();
 
 			FileAccess hashFile = FileAccess.Open($"user://{fileName}.ini", FileAccess.ModeFlags.Write);
-			byte[] hash = CalculateHash(fileName);
+			byte[] hash = HashUtils.CalculateHash(fileName);
 			hashFile.StoreVar(hash);
 			hashFile.Close();
 
@@ -205,9 +206,9 @@ namespace TheWizardCoder.Autoload
 			hashFile.Close();
 
 			//Actual hash
-			byte[] actualHash = CalculateHash(saveName);
+			byte[] actualHash = HashUtils.CalculateHash(saveName);
 
-			if (CompareHashes(actualHash, expectedHash))
+			if (HashUtils.CompareHashes(actualHash, expectedHash))
 			{
 				using var readSave = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Read);
 				string savedData = (string)readSave.GetVar();
@@ -220,20 +221,6 @@ namespace TheWizardCoder.Autoload
 				data.IsSaveEmpty = true;
 				return data;
 			}
-
-			return data;
-		}
-
-		private byte[] CalculateHash(string saveName)
-		{
-			using FileAccess file = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Read);
-			byte[] buffer = file.GetBuffer((long)file.GetLength());
-			file.Close();
-
-			HashingContext hashing = new();
-			hashing.Start(HashingContext.HashType.Sha256);
-			hashing.Update(buffer);
-			byte[] data = hashing.Finish();
 
 			return data;
 		}
@@ -263,63 +250,6 @@ namespace TheWizardCoder.Autoload
 			GetTree().ChangeSceneToFile("res://scenes/rooms/game_intro.tscn");
 		}
 
-		public Vector2 GetDirectionVector(Direction direction)
-		{
-			Vector2 resultVector = Vector2.Down;
-			switch (direction)
-			{
-				case Direction.Up:
-					resultVector = Vector2.Up;
-					break;
-				case Direction.Down:
-					resultVector = Vector2.Down;
-					break;
-				case Direction.Left:
-					resultVector = Vector2.Left;
-					break;
-				case Direction.Right:
-					resultVector = Vector2.Right;
-					break;
-			}
-
-			return resultVector;
-		}
-
-		public Direction GetDirectionFromVector(Vector2 vector)
-		{
-			float radianAngle = vector.Angle();
-			float angle = Mathf.RadToDeg(radianAngle);
-			Direction direction = Direction.Down;
-			
-			switch (angle)
-			{
-				case 0:
-					direction = Direction.Right;
-					break;
-				case 90:
-					direction = Direction.Down;
-					break;
-				case 180:
-					direction = Direction.Left;
-					break;
-				case -90:
-					direction = Direction.Up;
-					break;
-				default:
-					direction = Direction.Down;
-					break;
-			}
-		
-			return direction;
-		}
-
-		public Vector2 GetCameraBaseVector()
-		{
-			Vector2 resolutionVector = new Vector2(Settings.WindowWidth, Settings.WindowHeight);
-			Vector2 baseVector = CurrentRoom.Camera.GlobalPosition - (resolutionVector / 2);
-			return baseVector;
-		}
-
 		private Variant GetJsonData(string fileName)
 		{
 			if (!FileAccess.FileExists(fileName))
@@ -340,35 +270,6 @@ namespace TheWizardCoder.Autoload
 			}
 
 			return json.Data;
-		}
-
-		private bool CompareHashes(byte[] h1, byte[] h2)
-		{
-			if (h1 == null && h2 != null)
-			{
-				return false;
-			}
-			else if (h2 == null && h1 != null)
-			{
-				return false;
-			}
-
-			if (h1.Length != h2.Length)
-			{
-				return false;
-			}
-
-			for (int i = 0; i < h2.Length; i++)
-			{
-				var b1 = h1[i];
-				var b2 = h2[i];
-				if (b1 != b2)
-				{
-					return false;
-				}
-			}
-
-			return true;
 		}
 
 		public Variant GetPlayerData(string key)

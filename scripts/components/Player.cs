@@ -8,6 +8,7 @@ using TheWizardCoder.Enums;
 using TheWizardCoder.Data;
 using TheWizardCoder.Interactables;
 using TheWizardCoder.UI;
+using TheWizardCoder.Utils;
 
 namespace TheWizardCoder.Components
 {
@@ -72,7 +73,8 @@ namespace TheWizardCoder.Components
 			if (direction != Vector2.Zero)
 			{
 				ChangeDirection(direction);
-				Direction = global.GetDirectionFromVector(direction);
+				Direction = direction.ToDirection();
+				//Direction = global.GetDirectionFromVector(direction);
 			}
 
 			if (global.CurrentRoom.Camera != null)
@@ -107,7 +109,7 @@ namespace TheWizardCoder.Components
 				}
 				else
 				{
-					Follower.AddPathwayPoint(global.GetDirectionFromVector(velocity), GlobalPosition + new Vector2(0, 21), PlayerSpeed);
+					Follower.AddPathwayPoint(velocity.ToDirection(), GlobalPosition + new Vector2(0, 21), PlayerSpeed);
 					
 					if (DistanceWalked >= 24)
 					{
@@ -182,7 +184,8 @@ namespace TheWizardCoder.Components
 
 		public void ChangeDirection(Direction direction)
 		{
-			Vector2 resultVector = global.GetDirectionVector(direction);
+			//Vector2 resultVector = global.GetDirectionVector(direction);
+			Vector2 resultVector = direction.ToVector();
 
 			animationTree.Set("parameters/Idle/blend_position", resultVector);
 			animationTree.Set("parameters/Move/blend_position", resultVector);

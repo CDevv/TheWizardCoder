@@ -133,5 +133,5 @@ scale = Vector2(2, 1)
 DialogueResource = ExtResource("8_xxkd1")
 DialogueTitle = "locked"
 
-[node name="ZenDummy" parent="." index="26"]
+[node name="ZenDummy" parent="." index="27"]
 visible = true
