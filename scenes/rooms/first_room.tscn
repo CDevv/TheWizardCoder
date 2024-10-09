@@ -181,7 +181,7 @@ DefaultMarkerName = "AfterCutsceneMarker"
 [node name="ColorRect" type="ColorRect" parent="." index="3"]
 offset_right = 640.0
 offset_bottom = 480.0
-color = Color(0.0745098, 0.0745098, 0.0745098, 1)
+color = Color(0, 0, 0, 1)
 
 [node name="TileMap" type="TileMap" parent="." index="4"]
 y_sort_enabled = true

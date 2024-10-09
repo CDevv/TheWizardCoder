@@ -9,6 +9,10 @@
 script = ExtResource("1_ruwgr")
 TextButtonPackedScene = ExtResource("2_sl7en")
 
+[node name="ShopBackground" type="TextureRect" parent="."]
+offset_right = 640.0
+offset_bottom = 480.0
+
 [node name="ItemsRect" type="NinePatchRect" parent="."]
 offset_left = 16.0
 offset_top = 320.0

@@ -5,12 +5,14 @@ using TheWizardCoder.Abstractions;
 using TheWizardCoder.Autoload;
 using TheWizardCoder.Data;
 using TheWizardCoder.Enums;
+using TheWizardCoder.UI;
 
 public partial class ShopDisplay : Display
 {
 	[Export]
 	private PackedScene TextButtonPackedScene { get; set; }
 
+	private TextureRect background;
 	private NinePatchRect optionsRect;
 	private NinePatchRect descriptionRect;
 	private GridContainer itemsContainer;
@@ -26,8 +28,9 @@ public partial class ShopDisplay : Display
 	public override void _Ready()
 	{
 		base._Ready();
-		global = GetNode<Global>("/root/Global");
+		//global = GetNode<Global>("/root/Global");
 
+		background = GetNode<TextureRect>("ShopBackground");
 		optionsRect = GetNode<NinePatchRect>("%OptionsRect");
 		descriptionRect = GetNode<NinePatchRect>("%DescriptionRect");
 		itemsContainer = GetNode<GridContainer>("%ItemsContainer");
@@ -61,16 +64,23 @@ public partial class ShopDisplay : Display
 
     public override void ShowDisplay()
     {
-        Show();
+        ShowDisplay(Shop.Name, false);
     }
 
-	public void ShowDisplay(string shopId)
+	public async void ShowDisplay(string shopId, bool playTransition = true)
 	{
 		global.GameDisplayEnabled = false;
 		global.CanWalk = false;
 
+		if (playTransition)
+		{
+			global.CurrentRoom.TransitionRect.PlayAnimation();
+			await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
+		}
+
 		Show();
 		Shop = global.Shops[shopId];
+		background.Texture = ResourceLoader.Load<Texture2D>($"res://assets/shops/{Shop.Name}.png");
 
 		UpdateDisplay();
 		itemsContainer.Hide();
@@ -78,6 +88,12 @@ public partial class ShopDisplay : Display
 
 		shopHint.Show();
 		buyButton.GrabFocus();
+
+		if (playTransition)
+		{
+			global.CurrentRoom.TransitionRect.PlayAnimationBackwards();
+			await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
+		}
 	}
 
 	public override void UpdateDisplay()
@@ -88,14 +104,20 @@ public partial class ShopDisplay : Display
 		UpdateInventoryItems();
 	}
 
-    public override void HideDisplay()
+    public override async void HideDisplay()
     {
+		global.CurrentRoom.TransitionRect.PlayAnimation();
+		await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
+
         Hide();
 		global.CanWalk = true;
 		global.GameDisplayEnabled = true;
+
+		global.CurrentRoom.TransitionRect.PlayAnimationBackwards();
+		await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
     }
 
-    private void AddItem(int index, string itemName, ShopAction shopAction)
+    private Button AddItem(int index, string itemName, ShopAction shopAction)
 	{
 		Button newItem = TextButtonPackedScene.Instantiate<Button>();
 		newItem.Text = itemName;
@@ -106,6 +128,7 @@ public partial class ShopDisplay : Display
 		};
 
 		itemsContainer.AddChild(newItem);
+		return newItem;
 	}
 
 	private void ClearItems()
@@ -127,8 +150,9 @@ public partial class ShopDisplay : Display
 		priceLabel.Text = $"Price: {item.Price}";
 	}
 
-	private void UpdateShopItems()
+	private Button UpdateShopItems()
 	{
+		Button firstItem = null;
 		shopHint.Hide();
 		ClearItems();
 
@@ -136,12 +160,19 @@ public partial class ShopDisplay : Display
 		{
 			int currentIndex = i;
 			string item = Shop.Items[i];
-			AddItem(currentIndex, item, ShopAction.Buy);
+			Button button = AddItem(currentIndex, item, ShopAction.Buy);
+			if (i == 0)
+			{
+				firstItem = button;
+			}
 		}
+
+		return firstItem;
 	}
 
-	private void UpdateInventoryItems()
+	private Button UpdateInventoryItems()
 	{
+		Button firstItem = null;
 		shopHint.Hide();
 		ClearItems();
 
@@ -149,19 +180,24 @@ public partial class ShopDisplay : Display
 		{
 			int currentIndex = i;
 			string item = global.PlayerData.Inventory[i];
-			AddItem(currentIndex, item, ShopAction.Sell);
+			Button button = AddItem(currentIndex, item, ShopAction.Sell);
+			if (i == 0)
+			{
+				firstItem = button;
+			}
 		}
+
+		return firstItem;
 	}
 
 	private void OnBuyButton()
 	{
 		level = 1;
 
-		shopHint.Hide();
-		UpdateShopItems();
+		shopHint.Hide();	
 		itemsContainer.Show();
 
-		Button firstItem = itemsContainer.GetChild<Button>(0);
+		Button firstItem = UpdateShopItems();;
 		firstItem.GrabFocus();
 	}
 
@@ -169,11 +205,10 @@ public partial class ShopDisplay : Display
 	{
 		level = 1;
 
-		shopHint.Hide();
-		UpdateInventoryItems();
+		shopHint.Hide();		
 		itemsContainer.Show();
 
-		Button firstItem = itemsContainer.GetChild<Button>(0);
+		Button firstItem = UpdateInventoryItems();
 		if (firstItem != null)
 		{
 			firstItem.GrabFocus();
@@ -196,14 +231,16 @@ public partial class ShopDisplay : Display
 					global.PlayerData.Gold -= item.Price;
 					global.AddToInventory(itemName);
 					UpdateDisplay();
-					ShowDisplay(Shop.Name);
+					ShowDisplay();
+					level = 0;
 				}
 				break;
 			case ShopAction.Sell:
 				global.PlayerData.Gold += item.Price;
 				global.PlayerData.RemoveFromInventory(index);
 				UpdateDisplay();
-				ShowDisplay(Shop.Name);
+				ShowDisplay();
+				level = 0;
 				break;
 		}
 	}
