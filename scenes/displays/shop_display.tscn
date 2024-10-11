@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://behqc54w4kgkd"]
+[gd_scene load_steps=6 format=3 uid="uid://behqc54w4kgkd"]
 
 [ext_resource type="Script" path="res://scripts/displays/ShopDisplay.cs" id="1_ruwgr"]
 [ext_resource type="PackedScene" uid="uid://capppjgr8n1ew" path="res://scenes/ui/text_button.tscn" id="2_sl7en"]
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="2_wxo1j"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="3_l20tj"]
+[ext_resource type="PackedScene" uid="uid://t7m2o5fcqxvv" path="res://scenes/ui/int_field.tscn" id="5_6m2lq"]
 
 [node name="ShopDisplay" type="CanvasLayer"]
 script = ExtResource("1_ruwgr")
@@ -162,5 +163,62 @@ horizontal_alignment = 2
 vertical_alignment = 2
 autowrap_mode = 3
 
+[node name="Possession" type="Label" parent="DescriptionRect/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(448, 84)
+layout_mode = 2
+theme = ExtResource("3_l20tj")
+theme_override_font_sizes/font_size = 32
+text = "Possesion: 0"
+vertical_alignment = 2
+autowrap_mode = 3
+
+[node name="QuantityRect" type="NinePatchRect" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = 488.0
+offset_top = 192.0
+offset_right = 556.0
+offset_bottom = 228.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_wxo1j")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="QuantityField" parent="QuantityRect" instance=ExtResource("5_6m2lq")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -14.0
+offset_top = -20.0
+offset_right = 42.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+
+[node name="Label" type="Label" parent="QuantityRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -22.0
+offset_top = -32.0
+offset_right = 23.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("3_l20tj")
+text = "Quantity:"
+
 [connection signal="pressed" from="OptionsRect/MarginContainer/HBoxContainer/Buy" to="." method="OnBuyButton"]
 [connection signal="pressed" from="OptionsRect/MarginContainer/HBoxContainer/Sell" to="." method="OnSellButton"]
+[connection signal="pressed" from="QuantityRect/QuantityField" to="." method="OnQuantityField"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ddwumkhu3bon7"]
+[gd_scene load_steps=24 format=3 uid="uid://ddwumkhu3bon7"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_ujid1"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_ehys0"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/character_dialogue_point.tscn" id="9_hrcjo"]
 [ext_resource type="SpriteFrames" uid="uid://b7q7c8vycomy0" path="res://assets/characters/movement/spriteframes/linton.tres" id="10_yrt8o"]
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="12_53b5a"]
+[ext_resource type="Texture2D" uid="uid://ssogye25ef45" path="res://assets/props/barrier.png" id="13_logau"]
 
 [sub_resource type="Animation" id="Animation_m84pa"]
 resource_name = "code_solved"
@@ -221,6 +222,18 @@ tracks/3/keys = {
 "method": &"PlayIdleAnimation"
 }]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Camera:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(968, 717)]
+}
 
 [sub_resource type="Animation" id="Animation_dr3en"]
 resource_name = "linton_7"
@@ -263,6 +276,174 @@ tracks/2/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Border1:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Border2:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Border3:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Border4:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Border5:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Border6:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Border7:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Border1/Border1Collision:disabled")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Border2/Border2Collision:disabled")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Border3/Border3Collision:disabled")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Border4/Border4Collision:disabled")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Border5/Border5Collision:disabled")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Border6/Border6Collision:disabled")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Border7/Border7Collision:disabled")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_psa2p"]
 _data = {
@@ -282,6 +463,9 @@ b = Vector2(0, 0)
 a = Vector2(0, 1024)
 b = Vector2(0, 1856)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kemv6"]
+size = Vector2(32, 32)
+
 [node name="Village4" instance=ExtResource("1_ujid1")]
 y_sort_enabled = true
 script = ExtResource("2_yr3rd")
@@ -300,6 +484,7 @@ limit_bottom = 1952
 
 [node name="Player" parent="." index="10" instance=ExtResource("2_ehys0")]
 z_index = 1
+position = Vector2(132, 308)
 
 [node name="TileMap" type="TileMap" parent="." index="11"]
 y_sort_enabled = true
@@ -329,7 +514,15 @@ TargetRoomName = "village_3"
 TargetLocation = "Section4Marker"
 PlayerDirection = 2
 
-[node name="WatchtowerWarper" parent="." index="14" instance=ExtResource("4_yvi7c")]
+[node name="ForestWarper" parent="." index="14" instance=ExtResource("4_yvi7c")]
+z_index = 2
+position = Vector2(2256, 832)
+scale = Vector2(1, 12)
+TargetRoomName = "forest_1"
+TargetLocation = "VillageMarker"
+PlayerDirection = 3
+
+[node name="WatchtowerWarper" parent="." index="15" instance=ExtResource("4_yvi7c")]
 z_index = 2
 position = Vector2(1200, 754)
 TargetRoomName = "watchtower_1"
@@ -337,19 +530,22 @@ TargetLocation = "EnterMarker"
 PlayerDirection = 1
 Active = false
 
-[node name="Section3Marker" type="Marker2D" parent="." index="15"]
+[node name="Section3Marker" type="Marker2D" parent="." index="16"]
 position = Vector2(40, 800)
 
-[node name="WatchtowerMarker" type="Marker2D" parent="." index="16"]
+[node name="WatchtowerMarker" type="Marker2D" parent="." index="17"]
 position = Vector2(1200, 800)
 
-[node name="Glitch" type="Sprite2D" parent="." index="17"]
+[node name="ForestMarker" type="Marker2D" parent="." index="18"]
+position = Vector2(2200, 800)
+
+[node name="Glitch" type="Sprite2D" parent="." index="19"]
 z_index = 2
 position = Vector2(1176, 712)
 scale = Vector2(2, 2)
 texture = ExtResource("6_87sv2")
 
-[node name="CodeProblemPoint" parent="." index="18" instance=ExtResource("7_nooi4")]
+[node name="CodeProblemPoint" parent="." index="20" instance=ExtResource("7_nooi4")]
 z_index = 2
 position = Vector2(1176, 754)
 scale = Vector2(2, 1)
@@ -372,10 +568,10 @@ SolvableAreas = {
 }
 UseInventory = true
 
-[node name="SavePoint" parent="." index="19" instance=ExtResource("8_h5iky")]
+[node name="SavePoint" parent="." index="21" instance=ExtResource("8_h5iky")]
 position = Vector2(1368, 752)
 
-[node name="Linton" parent="." index="20" instance=ExtResource("9_hrcjo")]
+[node name="Linton" parent="." index="22" instance=ExtResource("9_hrcjo")]
 z_index = 1
 DialogueResource = ExtResource("3_3hq0k")
 DialogueTitle = "linton_point"
@@ -386,11 +582,96 @@ position = Vector2(0, -16)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("10_yrt8o")
 
-[node name="DummyDialogue" parent="." index="21" instance=ExtResource("12_53b5a")]
+[node name="DummyDialogue" parent="." index="23" instance=ExtResource("12_53b5a")]
 z_index = 2
 position = Vector2(951, 694)
 DialogueResource = ExtResource("3_3hq0k")
 DialogueTitle = "dummy_point"
 
+[node name="Border1" type="StaticBody2D" parent="." index="26" groups=["border"]]
+z_index = 1
+position = Vector2(1904, 720)
+
+[node name="Border1Collision" type="CollisionShape2D" parent="Border1" index="0"]
+shape = SubResource("RectangleShape2D_kemv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Border1" index="1"]
+position = Vector2(2.77162e-06, -9.53674e-07)
+scale = Vector2(2, 2)
+texture = ExtResource("13_logau")
+
+[node name="Border2" type="StaticBody2D" parent="." index="27" groups=["border"]]
+z_index = 1
+position = Vector2(1904, 752)
+
+[node name="Border2Collision" type="CollisionShape2D" parent="Border2" index="0"]
+shape = SubResource("RectangleShape2D_kemv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Border2" index="1"]
+position = Vector2(2.77162e-06, -9.53674e-07)
+scale = Vector2(2, 2)
+texture = ExtResource("13_logau")
+
+[node name="Border3" type="StaticBody2D" parent="." index="28" groups=["border"]]
+z_index = 1
+position = Vector2(1904, 784)
+
+[node name="Border3Collision" type="CollisionShape2D" parent="Border3" index="0"]
+shape = SubResource("RectangleShape2D_kemv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Border3" index="1"]
+position = Vector2(2.77162e-06, -9.53674e-07)
+scale = Vector2(2, 2)
+texture = ExtResource("13_logau")
+
+[node name="Border4" type="StaticBody2D" parent="." index="29" groups=["border"]]
+z_index = 1
+position = Vector2(1904, 816)
+
+[node name="Border4Collision" type="CollisionShape2D" parent="Border4" index="0"]
+shape = SubResource("RectangleShape2D_kemv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Border4" index="1"]
+position = Vector2(2.77162e-06, -9.53674e-07)
+scale = Vector2(2, 2)
+texture = ExtResource("13_logau")
+
+[node name="Border5" type="StaticBody2D" parent="." index="30" groups=["border"]]
+z_index = 1
+position = Vector2(1904, 848)
+
+[node name="Border5Collision" type="CollisionShape2D" parent="Border5" index="0"]
+shape = SubResource("RectangleShape2D_kemv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Border5" index="1"]
+position = Vector2(2.77162e-06, -9.53674e-07)
+scale = Vector2(2, 2)
+texture = ExtResource("13_logau")
+
+[node name="Border6" type="StaticBody2D" parent="." index="31" groups=["border"]]
+z_index = 1
+position = Vector2(1904, 880)
+
+[node name="Border6Collision" type="CollisionShape2D" parent="Border6" index="0"]
+shape = SubResource("RectangleShape2D_kemv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Border6" index="1"]
+position = Vector2(2.77162e-06, -9.53674e-07)
+scale = Vector2(2, 2)
+texture = ExtResource("13_logau")
+
+[node name="Border7" type="StaticBody2D" parent="." index="32" groups=["border"]]
+z_index = 1
+position = Vector2(1904, 912)
+
+[node name="Border7Collision" type="CollisionShape2D" parent="Border7" index="0"]
+shape = SubResource("RectangleShape2D_kemv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Border7" index="1"]
+position = Vector2(2.77162e-06, -9.53674e-07)
+scale = Vector2(2, 2)
+texture = ExtResource("13_logau")
+
+[connection signal="BattleEnded" from="BattleDisplay" to="." method="OnBattleFinished"]
 [connection signal="TurnFinished" from="BattleDisplay" to="." method="OnTurnFinished"]
 [connection signal="ProblemSolved" from="CodeProblemPoint" to="." method="OnCodeSolved"]

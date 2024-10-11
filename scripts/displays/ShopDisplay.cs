@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Linq;
 using TheWizardCoder.Abstractions;
 using TheWizardCoder.Autoload;
 using TheWizardCoder.Data;
@@ -15,13 +16,17 @@ public partial class ShopDisplay : Display
 	private TextureRect background;
 	private NinePatchRect optionsRect;
 	private NinePatchRect descriptionRect;
+	private NinePatchRect quantityRect;
 	private GridContainer itemsContainer;
 	private Label gold;
 	private Label description;
+	private Label possessionLabel;
 	private Label priceLabel;
 	private Button buyButton;
 	private Label shopHint;
+	private IntField quantityField;
 	private int level = 0;
+	private string chosenItem;
 
 	public Shop Shop { get; private set; }
 
@@ -37,8 +42,11 @@ public partial class ShopDisplay : Display
 		gold = GetNode<Label>("%Gold");
 		description = GetNode<Label>("%Description");
 		priceLabel = GetNode<Label>("%Price");
+		possessionLabel = GetNode<Label>("%Possession");
 		buyButton = GetNode<Button>("%Buy");
 		shopHint = GetNode<Label>("%ShopHint");
+		quantityRect = GetNode<NinePatchRect>("%QuantityRect");
+		quantityField = GetNode<IntField>("%QuantityField");
 	}
 
     public override void _Process(double delta)
@@ -85,6 +93,7 @@ public partial class ShopDisplay : Display
 		UpdateDisplay();
 		itemsContainer.Hide();
 		descriptionRect.Hide();
+		quantityRect.Hide();
 
 		shopHint.Show();
 		buyButton.GrabFocus();
@@ -143,11 +152,13 @@ public partial class ShopDisplay : Display
 
 	private void ShowDescription(string itemName)
 	{
+		int possession = global.PlayerData.Inventory.Count(x => x == itemName);
 		Item item = global.ItemDescriptions[itemName];
 
 		descriptionRect.Show();
 		description.Text = item.Description;
 		priceLabel.Text = $"Price: {item.Price}";
+		possessionLabel.Text = $"Possesion: {possession}";
 	}
 
 	private Button UpdateShopItems()
@@ -228,11 +239,10 @@ public partial class ShopDisplay : Display
 			case ShopAction.Buy:
 				if (item.Price <= global.PlayerData.Gold && item.Sellable)
 				{
-					global.PlayerData.Gold -= item.Price;
-					global.AddToInventory(itemName);
-					UpdateDisplay();
-					ShowDisplay();
-					level = 0;
+					chosenItem = itemName;
+					quantityRect.Show();
+					quantityField.Reset();
+					quantityField.GrabFocus();
 				}
 				break;
 			case ShopAction.Sell:
@@ -242,6 +252,23 @@ public partial class ShopDisplay : Display
 				ShowDisplay();
 				level = 0;
 				break;
+		}
+	}
+
+	private void OnQuantityField()
+	{
+		Item item = global.ItemDescriptions[chosenItem];
+		int totalPrice = item.Price * quantityField.Value;
+		if (global.PlayerData.Gold >= totalPrice)
+		{
+			global.PlayerData.Gold -= totalPrice;
+			for (int i = 0; i < quantityField.Value; i++)
+			{
+				global.AddToInventory(chosenItem);
+			}
+			UpdateDisplay();
+			ShowDisplay();
+			level = 0;
 		}
 	}
 }
