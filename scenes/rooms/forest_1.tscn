@@ -36,17 +36,28 @@ scale = Vector2(1, 7)
 TargetRoomName = "village_4"
 TargetLocation = "ForestMarker"
 
-[node name="VillageMarker" type="Marker2D" parent="." index="15"]
+[node name="VillageWarper2" parent="." index="15" instance=ExtResource("4_5x3c7")]
+z_index = 2
+position = Vector2(2352, 480)
+scale = Vector2(1, 12)
+TargetRoomName = "forest_2"
+TargetLocation = "Section1Marker"
+PlayerDirection = 3
+
+[node name="VillageMarker" type="Marker2D" parent="." index="16"]
 position = Vector2(64, 449)
 
-[node name="GroundEnemy" parent="." index="16" instance=ExtResource("5_khl1p")]
+[node name="Section2Marker" type="Marker2D" parent="." index="17"]
+position = Vector2(2272, 449)
+
+[node name="GroundEnemy" parent="." index="18" instance=ExtResource("5_khl1p")]
 z_index = 1
 position = Vector2(720, 344)
 
-[node name="GroundEnemy2" parent="." index="17" instance=ExtResource("5_khl1p")]
+[node name="GroundEnemy2" parent="." index="19" instance=ExtResource("5_khl1p")]
 z_index = 1
 position = Vector2(1232, 552)
 
-[node name="GroundEnemy3" parent="." index="18" instance=ExtResource("5_khl1p")]
+[node name="GroundEnemy3" parent="." index="20" instance=ExtResource("5_khl1p")]
 z_index = 1
 position = Vector2(1848, 344)
