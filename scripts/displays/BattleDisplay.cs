@@ -109,6 +109,16 @@ namespace TheWizardCoder.Displays
 
 		private void Clear()
 		{
+			global.PlayerData.Gold += 50;
+			for (int i = 0; i < Allies.Characters.Count; i++)
+			{
+				CharacterData character = Allies.Characters[i].Character;
+				if (character.Health <= 0)
+				{
+					character.Health = 5;
+				}
+			}
+
 			Allies.Clear();
 			Enemies.Clear();
 		}
@@ -166,19 +176,30 @@ namespace TheWizardCoder.Displays
 			IsTutorial = false;
 			battleOptions.ShowInfoLabel("You won! 50 Gold obtained.");
 
+			await StartTransition();
+			
+			Hide();
+			battleOptions.HideDisplay();	
+			
+			Clear();
+
+			global.CanWalk = true;
+			global.GameDisplayEnabled = true;
+			await EndTransition();
+			EmitSignal(SignalName.BattleEnded);
+		}
+
+		private async Task StartTransition()
+		{
 			SceneTreeTimer timer = GetTree().CreateTimer(2);
 			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
 			global.CurrentRoom.TransitionRect.PlayAnimation();
 			await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
-			Hide();
-			battleOptions.HideDisplay();
-			Clear();
-			global.PlayerData.Gold += 50;
+		}
 
-			global.CanWalk = true;
-			global.GameDisplayEnabled = true;
+		private async Task EndTransition()
+		{
 			global.CurrentRoom.TransitionRect.PlayAnimationBackwards();
-			EmitSignal(SignalName.BattleEnded);
 		}
 	}
 }

@@ -2,10 +2,11 @@
 Narrator: Loading TheWizardCoder..
 Narrator: Would you like to read the instructions? (y/n)
 - y
-	Narrator: Okay. This is an experimental software. 
-	Narrator: This software will test opening a socket to another 'world'
-	Narrator: You will also test controlling a being from that world.
-	Narrator: Your task is to prevent attacks and preserve the ecosystem.
+	Narrator: Okay. Here are the controls:
+	Narrator: [Z or Enter] -  Interact/Confirm
+	Narrator: [X or Escape] - Close Menu/Cancel
+	Narrator: You may also see puzzles that require movement of the mouse. 
+	Narrator: Drag the item into the correct place using your mouse. 
 - n
 	Narrator: Instructions skipped..
 Narrator: [#input] How will you name this file?

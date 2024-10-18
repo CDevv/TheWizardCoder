@@ -103,8 +103,19 @@ namespace TheWizardCoder.Displays
 						}
 						else
 						{
-							userInput += inputKey.AsTextKeycode();
-							label.Text += inputKey.AsTextKeycode();
+							RegEx regEx = RegEx.CreateFromString("[^A-Za-z0-9]");
+							char keyChar = (char)inputKey.Unicode;
+							if (char.IsLetter(keyChar))
+							{
+								userInput += inputKey.AsTextKeycode();
+								label.Text += inputKey.AsTextKeycode();
+							}
+
+							if (inputKey.Keycode == Key.Backspace)
+							{
+								userInput = userInput.Substring(0, userInput.Length - 1);
+								label.Text = label.Text.Substring(0, label.Text.Length - 1);
+							}
 						}
 					}
 				}

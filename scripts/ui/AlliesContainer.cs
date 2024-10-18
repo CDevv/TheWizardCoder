@@ -86,7 +86,24 @@ namespace TheWizardCoder.UI
 			else
 			{
 				alliesCards[currentCharacter-1].HideBackground();
-				StartTurn();
+				if (allies[currentCharacter].Character.Health > 0)
+				{
+					StartTurn();
+				}
+				else
+				{
+					currentCharacter++;
+
+					if (currentCharacter < allies.Count)
+					{
+						StartTurn();
+					}
+					else
+					{
+						currentCharacter = 0;
+						await BattleDisplay.Routine();
+					}
+				}
 			}
 		}
 
@@ -99,6 +116,12 @@ namespace TheWizardCoder.UI
 
 			CharacterBattleState state = allies[i];
 			CharacterData ally = state.Character;
+
+			if (ally.Health <= 0)
+			{
+				return;
+			}
+
 			switch (allies[i].Action)
 			{
 				case CharacterAction.Attack:
@@ -196,15 +219,22 @@ namespace TheWizardCoder.UI
 		public async Task DamageRandomAlly(string enemyName, int damage)
 		{
 			int targetIndex = (int)(GD.Randi() % allies.Count);
+			CharacterBattleState targetState = allies[targetIndex];
 
-			if (allies[targetIndex].Action == CharacterAction.Defend)
+			while (targetState.Character.Health <= 0)
 			{
-				damage = Mathf.Clamp(damage - allies[targetIndex].Character.DefensePoints, 0, damage);
+				targetIndex = (int)(GD.Randi() % allies.Count);
+				targetState = allies[targetIndex];
 			}
-			allies[targetIndex].Character.Health -= damage;
+
+			if (targetState.Action == CharacterAction.Defend)
+			{
+				damage = Mathf.Clamp(damage - targetState.Character.DefensePoints, 0, damage);
+			}
+			targetState.Character.Health -= damage;
 
 			//Visuals
-			BattleOptions.ShowInfoLabel($"{enemyName} attacks {allies[targetIndex].Character.Name}!");
+			BattleOptions.ShowInfoLabel($"{enemyName} attacks {targetState.Character.Name}!");
 			await DisplayHealthChange(targetIndex, -damage);
 		}
 
