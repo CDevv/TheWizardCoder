@@ -39,6 +39,7 @@ namespace TheWizardCoder.Rooms
 		{
 			await PlayCutscene("code_solved");
 			global.PlayerData.AddToInventory("'r'");
+			global.PlayerData.HasSolvedTavernGlitch = true;
 		}
 	}
 }

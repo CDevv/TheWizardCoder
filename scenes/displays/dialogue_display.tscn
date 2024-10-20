@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://b8wix4lm5g767"]
+[gd_scene load_steps=44 format=3 uid="uid://b8wix4lm5g767"]
 
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_q5vyp"]
 [ext_resource type="Script" path="res://scripts/displays/DialogueDisplay.cs" id="1_u23wf"]
@@ -11,7 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://b82ubblioamoo" path="res://assets/characters/portraits/nara.png" id="5_iw7gq"]
 [ext_resource type="Texture2D" uid="uid://dojurbs5k8wnd" path="res://assets/characters/portraits/dudeley.png" id="5_k3maw"]
 [ext_resource type="Texture2D" uid="uid://qbru1t4okg4k" path="res://assets/characters/portraits/zenith.png" id="5_wun3d"]
+[ext_resource type="Texture2D" uid="uid://cg4abd46clb5w" path="res://assets/characters/portraits/gertrude.png" id="6_3iyw6"]
 [ext_resource type="Texture2D" uid="uid://c8jyb05cf4i13" path="res://assets/characters/portraits/linton.png" id="6_87rob"]
+[ext_resource type="Texture2D" uid="uid://5evvqmuv2ujj" path="res://assets/characters/portraits/nobe.png" id="10_ye061"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8h35u"]
 atlas = ExtResource("4_mfeyw")
@@ -40,6 +42,14 @@ region = Rect2(48, 0, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_2mmva"]
 atlas = ExtResource("5_k3maw")
 region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5vtv"]
+atlas = ExtResource("6_3iyw6")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jq1dl"]
+atlas = ExtResource("6_3iyw6")
+region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p1wo0"]
 atlas = ExtResource("4_7t36c")
@@ -152,6 +162,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_i5vtv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jq1dl")
+}],
+"loop": true,
+"name": &"gertrude",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_p1wo0")
 }, {
 "duration": 1.0,
@@ -196,6 +217,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"nara",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_ye061")
+}],
+"loop": true,
+"name": &"nobe",
 "speed": 5.0
 }, {
 "frames": [{
