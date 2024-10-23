@@ -3,21 +3,20 @@ using Godot.Collections;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TheWizardCoder.Abstractions;
 using TheWizardCoder.Autoload;
 using TheWizardCoder.Data;
 using TheWizardCoder.Displays;
 
 namespace TheWizardCoder.UI
 {
-	public partial class EnemiesContainer : Node
+	public partial class EnemiesContainer : CharactersContainer
 	{
 		[Signal]
 		public delegate void EnemyPressedEventHandler(int index);
 
 		[Export]
 		public AlliesContainer Allies { get; set; }
-		[Export]
-		public BattleDisplay BattleDisplay { get; set; }
 		[Export]
 		public EnemyHealthBar EnemyHealthBar { get; set; }
 		[Export]
@@ -27,39 +26,33 @@ namespace TheWizardCoder.UI
 		[Export]
 		public PackedScene EnemySpriteScene { get; set; }
 
-		private Global global;
 		private Vector2 enemySpritePoint = Vector2.Zero;
 
 		private Array<EnemySprite> enemySprites = new();
-		private List<CharacterBattleState> enemies = new();
 
-		public List<CharacterBattleState> Characters
-		{
-			get { return enemies; }
-		}
 
 		public override void _Ready()
 		{
-			global = GetNode<Global>("/root/Global");
+			base._Ready();
 			enemySpritePoint = BaseEnemyPosition.Position;
 		}
 
-		public void AddEnemy(CharacterData data)
+		public override void AddCharacter(CharacterData character)
 		{
-			int currentIndex = enemySprites.Count;
+			base.AddCharacter(character);
+
+			int currentIndex = Characters.Count - 1;
 
 			EnemySprite enemySprite = EnemySpriteScene.Instantiate<EnemySprite>();
-			enemySprite.Position = enemySpritePoint;
-			
 			BattleDisplay.AddChild(enemySprite);
-			enemySprite.ApplyData(data);
+
+			enemySprite.Position = enemySpritePoint;
+			enemySprite.ApplyData(character);
 			enemySprite.ButtonPressed += () => {			
 				EmitSignal(SignalName.EnemyPressed, currentIndex);
 			};
-			enemySprites.Add(enemySprite);
 
-			CharacterBattleState state = new(data, currentIndex);
-			enemies.Add(state);
+			enemySprites.Add(enemySprite);
 		}
 
 		public void FocusOnFirst()
@@ -67,63 +60,47 @@ namespace TheWizardCoder.UI
 			enemySprites[0].GrabFocus();
 		}
 
-		public async Task EnemyTurn(int i)
+		public override async Task Turn(int index)
 		{
 			if (BattleDisplay.IsBattleEnded)
 			{
 				return;
 			}
-			GD.Print(enemies.Count);
-			await Allies.DamageRandomAlly(enemies[i].Character.Name, enemies[i].Character.AttackPoints);
+
+			int targetIndex = (int)(GD.Randi() % Allies.Characters.Count);
+			string enemyName = Characters[index].Name;
+
+			BattleOptions.ShowInfoLabel($"{enemyName} attacks {Allies.Characters[targetIndex].Name}!");
+			await Allies.DamageCharacter(targetIndex, Characters[index].AttackPoints);
 		}
 
-		public async Task EnemiesTurn()
-		{
-			for (int i = 0; i < enemies.Count; i++)
-			{
-				if (BattleDisplay.IsBattleEnded)
-				{
-					break;
-				}
+		public override void OnNextCharacterPassed()
+        {
+            throw new NotImplementedException();
+        }
 
-				await Allies.DamageRandomAlly(enemies[i].Character.Name, enemies[i].Character.AttackPoints);
-			}
+		public override async Task DamageCharacter(int index, int damage)
+		{			
+			await DisplayHealthChange(index, damage);
+			await base.DamageCharacter(index, damage);
 		}
 
-		public string GetEnemyName(int index)
+		public override async Task DisplayHealthChange(int index, int change)
 		{
-			return enemies[index].Character.Name;
-		}
-
-		public async Task DamageEnemy(int index, int damage)
-		{
-			CharacterData enemyData = enemies[index].Character;
+			CharacterData enemyData = Characters[index];
 			EnemySprite sprite = enemySprites[index];
-			
-			DamageIndicator.PlayAnimation(damage, sprite.Position - new Vector2(DamageIndicator.Size.X, 10), new Color(255, 0, 0));
+
+			DamageIndicator.PlayAnimation(change, sprite.Position - new Vector2(DamageIndicator.Size.X, 10), new Color(255, 0, 0));
 
 			Vector2 barPosition = sprite.Position - new Vector2(EnemyHealthBar.Size.X/2, -20);
 			EnemyHealthBar.Position = barPosition;
-			await EnemyHealthBar.ShowHealthBar(enemyData.Health, enemyData.Health - damage, enemyData.MaxHealth);
-
-			enemyData.Health -= damage;
-			enemies[index].Character = enemyData;
+			await EnemyHealthBar.ShowHealthBar(enemyData.Health, enemyData.Health - change, enemyData.MaxHealth);
 		}
 
-		public int GetTotalHealth()
+		public override void Clear()
 		{
-			int result = 0;
-			foreach(CharacterBattleState state in enemies)
-			{
-				result += state.Character.Health;
-			}
-			return result;
-		}
-
-		public void Clear()
-		{
-			enemies.Clear();
+			base.Clear();
 			enemySprites.Clear();
 		}
-	}
+    }
 }

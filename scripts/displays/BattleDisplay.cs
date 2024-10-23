@@ -75,12 +75,12 @@ namespace TheWizardCoder.Displays
 		{
 			IsBattleEnded = false;
 			//Add allies
-			Allies.AddAlly(global.PlayerData.Stats);
+			Allies.AddCharacter(global.PlayerData.Stats);
 			if (global.PlayerData.Allies.Count > 0)
 			{
 				foreach (CharacterData ally in global.PlayerData.Allies)
 				{
-					Allies.AddAlly(ally);
+					Allies.AddCharacter(ally);
 				}
 			}
 
@@ -88,7 +88,7 @@ namespace TheWizardCoder.Displays
 			foreach (string enemyName in enemies)
 			{
 				CharacterData newEnemy = global.Characters[enemyName];
-				Enemies.AddEnemy(newEnemy);
+				Enemies.AddCharacter(newEnemy);
 			}
 
 			global.CurrentRoom.TransitionRect.PlayAnimation();
@@ -112,7 +112,7 @@ namespace TheWizardCoder.Displays
 			global.PlayerData.Gold += 50;
 			for (int i = 0; i < Allies.Characters.Count; i++)
 			{
-				CharacterData character = Allies.Characters[i].Character;
+				CharacterData character = Allies.Characters[i];
 				if (character.Health <= 0)
 				{
 					character.Health = 5;
@@ -128,8 +128,8 @@ namespace TheWizardCoder.Displays
 			invisButton.GrabFocus();
 
 			List<CharacterBattleState> participants = new();
-			participants.AddRange(Allies.Characters);
-			participants.AddRange(Enemies.Characters);
+			participants.AddRange(Allies.BattleStates);
+			participants.AddRange(Enemies.BattleStates);
 			participants = participants.OrderByDescending((p) => p.Character.AgilityPoints).ToList();
 
 			foreach (CharacterBattleState participant in participants)
@@ -137,10 +137,10 @@ namespace TheWizardCoder.Displays
 				switch (participant.Character.Type)
 				{
 					case CharacterType.Ally:
-						await Allies.AllyTurn(participant.InternalIndex);
+						await Allies.Turn(participant.InternalIndex);
 						break;
 					case CharacterType.Enemy:
-						await Enemies.EnemyTurn(participant.InternalIndex);
+						await Enemies.Turn(participant.InternalIndex);
 						break;
 				}
 

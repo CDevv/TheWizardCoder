@@ -27,21 +27,22 @@ EnemySpriteScene = ExtResource("3_xj7hs")
 Allies = NodePath("AlliesContainer")
 Enemies = NodePath("EnemiesContainer")
 
-[node name="AlliesContainer" parent="." node_paths=PackedStringArray("Enemies", "DamageIndicator", "BattleOptions", "BattleDisplay", "BaseCardPosition") instance=ExtResource("8_xfudy")]
+[node name="AlliesContainer" parent="." node_paths=PackedStringArray("Enemies", "DamageIndicator", "BaseCardPosition", "BattleDisplay", "BattleOptions") instance=ExtResource("8_xfudy")]
 Enemies = NodePath("../EnemiesContainer")
 DamageIndicator = NodePath("../DamageIndicator")
-BattleOptions = NodePath("../BattleOptions")
-BattleDisplay = NodePath("..")
 BaseCardPosition = NodePath("../RectPoint")
 CharacterRectScene = ExtResource("3_xy74d")
-
-[node name="EnemiesContainer" parent="." node_paths=PackedStringArray("Allies", "BattleDisplay", "EnemyHealthBar", "DamageIndicator", "BaseEnemyPosition") instance=ExtResource("9_aigq0")]
-Allies = NodePath("../AlliesContainer")
 BattleDisplay = NodePath("..")
+BattleOptions = NodePath("../BattleOptions")
+
+[node name="EnemiesContainer" parent="." node_paths=PackedStringArray("Allies", "EnemyHealthBar", "DamageIndicator", "BaseEnemyPosition", "BattleDisplay", "BattleOptions") instance=ExtResource("9_aigq0")]
+Allies = NodePath("../AlliesContainer")
 EnemyHealthBar = NodePath("../EnemyHealthBar")
 DamageIndicator = NodePath("../DamageIndicator")
 BaseEnemyPosition = NodePath("../EnemySpritePoint")
 EnemySpriteScene = ExtResource("3_xj7hs")
+BattleDisplay = NodePath("..")
+BattleOptions = NodePath("../BattleOptions")
 
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 640.0
