@@ -9,10 +9,11 @@
 y_sort_enabled = true
 
 [node name="Camera" parent="." index="5"]
-limit_right = 1296
-limit_bottom = 1152
+limit_right = 1152
+limit_bottom = 992
 
 [node name="Player" parent="." index="12" instance=ExtResource("2_elp0f")]
+z_index = 1
 position = Vector2(40, 280)
 
 [node name="TileMap" type="TileMap" parent="." index="13"]

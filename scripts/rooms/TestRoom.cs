@@ -7,12 +7,12 @@ namespace TheWizardCoder.Rooms
 {
 	public partial class TestRoom : BaseRoom
 	{
-        public override void _Ready()
-        {
-            base._Ready();
-        }
+		public override void _Ready()
+		{
+			base._Ready();
+		}
 
-        private async void TestCutscene()
+		private async void TestCutscene()
 		{
 			await PlayCutscene("test_anim");
 			//testDummy.MakeFollower();

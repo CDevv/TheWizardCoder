@@ -26,9 +26,21 @@ layer_1/tile_data = PackedInt32Array(0, 1179649, 3, 65536, 1179649, 4, 131072, 1
 
 [node name="Player" parent="." index="13" instance=ExtResource("3_fsb33")]
 z_index = 1
+position = Vector2(544, 312)
+
+[node name="Section9Marker" type="Marker2D" parent="." index="14"]
+position = Vector2(56, 1408)
+
+[node name="SideMarker" type="Marker2D" parent="." index="15"]
+position = Vector2(1344, 368)
+
+[node name="Section11Marker" type="Marker2D" parent="." index="16"]
 position = Vector2(880, 24)
 
-[node name="Warper" parent="." index="14" instance=ExtResource("4_v076h")]
+[node name="Section9Marker2" type="Marker2D" parent="." index="17"]
+position = Vector2(40, 384)
+
+[node name="Warper" parent="." index="18" instance=ExtResource("4_v076h")]
 z_index = 2
 position = Vector2(-16, 1440)
 scale = Vector2(1, 12)
@@ -36,16 +48,7 @@ TargetRoomName = "forest_9"
 TargetLocation = "Section10Marker"
 PlayerDirection = 2
 
-[node name="Section9Marker" type="Marker2D" parent="." index="15"]
-position = Vector2(56, 1408)
-
-[node name="SideMarker" type="Marker2D" parent="." index="16"]
-position = Vector2(1344, 368)
-
-[node name="Section11Marker" type="Marker2D" parent="." index="17"]
-position = Vector2(880, 24)
-
-[node name="SideWarper" parent="." index="18" instance=ExtResource("4_v076h")]
+[node name="SideWarper" parent="." index="19" instance=ExtResource("4_v076h")]
 z_index = 2
 position = Vector2(1392, 384)
 scale = Vector2(1, 12)
@@ -53,10 +56,18 @@ TargetRoomName = "forest_10_side"
 TargetLocation = "Section10Marker"
 PlayerDirection = 3
 
-[node name="Section11Warper" parent="." index="19" instance=ExtResource("4_v076h")]
+[node name="Section11Warper" parent="." index="20" instance=ExtResource("4_v076h")]
 z_index = 2
 position = Vector2(880, -16)
 scale = Vector2(12, 1)
 TargetRoomName = "forest_11"
 TargetLocation = "Section10Marker"
 PlayerDirection = 1
+
+[node name="Section9Warper2" parent="." index="21" instance=ExtResource("4_v076h")]
+z_index = 2
+position = Vector2(-16, 400)
+scale = Vector2(1, 12)
+TargetRoomName = "forest_9"
+TargetLocation = "Section10Marker2"
+PlayerDirection = 2

@@ -41,11 +41,11 @@ z_index = 2
 position = Vector2(3136, -16)
 scale = Vector2(12, 1)
 TargetRoomName = "forest_side_path_2"
-TargetLocation = "Path1Marker"
+TargetLocation = "Side1Marker"
 PlayerDirection = 1
 
 [node name="Section7Marker" type="Marker2D" parent="." index="16"]
 position = Vector2(3776, 1664)
 
-[node name="Path2Marker" type="Marker2D" parent="." index="17"]
+[node name="Side2Marker" type="Marker2D" parent="." index="17"]
 position = Vector2(3136, 24)
