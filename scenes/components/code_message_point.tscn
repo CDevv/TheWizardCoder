@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcec1jvlgi5m4"]
+
+[ext_resource type="Script" path="res://scripts/interactables/CodeMessagePoint.cs" id="1_owdil"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5diml"]
+size = Vector2(32, 32)
+
+[node name="CodeMessagePoint" type="Area2D"]
+script = ExtResource("1_owdil")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5diml")
+debug_color = Color(0.249202, 0.109483, 0.457752, 0.42)

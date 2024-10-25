@@ -13,13 +13,13 @@ namespace TheWizardCoder.Data
         public ItemType Type { get; set; }
         public int Price { get; set; }
         public bool Sellable { get; set; }
+        public string[] AdditionalData { get; set; }
 
         public void ApplyDictionary(Dictionary<string, Variant> dict)
         {
-            Name = (string)dict["Name"];
             Description = (string)dict["Description"];
             Effect = (int)dict["Effect"];
-            Type = Enum.Parse<ItemType>((string)dict["Type"]);
+            Type = Enum.Parse<ItemType>((string)dict["Type"]);          
 
             if (dict.ContainsKey("Price"))
             {
@@ -30,7 +30,11 @@ namespace TheWizardCoder.Data
             {
                 Sellable = false;
             }
-            
+
+            if (Type == ItemType.Key)
+            {
+                AdditionalData = (string[])dict["AdditionalData"];
+            }         
         }
     }
 }

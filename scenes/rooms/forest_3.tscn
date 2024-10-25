@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk7oeyci1a4c0"]
+[gd_scene load_steps=7 format=3 uid="uid://bk7oeyci1a4c0"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_1xi4c"]
+[ext_resource type="Script" path="res://scripts/rooms/Forest3.cs" id="2_eklv3"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_uf4js"]
 [ext_resource type="TileSet" uid="uid://b5gmhkessquy0" path="res://tilesets/forest_environment.tres" id="3_1y4wy"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_ghuoe"]
@@ -8,6 +9,7 @@
 
 [node name="Forest3" instance=ExtResource("1_1xi4c")]
 y_sort_enabled = true
+script = ExtResource("2_eklv3")
 
 [node name="Camera" parent="." index="5"]
 limit_right = 4288

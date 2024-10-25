@@ -121,6 +121,16 @@ namespace TheWizardCoder.Displays
 				action = MenuAction.Items;
 				ChangeSubdisplay("PartyMembers");
 			}
+			else if (item.Type == ItemType.Key)
+			{
+				if (item.AdditionalData.Length > 0)
+				{
+					global.CurrentRoom.Get(item.AdditionalData[0]).As<Node>().Call("ShowDisplay", item.AdditionalData[1]);
+					level = 0;
+					HideDisplay();
+					HideAllSubdisplays();
+				}
+			}
 		}
 
 		private void OnStatusMenu()

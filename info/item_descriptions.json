@@ -1,46 +1,119 @@
 {
 	"item":{
-		"Name":"item",
 		"Description":"Description",
 		"Type": "Heal",
 		"Effect": 15,
 		"Price": 10,
 	},
 	"Apple":{
-		"Name": "Apple",
 		"Description":"Apple from Nara.",
 		"Type": "Heal",
 		"Effect": 10,
 		"Price": 20,
 	},
 	"'s'":{
-		"Name": "'s'",
 		"Description":"return 's';",
 		"Type": "Key",
 		"Effect": 0,
+		"AdditionalData": []
 	},
 	"'t'":{
-		"Name": "'t'",
 		"Description":"return 't';",
 		"Type": "Key",
 		"Effect": 0,
+		"AdditionalData": []
 	},
 	"'a'":{
-		"Name": "'a'",
 		"Description":"return 'a';",
 		"Type": "Key",
 		"Effect": 0,
+		"AdditionalData": []
 	},
 	"'r'":{
-		"Name": "'r'",
 		"Description":"return 'r';",
 		"Type": "Key",
 		"Effect": 0,
+		"AdditionalData": []
 	},
 	"Nobe's key":{
-		"Name": "Nobe's key",
 		"Description":"A key that you found within a village house",
 		"Type": "Key",
 		"Effect": 0,
+		"AdditionalData": []
+	},
+	"ForestInstructions1.cs":{
+		"Description":"Instructions.",
+		"Type": "Key",
+		"Effect": 0,
+		"AdditionalData": ["CodeMessage",
+		"GoRight();
+		"]
+	},
+	"ForestInstructions2.cs":{
+		"Description":"Instructions.",
+		"Type": "Key",
+		"Effect": 0,
+		"AdditionalData": ["CodeMessage",
+		"GoRight();
+GoUp();
+		"]
+	},
+	"ForestInstructions3.cs":{
+		"Description":"Instructions.",
+		"Type": "Key",
+		"Effect": 0,
+		"AdditionalData": ["CodeMessage",
+		"GoUp();
+GoLeft();
+GoLeft();
+GoUp();
+		"]
+	},
+	"ForestInstructions4.cs":{
+		"Description":"Instructions.",
+		"Type": "Key",
+		"Effect": 0,
+		"AdditionalData": ["CodeMessage",
+		"GoUp();
+GoRight();
+GoUp();
+		"]
+	},
+	"ForestInstructions5.cs":{
+		"Description":"Instructions.",
+		"Type": "Key",
+		"Effect": 0,
+		"AdditionalData": ["CodeMessage",
+		"GoUp();
+GoRight();
+GoUp();
+GoUp();
+		"]
+	},
+	"ForestInstructions6.cs":{
+		"Description":"Instructions.",
+		"Type": "Key",
+		"Effect": 0,
+		"AdditionalData": ["CodeMessage",
+		"GoUp();
+GoRight();
+GoDown();
+GoRight();
+GoDown();
+GoRight();
+		"]
+	},
+	"ForestInstructions7.cs":{
+		"Description":"Instructions.",
+		"Type": "Key",
+		"Effect": 0,
+		"AdditionalData": ["CodeMessage",
+		"GoRight();
+GoUp();
+GoUp();
+GoLeft();
+GoUp();
+MeetGertrude();
+		"]
 	},
 }

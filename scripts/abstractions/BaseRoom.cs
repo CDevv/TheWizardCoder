@@ -31,6 +31,7 @@ namespace TheWizardCoder.Abstractions
 		public DialogueDisplay Dialogue { get; set; }
 		public GameOverDisplay GameOverDisplay { get; set; }
 		public ShopDisplay ShopDisplay { get; set; }
+		public CodeMessageDisplay CodeMessage { get; set; }
 		public Player Player { get; set; }
 		public Camera2D Camera { get; set; }
 
@@ -52,6 +53,7 @@ namespace TheWizardCoder.Abstractions
 			Dialogue = GetNode<DialogueDisplay>("Dialogue");
 			GameOverDisplay = GetNode<GameOverDisplay>("GameOverDisplay");
 			ShopDisplay = GetNode<ShopDisplay>("ShopDisplay");
+			CodeMessage = GetNode<CodeMessageDisplay>("CodeMessageDisplay");
 			Player = GetNode<Player>("Player");
 			Camera = GetNode<Camera2D>("Camera");
 

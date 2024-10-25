@@ -1,13 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxnmtnche424t"]
+[gd_scene load_steps=9 format=3 uid="uid://cxnmtnche424t"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_jqh4t"]
 [ext_resource type="TileSet" uid="uid://b5gmhkessquy0" path="res://tilesets/forest_environment.tres" id="2_4kb6i"]
+[ext_resource type="Script" path="res://scripts/rooms/Forest1.cs" id="2_6hjdj"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="3_74ghn"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_5x3c7"]
 [ext_resource type="PackedScene" uid="uid://d38oq7utuerxp" path="res://scenes/components/ground_enemy.tscn" id="5_khl1p"]
+[ext_resource type="PackedScene" uid="uid://bcec1jvlgi5m4" path="res://scenes/components/code_message_point.tscn" id="6_6qfby"]
+[ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="7_napuu"]
 
-[node name="BaseRoom" instance=ExtResource("1_jqh4t")]
+[node name="Forest1" instance=ExtResource("1_jqh4t")]
 y_sort_enabled = true
+script = ExtResource("2_6hjdj")
 
 [node name="Camera" parent="." index="5"]
 limit_right = 2336
@@ -61,3 +65,16 @@ position = Vector2(1232, 552)
 [node name="GroundEnemy3" parent="." index="20" instance=ExtResource("5_khl1p")]
 z_index = 1
 position = Vector2(1848, 344)
+
+[node name="CodeMessagePoint" parent="." index="22" instance=ExtResource("6_6qfby")]
+z_index = 2
+position = Vector2(296, 288)
+CodeText = "I see you have passed the first series of puzzles.
+Very well.
+Let's see if you can walk in directions.
+Check your files! Or in this case - items."
+
+[node name="MessageGlitch" type="Sprite2D" parent="." index="23"]
+position = Vector2(296, 288)
+scale = Vector2(2, 2)
+texture = ExtResource("7_napuu")
