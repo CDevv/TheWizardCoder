@@ -19,6 +19,7 @@ namespace TheWizardCoder.Autoload
 		public bool HasLoadedGame { get; set; } = false;
 		public bool CanWalk = true;
 		public bool GameDisplayEnabled { get; set; } = true;
+		public bool IsInShop { get; set; }
 		public bool PlayerIsOnStairs { get; set; } = false;
 		public bool StairsInverted { get; set; } = false;
 		public bool StairsGoUp { get; set; } = true;

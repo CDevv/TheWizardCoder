@@ -14,7 +14,10 @@ namespace TheWizardCoder.Interactables
 
         public override void Action()
         {
-            global.CurrentRoom.Dialogue.ShowDisplay(DialogueResource, DialogueTitle);
+            if (!global.IsInShop)
+            {
+                global.CurrentRoom.Dialogue.ShowDisplay(DialogueResource, DialogueTitle);
+            }
         }
     }
 }

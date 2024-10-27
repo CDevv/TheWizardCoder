@@ -10,7 +10,7 @@ namespace TheWizardCoder.Displays
 	public partial class DialogueDisplay : Display
 	{
 		[Signal]
-		public delegate void DialogueEndedEventHandler();
+		public delegate void DialogueEndedEventHandler(string initialTitle, string lastTitle);
 
 		[Export]
 		private PackedScene ResponseTemplate { get; set; }
@@ -22,7 +22,9 @@ namespace TheWizardCoder.Displays
 		private MarginContainer responsesRect;
 		private VBoxContainer responsesMenu;
 		private AudioStreamPlayer audioPlayer;
+		private string initialTitle;
 		private DialogueLine dialogueLine;
+		private string currentTitle;
 		private Resource dialogueResource;
 		private Marker2D responsesRectMarker;
 		private bool isTyping = false;
@@ -94,6 +96,7 @@ namespace TheWizardCoder.Displays
 						string nextId = dialogueLine.NextId;
 
 						dialogueLine = await DialogueManager.GetNextDialogueLine(dialogueResource, nextId);
+						currentTitle = nextId;
 						UpdateDisplay(dialogueLine);
 					}
 				}
@@ -113,6 +116,8 @@ namespace TheWizardCoder.Displays
 					string nextId = dialogueLine.NextId;
 
 					dialogueLine = await DialogueManager.GetNextDialogueLine(dialogueResource, nextId);
+					currentTitle = nextId;
+					//GD.Print(nextId); //8
 					UpdateDisplay(dialogueLine);
 				}
 			}
@@ -134,7 +139,11 @@ namespace TheWizardCoder.Displays
 			global.CanWalk = false;
 			global.GameDisplayEnabled = false;
 			this.dialogueResource = dialogueResource;
+
 			dialogueLine = await DialogueManager.GetNextDialogueLine(dialogueResource, title, new Array<Variant>());
+			initialTitle = title;
+			currentTitle = title;
+
 			UpdateDisplay(dialogueLine);
 			Show();
 			format = new();
@@ -283,7 +292,7 @@ namespace TheWizardCoder.Displays
 			Hide();
 			global.GameDisplayEnabled = true;
 			global.CanWalk = true;
-			EmitSignal(SignalName.DialogueEnded);
+			EmitSignal(SignalName.DialogueEnded, initialTitle, currentTitle);
 		}
 	}
 }

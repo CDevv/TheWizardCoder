@@ -1,3 +1,11 @@
-~ forest_spooky
-Gertrude: [#portrait=1] Do you know what time is it? It's trick or treatin' time!
+using Global
+
+~ nobe_intro
+Nobe: [#portrait=0] hello! would you like to buy something from my shop?
+- Sure
+	Nolan: [#portrait=0] Sure!
+	do OpenShop("NobeShop")
+- Nah, I'm good. 
+	Nolan: [#portrait=0] Nah, I'm good.
+	Nobe: [#portrait=0] ok! goodbye!
 => END!

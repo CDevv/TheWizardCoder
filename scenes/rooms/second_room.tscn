@@ -160,11 +160,11 @@ GoldAmount = 10
 z_index = 1
 position = Vector2(704, 416)
 
-[node name="ZenDummy" parent="." index="27"]
+[node name="ShopPoint" parent="." index="28" instance=ExtResource("14_0us7x")]
+position = Vector2(80, 264)
+
+[node name="ZenDummy" parent="." index="29"]
 visible = true
 position = Vector2(592, 200)
 DialogueResource = ExtResource("8_bj7jj")
 DialogueTitle = "demo"
-
-[node name="ShopPoint" parent="." index="28" instance=ExtResource("14_0us7x")]
-position = Vector2(80, 264)

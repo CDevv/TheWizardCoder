@@ -108,7 +108,7 @@ namespace TheWizardCoder.Interactables
 			sprite.Frame = (int)direction;
 		}
 
-		private void OnDialogueEnded()
+		private void OnDialogueEnded(string initialTitle, string title)
 		{
 			sprite.Frame = (int)DefaultDirection;
 			global.CurrentRoom.Dialogue.DialogueEnded -= OnDialogueEnded;

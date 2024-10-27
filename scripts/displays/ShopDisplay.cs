@@ -77,6 +77,8 @@ public partial class ShopDisplay : Display
 
 	public async void ShowDisplay(string shopId, bool playTransition = true)
 	{
+		global.IsInShop = true;
+		global.CurrentRoom.Dialogue.HideDisplay();
 		global.GameDisplayEnabled = false;
 		global.CanWalk = false;
 
@@ -115,6 +117,7 @@ public partial class ShopDisplay : Display
 
     public override async void HideDisplay()
     {
+		global.IsInShop = false;
 		global.CurrentRoom.TransitionRect.PlayAnimation();
 		await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
 

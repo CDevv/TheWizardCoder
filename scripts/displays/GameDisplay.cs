@@ -39,7 +39,7 @@ namespace TheWizardCoder.Displays
 
 		public override void _UnhandledInput(InputEvent @event)
 		{
-			if (!global.GameDisplayEnabled || global.IsInCutscene)
+			if (!global.GameDisplayEnabled || global.IsInCutscene || global.IsInShop)
 			{
 				return;
 			}

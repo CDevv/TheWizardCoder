@@ -3,5 +3,10 @@
 		"Items": [
 			"item", "Apple"
 		]
+	},
+	"NobeShop":{
+		"Items": [
+			"Apple", "item"
+		]
 	}
 }
