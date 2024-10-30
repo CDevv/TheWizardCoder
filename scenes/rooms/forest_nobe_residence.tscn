@@ -200,7 +200,7 @@ layer_1/tile_data = PackedInt32Array(1376256, 1310721, 5, 1441792, 1310721, 3, 1
 
 [node name="Player" parent="." index="13" instance=ExtResource("3_c133m")]
 z_index = 1
-position = Vector2(48, 752)
+position = Vector2(1664, 512)
 
 [node name="Warper" parent="." index="14" instance=ExtResource("4_i61hm")]
 y_sort_enabled = true
@@ -212,10 +212,11 @@ PlayerDirection = 2
 
 [node name="NobeCabinWarper" parent="." index="15" instance=ExtResource("4_i61hm")]
 z_index = 2
-position = Vector2(1808, 434)
+position = Vector2(1808, 432)
 TargetRoomName = "nobe_cabin"
 TargetLocation = "ForestMarker"
 PlayerDirection = 1
+Active = false
 
 [node name="Section2Marker" type="Marker2D" parent="." index="16"]
 position = Vector2(48, 746)
@@ -234,9 +235,16 @@ position = Vector2(0, -16)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_hrs1t")
 
-[node name="DialoguePoint" parent="." index="20" instance=ExtResource("9_bl1eu")]
+[node name="ShopDialogue" parent="." index="20" instance=ExtResource("9_bl1eu")]
 z_index = 2
 position = Vector2(1003, 468)
 scale = Vector2(4, 1)
 DialogueResource = ExtResource("6_lkysj")
 DialogueTitle = "nobe_intro"
+
+[node name="NobeCabinDialogue" parent="." index="21" instance=ExtResource("9_bl1eu")]
+z_index = 2
+position = Vector2(1808, 440)
+scale = Vector2(2, 1)
+DialogueResource = ExtResource("6_lkysj")
+DialogueTitle = "nobe_cabin"

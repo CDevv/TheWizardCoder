@@ -45,6 +45,10 @@ namespace TheWizardCoder.Abstractions
 			}
 		}
 
-		public virtual void OnNotActive() {}
+		public virtual void OnNotActive()
+		{
+			GD.Print("not active");
+			global.CanWalk = true;
+		}
 	}
 }

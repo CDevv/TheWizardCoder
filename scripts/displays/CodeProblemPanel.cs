@@ -15,6 +15,8 @@ namespace TheWizardCoder.Displays
 		public delegate void ProblemSolvedEventHandler();
 		[Signal]
 		public delegate void ProblemItemsChangedEventHandler();
+		[Signal]
+		public delegate void SubmittedEventHandler();
 
 		[Export]
 		public PackedScene PickableButtonScene { get; set; }
@@ -37,6 +39,8 @@ namespace TheWizardCoder.Displays
 			get { return items; }
 		}
 
+		public List<CodeProblemItem> LastProblemItems { get; private set; } = new();
+
 		public override void _Ready()
 		{
 			base._Ready();
@@ -55,8 +59,13 @@ namespace TheWizardCoder.Displays
 					global.GameDisplayEnabled = true;
 					animationPlayer.PlayBackwards("show");
 					await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
+					if (items.Count > 0)
+					{
+						LastProblemItems = items;
+						EmitSignal(SignalName.Submitted);
+					}
 					Reset();
-					Hide();
+					Hide();				
 				}
 			}
 		}
@@ -126,16 +135,17 @@ namespace TheWizardCoder.Displays
 
 		private void OnAreaButtonAdded(int index, string buttonText)
 		{
+			items[index].CurrentAnswer = buttonText;
 			if (items[index].CorrectAnswer == buttonText)
-			{
-				items[index].CurrentAnswer = buttonText;
-				items[index].IsSolved = true;
-				EmitSignal(SignalName.ProblemItemsChanged);
+			{			
+				items[index].IsSolved = true;		
 			}
 			if (AreAllAreasSolved())
 			{
 				OnProblemSolved();
 			}
+
+			EmitSignal(SignalName.ProblemItemsChanged);
 		}
 
 		private void OnAreaButtonRemoved(int index)
@@ -192,6 +202,10 @@ namespace TheWizardCoder.Displays
 			GD.Print("SOLVED!!");
 			global.CanWalk = true;
 			global.GameDisplayEnabled = true;
+			if (items.Count > 0)
+			{
+				LastProblemItems = items;
+			}
 			Reset();
 			animationPlayer.PlayBackwards("show");
 			await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);

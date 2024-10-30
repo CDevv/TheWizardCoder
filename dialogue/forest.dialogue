@@ -9,3 +9,16 @@ Nobe: [#portrait=0] hello! would you like to buy something from my shop?
 	Nolan: [#portrait=0] Nah, I'm good.
 	Nobe: [#portrait=0] ok! goodbye!
 => END!
+
+~ nobe_cabin
+if GetPlayerData("UnlockedNobeCabin") == false:
+	if HasItemInInventory("Nobe's key"):
+		Narrator: Open this cabin?
+		- Yes
+			Narrator: You unlocked the cabin.
+			do CallRoomMethod("UnlockCabin")
+		- No
+			Narrator: You decide not to do anything.
+	else:
+		Narrator: This cabin seems to be locked.
+=> END!

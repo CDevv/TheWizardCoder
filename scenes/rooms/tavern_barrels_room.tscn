@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bcj5uv21jfnna"]
+[gd_scene load_steps=23 format=3 uid="uid://bcj5uv21jfnna"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_dlif2"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_if4ef"]
@@ -10,6 +10,8 @@
 [ext_resource type="SpriteFrames" uid="uid://bmnwdib5t7mxq" path="res://assets/characters/movement/spriteframes/berry.tres" id="6_hi0d1"]
 [ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="9_5dtpd"]
 [ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/components/code_problem_point.tscn" id="10_etg8e"]
+[ext_resource type="Texture2D" uid="uid://seqdoffkhcdd" path="res://assets/ui/base_console_ui.png" id="11_ltl0o"]
+[ext_resource type="Theme" uid="uid://yvr5k4rix6lw" path="res://themes/console_theme.tres" id="12_2tjkw"]
 
 [sub_resource type="Animation" id="Animation_m7day"]
 resource_name = "berry_2"
@@ -233,6 +235,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." index="10" instance=ExtResource("2_if4ef")]
 z_index = 1
+position = Vector2(224, 304)
 
 [node name="TileMap" type="TileMap" parent="." index="11"]
 y_sort_enabled = true
@@ -242,7 +245,7 @@ format = 2
 layer_0/name = "props"
 layer_0/y_sort_enabled = true
 layer_0/z_index = 1
-layer_0/tile_data = PackedInt32Array(458758, 720896, 5, 458759, 720896, 5, 458760, 720896, 5, 458763, 720896, 5, 458764, 720896, 5, 458766, 720896, 5, 589838, 983040, 3)
+layer_0/tile_data = PackedInt32Array(458758, 720896, 5, 458759, 720896, 5, 458760, 720896, 5, 458763, 720896, 5, 458764, 720896, 5, 458766, 720896, 5, 589838, 983040, 3, 458757, 720896, 5, 458761, 720896, 5, 458762, 720896, 5, 458765, 720896, 5)
 layer_1/name = "floor"
 layer_1/tile_data = PackedInt32Array(524293, 0, 0, 589829, 0, 1, 655365, 0, 4, 524294, 65536, 0, 589830, 65536, 1, 655366, 65536, 2, 524295, 131072, 0, 589831, 131072, 1, 655367, 131072, 2, 524296, 0, 0, 589832, 0, 1, 655368, 0, 2, 524297, 65536, 0, 589833, 65536, 1, 655369, 65536, 2, 524298, 131072, 0, 589834, 131072, 1, 655370, 131072, 2, 524299, 0, 0, 589835, 0, 1, 655371, 0, 2, 524300, 65536, 0, 589836, 65536, 1, 655372, 65536, 2, 524301, 131072, 0, 589837, 131072, 1, 655373, 131072, 2, 458757, 0, 2, 458758, 65536, 2, 458759, 131072, 2, 458760, 0, 2, 458761, 65536, 2, 458762, 131072, 2, 458763, 0, 2, 458764, 65536, 2, 458765, 131072, 2, 393221, 196608, 2, 393222, 196608, 2, 393223, 196608, 2, 393224, 196608, 2, 393225, 196608, 2, 393226, 196608, 2, 393227, 196608, 2, 393228, 196608, 2, 393229, 196608, 2, 327693, 196608, 1, 327692, 196608, 1, 327691, 196608, 1, 327690, 196608, 1, 327689, 196608, 1, 327688, 196608, 1, 327687, 196608, 1, 327686, 196608, 1, 327685, 196608, 1, 262149, 196608, 1, 262150, 196608, 1, 262151, 196608, 1, 262152, 196608, 1, 262153, 196608, 1, 262154, 196608, 1, 262155, 196608, 1, 262156, 196608, 1, 262157, 196608, 1, 655374, 65536, 4, 589838, 131072, 0, 524302, 65536, 1, 458766, 65536, 2, 393230, 196608, 2, 327694, 196608, 1, 262158, 196608, 1, 720902, 131072, 3, 720903, 131072, 4)
 
@@ -303,4 +306,47 @@ SolvableAreas = {
 "i < 10;": Vector2(83, 36)
 }
 
-[connection signal="ProblemSolved" from="CodeProblemPoint" to="." method="OnProblemSolved"]
+[node name="InfoBoard" type="NinePatchRect" parent="." index="22"]
+unique_name_in_owner = true
+visible = false
+z_index = 1
+offset_left = 152.0
+offset_top = 136.0
+offset_right = 224.0
+offset_bottom = 200.0
+texture = ExtResource("11_ltl0o")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="IndexLabel" type="Label" parent="InfoBoard" index="0"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("12_2tjkw")
+text = "i = 0"
+horizontal_alignment = 1
+
+[node name="QuantityLabel" type="Label" parent="InfoBoard" index="1"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 24.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("12_2tjkw")
+text = "q = 0"
+horizontal_alignment = 1
+
+[connection signal="Submitted" from="CodeProblemPanel" to="." method="OnSubmitted" binds= [false]]
+[connection signal="ProblemSolved" from="CodeProblemPoint" to="." method="OnSubmitted" binds= [true]]

@@ -132,7 +132,21 @@ namespace TheWizardCoder.Components
 				if (overlappingAreas.Count > 0 && global.CanWalk)
 				{
 					global.CanWalk = false;
-					(overlappingAreas[0] as Interactable).Interact();
+
+					for (int i = 0; i < overlappingAreas.Count; i++)
+					{
+						Interactable interactable = (Interactable)overlappingAreas[i];
+						
+						if (interactable.Active)
+						{
+							interactable.Action();
+							break;
+						}
+						else
+						{
+							interactable.OnNotActive();
+						}
+					}
 				}
 			}
 
