@@ -6,10 +6,10 @@
 		"Price": 10,
 	},
 	"Apple":{
-		"Description":"Apple from Nara.",
+		"Description":"Apple from a farm.",
 		"Type": "Heal",
 		"Effect": 10,
-		"Price": 20,
+		"Price": 5,
 	},
 	"'s'":{
 		"Description":"return 's';",
@@ -116,4 +116,16 @@ GoUp();
 MeetGertrude();
 		"]
 	},
+	"Apple Juice":{
+		"Description":"Apple, but in the form of juice! Heals 15 HP.",
+		"Type": "Heal",
+		"Effect": 15,
+		"Price": 5
+	},
+	"Purple Fruit":{
+		"Description":"Some type of magical fruit that heals 20 HP.",
+		"Type": "Heal",
+		"Effect": 20,
+		"Price": 15
+	}
 }

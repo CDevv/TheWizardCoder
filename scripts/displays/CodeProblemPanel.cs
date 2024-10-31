@@ -51,7 +51,7 @@ namespace TheWizardCoder.Displays
 
 		public override async void _Process(double delta)
 		{
-			if (Input.IsActionPressed("ui_cancel"))
+			if (Input.IsActionJustPressed("ui_cancel"))
 			{
 				if (Visible)
 				{
@@ -130,7 +130,6 @@ namespace TheWizardCoder.Displays
 			items.Add(item);
 
 			areasCount++;
-			GD.Print(areasCount);
 		}
 
 		private void OnAreaButtonAdded(int index, string buttonText)
@@ -202,14 +201,15 @@ namespace TheWizardCoder.Displays
 			GD.Print("SOLVED!!");
 			global.CanWalk = true;
 			global.GameDisplayEnabled = true;
-			if (items.Count > 0)
-			{
-				LastProblemItems = items;
-			}
+
+			LastProblemItems = new(items);
+			GD.Print(LastProblemItems.Count);
 			Reset();
+
 			animationPlayer.PlayBackwards("show");
 			await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
-			EmitSignal(SignalName.ProblemSolved);			
+
+			EmitSignal(SignalName.ProblemSolved);
 			Hide();
 		}
 	}

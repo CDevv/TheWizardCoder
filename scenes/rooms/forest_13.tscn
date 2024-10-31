@@ -14,7 +14,7 @@ limit_bottom = 1536
 
 [node name="Player" parent="." index="12" instance=ExtResource("2_gknf4")]
 z_index = 1
-position = Vector2(40, 552)
+position = Vector2(2272, 568)
 
 [node name="TileMap" type="TileMap" parent="." index="13"]
 y_sort_enabled = true
@@ -36,7 +36,7 @@ TargetRoomName = "forest_12"
 TargetLocation = "Section13Marker"
 PlayerDirection = 2
 
-[node name="Warper2" parent="." index="15" instance=ExtResource("4_0a0ag")]
+[node name="Side3Warper" parent="." index="15" instance=ExtResource("4_0a0ag")]
 z_index = 2
 position = Vector2(-16, 576)
 scale = Vector2(1, 13)
@@ -44,8 +44,19 @@ TargetRoomName = "forest_side_path_3"
 TargetLocation = "Section13Marker"
 PlayerDirection = 2
 
-[node name="Section12Marker" type="Marker2D" parent="." index="16"]
+[node name="Section14Warper" parent="." index="16" instance=ExtResource("4_0a0ag")]
+z_index = 2
+position = Vector2(2320, 560)
+scale = Vector2(1, 13)
+TargetRoomName = "forest_14"
+TargetLocation = "Section13Marker"
+PlayerDirection = 3
+
+[node name="Section12Marker" type="Marker2D" parent="." index="17"]
 position = Vector2(1200, 1464)
 
-[node name="Side3Marker" type="Marker2D" parent="." index="17"]
+[node name="Section14Marker" type="Marker2D" parent="." index="18"]
+position = Vector2(2272, 568)
+
+[node name="Side3Marker" type="Marker2D" parent="." index="19"]
 position = Vector2(40, 552)

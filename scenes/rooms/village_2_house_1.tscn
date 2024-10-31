@@ -101,4 +101,5 @@ DialogueTitle = "dusty_shelf"
 [node name="Chest" parent="." index="18" instance=ExtResource("7_ws68g")]
 position = Vector2(528, 272)
 PlaythroughPropertyName = "VillageAppleChest"
-ItemName = "Apple"
+ChestType = 1
+GoldAmount = 30
