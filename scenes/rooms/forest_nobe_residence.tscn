@@ -200,7 +200,7 @@ layer_1/tile_data = PackedInt32Array(1376256, 1310721, 5, 1441792, 1310721, 3, 1
 
 [node name="Player" parent="." index="13" instance=ExtResource("3_c133m")]
 z_index = 1
-position = Vector2(1664, 512)
+position = Vector2(2560, 712)
 
 [node name="Warper" parent="." index="14" instance=ExtResource("4_i61hm")]
 y_sort_enabled = true
@@ -210,7 +210,15 @@ TargetRoomName = "forest_2"
 TargetLocation = "NobeMarker"
 PlayerDirection = 2
 
-[node name="NobeCabinWarper" parent="." index="15" instance=ExtResource("4_i61hm")]
+[node name="SeasideWarper" parent="." index="15" instance=ExtResource("4_i61hm")]
+y_sort_enabled = true
+position = Vector2(2608, 731)
+scale = Vector2(1, 5)
+TargetRoomName = "forest_seaside_1"
+TargetLocation = "NobeMarker"
+PlayerDirection = 3
+
+[node name="NobeCabinWarper" parent="." index="16" instance=ExtResource("4_i61hm")]
 z_index = 2
 position = Vector2(1808, 432)
 TargetRoomName = "nobe_cabin"
@@ -218,13 +226,16 @@ TargetLocation = "ForestMarker"
 PlayerDirection = 1
 Active = false
 
-[node name="Section2Marker" type="Marker2D" parent="." index="16"]
+[node name="Section2Marker" type="Marker2D" parent="." index="17"]
 position = Vector2(48, 746)
 
-[node name="NobeCabinMarker" type="Marker2D" parent="." index="17"]
+[node name="NobeCabinMarker" type="Marker2D" parent="." index="18"]
 position = Vector2(1808, 440)
 
-[node name="Nobe" parent="." index="19" instance=ExtResource("5_r7p1m")]
+[node name="SeasideMarker" type="Marker2D" parent="." index="19"]
+position = Vector2(2560, 712)
+
+[node name="Nobe" parent="." index="21" instance=ExtResource("5_r7p1m")]
 z_index = 1
 position = Vector2(1003, 448)
 DialogueResource = ExtResource("6_lkysj")
@@ -235,14 +246,14 @@ position = Vector2(0, -16)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_hrs1t")
 
-[node name="ShopDialogue" parent="." index="20" instance=ExtResource("9_bl1eu")]
+[node name="ShopDialogue" parent="." index="22" instance=ExtResource("9_bl1eu")]
 z_index = 2
 position = Vector2(1003, 468)
 scale = Vector2(4, 1)
 DialogueResource = ExtResource("6_lkysj")
 DialogueTitle = "nobe_intro"
 
-[node name="NobeCabinDialogue" parent="." index="21" instance=ExtResource("9_bl1eu")]
+[node name="NobeCabinDialogue" parent="." index="23" instance=ExtResource("9_bl1eu")]
 z_index = 2
 position = Vector2(1808, 440)
 scale = Vector2(2, 1)

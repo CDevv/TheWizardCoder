@@ -15,6 +15,7 @@ limit_bottom = 1120
 [node name="Player" parent="." index="13" instance=ExtResource("2_gb2o6")]
 z_index = 1
 y_sort_enabled = true
+position = Vector2(41, 848)
 
 [node name="TileMap" type="TileMap" parent="." index="14"]
 y_sort_enabled = true
@@ -36,5 +37,16 @@ TargetRoomName = "forest_15"
 TargetLocation = "Section16Marker"
 PlayerDirection = 2
 
-[node name="Section15Marker" type="Marker2D" parent="." index="16"]
+[node name="Seaside6Warper" parent="." index="16" instance=ExtResource("4_iug7p")]
+z_index = 2
+position = Vector2(-16, 880)
+scale = Vector2(1, 5)
+TargetRoomName = "forest_seaside_6"
+TargetLocation = "Section16Marker"
+PlayerDirection = 2
+
+[node name="Section15Marker" type="Marker2D" parent="." index="17"]
 position = Vector2(32, 344)
+
+[node name="Seaside6Marker" type="Marker2D" parent="." index="18"]
+position = Vector2(41, 848)
