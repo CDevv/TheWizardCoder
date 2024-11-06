@@ -7,6 +7,6 @@ public partial class Forest1 : BaseRoom
     public override void OnReady()
     {
         base.OnReady();
-		global.AddToInventory("ForestInstructions1.cs");
+		global.AddToInventory("Forest1.cs", true);
     }
 }

@@ -49,9 +49,9 @@ namespace TheWizardCoder.Autoload
 			}
 		}
 
-		public void AddToInventory(string item)
+		public void AddToInventory(string item, bool onlyOne = false)
 		{
-			PlayerData.AddToInventory(item);
+			PlayerData.AddToInventory(item, onlyOne);
 		}
 
 		public void RemoveFromInventory(string item)

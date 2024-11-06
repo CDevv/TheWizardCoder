@@ -1,9 +1,21 @@
-[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://c3e5witb4onuf"]
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://c3e5witb4onuf"]
 
 [ext_resource type="Texture2D" uid="uid://b3icfmgjqjfwf" path="res://assets/battle/battle-portraits/nolan.png" id="1_h658e"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5eiu"]
+atlas = ExtResource("1_h658e")
+region = Rect2(0, 0, 32, 32)
+
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5eiu")
+}],
+"loop": true,
+"name": &"Gertrude",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_h658e")

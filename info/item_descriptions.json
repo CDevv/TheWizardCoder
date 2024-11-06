@@ -41,7 +41,7 @@
 		"Effect": 0,
 		"AdditionalData": []
 	},
-	"ForestInstructions1.cs":{
+	"Forest1.cs":{
 		"Description":"Instructions.",
 		"Type": "Key",
 		"Effect": 0,
@@ -49,7 +49,7 @@
 		"GoRight();
 		"]
 	},
-	"ForestInstructions2.cs":{
+	"Forest2.cs":{
 		"Description":"Instructions.",
 		"Type": "Key",
 		"Effect": 0,
@@ -58,7 +58,7 @@
 GoUp();
 		"]
 	},
-	"ForestInstructions3.cs":{
+	"Forest3.cs":{
 		"Description":"Instructions.",
 		"Type": "Key",
 		"Effect": 0,
@@ -69,7 +69,7 @@ GoLeft();
 GoUp();
 		"]
 	},
-	"ForestInstructions4.cs":{
+	"Forest4.cs":{
 		"Description":"Instructions.",
 		"Type": "Key",
 		"Effect": 0,
@@ -79,7 +79,7 @@ GoRight();
 GoUp();
 		"]
 	},
-	"ForestInstructions5.cs":{
+	"Forest5.cs":{
 		"Description":"Instructions.",
 		"Type": "Key",
 		"Effect": 0,
@@ -90,7 +90,7 @@ GoUp();
 GoUp();
 		"]
 	},
-	"ForestInstructions6.cs":{
+	"Forest6.cs":{
 		"Description":"Instructions.",
 		"Type": "Key",
 		"Effect": 0,
@@ -103,7 +103,7 @@ GoDown();
 GoRight();
 		"]
 	},
-	"ForestInstructions7.cs":{
+	"Forest7.cs":{
 		"Description":"Instructions.",
 		"Type": "Key",
 		"Effect": 0,
@@ -115,6 +115,13 @@ GoLeft();
 GoUp();
 MeetGertrude();
 		"]
+	},
+	"Forest8.cs":{
+		"Description":"Instructions.",
+		"Type": "Key",
+		"Effect": 0,
+		"AdditionalData": ["CodeMessage",
+		"MeetGertrude();"]
 	},
 	"Apple Juice":{
 		"Description":"Apple, but in the form of juice! Heals 15 HP.",

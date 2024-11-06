@@ -1,9 +1,141 @@
-[gd_scene load_steps=9 format=3 uid="uid://clp7t3coof17k"]
+[gd_scene load_steps=14 format=3 uid="uid://clp7t3coof17k"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_hrpwg"]
+[ext_resource type="Script" path="res://scripts/rooms/GertrudeHouse.cs" id="2_8lcbe"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_u3uxm"]
 [ext_resource type="TileSet" uid="uid://cci1mfiwm4w6e" path="res://tilesets/forest_buildings_interiors.tres" id="3_aqt4b"]
+[ext_resource type="Resource" uid="uid://podtp1v3v8iu" path="res://dialogue/forest.dialogue" id="3_cauah"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_gty4g"]
+
+[sub_resource type="Animation" id="Animation_l0o80"]
+resource_name = "gertrude_1"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gertrude:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(432, 208)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Gertrude")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [3],
+"method": &"PlayIdleAnimation"
+}, {
+"args": [0],
+"method": &"PlayIdleAnimation"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(320, 344)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Player")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [1],
+"method": &"PlayIdleAnimation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_dxn8p"]
+resource_name = "gertrude_2"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gertrude:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.2, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(432, 208), Vector2(432, 272), Vector2(320, 272), Vector2(320, 344)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Gertrude")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.2, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": ["down"],
+"method": &"PlayAnimation"
+}, {
+"args": ["left"],
+"method": &"PlayAnimation"
+}, {
+"args": ["down"],
+"method": &"PlayAnimation"
+}, {
+"args": [0],
+"method": &"PlayIdleAnimation"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(320, 344)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Player")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [1],
+"method": &"PlayIdleAnimation"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fijve"]
+_data = {
+"gertrude_1": SubResource("Animation_l0o80"),
+"gertrude_2": SubResource("Animation_dxn8p")
+}
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_psef2"]
 a = Vector2(96, 64)
@@ -23,6 +155,13 @@ b = Vector2(544, 384)
 
 [node name="GetrudeHouse" instance=ExtResource("1_hrpwg")]
 y_sort_enabled = true
+script = ExtResource("2_8lcbe")
+DialogueResource = ExtResource("3_cauah")
+
+[node name="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_fijve")
+}
 
 [node name="ColorRect" type="ColorRect" parent="." index="13"]
 offset_right = 640.0
@@ -31,6 +170,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." index="14" instance=ExtResource("2_u3uxm")]
 z_index = 1
+position = Vector2(320, 344)
 
 [node name="TileMap" type="TileMap" parent="." index="15"]
 y_sort_enabled = true
@@ -67,3 +207,7 @@ TargetLocation = "HouseMarker"
 
 [node name="Section12Marker" type="Marker2D" parent="." index="18"]
 position = Vector2(320, 344)
+
+[node name="Gertrude" parent="." index="19"]
+visible = true
+position = Vector2(432, 208)

@@ -80,7 +80,8 @@ namespace TheWizardCoder.Abstractions
 			{
 				foreach (CharacterData ally in global.PlayerData.Allies)
 				{
-					Player.AddAlly(ally.Name, true);
+					var allyCharacter = Player.AddAlly(ally.Name, true);
+					allyCharacter.PlayIdleAnimation(global.PlayerDirection);
 				}
 			}
 			Player.DistanceWalked = 0;

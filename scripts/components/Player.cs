@@ -111,7 +111,7 @@ namespace TheWizardCoder.Components
 				{
 					Follower.AddPathwayPoint(velocity.ToDirection(), GlobalPosition + new Vector2(0, 21), PlayerSpeed);
 					
-					if (DistanceWalked >= 24)
+					if (DistanceWalked >= 32)
 					{
 						Follower.FollowPlayer();
 					}

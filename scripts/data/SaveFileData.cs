@@ -76,6 +76,7 @@ namespace TheWizardCoder.Data
         public bool WatchtowerChest { get; set; } = false;
         public bool VillageAppleChest { get; set; } = false;
         public bool UnlockedNobeCabin { get; set; } = false;
+        public bool HasMetGertrude { get; set; } = false;
 
         public SaveFileData()
         {
@@ -103,9 +104,19 @@ namespace TheWizardCoder.Data
             Gold = 0;
         }
 
-        public void AddToInventory(string item)
+        public void AddToInventory(string item, bool onlyOne = false)
         {
-            inventory.Add(item);
+            if (onlyOne)
+            {
+                if (!inventory.Contains(item))
+                {
+                    inventory.Add(item);
+                }
+            }
+            else
+            {
+                inventory.Add(item);
+            }
         }
 
         public void RemoveFromInventory(string item)

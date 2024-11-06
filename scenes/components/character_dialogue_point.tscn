@@ -17,6 +17,7 @@ shape = SubResource("RectangleShape2D_fly64")
 debug_color = Color(0.252721, 0.952149, 0.851056, 0.42)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
 
 [node name="Collision" type="CollisionShape2D" parent="StaticBody2D"]
 unique_name_in_owner = true

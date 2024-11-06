@@ -22,3 +22,21 @@ if GetPlayerData("UnlockedNobeCabin") == false:
 	else:
 		Narrator: This cabin seems to be locked.
 => END!
+
+~ gertrude_intro_1
+Gertrude: [#portrait=0] Ah!
+Gertrude: [#portrait=1] It's you!
+Nolan: [#portrait=0] It's me?
+=> END!
+
+~ gertrude_intro_2
+Gertrude: [#portrait=1] Yep! I was told a wizard will come by!
+Nolan: [#portrait=0] That's interesting..
+Gertrude: [#portrait=0] Yeah..! I received a mysterious message, saying that I need to help a wizard on their journey.
+Gertrude: [#portrait=1] I guess that wizard is you!
+Nolan: [#portrait=0] Help me?
+Gertrude: [#portrait=0] Yeah! Help you on your way to defeat, err.. 'bugs' or sorts. No idea what that means
+Gertrude: [#portrait=0] But I have seen some dark creatures around the forest lately. Maybe that is what it's about.
+Nolan: [#portrait=2] Maybe.
+Gertrude: [#portrait=1] So yeah! I will accompany you on your journey!
+=> END!

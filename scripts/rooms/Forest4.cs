@@ -7,7 +7,7 @@ public partial class Forest4 : BaseRoom
     public override void OnReady()
     {
         base.OnReady();
-		global.RemoveFromInventory("ForestInstructions3.cs");
-		global.AddToInventory("ForestInstructions4.cs");
+		global.RemoveFromInventory("Forest3.cs");
+		global.AddToInventory("Forest4.cs", true);
     }
 }
