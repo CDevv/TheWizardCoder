@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/abstractions/Interactable.cs" id="1_co054"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rq7ry"]
+size = Vector2(16, 16)
 
 [node name="Interactable" type="Area2D"]
 script = ExtResource("1_co054")

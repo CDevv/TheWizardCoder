@@ -11,6 +11,7 @@ namespace TheWizardCoder.Interactables
 
         public override void Action()
         {
+            global.CanWalk = true;
             EmitSignal(SignalName.Triggered);
         }
     }

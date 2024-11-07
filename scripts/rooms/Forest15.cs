@@ -9,15 +9,17 @@ public partial class Forest15 : BaseRoom
 {
 	private const int ButtonsCount = 5;
 
-	private Color redColor = new(255, 0, 0);
-	private Color greenColor = new(0, 255, 0);
 	private bool[] bools = { false, false, false, false, false };
 	private SwitchBlock[] buttons = new SwitchBlock[ButtonsCount];
 	private CodeMessagePoint codeMessage;
 
+	private TileMap tileMap;
+
     public override void OnReady()
     {
         base.OnReady();
+
+		tileMap = GetNode<TileMap>("TileMap");
 
 		codeMessage = GetNode<CodeMessagePoint>("CodeMessagePoint");
 		for (int i = 0; i < ButtonsCount; i++)
@@ -32,17 +34,6 @@ public partial class Forest15 : BaseRoom
     private void OnButtonPushed(int i)
 	{
 		bools[i] = !bools[i];
-		ColorRect colorRect = buttons[i].GetNode<ColorRect>("ColorRect");
-
-		if (bools[i])
-		{
-			colorRect.Color = greenColor;
-		}
-		else
-		{
-			colorRect.Color = redColor;
-		}
-
 		codeMessage.CodeText = BuildCodeString();
 	}
 
@@ -67,7 +58,7 @@ public partial class Forest15 : BaseRoom
 		int count = 0;
 		for (int i = 0; i < ButtonsCount; i++)
 		{
-			if (i % 2 == 0 == buttons[i].Value)
+			if ((i % 2 == 0) == buttons[i].Value)
 			{
 				count++;
 			}
@@ -76,6 +67,16 @@ public partial class Forest15 : BaseRoom
 		if (count == ButtonsCount)
 		{
 			GD.Print("Passed!");
+			ClearTrees();
+		}
+	}
+
+	private void ClearTrees()
+	{
+		for (int i = 8; i <= 17; i++)
+		{
+			tileMap.SetCell(0, new Vector2I(56, i));
+			tileMap.SetCell(0, new Vector2I(57, i));
 		}
 	}
 }
