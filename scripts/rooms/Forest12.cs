@@ -4,9 +4,9 @@ using TheWizardCoder.Abstractions;
 
 public partial class Forest12 : BaseRoom
 {
-    public override void OnReady()
-    {
-        base.OnReady();
+	public override void OnReady()
+	{
+		base.OnReady();
 		global.RemoveFromInventory("Forest7.cs");
 
 		if (!global.PlayerData.HasMetGertrude)
@@ -17,5 +17,5 @@ public partial class Forest12 : BaseRoom
 		{
 			global.RemoveFromInventory("Forest8.cs");
 		}
-    }
+	}
 }

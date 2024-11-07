@@ -1,14 +1,27 @@
-[gd_scene load_steps=7 format=3 uid="uid://dm12hksdykxf"]
+[gd_scene load_steps=15 format=3 uid="uid://dm12hksdykxf"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_n0yin"]
+[ext_resource type="Script" path="res://scripts/rooms/Forest15.cs" id="2_6mc3w"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_a4heb"]
 [ext_resource type="TileSet" uid="uid://b5gmhkessquy0" path="res://tilesets/forest_environment.tres" id="3_8gp3v"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_ryj5j"]
 [ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="5_sp774"]
 [ext_resource type="PackedScene" uid="uid://bcec1jvlgi5m4" path="res://scenes/components/code_message_point.tscn" id="6_6jhi6"]
+[ext_resource type="PackedScene" uid="uid://c7s1i2ervmbqe" path="res://scenes/components/interactable.tscn" id="7_0ehjy"]
+[ext_resource type="Script" path="res://scripts/interactables/SwitchBlock.cs" id="9_r4yph"]
+[ext_resource type="Script" path="res://scripts/interactables/DummyInteractable.cs" id="10_iogej"]
+[ext_resource type="Texture2D" uid="uid://seqdoffkhcdd" path="res://assets/ui/base_console_ui.png" id="11_f5r75"]
+[ext_resource type="Theme" uid="uid://yvr5k4rix6lw" path="res://themes/console_theme.tres" id="12_xwc1w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_htpnj"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wo6i8"]
+size = Vector2(64, 8)
 
 [node name="Forest15" instance=ExtResource("1_n0yin")]
 y_sort_enabled = true
+script = ExtResource("2_6mc3w")
 
 [node name="Camera" parent="." index="5"]
 limit_right = 2080
@@ -17,7 +30,7 @@ limit_bottom = 928
 [node name="Player" parent="." index="13" instance=ExtResource("2_a4heb")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(2048, 400)
+position = Vector2(1256, 416)
 
 [node name="TileMap" type="TileMap" parent="." index="14"]
 y_sort_enabled = true
@@ -54,16 +67,149 @@ position = Vector2(48, 416)
 position = Vector2(2048, 416)
 
 [node name="MessageGlitch" type="Sprite2D" parent="." index="20"]
-position = Vector2(704, 296)
+position = Vector2(1312, 312)
 scale = Vector2(2, 2)
 texture = ExtResource("5_sp774")
 
 [node name="CodeMessagePoint" parent="." index="21" instance=ExtResource("6_6jhi6")]
-position = Vector2(704, 296)
+position = Vector2(1312, 312)
 CodeText = "int c = 5;
 bool[] arr =
-{ true, false, true, false, true };
+{ false, false, false, false, false };
 	
 for (int i = 0; i < c; i++)
 	if (IsEven(i) == arr[i])
 		RemoveTrees();"
+
+[node name="Button1" parent="." index="22" instance=ExtResource("7_0ehjy")]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(1432, 360)
+scale = Vector2(2, 2)
+script = ExtResource("9_r4yph")
+
+[node name="ColorRect" type="ColorRect" parent="Button1" index="1"]
+y_sort_enabled = true
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(1, 0, 0, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Button1" index="2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Button1/StaticBody2D" index="0"]
+shape = SubResource("RectangleShape2D_htpnj")
+
+[node name="Button2" parent="." index="23" instance=ExtResource("7_0ehjy")]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(1488, 360)
+scale = Vector2(2, 2)
+script = ExtResource("9_r4yph")
+
+[node name="ColorRect" type="ColorRect" parent="Button2" index="1"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(1, 0, 0, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Button2" index="2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Button2/StaticBody2D" index="0"]
+shape = SubResource("RectangleShape2D_htpnj")
+
+[node name="Button3" parent="." index="24" instance=ExtResource("7_0ehjy")]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(1552, 360)
+scale = Vector2(2, 2)
+script = ExtResource("9_r4yph")
+
+[node name="ColorRect" type="ColorRect" parent="Button3" index="1"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(1, 0, 0, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Button3" index="2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Button3/StaticBody2D" index="0"]
+shape = SubResource("RectangleShape2D_htpnj")
+
+[node name="Button4" parent="." index="25" instance=ExtResource("7_0ehjy")]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(1616, 360)
+scale = Vector2(2, 2)
+script = ExtResource("9_r4yph")
+
+[node name="ColorRect" type="ColorRect" parent="Button4" index="1"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(1, 0, 0, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Button4" index="2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Button4/StaticBody2D" index="0"]
+shape = SubResource("RectangleShape2D_htpnj")
+
+[node name="Button5" parent="." index="26" instance=ExtResource("7_0ehjy")]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(1680, 360)
+scale = Vector2(2, 2)
+script = ExtResource("9_r4yph")
+
+[node name="ColorRect" type="ColorRect" parent="Button5" index="1"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(1, 0, 0, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Button5" index="2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Button5/StaticBody2D" index="0"]
+shape = SubResource("RectangleShape2D_htpnj")
+
+[node name="ExecuteButton" type="Area2D" parent="." index="27"]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("10_iogej")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExecuteButton" index="0"]
+position = Vector2(32, 12)
+shape = SubResource("RectangleShape2D_wo6i8")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ExecuteButton" index="1"]
+offset_left = 1104.0
+offset_top = 320.0
+offset_right = 1168.0
+offset_bottom = 336.0
+scale = Vector2(2, 2)
+texture = ExtResource("11_f5r75")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Label" type="Label" parent="ExecuteButton/NinePatchRect" index="0"]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 60.0
+offset_bottom = 23.0
+theme = ExtResource("12_xwc1w")
+text = "EXECUTE"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ExecuteButton/NinePatchRect" index="1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExecuteButton/NinePatchRect/StaticBody2D" index="0"]
+position = Vector2(32, 12)
+shape = SubResource("RectangleShape2D_wo6i8")
+
+[connection signal="Triggered" from="ExecuteButton" to="." method="CheckCode"]

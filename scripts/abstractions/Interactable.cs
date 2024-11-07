@@ -5,7 +5,7 @@ using TheWizardCoder.Components;
 
 namespace TheWizardCoder.Abstractions
 {
-	public abstract partial class Interactable : Area2D
+	public partial class Interactable : Area2D
 	{
 		[Signal]
 		public delegate void InteractedEventHandler();
@@ -36,7 +36,7 @@ namespace TheWizardCoder.Abstractions
 			}
 		}
 
-		public abstract void Action();
+		public virtual void Action() {}
 
 		private void OnBodyEntered(Node2D node)
 		{

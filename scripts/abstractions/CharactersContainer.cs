@@ -9,48 +9,48 @@ using TheWizardCoder.Subdisplays;
 
 namespace TheWizardCoder.Abstractions
 {
-    public abstract partial class CharactersContainer : Node
-    {
-        [Export]
+	public abstract partial class CharactersContainer : Node
+	{
+		[Export]
 		public BattleDisplay BattleDisplay { get; set; }
-        [Export]
+		[Export]
 		public BattleOptions BattleOptions { get; set; }
 
-        public List<CharacterData> Characters { get; private set; } = new();
-        public List<CharacterBattleState> BattleStates { get; set; } = new();
-        public int CurrentCharacter { get; set; } = 0;
-        protected Global global;
+		public List<CharacterData> Characters { get; private set; } = new();
+		public List<CharacterBattleState> BattleStates { get; set; } = new();
+		public int CurrentCharacter { get; set; } = 0;
+		protected Global global;
 
-        public override void _Ready()
-        {
-            global = GetNode<Global>("/root/Global");
-        }
+		public override void _Ready()
+		{
+			global = GetNode<Global>("/root/Global");
+		}
 
-        public virtual void AddCharacter(CharacterData character)
-        {
-            int currentIndex = Characters.Count;
+		public virtual void AddCharacter(CharacterData character)
+		{
+			int currentIndex = Characters.Count;
 
-            Characters.Add(character);
-            CharacterBattleState characterBattleState = new(character, currentIndex);
-            BattleStates.Add(characterBattleState);
-        }
+			Characters.Add(character);
+			CharacterBattleState characterBattleState = new(character, currentIndex);
+			BattleStates.Add(characterBattleState);
+		}
 
-        public virtual void StartTurn()
-        {}
+		public virtual void StartTurn()
+		{}
 
-        public async void PassToNext()
-        {
-            CurrentCharacter++;
-            if (CurrentCharacter >= Characters.Count)
+		public async void PassToNext()
+		{
+			CurrentCharacter++;
+			if (CurrentCharacter >= Characters.Count)
 			{
-                OnNextCharacterPassed();
+				OnNextCharacterPassed();
 				CurrentCharacter = 0;
 				await BattleDisplay.Routine();
 			}
-            else
-            {
-                OnNextCharacterPassed();
-                if (Characters[CurrentCharacter].Health > 0)
+			else
+			{
+				OnNextCharacterPassed();
+				if (Characters[CurrentCharacter].Health > 0)
 				{
 					StartTurn();
 				}
@@ -68,23 +68,23 @@ namespace TheWizardCoder.Abstractions
 						await BattleDisplay.Routine();
 					}
 				}
-            }
-        }
+			}
+		}
 
-        public abstract void OnNextCharacterPassed();
+		public abstract void OnNextCharacterPassed();
 
-        public abstract Task Turn(int index);
+		public abstract Task Turn(int index);
 
-        public abstract Task DisplayHealthChange(int index, int change);
+		public abstract Task DisplayHealthChange(int index, int change);
 
-        public virtual async Task DamageCharacter(int index, int damage)
-        {
-            Characters[index].Health -= damage;
-        }
+		public virtual async Task DamageCharacter(int index, int damage)
+		{
+			Characters[index].Health -= damage;
+		}
 
-        public async Task HealCharacter(int healerIndex)
-        {
-            CharacterBattleState state = BattleStates[healerIndex];
+		public async Task HealCharacter(int healerIndex)
+		{
+			CharacterBattleState state = BattleStates[healerIndex];
 			string itemName = global.PlayerData.Inventory[state.ActionModifier];
 			Item item = global.ItemDescriptions[itemName];
 			CharacterData target = BattleStates[state.Target].Character;
@@ -106,29 +106,29 @@ namespace TheWizardCoder.Abstractions
 
 			SceneTreeTimer timer = GetTree().CreateTimer(3);
 			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
-        }
+		}
 
-        public async Task DefendCharacter(int index)
-        {
-            BattleOptions.ShowInfoLabel($"{Characters[index].Name} defends!");
+		public async Task DefendCharacter(int index)
+		{
+			BattleOptions.ShowInfoLabel($"{Characters[index].Name} defends!");
 			SceneTreeTimer timer = GetTree().CreateTimer(3);
 			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
-        }
+		}
 
-        public int GetTotalHealth()
-        {
-            int result = 0;
-            foreach (var item in Characters)
-            {
-                result += item.Health;
-            }
-            return result;
-        }
+		public int GetTotalHealth()
+		{
+			int result = 0;
+			foreach (var item in Characters)
+			{
+				result += item.Health;
+			}
+			return result;
+		}
 
-        public virtual void Clear()
-        {
-            Characters = new();
-            BattleStates = new();
-        }
-    }
+		public virtual void Clear()
+		{
+			Characters = new();
+			BattleStates = new();
+		}
+	}
 }
