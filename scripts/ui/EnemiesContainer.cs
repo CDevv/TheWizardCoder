@@ -39,9 +39,11 @@ namespace TheWizardCoder.UI
 
 		public override void AddCharacter(CharacterData character)
 		{
-			base.AddCharacter(character);
+			int currentIndex = Characters.Count;
 
-			int currentIndex = Characters.Count - 1;
+			Characters.Add(character.Clone());
+            CharacterBattleState characterBattleState = new(character, currentIndex);
+            BattleStates.Add(characterBattleState);
 
 			EnemySprite enemySprite = EnemySpriteScene.Instantiate<EnemySprite>();
 			BattleDisplay.AddChild(enemySprite);
@@ -80,7 +82,7 @@ namespace TheWizardCoder.UI
         }
 
 		public override async Task DamageCharacter(int index, int damage)
-		{			
+		{
 			await DisplayHealthChange(index, damage);
 			await base.DamageCharacter(index, damage);
 		}
@@ -100,7 +102,11 @@ namespace TheWizardCoder.UI
 		public override void Clear()
 		{
 			base.Clear();
-			enemySprites.Clear();
+			foreach (var item in enemySprites)
+			{
+				item.QueueFree();
+			}
+			enemySprites = new();
 		}
     }
 }

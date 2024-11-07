@@ -27,19 +27,19 @@ layer_1/tile_data = PackedInt32Array(0, 1310721, 5, 65536, 1245185, 5, 131072, 1
 position = Vector2(1560, 2640)
 
 [node name="Section8Marker" type="Marker2D" parent="." index="14"]
-position = Vector2(320, 8)
+position = Vector2(320, 24)
 
 [node name="Section6SideMarker" type="Marker2D" parent="." index="15"]
-position = Vector2(32, 2224)
+position = Vector2(32, 2240)
 
 [node name="Section10Marker" type="Marker2D" parent="." index="16"]
-position = Vector2(1984, 1608)
+position = Vector2(1984, 1624)
 
 [node name="Section10Marker2" type="Marker2D" parent="." index="17"]
-position = Vector2(2008, 600)
+position = Vector2(2008, 616)
 
 [node name="Seaside1Marker" type="Marker2D" parent="." index="18"]
-position = Vector2(1560, 2640)
+position = Vector2(1560, 2656)
 
 [node name="Section8Warper" parent="." index="19" instance=ExtResource("4_w2eiy")]
 position = Vector2(320, -16)

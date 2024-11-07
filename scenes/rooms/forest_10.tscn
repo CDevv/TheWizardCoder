@@ -31,16 +31,16 @@ z_index = 1
 position = Vector2(544, 312)
 
 [node name="Section9Marker" type="Marker2D" parent="." index="14"]
-position = Vector2(56, 1408)
+position = Vector2(56, 1424)
 
 [node name="SideMarker" type="Marker2D" parent="." index="15"]
-position = Vector2(1344, 368)
+position = Vector2(1344, 384)
 
 [node name="Section11Marker" type="Marker2D" parent="." index="16"]
-position = Vector2(880, 24)
+position = Vector2(880, 40)
 
 [node name="Section9Marker2" type="Marker2D" parent="." index="17"]
-position = Vector2(40, 384)
+position = Vector2(40, 400)
 
 [node name="Warper" parent="." index="18" instance=ExtResource("4_v076h")]
 z_index = 2

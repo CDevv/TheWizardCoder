@@ -22,7 +22,7 @@ namespace TheWizardCoder.UI
 		public void ApplyData(CharacterData data)
 		{
 			nameLabel.Text = data.Name;
-			Texture = (Texture2D)ResourceLoader.LoadThreadedGet($"res://assets/battle/enemies/{data.Name}.png");
+			Texture = ResourceLoader.Load<Texture2D>($"res://assets/battle/enemies/{data.Name}.png");
 		}
 
 		public void GrabFocus()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2dpwk6p1w706"
-path="res://.godot/imported/JuniorBug.png-f19ff72617532d4946030154b442bb89.ctex"
+uid="uid://bkcqub1bq0kvx"
+path="res://.godot/imported/battle-bg.png-70fd7b87bf38d272398726c18082b0d0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/JuniorBug.png"
-dest_files=["res://.godot/imported/JuniorBug.png-f19ff72617532d4946030154b442bb89.ctex"]
+source_file="res://assets/battle/backgrounds/battle-bg.png"
+dest_files=["res://.godot/imported/battle-bg.png-70fd7b87bf38d272398726c18082b0d0.ctex"]
 
 [params]
 

@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckm0jdvghdb6b"]
+[gd_scene load_steps=8 format=3 uid="uid://ckm0jdvghdb6b"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_rcnbu"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_mcb5r"]
 [ext_resource type="Script" path="res://scripts/rooms/Forest2.cs" id="2_uxemu"]
 [ext_resource type="TileSet" uid="uid://b5gmhkessquy0" path="res://tilesets/forest_environment.tres" id="3_oojmy"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_ljtm2"]
+[ext_resource type="PackedScene" uid="uid://d38oq7utuerxp" path="res://scenes/components/ground_enemy.tscn" id="6_eifir"]
+[ext_resource type="Texture2D" uid="uid://yshsdevpml0u" path="res://assets/battle/backgrounds/battle-bg-forest.png" id="7_4aqkq"]
 
 [node name="Forest2" instance=ExtResource("1_rcnbu")]
 y_sort_enabled = true
@@ -55,10 +57,28 @@ TargetLocation = "Section2Marker"
 PlayerDirection = 1
 
 [node name="Section1Marker" type="Marker2D" parent="." index="17"]
-position = Vector2(64, 1216)
+position = Vector2(64, 1232)
 
 [node name="Section3Marker" type="Marker2D" parent="." index="18"]
-position = Vector2(1824, 32)
+position = Vector2(1824, 48)
 
 [node name="NobeMarker" type="Marker2D" parent="." index="19"]
-position = Vector2(2876, 2336)
+position = Vector2(2876, 2352)
+
+[node name="GroundEnemy" parent="." index="22" instance=ExtResource("6_eifir")]
+z_index = 1
+position = Vector2(1184, 1312)
+EnemyName = "JuniorBug"
+BackgroundImage = ExtResource("7_4aqkq")
+
+[node name="GroundEnemy2" parent="." index="23" instance=ExtResource("6_eifir")]
+z_index = 1
+position = Vector2(1720, 832)
+EnemyName = "JuniorBug"
+BackgroundImage = ExtResource("7_4aqkq")
+
+[node name="GroundEnemy3" parent="." index="24" instance=ExtResource("6_eifir")]
+z_index = 1
+position = Vector2(1856, 2112)
+EnemyName = "JuniorBug"
+BackgroundImage = ExtResource("7_4aqkq")

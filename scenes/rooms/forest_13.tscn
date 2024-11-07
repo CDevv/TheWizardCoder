@@ -14,6 +14,7 @@ limit_bottom = 1536
 
 [node name="Player" parent="." index="12" instance=ExtResource("2_gknf4")]
 z_index = 1
+y_sort_enabled = true
 position = Vector2(2272, 568)
 
 [node name="TileMap" type="TileMap" parent="." index="13"]
@@ -53,10 +54,10 @@ TargetLocation = "Section13Marker"
 PlayerDirection = 3
 
 [node name="Section12Marker" type="Marker2D" parent="." index="17"]
-position = Vector2(1200, 1464)
+position = Vector2(1200, 1480)
 
 [node name="Section14Marker" type="Marker2D" parent="." index="18"]
-position = Vector2(2272, 568)
+position = Vector2(2272, 584)
 
 [node name="Side3Marker" type="Marker2D" parent="." index="19"]
-position = Vector2(40, 552)
+position = Vector2(40, 568)

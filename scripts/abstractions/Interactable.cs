@@ -7,6 +7,9 @@ namespace TheWizardCoder.Abstractions
 {
 	public abstract partial class Interactable : Area2D
 	{
+		[Signal]
+		public delegate void InteractedEventHandler();
+
 		protected Global global;
 
 		[Export]
@@ -25,6 +28,7 @@ namespace TheWizardCoder.Abstractions
 			if (Active)
 			{
 				Action();
+				EmitSignal(SignalName.Interacted);
 			}
 			else
 			{

@@ -18,8 +18,12 @@ namespace TheWizardCoder.Data
         public Array<string> MagicSpells { get; set; }
         public CharacterType Type { get; set; }
 
+        private Dictionary<string, Variant> dict;
+
         public void ApplyDictionary(Dictionary<string, Variant> dict)
         {
+            this.dict = dict;
+
             Name = (string)dict["Name"];
             Health = (int)dict["Health"];
             MaxHealth = (int)dict["MaxHealth"];
@@ -30,6 +34,13 @@ namespace TheWizardCoder.Data
             AgilityPoints = (int)dict["AgilityPoints"];
             MagicSpells = (Array<string>)dict["MagicSpells"];
             Type = Enum.Parse<CharacterType>((string)dict["Type"]);
+        }
+
+        public CharacterData Clone()
+        {
+            CharacterData newData = new();
+            newData.ApplyDictionary(dict);
+            return newData;
         }
 
         public void AddHealth(int value)

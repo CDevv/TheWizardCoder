@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dm12hksdykxf"]
+[gd_scene load_steps=7 format=3 uid="uid://dm12hksdykxf"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_n0yin"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_a4heb"]
 [ext_resource type="TileSet" uid="uid://b5gmhkessquy0" path="res://tilesets/forest_environment.tres" id="3_8gp3v"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_ryj5j"]
+[ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="5_sp774"]
+[ext_resource type="PackedScene" uid="uid://bcec1jvlgi5m4" path="res://scenes/components/code_message_point.tscn" id="6_6jhi6"]
 
 [node name="Forest15" instance=ExtResource("1_n0yin")]
 y_sort_enabled = true
@@ -14,6 +16,7 @@ limit_bottom = 928
 
 [node name="Player" parent="." index="13" instance=ExtResource("2_a4heb")]
 z_index = 1
+y_sort_enabled = true
 position = Vector2(2048, 400)
 
 [node name="TileMap" type="TileMap" parent="." index="14"]
@@ -45,7 +48,22 @@ TargetLocation = "Section15Marker"
 PlayerDirection = 3
 
 [node name="Section14Marker" type="Marker2D" parent="." index="17"]
-position = Vector2(48, 400)
+position = Vector2(48, 416)
 
 [node name="Section16Marker" type="Marker2D" parent="." index="18"]
-position = Vector2(2048, 400)
+position = Vector2(2048, 416)
+
+[node name="MessageGlitch" type="Sprite2D" parent="." index="20"]
+position = Vector2(704, 296)
+scale = Vector2(2, 2)
+texture = ExtResource("5_sp774")
+
+[node name="CodeMessagePoint" parent="." index="21" instance=ExtResource("6_6jhi6")]
+position = Vector2(704, 296)
+CodeText = "int c = 5;
+bool[] arr =
+{ true, false, true, false, true };
+	
+for (int i = 0; i < c; i++)
+	if (IsEven(i) == arr[i])
+		RemoveTrees();"

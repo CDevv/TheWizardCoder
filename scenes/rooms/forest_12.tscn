@@ -16,7 +16,8 @@ limit_bottom = 1152
 
 [node name="Player" parent="." index="12" instance=ExtResource("2_5tigq")]
 z_index = 1
-position = Vector2(784, 576)
+y_sort_enabled = true
+position = Vector2(784, 600)
 
 [node name="TileMap" type="TileMap" parent="." index="13"]
 y_sort_enabled = true
@@ -46,13 +47,13 @@ TargetLocation = "Section12Marker"
 PlayerDirection = 1
 
 [node name="Section11Marker" type="Marker2D" parent="." index="16"]
-position = Vector2(472, 1112)
+position = Vector2(472, 1128)
 
 [node name="Section13Marker" type="Marker2D" parent="." index="17"]
-position = Vector2(2608, 768)
+position = Vector2(2608, 784)
 
 [node name="HouseMarker" type="Marker2D" parent="." index="18"]
-position = Vector2(784, 576)
+position = Vector2(784, 600)
 
 [node name="HouseWarper" parent="." index="20" instance=ExtResource("4_o6lkv")]
 z_index = 2

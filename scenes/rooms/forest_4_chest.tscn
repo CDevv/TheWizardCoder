@@ -36,4 +36,4 @@ TargetRoomName = "forest_4"
 TargetLocation = "ChestMarker"
 
 [node name="Section4Marker" type="Marker2D" parent="." index="15"]
-position = Vector2(384, 792)
+position = Vector2(384, 808)

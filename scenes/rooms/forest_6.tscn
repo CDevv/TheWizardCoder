@@ -52,10 +52,10 @@ TargetRoomName = "forest_6_side"
 TargetLocation = "Section6Marker"
 
 [node name="Section5Marker" type="Marker2D" parent="." index="17"]
-position = Vector2(352, 1056)
+position = Vector2(352, 1072)
 
 [node name="SidePathMarker" type="Marker2D" parent="." index="18"]
-position = Vector2(3808, 1064)
+position = Vector2(3808, 1080)
 
 [node name="Section7Marker2" type="Marker2D" parent="." index="19"]
-position = Vector2(3136, 24)
+position = Vector2(3136, 40)

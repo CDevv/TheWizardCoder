@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2dpwk6p1w706"
-path="res://.godot/imported/JuniorBug.png-f19ff72617532d4946030154b442bb89.ctex"
+uid="uid://kicysorc6o6d"
+path="res://.godot/imported/Glitch.png-bf52b94eb230872fc87fd3e2245f5df7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/JuniorBug.png"
-dest_files=["res://.godot/imported/JuniorBug.png-f19ff72617532d4946030154b442bb89.ctex"]
+source_file="res://assets/enemies/Glitch.png"
+dest_files=["res://.godot/imported/Glitch.png-bf52b94eb230872fc87fd3e2245f5df7.ctex"]
 
 [params]
 

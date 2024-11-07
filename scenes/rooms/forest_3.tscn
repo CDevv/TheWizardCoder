@@ -44,10 +44,10 @@ TargetLocation = "Section3Marker"
 PlayerDirection = 1
 
 [node name="Section2Marker" type="Marker2D" parent="." index="16"]
-position = Vector2(3872, 2144)
+position = Vector2(3872, 2160)
 
 [node name="Section4Marker" type="Marker2D" parent="." index="17"]
-position = Vector2(448, 24)
+position = Vector2(448, 40)
 
 [node name="Chest" parent="." index="18" instance=ExtResource("5_f66fe")]
 position = Vector2(2208, 173)

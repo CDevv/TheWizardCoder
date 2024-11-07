@@ -46,7 +46,7 @@ TargetLocation = "Section16Marker"
 PlayerDirection = 2
 
 [node name="Section15Marker" type="Marker2D" parent="." index="17"]
-position = Vector2(32, 344)
+position = Vector2(32, 360)
 
 [node name="Seaside6Marker" type="Marker2D" parent="." index="18"]
-position = Vector2(41, 848)
+position = Vector2(41, 864)

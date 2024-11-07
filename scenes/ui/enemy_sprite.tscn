@@ -62,15 +62,16 @@ visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -56.0
-offset_top = -44.0
-offset_right = -8.0
-offset_bottom = -21.0
+offset_left = -72.0
+offset_top = -52.0
+offset_right = 8.0
+offset_bottom = -29.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 theme = ExtResource("4_r6dll")
 text = "Label"
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [connection signal="focus_exited" from="Button" to="." method="OnFocusExited"]
 [connection signal="pressed" from="Button" to="." method="OnButtonPressed"]

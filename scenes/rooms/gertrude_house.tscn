@@ -20,7 +20,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(432, 208)]
+"values": [Vector2(432, 224)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -49,7 +49,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(320, 344)]
+"values": [Vector2(320, 360)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -79,7 +79,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 1.2, 1.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(432, 208), Vector2(432, 272), Vector2(320, 272), Vector2(320, 344)]
+"values": [Vector2(432, 224), Vector2(432, 288), Vector2(320, 288), Vector2(320, 344)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -114,7 +114,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(320, 344)]
+"values": [Vector2(320, 360)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -170,7 +170,8 @@ color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." index="14" instance=ExtResource("2_u3uxm")]
 z_index = 1
-position = Vector2(320, 344)
+y_sort_enabled = true
+position = Vector2(320, 360)
 
 [node name="TileMap" type="TileMap" parent="." index="15"]
 y_sort_enabled = true
@@ -206,8 +207,7 @@ TargetRoomName = "forest_12"
 TargetLocation = "HouseMarker"
 
 [node name="Section12Marker" type="Marker2D" parent="." index="18"]
-position = Vector2(320, 344)
+position = Vector2(320, 360)
 
 [node name="Gertrude" parent="." index="19"]
-visible = true
-position = Vector2(432, 208)
+position = Vector2(432, 224)

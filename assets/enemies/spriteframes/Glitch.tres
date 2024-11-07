@@ -1,0 +1,42 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://phvtxqaj4s25"]
+
+[ext_resource type="Texture2D" uid="uid://kicysorc6o6d" path="res://assets/enemies/Glitch.png" id="1_6ouje"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8d56g"]
+atlas = ExtResource("1_6ouje")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3d11a"]
+atlas = ExtResource("1_6ouje")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcoj0"]
+atlas = ExtResource("1_6ouje")
+region = Rect2(0, 0, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8d56g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3d11a")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jcoj0")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}]

@@ -66,10 +66,9 @@ scale = Vector2(2, 2)
 sprite_frames = ExtResource("10_hkyc4")
 
 [node name="Gertrude" parent="." instance=ExtResource("9_7x1rq")]
-visible = false
 z_index = 1
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Gertrude"]
-position = Vector2(0, -25)
+position = Vector2(0, -41)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("13_e7w2n")

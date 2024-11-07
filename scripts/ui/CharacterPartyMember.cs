@@ -39,6 +39,7 @@ namespace TheWizardCoder.UI
 		public void ApplyData(CharacterData data)
 		{
 			name.Text = data.Name;
+			sprite.Play(data.Name);
 			
 			StringBuilder mainStatsBuilder = new();
 			mainStatsBuilder.AppendLine($"HP: {data.Health}");

@@ -127,8 +127,8 @@ namespace TheWizardCoder.Abstractions
 
         public virtual void Clear()
         {
-            Characters.Clear();
-            BattleStates.Clear();
+            Characters = new();
+            BattleStates = new();
         }
     }
 }

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2dpwk6p1w706"
-path="res://.godot/imported/JuniorBug.png-f19ff72617532d4946030154b442bb89.ctex"
+uid="uid://cbx06dqvwrq8s"
+path="res://.godot/imported/gertrude-battle.png-1c584f9c275ffb34a6c345b0f90842ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/JuniorBug.png"
-dest_files=["res://.godot/imported/JuniorBug.png-f19ff72617532d4946030154b442bb89.ctex"]
+source_file="res://assets/battle/battle-portraits/gertrude-battle.png"
+dest_files=["res://.godot/imported/gertrude-battle.png-1c584f9c275ffb34a6c345b0f90842ed.ctex"]
 
 [params]
 

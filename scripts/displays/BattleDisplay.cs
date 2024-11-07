@@ -47,6 +47,7 @@ namespace TheWizardCoder.Displays
 		private DamageIndicator damageIndicator;
 		private Marker2D enemySpritePoint;
 		private Button invisButton;
+		private TextureRect backgroundRect;
 
 		public override void _Ready()
 		{
@@ -56,6 +57,7 @@ namespace TheWizardCoder.Displays
 			damageIndicator = GetNode<DamageIndicator>("DamageIndicator");
 			enemySpritePoint = GetNode<Marker2D>("EnemySpritePoint");
 			invisButton = GetNode<Button>("InvisButton");
+			backgroundRect = GetNode<TextureRect>("Background");
 		}
 
 		public override void _Input(InputEvent inputEvent)
@@ -68,12 +70,19 @@ namespace TheWizardCoder.Displays
 
 		public override void ShowDisplay()
 		{
-			ShowDisplay(new() {"Glitch"});
+			ShowDisplay(new() {"Glitch"}, backgroundRect.Texture);
 		}
 
 		public async void ShowDisplay(Array<string> enemies)
 		{
+			ShowDisplay(enemies, backgroundRect.Texture);
+		}
+
+		public async void ShowDisplay(Array<string> enemies, Texture2D background)
+		{
 			IsBattleEnded = false;
+			backgroundRect.Texture = background;
+
 			//Add allies
 			Allies.AddCharacter(global.PlayerData.Stats);
 			if (global.PlayerData.Allies.Count > 0)

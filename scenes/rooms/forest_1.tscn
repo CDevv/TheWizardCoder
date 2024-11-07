@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxnmtnche424t"]
+[gd_scene load_steps=10 format=3 uid="uid://cxnmtnche424t"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_jqh4t"]
 [ext_resource type="TileSet" uid="uid://b5gmhkessquy0" path="res://tilesets/forest_environment.tres" id="2_4kb6i"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_5x3c7"]
 [ext_resource type="PackedScene" uid="uid://d38oq7utuerxp" path="res://scenes/components/ground_enemy.tscn" id="5_khl1p"]
 [ext_resource type="PackedScene" uid="uid://bcec1jvlgi5m4" path="res://scenes/components/code_message_point.tscn" id="6_6qfby"]
+[ext_resource type="Texture2D" uid="uid://yshsdevpml0u" path="res://assets/battle/backgrounds/battle-bg-forest.png" id="7_gldls"]
 [ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="7_napuu"]
 
 [node name="Forest1" instance=ExtResource("1_jqh4t")]
@@ -49,22 +50,26 @@ TargetLocation = "Section1Marker"
 PlayerDirection = 3
 
 [node name="VillageMarker" type="Marker2D" parent="." index="16"]
-position = Vector2(64, 449)
+position = Vector2(64, 465)
 
 [node name="Section2Marker" type="Marker2D" parent="." index="17"]
-position = Vector2(2272, 449)
+position = Vector2(2272, 465)
 
 [node name="GroundEnemy" parent="." index="18" instance=ExtResource("5_khl1p")]
 z_index = 1
 position = Vector2(720, 344)
+EnemyName = "JuniorBug"
 
 [node name="GroundEnemy2" parent="." index="19" instance=ExtResource("5_khl1p")]
 z_index = 1
 position = Vector2(1232, 552)
+EnemyName = "JuniorBug"
 
 [node name="GroundEnemy3" parent="." index="20" instance=ExtResource("5_khl1p")]
 z_index = 1
 position = Vector2(1848, 344)
+EnemyName = "JuniorBug"
+BackgroundImage = ExtResource("7_gldls")
 
 [node name="CodeMessagePoint" parent="." index="22" instance=ExtResource("6_6qfby")]
 z_index = 2

@@ -32,6 +32,17 @@
 		"MagicSpells": {},
 		"Type": "Enemy",
 	},
+	"JuniorBug": {
+		"Health": 25,
+		"MaxHealth": 10,
+		"Points": 0,
+		"MaxPoints": 0,
+		"AttackPoints": 10,
+		"DefensePoints": 2,
+		"AgilityPoints": 5,
+		"MagicSpells": {},
+		"Type": "Enemy",
+	},
 	"Gertrude": {
 		"Health": 40,
 		"MaxHealth": 40,

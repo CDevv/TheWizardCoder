@@ -109,7 +109,7 @@ namespace TheWizardCoder.Components
 				}
 				else
 				{
-					Follower.AddPathwayPoint(velocity.ToDirection(), GlobalPosition + new Vector2(0, 21), PlayerSpeed);
+					Follower.AddPathwayPoint(velocity.ToDirection(), GlobalPosition, PlayerSpeed);
 					
 					if (DistanceWalked >= 32)
 					{
@@ -243,7 +243,7 @@ namespace TheWizardCoder.Components
 
 			if (setPos)
 			{
-				Follower.GlobalPosition = GlobalPosition + new Vector2(0, 21);
+				Follower.GlobalPosition = GlobalPosition;
 			}
 			Follower.MakeFollower();
 			Follower.Show();

@@ -10,6 +10,7 @@ namespace TheWizardCoder.Interactables
 		private CollisionShape2D collisionShape;
 
 		public string EnemyName { get; set; }
+		public Texture2D BackgroundImage { get; set; }
 
 		public override void _Ready()
 		{
@@ -22,7 +23,7 @@ namespace TheWizardCoder.Interactables
 			global.CanWalk = false;
 			global.GameDisplayEnabled = false;
 			GD.Print("Battle point");
-			global.CurrentRoom.BattleDisplay.ShowDisplay(new() { EnemyName });
+			global.CurrentRoom.BattleDisplay.ShowDisplay(new() { EnemyName }, BackgroundImage);
 			Active = false;
 			collisionShape.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		}

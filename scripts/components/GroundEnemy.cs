@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using TheWizardCoder.Autoload;
+using TheWizardCoder.Enums;
 using TheWizardCoder.Interactables;
 
 
@@ -12,22 +13,26 @@ namespace TheWizardCoder.Components
 
 		[Export]
 		public string EnemyName { get; set; } = "Glitch";
+		[Export]
+		public Texture2D BackgroundImage { get; set; } = ResourceLoader.Load<Texture2D>("res://assets/battle/backgrounds/battle-bg.png");
 
 		private Global global;
 		private BattlePoint battlePoint;
-		private Sprite2D sprite;
+		private AnimatedSprite2D sprite;
 		private bool following;
+		private Direction direction;
 
 		public override void _Ready()
 		{
 			global = GetNode<Global>("/root/Global");
 			battlePoint = GetNode<BattlePoint>("BattlePoint");
-			sprite = GetNode<Sprite2D>("Sprite");
+			sprite = GetNode<AnimatedSprite2D>("Sprite");
 
 			battlePoint.EnemyName = EnemyName;
+			battlePoint.BackgroundImage = BackgroundImage;
 
-			Texture2D enemyTexture = ResourceLoader.Load<Texture2D>($"res://assets/characters/enemies/{EnemyName}.png");
-			sprite.Texture = enemyTexture;
+			SpriteFrames enemyTexture = ResourceLoader.Load<SpriteFrames>($"res://assets/enemies/spriteframes/{EnemyName}.tres");
+			sprite.SpriteFrames = enemyTexture;
 		}
 
 		public override void _Process(double delta)
@@ -36,6 +41,15 @@ namespace TheWizardCoder.Components
 			{
 				Vector2 velocity = (global.CurrentRoom.Player.Position - Position).Normalized() * Speed;
 				Position += velocity;
+
+				if (velocity.X > 0)
+				{
+					sprite.FlipH = true;
+				}
+				else
+				{
+					sprite.FlipH = false;
+				}
 			}
 		}
 
@@ -48,6 +62,8 @@ namespace TheWizardCoder.Components
 					global.CurrentRoom.BattleDisplay.BattleEnded += BattleEnded;
 					global.CurrentRoom.Player.Enemy = this;
 					following = true;
+
+					sprite.Play();
 				}
 			}	
 		}
@@ -58,6 +74,9 @@ namespace TheWizardCoder.Components
 			{
 				global.CurrentRoom.Player.Enemy = null;
 				following = false;
+
+				sprite.Stop();
+				sprite.Frame = 0;
 			}
 		}
 
@@ -66,6 +85,8 @@ namespace TheWizardCoder.Components
 			battlePoint.Active = false;
 			Visible = false;
 			following = false;
+
+			sprite.Stop();
 		}
 	}
 }
