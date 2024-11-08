@@ -23,6 +23,8 @@ namespace TheWizardCoder.Interactables
 		private CollisionShape2D collision;
 
 		private bool followingPlayer;
+
+		public bool FollowingPlayer { get { return followingPlayer; } }
 		private Queue<CharacterPathway> pathways = new();
 
 		public override void _Ready()
@@ -45,19 +47,39 @@ namespace TheWizardCoder.Interactables
 
         public void MakeFollower()
 		{
-			Active = false;
-			followingPlayer = true;
-			collision.Disabled = true;
+			EnableFollowing();
 
 			CharacterPathway pathway = new(global.CurrentRoom.Player.Direction, GlobalPosition, global.CurrentRoom.Player.PlayerSpeed);
 			pathways.Enqueue(pathway);
+
 			global.CurrentRoom.Player.Follower = this;
+		}
+
+		public void EnableFollowing()
+		{
+			Active = false;
+			followingPlayer = true;
+			collision.Disabled = true;
+		}
+
+		public void DisableFollowing()
+		{
+			Active = true;
+			followingPlayer = false;
+			collision.Disabled = false;
+
+			pathways = new();
 		}
 
 		public void AddPathwayPoint(Direction direction, Vector2 point, int speed)
 		{
 			CharacterPathway pathway = new(direction, point, speed);
 			pathways.Enqueue(pathway);
+		}
+
+		public void AddPathwayPoint()
+		{
+			AddPathwayPoint(DefaultDirection, Position, 2);
 		}
 
 		public bool IsQueueEmpty()
@@ -96,7 +118,7 @@ namespace TheWizardCoder.Interactables
 			return pathways.Peek();
 		}
 
-		private void PlayAnimation(string name)
+		public void PlayAnimation(string name)
 		{
 			sprite.Play(name);
 		}

@@ -40,3 +40,17 @@ Gertrude: [#portrait=0] But I have seen some dark creatures around the forest la
 Nolan: [#portrait=2] Maybe.
 Gertrude: [#portrait=1] So yeah! I will accompany you on your journey!
 => END!
+
+~ puzzle_intro_1
+Gertrude: [#portrait=0] Wait..
+Gertrude: [#portrait=0] What is this? 
+=> END!
+
+~ puzzle_intro_2
+Gertrude: [#portrait=0] A black hole in the middle of a forest? And.. "EXECUTE"?
+Gertrude: [#portrait=0] I haven't seen these before..
+=> END!
+
+~ puzzle_solved
+Gertrude: [#portrait=0] Oh! It got solved!
+=> END!

@@ -105,11 +105,17 @@ namespace TheWizardCoder.Components
 			{
 				if (velocity == Vector2.Zero)
 				{
-					Follower.PlayIdleAnimation(Follower.PeekPathway().Direction);
+					if (Follower.FollowingPlayer)
+					{
+						Follower.PlayIdleAnimation(Follower.PeekPathway().Direction);
+					}
 				}
 				else
 				{
-					Follower.AddPathwayPoint(velocity.ToDirection(), GlobalPosition, PlayerSpeed);
+					if (Follower.FollowingPlayer)
+					{
+						Follower.AddPathwayPoint(velocity.ToDirection(), GlobalPosition, PlayerSpeed);
+					}
 					
 					if (DistanceWalked >= 32)
 					{

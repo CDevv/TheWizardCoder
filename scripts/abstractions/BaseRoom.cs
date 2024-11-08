@@ -35,6 +35,8 @@ namespace TheWizardCoder.Abstractions
 		public Player Player { get; set; }
 		public Camera2D Camera { get; set; }
 
+		public CharacterDialoguePoint Gertrude { get; set; }
+
 		public override void _Ready()
 		{
 			OnReady();
@@ -56,6 +58,8 @@ namespace TheWizardCoder.Abstractions
 			CodeMessage = GetNode<CodeMessageDisplay>("CodeMessageDisplay");
 			Player = GetNode<Player>("Player");
 			Camera = GetNode<Camera2D>("Camera");
+
+			Gertrude = GetNode<CharacterDialoguePoint>("Gertrude");
 
 			TransitionRect.Show();
 
@@ -104,6 +108,15 @@ namespace TheWizardCoder.Abstractions
 		{
 			Dialogue.ShowDisplay(resource, title);
 			await ToSignal(Dialogue, DialogueDisplay.SignalName.DialogueEnded);
+		}
+
+		public async Task TweenCamera(Vector2 position, float duration)
+		{
+			Tween tween = GetTree().CreateTween();
+			tween.TweenProperty(Camera, "position", position, duration);
+			tween.Play();
+
+			await ToSignal(tween, Tween.SignalName.Finished);
 		}
 	}
 }

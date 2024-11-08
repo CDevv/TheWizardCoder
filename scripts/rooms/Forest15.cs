@@ -2,11 +2,16 @@ using Godot;
 using System;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using TheWizardCoder.Abstractions;
+using TheWizardCoder.Enums;
 using TheWizardCoder.Interactables;
 
 public partial class Forest15 : BaseRoom
 {
+	[Export]
+	public Resource DialogueResource { get; set; }
+
 	private const int ButtonsCount = 5;
 
 	private bool[] bools = { false, false, false, false, false };
@@ -52,7 +57,7 @@ public partial class Forest15 : BaseRoom
 		return builder.ToString();
 	}
 
-	private void CheckCode()
+	private async void CheckCode()
 	{
 		GD.Print("execute");
 		int count = 0;
@@ -68,6 +73,7 @@ public partial class Forest15 : BaseRoom
 		{
 			GD.Print("Passed!");
 			ClearTrees();
+			await PuzzleSolvedCutscene();
 		}
 	}
 
@@ -78,5 +84,43 @@ public partial class Forest15 : BaseRoom
 			tileMap.SetCell(0, new Vector2I(56, i));
 			tileMap.SetCell(0, new Vector2I(57, i));
 		}
+	}
+
+	private async void PuzzleIntroCutscene()
+	{
+		if (global.CurrentRoom.Player.Follower != null)
+		{
+			global.CurrentRoom.Player.Follower.DisableFollowing();
+		}
+
+		await PlayCutscene("puzzle_intro_1");
+		await ShowDialogue(DialogueResource, "puzzle_intro_1");
+		await PlayCutscene("puzzle_intro_2");
+		await ShowDialogue(DialogueResource, "puzzle_intro_2");
+	}
+
+	private async Task PuzzleSolvedCutscene()
+	{
+		await TweenCamera(new Vector2(1840, 408), 0.3f);
+
+		await PlayCutscene("puzzle_solved");
+		await ShowDialogue(DialogueResource, "puzzle_solved");
+
+		global.CurrentRoom.Gertrude.PlayIdleAnimation(Direction.Left);
+		SceneTreeTimer timer = GetTree().CreateTimer(1);
+		await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
+
+		global.CurrentRoom.Gertrude.PlayAnimation("left");
+
+		Tween tween = GetTree().CreateTween();
+		tween.TweenProperty(global.CurrentRoom.Gertrude, "position", new Vector2(global.CurrentRoom.Player.Position.X, 408), 1.5f);
+		tween.Play();
+		await ToSignal(tween, Tween.SignalName.Finished);
+
+		global.CurrentRoom.Gertrude.PlayIdleAnimation(Direction.Up);
+		
+		global.CurrentRoom.Gertrude.EnableFollowing();
+		global.CurrentRoom.Gertrude.AddPathwayPoint();	
+		global.CurrentRoom.Player.DistanceWalked = 0;
 	}
 }
