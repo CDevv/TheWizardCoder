@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2dpwk6p1w706"
-path="res://.godot/imported/juniorbug.png-b4afe3130f7a719a86df857d0b302371.ctex"
+uid="uid://c83xktp24qsdk"
+path="res://.godot/imported/test-animtile.png-c7c56c301bfbccce3624427664e215c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/juniorbug.png"
-dest_files=["res://.godot/imported/juniorbug.png-b4afe3130f7a719a86df857d0b302371.ctex"]
+source_file="res://assets/tilesets/test-animtile.png"
+dest_files=["res://.godot/imported/test-animtile.png-c7c56c301bfbccce3624427664e215c5.ctex"]
 
 [params]
 
