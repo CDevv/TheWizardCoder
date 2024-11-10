@@ -25,6 +25,8 @@ b = Vector2(16, 1304)
 [node name="Village1" instance=ExtResource("1_8rjao")]
 y_sort_enabled = true
 script = ExtResource("2_ey3gt")
+SceneFileName = "village_1"
+LocationName = "The Village"
 
 [node name="BattleDisplay" parent="." index="1"]
 TutorialDialogueResource = null
@@ -72,7 +74,7 @@ PlayerDirection = 3
 
 [node name="ShimbleWarper" parent="." index="12" instance=ExtResource("4_ohjtn")]
 z_index = 1
-position = Vector2(720, 719)
+position = Vector2(720, 718)
 TargetRoomName = "shimble_house"
 TargetLocation = "EnterHouseMarker"
 PlayerDirection = 1
@@ -97,34 +99,34 @@ shape = SubResource("SegmentShape2D_gtpcj")
 shape = SubResource("SegmentShape2D_tdlu8")
 
 [node name="EnterVillageMarker" type="Marker2D" parent="." index="15"]
-position = Vector2(80, 880)
+position = Vector2(24, 896)
 
 [node name="Section2Marker" type="Marker2D" parent="." index="16"]
-position = Vector2(1648, 880)
+position = Vector2(1648, 896)
 
 [node name="ShimbleHouseMarker" type="Marker2D" parent="." index="17"]
-position = Vector2(720, 721)
+position = Vector2(720, 757)
 
 [node name="ZenHouseMarker" type="Marker2D" parent="." index="18"]
-position = Vector2(887, 400)
+position = Vector2(887, 416)
 
-[node name="Player" parent="." index="19" instance=ExtResource("5_7m8xg")]
+[node name="House1Marker" type="Marker2D" parent="." index="19"]
+position = Vector2(1456, 872)
+
+[node name="Player" parent="." index="20" instance=ExtResource("5_7m8xg")]
 z_index = 1
 position = Vector2(136, 824)
 
-[node name="SavePoint" parent="." index="21" instance=ExtResource("6_ddf0g")]
+[node name="SavePoint" parent="." index="22" instance=ExtResource("6_ddf0g")]
 z_index = 1
 position = Vector2(272, 816)
 
-[node name="House1Warper" parent="." index="23" instance=ExtResource("4_ohjtn")]
+[node name="House1Warper" parent="." index="24" instance=ExtResource("4_ohjtn")]
 z_index = 2
 position = Vector2(1456, 818)
 TargetRoomName = "village_1_house_1"
 TargetLocation = "EnterMarker"
 PlayerDirection = 1
-
-[node name="House1Marker" type="Marker2D" parent="." index="24"]
-position = Vector2(1456, 840)
 
 [node name="LockedHouse1" parent="." index="25" instance=ExtResource("7_ggsju")]
 z_index = 2
@@ -133,5 +135,5 @@ scale = Vector2(2, 1)
 DialogueResource = ExtResource("8_xxkd1")
 DialogueTitle = "locked"
 
-[node name="ZenDummy" parent="." index="27"]
+[node name="ZenDummy" parent="." index="28"]
 visible = true

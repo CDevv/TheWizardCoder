@@ -175,6 +175,7 @@ namespace TheWizardCoder.Autoload
 		{
 			SaveFileData data = ReadSaveFileData(saveName);
 			PlayerData = data;
+			PlayerData.LastSaved = DateTime.Now;
 
 			if (data.IsSaveEmpty)
 			{

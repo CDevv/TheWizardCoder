@@ -50,7 +50,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.8, 1.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(448, 308), Vector2(448, 308), Vector2(320, 308)]
+"values": [Vector2(448, 340), Vector2(448, 340), Vector2(320, 340)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -88,7 +88,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(320, 253)]
+"values": [Vector2(320, 264)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -118,7 +118,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(320, 308)]
+"values": [Vector2(320, 340)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -144,7 +144,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(320, 253)]
+"values": [Vector2(320, 264)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -171,10 +171,10 @@ tracks/0/path = NodePath("Player:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2, 3, 3.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 2, 3, 3.4, 3.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(320, 308), Vector2(320, 308), Vector2(448, 308), Vector2(448, 328)]
+"values": [Vector2(320, 340), Vector2(320, 340), Vector2(448, 340), Vector2(448, 360), Vector2(448, 360)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -215,7 +215,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.6, 1.4, 1.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(320, 253), Vector2(320, 294), Vector2(448, 294), Vector2(448, 349)]
+"values": [Vector2(320, 264), Vector2(320, 310), Vector2(448, 310), Vector2(448, 365)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -338,6 +338,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." index="11" instance=ExtResource("2_stxyb")]
 z_index = 2
+position = Vector2(320, 340)
 
 [node name="TileMap" type="TileMap" parent="." index="12"]
 y_sort_enabled = true
@@ -416,12 +417,12 @@ TargetRoomName = "watchtower_2"
 TargetLocation = "Floor3Marker"
 
 [node name="Floor2Marker" type="Marker2D" parent="." index="16"]
-position = Vector2(448, 308)
+position = Vector2(448, 340)
 
 [node name="Linton" parent="." index="17" instance=ExtResource("6_3c3t7")]
-position = Vector2(320, 253)
+position = Vector2(320, 264)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Linton" index="2"]
-position = Vector2(0, -16)
+position = Vector2(0, -32)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("7_cmpgl")

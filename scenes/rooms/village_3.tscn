@@ -59,6 +59,7 @@ layer_3/tile_data = PackedInt32Array(655361, 65536, 6, 720897, 0, 4, 786433, 655
 [node name="Player" parent="." index="9" instance=ExtResource("3_w6fsl")]
 z_index = 2
 y_sort_enabled = true
+position = Vector2(488, 888)
 
 [node name="PathWarper" parent="." index="10" instance=ExtResource("4_85gv2")]
 position = Vector2(-16, 864)
@@ -89,16 +90,16 @@ TargetRoomName = "dudeley_house"
 TargetLocation = "EnterHouseMarker"
 
 [node name="Section2Marker" type="Marker2D" parent="." index="14"]
-position = Vector2(40, 840)
+position = Vector2(40, 856)
 
 [node name="Section4Marker" type="Marker2D" parent="." index="15"]
-position = Vector2(1848, 840)
+position = Vector2(1848, 856)
 
 [node name="TavernMarker" type="Marker2D" parent="." index="16"]
-position = Vector2(512, 800)
+position = Vector2(512, 840)
 
 [node name="DudeleyHouseMarker" type="Marker2D" parent="." index="17"]
-position = Vector2(1200, 888)
+position = Vector2(1200, 920)
 
 [node name="RoomCollision" type="StaticBody2D" parent="." index="18"]
 position = Vector2(0, 320)
@@ -128,7 +129,7 @@ DialogueResource = ExtResource("6_7mst3")
 DialogueTitle = "dudeley_point"
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Dudeley" index="2"]
-position = Vector2(0, -16)
+position = Vector2(0, -32)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("8_20wkg")
 

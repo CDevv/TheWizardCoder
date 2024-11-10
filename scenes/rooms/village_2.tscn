@@ -81,19 +81,19 @@ TargetRoomName = "village_farm"
 TargetLocation = "Section2Marker"
 
 [node name="Section1Marker" type="Marker2D" parent="." index="13"]
-position = Vector2(55, 912)
+position = Vector2(55, 928)
 
 [node name="Section3Marker" type="Marker2D" parent="." index="14"]
-position = Vector2(1776, 904)
+position = Vector2(1776, 920)
 
 [node name="FarmMarker" type="Marker2D" parent="." index="15"]
-position = Vector2(1216, 1280)
+position = Vector2(1216, 1296)
 
 [node name="House1Marker" type="Marker2D" parent="." index="16"]
-position = Vector2(720, 872)
+position = Vector2(720, 888)
 
 [node name="House2Marker" type="Marker2D" parent="." index="17"]
-position = Vector2(1360, 872)
+position = Vector2(1360, 888)
 
 [node name="RoomCollision" type="StaticBody2D" parent="." index="18"]
 position = Vector2(0, 32)

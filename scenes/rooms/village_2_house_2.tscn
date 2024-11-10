@@ -102,7 +102,7 @@ TargetRoomName = "village_2"
 TargetLocation = "House2Marker"
 
 [node name="EnterMarker" type="Marker2D" parent="." index="15"]
-position = Vector2(192, 368)
+position = Vector2(192, 384)
 
 [node name="DrinkDialogue" parent="." index="16" instance=ExtResource("5_2bo3y")]
 z_index = 2

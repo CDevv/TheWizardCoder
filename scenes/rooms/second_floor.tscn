@@ -12,9 +12,6 @@ SceneFileName = "second_floor"
 LocationName = "Home"
 DefaultMarkerName = "DoorMarker"
 
-[node name="TransitionRect" parent="." index="6"]
-visible = false
-
 [node name="ColorRect" type="ColorRect" parent="." index="7"]
 offset_right = 640.0
 offset_bottom = 480.0
@@ -42,14 +39,14 @@ polygon = PackedVector2Array(480, 64, 496, 48, 496, 400, 144, 400, 144, 264, 112
 position = Vector2(312, 224)
 
 [node name="StairsMarker" type="Marker2D" parent="." index="12"]
-position = Vector2(72, 272)
+position = Vector2(72, 304)
 
 [node name="DoorWarper" parent="." index="13" instance=ExtResource("4_61e7m")]
 z_index = 2
 position = Vector2(312, 176)
 TargetRoomName = "wizardry_room"
 TargetLocation = "DefaultMarker"
-PlayerDirection = 0
+PlayerDirection = 1
 
 [node name="StairsWarper" parent="." index="14" instance=ExtResource("4_61e7m")]
 z_index = 2

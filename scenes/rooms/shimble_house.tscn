@@ -129,7 +129,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(472, 200), Vector2(472, 200)]
+"values": [Vector2(472, 216), Vector2(472, 216)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -161,7 +161,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(472, 200), Vector2(448, 200), Vector2(448, 296)]
+"values": [Vector2(472, 216), Vector2(448, 216), Vector2(448, 312)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -197,7 +197,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(448, 296)]
+"values": [Vector2(448, 312)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -287,12 +287,12 @@ layer_3/tile_data = PackedInt32Array(327684, 65536, 0, 655364, 0, 4, 655375, 655
 
 [node name="Shimble" parent="." index="11" instance=ExtResource("4_nfibm")]
 z_index = 1
-position = Vector2(472, 200)
+position = Vector2(472, 216)
 DialogueResource = ExtResource("6_hk72q")
 DialogueTitle = "shimble_point"
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Shimble" index="2"]
-position = Vector2(0, -18)
+position = Vector2(0, -32)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("5_yi567")
 
@@ -317,7 +317,7 @@ TargetRoomName = "village_1"
 TargetLocation = "ShimbleHouseMarker"
 
 [node name="EnterHouseMarker" type="Marker2D" parent="." index="14"]
-position = Vector2(448, 304)
+position = Vector2(448, 336)
 
 [node name="MissingChair" type="StaticBody2D" parent="." index="15"]
 z_index = 2

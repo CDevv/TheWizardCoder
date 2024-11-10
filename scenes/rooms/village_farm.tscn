@@ -71,7 +71,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1013, 928), Vector2(1128, 928)]
+"values": [Vector2(1013, 944), Vector2(1128, 944)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -119,7 +119,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.4, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1128, 816), Vector2(1128, 816), Vector2(1128, 896)]
+"values": [Vector2(1128, 832), Vector2(1128, 832), Vector2(1128, 912)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -302,13 +302,11 @@ libraries = {
 }
 
 [node name="Camera" parent="." index="5"]
-position = Vector2(1128, 928)
 limit_right = 1728
 limit_bottom = 1280
 
 [node name="Player" parent="." index="8" instance=ExtResource("2_6625t")]
 z_index = 1
-position = Vector2(256, 96)
 
 [node name="TileMap" type="TileMap" parent="." index="9"]
 y_sort_enabled = true
@@ -332,10 +330,10 @@ TargetLocation = "FarmMarker"
 PlayerDirection = 1
 
 [node name="Section2Marker" type="Marker2D" parent="." index="11"]
-position = Vector2(317, 16)
+position = Vector2(317, 32)
 
 [node name="HouseMarker" type="Marker2D" parent="." index="12"]
-position = Vector2(912, 896)
+position = Vector2(912, 928)
 
 [node name="RoomCollision" type="StaticBody2D" parent="." index="13"]
 
@@ -393,12 +391,12 @@ shape = SubResource("RectangleShape2D_gwoj0")
 
 [node name="Keenelm" parent="." index="20" instance=ExtResource("8_qga0w")]
 z_index = 1
-position = Vector2(1128, 816)
+position = Vector2(1128, 832)
 DialogueResource = ExtResource("6_eeq7a")
 DialogueTitle = "keenelm_point"
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Keenelm" index="2"]
-position = Vector2(0, -16)
+position = Vector2(0, -32)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("9_73pyg")
 

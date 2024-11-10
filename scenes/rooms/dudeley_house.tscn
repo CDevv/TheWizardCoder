@@ -31,7 +31,7 @@ color = Color(0, 0, 0, 1)
 z_index = 2
 
 [node name="EnterHouseMarker" type="Marker2D" parent="." index="11"]
-position = Vector2(304, 216)
+position = Vector2(304, 256)
 
 [node name="RoomCollision" type="StaticBody2D" parent="." index="12"]
 

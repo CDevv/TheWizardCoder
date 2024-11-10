@@ -97,7 +97,7 @@ TargetRoomName = "village_4"
 TargetLocation = "WatchtowerMarker"
 
 [node name="EnterMarker" type="Marker2D" parent="." index="14"]
-position = Vector2(320, 360)
+position = Vector2(320, 392)
 
 [node name="StairsCollision" type="StaticBody2D" parent="." index="15"]
 z_index = 5
@@ -156,4 +156,4 @@ TargetLocation = "Floor1Marker"
 PlayerDirection = 1
 
 [node name="Floor2Marker" type="Marker2D" parent="." index="18"]
-position = Vector2(192, 165)
+position = Vector2(192, 197)

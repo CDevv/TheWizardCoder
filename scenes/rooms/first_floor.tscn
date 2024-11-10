@@ -41,7 +41,7 @@ position = Vector2(312, 216)
 position = Vector2(40, 168)
 
 [node name="EntranceMarker" type="Marker2D" parent="." index="13"]
-position = Vector2(320, 344)
+position = Vector2(320, 376)
 
 [node name="DoorWarper" parent="." index="14" instance=ExtResource("4_v7qub")]
 z_index = 2
@@ -55,6 +55,7 @@ z_index = 2
 position = Vector2(40, 112)
 TargetRoomName = "second_floor"
 TargetLocation = "StairsMarker"
+PlayerDirection = 1
 
 [node name="StairsArea" parent="." index="16" instance=ExtResource("5_nfrtk")]
 

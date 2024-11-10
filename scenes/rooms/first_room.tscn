@@ -138,7 +138,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 4.2, 4.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(192, 176), Vector2(192, 176), Vector2(240, 176)]
+"values": [Vector2(192, 208), Vector2(192, 208), Vector2(240, 208)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -204,7 +204,7 @@ animation = &"top"
 
 [node name="Player" parent="." index="6" instance=ExtResource("1_m6ahu")]
 z_index = 1
-position = Vector2(192, 176)
+position = Vector2(192, 208)
 
 [node name="BedAnimationBottom" type="AnimatedSprite2D" parent="." index="7"]
 position = Vector2(192, 208)
@@ -255,10 +255,10 @@ libraries = {
 }
 
 [node name="RoomEnterMarker" type="Marker2D" parent="." index="15"]
-position = Vector2(248, 344)
+position = Vector2(248, 376)
 
 [node name="AfterCutsceneMarker" type="Marker2D" parent="." index="16"]
-position = Vector2(240, 176)
+position = Vector2(240, 208)
 
 [node name="Warper" parent="." index="17" instance=ExtResource("9_od3ub")]
 position = Vector2(248, 416)

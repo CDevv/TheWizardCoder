@@ -26,7 +26,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.6, 1.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(216, 313), Vector2(216, 275), Vector2(352, 275)]
+"values": [Vector2(216, 345), Vector2(216, 310), Vector2(352, 310)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -38,7 +38,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.4, 1.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(216, 313), Vector2(216, 294), Vector2(384, 294)]
+"values": [Vector2(216, 329), Vector2(216, 310), Vector2(384, 310)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -97,7 +97,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 1.7, 2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(384, 294), Vector2(384, 327), Vector2(216, 327), Vector2(216, 352)]
+"values": [Vector2(384, 310), Vector2(384, 343), Vector2(216, 343), Vector2(216, 368)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -235,7 +235,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." index="10" instance=ExtResource("2_if4ef")]
 z_index = 1
-position = Vector2(224, 304)
+position = Vector2(216, 345)
 
 [node name="TileMap" type="TileMap" parent="." index="11"]
 y_sort_enabled = true
@@ -250,7 +250,7 @@ layer_1/name = "floor"
 layer_1/tile_data = PackedInt32Array(524293, 0, 0, 589829, 0, 1, 655365, 0, 4, 524294, 65536, 0, 589830, 65536, 1, 655366, 65536, 2, 524295, 131072, 0, 589831, 131072, 1, 655367, 131072, 2, 524296, 0, 0, 589832, 0, 1, 655368, 0, 2, 524297, 65536, 0, 589833, 65536, 1, 655369, 65536, 2, 524298, 131072, 0, 589834, 131072, 1, 655370, 131072, 2, 524299, 0, 0, 589835, 0, 1, 655371, 0, 2, 524300, 65536, 0, 589836, 65536, 1, 655372, 65536, 2, 524301, 131072, 0, 589837, 131072, 1, 655373, 131072, 2, 458757, 0, 2, 458758, 65536, 2, 458759, 131072, 2, 458760, 0, 2, 458761, 65536, 2, 458762, 131072, 2, 458763, 0, 2, 458764, 65536, 2, 458765, 131072, 2, 393221, 196608, 2, 393222, 196608, 2, 393223, 196608, 2, 393224, 196608, 2, 393225, 196608, 2, 393226, 196608, 2, 393227, 196608, 2, 393228, 196608, 2, 393229, 196608, 2, 327693, 196608, 1, 327692, 196608, 1, 327691, 196608, 1, 327690, 196608, 1, 327689, 196608, 1, 327688, 196608, 1, 327687, 196608, 1, 327686, 196608, 1, 327685, 196608, 1, 262149, 196608, 1, 262150, 196608, 1, 262151, 196608, 1, 262152, 196608, 1, 262153, 196608, 1, 262154, 196608, 1, 262155, 196608, 1, 262156, 196608, 1, 262157, 196608, 1, 655374, 65536, 4, 589838, 131072, 0, 524302, 65536, 1, 458766, 65536, 2, 393230, 196608, 2, 327694, 196608, 1, 262158, 196608, 1, 720902, 131072, 3, 720903, 131072, 4)
 
 [node name="EnterMarker" type="Marker2D" parent="." index="12"]
-position = Vector2(216, 313)
+position = Vector2(216, 345)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="13"]
 
@@ -276,7 +276,7 @@ TargetLocation = "BarrelsRoomMarker"
 z_index = 1
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Berry" index="2"]
-position = Vector2(0, -16)
+position = Vector2(0, -32)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("6_hi0d1")
 

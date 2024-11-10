@@ -1,10 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://dm12hksdykxf"]
+[gd_scene load_steps=19 format=3 uid="uid://dm12hksdykxf"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_n0yin"]
 [ext_resource type="Script" path="res://scripts/rooms/Forest15.cs" id="2_6mc3w"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_a4heb"]
 [ext_resource type="TileSet" uid="uid://b5gmhkessquy0" path="res://tilesets/forest_environment.tres" id="3_8gp3v"]
-[ext_resource type="Resource" uid="uid://podtp1v3v8iu" path="res://dialogue/forest.dialogue" id="3_rjq5m"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_ryj5j"]
 [ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="5_sp774"]
 [ext_resource type="PackedScene" uid="uid://bcec1jvlgi5m4" path="res://scenes/components/code_message_point.tscn" id="6_6jhi6"]
@@ -237,7 +236,7 @@ size = Vector2(64, 8)
 [node name="Forest15" instance=ExtResource("1_n0yin")]
 y_sort_enabled = true
 script = ExtResource("2_6mc3w")
-DialogueResource = ExtResource("3_rjq5m")
+DialogueResource = null
 
 [node name="AnimationPlayer" parent="." index="4"]
 libraries = {

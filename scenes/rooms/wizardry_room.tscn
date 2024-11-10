@@ -13,9 +13,6 @@ SceneFileName = "wizardry_room"
 LocationName = "Home"
 DefaultMarkerName = "DefaultMarker"
 
-[node name="TransitionRect" parent="." index="6"]
-visible = false
-
 [node name="ColorRect" type="ColorRect" parent="." index="7"]
 offset_right = 640.0
 offset_bottom = 480.0
@@ -45,7 +42,7 @@ z_index = 2
 polygon = PackedVector2Array(480, 64, 496, 48, 496, 400, 352, 400, 352, 432, 272, 432, 272, 400, 144, 400, 144, 48, 496, 48, 480, 64, 160, 64, 160, 384, 288, 384, 288, 416, 336, 416, 336, 384, 480, 384)
 
 [node name="DefaultMarker" type="Marker2D" parent="." index="11"]
-position = Vector2(312, 352)
+position = Vector2(312, 384)
 
 [node name="Warper" parent="." index="12" instance=ExtResource("4_kyj06")]
 position = Vector2(312, 416)

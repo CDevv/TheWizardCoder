@@ -35,9 +35,9 @@ namespace TheWizardCoder.Rooms
 			
 		}
 
-		private void OnCodeProblemItemsChanged()
+		private void OnSubmitted()
 		{
-			List<CodeProblemItem> codeProblemItems = CodeProblemPanel.ProblemItems;
+			List<CodeProblemItem> codeProblemItems = CodeProblemPanel.LastProblemItems;
 
 			if (codeProblemItems[0].CurrentAnswer == "+" && codeProblemItems[1].CurrentAnswer == ".Fill")
 			{
@@ -54,6 +54,7 @@ namespace TheWizardCoder.Rooms
 		private async void OnCodeProblemSolved()
 		{
 			await PlayCutscene("code_solved");
+			OnSubmitted();
 			await ShowDialogue(DialogueResource, "zen_code_solved");
 			AnimationPlayer.Play("zen_down");
 			global.PlayerData.AddToInventory("'t'");

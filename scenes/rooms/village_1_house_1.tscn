@@ -71,7 +71,7 @@ TargetRoomName = "village_1"
 TargetLocation = "House1Marker"
 
 [node name="EnterMarker" type="Marker2D" parent="." index="15"]
-position = Vector2(160, 312)
+position = Vector2(160, 328)
 
 [node name="DialoguePoint" parent="." index="16" instance=ExtResource("5_twk0r")]
 z_index = 2

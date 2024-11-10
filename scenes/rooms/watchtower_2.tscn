@@ -183,10 +183,10 @@ TargetRoomName = "watchtower_1"
 TargetLocation = "Floor2Marker"
 
 [node name="Floor1Marker" type="Marker2D" parent="." index="17"]
-position = Vector2(192, 312)
+position = Vector2(192, 344)
 
 [node name="Floor3Marker" type="Marker2D" parent="." index="18"]
-position = Vector2(448, 168)
+position = Vector2(448, 200)
 
 [node name="Chest" parent="." index="19" instance=ExtResource("5_xsve4")]
 position = Vector2(320, 253)

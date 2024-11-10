@@ -56,10 +56,10 @@ tracks/0/path = NodePath("Player:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 2.1, 2.7),
+"times": PackedFloat32Array(0, 0.3, 2.1, 2.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(1200, 760), Vector2(1200, 813), Vector2(968, 813), Vector2(968, 717)]
+"values": [Vector2(1200, 792), Vector2(1200, 845), Vector2(968, 845), Vector2(968, 760)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -68,7 +68,7 @@ tracks/1/path = NodePath("Player")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6, 2.1, 2.7),
+"times": PackedFloat32Array(0, 0.3, 2.1, 2.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
 "args": [0],
@@ -91,10 +91,10 @@ tracks/2/path = NodePath("Linton:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3, 2.1, 2.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 2.1, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1200, 816), Vector2(1200, 832), Vector2(928, 832), Vector2(928, 736)]
+"values": [Vector2(1200, 845), Vector2(928, 845), Vector2(928, 760)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -103,12 +103,9 @@ tracks/3/path = NodePath("Linton")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.3, 2.1, 2.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 2.1, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
-"args": ["down"],
-"method": &"PlayAnimation"
-}, {
 "args": ["left"],
 "method": &"PlayAnimation"
 }, {
@@ -126,10 +123,10 @@ tracks/4/path = NodePath("Camera:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.6, 2.1, 2.7),
+"times": PackedFloat32Array(0, 0.3, 2.1, 2.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(1200, 760), Vector2(1200, 813), Vector2(968, 813), Vector2(968, 717)]
+"values": [Vector2(1200, 792), Vector2(1200, 845), Vector2(968, 845), Vector2(968, 760)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -174,7 +171,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(968, 717)]
+"values": [Vector2(968, 760)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -203,7 +200,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(928, 736)]
+"values": [Vector2(928, 760)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -248,7 +245,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(928, 736)]
+"values": [Vector2(928, 760)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -479,12 +476,13 @@ libraries = {
 }
 
 [node name="Camera" parent="." index="5"]
+position = Vector2(1200, 792)
 limit_right = 2240
 limit_bottom = 1952
 
 [node name="Player" parent="." index="10" instance=ExtResource("2_ehys0")]
 z_index = 1
-position = Vector2(132, 308)
+position = Vector2(1200, 792)
 
 [node name="TileMap" type="TileMap" parent="." index="11"]
 y_sort_enabled = true
@@ -531,13 +529,13 @@ PlayerDirection = 1
 Active = false
 
 [node name="Section3Marker" type="Marker2D" parent="." index="16"]
-position = Vector2(40, 800)
+position = Vector2(40, 832)
 
 [node name="WatchtowerMarker" type="Marker2D" parent="." index="17"]
-position = Vector2(1200, 800)
+position = Vector2(1200, 832)
 
 [node name="ForestMarker" type="Marker2D" parent="." index="18"]
-position = Vector2(2200, 800)
+position = Vector2(2200, 832)
 
 [node name="Glitch" type="Sprite2D" parent="." index="19"]
 z_index = 2
@@ -578,7 +576,7 @@ DialogueTitle = "linton_point"
 DefaultDirection = 1
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Linton" index="2"]
-position = Vector2(0, -16)
+position = Vector2(0, -32)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("10_yrt8o")
 
@@ -666,6 +664,7 @@ position = Vector2(1904, 912)
 
 [node name="Border7Collision" type="CollisionShape2D" parent="Border7" index="0"]
 shape = SubResource("RectangleShape2D_kemv6")
+disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Border7" index="1"]
 position = Vector2(2.77162e-06, -9.53674e-07)
