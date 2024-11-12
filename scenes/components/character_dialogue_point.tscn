@@ -18,10 +18,10 @@ shape = SubResource("RectangleShape2D_fly64")
 debug_color = Color(0.252721, 0.952149, 0.851056, 0.42)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
 position = Vector2(0, -16)
 
 [node name="Collision" type="CollisionShape2D" parent="StaticBody2D"]
 unique_name_in_owner = true
 position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_yl0hy")
+debug_color = Color(1.15514e-06, 0.3932, 0.461628, 0.42)

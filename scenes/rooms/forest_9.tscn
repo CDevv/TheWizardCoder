@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://kncl8u2lhmo3"]
+[gd_scene load_steps=7 format=3 uid="uid://kncl8u2lhmo3"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_qe5j3"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_iwnl8"]
 [ext_resource type="TileSet" uid="uid://b5gmhkessquy0" path="res://tilesets/forest_environment.tres" id="3_ajvfd"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_w2eiy"]
+[ext_resource type="PackedScene" uid="uid://d38oq7utuerxp" path="res://scenes/components/ground_enemy.tscn" id="5_8e68f"]
+[ext_resource type="Texture2D" uid="uid://yshsdevpml0u" path="res://assets/battle/backgrounds/battle-bg-forest.png" id="6_ue682"]
 
 [node name="Forest9" instance=ExtResource("1_qe5j3")]
 
@@ -77,3 +79,21 @@ position = Vector2(1560, 2720)
 scale = Vector2(5, 1)
 TargetRoomName = "forest_seaside_1"
 TargetLocation = "Section9Marker"
+
+[node name="GroundEnemy" parent="." index="26" instance=ExtResource("5_8e68f")]
+z_index = 1
+position = Vector2(1272, 616)
+EnemyName = "JuniorBug"
+BackgroundImage = ExtResource("6_ue682")
+
+[node name="GroundEnemy2" parent="." index="27" instance=ExtResource("5_8e68f")]
+z_index = 1
+position = Vector2(1552, 1544)
+EnemyName = "JuniorBug"
+BackgroundImage = ExtResource("6_ue682")
+
+[node name="GroundEnemy3" parent="." index="28" instance=ExtResource("5_8e68f")]
+z_index = 1
+position = Vector2(1056, 2216)
+EnemyName = "JuniorBug"
+BackgroundImage = ExtResource("6_ue682")

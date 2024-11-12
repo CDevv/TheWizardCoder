@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://baveq8678ti3j"]
+[gd_scene load_steps=8 format=3 uid="uid://baveq8678ti3j"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_s7x0i"]
 [ext_resource type="Script" path="res://scripts/rooms/Forest6.cs" id="2_hvbiv"]
 [ext_resource type="TileSet" uid="uid://b5gmhkessquy0" path="res://tilesets/forest_environment.tres" id="2_mtb37"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="3_wyday"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_nck5e"]
+[ext_resource type="PackedScene" uid="uid://d38oq7utuerxp" path="res://scenes/components/ground_enemy.tscn" id="6_ac12k"]
+[ext_resource type="Texture2D" uid="uid://yshsdevpml0u" path="res://assets/battle/backgrounds/battle-bg-forest.png" id="7_f6it5"]
 
 [node name="Forest6" instance=ExtResource("1_s7x0i")]
 y_sort_enabled = true
@@ -59,3 +61,9 @@ position = Vector2(3808, 1080)
 
 [node name="Section7Marker2" type="Marker2D" parent="." index="19"]
 position = Vector2(3136, 40)
+
+[node name="GroundEnemy" parent="." index="22" instance=ExtResource("6_ac12k")]
+z_index = 1
+position = Vector2(1737, 512)
+EnemyName = "JuniorBug"
+BackgroundImage = ExtResource("7_f6it5")

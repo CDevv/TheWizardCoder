@@ -41,6 +41,26 @@ Nolan: [#portrait=2] Maybe.
 Gertrude: [#portrait=1] So yeah! I will accompany you on your journey!
 => END!
 
+~ gertrude_wallstuff
+Gertrude: [#portrait=0] Oh! It's the stuff i put my magic powder in!
+Nolan: [#portrait=0] Magic what?
+Gertrude: [#portrait=0] Msgic powder, you silly!
+=> END!
+
+~ gertrude_couldron
+Gertrude: [#portrait=1] This is the magical pot that I use to cook my soup! And magic potions, of course!
+=> END!
+
+~ gertrude_chair
+Gertrude: [#portrait=0] Oh right, this colored chair..
+Gertrude: [#portrait=0] I wanted stuff to look a lil' fancy, y'know? But the purple-haired dude couldn't paint it green for some reason.
+Nolan: [#portrait=0] That's unfortunate..
+=> END!
+
+~ gertrude_downstairs
+Gertrude: [#portrait=0] Do not touch.
+=> END!
+
 ~ puzzle_intro_1
 Gertrude: [#portrait=0] Wait..
 Gertrude: [#portrait=0] What is this? 

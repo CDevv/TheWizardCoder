@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://clp7t3coof17k"]
+[gd_scene load_steps=15 format=3 uid="uid://clp7t3coof17k"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_hrpwg"]
 [ext_resource type="Script" path="res://scripts/rooms/GertrudeHouse.cs" id="2_8lcbe"]
@@ -6,6 +6,7 @@
 [ext_resource type="TileSet" uid="uid://cci1mfiwm4w6e" path="res://tilesets/forest_buildings_interiors.tres" id="3_aqt4b"]
 [ext_resource type="Resource" uid="uid://podtp1v3v8iu" path="res://dialogue/forest.dialogue" id="3_cauah"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_gty4g"]
+[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="7_cifly"]
 
 [sub_resource type="Animation" id="Animation_l0o80"]
 resource_name = "gertrude_1"
@@ -211,3 +212,31 @@ position = Vector2(320, 360)
 
 [node name="Gertrude" parent="." index="19"]
 position = Vector2(432, 224)
+
+[node name="WallStuff" parent="." index="20" instance=ExtResource("7_cifly")]
+z_index = 2
+position = Vector2(352, 184)
+scale = Vector2(5, 1)
+DialogueResource = ExtResource("3_cauah")
+DialogueTitle = "gertrude_wallstuff"
+
+[node name="Couldron" parent="." index="21" instance=ExtResource("7_cifly")]
+z_index = 2
+position = Vector2(480, 214)
+scale = Vector2(3, 1)
+DialogueResource = ExtResource("3_cauah")
+DialogueTitle = "gertrude_couldron"
+
+[node name="ColoredChair" parent="." index="22" instance=ExtResource("7_cifly")]
+z_index = 2
+position = Vector2(176, 264)
+scale = Vector2(2, 2)
+DialogueResource = ExtResource("3_cauah")
+DialogueTitle = "gertrude_chair"
+
+[node name="Downstairs" parent="." index="23" instance=ExtResource("7_cifly")]
+z_index = 2
+position = Vector2(208, 184)
+scale = Vector2(2, 1)
+DialogueResource = ExtResource("3_cauah")
+DialogueTitle = "gertrude_downstairs"
