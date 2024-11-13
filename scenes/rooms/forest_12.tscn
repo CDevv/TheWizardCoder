@@ -1,14 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2wv03s7g6cwy"]
+[gd_scene load_steps=7 format=3 uid="uid://d2wv03s7g6cwy"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_f0rwf"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_5tigq"]
 [ext_resource type="Script" path="res://scripts/rooms/Forest12.cs" id="2_n2sdk"]
 [ext_resource type="TileSet" uid="uid://b5gmhkessquy0" path="res://tilesets/forest_environment.tres" id="3_t6wso"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_o6lkv"]
+[ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/components/save_point.tscn" id="6_1e4sf"]
 
 [node name="Forest12" instance=ExtResource("1_f0rwf")]
 y_sort_enabled = true
 script = ExtResource("2_n2sdk")
+SceneFileName = "forest_12"
+LocationName = "The Deep Forest"
 
 [node name="Camera" parent="." index="5"]
 limit_right = 2624
@@ -61,3 +64,7 @@ position = Vector2(784, 562)
 TargetRoomName = "gertrude_house"
 TargetLocation = "Section12Marker"
 PlayerDirection = 1
+
+[node name="SavePoint" parent="." index="22" instance=ExtResource("6_1e4sf")]
+z_index = 1
+position = Vector2(1040, 624)

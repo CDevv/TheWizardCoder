@@ -1,9 +1,172 @@
-[gd_scene load_steps=6 format=3 uid="uid://xyo74vo23p6u"]
+[gd_scene load_steps=14 format=3 uid="uid://xyo74vo23p6u"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_ux1hj"]
+[ext_resource type="Script" path="res://scripts/rooms/Forest16.cs" id="2_03v68"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_gb2o6"]
 [ext_resource type="TileSet" uid="uid://b5gmhkessquy0" path="res://tilesets/forest_environment.tres" id="3_1j6p8"]
+[ext_resource type="Resource" uid="uid://podtp1v3v8iu" path="res://dialogue/forest.dialogue" id="3_cmcn2"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_iug7p"]
+[ext_resource type="Texture2D" uid="uid://bhb7cg74mxmyy" path="res://assets/props/raft.png" id="5_k7cq8"]
+[ext_resource type="PackedScene" uid="uid://mmm0k3msmmm5" path="res://scenes/components/cutscene_point.tscn" id="7_4yj6y"]
+
+[sub_resource type="Animation" id="Animation_2ui8h"]
+resource_name = "forest_final_1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CutscenePoint:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(648, 688)]
+}
+
+[sub_resource type="Animation" id="Animation_q6mvd"]
+resource_name = "forest_final_2"
+length = 3.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(383, 925)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Gertrude:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5, 1.8, 2, 2.4, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(383, 893), Vector2(400, 893), Vector2(400, 944), Vector2(400, 944), Vector2(424, 928), Vector2(448, 952), Vector2(480, 952)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Gertrude")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5, 1.7, 2.4, 2.9, 3.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": ["right"],
+"method": &"PlayAnimation"
+}, {
+"args": ["down"],
+"method": &"PlayAnimation"
+}, {
+"args": [0],
+"method": &"PlayIdleAnimation"
+}, {
+"args": [3],
+"method": &"PlayIdleAnimation"
+}, {
+"args": ["right"],
+"method": &"PlayAnimation"
+}, {
+"args": [3],
+"method": &"PlayIdleAnimation"
+}, {
+"args": [2],
+"method": &"PlayIdleAnimation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_2skmc"]
+resource_name = "forest_final_3"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gertrude:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.4, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(480, 952), Vector2(480, 952), Vector2(1112, 952)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.2, 1.6, 2, 2.4, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(383, 925), Vector2(384, 952), Vector2(400, 952), Vector2(400, 952), Vector2(424, 936), Vector2(448, 952), Vector2(448, 952), Vector2(1080, 952)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [0],
+"method": &"PlayMoveAnimation"
+}, {
+"args": [3],
+"method": &"PlayMoveAnimation"
+}, {
+"args": [3],
+"method": &"PlayIdleAnimation"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Gertrude")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [2],
+"method": &"PlayIdleAnimation"
+}, {
+"args": [3],
+"method": &"PlayIdleAnimation"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Raft:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.4, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(463, 952), Vector2(463, 952), Vector2(1096, 952)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hg0x7"]
+_data = {
+"forest_final_1": SubResource("Animation_2ui8h"),
+"forest_final_2": SubResource("Animation_q6mvd"),
+"forest_final_3": SubResource("Animation_2skmc")
+}
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_iqq5r"]
 a = Vector2(936, 896)
@@ -11,6 +174,13 @@ b = Vector2(936, 848)
 
 [node name="Forest16" instance=ExtResource("1_ux1hj")]
 y_sort_enabled = true
+script = ExtResource("2_03v68")
+DialogueResource = ExtResource("3_cmcn2")
+
+[node name="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_hg0x7")
+}
 
 [node name="Camera" parent="." index="5"]
 limit_right = 1056
@@ -19,7 +189,7 @@ limit_bottom = 1120
 [node name="Player" parent="." index="13" instance=ExtResource("2_gb2o6")]
 z_index = 2
 y_sort_enabled = true
-position = Vector2(40, 864)
+position = Vector2(383, 925)
 
 [node name="TileMap" type="TileMap" parent="." index="14"]
 y_sort_enabled = true
@@ -64,3 +234,23 @@ shape = SubResource("SegmentShape2D_iqq5r")
 
 [node name="Gertrude" parent="." index="20"]
 z_index = 2
+position = Vector2(480, 952)
+
+[node name="Raft" type="Sprite2D" parent="." index="21"]
+z_index = 1
+position = Vector2(463, 952)
+scale = Vector2(2, 2)
+texture = ExtResource("5_k7cq8")
+
+[node name="CutscenePoint" parent="." index="22" instance=ExtResource("7_4yj6y")]
+position = Vector2(648, 688)
+scale = Vector2(9, 1)
+RoomMethodName = "FirstCutscene"
+
+[node name="CutscenePoint2" parent="." index="23" instance=ExtResource("7_4yj6y")]
+z_index = 2
+position = Vector2(384, 936)
+RoomMethodName = "RaftCutscene"
+
+[node name="Marker2D" type="Marker2D" parent="." index="24"]
+position = Vector2(416, 880)

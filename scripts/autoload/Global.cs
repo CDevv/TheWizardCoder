@@ -214,7 +214,7 @@ namespace TheWizardCoder.Autoload
 			{
 				using var readSave = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Read);
 				string savedData = (string)readSave.GetVar();
-				data = JsonConvert.DeserializeObject<SaveFileData>(savedData);
+				data = JsonConvert.DeserializeObject<SaveFileData>(savedData, new JsonSerializerSettings() { ObjectCreationHandling = ObjectCreationHandling.Replace, NullValueHandling = NullValueHandling.Ignore });
 				data.IsSaveEmpty = false;
 			}
 			else

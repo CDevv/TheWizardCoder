@@ -9,6 +9,7 @@ namespace TheWizardCoder.Data
 {
     public partial class SaveFileData : Node
     {
+        public new StringName Name { get; set; } = "SaveFileNode";
         public bool IsSaveEmpty { get; set; } = false;
         public string FileName { get; set; }
         public string SaveName { get; set; }
@@ -77,6 +78,8 @@ namespace TheWizardCoder.Data
         public bool VillageAppleChest { get; set; } = false;
         public bool UnlockedNobeCabin { get; set; } = false;
         public bool HasMetGertrude { get; set; } = false;
+        public bool SeenRaft { get; set; } = false;
+        public bool UsedRaft { get; set; } = false;
 
         public SaveFileData()
         {
@@ -136,12 +139,12 @@ namespace TheWizardCoder.Data
 
         public void AddMagicSpell(string name)
         {
-            magicSpells.Add(name);
+            Stats.MagicSpells.Add(name);
         }
 
         public void RemoveMagicSpell(string name)
         {
-            magicSpells.Remove(name);
+            Stats.MagicSpells.Remove(name);
         }
     }
 }

@@ -29,6 +29,7 @@ namespace TheWizardCoder.Components
 
 		public int PlayerSpeed { get; private set; } = DefaultSpeed;
 		public float DistanceWalked { get; set; } = 0;
+		public bool CameraEnabled { get; set; } = true;
 
 		public override void _Ready()	
 		{
@@ -77,7 +78,7 @@ namespace TheWizardCoder.Components
 				//Direction = global.GetDirectionFromVector(direction);
 			}
 
-			if (global.CurrentRoom.Camera != null)
+			if (global.CurrentRoom.Camera != null && CameraEnabled)
 			{
 				global.CurrentRoom.Camera.Set(Camera2D.PropertyName.Position, Position + velocity);
 			}

@@ -34,7 +34,6 @@ namespace TheWizardCoder.Abstractions
 		public CodeMessageDisplay CodeMessage { get; set; }
 		public Player Player { get; set; }
 		public Camera2D Camera { get; set; }
-
 		public CharacterDialoguePoint Gertrude { get; set; }
 
 		public override void _Ready()
@@ -117,6 +116,11 @@ namespace TheWizardCoder.Abstractions
 			tween.Play();
 
 			await ToSignal(tween, Tween.SignalName.Finished);
+		}
+
+		public async Task TweenCameraToPlayer(float duration)
+		{
+			await TweenCamera(Player.Position, duration);
 		}
 	}
 }

@@ -39,12 +39,15 @@ Gertrude: [#portrait=0] Yeah! Help you on your way to defeat, err.. 'bugs' or so
 Gertrude: [#portrait=0] But I have seen some dark creatures around the forest lately. Maybe that is what it's about.
 Nolan: [#portrait=2] Maybe.
 Gertrude: [#portrait=1] So yeah! I will accompany you on your journey!
+Gertrude: [#portrait=0] What is your name, by the way?
+Nolan: [#portrait=0] Nolan!
+Gertrude: [#portrait=1] Nice to meet you, Nolan! I'm Gertrude!
 => END!
 
 ~ gertrude_wallstuff
 Gertrude: [#portrait=0] Oh! It's the stuff i put my magic powder in!
 Nolan: [#portrait=0] Magic what?
-Gertrude: [#portrait=0] Msgic powder, you silly!
+Gertrude: [#portrait=0] Magic powder, you silly!
 => END!
 
 ~ gertrude_couldron
@@ -73,4 +76,14 @@ Gertrude: [#portrait=0] I haven't seen these before..
 
 ~ puzzle_solved
 Gertrude: [#portrait=0] Oh! It got solved!
+=> END!
+
+~ forest_final_1
+Gertrude: [#portrait=0] Wait.. do you see that raft over there?
+Gertrude: [#portrait=0] We could use it to get along the way!
+Nolan: [#portrait=0] Yeah, probably!
+=> END!
+
+~ forest_final_2
+Gertrude: [#portrait=0] Come on! Hop in!
 => END!
