@@ -78,6 +78,10 @@ Gertrude: [#portrait=4] I haven't seen these before..
 Gertrude: [#portrait=3] Oh! It got solved!
 => END!
 
+~ gertrude_puzzle
+Gertrude: [#portrait=4] Do you have an idea how to get through?
+=> END!
+
 ~ forest_final_1
 Gertrude: [#portrait=2] Wait.. do you see that raft over there?
 Gertrude: [#portrait=3] We could use it to get along the way!

@@ -73,7 +73,12 @@ public partial class Forest15 : BaseRoom
 		{
 			GD.Print("Passed!");
 			ClearTrees();
+
+			global.CanWalk = false;
+
 			await PuzzleSolvedCutscene();
+
+			global.CanWalk = true;
 		}
 	}
 

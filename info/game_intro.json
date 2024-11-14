@@ -11,6 +11,7 @@ Items will be useful.
 To interact with the environment or choose an item from menu, use [Z]
 To close a menu or open the game's menu, use [X]
 Use [Shift] to walk faster.",
-	"intro_3": "Enter your name please..
+	"intro_3": "Some puzzles may require using your mouse. Don't forget to do so!",
+	"intro_4": "Enter your name please..
 Use your keyboard. Enter to confirm."
 }

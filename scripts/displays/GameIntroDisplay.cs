@@ -11,7 +11,7 @@ namespace TheWizardCoder.Displays
 	public partial class GameIntroDisplay : CanvasLayer
 	{
 		private const double DefaultWaitingTime = 2;
-		private string[] partNames = new string[] { "intro_1", "intro_2", "intro_3" };
+		private string[] partNames = new string[] { "intro_1", "intro_2", "intro_3", "intro_4" };
 
 		[Export]
 		public Resource DialogueResource { get; set; }
@@ -20,14 +20,15 @@ namespace TheWizardCoder.Displays
 		private TransitionRect transition;
 		private Label label;
 		private Label userInputLabel;
-		private DialogueLine line;
-		private double waitingTime = DefaultWaitingTime;
+		private NinePatchRect demoItems;
+		private NinePatchRect demoCode;
+		private Sprite2D cursor;
 		private bool waitingForInput = false;
 		private string userInput;
 		private int currentLine = 0;
 		private AnimationPlayer animationPlayer;
 
-		public override async void _Ready()
+		public override void _Ready()
 		{
 			global = GetNode<Global>("/root/Global");
 			animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
@@ -35,18 +36,22 @@ namespace TheWizardCoder.Displays
 			label = GetNode<Label>("%IntroLabel");
 			userInputLabel = GetNode<Label>("%UserInputLabel");
 
-			line = await DialogueManager.GetNextDialogueLine(DialogueResource, "game_intro");
+			demoItems = GetNode<NinePatchRect>("%ItemsDemoRect");
+			demoCode = GetNode<NinePatchRect>("%CodeDemoRect");
+			cursor = GetNode<Sprite2D>("%CursorDemo");
 
 			transition.Show();
 			transition.PlayAnimationBackwards();
 
 			label.Text = global.GameIntroStrings["intro_1"];
+			animationPlayer.Play("intro_1");
 		}
 
 		public override async void _Input(InputEvent @event)
 		{
 			if (Input.IsActionJustPressed("ui_accept"))
 			{
+				animationPlayer.Stop();
 				animationPlayer.Play("hide");
 				await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
 
@@ -58,7 +63,20 @@ namespace TheWizardCoder.Displays
 					return;
 				}
 
-				if (currentLine == partNames.Length - 1)
+				if (currentLine == 2)
+				{
+					demoCode.Visible = true;
+					demoItems.Visible = true;
+					cursor.Visible = true;
+				}
+				else
+				{
+					demoCode.Visible = false;
+					demoItems.Visible = false;
+					cursor.Visible = false;
+				}
+
+				if (currentLine == 3)
 				{
 					waitingForInput = true;
 				}
@@ -66,11 +84,10 @@ namespace TheWizardCoder.Displays
 				string title = partNames[currentLine];
 				label.Text = global.GameIntroStrings[title];
 
-				animationPlayer.Play(title);
-				await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
-
 				animationPlayer.PlayBackwards("hide");
 				await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
+
+				animationPlayer.Play(title);
 			}
 
 			if (@event is InputEventKey && @event.IsPressed())
@@ -100,8 +117,11 @@ namespace TheWizardCoder.Displays
 
 						if (inputKey.Keycode == Key.Backspace)
 						{
-							userInput = userInput.Substring(0, userInput.Length - 1);
-							userInputLabel.Text = userInput;
+							if (userInput.Length > 0)
+							{
+								userInput = userInput.Substring(0, userInput.Length - 1);
+								userInputLabel.Text = userInput;
+							}
 						}
 					}
 				}
