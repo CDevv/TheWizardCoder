@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://b8wix4lm5g767"]
+[gd_scene load_steps=47 format=3 uid="uid://b8wix4lm5g767"]
 
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_q5vyp"]
 [ext_resource type="Script" path="res://scripts/displays/DialogueDisplay.cs" id="1_u23wf"]
@@ -43,13 +43,25 @@ region = Rect2(48, 0, 48, 48)
 atlas = ExtResource("5_k3maw")
 region = Rect2(96, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i5vtv"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1q0gr"]
 atlas = ExtResource("6_3iyw6")
 region = Rect2(0, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jq1dl"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ql2ty"]
 atlas = ExtResource("6_3iyw6")
 region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ka7j3"]
+atlas = ExtResource("6_3iyw6")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8sfwh"]
+atlas = ExtResource("6_3iyw6")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ml6ic"]
+atlas = ExtResource("6_3iyw6")
+region = Rect2(192, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p1wo0"]
 atlas = ExtResource("4_7t36c")
@@ -162,10 +174,19 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i5vtv")
+"texture": SubResource("AtlasTexture_1q0gr")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jq1dl")
+"texture": SubResource("AtlasTexture_ql2ty")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ka7j3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8sfwh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ml6ic")
 }],
 "loop": true,
 "name": &"gertrude",

@@ -32,22 +32,22 @@ Nolan: [#portrait=0] It's me?
 ~ gertrude_intro_2
 Gertrude: [#portrait=1] Yep! I was told a wizard will come by!
 Nolan: [#portrait=0] That's interesting..
-Gertrude: [#portrait=0] Yeah..! I received a mysterious message, saying that I need to help a wizard on their journey.
-Gertrude: [#portrait=1] I guess that wizard is you!
+Gertrude: [#portrait=2] Yeah..! I received a mysterious message, saying that I need to help a wizard on their journey.
+Gertrude: [#portrait=3] I guess that wizard is you!
 Nolan: [#portrait=0] Help me?
-Gertrude: [#portrait=0] Yeah! Help you on your way to defeat, err.. 'bugs' or sorts. No idea what that means
-Gertrude: [#portrait=0] But I have seen some dark creatures around the forest lately. Maybe that is what it's about.
+Gertrude: [#portrait=4] Yeah! Help you on your way to defeat, err.. 'bugs' or sorts. No idea what that means
+Gertrude: [#portrait=4] But I have seen some dark creatures around the forest lately. Maybe that is what it's about.
 Nolan: [#portrait=2] Maybe.
 Gertrude: [#portrait=1] So yeah! I will accompany you on your journey!
-Gertrude: [#portrait=0] What is your name, by the way?
+Gertrude: [#portrait=2] What is your name, by the way?
 Nolan: [#portrait=0] Nolan!
 Gertrude: [#portrait=1] Nice to meet you, Nolan! I'm Gertrude!
 => END!
 
 ~ gertrude_wallstuff
-Gertrude: [#portrait=0] Oh! It's the stuff i put my magic powder in!
+Gertrude: [#portrait=3] Oh! It's the stuff i put my magic powder in!
 Nolan: [#portrait=0] Magic what?
-Gertrude: [#portrait=0] Magic powder, you silly!
+Gertrude: [#portrait=3] Magic powder, you silly!
 => END!
 
 ~ gertrude_couldron
@@ -56,7 +56,7 @@ Gertrude: [#portrait=1] This is the magical pot that I use to cook my soup! And 
 
 ~ gertrude_chair
 Gertrude: [#portrait=0] Oh right, this colored chair..
-Gertrude: [#portrait=0] I wanted stuff to look a lil' fancy, y'know? But the purple-haired dude couldn't paint it green for some reason.
+Gertrude: [#portrait=4] I wanted stuff to look a lil' fancy, y'know? But the purple-haired dude couldn't paint it green for some reason.
 Nolan: [#portrait=0] That's unfortunate..
 => END!
 
@@ -65,25 +65,25 @@ Gertrude: [#portrait=0] Do not touch.
 => END!
 
 ~ puzzle_intro_1
-Gertrude: [#portrait=0] Wait..
-Gertrude: [#portrait=0] What is this? 
+Gertrude: [#portrait=2] Wait..
+Gertrude: [#portrait=2] What is this? 
 => END!
 
 ~ puzzle_intro_2
-Gertrude: [#portrait=0] A black hole in the middle of a forest? And.. "EXECUTE"?
-Gertrude: [#portrait=0] I haven't seen these before..
+Gertrude: [#portrait=2] A black hole in the middle of a forest? And.. "EXECUTE"?
+Gertrude: [#portrait=4] I haven't seen these before..
 => END!
 
 ~ puzzle_solved
-Gertrude: [#portrait=0] Oh! It got solved!
+Gertrude: [#portrait=3] Oh! It got solved!
 => END!
 
 ~ forest_final_1
-Gertrude: [#portrait=0] Wait.. do you see that raft over there?
-Gertrude: [#portrait=0] We could use it to get along the way!
+Gertrude: [#portrait=2] Wait.. do you see that raft over there?
+Gertrude: [#portrait=3] We could use it to get along the way!
 Nolan: [#portrait=0] Yeah, probably!
 => END!
 
 ~ forest_final_2
-Gertrude: [#portrait=0] Come on! Hop in!
+Gertrude: [#portrait=3] Come on! Hop in!
 => END!

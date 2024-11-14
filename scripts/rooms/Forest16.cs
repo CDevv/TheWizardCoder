@@ -10,6 +10,7 @@ public partial class Forest16 : BaseRoom
 	private async void FirstCutscene()
 	{
 		global.CurrentRoom.Player.CameraEnabled = false;
+		global.CurrentRoom.Player.PlayIdleAnimation(global.CurrentRoom.Player.Direction);
 		global.CanWalk = false;
 
 		await TweenCamera(new Vector2(416, 880), 2);
@@ -33,6 +34,8 @@ public partial class Forest16 : BaseRoom
 		}
 		
 		global.CanWalk = false;
+		global.CurrentRoom.Player.PlayIdleAnimation(global.CurrentRoom.Player.Direction);
+
 		await PlayCutscene("forest_final_2");
 		await ShowDialogue(DialogueResource, "forest_final_2");
 		await PlayCutscene("forest_final_3");

@@ -30,6 +30,7 @@ namespace TheWizardCoder.Autoload
 		public System.Collections.Generic.Dictionary<string, MagicSpell> MagicSpells { get; private set; } = new();
 		public System.Collections.Generic.Dictionary<string, CharacterData> Characters { get; private set; } = new();
 		public System.Collections.Generic.Dictionary<string, Shop> Shops { get; set; } = new();
+		public System.Collections.Generic.Dictionary<string, string> GameIntroStrings { get; set; } = new();
 		public int[] ReverseDirections { get; } = { 1, 0, 3, 2 };
 
 		public override void _Ready()
@@ -38,6 +39,7 @@ namespace TheWizardCoder.Autoload
 			{
 				Settings.LoadSettings();
 				Settings.ApplySettings();
+				LoadGameIntro();
 				LoadItemDescriptions();
 				LoadMagicSpells();
 				LoadCharactersData();
@@ -130,6 +132,17 @@ namespace TheWizardCoder.Autoload
 				shop.ApplyDictionary(dict);
 
 				Shops.Add(pair.Key, shop);
+			}
+		}
+
+		public void LoadGameIntro()
+		{
+			Variant jsonData = GetJsonData("res://info/game_intro.json");
+			Dictionary<string, string> parsedData = (Dictionary<string, string>)jsonData;
+
+			foreach (var item in parsedData)
+			{
+				GameIntroStrings[item.Key] = item.Value;
 			}
 		}
 

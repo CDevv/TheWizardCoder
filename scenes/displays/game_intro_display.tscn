@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ba1ui2geu8rdc"]
+[gd_scene load_steps=11 format=3 uid="uid://ba1ui2geu8rdc"]
 
 [ext_resource type="Texture2D" uid="uid://seqdoffkhcdd" path="res://assets/ui/base_console_ui.png" id="1_7dgyl"]
 [ext_resource type="Script" path="res://scripts/displays/GameIntroDisplay.cs" id="1_454je"]
@@ -6,12 +6,147 @@
 [ext_resource type="Resource" uid="uid://db8b7wteav1mo" path="res://dialogue/game_intro.dialogue" id="2_ek8gt"]
 [ext_resource type="PackedScene" uid="uid://dqgxo8eebarbi" path="res://scenes/ui/transition_rect.tscn" id="3_4ytsv"]
 
+[sub_resource type="Animation" id="Animation_n3d62"]
+resource_name = "intro_1"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rect/IntroLabel:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(288, 208)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Rect/UserInputLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_qypy4"]
+resource_name = "intro_2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rect/IntroLabel:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(288, 208)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Rect/UserInputLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_qsxir"]
+resource_name = "intro_3"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rect/IntroLabel:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(288, 44)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Rect/UserInputLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Rect/IntroLabel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(16, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_j7g66"]
+resource_name = "hide"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rect/IntroLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Rect/UserInputLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nkqq4"]
+_data = {
+"hide": SubResource("Animation_j7g66"),
+"intro_1": SubResource("Animation_n3d62"),
+"intro_2": SubResource("Animation_qypy4"),
+"intro_3": SubResource("Animation_qsxir")
+}
+
 [node name="GameIntroDisplay" type="CanvasLayer"]
 script = ExtResource("1_454je")
 DialogueResource = ExtResource("2_ek8gt")
 
 [node name="TransitionRect" parent="." instance=ExtResource("3_4ytsv")]
 visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nkqq4")
+}
 
 [node name="Rect" type="NinePatchRect" parent="."]
 offset_right = 320.0
@@ -35,9 +170,30 @@ color = Color(0.0784314, 0.133333, 0.0784314, 1)
 [node name="IntroLabel" type="Label" parent="Rect"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 312.0
-offset_bottom = 232.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 304.0
+offset_bottom = 224.0
 theme = ExtResource("2_1ma8e")
-autowrap_mode = 1
+text = "Enter your name please..
+Use your keyboard. Enter to confirm."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="UserInputLabel" type="Label" parent="Rect"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -11.5
+offset_right = 140.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_1ma8e")
