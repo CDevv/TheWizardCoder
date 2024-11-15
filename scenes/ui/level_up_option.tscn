@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://boo83tpro3lpk"]
+
+[ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_33srt"]
+[ext_resource type="Script" path="res://scripts/ui/LevelUpOption.cs" id="2_axtxx"]
+[ext_resource type="SpriteFrames" uid="uid://b4ylh7xe358iv" path="res://assets/ui/spriteframes/select_arrow.tres" id="3_dxpw7"]
+[ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="4_5cr44"]
+
+[node name="LevelUpOption" type="NinePatchRect"]
+offset_right = 192.0
+offset_bottom = 36.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_33srt")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+script = ExtResource("2_axtxx")
+
+[node name="Background" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 188.0
+offset_bottom = 32.0
+
+[node name="SelectArrow" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, 18)
+sprite_frames = ExtResource("3_dxpw7")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 188.0
+offset_bottom = 28.0
+theme = ExtResource("4_5cr44")
+text = "A
+A"
+horizontal_alignment = 1
+
+[connection signal="focus_entered" from="." to="." method="OnFocusEntered"]
+[connection signal="focus_exited" from="." to="." method="OnFocusExited"]
+[connection signal="gui_input" from="." to="." method="OnGuiInput"]

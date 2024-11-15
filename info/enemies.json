@@ -1,4 +1,15 @@
 {
+	"Nolan": {
+		"Health": 50,
+		"MaxHealth": 50,
+		"Points": 10,
+		"MaxPoints": 10,
+		"AttackPoints": 10,
+		"DefensePoints": 5,
+		"AgilityPoints": 10,
+		"MagicSpells": ["Fireball"],
+		"Type": "Ally",
+	},
 	"ZenDummy": {
 		"Health": 10,
 		"MaxHealth": 20,
@@ -7,7 +18,7 @@
 		"AttackPoints": 10,
 		"DefensePoints": 5,
 		"AgilityPoints": 2,
-		"MagicSpells": {},
+		"MagicSpells": [],
 		"Type": "Ally",
 	},
 	"Glitch": {
@@ -18,7 +29,7 @@
 		"AttackPoints": 10,
 		"DefensePoints": 5,
 		"AgilityPoints": 5,
-		"MagicSpells": {},
+		"MagicSpells": [],
 		"Type": "Enemy",
 	},
 	"Dummy": {
@@ -29,7 +40,7 @@
 		"AttackPoints": 10,
 		"DefensePoints": 5,
 		"AgilityPoints": 5,
-		"MagicSpells": {},
+		"MagicSpells": [],
 		"Type": "Enemy",
 	},
 	"JuniorBug": {
@@ -40,7 +51,7 @@
 		"AttackPoints": 10,
 		"DefensePoints": 2,
 		"AgilityPoints": 5,
-		"MagicSpells": {},
+		"MagicSpells": [],
 		"Type": "Enemy",
 	},
 	"Gertrude": {
@@ -51,7 +62,7 @@
 		"AttackPoints": 15,
 		"DefensePoints": 5,
 		"AgilityPoints": 5,
-		"MagicSpells": {},
+		"MagicSpells": [],
 		"Type": "Ally",
 	}
 }

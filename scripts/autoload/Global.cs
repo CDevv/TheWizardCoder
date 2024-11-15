@@ -24,7 +24,7 @@ namespace TheWizardCoder.Autoload
 		public bool StairsInverted { get; set; } = false;
 		public bool StairsGoUp { get; set; } = true;
 		public bool IsInCutscene { get; set; } = false;
-		public SaveFileData PlayerData { get; set; } = new();
+		public SaveFileData PlayerData { get; set; }
 		public SettingsConfig Settings { get; set; } = new();
 		public System.Collections.Generic.Dictionary<string, Item> ItemDescriptions { get; private set; } = new();
 		public System.Collections.Generic.Dictionary<string, MagicSpell> MagicSpells { get; private set; } = new();
@@ -44,6 +44,8 @@ namespace TheWizardCoder.Autoload
 				LoadMagicSpells();
 				LoadCharactersData();
 				LoadShops();
+
+				PlayerData = new(Characters["Nolan"]);
 			}
 			catch (System.Exception e)
 			{
@@ -106,15 +108,20 @@ namespace TheWizardCoder.Autoload
 			foreach (var pair in parsedData)
 			{
 				Dictionary<string, Variant> dict = pair.Value;
-				dict["Name"] = pair.Key;
-				CharacterData character = new();
-				character.ApplyDictionary(dict);
-				Characters.Add(pair.Key, character);
 
-				if (character.Type == CharacterType.Enemy)
+				if (pair.Value != null)
 				{
-					ResourceLoader.LoadThreadedRequest($"res://assets/battle/enemies/{pair.Key}.png");
+					dict["Name"] = pair.Key;
+
+					CharacterData character = new(dict, this);
+					Characters.Add(pair.Key, character);
+
+					if (character.Type == CharacterType.Enemy)
+					{
+						ResourceLoader.LoadThreadedRequest($"res://assets/battle/enemies/{pair.Key}.png");
+					}
 				}
+
 			}
 		}
 
@@ -148,10 +155,10 @@ namespace TheWizardCoder.Autoload
 
 		public void CreateSaveFile(string fileName, string saveName)
 		{
-			SaveFileData data = new SaveFileData();
+			SaveFileData data = new SaveFileData(Characters["Nolan"]);
 			data.FileName = fileName;
 			data.SaveName = saveName;
-			
+
 			FileAccess file = FileAccess.Open($"user://{fileName}.wand", FileAccess.ModeFlags.Write);
 			file.StoreVar(JsonConvert.SerializeObject(data));
 			file.Close();
@@ -170,7 +177,7 @@ namespace TheWizardCoder.Autoload
 			PlayerData.LastSaved = DateTime.Now;
 			PlayerData.LocationVector = CurrentRoom.Player.Position;
 			PlayerData.SceneDefaultMarker = CurrentRoom.DefaultMarkerName;
-			SaveFileData data = PlayerData;		
+			SaveFileData data = PlayerData;
 
 			FileAccess file = FileAccess.Open($"user://{fileName}.wand", FileAccess.ModeFlags.Write);
 			file.StoreVar(JsonConvert.SerializeObject(data));
@@ -206,7 +213,7 @@ namespace TheWizardCoder.Autoload
 
 		public SaveFileData ReadSaveFileData(string saveName)
 		{
-			SaveFileData data = new SaveFileData();
+			SaveFileData data = new SaveFileData(Characters["Nolan"]);
 
 			if (!FileAccess.FileExists($"user://{saveName}.wand"))
 			{

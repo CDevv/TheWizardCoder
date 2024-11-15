@@ -29,7 +29,12 @@ namespace TheWizardCoder.UI
 
 		private Vector2 startingPoint = Vector2.Zero;
 		private Array<CharacterRect> alliesCards = new();
+		private System.Collections.Generic.Dictionary<int, int> collectedExperience = new();
 
+		public System.Collections.Generic.Dictionary<int, int> CollectedExperiences
+		{
+			get { return collectedExperience; }
+		}
 
 		public override void _Ready()
 		{
@@ -51,6 +56,7 @@ namespace TheWizardCoder.UI
 			rect.Pressed += () => OnCharacterCardPressed(currentIndex);
 
 			alliesCards.Add(rect);
+			collectedExperience[currentIndex] = 0;
         }
 
         public override void StartTurn()
@@ -90,6 +96,8 @@ namespace TheWizardCoder.UI
 				case CharacterAction.Attack:
 					BattleOptions.ShowInfoLabel($"{ally.Name} attacks {Enemies.Characters[state.Target].Name}!");
 					await Enemies.DamageCharacter(state.Target, ally.AttackPoints);
+
+					collectedExperience[i] += ally.AttackPoints / ally.GetMaxLevelPoints();
 					break;
 				case CharacterAction.Defend:
 					await DefendCharacter(i);
@@ -105,6 +113,8 @@ namespace TheWizardCoder.UI
 						string enemyName = Enemies.Characters[state.Target].Name;
 						BattleOptions.ShowInfoLabel($"{ally.Name} casted {currentMagicSpellName} on {enemyName}!");
 						await Enemies.DamageCharacter(state.Target, currentMagicSpell.Effect);
+
+						collectedExperience[i] += currentMagicSpell.Effect / ally.GetMaxLevelPoints();
 					}
 					break;
 			}
@@ -216,6 +226,14 @@ namespace TheWizardCoder.UI
 		{
 			base.Clear();
 			alliesCards.Clear();
+		}
+
+		public void AwardExperience()
+		{
+			for (int i = 0; i < collectedExperience.Count; i++)
+			{
+				Characters[i].AddLevelPoints(collectedExperience[i]);
+			}
 		}
 	}
 }

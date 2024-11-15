@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bb1itrnd1e8am"]
+[gd_scene load_steps=15 format=3 uid="uid://bb1itrnd1e8am"]
 
 [ext_resource type="PackedScene" uid="uid://de21qftn035us" path="res://scenes/displays/game_display.tscn" id="1_hid6f"]
 [ext_resource type="Script" path="res://scripts/abstractions/BaseRoom.cs" id="1_rfc1d"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://behqc54w4kgkd" path="res://scenes/displays/shop_display.tscn" id="9_0461u"]
 [ext_resource type="SpriteFrames" uid="uid://bep08a0upkydb" path="res://assets/characters/movement/spriteframes/zenith.tres" id="10_hkyc4"]
 [ext_resource type="PackedScene" uid="uid://bap5mf0chx1uc" path="res://scenes/displays/code_message_display.tscn" id="10_vippa"]
+[ext_resource type="PackedScene" uid="uid://dh3hemp3t81x5" path="res://scenes/displays/level_up_display.tscn" id="11_c8vxm"]
 [ext_resource type="SpriteFrames" uid="uid://baxuf0ifo3bd4" path="res://assets/characters/movement/spriteframes/gertrude.tres" id="13_e7w2n"]
 
 [node name="BaseRoom" type="Node2D"]
@@ -54,6 +55,9 @@ visible = false
 visible = false
 
 [node name="CodeMessageDisplay" parent="." instance=ExtResource("10_vippa")]
+visible = false
+
+[node name="LevelUpDisplay" parent="." instance=ExtResource("11_c8vxm")]
 visible = false
 
 [node name="ZenDummy" parent="." instance=ExtResource("9_7x1rq")]

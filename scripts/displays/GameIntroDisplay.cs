@@ -51,43 +51,40 @@ namespace TheWizardCoder.Displays
 		{
 			if (Input.IsActionJustPressed("ui_accept"))
 			{
-				animationPlayer.Stop();
-				animationPlayer.Play("hide");
-				await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
-
 				currentLine++;
-				if (currentLine >= partNames.Length)
+				if (currentLine < partNames.Length)
 				{
-					global.CreateSaveFile(global.ChosenSaveSlot, userInput);
-					global.ChangeRoom("first_room", "AfterCutsceneMarker", Direction.Down);
-					return;
+					animationPlayer.Stop();
+					animationPlayer.Play("hide");
+					await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
+
+					if (currentLine == 2)
+					{
+						demoCode.Visible = true;
+						demoItems.Visible = true;
+						cursor.Visible = true;
+					}
+					else
+					{
+						demoCode.Visible = false;
+						demoItems.Visible = false;
+						cursor.Visible = false;
+					}
+
+					string title = partNames[currentLine];
+					label.Text = global.GameIntroStrings[title];
+
+					animationPlayer.PlayBackwards("hide");
+					await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
+
+					animationPlayer.Play(title);
+
+					if (currentLine == 3)
+					{
+						waitingForInput = true;
+						return;
+					}
 				}
-
-				if (currentLine == 2)
-				{
-					demoCode.Visible = true;
-					demoItems.Visible = true;
-					cursor.Visible = true;
-				}
-				else
-				{
-					demoCode.Visible = false;
-					demoItems.Visible = false;
-					cursor.Visible = false;
-				}
-
-				if (currentLine == 3)
-				{
-					waitingForInput = true;
-				}
-
-				string title = partNames[currentLine];
-				label.Text = global.GameIntroStrings[title];
-
-				animationPlayer.PlayBackwards("hide");
-				await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
-
-				animationPlayer.Play(title);
 			}
 
 			if (@event is InputEventKey && @event.IsPressed())
@@ -99,7 +96,6 @@ namespace TheWizardCoder.Displays
 
 					if (inputKey.Keycode == Key.Enter)
 					{
-						label.Text += "\n";
 						waitingForInput = false;
 
 						global.CreateSaveFile(global.ChosenSaveSlot, userInput);

@@ -22,19 +22,20 @@ namespace TheWizardCoder.Abstractions
 
 		protected Global global;
 		public GameDisplay GameDisplay { get; private set; }
-		public AudioStreamPlayer AudioPlayer { get; set; }
-		public SavedGamesDisplay SavedGamesDisplay { get; set; }
-		public BattleDisplay BattleDisplay { get; set; }
-		public CodeProblemPanel CodeProblemPanel { get; set; }
-		public TransitionRect TransitionRect { get; set; }
-		public AnimationPlayer AnimationPlayer { get; set; }
-		public DialogueDisplay Dialogue { get; set; }
-		public GameOverDisplay GameOverDisplay { get; set; }
-		public ShopDisplay ShopDisplay { get; set; }
-		public CodeMessageDisplay CodeMessage { get; set; }
-		public Player Player { get; set; }
-		public Camera2D Camera { get; set; }
-		public CharacterDialoguePoint Gertrude { get; set; }
+		public AudioStreamPlayer AudioPlayer { get; private set; }
+		public SavedGamesDisplay SavedGamesDisplay { get; private set; }
+		public BattleDisplay BattleDisplay { get; private set; }
+		public CodeProblemPanel CodeProblemPanel { get; private set; }
+		public TransitionRect TransitionRect { get; private set; }
+		public AnimationPlayer AnimationPlayer { get; private set; }
+		public DialogueDisplay Dialogue { get; private set; }
+		public GameOverDisplay GameOverDisplay { get; private set; }
+		public ShopDisplay ShopDisplay { get; private set; }
+		public CodeMessageDisplay CodeMessage { get; private set; }
+		public LevelUpDisplay LevelUp { get; private set; }
+		public Player Player { get; private set; }
+		public Camera2D Camera { get; private set; }
+		public CharacterDialoguePoint Gertrude { get; private set; }
 
 		public override void _Ready()
 		{
@@ -55,6 +56,7 @@ namespace TheWizardCoder.Abstractions
 			GameOverDisplay = GetNode<GameOverDisplay>("GameOverDisplay");
 			ShopDisplay = GetNode<ShopDisplay>("ShopDisplay");
 			CodeMessage = GetNode<CodeMessageDisplay>("CodeMessageDisplay");
+			LevelUp = GetNode<LevelUpDisplay>("LevelUpDisplay");
 			Player = GetNode<Player>("Player");
 			Camera = GetNode<Camera2D>("Camera");
 

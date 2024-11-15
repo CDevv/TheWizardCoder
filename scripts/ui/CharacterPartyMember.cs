@@ -47,8 +47,7 @@ namespace TheWizardCoder.UI
 			mainStats.Text = mainStatsBuilder.ToString();
 
 			StringBuilder secondaryStatsBuilder = new();
-			secondaryStatsBuilder.AppendLine($"ATK: {data.AttackPoints}");
-			secondaryStatsBuilder.AppendLine($"DEF: {data.DefensePoints}");
+			secondaryStatsBuilder.AppendLine($"Level: {data.Level}");
 			secondaryStats.Text = secondaryStatsBuilder.ToString();
 		}
 

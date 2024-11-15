@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
 using Newtonsoft.Json;
+using TheWizardCoder.Autoload;
 using TheWizardCoder.Enums;
 
 namespace TheWizardCoder.Data
@@ -81,7 +82,7 @@ namespace TheWizardCoder.Data
         public bool SeenRaft { get; set; } = false;
         public bool UsedRaft { get; set; } = false;
 
-        public SaveFileData()
+        public SaveFileData(CharacterData stats)
         {
             IsSaveEmpty = true;
             
@@ -93,17 +94,7 @@ namespace TheWizardCoder.Data
             Location = "Home";
             SceneDefaultMarker = "AfterCutsceneMarker";
 
-            Stats = new CharacterData() {
-                Name = "Nolan",
-                MaxHealth = 50, Health = 50,
-                MaxPoints = 10, Points = 10,
-                AttackPoints = 10, DefensePoints = 5,
-                AgilityPoints = 10,
-                MagicSpells = new() {
-                    "Fireball"
-                },
-                Type = CharacterType.Ally
-            };
+            Stats = stats;
             Gold = 0;
         }
 

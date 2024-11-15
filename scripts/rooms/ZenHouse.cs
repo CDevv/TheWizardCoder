@@ -31,8 +31,7 @@ namespace TheWizardCoder.Rooms
 			{
 				basketDialogue.DialogueTitle = "basket_full";
 				AnimationPlayer.Play("final_pos");
-			}
-			
+			}	
 		}
 
 		private void OnSubmitted()
@@ -58,6 +57,8 @@ namespace TheWizardCoder.Rooms
 			await ShowDialogue(DialogueResource, "zen_code_solved");
 			AnimationPlayer.Play("zen_down");
 			global.PlayerData.AddToInventory("'t'");
+
+			global.PlayerData.Stats.AddLevelPoints(10);
 		}
 	}
 }

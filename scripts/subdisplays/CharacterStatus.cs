@@ -15,6 +15,8 @@ namespace TheWizardCoder.Subdisplays
 		private Label attackPoints;
 		private Label defensePoints;
 		private Label agilityPoints;
+		private Label levelLabel;
+		private TextureProgressBar levelBar;
 
 		public override void _Ready()
 		{
@@ -28,6 +30,8 @@ namespace TheWizardCoder.Subdisplays
 			attackPoints = GetNode<Label>("%AttackPointsLabel");
 			defensePoints = GetNode<Label>("%DefensePointsLabel");
 			agilityPoints = GetNode<Label>("%AgilityPointsLabel");
+			levelLabel = GetNode<Label>("%LevelLabel");
+			levelBar = GetNode<TextureProgressBar>("%LevelBar");
 		}
 
 		public override void ShowDisplay()
@@ -48,6 +52,10 @@ namespace TheWizardCoder.Subdisplays
 			attackPoints.Text = $"Attack: {character.AttackPoints}";
 			defensePoints.Text = $"Defense: {character.DefensePoints}";
 			agilityPoints.Text = $"Agility: {character.AgilityPoints}";
+
+			levelLabel.Text = $"Level: {character.Level}";
+			levelBar.MaxValue = character.GetMaxLevelPoints();
+			levelBar.Value = character.LevelPoints;
 
 			Show();
 		}
