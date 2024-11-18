@@ -97,7 +97,7 @@ namespace TheWizardCoder.UI
 					BattleOptions.ShowInfoLabel($"{ally.Name} attacks {Enemies.Characters[state.Target].Name}!");
 					await Enemies.DamageCharacter(state.Target, ally.AttackPoints);
 
-					collectedExperience[i] += ally.AttackPoints / ally.GetMaxLevelPoints();
+					collectedExperience[i] += (ally.Level + 2);
 					break;
 				case CharacterAction.Defend:
 					await DefendCharacter(i);
@@ -114,7 +114,7 @@ namespace TheWizardCoder.UI
 						BattleOptions.ShowInfoLabel($"{ally.Name} casted {currentMagicSpellName} on {enemyName}!");
 						await Enemies.DamageCharacter(state.Target, currentMagicSpell.Effect);
 
-						collectedExperience[i] += currentMagicSpell.Effect / ally.GetMaxLevelPoints();
+						collectedExperience[i] += (ally.Level + 4);
 					}
 					break;
 			}

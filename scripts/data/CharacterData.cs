@@ -66,8 +66,8 @@ namespace TheWizardCoder.Data
 
             if (LevelPoints >= GetMaxLevelPoints())
             {
-                Level++;
                 LevelPoints -= GetMaxLevelPoints();
+                Level++;
 
                 global.CurrentRoom.LevelUp.ShowDisplay();
             }

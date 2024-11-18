@@ -929,6 +929,13 @@ texture = ExtResource("2_gw6q6")
 10:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:7/0/physics_layer_0/angular_velocity = 0.0
 10:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-12, -40, -8, -40, -8, -8, 24, -8, 24, -40, 28, -40, 28, 8, -8, 8, -12, 8)
+18:11/size_in_atlas = Vector2i(10, 10)
+18:11/0 = 0
+18:11/0/texture_origin = Vector2i(0, 24)
+18:11/0/y_sort_origin = -8
+18:11/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+18:11/0/physics_layer_0/angular_velocity = 0.0
+18:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -76, 8, -76, 64, -76, 64, 48, 16, 48, 16, 24, 20, 24, 20, 8, -8, 8, -20, 8, -20, 24, -16, 24, -16, 48, -64, 48, -64, -76)
 
 [resource]
 physics_layer_0/collision_layer = 1

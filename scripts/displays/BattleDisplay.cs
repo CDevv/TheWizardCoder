@@ -38,8 +38,6 @@ namespace TheWizardCoder.Displays
 		public bool IsBattleEnded { get; private set; } = false;
 		public bool IsTutorial { get; set; } = false;
 
-		private AlliesContainer alliesContainer;
-		private EnemiesContainer enemiesContainer;
 		private BattleOptions battleOptions;
 		private EnemyHealthBar enemyHealthContainer;
 		private TextureProgressBar enemyHealthBar;
@@ -183,9 +181,7 @@ namespace TheWizardCoder.Displays
 			IsBattleEnded = true;
 			IsTutorial = false;
 
-			GD.Print(alliesContainer);
-			//battleOptions.ShowInfoLabel($"You won! 50 Gold and {alliesContainer.CollectedExperiences[0]} EXP obtained.");
-			battleOptions.ShowInfoLabel($"You won! 50 Gold obtained.");
+			battleOptions.ShowInfoLabel($"You won! 50 Gold and {Allies.CollectedExperiences[0]} EXP obtained.");			
 
 			await StartTransition();
 			
@@ -197,7 +193,7 @@ namespace TheWizardCoder.Displays
 			await EndTransition();
 			EmitSignal(SignalName.BattleEnded);
 
-			alliesContainer.AwardExperience();
+			Allies.AwardExperience();
 			Clear();
 		}
 
