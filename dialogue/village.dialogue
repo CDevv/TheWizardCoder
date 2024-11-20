@@ -55,7 +55,7 @@ else:
 		Narrator: Just check this drawer. And don't miss out your keys next time!"
 		Narrator: -Por
 		Narrator: You received Nobe's key
-		do AddToInventory("Nobe's key")
+		do AddToInventory("Nobe's key", true)
 	- No
 		Narrator: You don't want to read a note today
 => END!
@@ -199,7 +199,7 @@ Nara: [#portrait=0] Hold on for a moment.
 ~ nara_code_solved_3
 Nara: [#portrait=0] Here, take this apple as a sign of gratitude.
 Narrator: You received an Apple.
-do AddToInventory("Apple")
+do AddToInventory("Apple", false)
 Nolan: [#portrait=1] Oh. Thanks!
 Nara: [#portrait=0] There are other places in this village that need fixing. 
 Nara: [#portrait=0] Some say that the further you go to the castle town, the more 'glitches' you will meet.

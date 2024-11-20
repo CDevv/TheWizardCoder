@@ -158,6 +158,7 @@ namespace TheWizardCoder.Autoload
 			SaveFileData data = new SaveFileData(Characters["Nolan"]);
 			data.FileName = fileName;
 			data.SaveName = saveName;
+			data.Stats.Global = null;
 
 			FileAccess file = FileAccess.Open($"user://{fileName}.wand", FileAccess.ModeFlags.Write);
 			file.StoreVar(JsonConvert.SerializeObject(data));
@@ -179,6 +180,10 @@ namespace TheWizardCoder.Autoload
 			PlayerData.SceneDefaultMarker = CurrentRoom.DefaultMarkerName;
 			SaveFileData data = PlayerData;
 			data.Stats.Global = null;
+			for (var i = 0; i < data.Allies.Count; i++)
+			{
+				data.Allies[i].Global = null;
+			}
 
 			FileAccess file = FileAccess.Open($"user://{fileName}.wand", FileAccess.ModeFlags.Write);
 			file.StoreVar(JsonConvert.SerializeObject(data));
