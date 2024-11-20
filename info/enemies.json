@@ -11,7 +11,7 @@
 		"Type": "Ally",
 	},
 	"ZenDummy": {
-		"Health": 10,
+		"Health": 20,
 		"MaxHealth": 20,
 		"Points": 0,
 		"MaxPoints": 0,
@@ -44,8 +44,8 @@
 		"Type": "Enemy",
 	},
 	"JuniorBug": {
-		"Health": 25,
-		"MaxHealth": 10,
+		"Health": 20,
+		"MaxHealth": 20,
 		"Points": 0,
 		"MaxPoints": 0,
 		"AttackPoints": 10,

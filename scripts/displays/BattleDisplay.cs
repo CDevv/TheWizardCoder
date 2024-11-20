@@ -115,7 +115,6 @@ namespace TheWizardCoder.Displays
 
 		private void Clear()
 		{
-			global.PlayerData.Gold += 50;
 			for (int i = 0; i < Allies.Characters.Count; i++)
 			{
 				CharacterData character = Allies.Characters[i];
@@ -181,7 +180,9 @@ namespace TheWizardCoder.Displays
 			IsBattleEnded = true;
 			IsTutorial = false;
 
-			battleOptions.ShowInfoLabel($"You won! 50 Gold and {Allies.CollectedExperiences[0]} EXP obtained.");			
+			int wonGold = Allies.Characters.Sum(x => x.AttackPoints * x.Level);
+
+			battleOptions.ShowInfoLabel($"You won! {wonGold} Gold and {Allies.CollectedExperiences[0]} EXP obtained.");			
 
 			await StartTransition();
 			
@@ -194,6 +195,7 @@ namespace TheWizardCoder.Displays
 			EmitSignal(SignalName.BattleEnded);
 
 			Allies.AwardExperience();
+			global.PlayerData.Gold += wonGold;
 			Clear();
 		}
 

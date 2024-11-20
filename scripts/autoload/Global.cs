@@ -178,6 +178,7 @@ namespace TheWizardCoder.Autoload
 			PlayerData.LocationVector = CurrentRoom.Player.Position;
 			PlayerData.SceneDefaultMarker = CurrentRoom.DefaultMarkerName;
 			SaveFileData data = PlayerData;
+			data.Stats.Global = null;
 
 			FileAccess file = FileAccess.Open($"user://{fileName}.wand", FileAccess.ModeFlags.Write);
 			file.StoreVar(JsonConvert.SerializeObject(data));
@@ -196,6 +197,7 @@ namespace TheWizardCoder.Autoload
 			SaveFileData data = ReadSaveFileData(saveName);
 			PlayerData = data;
 			PlayerData.LastSaved = DateTime.Now;
+			PlayerData.Stats.Global = this;
 
 			if (data.IsSaveEmpty)
 			{

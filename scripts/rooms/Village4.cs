@@ -50,6 +50,8 @@ namespace TheWizardCoder.Rooms
 			global.PlayerData.RemoveFromInventory("'t'");
 			global.PlayerData.RemoveFromInventory("'a'");
 			global.PlayerData.RemoveFromInventory("'r'");
+
+			global.PlayerData.Stats.AddLevelPoints(5);
 		}
 
 		private async void OnBattleFinished()

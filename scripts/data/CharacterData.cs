@@ -10,6 +10,8 @@ namespace TheWizardCoder.Data
     {
         private const int BaseLevelPoints = 10;
 
+        public Global Global { get; set; }
+
         public string Name { get; set; }
         public int Health { get; set; }
         public int MaxHealth { get; set; }
@@ -24,11 +26,10 @@ namespace TheWizardCoder.Data
         public int LevelPoints { get; set; }
 
         private Dictionary<string, Variant> dict;
-        private Global global;
 
         public CharacterData(Dictionary<string, Variant> dict, Global global)
         {
-            this.global = global;
+            Global = global;
             this.dict = dict;
 
             if (dict != null)
@@ -50,7 +51,7 @@ namespace TheWizardCoder.Data
 
         public CharacterData Clone()
         {
-            CharacterData newData = new(this.dict, global);
+            CharacterData newData = new(this.dict, Global);
             return newData;
         }
 
@@ -69,7 +70,9 @@ namespace TheWizardCoder.Data
                 LevelPoints -= GetMaxLevelPoints();
                 Level++;
 
-                global.CurrentRoom.LevelUp.ShowDisplay();
+                GD.Print(Global.CurrentRoom == null);
+                GD.Print(Global.CurrentRoom.LevelUp == null);
+                Global.CurrentRoom.LevelUp.ShowDisplay();
             }
         }
 

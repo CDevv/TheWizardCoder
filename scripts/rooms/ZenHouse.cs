@@ -58,7 +58,7 @@ namespace TheWizardCoder.Rooms
 			AnimationPlayer.Play("zen_down");
 			global.PlayerData.AddToInventory("'t'");
 
-			global.PlayerData.Stats.AddLevelPoints(10);
+			global.PlayerData.Stats.AddLevelPoints(4);
 		}
 	}
 }

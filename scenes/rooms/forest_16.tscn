@@ -245,9 +245,6 @@ position = Vector2(41, 864)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomCollision" index="0"]
 shape = SubResource("SegmentShape2D_iqq5r")
 
-[node name="Gertrude" parent="." index="20"]
-z_index = 2
-
 [node name="Raft" type="Sprite2D" parent="." index="21"]
 z_index = 1
 position = Vector2(463, 952)
@@ -266,3 +263,6 @@ RoomMethodName = "RaftCutscene"
 
 [node name="Marker2D" type="Marker2D" parent="." index="24"]
 position = Vector2(416, 880)
+
+[node name="Gertrude" parent="." index="25"]
+z_index = 2

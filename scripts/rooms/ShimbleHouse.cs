@@ -35,6 +35,8 @@ namespace TheWizardCoder.Rooms
 			await PlayCutscene("problem_solved");
 			await ShowDialogue(DialogueResource, "shimble_chair_solved");
 			global.PlayerData.AddToInventory("'s'");
+
+			global.PlayerData.Stats.AddLevelPoints(3);
 		}
 	}
 }

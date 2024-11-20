@@ -312,10 +312,6 @@ position = Vector2(48, 416)
 [node name="Section16Marker" type="Marker2D" parent="." index="18"]
 position = Vector2(2048, 416)
 
-[node name="Gertrude" parent="." index="19"]
-position = Vector2(976, 408)
-DefaultDirection = 1
-
 [node name="CutscenePoint" parent="." index="20" instance=ExtResource("6_mbnvm")]
 position = Vector2(1040, 408)
 scale = Vector2(1, 12)
@@ -402,5 +398,9 @@ z_index = 1
 y_sort_enabled = true
 position = Vector2(1696, 368)
 scale = Vector2(2, 2)
+
+[node name="Gertrude" parent="." index="29"]
+position = Vector2(976, 408)
+DefaultDirection = 1
 
 [connection signal="Triggered" from="ExecuteButton" to="." method="CheckCode"]

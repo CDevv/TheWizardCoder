@@ -53,6 +53,8 @@ namespace TheWizardCoder.Rooms
 			}
 			await ShowDialogue(DialogueResource, "keenelm_code_solved");
 			global.PlayerData.AddToInventory("'a'");
+
+			global.PlayerData.Stats.AddLevelPoints(3);
 		}
 	}
 }
