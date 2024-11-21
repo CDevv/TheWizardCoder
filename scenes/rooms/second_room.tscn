@@ -138,32 +138,38 @@ position = Vector2(672, 214)
 DialogueResource = ExtResource("8_bj7jj")
 DialogueTitle = "demo_shop"
 
-[node name="CutscenePoint" parent="." index="21" instance=ExtResource("12_8300v")]
+[node name="DialoguePoint3" parent="." index="21" instance=ExtResource("11_67j7s")]
+z_index = 1
+position = Vector2(456, 216)
+DialogueResource = ExtResource("8_bj7jj")
+DialogueTitle = "demo_dialogueextra"
+
+[node name="CutscenePoint" parent="." index="22" instance=ExtResource("12_8300v")]
 z_index = 1
 position = Vector2(432, 272)
 PlaythroughPropertyName = "TestCutscene"
 RoomMethodName = "TestCutscene"
 
-[node name="Chest" parent="." index="23" instance=ExtResource("14_lefl4")]
+[node name="Chest" parent="." index="24" instance=ExtResource("14_lefl4")]
 z_index = 1
 position = Vector2(784, 208)
 PlaythroughPropertyName = "TestChest"
 
-[node name="Chest2" parent="." index="24" instance=ExtResource("14_lefl4")]
+[node name="Chest2" parent="." index="25" instance=ExtResource("14_lefl4")]
 z_index = 1
 position = Vector2(848, 208)
 PlaythroughPropertyName = "TestChest2"
 ChestType = 1
 GoldAmount = 10
 
-[node name="GroundEnemy" parent="." index="25" instance=ExtResource("15_dhyf2")]
+[node name="GroundEnemy" parent="." index="26" instance=ExtResource("15_dhyf2")]
 z_index = 1
 position = Vector2(704, 416)
 
-[node name="ShopPoint" parent="." index="28" instance=ExtResource("14_0us7x")]
+[node name="ShopPoint" parent="." index="29" instance=ExtResource("14_0us7x")]
 position = Vector2(80, 264)
 
-[node name="ZenDummy" parent="." index="30"]
+[node name="ZenDummy" parent="." index="31"]
 visible = true
 position = Vector2(592, 224)
 DialogueResource = ExtResource("8_bj7jj")

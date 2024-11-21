@@ -39,5 +39,7 @@ public partial class Forest16 : BaseRoom
 		await PlayCutscene("forest_final_2");
 		await ShowDialogue(DialogueResource, "forest_final_2");
 		await PlayCutscene("forest_final_3");
+
+		global.ChangeRoom("raft_water");
 	}
 }

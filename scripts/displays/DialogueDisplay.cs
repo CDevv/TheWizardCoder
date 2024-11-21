@@ -81,12 +81,15 @@ namespace TheWizardCoder.Displays
 
 				if (hasAutoAdvance)
 				{
-					if (lineTime > 0)
+					GD.Print("hasAutoAdvance");
+					if (lineTime >= 0)
 					{
+						GD.Print($"{lineTime} - {delta}");
 						lineTime -= delta;
 					}
 					else
 					{
+						GD.Print("ended auto");
 						lineTime = 0;
 						isTyping = false;
 						hasAutoAdvance = false;

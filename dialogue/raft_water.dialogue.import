@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://bky44uy3y8eq8"
+path="res://.godot/imported/raft_water.dialogue-63c2036400cc09675585f800a2baca7d.tres"
+
+[deps]
+
+source_file="res://dialogue/raft_water.dialogue"
+dest_files=["res://.godot/imported/raft_water.dialogue-63c2036400cc09675585f800a2baca7d.tres"]
+
+[params]
+
+defaults=true
