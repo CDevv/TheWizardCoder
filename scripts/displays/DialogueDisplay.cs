@@ -9,6 +9,8 @@ namespace TheWizardCoder.Displays
 {
 	public partial class DialogueDisplay : Display
 	{
+		private const float DefaultWaitingTime = 0.02f;
+
 		[Signal]
 		public delegate void DialogueEndedEventHandler(string initialTitle, string lastTitle);
 
@@ -27,8 +29,9 @@ namespace TheWizardCoder.Displays
 		private string currentTitle;
 		private Resource dialogueResource;
 		private Marker2D responsesRectMarker;
+		private Timer lineTimer;
 		private bool isTyping = false;
-		private double waitingTime = 0.02;
+		private double waitingTime = DefaultWaitingTime;
 		private double lineTime = 0;
 		private bool hasAutoAdvance = false;
 		private double typingSpeed = 1;
@@ -47,11 +50,12 @@ namespace TheWizardCoder.Displays
 			responsesMenu = GetNode<VBoxContainer>("%Responses");
 			audioPlayer = GetNode<AudioStreamPlayer>("%AudioPlayer");
 			responsesRectMarker = GetNode<Marker2D>("ResponsesContainerMarker");
+			lineTimer = GetNode<Timer>("LineTimer");
 
 			responsesRectBasePosition = responsesRectMarker.Position;
 		}
 
-		public override async void _Process(double delta)
+		public override void _Process(double delta)
 		{
 			if (!Visible) return;
 
@@ -63,8 +67,7 @@ namespace TheWizardCoder.Displays
 					if (dialogueLine.Responses.Count > 0)
 					{
 						responsesRect.Show();
-						UpdateResponses(dialogueLine.Responses);				
-						
+						UpdateResponses(dialogueLine.Responses);								
 					}
 					return;
 				}
@@ -76,36 +79,19 @@ namespace TheWizardCoder.Displays
 				else
 				{
 					TypeCharacter();
-					waitingTime = 0.02;
-				}
-
-				if (hasAutoAdvance)
-				{
-					GD.Print("hasAutoAdvance");
-					if (lineTime >= 0)
-					{
-						GD.Print($"{lineTime} - {delta}");
-						lineTime -= delta;
-					}
-					else
-					{
-						GD.Print("ended auto");
-						lineTime = 0;
-						isTyping = false;
-						hasAutoAdvance = false;
-
-						label.VisibleCharacters = 0;
-						index = 0;
-						string nextId = dialogueLine.NextId;
-
-						dialogueLine = await DialogueManager.GetNextDialogueLine(dialogueResource, nextId);
-						currentTitle = nextId;
-						UpdateDisplay(dialogueLine);
-					}
+					waitingTime = DefaultWaitingTime;
 				}
 			}
+		}
 
-			if (Input.IsActionJustPressed("ui_accept"))
+        public override async void _Input(InputEvent @event)
+        {
+			if (dialogueLine == null)
+			{
+				return;
+			}
+
+            if (Input.IsActionJustPressed("ui_accept"))
 			{
 				if (hasResponses)
 				{
@@ -120,7 +106,6 @@ namespace TheWizardCoder.Displays
 
 					dialogueLine = await DialogueManager.GetNextDialogueLine(dialogueResource, nextId);
 					currentTitle = nextId;
-					//GD.Print(nextId); //8
 					UpdateDisplay(dialogueLine);
 				}
 			}
@@ -130,9 +115,9 @@ namespace TheWizardCoder.Displays
 				label.VisibleCharacters = -1;
 				index = dialogueLine.Text.Length - 1;
 			}
-		}
+        }
 
-		public override void ShowDisplay()
+        public override void ShowDisplay()
 		{
 			Show();
 		}
@@ -180,7 +165,7 @@ namespace TheWizardCoder.Displays
 
 			if (format.Count == 0)
 			{
-				label.Text = line.Text;
+				label.Text = line.Text.TrimStart();
 			}
 			else
 			{
@@ -217,6 +202,8 @@ namespace TheWizardCoder.Displays
 			{
 				hasAutoAdvance = true;
 				lineTime = double.Parse(line.Time);
+				lineTimer.WaitTime = lineTime;
+				lineTimer.Start();
 			}
 		}
 
@@ -296,6 +283,14 @@ namespace TheWizardCoder.Displays
 			global.GameDisplayEnabled = true;
 			global.CanWalk = true;
 			EmitSignal(SignalName.DialogueEnded, initialTitle, currentTitle);
+		}
+
+		private async void OnTimerTimeout()
+		{
+			string nextId = dialogueLine.NextId;
+			dialogueLine = await DialogueManager.GetNextDialogueLine(dialogueResource, nextId);
+			currentTitle = nextId;
+			UpdateDisplay(dialogueLine);
 		}
 	}
 }

@@ -1,15 +1,15 @@
 using Global
 
 ~ demo
-Nolan: [#portrait=0] [[Hi|Hello|Howdy]], this is some dialogue.
-Nolan: [#portrait=0] Here are some choices.
+Zen: [#portrait=0] [[Hi|Hello|Howdy]], this is some dialogue.
+Zen: [#portrait=0] Here are some choices.
 - First one
-	Nolan: [#portrait=0] You picked the first one.
+	Zen: [#portrait=0] You picked the first one.
 - Second one
-	Nolan: [#portrait=0] You picked the second one.
+	Zen: [#portrait=0] You picked the second one.
 - Start again => demo
 - End the conversation => END
-Nolan: [#portrait=0] For more information see the online documentation.
+Zen: [#portrait=0] For more information see the online documentation.
 => END
 
 ~ demo_playerdata

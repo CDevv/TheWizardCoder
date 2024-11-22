@@ -1,4 +1,17 @@
 ~ water
-Gertrude: [next=1] [#portrait=0] Test.
-Gertrude: [#portrait=1] Test2.
+Gertrude: [next=2] [#portrait=1] So, what an adventure, huh?
+Nolan: [next=1.5] [#portrait=1] Yeah..
+Nolan: [next=3] [#portrait=0] I wonder how did you even know I was gonna come?
+Gertrude: [next=1.5] [#portrait=0] You see.. 
+Gertrude: [next=4] [#portrait=0] I've always thought it would be nice to have a fellow wizard friend.
+Gertrude: [next=3.5] [#portrait=4] I was really lonely at my house.
+Nolan: [next=1.5] [#portrait=2] Makes sense..
+Gertrude: [next=3.5] [#portrait=0] But what about you? What made you come to the forest?
+Nolan: [next=3.5] [#portrait=2] Well.. Apperently there is a greater danger out there.
+Nolan: [next=4] [#portrait=0] And honestly, I feel like I am going on some kind of adventure.
+Gertrude: [next=3.5] [#portrait=1] With a friend! Ain't that nice?
+Nolan: [next=1.5] [#portrait=1] Yeah..!
+Nolan: [next=6] [#portrait=0] We just have to figure out what is going on.. I've never seen those black holes or whatever they are. 
+Nolan: [next=3] [#portrait=2] Good thing they aren't harmful.
+Gertrude: [next=3.5] [#portrait=4] Yeah, that stuff is weird..
 => END!

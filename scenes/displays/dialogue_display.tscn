@@ -292,6 +292,9 @@ animations = [{
 script = ExtResource("1_u23wf")
 ResponseTemplate = ExtResource("2_y60jh")
 
+[node name="LineTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="TextRect" type="NinePatchRect" parent="."]
 offset_left = 32.0
 offset_top = 320.0
@@ -394,3 +397,5 @@ text = "Response"
 
 [node name="ResponsesContainerMarker" type="Marker2D" parent="."]
 position = Vector2(608, 176)
+
+[connection signal="timeout" from="LineTimer" to="." method="OnTimerTimeout"]
