@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dm12hksdykxf"]
+[gd_scene load_steps=21 format=3 uid="uid://dm12hksdykxf"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_n0yin"]
 [ext_resource type="Script" path="res://scripts/rooms/Forest15.cs" id="2_6mc3w"]
@@ -252,6 +252,9 @@ _data = {
 "puzzle_solved": SubResource("Animation_bna13")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oryeu"]
+size = Vector2(80, 32)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_158om"]
 size = Vector2(128, 16)
 
@@ -318,11 +321,21 @@ scale = Vector2(1, 12)
 RoomMethodName = "PuzzleIntroCutscene"
 
 [node name="MessageGlitch" type="Sprite2D" parent="." index="21"]
+z_index = 1
+y_sort_enabled = true
 position = Vector2(1312, 312)
 scale = Vector2(2, 2)
 texture = ExtResource("5_sp774")
 
-[node name="CodeMessagePoint" parent="." index="22" instance=ExtResource("6_6jhi6")]
+[node name="MessageGlitchCollision" type="StaticBody2D" parent="." index="22"]
+z_index = 2
+position = Vector2(1312, 312)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MessageGlitchCollision" index="0"]
+shape = SubResource("RectangleShape2D_oryeu")
+
+[node name="CodeMessagePoint" parent="." index="23" instance=ExtResource("6_6jhi6")]
+z_index = 1
 position = Vector2(1312, 312)
 CodeText = "int c = 5;
 bool[] arr =
@@ -332,7 +345,7 @@ for (int i = 0; i < c; i++)
 	if (IsEven(i) == arr[i])
 		RemoveTrees();"
 
-[node name="ExecuteButton" type="Area2D" parent="." index="23"]
+[node name="ExecuteButton" type="Area2D" parent="." index="24"]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("10_iogej")
@@ -369,37 +382,37 @@ visible = false
 position = Vector2(32, 12)
 shape = SubResource("RectangleShape2D_wo6i8")
 
-[node name="Button1" parent="." index="24" instance=ExtResource("11_srtuk")]
+[node name="Button1" parent="." index="25" instance=ExtResource("11_srtuk")]
 z_index = 1
 y_sort_enabled = true
 position = Vector2(1440, 368)
 scale = Vector2(2, 2)
 
-[node name="Button2" parent="." index="25" instance=ExtResource("11_srtuk")]
+[node name="Button2" parent="." index="26" instance=ExtResource("11_srtuk")]
 z_index = 1
 y_sort_enabled = true
 position = Vector2(1504, 368)
 scale = Vector2(2, 2)
 
-[node name="Button3" parent="." index="26" instance=ExtResource("11_srtuk")]
+[node name="Button3" parent="." index="27" instance=ExtResource("11_srtuk")]
 z_index = 1
 y_sort_enabled = true
 position = Vector2(1568, 368)
 scale = Vector2(2, 2)
 
-[node name="Button4" parent="." index="27" instance=ExtResource("11_srtuk")]
+[node name="Button4" parent="." index="28" instance=ExtResource("11_srtuk")]
 z_index = 1
 y_sort_enabled = true
 position = Vector2(1632, 368)
 scale = Vector2(2, 2)
 
-[node name="Button5" parent="." index="28" instance=ExtResource("11_srtuk")]
+[node name="Button5" parent="." index="29" instance=ExtResource("11_srtuk")]
 z_index = 1
 y_sort_enabled = true
 position = Vector2(1696, 368)
 scale = Vector2(2, 2)
 
-[node name="Gertrude" parent="." index="29"]
+[node name="Gertrude" parent="." index="30"]
 position = Vector2(976, 408)
 DefaultDirection = 1
 

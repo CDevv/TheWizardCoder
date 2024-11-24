@@ -71,15 +71,20 @@ public partial class Forest15 : BaseRoom
 
 		if (count == ButtonsCount)
 		{
-			GD.Print("Passed!");
-			ClearTrees();
-
-			global.CanWalk = false;
-
-			await PuzzleSolvedCutscene();
-
-			global.CanWalk = true;
+			await OnCodeSolved();
 		}
+	}
+
+	private async Task OnCodeSolved()
+	{
+		GD.Print("Passed!");
+		ClearTrees();
+
+		await PuzzleSolvedCutscene();
+
+		global.CanWalk = true;
+		
+		global.PlayerData.Stats.AddLevelPoints(6);
 	}
 
 	private void ClearTrees()
@@ -111,6 +116,10 @@ public partial class Forest15 : BaseRoom
 		await PlayCutscene("puzzle_solved");
 		await ShowDialogue(DialogueResource, "puzzle_solved");
 
+		await TweenCameraToPlayer(0.3f);
+		
+		global.CanWalk = false;
+
 		global.CurrentRoom.Gertrude.PlayIdleAnimation(Direction.Left);
 		SceneTreeTimer timer = GetTree().CreateTimer(1);
 		await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
@@ -127,5 +136,7 @@ public partial class Forest15 : BaseRoom
 		global.CurrentRoom.Gertrude.EnableFollowing();
 		global.CurrentRoom.Gertrude.AddPathwayPoint();	
 		global.CurrentRoom.Player.DistanceWalked = 0;
+		
+		global.CanWalk = true;
 	}
 }

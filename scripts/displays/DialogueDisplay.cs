@@ -287,6 +287,11 @@ namespace TheWizardCoder.Displays
 
 		private async void OnTimerTimeout()
 		{
+			if (dialogueLine == null)
+			{
+				return;
+			}
+
 			string nextId = dialogueLine.NextId;
 			dialogueLine = await DialogueManager.GetNextDialogueLine(dialogueResource, nextId);
 			currentTitle = nextId;

@@ -210,9 +210,6 @@ TargetLocation = "HouseMarker"
 [node name="Section12Marker" type="Marker2D" parent="." index="18"]
 position = Vector2(320, 360)
 
-[node name="Gertrude" parent="." index="19"]
-position = Vector2(432, 224)
-
 [node name="WallStuff" parent="." index="20" instance=ExtResource("7_cifly")]
 z_index = 2
 position = Vector2(352, 184)
@@ -240,3 +237,6 @@ position = Vector2(208, 184)
 scale = Vector2(2, 1)
 DialogueResource = ExtResource("3_cauah")
 DialogueTitle = "gertrude_downstairs"
+
+[node name="Gertrude" parent="." index="24"]
+position = Vector2(432, 224)

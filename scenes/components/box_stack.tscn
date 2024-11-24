@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://max4o366gqrj"]
+
+[ext_resource type="Script" path="res://scripts/components/BoxStack.cs" id="1_dypir"]
+[ext_resource type="PackedScene" uid="uid://d2c47rjmggs70" path="res://scenes/components/colored_box.tscn" id="2_akqr4"]
+
+[node name="BoxStack" type="Node2D"]
+script = ExtResource("1_dypir")
+BoxScene = ExtResource("2_akqr4")
