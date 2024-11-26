@@ -5,6 +5,7 @@ using System.Linq;
 using TheWizardCoder.Autoload;
 using TheWizardCoder.Enums;
 using TheWizardCoder.UI;
+using TheWizardCoder.Utils;
 
 namespace TheWizardCoder.Displays
 {
@@ -98,7 +99,7 @@ namespace TheWizardCoder.Displays
 					{
 						waitingForInput = false;
 
-						global.CreateSaveFile(global.ChosenSaveSlot, userInput);
+						SaveFileHelper.CreateSaveFile(global.ChosenSaveSlot, userInput);
 						global.ChangeRoom("first_room", "AfterCutsceneMarker", Direction.Down);
 						return;
 					}

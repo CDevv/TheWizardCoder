@@ -22,7 +22,7 @@ namespace TheWizardCoder.Data
         public int AgilityPoints { get; set; }
         public Array<string> MagicSpells { get; set; }
         public CharacterType Type { get; set; }
-        public int Level { get; set; }
+        public int Level { get; set; } = 1;
         public int LevelPoints { get; set; }
 
         private Dictionary<string, Variant> dict;

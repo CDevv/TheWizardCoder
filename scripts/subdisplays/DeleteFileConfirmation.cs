@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using TheWizardCoder.Abstractions;
+using TheWizardCoder.Utils;
 
 namespace TheWizardCoder.Subdisplays
 {
@@ -37,7 +38,7 @@ namespace TheWizardCoder.Subdisplays
 		{
 			if (fileIsDeleted)
 			{
-				global.DeleteSaveFile(saveName);
+				SaveFileHelper.DeleteSaveFile(saveName);
 				EmitSignal(SignalName.FileDeleted);
 			}
 			Hide();

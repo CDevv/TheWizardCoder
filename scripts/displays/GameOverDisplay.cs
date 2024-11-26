@@ -3,6 +3,7 @@ using System;
 using TheWizardCoder.Abstractions;
 using TheWizardCoder.Enums;
 using TheWizardCoder.UI;
+using TheWizardCoder.Utils;
 
 namespace TheWizardCoder.Displays
 {
@@ -27,7 +28,7 @@ namespace TheWizardCoder.Displays
 		{
 			global.CurrentRoom.TransitionRect.PlayAnimation();
 			await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
-			global.LoadSaveFile(global.PlayerData.SaveName);
+			SaveFileHelper.LoadSaveFile(global.PlayerData.SaveName);
 			global.ChangeRoom(global.PlayerData.SceneFileName, global.PlayerData.SceneDefaultMarker, Direction.Down);
 			Hide();
 		}

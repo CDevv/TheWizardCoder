@@ -567,6 +567,7 @@ SolvableAreas = {
 UseInventory = true
 
 [node name="SavePoint" parent="." index="21" instance=ExtResource("8_h5iky")]
+z_index = 1
 position = Vector2(1368, 752)
 
 [node name="Linton" parent="." index="22" instance=ExtResource("9_hrcjo")]

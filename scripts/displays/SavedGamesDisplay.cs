@@ -4,6 +4,7 @@ using TheWizardCoder.Autoload;
 using TheWizardCoder.Data;
 using TheWizardCoder.Abstractions;
 using TheWizardCoder.UI;
+using TheWizardCoder.Utils;
 
 namespace TheWizardCoder.Displays
 {
@@ -33,7 +34,7 @@ namespace TheWizardCoder.Displays
 			{
 				SaveFileOption button = buttons[i];
 				string fileName = buttons[i].Name.ToString().ToLower();
-				SaveFileData save1data = global.ReadSaveFileData(fileName);
+				SaveFileData save1data = SaveFileHelper.ReadSaveFile(fileName);
 				button.ShowData(save1data);
 			}
 		}
@@ -59,7 +60,7 @@ namespace TheWizardCoder.Displays
 
 		public void OnSaveOption(string saveName)
 		{
-			global.UpdateSaveFile(saveName);
+			SaveFileHelper.UpdateSaveFile(saveName);
 			OnCloseButton();
 		}
 

@@ -4,6 +4,7 @@ using TheWizardCoder.Abstractions;
 using TheWizardCoder.Enums;
 using TheWizardCoder.Data;
 using TheWizardCoder.UI;
+using TheWizardCoder.Utils;
 
 namespace TheWizardCoder.Subdisplays
 {
@@ -54,7 +55,7 @@ namespace TheWizardCoder.Subdisplays
 			{
 				SaveFileOption button = saveButtons[i];
 				string fileName = saveButtons[i].Name.ToString().ToLower();
-				SaveFileData saveData = global.ReadSaveFileData(fileName);
+				SaveFileData saveData = SaveFileHelper.ReadSaveFile(fileName);
 				button.ShowData(saveData);
 			}
 		}
@@ -80,7 +81,7 @@ namespace TheWizardCoder.Subdisplays
 		{
 			if (mode == SaveFileAction.Load)
 			{
-				SaveFileData data = global.ReadSaveFileData($"save{saveNumber}");
+				SaveFileData data = SaveFileHelper.ReadSaveFile($"save{saveNumber}");
 				if (data.IsSaveEmpty)
 				{
 					Transition.Show();
@@ -92,7 +93,7 @@ namespace TheWizardCoder.Subdisplays
 				}
 				else
 				{
-					global.LoadSaveFile($"save{saveNumber}");
+					SaveFileHelper.LoadSaveFile($"save{saveNumber}");
 					global.ChangeRoom(global.PlayerData.SceneFileName, global.PlayerData.SceneDefaultMarker, Direction.Down);
 				}
 			}

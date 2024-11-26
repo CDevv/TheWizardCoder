@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using DialogueManagerRuntime;
 using TheWizardCoder.Abstractions;
+using System.Linq;
 
 namespace TheWizardCoder.Displays
 {
@@ -38,8 +39,8 @@ namespace TheWizardCoder.Displays
 		private string text = "";
 		private int index = -1;
 		private bool hasResponses = false;
-		private float maxSize = 0;
 		private List<string> format = new();
+		private List<Button> buttons = new();
 
 		public override void _Ready()
 		{
@@ -226,8 +227,6 @@ namespace TheWizardCoder.Displays
 		{
 			ClearResponses();
 
-			maxSize = 48;
-			Array<Button> buttons = new Array<Button>();
 			for (int i = 0; i < responses.Count; i++)
 			{
 				DialogueResponse response = responses[i];
@@ -242,11 +241,6 @@ namespace TheWizardCoder.Displays
 				{
 					button.GrabFocus();
 				}
-				
-				if (button.Size.X > maxSize)
-				{
-					maxSize = button.Size.X;
-				}
 			}
 
 			buttons[0].FocusNeighborTop = buttons[buttons.Count - 1].GetPath();
@@ -259,7 +253,10 @@ namespace TheWizardCoder.Displays
 			buttons[buttons.Count - 1].FocusNeighborTop = buttons[buttons.Count - 2].GetPath();
 			buttons[buttons.Count - 1].FocusNeighborBottom = buttons[0].GetPath();
 
-			responsesRect.Position = responsesRectBasePosition - new Vector2((maxSize + (8 * 2)) * 2, 0);
+			//GD.Print(buttons.Sum(x => x.Size.Y) / 2);
+			//responsesRect.Size = new Vector2(buttons.Max(x => x.Size.X), buttons.Sum(x => x.Size.Y) / 2) + new Vector2(8, 8);
+			//responsesRect.Size /= new Vector2(1, 2);
+			//GD.Print(responsesRect.Size);
 		}
 
 		private void ClearResponses()
@@ -268,6 +265,16 @@ namespace TheWizardCoder.Displays
 			foreach (Node item in oldResponses)
 			{
 				item.QueueFree();
+			}
+			buttons.Clear();
+		}
+
+		private void OnResponsesContainerResized()
+		{
+			if (responsesRect != null)
+			{
+				responsesRect.Size = new Vector2(responsesMenu.Size.X, responsesMenu.Size.Y);
+				responsesRect.Position = responsesRectBasePosition - (responsesRect.Scale * new Vector2(responsesRect.Size.X, responsesRect.Size.Y));
 			}
 		}
 

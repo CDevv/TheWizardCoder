@@ -37,13 +37,12 @@ namespace TheWizardCoder.Autoload
 		{
 			try
 			{
+				SaveFileHelper.Global = this;
+				DataLoader.Global = this;
+				LoadData();
+
 				Settings.LoadSettings();
 				Settings.ApplySettings();
-				LoadGameIntro();
-				LoadItemDescriptions();
-				LoadMagicSpells();
-				LoadCharactersData();
-				LoadShops();
 
 				PlayerData = new(Characters["Nolan"]);
 			}
@@ -51,6 +50,15 @@ namespace TheWizardCoder.Autoload
 			{
 				GD.PrintErr(e.ToString());
 			}
+		}
+
+		private void LoadData()
+		{
+			GameIntroStrings = DataLoader.LoadGameIntro();
+			ItemDescriptions = DataLoader.LoadItems();
+			MagicSpells = DataLoader.LoadMagicSpells();
+			Characters = DataLoader.LoadCharacters();
+			Shops = DataLoader.LoadShops();
 		}
 
 		public void AddToInventory(string item, bool onlyOne = false)
@@ -71,187 +79,6 @@ namespace TheWizardCoder.Autoload
 		public void AddMagicSpell(string name)
 		{
 			PlayerData.AddMagicSpell(name);
-		}
-
-		private void LoadItemDescriptions()
-		{
-			Variant jsonData = GetJsonData("res://info/item_descriptions.json");
-			Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
-
-			foreach (var pair in parsedData)
-			{
-				Item item = new Item();
-				item.ApplyDictionary(pair.Value);
-				item.Name = pair.Key;
-				ItemDescriptions.Add(item.Name, item);
-			}
-		}
-
-		private void LoadMagicSpells()
-		{
-			Variant jsonData = GetJsonData("res://info/magic_descriptions.json");
-			Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
-
-			foreach (var pair in parsedData)
-			{
-				MagicSpell magicSpell = new MagicSpell();
-				magicSpell.ApplyDictionary(pair.Value);
-				MagicSpells.Add(pair.Key, magicSpell);
-			}
-		}
-
-		public void LoadCharactersData()
-		{
-			Variant jsonData = GetJsonData("res://info/enemies.json");
-			Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
-
-			foreach (var pair in parsedData)
-			{
-				Dictionary<string, Variant> dict = pair.Value;
-
-				if (pair.Value != null)
-				{
-					dict["Name"] = pair.Key;
-
-					CharacterData character = new(dict, this);
-					Characters.Add(pair.Key, character);
-
-					if (character.Type == CharacterType.Enemy)
-					{
-						ResourceLoader.LoadThreadedRequest($"res://assets/battle/enemies/{pair.Key}.png");
-					}
-				}
-
-			}
-		}
-
-		public void LoadShops()
-		{
-			Variant jsonData = GetJsonData("res://info/shops.json");
-			Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
-
-			foreach (var pair in parsedData)
-			{
-				Dictionary<string, Variant> dict = pair.Value;
-				dict["Name"] = pair.Key;
-
-				Shop shop = new();
-				shop.ApplyDictionary(dict);
-
-				Shops.Add(pair.Key, shop);
-			}
-		}
-
-		public void LoadGameIntro()
-		{
-			Variant jsonData = GetJsonData("res://info/game_intro.json");
-			Dictionary<string, string> parsedData = (Dictionary<string, string>)jsonData;
-
-			foreach (var item in parsedData)
-			{
-				GameIntroStrings[item.Key] = item.Value;
-			}
-		}
-
-		public void CreateSaveFile(string fileName, string saveName)
-		{
-			SaveFileData data = new SaveFileData(Characters["Nolan"]);
-			data.FileName = fileName;
-			data.SaveName = saveName;
-			data.Stats.Global = null;
-
-			FileAccess file = FileAccess.Open($"user://{fileName}.wand", FileAccess.ModeFlags.Write);
-			file.StoreVar(JsonConvert.SerializeObject(data));
-			file.Close();
-
-			FileAccess hashFile = FileAccess.Open($"user://{fileName}.ini", FileAccess.ModeFlags.Write);
-			byte[] hash = HashUtils.CalculateHash(fileName);
-			hashFile.StoreVar(hash);
-			hashFile.Close();
-
-			PlayerData = data;
-		}
-
-		public void UpdateSaveFile(string fileName)
-		{
-			PlayerData.TimeSpent = PlayerData.TimeSpent.Add(DateTime.Now - PlayerData.LastSaved);
-			PlayerData.LastSaved = DateTime.Now;
-			PlayerData.LocationVector = CurrentRoom.Player.Position;
-			PlayerData.SceneDefaultMarker = CurrentRoom.DefaultMarkerName;
-			SaveFileData data = PlayerData;
-			data.Stats.Global = null;
-			for (var i = 0; i < data.Allies.Count; i++)
-			{
-				data.Allies[i].Global = null;
-			}
-
-			FileAccess file = FileAccess.Open($"user://{fileName}.wand", FileAccess.ModeFlags.Write);
-			file.StoreVar(JsonConvert.SerializeObject(data));
-			file.Close();
-
-			FileAccess hashFile = FileAccess.Open($"user://{fileName}.ini", FileAccess.ModeFlags.Write);
-			byte[] hash = HashUtils.CalculateHash(fileName);
-			hashFile.StoreVar(hash);
-			hashFile.Close();
-
-			PlayerData.LocationVector = Vector2.Zero;
-		}
-
-		public void LoadSaveFile(string saveName)
-		{
-			SaveFileData data = ReadSaveFileData(saveName);
-			PlayerData = data;
-			PlayerData.LastSaved = DateTime.Now;
-			PlayerData.Stats.Global = this;
-
-			if (data.IsSaveEmpty)
-			{
-				PlayerData.SaveName = saveName;
-				CreateSaveFile(saveName, saveName);
-			}
-		}
-
-		public void DeleteSaveFile(string saveName)
-		{
-			DirAccess dir = DirAccess.Open("user://");
-			dir.Remove($"{saveName}.ini");
-			dir.Remove($"{saveName}.wand");
-		}
-
-		public SaveFileData ReadSaveFileData(string saveName)
-		{
-			SaveFileData data = new SaveFileData(Characters["Nolan"]);
-
-			if (!FileAccess.FileExists($"user://{saveName}.wand"))
-			{
-				GD.PushWarning($"File {saveName}.wand does not exist");
-				data.IsSaveEmpty = true;
-				return data;
-			}
-
-			//Get expected hash
-			using var hashFile = FileAccess.Open($"user://{saveName}.ini", FileAccess.ModeFlags.Read);
-			byte[] expectedHash = (byte[])hashFile.GetVar();
-			hashFile.Close();
-
-			//Actual hash
-			byte[] actualHash = HashUtils.CalculateHash(saveName);
-
-			if (HashUtils.CompareHashes(actualHash, expectedHash))
-			{
-				using var readSave = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Read);
-				string savedData = (string)readSave.GetVar();
-				data = JsonConvert.DeserializeObject<SaveFileData>(savedData, new JsonSerializerSettings() { ObjectCreationHandling = ObjectCreationHandling.Replace, NullValueHandling = NullValueHandling.Ignore });
-				data.IsSaveEmpty = false;
-			}
-			else
-			{
-				GD.PushWarning($"{saveName}.ini: The hashes don't match");
-				data.IsSaveEmpty = true;
-				return data;
-			}
-
-			return data;
 		}
 
 		public void ChangeRoom(string room)
@@ -277,28 +104,6 @@ namespace TheWizardCoder.Autoload
 		public void GoToGameIntro()
 		{
 			GetTree().ChangeSceneToFile("res://scenes/rooms/game_intro.tscn");
-		}
-
-		private Variant GetJsonData(string fileName)
-		{
-			if (!FileAccess.FileExists(fileName))
-			{
-				GD.PrintErr($"{fileName} does not exist");
-				return new Json();
-			}
-
-			using var data = FileAccess.Open(fileName, FileAccess.ModeFlags.Read);
-			string jsonString = data.GetAsText();
-
-			Json json = new Json();
-			Error jsonError = json.Parse(jsonString);
-
-			if (jsonError != Error.Ok)
-			{
-				GD.PrintErr($"Json parse error: {jsonError}");
-			}
-
-			return json.Data;
 		}
 
 		public Variant GetPlayerData(string key)
