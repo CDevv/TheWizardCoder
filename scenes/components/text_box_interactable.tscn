@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://rvoayeto0hni"]
+
+[ext_resource type="PackedScene" uid="uid://difw3tkd13yu0" path="res://scenes/components/console_box_text.tscn" id="1_axnub"]
+[ext_resource type="Script" path="res://scripts/interactables/TextBoxInteractable.cs" id="1_lmt7h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bq5om"]
+size = Vector2(4, 4)
+
+[node name="TextBoxInteractable" type="Area2D"]
+collision_mask = 8
+script = ExtResource("1_lmt7h")
+
+[node name="ConsoleBoxText" parent="." instance=ExtResource("1_axnub")]
+Text = "Hello."
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(4, 4)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_bq5om")
+debug_color = Color(0.321569, 0.972549, 0.282353, 0.419608)
+
+[node name="OnScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="resized" from="ConsoleBoxText" to="." method="OnBoxResized"]

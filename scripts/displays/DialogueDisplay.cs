@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using DialogueManagerRuntime;
 using TheWizardCoder.Abstractions;
 using System.Linq;
+using System.Globalization;
 
 namespace TheWizardCoder.Displays
 {
@@ -202,7 +203,7 @@ namespace TheWizardCoder.Displays
 			if (!string.IsNullOrEmpty(line.Time))
 			{
 				hasAutoAdvance = true;
-				lineTime = double.Parse(line.Time);
+				lineTime = double.Parse(line.Time, CultureInfo.InvariantCulture);
 				lineTimer.WaitTime = lineTime;
 				lineTimer.Start();
 			}
@@ -219,7 +220,7 @@ namespace TheWizardCoder.Displays
 
 			if (dialogueLine.Speeds.ContainsKey(index))
 			{
-				typingSpeed = double.Parse((string)dialogueLine.Speeds[index]);
+				typingSpeed = double.Parse((string)dialogueLine.Speeds[index], CultureInfo.InvariantCulture);
 			}
 		}
 
