@@ -7,6 +7,7 @@
 size = Vector2(4, 4)
 
 [node name="TextBoxInteractable" type="Area2D"]
+collision_layer = 9
 collision_mask = 8
 script = ExtResource("1_lmt7h")
 
@@ -21,4 +22,5 @@ debug_color = Color(0.321569, 0.972549, 0.282353, 0.419608)
 
 [node name="OnScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
 
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
 [connection signal="resized" from="ConsoleBoxText" to="." method="OnBoxResized"]

@@ -265,7 +265,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." index="9" instance=ExtResource("2_smlwp")]
 z_index = 2
-position = Vector2(448, 296)
+position = Vector2(448, 336)
 
 [node name="TileMap" type="TileMap" parent="." index="10"]
 y_sort_enabled = true

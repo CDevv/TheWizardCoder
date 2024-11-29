@@ -60,7 +60,7 @@ namespace TheWizardCoder.Displays
 
 		public void OnSaveOption(string saveName)
 		{
-			SaveFileHelper.UpdateSaveFile(saveName);
+			SaveFileHelper.UpdateSaveFile(global, saveName);
 			OnCloseButton();
 		}
 

@@ -11,6 +11,8 @@ namespace TheWizardCoder.Interactables
 		[Signal]
 		public delegate void TouchedEventHandler();
 
+		public string Text { get; set; }
+
 		private CollisionShape2D collisionShape;
 		private ConsoleBoxText consoleBoxText;
 		private VisibleOnScreenNotifier2D onScreenNotifier;
@@ -20,6 +22,8 @@ namespace TheWizardCoder.Interactables
 			collisionShape = GetNode<CollisionShape2D>("CollisionShape");
 			consoleBoxText = GetNode<ConsoleBoxText>("ConsoleBoxText");
 			onScreenNotifier = GetNode<VisibleOnScreenNotifier2D>("OnScreenNotifier");
+
+			consoleBoxText.Text = Text;
 		}
 
 		public override void _PhysicsProcess(double delta)
@@ -32,6 +36,12 @@ namespace TheWizardCoder.Interactables
 		{
 			EmitSignal(SignalName.Touched);
 			QueueFree();
+		}
+
+		public void SetText(string text)
+		{
+			Text = text;
+			consoleBoxText.SetText(text);
 		}
 
 		private void OnBoxResized()

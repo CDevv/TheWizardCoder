@@ -29,8 +29,9 @@ namespace TheWizardCoder.Utils
             Global.PlayerData = data;
         }
 
-        public static void UpdateSaveFile(string fileName)
+        public static void UpdateSaveFile(Global global, string fileName)
         {
+			Global = global;
             Global.PlayerData.TimeSpent = Global.PlayerData.TimeSpent.Add(DateTime.Now - Global.PlayerData.LastSaved);
 			Global.PlayerData.LastSaved = DateTime.Now;
 			Global.PlayerData.LocationVector = Global.CurrentRoom.Player.Position;
@@ -44,6 +45,7 @@ namespace TheWizardCoder.Utils
 			}
 
 			FileAccess file = FileAccess.Open($"user://{fileName}.wand", FileAccess.ModeFlags.Write);
+			GD.Print(JsonConvert.SerializeObject(data));
 			file.StoreVar(JsonConvert.SerializeObject(data));
 			file.Close();
 
@@ -78,6 +80,7 @@ namespace TheWizardCoder.Utils
 			{
 				using var readSave = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Read);
 				string savedData = (string)readSave.GetVar();
+				//GD.Print(savedData);
 				data = JsonConvert.DeserializeObject<SaveFileData>(savedData, new JsonSerializerSettings() { ObjectCreationHandling = ObjectCreationHandling.Replace, NullValueHandling = NullValueHandling.Ignore });
 				data.IsSaveEmpty = false;
 			}

@@ -217,7 +217,7 @@ offset_bottom = 480.0
 color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." index="10" instance=ExtResource("2_kf2x7")]
-z_index = 1
+z_index = 2
 position = Vector2(344, 168)
 
 [node name="TileMap" type="TileMap" parent="." index="11"]

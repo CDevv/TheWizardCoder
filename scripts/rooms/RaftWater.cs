@@ -19,6 +19,7 @@ public partial class RaftWater : BaseRoom
     private Area2D interactableScanner;
     private double passedTime = 0;
     private bool canMoveRaft;
+    private bool cutsceneSkippable;
 
     public override async void OnReady()
     {
@@ -39,6 +40,11 @@ public partial class RaftWater : BaseRoom
         global.CanWalk = false;
     }
 
+    public override void _Process(double delta)
+    {
+        passedTime += delta;
+    }
+
     public override void _PhysicsProcess(double delta)
     {
         if (canMoveRaft)
@@ -52,17 +58,30 @@ public partial class RaftWater : BaseRoom
         }
     }
 
-    private void OnInteractableEntered(Node2D node)
+    public override void _Input(InputEvent @event)
     {
-        if (node.GetType() == typeof(Interactable))
+        if (Input.IsActionJustPressed("ui_cancel"))
         {
-            ((Interactable)node).Action();
+            if (cutsceneSkippable)
+            {
+                global.CanWalk = false;
+                canMoveRaft = true;
+
+                AnimationPlayer.Play("water_final");
+                boxStack.AddBox();
+                SpawnTextBox();
+
+                cutsceneSkippable = false;
+            }
         }
     }
 
-    public override void _Process(double delta)
+    private void OnInteractableEntered(Area2D area)
     {
-        passedTime += delta;
+        GD.Print("area entered");
+        Interactable interactable = (Interactable)area;
+        
+        interactable.Action();
     }
 
     private void SpawnTextBox()
@@ -71,7 +90,10 @@ public partial class RaftWater : BaseRoom
         Vector2 boxPosition = new Vector2(textBoxBasePos.Position.X, textBoxBasePos.Position.Y + boxY);
 
         TextBoxInteractable textBox = TextBoxScene.Instantiate<TextBoxInteractable>();
+        textBox.Text = "Hello.";
         textBox.Position = boxPosition;
+        textBox.Touched += () => boxStack.AddBox();
+
         AddChild(textBox);
     }
 
@@ -86,5 +108,10 @@ public partial class RaftWater : BaseRoom
 
         boxStack.AddBox();
         SpawnTextBox();
+    }
+
+    private void SetCutsceneSkippable(bool skippable)
+    {
+        this.cutsceneSkippable = skippable;
     }
 }

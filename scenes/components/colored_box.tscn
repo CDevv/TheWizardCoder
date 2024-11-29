@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://d2c47rjmggs70"]
 
-[ext_resource type="Texture2D" uid="uid://ssogye25ef45" path="res://assets/props/barrier.png" id="1_uktvr"]
+[ext_resource type="Texture2D" uid="uid://cqg0hnpu5i8bx" path="res://assets/props/box.png" id="1_4r373"]
 
 [node name="ColoredBox" type="Sprite2D"]
 z_index = 1
 position = Vector2(-4.76837e-07, -4.76837e-07)
 scale = Vector2(2, 2)
-texture = ExtResource("1_uktvr")
+texture = ExtResource("1_4r373")
