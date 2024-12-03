@@ -38,7 +38,7 @@ namespace TheWizardCoder.Subdisplays
 		{
 			if (fileIsDeleted)
 			{
-				SaveFileHelper.DeleteSaveFile(saveName);
+				global.SaveFiles.DeleteSaveFile(saveName);
 				EmitSignal(SignalName.FileDeleted);
 			}
 			Hide();

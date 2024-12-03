@@ -28,7 +28,7 @@ namespace TheWizardCoder.Displays
 		{
 			global.CurrentRoom.TransitionRect.PlayAnimation();
 			await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
-			SaveFileHelper.LoadSaveFile(global.PlayerData.SaveName);
+			global.SaveFiles.LoadSaveFile(global.PlayerData.SaveName);
 			global.ChangeRoom(global.PlayerData.SceneFileName, global.PlayerData.SceneDefaultMarker, Direction.Down);
 			Hide();
 		}

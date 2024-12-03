@@ -13,7 +13,7 @@ public partial class RaftWater : BaseRoom
     [Export]
     public PackedScene TextBoxScene { get; set; }
 
-    private Sprite2D raft;
+    private CharacterBody2D raft;
     private BoxStack boxStack;
     private Marker2D textBoxBasePos;
     private Area2D interactableScanner;
@@ -24,7 +24,7 @@ public partial class RaftWater : BaseRoom
     public override async void OnReady()
     {
         base.OnReady();
-        raft = GetNode<Sprite2D>("Raft");
+        raft = GetNode<CharacterBody2D>("Raft");
         boxStack = GetNode<BoxStack>("%BoxStack");
         textBoxBasePos = GetNode<Marker2D>("TextBoxBase");
         interactableScanner = GetNode<Area2D>("%InteractableScanner");
@@ -38,6 +38,7 @@ public partial class RaftWater : BaseRoom
         global.CurrentRoom.Player.CameraEnabled = false;
         canMoveRaft = true;
         global.CanWalk = false;
+        global.GameDisplayEnabled = false;
     }
 
     public override void _Process(double delta)
@@ -51,10 +52,14 @@ public partial class RaftWater : BaseRoom
         {
             Vector2 velocity = Input.GetVector("left", "right", "up", "down").Normalized();
             velocity *= RaftSpeed;
-            
-            global.CurrentRoom.Player.Position += velocity;
-            global.CurrentRoom.Gertrude.Position += velocity;
-            raft.Position += velocity;
+
+            var collision = raft.MoveAndCollide(velocity);
+
+            if (collision == null)
+            {
+                global.CurrentRoom.Player.Position += velocity;
+                global.CurrentRoom.Gertrude.Position += velocity;
+            }        
         }
     }
 
@@ -64,16 +69,22 @@ public partial class RaftWater : BaseRoom
         {
             if (cutsceneSkippable)
             {
-                global.CanWalk = false;
-                canMoveRaft = true;
-
-                AnimationPlayer.Play("water_final");
-                boxStack.AddBox();
-                SpawnTextBox();
-
+                StartSequence();
                 cutsceneSkippable = false;
             }
         }
+    }
+
+    private void StartSequence()
+    {
+        AnimationPlayer.Stop();
+        AnimationPlayer.Play("water_final");
+
+        global.CanWalk = false;
+        global.GameDisplayEnabled = false;
+
+        boxStack.AddBox();
+        SpawnTextBox();
     }
 
     private void OnInteractableEntered(Area2D area)
@@ -95,19 +106,16 @@ public partial class RaftWater : BaseRoom
         textBox.Touched += () => boxStack.AddBox();
 
         AddChild(textBox);
-    }
+    }  
 
     private void OnDialogueEnded(string initialTitle, string message)
     {
-        global.CanWalk = false;
+        StartSequence();
 
-        AnimationPlayer.Play("water_final");
+        
         GD.Print(passedTime);
         GD.Print(global.CurrentRoom.Player.Position);
         GD.Print(global.CurrentRoom.Gertrude.Position);
-
-        boxStack.AddBox();
-        SpawnTextBox();
     }
 
     private void SetCutsceneSkippable(bool skippable)

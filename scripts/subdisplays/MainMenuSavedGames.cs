@@ -55,7 +55,7 @@ namespace TheWizardCoder.Subdisplays
 			{
 				SaveFileOption button = saveButtons[i];
 				string fileName = saveButtons[i].Name.ToString().ToLower();
-				SaveFileData saveData = SaveFileHelper.ReadSaveFile(fileName);
+				SaveFileData saveData = global.SaveFiles.ReadSaveFile(fileName);
 				button.ShowData(saveData);
 			}
 		}
@@ -81,7 +81,7 @@ namespace TheWizardCoder.Subdisplays
 		{
 			if (mode == SaveFileAction.Load)
 			{
-				SaveFileData data = SaveFileHelper.ReadSaveFile($"save{saveNumber}");
+				SaveFileData data = global.SaveFiles.ReadSaveFile($"save{saveNumber}");
 				if (data.IsSaveEmpty)
 				{
 					Transition.Show();
@@ -93,7 +93,7 @@ namespace TheWizardCoder.Subdisplays
 				}
 				else
 				{
-					SaveFileHelper.LoadSaveFile($"save{saveNumber}");
+					global.SaveFiles.LoadSaveFile($"save{saveNumber}");
 					global.ChangeRoom(global.PlayerData.SceneFileName, global.PlayerData.SceneDefaultMarker, Direction.Down);
 				}
 			}

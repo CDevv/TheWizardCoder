@@ -34,7 +34,7 @@ namespace TheWizardCoder.Displays
 			{
 				SaveFileOption button = buttons[i];
 				string fileName = buttons[i].Name.ToString().ToLower();
-				SaveFileData save1data = SaveFileHelper.ReadSaveFile(fileName);
+				SaveFileData save1data = global.SaveFiles.ReadSaveFile(fileName);
 				button.ShowData(save1data);
 			}
 		}
@@ -60,7 +60,7 @@ namespace TheWizardCoder.Displays
 
 		public void OnSaveOption(string saveName)
 		{
-			SaveFileHelper.UpdateSaveFile(global, saveName);
+			global.SaveFiles.UpdateSaveFile(saveName);
 			OnCloseButton();
 		}
 

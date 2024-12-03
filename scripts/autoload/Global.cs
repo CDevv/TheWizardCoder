@@ -17,14 +17,18 @@ namespace TheWizardCoder.Autoload
 		public Direction PlayerDirection { get; set; }
 		public string ChosenSaveSlot { get; set; }
 		public bool HasLoadedGame { get; set; } = false;
-		public bool CanWalk = true;
+		public bool CanWalk { get; set; } = true;
 		public bool GameDisplayEnabled { get; set; } = true;
 		public bool IsInShop { get; set; }
 		public bool PlayerIsOnStairs { get; set; } = false;
 		public bool StairsInverted { get; set; } = false;
 		public bool StairsGoUp { get; set; } = true;
 		public bool IsInCutscene { get; set; } = false;
-		public SaveFileData PlayerData { get; set; }
+		public SaveFileData PlayerData 
+		{ 
+			get { return SaveFiles.PlayerData; }
+		}
+		public SaveFileHelper SaveFiles { get; set; }
 		public SettingsConfig Settings { get; set; } = new();
 		public System.Collections.Generic.Dictionary<string, Item> ItemDescriptions { get; private set; } = new();
 		public System.Collections.Generic.Dictionary<string, MagicSpell> MagicSpells { get; private set; } = new();
@@ -36,15 +40,13 @@ namespace TheWizardCoder.Autoload
 		public override void _Ready()
 		{
 			try
-			{
-				SaveFileHelper.Global = this;
+			{			
 				DataLoader.Global = this;
 				LoadData();
+				SaveFiles = new(this);
 
 				Settings.LoadSettings();
 				Settings.ApplySettings();
-
-				PlayerData = new(Characters["Nolan"]);
 			}
 			catch (System.Exception e)
 			{
@@ -64,6 +66,11 @@ namespace TheWizardCoder.Autoload
 		public void AddToInventory(string item, bool onlyOne = false)
 		{
 			PlayerData.AddToInventory(item, onlyOne);
+		}
+
+		public void AddToInventory(string item)
+		{
+			PlayerData.AddToInventory(item, false);
 		}
 
 		public void RemoveFromInventory(string item)

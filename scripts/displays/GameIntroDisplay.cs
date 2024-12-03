@@ -99,7 +99,7 @@ namespace TheWizardCoder.Displays
 					{
 						waitingForInput = false;
 
-						SaveFileHelper.CreateSaveFile(global.ChosenSaveSlot, userInput);
+						global.SaveFiles.CreateSaveFile(global.ChosenSaveSlot, userInput);
 						global.ChangeRoom("first_room", "AfterCutsceneMarker", Direction.Down);
 						return;
 					}
