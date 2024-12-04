@@ -20,10 +20,9 @@ namespace TheWizardCoder.Interactables
 		public Direction DefaultDirection { get; set; } = Direction.Down;
 
 		private AnimatedSprite2D sprite;
+		public AnimatedSprite2D Sprite { get { return sprite; } }
 		private CollisionShape2D collision;
-
 		private bool followingPlayer;
-
 		public bool FollowingPlayer { get { return followingPlayer; } }
 		private Queue<CharacterPathway> pathways = new();
 

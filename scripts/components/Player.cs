@@ -75,7 +75,6 @@ namespace TheWizardCoder.Components
 			{
 				ChangeDirection(direction);
 				Direction = direction.ToDirection();
-				//Direction = global.GetDirectionFromVector(direction);
 			}
 
 			if (global.CurrentRoom.Camera != null && CameraEnabled)
@@ -99,10 +98,10 @@ namespace TheWizardCoder.Components
 				}
 			}
 
-			MoveAndCollide(velocity); 
+			var collision = MoveAndCollide(velocity); 
 			DistanceWalked += Position.DistanceTo(Position + velocity);
 
-			if (Follower != null)
+			if (Follower != null && collision == null)
 			{
 				if (velocity == Vector2.Zero)
 				{

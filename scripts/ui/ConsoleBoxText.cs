@@ -18,7 +18,7 @@ public partial class ConsoleBoxText : NinePatchRect
 
 	public void SetText(string text)
 	{
-		label.Text = Text;
+		label.Text = text;
 	}
 
 	private void OnLabelResized()

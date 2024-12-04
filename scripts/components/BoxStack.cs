@@ -11,6 +11,7 @@ public partial class BoxStack : Node2D
 	public PackedScene BoxScene { get; set; }
 
 	private Stack<Sprite2D> boxes = new Stack<Sprite2D>();
+	public int Count { get { return boxes.Count; } }
 
 	public void AddBox()
 	{
@@ -29,5 +30,19 @@ public partial class BoxStack : Node2D
 
 		AddChild(box);
 		boxes.Push(box);
+	}
+
+	public void RemoveBox()
+	{
+		boxes.Pop().QueueFree();
+	}
+
+	public void ClearBoxes()
+	{
+		foreach (var box in boxes)
+		{
+			box.QueueFree();
+		}
+		boxes.Clear();
 	}
 }

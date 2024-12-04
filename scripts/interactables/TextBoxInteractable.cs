@@ -23,7 +23,7 @@ namespace TheWizardCoder.Interactables
 			consoleBoxText = GetNode<ConsoleBoxText>("ConsoleBoxText");
 			onScreenNotifier = GetNode<VisibleOnScreenNotifier2D>("OnScreenNotifier");
 
-			consoleBoxText.Text = Text;
+			consoleBoxText.SetText(Text);
 		}
 
 		public override void _PhysicsProcess(double delta)
