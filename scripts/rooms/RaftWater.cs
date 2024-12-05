@@ -23,6 +23,7 @@ public partial class RaftWater : BaseRoom
     private BoxStack boxStack;
     private Area2D interactableScanner;
     private CanvasLayer challengeDisplay;
+    private RaftSunkDisplay raftSunkDisplay;
     private ConsoleBoxText boxCountText;
     private ConsoleBoxText conditionText;
     private List<Vector2> spawnPositions;
@@ -41,6 +42,7 @@ public partial class RaftWater : BaseRoom
         boxStack = GetNode<BoxStack>("%BoxStack");
         interactableScanner = GetNode<Area2D>("%InteractableScanner");
         challengeDisplay = GetNode<CanvasLayer>("ChallengeDisplay");
+        raftSunkDisplay = GetNode<RaftSunkDisplay>("RaftSunkDisplay");
         boxCountText = GetNode<ConsoleBoxText>("%BoxCountText");
         conditionText = GetNode<ConsoleBoxText>("%ChallengeConditionText");
 
@@ -82,6 +84,13 @@ public partial class RaftWater : BaseRoom
         };
         boxTypeFuncs[(int)ChallengeTextBoxType.AddNoBoxes] = () => {};
         boxTypeFuncs[(int)ChallengeTextBoxType.RemoveTwoBoxes] = () => { boxStack.RemoveBox(); boxStack.RemoveBox(); };
+        boxTypeFuncs[(int)ChallengeTextBoxType.AddSevenBoxes] = () => 
+        {
+            for (var i = 0; i < 7; i++)
+            {
+                boxStack.AddBox();
+            }
+        };
 
         boxTitles[(int)ChallengeTextBoxType.AddBox] = "AddBox();";
         boxTitles[(int)ChallengeTextBoxType.RemoveBox] = "RemoveBox();";
@@ -90,6 +99,7 @@ public partial class RaftWater : BaseRoom
         boxTitles[(int)ChallengeTextBoxType.AddFiveBoxes] = "AddBoxes(5);";
         boxTitles[(int)ChallengeTextBoxType.AddNoBoxes] = "AddBoxes(0);";
         boxTitles[(int)ChallengeTextBoxType.RemoveTwoBoxes] = "RemoveBoxes(2);";
+        boxTitles[(int)ChallengeTextBoxType.AddSevenBoxes] = "AddBoxes(7);";
     }
 
     private void InitChallenges()
@@ -98,7 +108,6 @@ public partial class RaftWater : BaseRoom
 
         foreach (var item in data)
         {
-            GD.Print(item.Value);
             var challengeData = (Godot.Collections.Dictionary<string, Variant>)item.Value;
             RaftWaterChallenge challenge = new(challengeData);
             challenges.Add(challenge);
@@ -153,7 +162,6 @@ public partial class RaftWater : BaseRoom
 
     private void OnInteractableEntered(Area2D area)
     {
-        GD.Print("area entered");
         Interactable interactable = (Interactable)area;
         
         interactable.Action();
@@ -175,7 +183,8 @@ public partial class RaftWater : BaseRoom
             catch (InvalidOperationException)
             {
                 challengeDisplay.Hide();
-                global.CurrentRoom.GameOverDisplay.ShowDisplay();
+                ClearTextBoxes();
+                raftSunkDisplay.ShowDisplay();
             }
 
             if (challenges[currentChallenge-1].Condition(boxStack))
@@ -185,7 +194,8 @@ public partial class RaftWater : BaseRoom
             else
             {
                 challengeDisplay.Hide();
-                global.CurrentRoom.GameOverDisplay.ShowDisplay();
+                ClearTextBoxes();
+                raftSunkDisplay.ShowDisplay();
             }
         };
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d1k1cp4qwf0t2"]
+[gd_scene load_steps=20 format=3 uid="uid://d1k1cp4qwf0t2"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_pxhvl"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_3l18c"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bhb7cg74mxmyy" path="res://assets/props/raft.png" id="4_ropwh"]
 [ext_resource type="PackedScene" uid="uid://max4o366gqrj" path="res://scenes/components/box_stack.tscn" id="7_yom75"]
 [ext_resource type="PackedScene" uid="uid://difw3tkd13yu0" path="res://scenes/components/console_box_text.tscn" id="9_lt87v"]
+[ext_resource type="PackedScene" uid="uid://3lov8fa64e3" path="res://scenes/displays/raft_sunk_display.tscn" id="10_of6yc"]
 
 [sub_resource type="Animation" id="Animation_or61g"]
 resource_name = "water_1"
@@ -331,5 +332,9 @@ offset_right = 44.0
 offset_bottom = 76.0
 Text = "box.Count = "
 
+[node name="RaftSunkDisplay" parent="." index="25" instance=ExtResource("10_of6yc")]
+visible = false
+
 [connection signal="DialogueEnded" from="Dialogue" to="." method="OnDialogueEnded"]
 [connection signal="area_entered" from="Raft/InteractableScanner" to="." method="OnInteractableEntered"]
+[connection signal="RetryPressed" from="RaftSunkDisplay" to="." method="OnReady"]

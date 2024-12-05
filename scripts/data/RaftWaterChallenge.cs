@@ -31,7 +31,7 @@ namespace TheWizardCoder.Data
                 BoxTypes[i] = boxType;
             }
 
-            string[] conditionArr = ((string)dict["Condition"]).Split();
+            string[] conditionArr = ((string)dict["Condition"]).Split(' ', 2);
             string operation = conditionArr[0];
             string operandString = conditionArr[1];
             int operand = 0;
@@ -40,7 +40,6 @@ namespace TheWizardCoder.Data
                 Expression expr = new();
                 expr.Parse(operandString);
                 operand = (int)expr.Execute();
-                GD.Print(operand);
             }
             else
             {

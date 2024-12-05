@@ -51,4 +51,32 @@
 		"Condition": "> 2 * 2",
 		"BoxTypes": ["AddBox","AddTwoBoxes","RemoveBox","ClearAllBoxes"]
 	},
+	"14": {
+		"Condition": "== 2 * 2",
+		"BoxTypes": ["AddNoBoxes","AddFiveBoxes","RemoveBox","RemoveTwoBoxes"]
+	},
+	"15": {
+		"Condition": "< 6 / 3",
+		"BoxTypes": ["ClearAllBoxes","RemoveBox","AddBox","AddTwoBoxes"]
+	},
+	"16": {
+		"Condition": ">= 5 - 3",
+		"BoxTypes": ["AddBox","ClearAllBoxes","AddTwoBoxes","RemoveTwoBoxes"]
+	},
+	"17": {
+		"Condition": "== (-3) * (-1)",
+		"BoxTypes": ["ClearAllBoxes","RemoveBox","RemoveBox","AddBox"]
+	},
+	"18": {
+		"Condition": "> 3 * (-1)",
+		"BoxTypes": ["AddTwoBoxes","AddFiveBoxes","AddNoBoxes","RemoveTwoBoxes"]
+	},
+	"19": {
+		"Condition": "== (2 * 3) + ((-4) * (-1))",
+		"BoxTypes": ["AddFiveBoxes","AddSevenBoxes","ClearAllBoxes","AddTwoBoxes"]
+	},
+	"20": {
+		"Condition": "<= 0",
+		"BoxTypes": ["ClearAllBoxes","AddBox","AddBox","ClearAllBoxes"]
+	},
 }
