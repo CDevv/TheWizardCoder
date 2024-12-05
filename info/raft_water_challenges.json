@@ -1,0 +1,54 @@
+{
+	"1": {
+		"Condition": "== 1",
+		"BoxTypes": ["AddBox","RemoveBox","RemoveBox","AddTwoBoxes"]
+	},
+	"2": {
+		"Condition": "== 2",
+		"BoxTypes": ["AddBox","RemoveBox","ClearAllBoxes","RemoveBox"]
+	},
+	"3": {
+		"Condition": "== 1",
+		"BoxTypes": ["ClearAllBoxes","AddBox","RemoveBox","RemoveBox"]
+	},
+	"4": {
+		"Condition": "== 3",
+		"BoxTypes": ["AddBox","AddTwoBoxes","AddBox","RemoveBox"]
+	},
+	"5": {
+		"Condition": "> 3",
+		"BoxTypes": ["ClearAllBoxes","AddBox","AddTwoBoxes","RemoveBox"]
+	},
+	"6": {
+		"Condition": "< 2",
+		"BoxTypes": ["AddBox","AddFiveBoxes","ClearAllBoxes","RemoveBox"]
+	},
+	"7": {
+		"Condition": "!= 2",
+		"BoxTypes": ["AddTwoBoxes","AddBox","ClearAllBoxes","AddFiveBoxes"]
+	},
+	"8": {
+		"Condition": ">= 5",
+		"BoxTypes": ["AddTwoBoxes","AddFiveBoxes","AddBox","RemoveBox"]
+	},
+	"9": {
+		"Condition": "<= 4",
+		"BoxTypes": ["RemoveTwoBoxes","AddFiveBoxes","AddBox","ClearAllBoxes"]
+	},
+	"10": {
+		"Condition": "== 4",
+		"BoxTypes": ["AddFiveBoxes","AddTwoBoxes","AddBox","AddNoBoxes"]
+	},
+	"11": {
+		"Condition": "<= 5",
+		"BoxTypes": ["AddBox","ClearAllBoxes","AddTwoBoxes","RemoveBox"]
+	},
+	"12": {
+		"Condition": "== 3",
+		"BoxTypes": ["RemoveTwoBoxes","AddFiveBoxes","RemoveBox","AddNoBoxes"]
+	},
+	"13": {
+		"Condition": "> 2 * 2",
+		"BoxTypes": ["AddBox","AddTwoBoxes","RemoveBox","ClearAllBoxes"]
+	},
+}

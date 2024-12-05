@@ -4,6 +4,10 @@ namespace TheWizardCoder.Enums
     {
         AddBox = 0,
         RemoveBox = 1,
-        ClearAllBoxes = 2
+        ClearAllBoxes = 2,
+        AddTwoBoxes = 3,
+        AddFiveBoxes = 4,
+        AddNoBoxes = 5,
+        RemoveTwoBoxes = 6,
     }
 }

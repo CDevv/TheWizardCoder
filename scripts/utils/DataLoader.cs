@@ -11,7 +11,7 @@ namespace TheWizardCoder.Utils
     {
         public static Global Global { get; set; }
 
-        private static Variant GetJsonData(string fileName)
+        public static Variant GetJsonData(string fileName)
         {
             if (!FileAccess.FileExists(fileName))
 			{

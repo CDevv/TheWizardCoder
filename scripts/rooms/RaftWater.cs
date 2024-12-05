@@ -5,6 +5,7 @@ using TheWizardCoder.Abstractions;
 using TheWizardCoder.Interactables;
 using TheWizardCoder.Enums;
 using TheWizardCoder.Data;
+using TheWizardCoder.Utils;
 
 public partial class RaftWater : BaseRoom
 {
@@ -26,8 +27,8 @@ public partial class RaftWater : BaseRoom
     private ConsoleBoxText conditionText;
     private List<Vector2> spawnPositions;
     private List<TextBoxInteractable> challengeBoxes = new();
-    private string[] boxTitles = new string[4];
-    private Action[] boxTypeFuncs = new Action[4];
+    private string[] boxTitles = new string[Enum.GetValues(typeof(ChallengeTextBoxType)).Length];
+    private Action[] boxTypeFuncs = new Action[Enum.GetValues(typeof(ChallengeTextBoxType)).Length];
     private double passedTime = 0;
     private bool canMoveRaft;
     private bool cutsceneSkippable;
@@ -51,20 +52,8 @@ public partial class RaftWater : BaseRoom
             GetNode<Marker2D>("TextBoxBase4").Position
         };
 
-        boxTypeFuncs[(int)ChallengeTextBoxType.AddBox] = () => { boxStack.AddBox(); };
-        boxTypeFuncs[(int)ChallengeTextBoxType.RemoveBox] = () => { boxStack.RemoveBox(); };
-        boxTypeFuncs[(int)ChallengeTextBoxType.ClearAllBoxes] = () => { boxStack.ClearBoxes(); };
-
-        boxTitles[(int)ChallengeTextBoxType.AddBox] = "AddBox();";
-        boxTitles[(int)ChallengeTextBoxType.RemoveBox] = "RemoveBox();";
-        boxTitles[(int)ChallengeTextBoxType.ClearAllBoxes] = "ClearBoxes();";
-
-        challenges.Add(new(() => boxStack.Count == 1, "Count == 1", new ChallengeTextBoxType[4]{
-            ChallengeTextBoxType.AddBox, ChallengeTextBoxType.RemoveBox, ChallengeTextBoxType.RemoveBox, ChallengeTextBoxType.RemoveBox
-        }));
-        challenges.Add(new(() => boxStack.Count == 2, "Count == 2", new ChallengeTextBoxType[4]{
-            ChallengeTextBoxType.AddBox, ChallengeTextBoxType.RemoveBox, ChallengeTextBoxType.RemoveBox, ChallengeTextBoxType.RemoveBox
-        }));
+        InitBoxTypes();
+        InitChallenges();
 
 		await PlayCutscene("water_1");
         if (global.CurrentRoom.Player.Follower != null)
@@ -76,6 +65,44 @@ public partial class RaftWater : BaseRoom
         canMoveRaft = true;
         global.CanWalk = false;
         global.GameDisplayEnabled = false;
+    }
+
+    private void InitBoxTypes()
+    {
+        boxTypeFuncs[(int)ChallengeTextBoxType.AddBox] = () => { boxStack.AddBox(); };
+        boxTypeFuncs[(int)ChallengeTextBoxType.RemoveBox] = () => { boxStack.RemoveBox(); };
+        boxTypeFuncs[(int)ChallengeTextBoxType.ClearAllBoxes] = () => { boxStack.ClearBoxes(); };
+        boxTypeFuncs[(int)ChallengeTextBoxType.AddTwoBoxes] = () => { boxStack.AddBox(); boxStack.AddBox(); };
+        boxTypeFuncs[(int)ChallengeTextBoxType.AddFiveBoxes] = () => 
+        {
+            for (var i = 0; i < 5; i++)
+            {
+                boxStack.AddBox();
+            }
+        };
+        boxTypeFuncs[(int)ChallengeTextBoxType.AddNoBoxes] = () => {};
+        boxTypeFuncs[(int)ChallengeTextBoxType.RemoveTwoBoxes] = () => { boxStack.RemoveBox(); boxStack.RemoveBox(); };
+
+        boxTitles[(int)ChallengeTextBoxType.AddBox] = "AddBox();";
+        boxTitles[(int)ChallengeTextBoxType.RemoveBox] = "RemoveBox();";
+        boxTitles[(int)ChallengeTextBoxType.ClearAllBoxes] = "ClearBoxes();";
+        boxTitles[(int)ChallengeTextBoxType.AddTwoBoxes] = "AddBoxes(2);";
+        boxTitles[(int)ChallengeTextBoxType.AddFiveBoxes] = "AddBoxes(5);";
+        boxTitles[(int)ChallengeTextBoxType.AddNoBoxes] = "AddBoxes(0);";
+        boxTitles[(int)ChallengeTextBoxType.RemoveTwoBoxes] = "RemoveBoxes(2);";
+    }
+
+    private void InitChallenges()
+    {
+        var data = (Godot.Collections.Dictionary<string, Variant>)DataLoader.GetJsonData("res://info/raft_water_challenges.json");
+
+        foreach (var item in data)
+        {
+            GD.Print(item.Value);
+            var challengeData = (Godot.Collections.Dictionary<string, Variant>)item.Value;
+            RaftWaterChallenge challenge = new(challengeData);
+            challenges.Add(challenge);
+        }
     }
 
     public override void _Process(double delta)
@@ -134,7 +161,6 @@ public partial class RaftWater : BaseRoom
 
     private void SpawnTextBox(int position, ChallengeTextBoxType boxType)
     {
-        float boxY = GD.Randi() % MaxScreenY;
         Vector2 boxPosition = spawnPositions[position];
 
         TextBoxInteractable textBox = TextBoxScene.Instantiate<TextBoxInteractable>();
@@ -152,7 +178,7 @@ public partial class RaftWater : BaseRoom
                 global.CurrentRoom.GameOverDisplay.ShowDisplay();
             }
 
-            if (challenges[currentChallenge-1].Condition())
+            if (challenges[currentChallenge-1].Condition(boxStack))
             {
                 SpawnMany();
             }
@@ -178,6 +204,12 @@ public partial class RaftWater : BaseRoom
 
     private void SpawnMany()
     {
+        if (currentChallenge >= challenges.Count)
+        {
+            OnChallengesCleared();
+            return;
+        }
+
         boxCountText.SetText($"Count = {boxStack.Count}");
         conditionText.SetText($"if ({challenges[currentChallenge].ConditionString})");
         
@@ -188,6 +220,13 @@ public partial class RaftWater : BaseRoom
             SpawnTextBox(i, chosenType);
         }
         currentChallenge++;
+    }
+
+    private void OnChallengesCleared()
+    {
+        GD.Print("Challenges cleared!");
+        ClearTextBoxes();
+        challengeDisplay.Hide();
     }
 
     private void OnDialogueEnded(string initialTitle, string message)
