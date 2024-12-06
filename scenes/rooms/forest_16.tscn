@@ -203,7 +203,6 @@ limit_bottom = 1120
 [node name="Player" parent="." index="13" instance=ExtResource("2_gb2o6")]
 z_index = 2
 y_sort_enabled = true
-position = Vector2(88, 368)
 
 [node name="TileMap" type="TileMap" parent="." index="14"]
 y_sort_enabled = true

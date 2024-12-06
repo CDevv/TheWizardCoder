@@ -311,7 +311,7 @@ patch_margin_bottom = 3
 unique_name_in_owner = true
 position = Vector2(32, 32)
 sprite_frames = SubResource("SpriteFrames_td2l1")
-animation = &"nolan"
+animation = &"gertrude"
 
 [node name="DialogueText" type="RichTextLabel" parent="TextRect"]
 unique_name_in_owner = true

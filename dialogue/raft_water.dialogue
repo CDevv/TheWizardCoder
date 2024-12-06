@@ -16,3 +16,16 @@ Nolan: [next=3] [#portrait=2] Good thing they aren't harmful.
 Gertrude: [next=3.5] [#portrait=4] Yeah, that stuff is weird..
 Gertrude: [next=5] [#portrait=2] Wait, what is that?
 => END!
+
+~ water_finished
+Gertrude: [next=3.5] [#portrait=4] Well that was.. [wait=1] something.
+Nolan: [next=0.8] [#portrait=2] Yeah..
+Nolan: [next=2] [#portrait=0] Floating signs..? 
+Gertrude: [next=2.5] [#portrait=1] At least we somehow managed to get past them.
+Nolan: [next=2.3] [#portrait=2] You're right! But still pretty weird..
+Gertrude: [next=2.5] [#portrait=2] They were as green as the message I received.
+Nolan: [next=1.5] [#portrait=0] I see.. 
+Nolan: [next=3] [#portrait=2] Something definetely is going on.
+Gertrude: [next=1.5] [#portrait=0] Yeah.
+Gertrude: [next=2.5] [#portrait=3] Oh, we're reaching a coast!
+=> END!

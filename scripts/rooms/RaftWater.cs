@@ -6,6 +6,7 @@ using TheWizardCoder.Interactables;
 using TheWizardCoder.Enums;
 using TheWizardCoder.Data;
 using TheWizardCoder.Utils;
+using System.Threading.Tasks;
 
 public partial class RaftWater : BaseRoom
 {
@@ -34,6 +35,7 @@ public partial class RaftWater : BaseRoom
     private bool canMoveRaft;
     private bool cutsceneSkippable;
     private int currentChallenge = 0;
+    private bool passedChallenge;
 
     public override async void OnReady()
     {
@@ -57,16 +59,23 @@ public partial class RaftWater : BaseRoom
         InitBoxTypes();
         InitChallenges();
 
-		await PlayCutscene("water_1");
-        if (global.CurrentRoom.Player.Follower != null)
+        if (!global.PlayerData.PassedWaterChallenges)
         {
-            global.CurrentRoom.Player.Follower.DisableFollowing();
+            await PlayCutscene("water_1");
+            if (global.CurrentRoom.Player.Follower != null)
+            {
+                global.CurrentRoom.Player.Follower.DisableFollowing();
+            }
+
+            global.CurrentRoom.Player.CameraEnabled = false;
+            canMoveRaft = true;
+            global.CanWalk = false;
+            global.GameDisplayEnabled = false;
         }
-        
-        global.CurrentRoom.Player.CameraEnabled = false;
-        canMoveRaft = true;
-        global.CanWalk = false;
-        global.GameDisplayEnabled = false;
+        else
+        {
+            AnimationPlayer.Play("water_final_2");
+        }
     }
 
     private void InitBoxTypes()
@@ -143,6 +152,9 @@ public partial class RaftWater : BaseRoom
             if (cutsceneSkippable)
             {
                 StartSequence();
+                //AnimationPlayer.Play("water_final");
+                //OnChallengesCleared();
+                //canMoveRaft = false;
                 cutsceneSkippable = false;
             }
         }
@@ -182,9 +194,8 @@ public partial class RaftWater : BaseRoom
             }
             catch (InvalidOperationException)
             {
-                challengeDisplay.Hide();
-                ClearTextBoxes();
-                raftSunkDisplay.ShowDisplay();
+                OnFailure();
+                return;
             }
 
             if (challenges[currentChallenge-1].Condition(boxStack))
@@ -193,9 +204,8 @@ public partial class RaftWater : BaseRoom
             }
             else
             {
-                challengeDisplay.Hide();
-                ClearTextBoxes();
-                raftSunkDisplay.ShowDisplay();
+                OnFailure();
+                return;
             }
         };
 
@@ -232,24 +242,65 @@ public partial class RaftWater : BaseRoom
         currentChallenge++;
     }
 
-    private void OnChallengesCleared()
+    private void OnFailure()
+    {
+        currentChallenge = 0;
+        challengeDisplay.Hide();
+        ClearTextBoxes();
+        boxStack.ClearBoxes();
+        raftSunkDisplay.ShowDisplay();
+    }
+
+    private async void OnChallengesCleared()
     {
         GD.Print("Challenges cleared!");
         ClearTextBoxes();
         challengeDisplay.Hide();
+        passedChallenge = true;
+        canMoveRaft = false;
+
+        await TweenRaft(new Vector2(3932, 1144), 1f);
+        await PlayCutscene("water_2");
+        await TweenCameraToPlayer(1f);
+
+        global.CanWalk = true;
+        global.GameDisplayEnabled = true;
+        global.CurrentRoom.Player.CameraEnabled = true;
+
+        if (Player.Follower != null)
+        {
+            Player.Follower.EnableFollowing();
+        }
     }
 
     private void OnDialogueEnded(string initialTitle, string message)
     {
-        StartSequence();
+        if (!passedChallenge)
+        {
+            StartSequence();
+        }
         
         GD.Print(passedTime);
         GD.Print(global.CurrentRoom.Player.Position);
         GD.Print(global.CurrentRoom.Gertrude.Position);
+        passedTime = 0;
     }
 
     private void SetCutsceneSkippable(bool skippable)
     {
         this.cutsceneSkippable = skippable;
+    }
+
+    private async Task TweenRaft(Vector2 position, float duration)
+    {
+        Tween tween = GetTree().CreateTween();
+        tween.SetParallel();
+
+        tween.TweenProperty(raft, "position", position, duration);
+        tween.TweenProperty(global.CurrentRoom.Player, "position", position + new Vector2(-16, 0), duration);
+        tween.TweenProperty(global.CurrentRoom.Gertrude, "position", position + new Vector2(16, 0), duration);
+
+        tween.Play();
+        await ToSignal(tween, Tween.SignalName.Finished);
     }
 }
