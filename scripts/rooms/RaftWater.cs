@@ -7,14 +7,15 @@ using TheWizardCoder.Enums;
 using TheWizardCoder.Data;
 using TheWizardCoder.Utils;
 using System.Threading.Tasks;
+using System.Threading;
 
 public partial class RaftWater : BaseRoom
 {
     private const float RaftSpeed = 4;
     private const int MaxScreenY = 480;
 
-	[Export]
-	public Resource DialogueResource { get; set; }
+    [Export]
+    public Resource DialogueResource { get; set; }
     [Export]
     public PackedScene TextBoxScene { get; set; }
 
@@ -36,9 +37,14 @@ public partial class RaftWater : BaseRoom
     private bool cutsceneSkippable;
     private int currentChallenge = 0;
     private bool passedChallenge;
+    private Task cutsceneTask;
+    private CancellationTokenSource cancellationToken;
+    private bool playSecondCutscene;
 
     public override async void OnReady()
     {
+        cancellationToken = new();
+
         base.OnReady();
         raft = GetNode<CharacterBody2D>("Raft");
         boxStack = GetNode<BoxStack>("%BoxStack");
@@ -48,7 +54,7 @@ public partial class RaftWater : BaseRoom
         boxCountText = GetNode<ConsoleBoxText>("%BoxCountText");
         conditionText = GetNode<ConsoleBoxText>("%ChallengeConditionText");
 
-        spawnPositions = new List<Vector2>() 
+        spawnPositions = new List<Vector2>()
         {
             GetNode<Marker2D>("TextBoxBase1").Position,
             GetNode<Marker2D>("TextBoxBase2").Position,
@@ -68,7 +74,7 @@ public partial class RaftWater : BaseRoom
             }
 
             global.CurrentRoom.Player.CameraEnabled = false;
-            canMoveRaft = true;
+            //canMoveRaft = true;
             global.CanWalk = false;
             global.GameDisplayEnabled = false;
         }
@@ -84,16 +90,16 @@ public partial class RaftWater : BaseRoom
         boxTypeFuncs[(int)ChallengeTextBoxType.RemoveBox] = () => { boxStack.RemoveBox(); };
         boxTypeFuncs[(int)ChallengeTextBoxType.ClearAllBoxes] = () => { boxStack.ClearBoxes(); };
         boxTypeFuncs[(int)ChallengeTextBoxType.AddTwoBoxes] = () => { boxStack.AddBox(); boxStack.AddBox(); };
-        boxTypeFuncs[(int)ChallengeTextBoxType.AddFiveBoxes] = () => 
+        boxTypeFuncs[(int)ChallengeTextBoxType.AddFiveBoxes] = () =>
         {
             for (var i = 0; i < 5; i++)
             {
                 boxStack.AddBox();
             }
         };
-        boxTypeFuncs[(int)ChallengeTextBoxType.AddNoBoxes] = () => {};
+        boxTypeFuncs[(int)ChallengeTextBoxType.AddNoBoxes] = () => { };
         boxTypeFuncs[(int)ChallengeTextBoxType.RemoveTwoBoxes] = () => { boxStack.RemoveBox(); boxStack.RemoveBox(); };
-        boxTypeFuncs[(int)ChallengeTextBoxType.AddSevenBoxes] = () => 
+        boxTypeFuncs[(int)ChallengeTextBoxType.AddSevenBoxes] = () =>
         {
             for (var i = 0; i < 7; i++)
             {
@@ -141,20 +147,27 @@ public partial class RaftWater : BaseRoom
             {
                 global.CurrentRoom.Player.Position += velocity;
                 global.CurrentRoom.Gertrude.Position += velocity;
-            }        
+            }
         }
     }
 
-    public override void _Input(InputEvent @event)
+    public override async void _Input(InputEvent @event)
     {
         if (Input.IsActionJustPressed("ui_cancel"))
         {
             if (cutsceneSkippable)
             {
-                StartSequence();
-                //AnimationPlayer.Play("water_final");
-                //OnChallengesCleared();
-                //canMoveRaft = false;
+                //StartSequence();
+                passedChallenge = true;
+                AnimationPlayer.Play("water_final");
+
+                if (cutsceneTask == null)
+                {
+                    //cutsceneTask = Task.Run(() => OnChallengesCleared(), cancellationToken.Token);
+                }
+                OnChallengesCleared();
+
+                canMoveRaft = false;
                 cutsceneSkippable = false;
             }
         }
@@ -175,7 +188,7 @@ public partial class RaftWater : BaseRoom
     private void OnInteractableEntered(Area2D area)
     {
         Interactable interactable = (Interactable)area;
-        
+
         interactable.Action();
     }
 
@@ -186,7 +199,7 @@ public partial class RaftWater : BaseRoom
         TextBoxInteractable textBox = TextBoxScene.Instantiate<TextBoxInteractable>();
         textBox.Text = boxTitles[(int)boxType];
         textBox.Position = boxPosition;
-        textBox.Touched += () => 
+        textBox.Touched += () =>
         {
             try
             {
@@ -198,7 +211,7 @@ public partial class RaftWater : BaseRoom
                 return;
             }
 
-            if (challenges[currentChallenge-1].Condition(boxStack))
+            if (challenges[currentChallenge - 1].Condition(boxStack))
             {
                 SpawnMany();
             }
@@ -220,9 +233,9 @@ public partial class RaftWater : BaseRoom
             item.QueueFree();
         }
         challengeBoxes.Clear();
-    }  
+    }
 
-    private void SpawnMany()
+    private async void SpawnMany()
     {
         if (currentChallenge >= challenges.Count)
         {
@@ -232,7 +245,7 @@ public partial class RaftWater : BaseRoom
 
         boxCountText.SetText($"Count = {boxStack.Count}");
         conditionText.SetText($"if ({challenges[currentChallenge].ConditionString})");
-        
+
         ClearTextBoxes();
         for (var i = 0; i < 4; i++)
         {
@@ -251,35 +264,57 @@ public partial class RaftWater : BaseRoom
         raftSunkDisplay.ShowDisplay();
     }
 
-    private async void OnChallengesCleared()
+    private async void OnChallengesCleared(bool playSecondCutscene = true)
     {
+        this.playSecondCutscene = playSecondCutscene;
         GD.Print("Challenges cleared!");
         ClearTextBoxes();
         challengeDisplay.Hide();
         passedChallenge = true;
         canMoveRaft = false;
 
-        await TweenRaft(new Vector2(3932, 1144), 1f);
-        await PlayCutscene("water_2");
-        await TweenCameraToPlayer(1f);
+        GD.Print(playSecondCutscene);
 
-        global.CanWalk = true;
-        global.GameDisplayEnabled = true;
-        global.CurrentRoom.Player.CameraEnabled = true;
-
-        if (Player.Follower != null)
+        if (playSecondCutscene)
         {
-            Player.Follower.EnableFollowing();
+            await TweenRaft(new Vector2(3932, 1144), 1f);
+            AnimationPlayer.Play("water_2", -1, 0.5f);
         }
+        else
+        {
+            AnimationPlayer.CallThreadSafe(AnimationPlayer.MethodName.Seek, 14, true, true);
+        }
+
+        ToSignal(AnimationPlayer, AnimationPlayer.SignalName.AnimationFinished).OnCompleted(async () =>
+        {
+            if (passedChallenge)
+            {
+                await TweenCameraToPlayer(1f);
+
+                global.CanWalk = true;
+                global.GameDisplayEnabled = true;
+                global.CurrentRoom.Player.CameraEnabled = true;
+
+                if (Player.Follower != null)
+                {
+                    Player.Follower.EnableFollowing();
+                }
+            }
+        });
     }
 
-    private void OnDialogueEnded(string initialTitle, string message)
+    private async void OnDialogueEnded(string initialTitle, string message)
     {
         if (!passedChallenge)
         {
             StartSequence();
         }
-        
+        else
+        {
+            GD.Print("dialogue");
+            OnChallengesCleared(false);
+        }
+
         GD.Print(passedTime);
         GD.Print(global.CurrentRoom.Player.Position);
         GD.Print(global.CurrentRoom.Gertrude.Position);

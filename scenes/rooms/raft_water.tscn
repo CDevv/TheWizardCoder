@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d1k1cp4qwf0t2"]
+[gd_scene load_steps=24 format=3 uid="uid://d1k1cp4qwf0t2"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_pxhvl"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_3l18c"]
@@ -166,25 +166,13 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(3916, 1144), Vector2(5184.26, 1144), Vector2(5636.15, 1144), Vector2(5636.15, 1144), Vector2(5680, 1144), Vector2(5691, 1134), Vector2(5710, 1144), Vector2(5720, 1144), Vector2(5720, 1144)]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Gertrude:position")
+tracks/2/path = NodePath("Dialogue")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(1, 11, 14.5, 15, 15.5, 16, 16.5, 17, 18),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(3948, 1144), Vector2(5216.26, 1144), Vector2(5668.15, 1144), Vector2(5676.15, 1144), Vector2(5691, 1128), Vector2(5710, 1152), Vector2(5720, 1152), Vector2(5720, 1152), Vector2(5720, 1184)]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Dialogue")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -192,28 +180,57 @@ tracks/3/keys = {
 "method": &"ShowDisplay"
 }]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Camera:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0, 1, 11, 14.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(3932, 1144), Vector2(3932, 1144), Vector2(5200.26, 1144), Vector2(5644.15, 1144)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Gertrude:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1, 11, 14.5, 15, 15.5, 16, 16.5, 17, 18),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(3948, 1144), Vector2(5216.26, 1144), Vector2(5668.15, 1144), Vector2(5676.15, 1144), Vector2(5691, 1128), Vector2(5710, 1152), Vector2(5720, 1152), Vector2(5720, 1152), Vector2(5720, 1184)]
+}
 tracks/5/type = "method"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Player")
+tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(1, 18.5, 19.5, 20.5, 21, 21.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "values": [{
+"args": [Vector2(3932, 1144), 1.0],
+"method": &"TweenRaft"
+}]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Player")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1, 14.5, 18.5, 19.5, 20.5, 21, 21.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [3],
+"method": &"PlayIdleAnimation"
+}, {
 "args": [3],
 "method": &"PlayIdleAnimation"
 }, {
@@ -233,15 +250,15 @@ tracks/5/keys = {
 "method": &"PlayIdleAnimation"
 }]
 }
-tracks/6/type = "method"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Gertrude")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(1, 14.5, 15, 16, 16.5, 17, 18, 18.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Gertrude")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(1, 14.5, 15, 16, 16.5, 17, 18),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [3],
 "method": &"PlayIdleAnimation"
@@ -261,25 +278,8 @@ tracks/6/keys = {
 "args": ["down"],
 "method": &"PlayAnimation"
 }, {
-"args": [0],
-"method": &"PlayIdleAnimation"
-}, {
 "args": [1],
 "method": &"PlayIdleAnimation"
-}]
-}
-tracks/7/type = "method"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath(".")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [Vector2(3932, 1144), 1.0],
-"method": &"TweenRaft"
 }]
 }
 
@@ -349,10 +349,124 @@ tracks/0/keys = {
 "values": [Vector2(5652.15, 1144)]
 }
 
+[sub_resource type="Animation" id="Animation_7igwb"]
+resource_name = "water_3"
+length = 7.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Raft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5652.15, 1144)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4, 5, 5.5, 6, 6.5, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(5636.15, 1144), Vector2(5636.15, 1144), Vector2(5680, 1144), Vector2(5691, 1134), Vector2(5710, 1144), Vector2(5720, 1144), Vector2(5720, 1144)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Gertrude:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(5668.15, 1144), Vector2(5676.15, 1144), Vector2(5691, 1128), Vector2(5710, 1152), Vector2(5720, 1152), Vector2(5720, 1152), Vector2(5720, 1184)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Player")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 4, 5, 6, 6.5, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [3],
+"method": &"PlayIdleAnimation"
+}, {
+"args": [3],
+"method": &"PlayMoveAnimation"
+}, {
+"args": [3],
+"method": &"PlayIdleAnimation"
+}, {
+"args": [3],
+"method": &"PlayMoveAnimation"
+}, {
+"args": [1],
+"method": &"PlayIdleAnimation"
+}, {
+"args": [1],
+"method": &"PlayIdleAnimation"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Gertrude")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5, 2, 2.5, 3.5, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": ["right"],
+"method": &"PlayAnimation"
+}, {
+"args": [3],
+"method": &"PlayIdleAnimation"
+}, {
+"args": ["right"],
+"method": &"PlayAnimation"
+}, {
+"args": [0],
+"method": &"PlayIdleAnimation"
+}, {
+"args": ["down"],
+"method": &"PlayAnimation"
+}, {
+"args": [0],
+"method": &"PlayIdleAnimation"
+}, {
+"args": [1],
+"method": &"PlayIdleAnimation"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Camera:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5644.15, 1144)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pol5j"]
 _data = {
 "water_1": SubResource("Animation_or61g"),
 "water_2": SubResource("Animation_s7tjq"),
+"water_3": SubResource("Animation_7igwb"),
 "water_final": SubResource("Animation_8v4m0"),
 "water_final_2": SubResource("Animation_jqkn4")
 }
@@ -393,17 +507,17 @@ libraries = {
 }
 
 [node name="Camera" parent="." index="5"]
-position = Vector2(3932, 1144)
+position = Vector2(5644.15, 1144)
 limit_right = 6016
 limit_bottom = 1696
 
 [node name="Gertrude" parent="." index="14"]
-position = Vector2(3948, 1144)
+position = Vector2(5720, 1184)
 
 [node name="Player" parent="." index="15" instance=ExtResource("2_3l18c")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(3916, 1144)
+position = Vector2(5720, 1144)
 
 [node name="TileMap" type="TileMap" parent="." index="16"]
 y_sort_enabled = true
@@ -421,7 +535,7 @@ layer_1/tile_data = PackedInt32Array(393216, 1310721, 5, 458752, 1245185, 3, 524
 z_index = 2
 
 [node name="Raft" type="CharacterBody2D" parent="." index="18"]
-position = Vector2(3932, 1144)
+position = Vector2(5652.15, 1144)
 scale = Vector2(2, 2)
 collision_layer = 16
 collision_mask = 16
