@@ -15,6 +15,8 @@ namespace TheWizardCoder.Displays
 
 		[Signal]
 		public delegate void DialogueEndedEventHandler(string initialTitle, string lastTitle);
+		[Signal]
+		public delegate void DialogueLineSkippedEventHandler();
 
 		[Export]
 		private PackedScene ResponseTemplate { get; set; }
@@ -116,6 +118,8 @@ namespace TheWizardCoder.Displays
 			{
 				label.VisibleCharacters = -1;
 				index = dialogueLine.Text.Length - 1;
+
+				EmitSignal(SignalName.DialogueLineSkipped);
 			}
         }
 

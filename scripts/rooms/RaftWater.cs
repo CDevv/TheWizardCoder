@@ -7,12 +7,10 @@ using TheWizardCoder.Enums;
 using TheWizardCoder.Data;
 using TheWizardCoder.Utils;
 using System.Threading.Tasks;
-using System.Threading;
 
 public partial class RaftWater : BaseRoom
 {
     private const float RaftSpeed = 4;
-    private const int MaxScreenY = 480;
 
     [Export]
     public Resource DialogueResource { get; set; }
@@ -37,14 +35,11 @@ public partial class RaftWater : BaseRoom
     private bool cutsceneSkippable;
     private int currentChallenge = 0;
     private bool passedChallenge;
-    private Task cutsceneTask;
-    private CancellationTokenSource cancellationToken;
     private bool playSecondCutscene;
+    private bool isSkippingSecondCutscene;
 
     public override async void OnReady()
     {
-        cancellationToken = new();
-
         base.OnReady();
         raft = GetNode<CharacterBody2D>("Raft");
         boxStack = GetNode<BoxStack>("%BoxStack");
@@ -53,6 +48,9 @@ public partial class RaftWater : BaseRoom
         raftSunkDisplay = GetNode<RaftSunkDisplay>("RaftSunkDisplay");
         boxCountText = GetNode<ConsoleBoxText>("%BoxCountText");
         conditionText = GetNode<ConsoleBoxText>("%ChallengeConditionText");
+
+        challenges = new();
+        challengeBoxes = new();
 
         spawnPositions = new List<Vector2>()
         {
@@ -74,7 +72,7 @@ public partial class RaftWater : BaseRoom
             }
 
             global.CurrentRoom.Player.CameraEnabled = false;
-            //canMoveRaft = true;
+            canMoveRaft = true;
             global.CanWalk = false;
             global.GameDisplayEnabled = false;
         }
@@ -157,15 +155,7 @@ public partial class RaftWater : BaseRoom
         {
             if (cutsceneSkippable)
             {
-                //StartSequence();
-                passedChallenge = true;
-                AnimationPlayer.Play("water_final");
-
-                if (cutsceneTask == null)
-                {
-                    //cutsceneTask = Task.Run(() => OnChallengesCleared(), cancellationToken.Token);
-                }
-                OnChallengesCleared();
+                StartSequence();
 
                 canMoveRaft = false;
                 cutsceneSkippable = false;
@@ -270,6 +260,7 @@ public partial class RaftWater : BaseRoom
         GD.Print("Challenges cleared!");
         ClearTextBoxes();
         challengeDisplay.Hide();
+        global.CanWalk = false;
         passedChallenge = true;
         canMoveRaft = false;
 
@@ -285,25 +276,21 @@ public partial class RaftWater : BaseRoom
             AnimationPlayer.CallThreadSafe(AnimationPlayer.MethodName.Seek, 14, true, true);
         }
 
-        ToSignal(AnimationPlayer, AnimationPlayer.SignalName.AnimationFinished).OnCompleted(async () =>
+        await ToSignal(AnimationPlayer, AnimationPlayer.SignalName.AnimationFinished);
+
+        await TweenCameraToPlayer(1f);
+
+        global.CanWalk = true;
+        global.GameDisplayEnabled = true;
+        global.CurrentRoom.Player.CameraEnabled = true;
+
+        if (Player.Follower != null)
         {
-            if (passedChallenge)
-            {
-                await TweenCameraToPlayer(1f);
-
-                global.CanWalk = true;
-                global.GameDisplayEnabled = true;
-                global.CurrentRoom.Player.CameraEnabled = true;
-
-                if (Player.Follower != null)
-                {
-                    Player.Follower.EnableFollowing();
-                }
-            }
-        });
+            Player.Follower.EnableFollowing();
+        }
     }
 
-    private async void OnDialogueEnded(string initialTitle, string message)
+    private void OnDialogueEnded(string initialTitle, string message)
     {
         if (!passedChallenge)
         {
@@ -312,13 +299,24 @@ public partial class RaftWater : BaseRoom
         else
         {
             GD.Print("dialogue");
-            OnChallengesCleared(false);
+            if (isSkippingSecondCutscene)
+            {
+                OnChallengesCleared(false);
+            }
         }
 
         GD.Print(passedTime);
         GD.Print(global.CurrentRoom.Player.Position);
         GD.Print(global.CurrentRoom.Gertrude.Position);
         passedTime = 0;
+    }
+
+    private void OnDialogueLineSkipped()
+    {
+        if (passedChallenge)
+        {
+            isSkippingSecondCutscene = true;
+        }
     }
 
     private void SetCutsceneSkippable(bool skippable)
