@@ -149,7 +149,7 @@ public partial class RaftWater : BaseRoom
         }
     }
 
-    public override async void _Input(InputEvent @event)
+    public override void _Input(InputEvent @event)
     {
         if (Input.IsActionJustPressed("ui_cancel"))
         {
@@ -159,6 +159,9 @@ public partial class RaftWater : BaseRoom
 
                 canMoveRaft = false;
                 cutsceneSkippable = false;
+                //passedChallenge = true;
+                //OnChallengesCleared();
+
             }
         }
     }
@@ -225,7 +228,7 @@ public partial class RaftWater : BaseRoom
         challengeBoxes.Clear();
     }
 
-    private async void SpawnMany()
+    private void SpawnMany()
     {
         if (currentChallenge >= challenges.Count)
         {
@@ -273,7 +276,7 @@ public partial class RaftWater : BaseRoom
         }
         else
         {
-            AnimationPlayer.CallThreadSafe(AnimationPlayer.MethodName.Seek, 14, true, true);
+            AnimationPlayer.Seek(14, true, true);
         }
 
         await ToSignal(AnimationPlayer, AnimationPlayer.SignalName.AnimationFinished);

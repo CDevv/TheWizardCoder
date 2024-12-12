@@ -42,6 +42,7 @@ namespace TheWizardCoder.Interactables
 		{
 			Text = text;
 			consoleBoxText.SetText(text);
+			OnBoxResized();
 		}
 
 		private void OnBoxResized()

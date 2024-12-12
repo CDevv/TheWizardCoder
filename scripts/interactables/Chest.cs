@@ -37,11 +37,11 @@ namespace TheWizardCoder.Interactables
 			switch (ChestType)
 			{
 				case ChestType.Item:
-					global.CurrentRoom.Dialogue.ShowDisplay(DialogueResource, "chest", new() { ItemName });
+					global.CurrentRoom.Dialogue.ShowDisplay(DialogueResource, "chest", format: new() { ItemName });
 					global.PlayerData.AddToInventory(ItemName);
 					break;
 				case ChestType.Gold:
-					global.CurrentRoom.Dialogue.ShowDisplay(DialogueResource, "chest_gold", new() { GoldAmount.ToString() });
+					global.CurrentRoom.Dialogue.ShowDisplay(DialogueResource, "chest_gold", format: new() { GoldAmount.ToString() });
 					global.PlayerData.Gold += GoldAmount;
 					break;
 			}

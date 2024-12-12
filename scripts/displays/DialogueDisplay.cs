@@ -44,6 +44,7 @@ namespace TheWizardCoder.Displays
 		private bool hasResponses = false;
 		private List<string> format = new();
 		private List<Button> buttons = new();
+		private bool shouldUnlockPlayer = true;
 
 		public override void _Ready()
 		{
@@ -128,6 +129,12 @@ namespace TheWizardCoder.Displays
 			Show();
 		}
 
+		public void ShowDisplay(Resource dialogueResource, string title, bool shouldUnlockPlayer)
+		{
+			this.shouldUnlockPlayer = shouldUnlockPlayer;
+			ShowDisplay(dialogueResource, title);
+		}
+
 		public async void ShowDisplay(Resource dialogueResource, string title)
 		{
 			global.CanWalk = false;
@@ -143,10 +150,11 @@ namespace TheWizardCoder.Displays
 			format = new();
 		}
 
-		public void ShowDisplay(Resource dialogueResource, string title, List<string> format)
+		public void ShowDisplay(Resource dialogueResource, string title, List<string> format, bool shouldUnlockPlayer = true)
 		{
 			ShowDisplay(dialogueResource, title);
 			this.format = format;
+			this.shouldUnlockPlayer = shouldUnlockPlayer;
 		}
 
 		public override void UpdateDisplay()
@@ -292,8 +300,17 @@ namespace TheWizardCoder.Displays
 		private void OnDialogueEnded()
 		{
 			Hide();
-			global.GameDisplayEnabled = true;
-			global.CanWalk = true;
+			
+			if (shouldUnlockPlayer)
+			{
+				global.GameDisplayEnabled = true;
+				global.CanWalk = true;
+			}
+			else
+			{
+				shouldUnlockPlayer = true;
+			}
+
 			EmitSignal(SignalName.DialogueEnded, initialTitle, currentTitle);
 		}
 
