@@ -70,9 +70,12 @@ namespace TheWizardCoder.Data
                 LevelPoints -= GetMaxLevelPoints();
                 Level++;
 
-                GD.Print(Global.CurrentRoom == null);
-                GD.Print(Global.CurrentRoom.LevelUp == null);
-                Global.CurrentRoom.LevelUp.ShowDisplay();
+                //GD.Print(Global.CurrentRoom == null);
+                //GD.Print(Global.CurrentRoom.LevelUp == null);
+                if (Name == "Nolan")
+                {
+                    Global.CurrentRoom.LevelUp.ShowDisplay();
+                }
             }
         }
 

@@ -56,14 +56,18 @@ namespace TheWizardCoder.Subdisplays
 
 		private void FocusOnFirstItem()
 		{
-			Button button = magicContainer.GetChildOrNull<Button>(0);
-			if (button != null)
+			GD.Print(magicContainer.GetChildCount());
+			if (magicContainer.GetChildCount() > 0)
 			{
-				button.GrabFocus();
-			}
-			else
-			{
-				magicDescription.Text = "No magic spells.";
+				Button button = (Button)magicContainer.GetChildren()[0];
+				if (button != null)
+				{
+					button.GrabFocus();
+				}
+				else
+				{
+					magicDescription.Text = "No magic spells.";
+				}
 			}
 		}
 

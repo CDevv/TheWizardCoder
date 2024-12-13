@@ -28,7 +28,8 @@ namespace TheWizardCoder.Autoload
 		{ 
 			get { return SaveFiles.PlayerData; }
 		}
-		public SaveFileHelper SaveFiles { get; set; }
+		public SaveFileHelper SaveFiles { get; private set; }
+		public DataLoader DataLoader { get; private set; }
 		public SettingsConfig Settings { get; set; } = new();
 		public System.Collections.Generic.Dictionary<string, Item> ItemDescriptions { get; private set; } = new();
 		public System.Collections.Generic.Dictionary<string, MagicSpell> MagicSpells { get; private set; } = new();
@@ -41,7 +42,7 @@ namespace TheWizardCoder.Autoload
 		{
 			try
 			{			
-				DataLoader.Global = this;
+				DataLoader = new(this);
 				LoadData();
 				SaveFiles = new(this);
 

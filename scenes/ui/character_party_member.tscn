@@ -41,9 +41,9 @@ text = "Label"
 
 [node name="MainStats" type="Label" parent="."]
 layout_mode = 0
-offset_left = 80.0
+offset_left = 128.0
 offset_top = 4.0
-offset_right = 144.0
+offset_right = 188.0
 offset_bottom = 33.0
 theme = ExtResource("3_x45pu")
 text = "HP: 100
@@ -51,10 +51,10 @@ MP: 100"
 
 [node name="SecondaryStats" type="Label" parent="."]
 layout_mode = 0
-offset_left = 132.0
-offset_top = 4.0
-offset_right = 194.0
-offset_bottom = 33.0
+offset_left = 40.0
+offset_top = 20.0
+offset_right = 128.0
+offset_bottom = 36.0
 theme = ExtResource("3_x45pu")
 text = "Level:"
 

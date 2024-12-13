@@ -7,11 +7,16 @@ using TheWizardCoder.Enums;
 
 namespace TheWizardCoder.Utils
 {
-    public static class DataLoader
+    public class DataLoader
     {
-        public static Global Global { get; set; }
+        private Global Global { get; set; }
 
-        public static Variant GetJsonData(string fileName)
+		public DataLoader(Global global)
+		{
+			Global = global;
+		}
+
+        public Variant GetJsonData(string fileName)
         {
             if (!FileAccess.FileExists(fileName))
 			{
@@ -33,7 +38,7 @@ namespace TheWizardCoder.Utils
 			return json.Data;
         }
 
-        public static System.Collections.Generic.Dictionary<string, Item> LoadItems()
+        public System.Collections.Generic.Dictionary<string, Item> LoadItems()
         {
             System.Collections.Generic.Dictionary<string, Item> items = new();
 
@@ -51,7 +56,7 @@ namespace TheWizardCoder.Utils
             return items;
         }
 
-        public static System.Collections.Generic.Dictionary<string, MagicSpell> LoadMagicSpells()
+        public System.Collections.Generic.Dictionary<string, MagicSpell> LoadMagicSpells()
         {
             System.Collections.Generic.Dictionary<string, MagicSpell> magicSpells = new();
 
@@ -68,7 +73,7 @@ namespace TheWizardCoder.Utils
             return magicSpells;
         }
 
-        public static System.Collections.Generic.Dictionary<string, Shop> LoadShops()
+        public System.Collections.Generic.Dictionary<string, Shop> LoadShops()
         {
             System.Collections.Generic.Dictionary<string, Shop> shops = new();
 
@@ -89,7 +94,7 @@ namespace TheWizardCoder.Utils
             return shops;
         }
 
-        public static System.Collections.Generic.Dictionary<string, CharacterData> LoadCharacters()
+        public System.Collections.Generic.Dictionary<string, CharacterData> LoadCharacters()
         {
             System.Collections.Generic.Dictionary<string, CharacterData> characters = new();
 
@@ -117,7 +122,7 @@ namespace TheWizardCoder.Utils
             return characters;
         }
 
-        public static System.Collections.Generic.Dictionary<string, string> LoadGameIntro()
+        public System.Collections.Generic.Dictionary<string, string> LoadGameIntro()
         {
             System.Collections.Generic.Dictionary<string, string> gameIntroStrings = new();
 

@@ -9,7 +9,7 @@ namespace TheWizardCoder.Components
 {
 	public partial class GroundEnemy : Area2D
 	{
-		private const float Speed = 1.5f;
+		private const float Speed = 0.25f;
 
 		[Export]
 		public string EnemyName { get; set; } = "Glitch";
@@ -87,6 +87,11 @@ namespace TheWizardCoder.Components
 			following = false;
 
 			sprite.Stop();
+		}
+
+		private void OnInteracted()
+		{
+			following = false;
 		}
 	}
 }

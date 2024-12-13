@@ -101,40 +101,46 @@ public partial class Forest15 : BaseRoom
 		if (global.CurrentRoom.Player.Follower != null)
 		{
 			global.CurrentRoom.Player.Follower.DisableFollowing();
-		}
 
-		await PlayCutscene("puzzle_intro_1");
+			await PlayCutscene("puzzle_intro_1");
 		await ShowDialogue(DialogueResource, "puzzle_intro_1");
 		await PlayCutscene("puzzle_intro_2");
 		await ShowDialogue(DialogueResource, "puzzle_intro_2");
+		}
 	}
 
 	private async Task PuzzleSolvedCutscene()
 	{
 		await TweenCamera(new Vector2(1840, 408), 0.3f);
 
-		await PlayCutscene("puzzle_solved");
-		await ShowDialogue(DialogueResource, "puzzle_solved");
+		if (Player.Follower != null)
+		{
+			await PlayCutscene("puzzle_solved");
+			await ShowDialogue(DialogueResource, "puzzle_solved");
+			global.CanWalk = false;
+		}
 
 		await TweenCameraToPlayer(0.3f);
-		
-		global.CanWalk = false;
 
-		global.CurrentRoom.Gertrude.PlayIdleAnimation(Direction.Left);
-		SceneTreeTimer timer = GetTree().CreateTimer(1);
-		await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
+		if (Player.Follower != null)
+		{
+			global.CurrentRoom.Gertrude.PlayIdleAnimation(Direction.Left);
+			SceneTreeTimer timer = GetTree().CreateTimer(1);
+			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
 
-		global.CurrentRoom.Gertrude.PlayAnimation("left");
+			global.CurrentRoom.Gertrude.PlayAnimation("left");
 
-		Tween tween = GetTree().CreateTween();
-		tween.TweenProperty(global.CurrentRoom.Gertrude, "position", new Vector2(global.CurrentRoom.Player.Position.X, 408), 1.5f);
-		tween.Play();
-		await ToSignal(tween, Tween.SignalName.Finished);
+			Tween tween = GetTree().CreateTween();
+			tween.TweenProperty(global.CurrentRoom.Gertrude, "position", new Vector2(global.CurrentRoom.Player.Position.X, 408), 1.5f);
+			tween.Play();
+			await ToSignal(tween, Tween.SignalName.Finished);
 
-		global.CurrentRoom.Gertrude.PlayIdleAnimation(Direction.Up);
-		
-		global.CurrentRoom.Gertrude.EnableFollowing();
-		global.CurrentRoom.Gertrude.AddPathwayPoint();	
+			global.CurrentRoom.Gertrude.PlayIdleAnimation(Direction.Up);
+			
+			global.CurrentRoom.Gertrude.EnableFollowing();
+			global.CurrentRoom.Gertrude.AddPathwayPoint();
+		}
+	
 		global.CurrentRoom.Player.DistanceWalked = 0;
 		
 		global.CanWalk = true;

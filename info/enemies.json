@@ -44,8 +44,8 @@
 		"Type": "Enemy",
 	},
 	"JuniorBug": {
-		"Health": 20,
-		"MaxHealth": 20,
+		"Health": 15,
+		"MaxHealth": 15,
 		"Points": 0,
 		"MaxPoints": 0,
 		"AttackPoints": 10,

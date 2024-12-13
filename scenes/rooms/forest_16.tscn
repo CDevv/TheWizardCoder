@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://xyo74vo23p6u"]
+[gd_scene load_steps=16 format=3 uid="uid://xyo74vo23p6u"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_ux1hj"]
 [ext_resource type="Script" path="res://scripts/rooms/Forest16.cs" id="2_03v68"]
@@ -175,11 +175,132 @@ tracks/5/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_lnt1q"]
+resource_name = "forest_final_2_nolan"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.1, 1.5, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(383, 925), Vector2(384, 952), Vector2(408, 952), Vector2(424, 936), Vector2(448, 952), Vector2(464, 952)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Gertrude:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.5, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"values": [{
+"args": [0],
+"method": &"PlayMoveAnimation"
+}, {
+"args": [3],
+"method": &"PlayMoveAnimation"
+}, {
+"args": [3],
+"method": &"PlayIdleAnimation"
+}, {
+"args": [3],
+"method": &"PlayMoveAnimation"
+}, {
+"args": [3],
+"method": &"PlayIdleAnimation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_4kwil"]
+resource_name = "forest_final_3_nolan"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gertrude:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4.6, 7.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(463, 952), Vector2(846.132, 952), Vector2(1096, 952)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Raft:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 4.6, 7.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(463, 952), Vector2(846.132, 952), Vector2(1096, 952)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("TransitionRect")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [5.0],
+"method": &"PlayAnimation"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hg0x7"]
 _data = {
 "forest_final_1": SubResource("Animation_2ui8h"),
 "forest_final_2": SubResource("Animation_q6mvd"),
-"forest_final_3": SubResource("Animation_2skmc")
+"forest_final_2_nolan": SubResource("Animation_lnt1q"),
+"forest_final_3": SubResource("Animation_2skmc"),
+"forest_final_3_nolan": SubResource("Animation_4kwil")
 }
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_iqq5r"]
@@ -203,6 +324,7 @@ limit_bottom = 1120
 [node name="Player" parent="." index="13" instance=ExtResource("2_gb2o6")]
 z_index = 2
 y_sort_enabled = true
+position = Vector2(560, 416)
 
 [node name="TileMap" type="TileMap" parent="." index="14"]
 y_sort_enabled = true

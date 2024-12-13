@@ -265,6 +265,7 @@ size = Vector2(64, 8)
 y_sort_enabled = true
 script = ExtResource("2_6mc3w")
 DialogueResource = ExtResource("3_7xdu7")
+DefaultMarkerName = "Section14Marker"
 
 [node name="AnimationPlayer" parent="." index="4"]
 libraries = {
@@ -413,7 +414,6 @@ position = Vector2(1696, 368)
 scale = Vector2(2, 2)
 
 [node name="Gertrude" parent="." index="30"]
-position = Vector2(976, 408)
 DefaultDirection = 1
 
 [connection signal="Triggered" from="ExecuteButton" to="." method="CheckCode"]

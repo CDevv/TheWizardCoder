@@ -64,6 +64,8 @@ namespace TheWizardCoder.Abstractions
 
 			TransitionRect.Show();
 
+			global.PlayerData.Stats.Global = global;
+
 			global.CurrentRoom = this;
 			global.PlayerData.SceneFileName = SceneFileName;
 			global.PlayerData.Location = LocationName;

@@ -117,7 +117,7 @@ public partial class RaftWater : BaseRoom
 
     private void InitChallenges()
     {
-        var data = (Godot.Collections.Dictionary<string, Variant>)DataLoader.GetJsonData("res://info/raft_water_challenges.json");
+        var data = (Godot.Collections.Dictionary<string, Variant>)global.DataLoader.GetJsonData("res://info/raft_water_challenges.json");
 
         foreach (var item in data)
         {
@@ -159,9 +159,6 @@ public partial class RaftWater : BaseRoom
 
                 canMoveRaft = false;
                 cutsceneSkippable = false;
-                //passedChallenge = true;
-                //OnChallengesCleared();
-
             }
         }
     }
@@ -260,14 +257,13 @@ public partial class RaftWater : BaseRoom
     private async void OnChallengesCleared(bool playSecondCutscene = true)
     {
         this.playSecondCutscene = playSecondCutscene;
-        GD.Print("Challenges cleared!");
+        global.PlayerData.PassedWaterChallenges = true;
+
         ClearTextBoxes();
         challengeDisplay.Hide();
         global.CanWalk = false;
         passedChallenge = true;
         canMoveRaft = false;
-
-        GD.Print(playSecondCutscene);
 
         if (playSecondCutscene)
         {
@@ -290,6 +286,12 @@ public partial class RaftWater : BaseRoom
         if (Player.Follower != null)
         {
             Player.Follower.EnableFollowing();
+            Player.Follower.AddPathwayPoint(Direction.Up, Player.Follower.Position, Player.PlayerSpeed);
+        }
+
+        if (passedChallenge)
+        {
+            global.PlayerData.Stats.AddLevelPoints(6);
         }
     }
 
@@ -301,16 +303,12 @@ public partial class RaftWater : BaseRoom
         }
         else
         {
-            GD.Print("dialogue");
             if (isSkippingSecondCutscene)
             {
                 OnChallengesCleared(false);
             }
         }
 
-        GD.Print(passedTime);
-        GD.Print(global.CurrentRoom.Player.Position);
-        GD.Print(global.CurrentRoom.Gertrude.Position);
         passedTime = 0;
     }
 

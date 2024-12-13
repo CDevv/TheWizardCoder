@@ -7,6 +7,9 @@ namespace TheWizardCoder.Interactables
 {
 	public partial class BattlePoint : Interactable
 	{
+		[Signal]
+		public delegate void TouchedPointEventHandler();
+
 		private CollisionShape2D collisionShape;
 
 		public string EnemyName { get; set; }
@@ -26,6 +29,8 @@ namespace TheWizardCoder.Interactables
 			global.CurrentRoom.BattleDisplay.ShowDisplay(new() { EnemyName }, BackgroundImage);
 			Active = false;
 			collisionShape.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+
+			EmitSignal(SignalName.TouchedPoint);
 		}
 	}
 }
