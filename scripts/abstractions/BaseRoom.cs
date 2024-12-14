@@ -64,7 +64,10 @@ namespace TheWizardCoder.Abstractions
 
 			TransitionRect.Show();
 
-			global.PlayerData.Stats.Global = global;
+			global.PlayerData.Stats.LeveledUp += () => 
+			{
+				global.CurrentRoom.LevelUp.ShowDisplay();
+			};
 
 			global.CurrentRoom = this;
 			global.PlayerData.SceneFileName = SceneFileName;

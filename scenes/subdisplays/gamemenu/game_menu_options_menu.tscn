@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://1s17ud5yxf8a"]
+[gd_scene load_steps=5 format=3 uid="uid://1s17ud5yxf8a"]
 
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_435q7"]
 [ext_resource type="Script" path="res://scripts/subdisplays/OptionsMenu.cs" id="1_wdgsp"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="2_mnh0l"]
+[ext_resource type="PackedScene" uid="uid://oixacvv4k6tw" path="res://scenes/ui/custom_checkbox.tscn" id="4_f82rw"]
 
 [node name="GameMenuOptionsMenu" type="CanvasLayer"]
 script = ExtResource("1_wdgsp")
@@ -27,6 +28,7 @@ offset_top = 12.0
 offset_right = 284.0
 offset_bottom = 41.0
 scale = Vector2(0.5, 0.5)
+focus_neighbor_top = NodePath("../AutoSprintCheckBox")
 focus_neighbor_bottom = NodePath("../FullscreenCheckBox")
 mouse_filter = 2
 theme = ExtResource("2_mnh0l")
@@ -61,17 +63,38 @@ theme_override_font_sizes/font_size = 36
 text = "Fullscreen
 "
 
-[node name="FullscreenCheckBox" type="CheckBox" parent="OptionsRect"]
-unique_name_in_owner = true
+[node name="AutoSprintLabel" type="Label" parent="OptionsRect"]
 layout_mode = 0
+offset_left = 12.0
+offset_top = 76.0
+offset_right = 172.0
+offset_bottom = 105.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_mnh0l")
+theme_override_font_sizes/font_size = 36
+text = "AutoSprint"
+
+[node name="FullscreenCheckBox" parent="OptionsRect" instance=ExtResource("4_f82rw")]
+unique_name_in_owner = true
+layout_mode = 1
 offset_left = 92.0
-offset_top = 28.0
-offset_right = 116.0
-offset_bottom = 52.0
+offset_top = 32.0
+offset_right = -72.0
+offset_bottom = -92.0
+scale = Vector2(0.5, 0.5)
 focus_neighbor_top = NodePath("../ResolutionOptions")
 focus_neighbor_bottom = NodePath("../ControlsButton")
-mouse_filter = 2
-theme = ExtResource("2_mnh0l")
+
+[node name="AutoSprintCheckBox" parent="OptionsRect" instance=ExtResource("4_f82rw")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 92.0
+offset_top = 76.0
+offset_right = -72.0
+offset_bottom = -48.0
+scale = Vector2(0.5, 0.5)
+focus_neighbor_top = NodePath("../ControlsButton")
+focus_neighbor_bottom = NodePath("../ResolutionOptions")
 
 [node name="ControlsButton" type="Button" parent="OptionsRect"]
 layout_mode = 0
@@ -81,10 +104,12 @@ offset_right = 108.0
 offset_bottom = 76.0
 scale = Vector2(0.5, 0.5)
 focus_neighbor_top = NodePath("../FullscreenCheckBox")
+focus_neighbor_bottom = NodePath("../AutoSprintCheckBox")
 theme = ExtResource("2_mnh0l")
 theme_override_font_sizes/font_size = 36
 text = "Controls.."
 
 [connection signal="item_selected" from="OptionsRect/ResolutionOptions" to="." method="OnWindowSizeChanged"]
-[connection signal="toggled" from="OptionsRect/FullscreenCheckBox" to="." method="OnFullscreenToggled"]
+[connection signal="Toggled" from="OptionsRect/FullscreenCheckBox" to="." method="OnFullscreenToggled"]
+[connection signal="Toggled" from="OptionsRect/AutoSprintCheckBox" to="." method="OnAutoSprintToggled"]
 [connection signal="pressed" from="OptionsRect/ControlsButton" to="." method="OnControlsPage"]

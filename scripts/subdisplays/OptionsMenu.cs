@@ -2,6 +2,7 @@ using Godot;
 using System;
 using TheWizardCoder.Abstractions;
 using TheWizardCoder.Enums;
+using TheWizardCoder.UI;
 
 namespace TheWizardCoder.Subdisplays
 {
@@ -13,13 +14,26 @@ namespace TheWizardCoder.Subdisplays
 		public delegate void OnBackButtonPressedEventHandler();
 
 		private OptionButton resolutionsButton;
-		private CheckBox fullscreenButton;
+		private CustomCheckbox fullscreenButton;
+		private CustomCheckbox autoSprintButton;
 
 		public override void _Ready()
 		{
 			base._Ready();
 			resolutionsButton = GetNode<OptionButton>("%ResolutionOptions");
-			fullscreenButton = GetNode<CheckBox>("%FullscreenCheckBox");
+			fullscreenButton = GetNode<CustomCheckbox>("%FullscreenCheckBox");
+			autoSprintButton = GetNode<CustomCheckbox>("%AutoSprintCheckBox");
+		}
+
+		public override void _Input(InputEvent @event)
+		{
+			if (Input.IsActionJustPressed("ui_cancel"))
+			{
+				if (Visible)
+				{
+					EmitSignal(SignalName.OnBackButtonPressed);
+				}
+			}
 		}
 
 		public override void ShowDisplay()
@@ -31,7 +45,8 @@ namespace TheWizardCoder.Subdisplays
 		public override void UpdateDisplay()
 		{
 			resolutionsButton.Set(OptionButton.PropertyName.Selected, (int)global.Settings.WindowSize);
-			fullscreenButton.Set(CheckBox.PropertyName.ButtonPressed, (bool)global.Settings.Fullscreen);
+			fullscreenButton.SetToggled(global.Settings.Fullscreen);
+			autoSprintButton.SetToggled(global.Settings.AutoSprint);
 		}
 
 		public void FocusFirst()
@@ -49,6 +64,13 @@ namespace TheWizardCoder.Subdisplays
 		public void OnFullscreenToggled(bool toggled)
 		{
 			global.Settings.ToggleFullscreen(toggled);
+			global.Settings.SaveSettings();
+		}
+
+		private void OnAutoSprintToggled(bool toggled)
+		{
+			global.Settings.AutoSprint = toggled;
+			global.Settings.SaveSettings();
 		}
 
 		public void OnBackButton()

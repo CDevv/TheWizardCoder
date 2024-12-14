@@ -52,7 +52,7 @@ namespace TheWizardCoder.Components
 			Vector2 direction = Input.GetVector("left", "right", "up", "down").Normalized();
 			Vector2 velocity = direction * DefaultSpeed;
 
-			if (isSprinting)
+			if (isSprinting || global.Settings.AutoSprint)
 			{
 				velocity *= 2;
 				PlayerSpeed = DefaultSpeed * 2;

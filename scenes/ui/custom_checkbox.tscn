@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://oixacvv4k6tw"]
+
+[ext_resource type="Script" path="res://scripts/ui/CustomCheckbox.cs" id="1_0i1xn"]
+[ext_resource type="Texture2D" uid="uid://cgw1p774urfqc" path="res://assets/ui/checkbox-unchecked.png" id="2_dhn0j"]
+
+[node name="CustomCheckbox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -608.0
+offset_bottom = -448.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+mouse_filter = 2
+script = ExtResource("1_0i1xn")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(16, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("2_dhn0j")

@@ -74,7 +74,7 @@ patch_margin_bottom = 3
 [node name="MarginContainer" type="MarginContainer" parent="DescriptionRect"]
 layout_mode = 0
 offset_right = 392.0
-offset_bottom = 64.0
+offset_bottom = 100.0
 scale = Vector2(0.5, 0.5)
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8

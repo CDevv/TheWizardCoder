@@ -123,6 +123,20 @@ tracks/0/keys = {
 "method": &"PlayIdleAnimation"
 }]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [2],
+"method": &"PlayIdleAnimation"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ijerk"]
 _data = {
@@ -217,8 +231,8 @@ offset_bottom = 480.0
 color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." index="10" instance=ExtResource("2_kf2x7")]
-z_index = 2
-position = Vector2(344, 168)
+z_index = 1
+position = Vector2(352, 224)
 
 [node name="TileMap" type="TileMap" parent="." index="11"]
 y_sort_enabled = true
@@ -290,7 +304,6 @@ texture = ExtResource("10_5j3uc")
 [node name="GlitchShape" type="CollisionShape2D" parent="Glitch/GlitchCollision" index="0"]
 position = Vector2(4, 0)
 shape = SubResource("RectangleShape2D_aljoa")
-disabled = true
 
 [node name="CodeProblemPoint" parent="." index="18" instance=ExtResource("11_1n5do")]
 z_index = 2

@@ -11,6 +11,7 @@ namespace TheWizardCoder.Data
         public int WindowWidth { get; set; } = 640;
         public int WindowHeight { get; set; } = 480;
         public bool Fullscreen { get; set; } = false;
+        public bool AutoSprint { get; set; } = false;
 
         private Dictionary<string, InputEvent> controls = new()
         {
@@ -40,6 +41,8 @@ namespace TheWizardCoder.Data
                 configFile.SetValue("Controls", item.Key, item.Value);
             }
 
+            configFile.SetValue("Other", "AutoSprint", AutoSprint);
+
             configFile.Save("user://options.cfg");
         }
 
@@ -61,11 +64,12 @@ namespace TheWizardCoder.Data
             {
                 controls[item.Key] = (InputEvent)configFile.GetValue("Controls", item.Key);
             }
+
+            AutoSprint = (bool)configFile.GetValue("Other", "AutoSprint");
         }
 
         public void ApplySettings()
         {
-            //DisplayServer.WindowSetSize(new Vector2I(WindowWidth, WindowHeight));
             ChangeWindowSize(WindowSize);
 
             ToggleFullscreen(Fullscreen);

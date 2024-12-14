@@ -11,6 +11,8 @@ namespace TheWizardCoder.Subdisplays
 		[Export]
 		public PackedScene TextButtonTemplate { get; set; }
 
+		private CharacterData character;
+		private Button firstItem;
 		private AnimatedSprite2D portrait;
 		private Label name;
 		private GridContainer magicContainer;
@@ -34,16 +36,16 @@ namespace TheWizardCoder.Subdisplays
 
 		public void ShowDisplay(CharacterData character)
 		{
+			this.character = character;
+			firstItem = null;
+
 			portrait.Animation = character.Name;
 			name.Text = character.Name;
 			characterPoints.Text = $"MP: {character.Points}";
 
 			magicDescription.Text = "No magic spells.";
 			ClearContainer();
-			for (int i = 0; i < character.MagicSpells.Count; i++)
-			{
-				AddItem(character.MagicSpells[i]);
-			}
+			PopulateContainer();
 
 			Show();
 			FocusOnFirstItem();
@@ -54,20 +56,27 @@ namespace TheWizardCoder.Subdisplays
 			Show();
 		}
 
+		private void PopulateContainer()
+		{
+			for (int i = 0; i < character.MagicSpells.Count; i++)
+			{
+				Button magicSpellButton = AddItem(character.MagicSpells[i]);
+				if (i == 0)
+				{
+					firstItem = magicSpellButton;
+				}
+			}
+		}
+
 		private void FocusOnFirstItem()
 		{
-			GD.Print(magicContainer.GetChildCount());
-			if (magicContainer.GetChildCount() > 0)
+			if (firstItem != null)
 			{
-				Button button = (Button)magicContainer.GetChildren()[0];
-				if (button != null)
-				{
-					button.GrabFocus();
-				}
-				else
-				{
-					magicDescription.Text = "No magic spells.";
-				}
+				firstItem.GrabFocus();
+			}
+			else
+			{
+				magicDescription.Text = "No magic spells.";
 			}
 		}
 
@@ -80,19 +89,22 @@ namespace TheWizardCoder.Subdisplays
 			}
 		}
 
-		private void AddItem(string name)
+		private Button AddItem(string name)
 		{
 			MagicSpell magicSpell = global.MagicSpells[name];
 
 			Button button = TextButtonTemplate.Instantiate<Button>();
 			button.Text = name;
 			button.Set("theme_override_font_sizes/font_size", 32);
-			button.FocusEntered += () => {
+			button.FocusEntered += () =>
+			{
 				magicDescription.Text = magicSpell.Description;
 				pointsCost.Text = $"MP Cost: {magicSpell.Cost}";
 			};
 
 			magicContainer.AddChild(button);
+
+			return button;
 		}
 	}
 }

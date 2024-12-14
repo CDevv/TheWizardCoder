@@ -6,8 +6,12 @@ using TheWizardCoder.Enums;
 
 namespace TheWizardCoder.Data
 {
+    public delegate void LeveledUpEventHandler();
+
     public partial class CharacterData
     {
+        public event LeveledUpEventHandler LeveledUp;
+
         private const int BaseLevelPoints = 10;
 
         public Global Global { get; set; }
@@ -70,11 +74,9 @@ namespace TheWizardCoder.Data
                 LevelPoints -= GetMaxLevelPoints();
                 Level++;
 
-                //GD.Print(Global.CurrentRoom == null);
-                //GD.Print(Global.CurrentRoom.LevelUp == null);
                 if (Name == "Nolan")
                 {
-                    Global.CurrentRoom.LevelUp.ShowDisplay();
+                    LeveledUp();
                 }
             }
         }

@@ -82,31 +82,28 @@ patch_margin_bottom = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="DescriptionRect"]
 layout_mode = 0
-offset_right = 392.0
-offset_bottom = 112.0
-scale = Vector2(0.5, 0.5)
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+offset_right = 196.0
+offset_bottom = 56.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
 [node name="MagicDescription" type="Label" parent="DescriptionRect/MarginContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(376, 96)
+custom_minimum_size = Vector2(180, 40)
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("4_hxthu")
-theme_override_font_sizes/font_size = 36
 autowrap_mode = 3
 
 [node name="MagicCost" type="Label" parent="DescriptionRect/MarginContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(376, 96)
+custom_minimum_size = Vector2(180, 40)
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("4_hxthu")
 theme_override_colors/font_color = Color(0.564706, 0, 0.517647, 1)
-theme_override_font_sizes/font_size = 36
 text = "MP Cost: 00"
 horizontal_alignment = 2
 vertical_alignment = 2

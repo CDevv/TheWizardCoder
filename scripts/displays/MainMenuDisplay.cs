@@ -65,6 +65,7 @@ namespace TheWizardCoder.Displays
 			main.Show();
 			HideAllSubdisplays();
 			playButton.GrabFocus();
+			playButton.CallDeferred(Button.MethodName.GrabFocus);
 		}
 
 		public void ShowSavedGamesMenu()

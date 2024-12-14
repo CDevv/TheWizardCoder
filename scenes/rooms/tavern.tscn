@@ -207,7 +207,7 @@ TargetLocation = "EnterMarker"
 PlayerDirection = 1
 
 [node name="EnterMarker" type="Marker2D" parent="." index="16"]
-position = Vector2(704, 284)
+position = Vector2(704, 300)
 
 [node name="BarrelsRoomMarker" type="Marker2D" parent="." index="17"]
 position = Vector2(528, 192)

@@ -75,7 +75,7 @@ position = Vector2(736, 200)
 
 [node name="Player" parent="." index="6" instance=ExtResource("3_bjkae")]
 z_index = 1
-position = Vector2(400, 280)
+position = Vector2(251, 282)
 
 [node name="AnimationPlayer" parent="." index="8"]
 libraries = {
