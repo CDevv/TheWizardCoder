@@ -33,8 +33,7 @@ public partial class ShopDisplay : Display
 	public override void _Ready()
 	{
 		base._Ready();
-		//global = GetNode<Global>("/root/Global");
-
+		
 		background = GetNode<TextureRect>("ShopBackground");
 		optionsRect = GetNode<NinePatchRect>("%OptionsRect");
 		descriptionRect = GetNode<NinePatchRect>("%DescriptionRect");

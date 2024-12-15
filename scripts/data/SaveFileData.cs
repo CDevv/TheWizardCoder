@@ -96,7 +96,7 @@ namespace TheWizardCoder.Data
             SceneDefaultMarker = "AfterCutsceneMarker";
 
             Stats = stats;
-            Gold = 0;
+            Gold = 100;
         }
 
         public void AddToInventory(string item, bool onlyOne = false)

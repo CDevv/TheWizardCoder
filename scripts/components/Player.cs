@@ -25,6 +25,7 @@ namespace TheWizardCoder.Components
 		private Area2D interactableFinder;
 
 		public CharacterDialoguePoint Follower { get; set; }
+		public bool HasFollower { get; set; } = false;
 		public GroundEnemy Enemy { get; set; }
 
 		public int PlayerSpeed { get; private set; } = DefaultSpeed;
@@ -253,6 +254,8 @@ namespace TheWizardCoder.Components
 			}
 			Follower.MakeFollower();
 			Follower.Show();
+
+			HasFollower = true;
 
 			return Follower;
 		}

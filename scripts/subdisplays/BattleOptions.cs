@@ -9,6 +9,8 @@ namespace TheWizardCoder.Subdisplays
 {
 	public partial class BattleOptions : Display
 	{
+		const int ItemsPerPage = 4;
+
 		[Export]
 		public PackedScene ButtonTemplate { get; set; }
 
@@ -29,9 +31,15 @@ namespace TheWizardCoder.Subdisplays
 		private GridContainer itemsContainer;
 		private GridContainer magicContainer;
 		private Label infoLabel;
+		private NinePatchRect pagingRect;
+		private Label pageLabel;
+		private Button prevButton;
+		private Button nextButton;
 
 		private bool isTyping = false;
 		private double waitingTime = 0.005;
+		private int currentPage = 0;
+		private int lastPage = 0;
 
 		public override void _Ready()
 		{
@@ -44,6 +52,12 @@ namespace TheWizardCoder.Subdisplays
 			itemsContainer = GetNode<GridContainer>("%Items");
 			magicContainer = GetNode<GridContainer>("%Magic");
 			infoLabel = GetNode<Label>("%InfoLabel");
+
+			pagingRect = GetNode<NinePatchRect>("%PagingRect");
+			pageLabel = GetNode<Label>("%PageLabel");
+
+			prevButton = GetNode<Button>("PrevPageButton");
+			nextButton = GetNode<Button>("NextPageButton");
 		}
 
 		public override void _Process(double delta)
@@ -68,8 +82,20 @@ namespace TheWizardCoder.Subdisplays
 			}
 		}
 
+		private void CalculateLastPage()
+		{
+			lastPage = global.PlayerData.Inventory.Count / ItemsPerPage;
+
+			if (global.PlayerData.Inventory.Count % ItemsPerPage > 0)
+			{
+				lastPage++;
+			}
+		}
+
 		public override void ShowDisplay()
 		{
+			CalculateLastPage();
+
 			Show();
 			ShowOptions();
 		}
@@ -81,9 +107,7 @@ namespace TheWizardCoder.Subdisplays
 			itemsContainer.Hide();
 			magicContainer.Hide();
 			infoLabel.Text = text;
-			//infoLabel.VisibleCharacters = 0;
 			infoLabel.Show();
-			//isTyping = true;
 		}
 
 		public void ShowOptions()
@@ -94,26 +118,38 @@ namespace TheWizardCoder.Subdisplays
 			magicContainer.Hide();
 			infoLabel.Hide();
 
+			pagingRect.Hide();
+
 			attackButton.GrabFocus();
 		}
 
 		private void ShowItems()
 		{
+			currentPage = 0;
 			optionsContainer.Hide();
 			magicContainer.Hide();
 			costLabel.Hide();
 			itemsContainer.Show();
 
-			Button button = itemsContainer.GetChildOrNull<Button>(0);
-			if (button == null)
+			CalculateLastPage();
+			ClearInventoryContainer();
+			Button firstItem = PopulateInventory();
+
+			if (firstItem == null)
 			{
 				descriptionContainer.Hide();
 				ShowInfoLabel("You have no items");			
 			}
 			else
 			{
-				button.GrabFocus();
+				firstItem.GrabFocus();
 				descriptionContainer.Show();
+			}
+
+			if (global.PlayerData.Inventory.Count > ItemsPerPage)
+			{
+				pagingRect.Show();
+				pageLabel.Text = $"{currentPage + 1}/{lastPage}";
 			}
 		}
 
@@ -146,9 +182,22 @@ namespace TheWizardCoder.Subdisplays
 		{
 			ClearContainers();
 
-			for (int i = 0; i < global.PlayerData.Inventory.Count; i++)
+			PopulateInventory();
+			PopulateMagicSpells(characterData);
+		}
+
+		private Button PopulateInventory()
+		{
+			if (global.PlayerData.Inventory.Count == 0) return null;
+
+			Button firstButton = null;
+			for (int i = currentPage * ItemsPerPage; i < (currentPage + 1) * ItemsPerPage; i++)
 			{
 				int currentIndex = i;
+				if (currentIndex >= global.PlayerData.Inventory.Count)
+				{
+					break;
+				}
 
 				string item = global.PlayerData.Inventory[i];
 				Button buttonItem = ButtonTemplate.Instantiate<Button>();
@@ -159,9 +208,32 @@ namespace TheWizardCoder.Subdisplays
 				buttonItem.Pressed += () => {
 					EmitSignal(SignalName.ItemsButtonTriggered, currentIndex);
 				};
+
+				if (global.PlayerData.Inventory.Count > ItemsPerPage)
+				{
+					if (i % 2 == 0)
+					{
+						buttonItem.FocusNeighborLeft = prevButton.GetPath();
+					}
+					else
+					{
+						buttonItem.FocusNeighborRight = nextButton.GetPath();
+					}
+				}
+
 				itemsContainer.AddChild(buttonItem);
+
+				if (firstButton == null)
+				{
+					firstButton = buttonItem;
+				}
 			}
 
+			return firstButton;
+		}
+
+		private void PopulateMagicSpells(CharacterData characterData)
+		{
 			for (int i = 0; i < characterData.MagicSpells.Count; i++)
 			{
 				int currentIndex = i;
@@ -192,14 +264,19 @@ namespace TheWizardCoder.Subdisplays
 
 		private void ClearContainers()
 		{
-			Array<Node> itemButtons = itemsContainer.GetChildren();
-			foreach (var item in itemButtons)
-			{
-				item.QueueFree();
-			}
+			ClearInventoryContainer();
 
 			Array<Node> magicSpellsButtons = magicContainer.GetChildren();
 			foreach (var item in magicSpellsButtons)
+			{
+				item.QueueFree();
+			}
+		}
+
+		private void ClearInventoryContainer()
+		{
+			Array<Node> itemButtons = itemsContainer.GetChildren();
+			foreach (var item in itemButtons)
 			{
 				item.QueueFree();
 			}
@@ -228,6 +305,44 @@ namespace TheWizardCoder.Subdisplays
 			if (!global.CurrentRoom.Dialogue.Visible)
 			{
 				EmitSignal(SignalName.DefenseButtonTriggered);
+			}
+		}
+
+		private void OnPrevButton()
+		{
+			if (currentPage > 0)
+			{
+				currentPage--;
+				ClearContainers();
+				Button firstItem = PopulateInventory();
+
+				firstItem.CallDeferred(Button.MethodName.GrabFocus);
+
+				pageLabel.Text = $"{currentPage + 1}/{lastPage}";
+			}
+			else
+			{
+				Button button = itemsContainer.GetChildOrNull<Button>(0);
+				button.CallDeferred(Button.MethodName.GrabFocus);
+			}
+		}
+
+		private void OnNextButton()
+		{
+			if (currentPage + 1 < lastPage)
+			{
+				currentPage++;
+				ClearContainers();
+				Button firstItem = PopulateInventory();
+
+				firstItem.CallDeferred(Button.MethodName.GrabFocus);
+
+				pageLabel.Text = $"{currentPage + 1}/{lastPage}";
+			}
+			else
+			{
+				Button button = itemsContainer.GetChildOrNull<Button>(0);
+				button.CallDeferred(Button.MethodName.GrabFocus);
 			}
 		}
 	}

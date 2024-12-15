@@ -17,6 +17,10 @@ Gertrude: [next=3.5] [#portrait=4] Yeah, that stuff is weird..
 Gertrude: [next=5] [#portrait=2] Wait, what is that?
 => END!
 
+~ water_nolan
+Nolan: [next=2] [#portrait=0] Huh? What's that?
+=> END!
+
 ~ water_finished
 Gertrude: [next=3.5] [#portrait=4] Well that was.. [wait=1] something.
 Nolan: [next=0.8] [#portrait=2] Yeah..

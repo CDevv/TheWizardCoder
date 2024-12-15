@@ -70,7 +70,7 @@ namespace TheWizardCoder.Displays
 			ShowDisplay(new() {"Glitch"}, backgroundRect.Texture);
 		}
 
-		public async void ShowDisplay(Array<string> enemies)
+		public void ShowDisplay(Array<string> enemies)
 		{
 			ShowDisplay(enemies, backgroundRect.Texture);
 		}

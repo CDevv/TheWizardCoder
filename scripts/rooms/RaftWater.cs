@@ -65,10 +65,17 @@ public partial class RaftWater : BaseRoom
 
         if (!global.PlayerData.PassedWaterChallenges)
         {
-            await PlayCutscene("water_1");
-            if (global.CurrentRoom.Player.Follower != null)
+            if (Player.HasFollower)
             {
-                global.CurrentRoom.Player.Follower.DisableFollowing();
+                await PlayCutscene("water_1");
+                if (global.CurrentRoom.Player.Follower != null)
+                {
+                    global.CurrentRoom.Player.Follower.DisableFollowing();
+                }
+            }
+            else
+            {
+                await PlayCutscene("water_1_nolan");
             }
 
             global.CurrentRoom.Player.CameraEnabled = false;
@@ -144,7 +151,11 @@ public partial class RaftWater : BaseRoom
             if (collision == null)
             {
                 global.CurrentRoom.Player.Position += velocity;
-                global.CurrentRoom.Gertrude.Position += velocity;
+                
+                if (Player.HasFollower)
+                {
+                    global.CurrentRoom.Gertrude.Position += velocity;
+                }
             }
         }
     }
@@ -166,7 +177,14 @@ public partial class RaftWater : BaseRoom
     private void StartSequence()
     {
         AnimationPlayer.Stop();
-        AnimationPlayer.Play("water_final");
+        if (Player.HasFollower)
+        {
+            AnimationPlayer.Play("water_final");
+        }
+        else
+        {
+            AnimationPlayer.Play("water_final_nolan");
+        }
 
         global.CanWalk = false;
         global.GameDisplayEnabled = false;
@@ -268,7 +286,15 @@ public partial class RaftWater : BaseRoom
         if (playSecondCutscene)
         {
             await TweenRaft(new Vector2(3932, 1144), 1f);
-            AnimationPlayer.Play("water_2", -1, 0.5f);
+            
+            if (Player.HasFollower)
+            {
+                AnimationPlayer.Play("water_2", -1, 0.5f);
+            }
+            else
+            {
+                AnimationPlayer.Play("water_2_nolan", -1, 0.5f);
+            }
         }
         else
         {
@@ -330,9 +356,17 @@ public partial class RaftWater : BaseRoom
         Tween tween = GetTree().CreateTween();
         tween.SetParallel();
 
-        tween.TweenProperty(raft, "position", position, duration);
-        tween.TweenProperty(global.CurrentRoom.Player, "position", position + new Vector2(-16, 0), duration);
-        tween.TweenProperty(global.CurrentRoom.Gertrude, "position", position + new Vector2(16, 0), duration);
+        tween.TweenProperty(raft, "position", position, duration);   
+
+        if (Player.HasFollower)
+        {
+            tween.TweenProperty(global.CurrentRoom.Player, "position", position + new Vector2(-16, 0), duration);
+            tween.TweenProperty(global.CurrentRoom.Gertrude, "position", position + new Vector2(16, 0), duration);
+        }
+        else
+        {
+            tween.TweenProperty(global.CurrentRoom.Player, "position", position, duration);
+        }
 
         tween.Play();
         await ToSignal(tween, Tween.SignalName.Finished);
