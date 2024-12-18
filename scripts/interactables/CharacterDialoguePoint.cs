@@ -7,6 +7,7 @@ using TheWizardCoder.Components;
 using TheWizardCoder.Data;
 using System.Collections.Generic;
 using System.Linq;
+using TheWizardCoder.Utils;
 
 namespace TheWizardCoder.Interactables
 {
@@ -20,11 +21,14 @@ namespace TheWizardCoder.Interactables
 		public Direction DefaultDirection { get; set; } = Direction.Down;
 
 		private AnimatedSprite2D sprite;
-		public AnimatedSprite2D Sprite { get { return sprite; } }
 		private CollisionShape2D collision;
-		private bool followingPlayer;
-		public bool FollowingPlayer { get { return followingPlayer; } }
+		private bool followingPlayer;	
 		private Queue<CharacterPathway> pathways = new();
+		private int speed = 2;
+
+		public AnimatedSprite2D Sprite { get { return sprite; } }
+		public bool FollowingPlayer { get { return followingPlayer; } }
+
 
 		public override void _Ready()
 		{
@@ -36,7 +40,7 @@ namespace TheWizardCoder.Interactables
 			sprite.Frame = (int)DefaultDirection;
 		}
 
-		public override void Action()
+        public override void Action()
 		{
 			Player player = global.CurrentRoom.Player;
 			sprite.Frame = global.ReverseDirections[(int)player.Direction];
@@ -90,25 +94,18 @@ namespace TheWizardCoder.Interactables
 		{
 			if (followingPlayer)
 			{
-				if (pathways.Count > 1)
+				if (pathways.Count > 0)
 				{
 					CharacterPathway lastPathway = pathways.Peek();
 					Vector2 lastPos = lastPathway.Position;
 					Vector2 difference = lastPos - Position;
 
-					GlobalPosition += difference.Normalized() * lastPathway.Speed;
-					Vector2 newPos = GlobalPosition;
-					newPos.X = Mathf.Clamp(newPos.X, 0, lastPos.X);
-					newPos.Y = Mathf.Clamp(newPos.Y, 0, lastPos.Y);
-					GlobalPosition = newPos;
+					GlobalPosition += difference;
 
 					PlayAnimation(lastPathway.Direction.ToString().ToLower());
 
-					if (Position == lastPos)
-					{
-						pathways.Dequeue();		
-					}
-				}		
+					pathways.Dequeue();	
+				}
 			}
 		}
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2dpwk6p1w706"
-path="res://.godot/imported/JuniorBug.png-f19ff72617532d4946030154b442bb89.ctex"
+uid="uid://c24oaehv3n0vc"
+path="res://.godot/imported/vindi-env.png-fe4f987936da7ad97c73005190968193.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/JuniorBug.png"
-dest_files=["res://.godot/imported/JuniorBug.png-f19ff72617532d4946030154b442bb89.ctex"]
+source_file="res://assets/tilesets/vindi-env.png"
+dest_files=["res://.godot/imported/vindi-env.png-fe4f987936da7ad97c73005190968193.ctex"]
 
 [params]
 
