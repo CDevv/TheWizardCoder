@@ -19,6 +19,7 @@ limit_bottom = 992
 [node name="Player" parent="." index="15" instance=ExtResource("2_8o435")]
 z_index = 1
 y_sort_enabled = true
+position = Vector2(752, 736)
 
 [node name="TileMap" type="TileMap" parent="." index="16"]
 y_sort_enabled = true
@@ -40,20 +41,31 @@ TargetRoomName = "vindi_5"
 TargetLocation = "Section7Marker"
 PlayerDirection = 2
 
-[node name="Section8Warper" parent="." index="18" instance=ExtResource("4_uic8l")]
+[node name="Section10Warper" parent="." index="18" instance=ExtResource("4_uic8l")]
+z_index = 2
+position = Vector2(1648, 696)
+scale = Vector2(1, 12)
+TargetRoomName = "vindi_10"
+TargetLocation = "Section7Marker"
+PlayerDirection = 3
+
+[node name="Section8Warper" parent="." index="19" instance=ExtResource("4_uic8l")]
 z_index = 2
 position = Vector2(640, 1008)
 scale = Vector2(10, 1)
 TargetRoomName = "vindi_8"
 TargetLocation = "Section7Marker"
 
-[node name="Section5Marker" type="Marker2D" parent="." index="19"]
+[node name="Section5Marker" type="Marker2D" parent="." index="20"]
 position = Vector2(32, 704)
 
-[node name="Section8Marker" type="Marker2D" parent="." index="20"]
+[node name="Section8Marker" type="Marker2D" parent="." index="21"]
 position = Vector2(640, 968)
 
-[node name="RoomCollision" type="StaticBody2D" parent="." index="21"]
+[node name="Section10Marker" type="Marker2D" parent="." index="22"]
+position = Vector2(1600, 720)
+
+[node name="RoomCollision" type="StaticBody2D" parent="." index="23"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomCollision" index="0"]
 shape = SubResource("SegmentShape2D_x6u5b")
