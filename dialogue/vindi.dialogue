@@ -1,0 +1,28 @@
+using Global
+
+~ vindi_intro_1
+Timothy: [#portrait=1] So, how was the fishing?
+Gregory: [#portrait=1] Eh, I got almost nothing, mate!
+Gregory: [#portrait=0] Only a few fishies.
+=> END!
+
+~ vindi_intro_2
+Timothy: [#portrait=1] Hm? Who is that?
+=> END!
+
+~ vindi_intro_3
+if PlayerHasFollower():
+	Timothy: Huh? Two travellers 'ere?
+else:
+	Timothy: [#portrait=1] What ya doin' here, mate?
+	Nolan: [#portrait=0] Uh.. I just got here using the raft that is on the coast outside this forest.
+	Timothy: [#portrait=0] Hmm.. I see.
+	Nolan: [#portrait=0] I am headed towards the Castle Town. I've heard some strange things have been happening.
+	Timothy: [#portrait=0] You right! Some stuff been happenin..
+	Timothy: [#portrait=2] Some places have black holes. But it's not actually a hole.
+	Timothy: [#portrait=1] When you touch it, some weird text comes up. It's just weird, man..
+	Timothy: [#portrait=1] Hey, are you not a mage or something?
+	Nolan: [#portrait=0] Yeah.. I am!
+	Timothy: [#portrait=1] Mages have, like, cool magic spells or whatever. Can you try doing something about this?
+	Nolan: [#portrait=0] Yeah sure, I'll try.
+=> END!

@@ -32,6 +32,7 @@ namespace TheWizardCoder.Components
 		public float DistanceWalked { get; set; } = 0;
 		public bool CameraEnabled { get; set; } = true;
 
+
 		public override void _Ready()	
 		{
 			global = GetNode<Global>("/root/Global");
@@ -146,6 +147,7 @@ namespace TheWizardCoder.Components
 						
 						if (interactable.Active)
 						{
+							PlayIdleAnimation(Direction);
 							interactable.Action();
 							break;
 						}
@@ -167,6 +169,12 @@ namespace TheWizardCoder.Components
 				isSprinting = false;
 				animationTree.Set("parameters/TimeScale/scale", 1);
 			}
+		}
+
+		public void Freeze()
+		{
+			global.CanWalk = false;
+			PlayIdleAnimation(Direction);
 		}
 
 		public async void TransitionToRoom(Warper warper)

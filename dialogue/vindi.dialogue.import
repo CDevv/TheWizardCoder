@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://ukx1i3qsx6q2"
+path="res://.godot/imported/vindi.dialogue-13f42bed947d5bf83404754c747b7661.tres"
+
+[deps]
+
+source_file="res://dialogue/vindi.dialogue"
+dest_files=["res://.godot/imported/vindi.dialogue-13f42bed947d5bf83404754c747b7661.tres"]
+
+[params]
+
+defaults=true

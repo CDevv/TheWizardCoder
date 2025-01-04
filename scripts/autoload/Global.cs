@@ -129,6 +129,11 @@ namespace TheWizardCoder.Autoload
 			CurrentRoom.CallDeferred(methodName);
 		}
 
+		public bool PlayerHasFollower()
+		{
+			return CurrentRoom.Player.HasFollower;
+		}
+
 		public void OpenShop(string shopName)
 		{
 			CanWalk = false;

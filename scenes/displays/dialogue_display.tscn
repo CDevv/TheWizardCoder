@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://b8wix4lm5g767"]
+[gd_scene load_steps=54 format=3 uid="uid://b8wix4lm5g767"]
 
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_q5vyp"]
 [ext_resource type="Script" path="res://scripts/displays/DialogueDisplay.cs" id="1_u23wf"]
@@ -13,7 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://qbru1t4okg4k" path="res://assets/characters/portraits/zenith.png" id="5_wun3d"]
 [ext_resource type="Texture2D" uid="uid://cg4abd46clb5w" path="res://assets/characters/portraits/gertrude.png" id="6_3iyw6"]
 [ext_resource type="Texture2D" uid="uid://c8jyb05cf4i13" path="res://assets/characters/portraits/linton.png" id="6_87rob"]
+[ext_resource type="Texture2D" uid="uid://dwddyqemmghcc" path="res://assets/characters/portraits/gregory.png" id="7_kq7ba"]
 [ext_resource type="Texture2D" uid="uid://5evvqmuv2ujj" path="res://assets/characters/portraits/nobe.png" id="10_ye061"]
+[ext_resource type="Texture2D" uid="uid://hqi47s7722dw" path="res://assets/characters/portraits/timothy.png" id="14_p7rx0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8h35u"]
 atlas = ExtResource("4_mfeyw")
@@ -62,6 +64,14 @@ region = Rect2(144, 0, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ml6ic"]
 atlas = ExtResource("6_3iyw6")
 region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdrx4"]
+atlas = ExtResource("7_kq7ba")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqhmi"]
+atlas = ExtResource("7_kq7ba")
+region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p1wo0"]
 atlas = ExtResource("4_7t36c")
@@ -127,6 +137,18 @@ region = Rect2(0, 0, 48, 48)
 atlas = ExtResource("5_dsymk")
 region = Rect2(48, 0, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_cipad"]
+atlas = ExtResource("14_p7rx0")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xhrp"]
+atlas = ExtResource("14_p7rx0")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_in8m8"]
+atlas = ExtResource("14_p7rx0")
+region = Rect2(96, 0, 48, 48)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_83kq1"]
 atlas = ExtResource("5_wun3d")
 region = Rect2(0, 0, 48, 48)
@@ -190,6 +212,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"gertrude",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kdrx4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqhmi")
+}],
+"loop": true,
+"name": &"gregory",
 "speed": 5.0
 }, {
 "frames": [{
@@ -271,6 +304,20 @@ animations = [{
 }],
 "loop": true,
 "name": &"shimble",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cipad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xhrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_in8m8")
+}],
+"loop": true,
+"name": &"timothy",
 "speed": 5.0
 }, {
 "frames": [{
