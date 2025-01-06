@@ -8,6 +8,7 @@ using TheWizardCoder.Components;
 using TheWizardCoder.UI;
 using TheWizardCoder.Interactables;
 using TheWizardCoder.Data;
+using TheWizardCoder.Enums;
 
 namespace TheWizardCoder.Abstractions
 {
@@ -35,22 +36,32 @@ namespace TheWizardCoder.Abstractions
 		public LevelUpDisplay LevelUp { get; private set; }
 		public Player Player { get; private set; }
 		public Camera2D Camera { get; private set; }
-		public CharacterDialoguePoint Gertrude { get; private set; }
+		public Actor Gertrude { get; private set; }
+        private bool WillLoadNextRoom { get; set; }
+        private string NextRoomPath { get; set; }
+		private Godot.Collections.Array loadProgress;
+
 
 		public override void _Ready()
 		{
-			OnReady();
+            TransitionRect = GetNode<TransitionRect>("TransitionRect");
+            TransitionRect.Show();
+			TransitionRect.ShowPitchBlack();
+
+            OnReady();
+
+			TransitionRect.PlayAnimationBackwards();
 		}
 
 		public virtual void OnReady()
 		{
-			global = GetNode<Global>("/root/Global");
+            global = GetNode<Global>("/root/Global");
 			GameDisplay = GetNode<GameDisplay>("GameDisplay");
 			AudioPlayer = GetNode<AudioStreamPlayer>("AudioPlayer");
 			SavedGamesDisplay = GetNode<SavedGamesDisplay>("SavedGamesDisplay");
 			BattleDisplay = GetNode<BattleDisplay>("BattleDisplay");
 			CodeProblemPanel = GetNode<CodeProblemPanel>("CodeProblemPanel");
-			TransitionRect = GetNode<TransitionRect>("TransitionRect");
+			
 			AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 			Dialogue = GetNode<DialogueDisplay>("Dialogue");
 			GameOverDisplay = GetNode<GameOverDisplay>("GameOverDisplay");
@@ -60,11 +71,9 @@ namespace TheWizardCoder.Abstractions
 			Player = GetNode<Player>("Player");
 			Camera = GetNode<Camera2D>("Camera");
 
-			Gertrude = GetNode<CharacterDialoguePoint>("Gertrude");
+			Gertrude = GetNode<Actor>("Gertrude");
 
-			TransitionRect.Show();
-
-			global.PlayerData.Stats.LeveledUp += () => 
+            global.PlayerData.Stats.LeveledUp += () => 
 			{
 				global.CurrentRoom.LevelUp.ShowDisplay();
 			};
@@ -95,12 +104,35 @@ namespace TheWizardCoder.Abstractions
 				}
 			}
 			Player.DistanceWalked = 0;
-
-			TransitionRect.CallDeferred(TransitionRect.MethodName.PlayAnimationBackwards);
+			
 			global.CanWalk = true;
 		}
 
-		public async Task PlayCutscene(string name)
+        public override void _Process(double delta)
+        {
+            if (WillLoadNextRoom)
+            {
+				ResourceLoader.ThreadLoadStatus status = ResourceLoader.LoadThreadedGetStatus(NextRoomPath);
+
+                if (status == ResourceLoader.ThreadLoadStatus.Loaded)
+                {
+					Resource resource = ResourceLoader.LoadThreadedGet(NextRoomPath);
+					GetTree().ChangeSceneToPacked((PackedScene)resource);
+                }
+            }
+        }
+
+		public void TransitionToRoom(string room, string playerLocation, Direction direction)
+		{
+			global.LocationMarkerName = playerLocation;
+			global.PlayerDirection = direction;
+
+            NextRoomPath = $"res://scenes/rooms/{room}.tscn";
+            WillLoadNextRoom = true;
+            ResourceLoader.LoadThreadedRequest(NextRoomPath);
+		}
+
+        public async Task PlayCutscene(string name)
 		{
 			global.CanWalk = false;
 			global.GameDisplayEnabled = false;

@@ -96,15 +96,10 @@ namespace TheWizardCoder.Autoload
 
 		public void ChangeRoom(string room, string playerLocation, Direction direction)
 		{
-			var result = GetTree().ChangeSceneToFile($"res://scenes/rooms/{room}.tscn");
-			if (result == Error.Ok)
-			{
-				LocationMarkerName = playerLocation;
-				PlayerDirection = direction;
-			}
-		}
+			CurrentRoom.TransitionToRoom(room, playerLocation, direction);
+        }
 
-		public void GoToMainMenu()
+        public void GoToMainMenu()
 		{
 			GetTree().ChangeSceneToFile("res://scenes/rooms/main_menu.tscn");
 		}

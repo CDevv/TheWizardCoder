@@ -17,7 +17,7 @@ namespace TheWizardCoder.Rooms
 		[Export]
 		public Resource DialogueResource { get; set; }
 
-		private CharacterDialoguePoint berry;
+		private Actor berry;
 		private TileMap tileMap;
 		private NinePatchRect infoBoard;
 		private Label indexLabel;
@@ -27,7 +27,7 @@ namespace TheWizardCoder.Rooms
 		public override async void OnReady()
 		{
 			base.OnReady();
-			berry = GetNode<CharacterDialoguePoint>("Berry");
+			berry = GetNode<Actor>("Berry");
 			tileMap = GetNode<TileMap>("TileMap");
 			infoBoard = GetNode<NinePatchRect>("%InfoBoard");
 			indexLabel = GetNode<Label>("%IndexLabel");

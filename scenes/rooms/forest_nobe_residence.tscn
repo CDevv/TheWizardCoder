@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/rooms/ForestNobeResidence.cs" id="2_yo7nr"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="3_c133m"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_i61hm"]
-[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/character_dialogue_point.tscn" id="5_r7p1m"]
+[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/actor.tscn" id="5_r7p1m"]
 [ext_resource type="Texture2D" uid="uid://c0sg2gmqqu3s8" path="res://assets/characters/movement/nobeanims.png" id="6_4rp8o"]
 [ext_resource type="Resource" uid="uid://podtp1v3v8iu" path="res://dialogue/forest.dialogue" id="6_lkysj"]
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="9_bl1eu"]

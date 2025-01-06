@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="3_rbhxw"]
 [ext_resource type="Resource" uid="uid://dxv3wga5qop3d" path="res://dialogue/nolan_house.dialogue" id="3_tbp4q"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_qdfit"]
-[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/character_dialogue_point.tscn" id="6_ivmv4"]
+[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/actor.tscn" id="6_ivmv4"]
 [ext_resource type="SpriteFrames" uid="uid://bep08a0upkydb" path="res://assets/characters/movement/spriteframes/zenith.tres" id="7_8tyc7"]
 
 [sub_resource type="Animation" id="Animation_ow6c7"]

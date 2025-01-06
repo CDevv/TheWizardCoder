@@ -24,7 +24,7 @@ namespace TheWizardCoder.Components
 		private AnimationTree animationTree;
 		private Area2D interactableFinder;
 
-		public CharacterDialoguePoint Follower { get; set; }
+		public Actor Follower { get; set; }
 		public bool HasFollower { get; set; } = false;
 		public GroundEnemy Enemy { get; set; }
 
@@ -248,9 +248,9 @@ namespace TheWizardCoder.Components
 			DialogueManager.ShowDialogueBalloon(resource, title);
 		}
 
-		public CharacterDialoguePoint AddAlly(string name, bool setPos)
+		public Actor AddAlly(string name, bool setPos)
 		{
-			Follower = global.CurrentRoom.GetNode<CharacterDialoguePoint>(name);	
+			Follower = global.CurrentRoom.GetNode<Actor>(name);	
 			if (!global.PlayerData.Allies.Exists(x => x.Name == name))
 			{
 				global.PlayerData.Allies.Add(global.Characters[name]);

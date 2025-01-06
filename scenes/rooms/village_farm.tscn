@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="5_hwpiv"]
 [ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="6_eeq7a"]
 [ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="7_bewxe"]
-[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/character_dialogue_point.tscn" id="8_qga0w"]
+[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/actor.tscn" id="8_qga0w"]
 [ext_resource type="SpriteFrames" uid="uid://c3u650qgmryo7" path="res://assets/characters/movement/spriteframes/keenelm.tres" id="9_73pyg"]
 [ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/components/code_problem_point.tscn" id="10_qkqpl"]
 [ext_resource type="PackedScene" uid="uid://mmm0k3msmmm5" path="res://scenes/components/cutscene_point.tscn" id="12_1wghb"]

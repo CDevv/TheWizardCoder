@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="6_87sv2"]
 [ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/components/code_problem_point.tscn" id="7_nooi4"]
 [ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/components/save_point.tscn" id="8_h5iky"]
-[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/character_dialogue_point.tscn" id="9_hrcjo"]
+[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/actor.tscn" id="9_hrcjo"]
 [ext_resource type="SpriteFrames" uid="uid://b7q7c8vycomy0" path="res://assets/characters/movement/spriteframes/linton.tres" id="10_yrt8o"]
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="12_53b5a"]
 [ext_resource type="Texture2D" uid="uid://ssogye25ef45" path="res://assets/props/barrier.png" id="13_logau"]

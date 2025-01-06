@@ -12,14 +12,14 @@ namespace TheWizardCoder.Rooms
         [Export]
         public Resource DialogueResource { get; set; }
 
-        private CharacterDialoguePoint timothy;
-		private CharacterDialoguePoint gregory;
+        private Actor timothy;
+		private Actor gregory;
 
 		public override void OnReady()
 		{
 			base.OnReady();
-			timothy = GetNode<CharacterDialoguePoint>("Timothy");
-			gregory = GetNode<CharacterDialoguePoint>("Gregory");
+			timothy = GetNode<Actor>("Timothy");
+			gregory = GetNode<Actor>("Gregory");
 
 			if (!global.PlayerData.HasMetTimothy)
 			{

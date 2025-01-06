@@ -11,7 +11,7 @@ using TheWizardCoder.Utils;
 
 namespace TheWizardCoder.Interactables
 {
-	public partial class CharacterDialoguePoint : Interactable
+	public partial class Actor : Interactable
 	{
 		[Export]
 		public Resource DialogueResource { get; set; }

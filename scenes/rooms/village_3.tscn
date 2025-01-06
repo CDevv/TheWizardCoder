@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_85gv2"]
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="5_e8sk1"]
 [ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="6_7mst3"]
-[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/character_dialogue_point.tscn" id="7_ipt30"]
+[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/actor.tscn" id="7_ipt30"]
 [ext_resource type="SpriteFrames" uid="uid://d1gxee3phytrf" path="res://assets/characters/movement/spriteframes/dudeley.tres" id="8_20wkg"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_7v5mn"]

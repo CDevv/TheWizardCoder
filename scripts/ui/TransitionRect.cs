@@ -57,5 +57,10 @@ namespace TheWizardCoder.UI
 
 			await ToSignal(tween, Tween.SignalName.Finished);
 		}
+
+		public void ShowPitchBlack()
+		{
+			animationPlayer.Play("black");
+		}
 	}
 }

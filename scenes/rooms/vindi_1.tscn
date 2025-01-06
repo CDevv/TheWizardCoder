@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://ukx1i3qsx6q2" path="res://dialogue/vindi.dialogue" id="3_cmbel"]
 [ext_resource type="TileSet" uid="uid://g6httogfukc2" path="res://tilesets/vindi_env.tres" id="3_fhl15"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_yfsyw"]
-[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/character_dialogue_point.tscn" id="5_abc0n"]
+[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/actor.tscn" id="5_abc0n"]
 [ext_resource type="SpriteFrames" uid="uid://dbs50q2nx4m56" path="res://assets/characters/movement/spriteframes/timothy.tres" id="6_6p1xo"]
 [ext_resource type="SpriteFrames" uid="uid://ci3kqvtxxjgdg" path="res://assets/characters/movement/spriteframes/gregory.tres" id="8_6chff"]
 [ext_resource type="PackedScene" uid="uid://mmm0k3msmmm5" path="res://scenes/components/cutscene_point.tscn" id="9_c7nka"]

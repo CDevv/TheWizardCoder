@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_smlwp"]
 [ext_resource type="Script" path="res://scripts/rooms/ShimbleHouse.cs" id="2_t54dc"]
 [ext_resource type="TileSet" uid="uid://clhrfovy5lcgu" path="res://tilesets/houses_interiors.tres" id="3_7bms3"]
-[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/character_dialogue_point.tscn" id="4_nfibm"]
+[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/actor.tscn" id="4_nfibm"]
 [ext_resource type="SpriteFrames" uid="uid://be1stqnv5fl5x" path="res://assets/characters/movement/spriteframes/shimble.tres" id="5_yi567"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="6_c5qg6"]
 [ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="6_hk72q"]
