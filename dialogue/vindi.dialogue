@@ -25,4 +25,21 @@ else:
 	Nolan: [#portrait=0] Yeah.. I am!
 	Timothy: [#portrait=1] Mages have, like, cool magic spells or whatever. Can you try doing something about this?
 	Nolan: [#portrait=0] Yeah sure, I'll try.
+	Timothy: [#portrait=0] Alright, come inside and I'll tell ya the details.
+=> END!
+
+~ timothy_intro
+Timothy: [#portrait=0] Oh, heya! 
+Nolan: [#portrait=0] Hello! What details were you talking about?
+Timothy: [#portrait=0] Oh, right. 
+Timothy: [#portrait=0] Okay so I've noticed several spots 'round here that have strange stuff goin' on.
+Timothy: [#portrait=0] To the south of here is my friend Gregory's usual fishing spot. 
+Timothy: [#portrait=0] There are a couple of houses here and there. The issue is when you try to catch fish.
+Timothy: [#portrait=0] You always get strange black squares n stuff.. Dunno if that's nature's doing or some madlad playing around.
+Timothy: [#portrait=0] You could look into that.
+Nolan: [#portrait=0] Hmm.. alright. Anything else?
+Timothy: [#portrait=0] For now, no.
+Timothy: [#portrait=0] Also, may I know your name? So I know who to thank later, heh!
+Nolan: [#portrait=0] My name is Nolan. What about yours?
+Timothy: [#portrait=0] I'm Timothy!
 => END!

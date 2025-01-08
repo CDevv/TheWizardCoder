@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bcdc2k6p8yj3g"]
+[gd_scene load_steps=15 format=3 uid="uid://bcdc2k6p8yj3g"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_6m840"]
 [ext_resource type="Script" path="res://scripts/rooms/Vindi1.cs" id="2_r8lsh"]
@@ -66,6 +66,30 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(816, 694)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Timothy:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Gregory:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_xlo0y"]
 resource_name = "vindi_intro_2"
@@ -122,8 +146,61 @@ tracks/3/keys = {
 "values": [Vector2(816, 694)]
 }
 
+[sub_resource type="Animation" id="Animation_h1hts"]
+resource_name = "hide"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Timothy:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Gregory:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Timothy:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Gregory:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wwxtt"]
 _data = {
+"hide": SubResource("Animation_h1hts"),
 "setup": SubResource("Animation_yq2wi"),
 "vindi_intro_2": SubResource("Animation_xlo0y")
 }
@@ -145,7 +222,7 @@ limit_bottom = 1440
 [node name="Player" parent="." index="15" instance=ExtResource("2_r8xiv")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(952, 768)
+position = Vector2(536, 744)
 
 [node name="TileMap" type="TileMap" parent="." index="16"]
 y_sort_enabled = true
@@ -168,7 +245,10 @@ position = Vector2(1376, 768)
 [node name="TimothyMarker" type="Marker2D" parent="." index="19"]
 position = Vector2(976, 720)
 
-[node name="RaftWaterWarper" parent="." index="20" instance=ExtResource("4_yfsyw")]
+[node name="WarperPoint" type="Marker2D" parent="." index="20"]
+position = Vector2(976, 672)
+
+[node name="RaftWaterWarper" parent="." index="21" instance=ExtResource("4_yfsyw")]
 z_index = 2
 position = Vector2(-16, 776)
 scale = Vector2(1, 12)
@@ -176,7 +256,7 @@ TargetRoomName = "raft_water"
 TargetLocation = "VindiMarker"
 PlayerDirection = 2
 
-[node name="Section2Warper" parent="." index="21" instance=ExtResource("4_yfsyw")]
+[node name="Section2Warper" parent="." index="22" instance=ExtResource("4_yfsyw")]
 z_index = 2
 position = Vector2(1424, 744)
 scale = Vector2(1, 12)
@@ -184,14 +264,14 @@ TargetRoomName = "vindi_2"
 TargetLocation = "Section1Marker"
 PlayerDirection = 3
 
-[node name="TimothyHouseWarper" parent="." index="22" instance=ExtResource("4_yfsyw")]
+[node name="TimothyHouseWarper" parent="." index="23" instance=ExtResource("4_yfsyw")]
 z_index = 2
 position = Vector2(976, 656)
 TargetRoomName = "timothy_house"
 TargetLocation = "Marker"
 PlayerDirection = 1
 
-[node name="Timothy" parent="." index="23" groups=["chars"] instance=ExtResource("5_abc0n")]
+[node name="Timothy" parent="." index="24" groups=["chars"] instance=ExtResource("5_abc0n")]
 z_index = 1
 position = Vector2(768, 694)
 
@@ -200,7 +280,7 @@ position = Vector2(0, -34)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("6_6p1xo")
 
-[node name="Gregory" parent="." index="24" groups=["chars"] instance=ExtResource("5_abc0n")]
+[node name="Gregory" parent="." index="25" groups=["chars"] instance=ExtResource("5_abc0n")]
 z_index = 1
 position = Vector2(816, 694)
 
@@ -209,8 +289,9 @@ position = Vector2(0, -34)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("8_6chff")
 
-[node name="CutscenePoint" parent="." index="25" instance=ExtResource("9_c7nka")]
+[node name="CutscenePoint" parent="." index="26" instance=ExtResource("9_c7nka")]
 z_index = 2
 position = Vector2(640, 736)
 scale = Vector2(1, 12)
+PlaythroughPropertyName = "HasMetTimothy"
 RoomMethodName = "IntroCutscene"

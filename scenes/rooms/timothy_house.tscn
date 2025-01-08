@@ -1,9 +1,82 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwc15ui36p0fo"]
+[gd_scene load_steps=14 format=3 uid="uid://cwc15ui36p0fo"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_3eplx"]
+[ext_resource type="Script" path="res://scripts/rooms/TimothyHouse.cs" id="2_0o0xl"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_mk083"]
 [ext_resource type="TileSet" uid="uid://g6httogfukc2" path="res://tilesets/vindi_env.tres" id="3_tho2a"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_rp3ax"]
+[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/actor.tscn" id="5_6bhd4"]
+[ext_resource type="SpriteFrames" uid="uid://dbs50q2nx4m56" path="res://assets/characters/movement/spriteframes/timothy.tres" id="6_rccdu"]
+
+[sub_resource type="Animation" id="Animation_encrt"]
+resource_name = "timothy_intro"
+length = 2.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Timothy:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(352, 320), Vector2(352, 320), Vector2(448, 320), Vector2(448, 360)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Timothy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [0],
+"method": &"PlayIdleAnimation"
+}, {
+"args": ["right"],
+"method": &"PlayAnimation"
+}, {
+"args": ["down"],
+"method": &"PlayAnimation"
+}, {
+"args": [0],
+"method": &"PlayIdleAnimation"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(448, 376)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Player")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [1],
+"method": &"PlayIdleAnimation"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yfglj"]
+_data = {
+"timothy_intro": SubResource("Animation_encrt")
+}
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_xy2rp"]
 a = Vector2(128, 224)
@@ -23,6 +96,12 @@ b = Vector2(512, 384)
 
 [node name="TimothyHouse" instance=ExtResource("1_3eplx")]
 y_sort_enabled = true
+script = ExtResource("2_0o0xl")
+
+[node name="AnimationPlayer" parent="." index="5"]
+libraries = {
+"": SubResource("AnimationLibrary_yfglj")
+}
 
 [node name="ColorRect" type="ColorRect" parent="." index="15"]
 offset_right = 640.0
@@ -32,6 +111,7 @@ color = Color(0.117518, 0.0336082, 0, 1)
 [node name="Player" parent="." index="16" instance=ExtResource("2_mk083")]
 z_index = 1
 y_sort_enabled = true
+position = Vector2(448, 376)
 
 [node name="TileMap" type="TileMap" parent="." index="17"]
 y_sort_enabled = true
@@ -67,3 +147,11 @@ TargetLocation = "TimothyMarker"
 
 [node name="Marker" type="Marker2D" parent="." index="20"]
 position = Vector2(448, 376)
+
+[node name="Timothy" parent="." index="21" instance=ExtResource("5_6bhd4")]
+position = Vector2(448, 360)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Timothy" index="2"]
+position = Vector2(0, -32)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("6_rccdu")

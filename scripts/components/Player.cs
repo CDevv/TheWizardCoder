@@ -174,7 +174,14 @@ namespace TheWizardCoder.Components
 		public void Freeze()
 		{
 			global.CanWalk = false;
+			global.GameDisplayEnabled = false;
 			PlayIdleAnimation(Direction);
+		}
+
+		public void Unfreeze()
+		{
+			global.CanWalk = true;
+			global.GameDisplayEnabled = true;
 		}
 
 		public async void TransitionToRoom(Warper warper)

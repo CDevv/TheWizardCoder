@@ -103,7 +103,7 @@ namespace TheWizardCoder.Interactables
 
 					GlobalPosition += difference;
 
-					PlayAnimation(lastPathway.Direction.ToString().ToLower());
+					PlayAnimation(lastPathway.Direction);
 
 					pathways.Dequeue();	
 				}
@@ -120,9 +120,8 @@ namespace TheWizardCoder.Interactables
 			Vector2 difference = point - Position;
 			Vector2 normalizedDifference = difference.Normalized();
             Direction targetDirection = normalizedDifference.ToDirection();
-			string directionString = targetDirection.ToString().ToLower();
 
-            PlayAnimation(directionString);
+            PlayAnimation(targetDirection);
 
 			//float duration = difference.X > 0 ? (difference.X / speed) : (difference.Y / speed);
             Tween tween = GetTree().CreateTween();
@@ -137,6 +136,11 @@ namespace TheWizardCoder.Interactables
 		public void PlayAnimation(string name)
 		{
 			sprite.Play(name);
+		}
+
+		public void PlayAnimation(Direction direction)
+		{
+			PlayAnimation(direction.ToString().ToLower());
 		}
 
 		public void PlayIdleAnimation(Direction direction)
