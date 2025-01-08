@@ -40,52 +40,8 @@ namespace TheWizardCoder.Rooms
 
 		private async Task WalkToPlayer()
 		{
-			Direction targetDirection = Direction.Down;
-            if (Player.Position.Y > timothy.Position.Y)
-            {
-				targetDirection = Direction.Down;
-            }
-            else if (Player.Position.Y < timothy.Position.Y)
-            {
-				targetDirection = Direction.Up;
-            }
-            else
-            {
-				return;
-            }
-
-			await MakeTimothyMoveY(targetDirection);
-			await MakeTimothyMoveLeft();
-        }
-
-		private async Task MakeTimothyMoveY(Direction targetDirection)
-		{
-            timothy.PlayAnimation(targetDirection.ToString().ToLower());
-
-            Vector2 targetPosition = new Vector2(timothy.Position.X, Player.Position.Y);
-
-            Tween tween = GetTree().CreateTween();
-            tween.TweenProperty(timothy, "position", targetPosition, 2);
-            tween.Play();
-
-            await ToSignal(tween, Tween.SignalName.Finished);
-
-            timothy.PlayIdleAnimation(targetDirection);
-        }
-
-		private async Task MakeTimothyMoveLeft()
-		{
-			timothy.PlayAnimation("left");
-
-			Vector2 targetPosition = new Vector2(Player.Position.X + 32, Player.Position.Y);
-
-			Tween tween = GetTree().CreateTween();
-            tween.TweenProperty(timothy, "position", targetPosition, 2);
-            tween.Play();
-
-            await ToSignal(tween, Tween.SignalName.Finished);
-
-			timothy.PlayIdleAnimation(Direction.Left);
+			await timothy.WalkToPoint(new Vector2(timothy.Position.X, Player.Position.Y));
+			await timothy.WalkToPoint(new Vector2(Player.Position.X + 32, Player.Position.Y));
         }
 	}
 }

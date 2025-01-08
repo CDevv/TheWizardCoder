@@ -54,7 +54,7 @@ script = ExtResource("2_eh4xc")
 SceneFileName = "second_room"
 LocationName = "TestRoom"
 
-[node name="BattleDisplay" parent="." index="1"]
+[node name="BattleDisplay" parent="." index="2"]
 TutorialDialogueResource = null
 
 [node name="ColorRect" type="ColorRect" parent="." index="3"]
@@ -77,11 +77,6 @@ position = Vector2(736, 200)
 z_index = 1
 position = Vector2(251, 282)
 
-[node name="AnimationPlayer" parent="." index="8"]
-libraries = {
-"": SubResource("AnimationLibrary_atiyj")
-}
-
 [node name="FirstRoomMarker" type="Marker2D" parent="." index="9"]
 position = Vector2(176, 241)
 
@@ -97,14 +92,19 @@ position = Vector2(912, 207)
 TargetRoomName = "village_1"
 TargetLocation = "EnterVillageMarker"
 
-[node name="Camera" parent="." index="12"]
-limit_right = 1280
-limit_bottom = 960
+[node name="AnimationPlayer" parent="." index="12"]
+libraries = {
+"": SubResource("AnimationLibrary_atiyj")
+}
 
 [node name="BattlePoint" parent="." index="13" instance=ExtResource("5_5d3xc")]
 z_index = 2
 position = Vector2(736, 624)
 OnCollision = false
+
+[node name="Camera" parent="." index="14"]
+limit_right = 1280
+limit_bottom = 960
 
 [node name="CodeProblemPoint" parent="." index="16" instance=ExtResource("11_5aqh3")]
 z_index = 1

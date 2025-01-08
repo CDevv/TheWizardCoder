@@ -133,19 +133,19 @@ y_sort_enabled = true
 script = ExtResource("2_r8lsh")
 DialogueResource = ExtResource("3_cmbel")
 
-[node name="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" parent="." index="5"]
 libraries = {
 "": SubResource("AnimationLibrary_wwxtt")
 }
 
-[node name="Camera" parent="." index="5"]
+[node name="Camera" parent="." index="6"]
 limit_right = 1408
 limit_bottom = 1440
 
 [node name="Player" parent="." index="15" instance=ExtResource("2_r8xiv")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(584, 704)
+position = Vector2(952, 768)
 
 [node name="TileMap" type="TileMap" parent="." index="16"]
 y_sort_enabled = true
@@ -165,7 +165,10 @@ position = Vector2(40, 768)
 [node name="Section2Marker" type="Marker2D" parent="." index="18"]
 position = Vector2(1376, 768)
 
-[node name="RaftWaterWarper" parent="." index="19" instance=ExtResource("4_yfsyw")]
+[node name="TimothyMarker" type="Marker2D" parent="." index="19"]
+position = Vector2(976, 720)
+
+[node name="RaftWaterWarper" parent="." index="20" instance=ExtResource("4_yfsyw")]
 z_index = 2
 position = Vector2(-16, 776)
 scale = Vector2(1, 12)
@@ -173,7 +176,7 @@ TargetRoomName = "raft_water"
 TargetLocation = "VindiMarker"
 PlayerDirection = 2
 
-[node name="Section2Warper" parent="." index="20" instance=ExtResource("4_yfsyw")]
+[node name="Section2Warper" parent="." index="21" instance=ExtResource("4_yfsyw")]
 z_index = 2
 position = Vector2(1424, 744)
 scale = Vector2(1, 12)
@@ -181,7 +184,14 @@ TargetRoomName = "vindi_2"
 TargetLocation = "Section1Marker"
 PlayerDirection = 3
 
-[node name="Timothy" parent="." index="21" groups=["chars"] instance=ExtResource("5_abc0n")]
+[node name="TimothyHouseWarper" parent="." index="22" instance=ExtResource("4_yfsyw")]
+z_index = 2
+position = Vector2(976, 656)
+TargetRoomName = "timothy_house"
+TargetLocation = "Marker"
+PlayerDirection = 1
+
+[node name="Timothy" parent="." index="23" groups=["chars"] instance=ExtResource("5_abc0n")]
 z_index = 1
 position = Vector2(768, 694)
 
@@ -190,7 +200,7 @@ position = Vector2(0, -34)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("6_6p1xo")
 
-[node name="Gregory" parent="." index="22" groups=["chars"] instance=ExtResource("5_abc0n")]
+[node name="Gregory" parent="." index="24" groups=["chars"] instance=ExtResource("5_abc0n")]
 z_index = 1
 position = Vector2(816, 694)
 
@@ -199,7 +209,7 @@ position = Vector2(0, -34)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("8_6chff")
 
-[node name="CutscenePoint" parent="." index="23" instance=ExtResource("9_c7nka")]
+[node name="CutscenePoint" parent="." index="25" instance=ExtResource("9_c7nka")]
 z_index = 2
 position = Vector2(640, 736)
 scale = Vector2(1, 12)

@@ -8,6 +8,7 @@ using TheWizardCoder.Data;
 using System.Collections.Generic;
 using System.Linq;
 using TheWizardCoder.Utils;
+using System.Threading.Tasks;
 
 namespace TheWizardCoder.Interactables
 {
@@ -113,6 +114,25 @@ namespace TheWizardCoder.Interactables
 		{
 			return pathways.Peek();
 		}
+
+		public async Task WalkToPoint(Vector2 point)
+		{
+			Vector2 difference = point - Position;
+			Vector2 normalizedDifference = difference.Normalized();
+            Direction targetDirection = normalizedDifference.ToDirection();
+			string directionString = targetDirection.ToString().ToLower();
+
+            PlayAnimation(directionString);
+
+			//float duration = difference.X > 0 ? (difference.X / speed) : (difference.Y / speed);
+            Tween tween = GetTree().CreateTween();
+            tween.TweenProperty(this, "position", point, 2);
+            tween.Play();
+
+            await ToSignal(tween, Tween.SignalName.Finished);
+
+			PlayIdleAnimation(targetDirection);
+        }
 
 		public void PlayAnimation(string name)
 		{

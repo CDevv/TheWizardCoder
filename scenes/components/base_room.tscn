@@ -20,6 +20,7 @@ script = ExtResource("1_rfc1d")
 
 [node name="TransitionRect" parent="." instance=ExtResource("4_qu4y4")]
 layer = 2
+visible = false
 
 [node name="GameDisplay" parent="." instance=ExtResource("1_hid6f")]
 visible = false
