@@ -14,6 +14,9 @@ namespace TheWizardCoder.Interactables
 {
 	public partial class Actor : Interactable
 	{
+		[Signal]
+		public delegate void FinishedWalkingEventHandler();
+
 		[Export]
 		public Resource DialogueResource { get; set; }
 		[Export]
@@ -26,10 +29,11 @@ namespace TheWizardCoder.Interactables
 		private bool followingPlayer;	
 		private Queue<CharacterPathway> pathways = new();
 		private int speed = 2;
+		private bool walkingToPoint = false;
+		private Vector2 targetPoint = Vector2.Zero;
 
 		public AnimatedSprite2D Sprite { get { return sprite; } }
 		public bool FollowingPlayer { get { return followingPlayer; } }
-
 
 		public override void _Ready()
 		{
@@ -40,6 +44,23 @@ namespace TheWizardCoder.Interactables
 			sprite.Animation = "default";
 			sprite.Frame = (int)DefaultDirection;
 		}
+
+        public override void _Process(double delta)
+        {
+            if (walkingToPoint)
+            {
+                if (Position.DistanceTo(targetPoint) < 1)
+                {
+					walkingToPoint = false;
+					EmitSignal(SignalName.FinishedWalking);
+					return;
+                }
+
+				Vector2 difference = targetPoint - Position;
+                Vector2 normalizedDifference = difference.Normalized();
+                Position += normalizedDifference * speed;
+            }
+        }
 
         public override void Action()
 		{
@@ -117,23 +138,23 @@ namespace TheWizardCoder.Interactables
 
 		public async Task WalkToPoint(Vector2 point)
 		{
-			Vector2 difference = point - Position;
-			Vector2 normalizedDifference = difference.Normalized();
+			walkingToPoint = true;
+			targetPoint = point;
+
+            Vector2 difference = point - Position;
+
+            if (Math.Abs(difference.X) <= 1) difference.X = 0;
+            if (Math.Abs(difference.Y) <= 1) difference.Y = 0;
+
+            Vector2 normalizedDifference = difference.Normalized();
             Direction targetDirection = normalizedDifference.ToDirection();
 
             PlayAnimation(targetDirection);
-
-			//float duration = difference.X > 0 ? (difference.X / speed) : (difference.Y / speed);
-            Tween tween = GetTree().CreateTween();
-            tween.TweenProperty(this, "position", point, 2);
-            tween.Play();
-
-            await ToSignal(tween, Tween.SignalName.Finished);
-
-			PlayIdleAnimation(targetDirection);
+            await ToSignal(this, SignalName.FinishedWalking);
+            PlayIdleAnimation(targetDirection);
         }
 
-		public void PlayAnimation(string name)
+        public void PlayAnimation(string name)
 		{
 			sprite.Play(name);
 		}

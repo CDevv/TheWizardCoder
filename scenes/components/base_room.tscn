@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c7roc1nqcr3w0" path="res://scenes/displays/code_problem_panel.tscn" id="6_244tq"]
 [ext_resource type="PackedScene" uid="uid://b8wix4lm5g767" path="res://scenes/displays/dialogue_display.tscn" id="6_wcmrr"]
 [ext_resource type="PackedScene" uid="uid://o37pcggx0jjm" path="res://scenes/displays/game_over_display.tscn" id="8_w5sia"]
-[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/actor.tscn" id="9_7x1rq"]
+[ext_resource type="PackedScene" uid="uid://bk3a4lc0i5uwk" path="res://scenes/components/actor.tscn" id="9_7x1rq"]
 [ext_resource type="PackedScene" uid="uid://behqc54w4kgkd" path="res://scenes/displays/shop_display.tscn" id="9_0461u"]
 [ext_resource type="SpriteFrames" uid="uid://bep08a0upkydb" path="res://assets/characters/movement/spriteframes/zenith.tres" id="10_hkyc4"]
 [ext_resource type="PackedScene" uid="uid://bap5mf0chx1uc" path="res://scenes/displays/code_message_display.tscn" id="10_vippa"]

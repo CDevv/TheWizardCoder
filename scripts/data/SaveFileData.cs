@@ -83,6 +83,7 @@ namespace TheWizardCoder.Data
         public bool UsedRaft { get; set; } = false;
         public bool PassedWaterChallenges { get; set; } = false;
         public bool HasMetTimothy { get; set; } = false;
+        public bool HasMetGregory { get; set; } = false;
         public bool VisitedTimothyHouse { get; set; } = false;
 
         public SaveFileData(CharacterData stats)

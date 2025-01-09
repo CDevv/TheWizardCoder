@@ -38,8 +38,40 @@ Timothy: [#portrait=0] There are a couple of houses here and there. The issue is
 Timothy: [#portrait=0] You always get strange black squares n stuff.. Dunno if that's nature's doing or some madlad playing around.
 Timothy: [#portrait=0] You could look into that.
 Nolan: [#portrait=0] Hmm.. alright. Anything else?
-Timothy: [#portrait=0] For now, no.
+Timothy: [#portrait=0] You can talk to me again once you complete that one.
 Timothy: [#portrait=0] Also, may I know your name? So I know who to thank later, heh!
 Nolan: [#portrait=0] My name is Nolan. What about yours?
 Timothy: [#portrait=0] I'm Timothy!
+Nolan: [#portrait=0] Nice to meet you! My name is Nolan.
+=> END!
+
+~ gregory_point
+Gregory: [#portrait=0] Oh, heya!
+if GetPlayerData("HasMetGregory"):
+	Gregory: [#portrait=0] So, did ya fix that fishing thing yet?
+	Nolan: [#portrait=0] Nope..
+else:
+	if GetPlayerData("HasMetTimothy"):
+		Nolan: [#portrait=0] Heya! You must be the other wolf's friend!
+		Gregory: [#portrait=0] Yeah, I am. His name is Timothy, though.
+		Nolan: [#portrait=0] Oh, okay.
+		Gregory: [#portrait=0] And mine is Gregory.
+	else:
+		Nolan: [#portrait=0] Heya! You must be Timothy's friend!
+		Gregory: [#portrait=0] Yeah, I am!
+		Gregory: [#portrait=0] My name is Gregory. And you?
+		Nolan: [#portrait=0] My name is Nolan, nice to meet ya!
+		
+	Gregory: [#portrait=0] So.. you a mage, huh? We have quite strange stuff happenin' here.. 
+	Gregory: [#portrait=0] Other than the everyday snow, of course.
+	
+	if GetPlayerData("VisitedTimothyHouse"):
+		Nolan: [#portrait=0] If you mean the weird fishing phenomenon, then Timothy already told me.
+		Gregory: [#portrait=0] Oh. Alright then, good luck on that!
+	else:
+		Gregory: [#portrait=0] So.. I usually spend my time fishing. My usual fishing spot is to the south of here. Go right and then south. 
+		Gregory: [#portrait=0] There's a an anomaly when you bring out your fishing rod and use it. After a while, you catch.. weird black squares..
+		Nolan: [#portrait=0] Oh.. I see. Got it.
+		
+do SetPlayerData("HasMetGregory", true)
 => END!

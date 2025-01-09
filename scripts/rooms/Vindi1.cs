@@ -57,9 +57,14 @@ namespace TheWizardCoder.Rooms
 			gregory.PlayIdleAnimation(Direction.Down);
 
 			Vector2 point2 = GetNode<Marker2D>("WarperPoint").Position;
-			await timothy.WalkToPoint(new Vector2(timothyHouseMarker.Position.X, timothy.Position.Y));
-			await timothy.WalkToPoint(new Vector2(timothy.Position.X, point2.Y));
-			timothy.Hide();
-		}
+
+            if (timothy.Position.Y < point2.Y)
+            {
+                await timothy.WalkToPoint(new Vector2(timothy.Position.X, timothyHouseMarker.Position.Y));
+            }
+            await timothy.WalkToPoint(new Vector2(timothyHouseMarker.Position.X, timothy.Position.Y));
+            await timothy.WalkToPoint(new Vector2(timothy.Position.X, point2.Y));
+            timothy.Hide();
+        }
 	}
 }

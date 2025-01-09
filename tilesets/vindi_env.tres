@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://g6httogfukc2"]
+[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://dqirfdrc3jlyd"]
 
 [ext_resource type="Texture2D" uid="uid://c24oaehv3n0vc" path="res://assets/tilesets/vindi-env.png" id="1_p8ew0"]
 [ext_resource type="Texture2D" uid="uid://ddmxsfg4smb8r" path="res://assets/tilesets/forest-env.png" id="2_jyalx"]
