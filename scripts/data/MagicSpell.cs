@@ -11,6 +11,7 @@ namespace TheWizardCoder.Data
         public string Description { get; private set; }
         public int Effect { get; private set; }
         public int Cost { get; private set; }
+        public int ShopPrice { get; set; }
         public CharacterType TargetType { get; private set; }
 
         public void ApplyDictionary(Dictionary<string, Variant> dict)
@@ -19,6 +20,7 @@ namespace TheWizardCoder.Data
             Description = (string)dict["Description"];
             Effect = (int)dict["Effect"];
             Cost = (int)dict["Cost"];
+            ShopPrice = (int)dict["ShopPrice"];
             TargetType = Enum.Parse<CharacterType>((string)dict["TargetType"]);
         }
     }

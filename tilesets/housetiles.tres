@@ -1,6 +1,7 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://b00p342wf54q8"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://b00p342wf54q8"]
 
 [ext_resource type="Texture2D" uid="uid://dqkr47csbh7xv" path="res://assets/tilesets/wizardhouseassets.png" id="1_cqtg7"]
+[ext_resource type="Texture2D" uid="uid://c24oaehv3n0vc" path="res://assets/tilesets/vindi-env.png" id="2_xcalq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jvs0i"]
 texture = ExtResource("1_cqtg7")
@@ -68,6 +69,20 @@ texture = ExtResource("1_cqtg7")
 3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:0/0/physics_layer_0/angular_velocity = 0.0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ohc52"]
+texture = ExtResource("2_xcalq")
+0:13/size_in_atlas = Vector2i(3, 4)
+0:13/0 = 0
+0:13/0/texture_origin = Vector2i(-16, 24)
+0:13/0/y_sort_origin = -8
+0:13/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:13/0/physics_layer_0/angular_velocity = 0.0
+3:13/size_in_atlas = Vector2i(3, 2)
+3:13/0 = 0
+3:13/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:13/0/physics_layer_0/angular_velocity = 0.0
+
 [resource]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_jvs0i")
+sources/1 = SubResource("TileSetAtlasSource_ohc52")

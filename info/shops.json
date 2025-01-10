@@ -1,12 +1,20 @@
 {
 	"TestShop":{
+		"Type": "Item",
 		"Items": [
 			"item", "Apple"
 		]
 	},
 	"NobeShop":{
+		"Type": "Item",
 		"Items": [
 			"Apple", "Apple Juice", "Purple Fruit"
+		]
+	},
+	"TestMagic":{
+		"Type": "Magic",
+		"Items": [
+			"Fireball", "Fireball2"
 		]
 	}
 }

@@ -37,6 +37,7 @@ namespace TheWizardCoder.Abstractions
 		public Player Player { get; private set; }
 		public Camera2D Camera { get; private set; }
 		public Actor Gertrude { get; private set; }
+
         private bool WillLoadNextRoom { get; set; }
         private string NextRoomPath { get; set; }
 		private Godot.Collections.Array loadProgress;

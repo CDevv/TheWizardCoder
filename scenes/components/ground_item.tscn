@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dej8mnaswqovl"]
+
+[ext_resource type="Script" path="res://scripts/interactables/GroundItem.cs" id="1_4u1jv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ifu41"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_neb3d"]
+size = Vector2(32, 8)
+
+[node name="GroundItem" type="Area2D"]
+script = ExtResource("1_4u1jv")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ifu41")
+debug_color = Color(0.340539, 0.604783, 0.411051, 0.42)
+
+[node name="StaticBody" type="StaticBody2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="StaticBody"]
+unique_name_in_owner = true
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_neb3d")
+debug_color = Color(0.130953, 0.332105, 0.259076, 0.42)

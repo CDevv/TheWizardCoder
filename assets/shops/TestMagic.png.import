@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2dpwk6p1w706"
-path="res://.godot/imported/JuniorBug.png-f19ff72617532d4946030154b442bb89.ctex"
+uid="uid://bkfcqhysp5d14"
+path="res://.godot/imported/TestMagic.png-bb1110a9317cbbe7ff43d15a084fa7e1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/JuniorBug.png"
-dest_files=["res://.godot/imported/JuniorBug.png-f19ff72617532d4946030154b442bb89.ctex"]
+source_file="res://assets/shops/TestMagic.png"
+dest_files=["res://.godot/imported/TestMagic.png-bb1110a9317cbbe7ff43d15a084fa7e1.ctex"]
 
 [params]
 

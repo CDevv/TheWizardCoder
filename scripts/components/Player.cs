@@ -31,9 +31,9 @@ namespace TheWizardCoder.Components
 		public int PlayerSpeed { get; private set; } = DefaultSpeed;
 		public float DistanceWalked { get; set; } = 0;
 		public bool CameraEnabled { get; set; } = true;
+        public new Vector2 Velocity { get; set; }
 
-
-		public override void _Ready()	
+        public override void _Ready()	
 		{
 			global = GetNode<Global>("/root/Global");
 			animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
@@ -63,6 +63,8 @@ namespace TheWizardCoder.Components
 			{
 				PlayerSpeed = DefaultSpeed;
 			}
+
+			Velocity = velocity;
 
 			if (velocity == Vector2.Zero)
 			{
@@ -117,11 +119,6 @@ namespace TheWizardCoder.Components
 					if (Follower.FollowingPlayer)
 					{
 						Follower.AddPathwayPoint(velocity.ToDirection(), GlobalPosition, PlayerSpeed);
-					}
-					
-					if (DistanceWalked >= 32)
-					{
-						Follower.FollowPlayer();
 					}
 				}
 			}

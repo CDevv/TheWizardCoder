@@ -9,11 +9,14 @@ using System.Collections.Generic;
 using System.Linq;
 using TheWizardCoder.Utils;
 using System.Threading.Tasks;
+using TheWizardCoder.Autoload;
 
 namespace TheWizardCoder.Interactables
 {
-	public partial class Actor : Interactable
+	public partial class Actor : CharacterBody2D
 	{
+		private const int PixelsPerSecond = 120; //120 pixels per frame
+
 		[Signal]
 		public delegate void FinishedWalkingEventHandler();
 
@@ -24,29 +27,42 @@ namespace TheWizardCoder.Interactables
 		[Export]
 		public Direction DefaultDirection { get; set; } = Direction.Down;
 
-		private AnimatedSprite2D sprite;
-		private CollisionShape2D collision;
+		private Global global;
+		private ActorInteractable interactable;
+        private CollisionShape2D collision;
+        private AnimatedSprite2D sprite;
 		private bool followingPlayer;	
 		private Queue<CharacterPathway> pathways = new();
-		private int speed = 2;
 		private bool walkingToPoint = false;
 		private Vector2 targetPoint = Vector2.Zero;
 
 		public AnimatedSprite2D Sprite { get { return sprite; } }
 		public bool FollowingPlayer { get { return followingPlayer; } }
+		public int Speed { get; set; } = 2;
 
-		public override void _Ready()
+        public override void _Ready()
 		{
-			base._Ready();
-			collision = GetNode<CollisionShape2D>("%Collision");
+			global = GetNode<Global>("/root/Global");
+
+			interactable = GetNode<ActorInteractable>("Interactable");
+			collision = GetNode<CollisionShape2D>("BodyCollision");
 			sprite = GetNode<AnimatedSprite2D>("Sprite");
 
 			sprite.Animation = "default";
 			sprite.Frame = (int)DefaultDirection;
+
+			interactable.DialogueResource = DialogueResource;
+			interactable.DialogueTitle = DialogueTitle;
+			interactable.DefaultDirection = DefaultDirection;
+			interactable.Sprite = sprite;
+
+			
 		}
 
-        public override void _Process(double delta)
+        public override void _PhysicsProcess(double delta)
         {
+			Speed = global.CurrentRoom.Player.PlayerSpeed;
+
             if (walkingToPoint)
             {
                 if (Position.DistanceTo(targetPoint) < 1)
@@ -58,17 +74,16 @@ namespace TheWizardCoder.Interactables
 
 				Vector2 difference = targetPoint - Position;
                 Vector2 normalizedDifference = difference.Normalized();
-                Position += normalizedDifference * speed;
+				Vector2 velocity = normalizedDifference * PixelsPerSecond * (float)delta;
+                
+				MoveAndCollide(velocity);
+            }
+
+            if (followingPlayer && global.CurrentRoom.Player.DistanceWalked >= 32)
+            {
+				FollowPlayer();
             }
         }
-
-        public override void Action()
-		{
-			Player player = global.CurrentRoom.Player;
-			sprite.Frame = global.ReverseDirections[(int)player.Direction];
-			global.CurrentRoom.Dialogue.ShowDisplay(DialogueResource, DialogueTitle);
-			global.CurrentRoom.Dialogue.DialogueEnded += OnDialogueEnded;
-		}
 
         public void MakeFollower()
 		{
@@ -82,14 +97,14 @@ namespace TheWizardCoder.Interactables
 
 		public void EnableFollowing()
 		{
-			Active = false;
+			interactable.Active = false;
 			followingPlayer = true;
 			collision.Disabled = true;
 		}
 
 		public void DisableFollowing()
 		{
-			Active = true;
+			interactable.Active = true;
 			followingPlayer = false;
 			collision.Disabled = false;
 
@@ -107,29 +122,25 @@ namespace TheWizardCoder.Interactables
 			AddPathwayPoint(DefaultDirection, Position, 2);
 		}
 
-		public bool IsQueueEmpty()
-		{
-			return pathways.Count == 0;
-		}
-
 		public void FollowPlayer()
 		{
-			if (followingPlayer)
-			{
-				if (pathways.Count > 0)
-				{
-					CharacterPathway lastPathway = pathways.Peek();
-					Vector2 lastPos = lastPathway.Position;
-					Vector2 difference = lastPos - Position;
+            if (pathways.Count > 0 && global.CurrentRoom.Player.Velocity != Vector2.Zero)
+            {
+                CharacterPathway lastPathway = pathways.Peek();
+                Vector2 lastPos = lastPathway.Position;
+                Vector2 difference = lastPos - Position;
+                Vector2 velocity = difference.Normalized() * lastPathway.Speed;
 
-					GlobalPosition += difference;
+                MoveAndCollide(velocity);
 
-					PlayAnimation(lastPathway.Direction);
+                PlayAnimation(lastPathway.Direction);
 
-					pathways.Dequeue();	
-				}
-			}
-		}
+                if (lastPos.DistanceTo(Position) < 1)
+                {
+                    pathways.Dequeue();
+                }
+            }
+        }
 
 		public CharacterPathway PeekPathway()
 		{
@@ -169,12 +180,6 @@ namespace TheWizardCoder.Interactables
 			sprite.Stop();
 			sprite.Animation = "default";
 			sprite.Frame = (int)direction;
-		}
-
-		private void OnDialogueEnded(string initialTitle, string title)
-		{
-			sprite.Frame = (int)DefaultDirection;
-			global.CurrentRoom.Dialogue.DialogueEnded -= OnDialogueEnded;
 		}
 	}
 }

@@ -134,5 +134,12 @@ MeetGertrude();
 		"Type": "Heal",
 		"Effect": 20,
 		"Price": 15
+	},
+	"Fishing Rod":{
+		"Description":"Catch fish!",
+		"Type": "Key",
+		"Effect": 0,
+		"Price": 25,
+		"AdditionalData": []
 	}
 }

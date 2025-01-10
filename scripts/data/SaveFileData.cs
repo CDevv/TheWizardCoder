@@ -42,11 +42,11 @@ namespace TheWizardCoder.Data
         {      
             get
             {
-                return magicSpells;
+                return Stats.MagicSpells;
             }
             private set
             {
-                magicSpells = value;
+                Stats.MagicSpells = value;
             }
         }
 

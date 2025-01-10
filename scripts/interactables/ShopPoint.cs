@@ -2,15 +2,21 @@ using Godot;
 using System;
 using TheWizardCoder.Abstractions;
 
-public partial class ShopPoint : Interactable
+namespace TheWizardCoder.Interactables
 {
-	public override void _Ready()
-	{
-		base._Ready();
-	}
-
-    public override void Action()
+    public partial class ShopPoint : Interactable
     {
-        global.OpenShop("TestShop");
+        [Export]
+        public string ShopName { get; set; }
+
+        public override void _Ready()
+        {
+            base._Ready();
+        }
+
+        public override void Action()
+        {
+            global.OpenShop(ShopName);
+        }
     }
 }

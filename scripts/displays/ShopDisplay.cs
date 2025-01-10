@@ -154,14 +154,33 @@ public partial class ShopDisplay : Display
 
 	private void ShowDescription(string itemName)
 	{
-		int possession = global.PlayerData.Inventory.Count(x => x == itemName);
-		Item item = global.ItemDescriptions[itemName];
+		descriptionRect.Show();	
 
-		descriptionRect.Show();
-		description.Text = item.Description;
-		priceLabel.Text = $"Price: {item.Price}";
-		possessionLabel.Text = $"Possesion: {possession}";
-	}
+        if (Shop.Type == ShopType.Item)
+        {
+            int possession = global.PlayerData.Inventory.Count(x => x == itemName);
+            Item item = global.ItemDescriptions[itemName];
+
+            description.Text = item.Description;
+            priceLabel.Text = $"Price: {item.Price}";
+            possessionLabel.Text = $"Possesion: {possession}";
+        }
+        else
+        {
+			MagicSpell spell = global.MagicSpells[itemName];
+			description.Text = spell.Description;
+            priceLabel.Text = $"Price: {spell.ShopPrice}";
+
+            if (global.PlayerData.MagicSpells.Contains(itemName))
+            {
+				possessionLabel.Text = "Owned";
+            }
+            else
+            {
+                possessionLabel.Text = "";
+            }
+        }
+    }
 
 	private Button UpdateShopItems()
 	{
@@ -216,6 +235,8 @@ public partial class ShopDisplay : Display
 
 	private void OnSellButton()
 	{
+		if (Shop.Type == ShopType.Magic) return;
+
 		level = 1;
 
 		shopHint.Hide();		
@@ -234,28 +255,59 @@ public partial class ShopDisplay : Display
 
 	private void OnItemButton(int index, string itemName, ShopAction shopAction)
 	{
-		Item item = global.ItemDescriptions[itemName];
-
-		switch (shopAction)
+		switch (Shop.Type)
 		{
-			case ShopAction.Buy:
-				if (item.Price <= global.PlayerData.Gold && item.Sellable)
-				{
-					chosenItem = itemName;
-					quantityRect.Show();
-					quantityField.Reset();
-					quantityField.GrabFocus();
-				}
+			case ShopType.Item:
+				OnItem(index, itemName, shopAction);
 				break;
-			case ShopAction.Sell:
-				global.PlayerData.Gold += item.Price;
-				global.PlayerData.RemoveFromInventory(index);
-				UpdateDisplay();
-				ShowDisplay();
-				level = 0;
+			case ShopType.Magic:
+				OnMagicSpell(index, itemName, shopAction);
 				break;
 		}
 	}
+
+	private void OnItem(int index, string itemName, ShopAction shopAction)
+	{
+        Item item = global.ItemDescriptions[itemName];
+
+        switch (shopAction)
+        {
+            case ShopAction.Buy:
+                if (item.Price <= global.PlayerData.Gold && item.Sellable)
+                {
+                    chosenItem = itemName;
+                    quantityRect.Show();
+                    quantityField.Reset();
+                    quantityField.GrabFocus();
+                }
+                break;
+            case ShopAction.Sell:
+                global.PlayerData.Gold += item.Price;
+                global.PlayerData.RemoveFromInventory(index);
+                UpdateDisplay();
+                ShowDisplay();
+                level = 0;
+                break;
+        }
+    }
+
+	private void OnMagicSpell(int index, string spellName, ShopAction shopAction)
+	{
+		MagicSpell magicSpell = global.MagicSpells[spellName];
+
+        if (shopAction == ShopAction.Sell || global.PlayerData.MagicSpells.Contains(spellName))
+        {
+			return;
+        }
+
+        if (magicSpell.ShopPrice <= global.PlayerData.Gold)
+        {
+			global.PlayerData.Gold -= magicSpell.ShopPrice;
+			global.PlayerData.AddMagicSpell(spellName);
+            UpdateDisplay();
+            ShowDisplay();
+        }
+    }
 
 	private void OnQuantityField()
 	{
