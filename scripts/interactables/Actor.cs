@@ -39,6 +39,7 @@ namespace TheWizardCoder.Interactables
 		public AnimatedSprite2D Sprite { get { return sprite; } }
 		public bool FollowingPlayer { get { return followingPlayer; } }
 		public int Speed { get; set; } = 2;
+        public CharacterPathway LastPathway { get; set; }
 
         public override void _Ready()
 		{
@@ -55,13 +56,18 @@ namespace TheWizardCoder.Interactables
 			interactable.DialogueTitle = DialogueTitle;
 			interactable.DefaultDirection = DefaultDirection;
 			interactable.Sprite = sprite;
-
-			
 		}
 
         public override void _PhysicsProcess(double delta)
         {
-			Speed = global.CurrentRoom.Player.PlayerSpeed;
+            if (global.CurrentRoom.Player.IsSprinting)
+            {
+				Speed = Player.DefaultSpeed * 2;
+            }
+            else
+            {
+				Speed = Player.DefaultSpeed;
+            }
 
             if (walkingToPoint)
             {
@@ -81,7 +87,7 @@ namespace TheWizardCoder.Interactables
 
             if (followingPlayer && global.CurrentRoom.Player.DistanceWalked >= 32)
             {
-				FollowPlayer();
+				FollowPlayer(delta);
             }
         }
 
@@ -122,22 +128,56 @@ namespace TheWizardCoder.Interactables
 			AddPathwayPoint(DefaultDirection, Position, 2);
 		}
 
-		public void FollowPlayer()
+		public void FollowPlayer(double delta)
 		{
-            if (pathways.Count > 0 && global.CurrentRoom.Player.Velocity != Vector2.Zero)
+            if (global.CurrentRoom.Player.Velocity != Vector2.Zero)
             {
-                CharacterPathway lastPathway = pathways.Peek();
-                Vector2 lastPos = lastPathway.Position;
-                Vector2 difference = lastPos - Position;
-                Vector2 velocity = difference.Normalized() * lastPathway.Speed;
-
-                MoveAndCollide(velocity);
-
-                PlayAnimation(lastPathway.Direction);
-
-                if (lastPos.DistanceTo(Position) < 1)
+                if (pathways.Count > 0)
                 {
-                    pathways.Dequeue();
+                    CharacterPathway peekedPathway = pathways.Peek();
+                    Vector2 lastPos = peekedPathway.Position;
+                    Vector2 difference = lastPos - Position;
+                    Vector2 velocity = difference.Normalized() * Speed;
+
+                    MoveAndCollide(velocity);
+
+                    if (LastPathway == null)
+                    {
+                        PlayAnimation(peekedPathway.Direction);
+                    }
+                    else
+                    {
+                        PlayAnimation(LastPathway.Direction);
+                    }
+
+                    if (lastPos.DistanceTo(Position) < 2)
+                    {
+                        LastPathway = pathways.Dequeue();
+                    }
+                }
+				else
+				{
+                    Vector2 lastPos = global.CurrentRoom.Player.Position;
+                    Vector2 difference = lastPos - Position;
+                    Vector2 velocity = difference.Normalized() * Speed;
+
+                    if (lastPos.DistanceTo(Position) >= 32)
+                    {
+                        MoveAndCollide(velocity);
+                    }
+
+                    PlayAnimation(LastPathway.Direction);
+                }
+            }
+            else
+            {
+                if (pathways.Count > 0)
+                {
+                    PlayIdleAnimation(pathways.Peek().Direction);
+                }
+                else
+                {
+                    PlayIdleAnimation(LastPathway.Direction);
                 }
             }
         }

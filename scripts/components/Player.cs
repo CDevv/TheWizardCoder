@@ -18,11 +18,11 @@ namespace TheWizardCoder.Components
 		public delegate void AnimationFinishedEventHandler();
 		public Direction Direction { get; private set; }
 		public const int DefaultSpeed = 2;
-		private bool isSprinting = false;
 		private Global global;
 		private AnimationPlayer animationPlayer;
 		private AnimationTree animationTree;
 		private Area2D interactableFinder;
+		private Vector2 lastDirection;
 
 		public Actor Follower { get; set; }
 		public bool HasFollower { get; set; } = false;
@@ -32,6 +32,7 @@ namespace TheWizardCoder.Components
 		public float DistanceWalked { get; set; } = 0;
 		public bool CameraEnabled { get; set; } = true;
         public new Vector2 Velocity { get; set; }
+		public bool IsSprinting { get; private set; } = false;
 
         public override void _Ready()	
 		{
@@ -54,7 +55,7 @@ namespace TheWizardCoder.Components
 			Vector2 direction = Input.GetVector("left", "right", "up", "down").Normalized();
 			Vector2 velocity = direction * DefaultSpeed;
 
-			if (isSprinting || global.Settings.AutoSprint)
+			if (IsSprinting || global.Settings.AutoSprint)
 			{
 				velocity *= 2;
 				PlayerSpeed = DefaultSpeed * 2;
@@ -107,21 +108,19 @@ namespace TheWizardCoder.Components
 
 			if (Follower != null && collision == null)
 			{
-				if (velocity == Vector2.Zero)
+				if (velocity != Vector2.Zero)
 				{
-					if (Follower.FollowingPlayer)
-					{
-						Follower.PlayIdleAnimation(Follower.PeekPathway().Direction);
-					}
-				}
-				else
-				{
-					if (Follower.FollowingPlayer)
-					{
-						Follower.AddPathwayPoint(velocity.ToDirection(), GlobalPosition, PlayerSpeed);
-					}
-				}
+                    if (Follower.FollowingPlayer)
+                    {
+                        if (lastDirection != direction)
+                        {
+                            Follower.AddPathwayPoint(Direction, GlobalPosition, PlayerSpeed);
+                        }
+                    }
+                }
 			}
+
+			lastDirection = direction;
 		}
 
 		public override void _UnhandledInput(InputEvent @event)
@@ -158,12 +157,12 @@ namespace TheWizardCoder.Components
 
 			if (Input.IsActionPressed("sprint"))
 			{
-				isSprinting = true;
+				IsSprinting = true;
 				animationTree.Set("parameters/TimeScale/scale", 2);
 			}
 			else 
 			{
-				isSprinting = false;
+				IsSprinting = false;
 				animationTree.Set("parameters/TimeScale/scale", 1);
 			}
 		}

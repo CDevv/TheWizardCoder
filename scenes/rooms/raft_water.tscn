@@ -663,12 +663,12 @@ TextBoxScene = ExtResource("4_d6m5c")
 SceneFileName = "raft_water"
 LocationName = "Forest Coast"
 
-[node name="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" parent="." index="5"]
 libraries = {
 "": SubResource("AnimationLibrary_pol5j")
 }
 
-[node name="Camera" parent="." index="5"]
+[node name="Camera" parent="." index="6"]
 position = Vector2(-64, 1144)
 limit_right = 6016
 limit_bottom = 1696

@@ -159,7 +159,7 @@ y_sort_enabled = true
 script = ExtResource("2_8lcbe")
 DialogueResource = ExtResource("3_cauah")
 
-[node name="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" parent="." index="5"]
 libraries = {
 "": SubResource("AnimationLibrary_fijve")
 }
@@ -171,7 +171,6 @@ color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." index="14" instance=ExtResource("2_u3uxm")]
 z_index = 1
-y_sort_enabled = true
 position = Vector2(320, 360)
 
 [node name="TileMap" type="TileMap" parent="." index="15"]

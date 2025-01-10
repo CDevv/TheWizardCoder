@@ -178,12 +178,10 @@ position = Vector2(704, 416)
 [node name="ShopPoint" parent="." index="29" instance=ExtResource("14_0us7x")]
 z_index = 2
 position = Vector2(208, 464)
-ShopName = "TestShop"
 
 [node name="ShopPoint2" parent="." index="30" instance=ExtResource("14_0us7x")]
 z_index = 2
 position = Vector2(336, 464)
-ShopName = "TestMagic"
 
 [node name="ZenDummy" parent="." index="32"]
 visible = true
@@ -191,7 +189,7 @@ position = Vector2(592, 224)
 DialogueResource = ExtResource("8_bj7jj")
 DialogueTitle = "demo"
 
-[node name="Sprite" parent="ZenDummy" index="3"]
+[node name="Sprite" parent="ZenDummy" index="2"]
 position = Vector2(0, -32)
 
 [node name="GroundItem" parent="." index="34" instance=ExtResource("15_d8wuq")]

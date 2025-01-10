@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk3a4lc0i5uwk"]
+[gd_scene load_steps=5 format=3 uid="uid://bk3a4lc0i5uwk"]
 
 [ext_resource type="Script" path="res://scripts/interactables/Actor.cs" id="1_jp4ki"]
 [ext_resource type="Script" path="res://scripts/interactables/ActorInteractable.cs" id="2_gcden"]
@@ -8,8 +8,6 @@ size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jw71i"]
 size = Vector2(22, 14)
-
-[sub_resource type="Curve2D" id="Curve2D_fov7m"]
 
 [node name="Actor" type="CharacterBody2D"]
 script = ExtResource("1_jp4ki")
@@ -29,8 +27,3 @@ z_index = 2
 position = Vector2(0, -9)
 shape = SubResource("RectangleShape2D_jw71i")
 debug_color = Color(1.15514e-06, 0.3932, 0.461628, 0.42)
-
-[node name="Path" type="Path2D" parent="."]
-curve = SubResource("Curve2D_fov7m")
-
-[node name="PathFollow" type="PathFollow2D" parent="Path"]
