@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2dpwk6p1w706"
-path="res://.godot/imported/JuniorBug.png-f19ff72617532d4946030154b442bb89.ctex"
+uid="uid://ctciyjp51g04j"
+path="res://.godot/imported/craiganims.png-8df73cd3e8a0eae9836d8d0225853c52.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/JuniorBug.png"
-dest_files=["res://.godot/imported/JuniorBug.png-f19ff72617532d4946030154b442bb89.ctex"]
+source_file="res://assets/characters/movement/craiganims.png"
+dest_files=["res://.godot/imported/craiganims.png-8df73cd3e8a0eae9836d8d0225853c52.ctex"]
 
 [params]
 

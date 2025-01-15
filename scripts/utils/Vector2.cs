@@ -55,5 +55,20 @@ namespace TheWizardCoder.Utils
 		
 			return direction;
         }
+
+		public static bool IsInOneDirection(Vector2 direction)
+		{
+			bool result = false;
+
+            if (direction == Vector2.Down
+				|| direction == Vector2.Up
+				|| direction == Vector2.Left
+				|| direction == Vector2.Right)
+            {
+				result = true;
+            }
+
+			return result;
+        }
     }
 }

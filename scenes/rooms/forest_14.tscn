@@ -10,13 +10,12 @@
 [node name="Forest14" instance=ExtResource("1_48ikr")]
 y_sort_enabled = true
 
-[node name="Camera" parent="." index="5"]
+[node name="Camera" parent="." index="6"]
 limit_right = 2496
 limit_bottom = 1856
 
 [node name="Player" parent="." index="13" instance=ExtResource("2_hlpkc")]
 z_index = 1
-y_sort_enabled = true
 
 [node name="TileMap" type="TileMap" parent="." index="14"]
 y_sort_enabled = true

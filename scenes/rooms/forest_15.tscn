@@ -267,19 +267,18 @@ script = ExtResource("2_6mc3w")
 DialogueResource = ExtResource("3_7xdu7")
 DefaultMarkerName = "Section14Marker"
 
-[node name="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" parent="." index="5"]
 libraries = {
 "": SubResource("AnimationLibrary_i8b2k")
 }
 
-[node name="Camera" parent="." index="5"]
+[node name="Camera" parent="." index="6"]
 position = Vector2(1008, 408)
 limit_right = 2080
 limit_bottom = 928
 
 [node name="Player" parent="." index="13" instance=ExtResource("2_a4heb")]
 z_index = 1
-y_sort_enabled = true
 position = Vector2(1008, 408)
 
 [node name="TileMap" type="TileMap" parent="." index="14"]

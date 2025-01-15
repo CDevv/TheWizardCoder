@@ -260,7 +260,7 @@ position = Vector2(1376, 768)
 position = Vector2(976, 720)
 
 [node name="WarperPoint" type="Marker2D" parent="." index="20"]
-position = Vector2(976, 672)
+position = Vector2(976, 688)
 
 [node name="RaftWaterWarper" parent="." index="21" instance=ExtResource("4_yfsyw")]
 z_index = 2

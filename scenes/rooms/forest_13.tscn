@@ -8,13 +8,12 @@
 [node name="Forest13" instance=ExtResource("1_ukknh")]
 y_sort_enabled = true
 
-[node name="Camera" parent="." index="5"]
+[node name="Camera" parent="." index="6"]
 limit_right = 2304
 limit_bottom = 1536
 
 [node name="Player" parent="." index="12" instance=ExtResource("2_gknf4")]
 z_index = 1
-y_sort_enabled = true
 position = Vector2(2272, 568)
 
 [node name="TileMap" type="TileMap" parent="." index="13"]

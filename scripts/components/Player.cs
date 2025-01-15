@@ -23,6 +23,7 @@ namespace TheWizardCoder.Components
 		private AnimationTree animationTree;
 		private Area2D interactableFinder;
 		private Vector2 lastDirection;
+		private AnimatedSprite2D animatedSprite;
 
 		public Actor Follower { get; set; }
 		public bool HasFollower { get; set; } = false;
@@ -41,6 +42,8 @@ namespace TheWizardCoder.Components
 			animationTree = GetNode<AnimationTree>("AnimationTree");
 			interactableFinder = GetNode<Area2D>("InteractableFinder");
 
+			animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+
 			DistanceWalked = 0;
 		}
 
@@ -50,10 +53,9 @@ namespace TheWizardCoder.Components
 			{
 				return;
 			}
-			animationTree.Set("parameters/conditions/extrastate", false);
 
-			Vector2 direction = Input.GetVector("left", "right", "up", "down").Normalized();
-			Vector2 velocity = direction * DefaultSpeed;
+			Vector2 directionVector = Input.GetVector("left", "right", "up", "down").Normalized();
+			Vector2 velocity = directionVector * DefaultSpeed;
 
 			if (IsSprinting || global.Settings.AutoSprint)
 			{
@@ -67,22 +69,21 @@ namespace TheWizardCoder.Components
 
 			Velocity = velocity;
 
-			if (velocity == Vector2.Zero)
+            if (directionVector != Vector2.Zero)
+            {
+                Direction = directionVector.ToDirection();
+            }
+
+            if (velocity == Vector2.Zero)
 			{
-				animationTree.Set("parameters/Transition/transition_request", "idle");
+				PlayIdleAnimation(Direction);
 			}
 			else
 			{
-				animationTree.Set("parameters/Transition/transition_request", "move");
+				PlayMoveAnimation(directionVector);
 			}
 
-			if (direction != Vector2.Zero)
-			{
-				ChangeDirection(direction);
-				Direction = direction.ToDirection();
-			}
-
-			if (global.CurrentRoom.Camera != null && CameraEnabled)
+            if (global.CurrentRoom.Camera != null && CameraEnabled)
 			{
 				global.CurrentRoom.Camera.Set(Camera2D.PropertyName.Position, Position + velocity);
 			}
@@ -112,7 +113,7 @@ namespace TheWizardCoder.Components
 				{
                     if (Follower.FollowingPlayer)
                     {
-                        if (lastDirection != direction)
+                        if (lastDirection != directionVector)
                         {
                             Follower.AddPathwayPoint(Direction, GlobalPosition, PlayerSpeed);
                         }
@@ -120,7 +121,7 @@ namespace TheWizardCoder.Components
                 }
 			}
 
-			lastDirection = direction;
+			lastDirection = directionVector;
 		}
 
 		public override void _UnhandledInput(InputEvent @event)
@@ -167,7 +168,43 @@ namespace TheWizardCoder.Components
 			}
 		}
 
-		public void Freeze()
+        public void PlaySideAnimation(string name)
+        {
+            animatedSprite.Play(name);
+        }
+
+        public void PlayIdleAnimation(Direction direction)
+        {
+			Direction = direction;
+
+			animatedSprite.Stop();
+
+            animatedSprite.Animation = "default";
+            animatedSprite.Frame = (int)direction;
+
+            interactableFinder.Rotation = direction.ToVector().Angle() - (Mathf.Pi / 2);
+        }
+
+        public void PlayMoveAnimation(Direction direction)
+        {
+			Direction = direction;
+
+            animatedSprite.Play(direction.ToString().ToLower());
+
+            interactableFinder.Rotation = direction.ToVector().Angle() - (Mathf.Pi / 2);
+        }
+
+        public void PlayMoveAnimation(Vector2 direction)
+        {
+            if (!Vector2Helper.IsInOneDirection(direction))
+            {
+                return;
+            }
+
+            PlayMoveAnimation(direction.ToDirection());
+        }
+
+        public void Freeze()
 		{
 			global.CanWalk = false;
 			global.GameDisplayEnabled = false;
@@ -210,41 +247,22 @@ namespace TheWizardCoder.Components
 
 		public void ChangeDirection(Vector2 vectorDirection)
 		{
-			animationTree.Set("parameters/Idle/blend_position", vectorDirection);
-			animationTree.Set("parameters/Move/blend_position", vectorDirection);
+			//animationTree.Set("parameters/Idle/blend_position", vectorDirection);
+			//animationTree.Set("parameters/Move/blend_position", vectorDirection);
 		}
 
 		public void ChangeDirection(Direction direction)
 		{
 			//Vector2 resultVector = global.GetDirectionVector(direction);
-			Vector2 resultVector = direction.ToVector();
+			//Vector2 resultVector = direction.ToVector();
 
-			animationTree.Set("parameters/Idle/blend_position", resultVector);
-			animationTree.Set("parameters/Move/blend_position", resultVector);
+			//animationTree.Set("parameters/Idle/blend_position", resultVector);
+			//animationTree.Set("parameters/Move/blend_position", resultVector);
 		}
 
-		public void PlaySideAnimation(string name)
-		{
-			animationTree.Set("parameters/Transition/transition_request", "extra");
-			animationTree.Set("parameters/Extra/transition_request", name);
+		
 
-			Task finishedAnimation = new Task(async () => {
-				await ToSignal(animationTree, AnimationTree.SignalName.AnimationFinished);
-				EmitSignal(SignalName.AnimationFinished);
-			});
-		}
-
-		public void PlayIdleAnimation(Direction direction)
-		{
-			animationTree.Set("parameters/Transition/transition_request", "idle");
-			ChangeDirection(direction);
-		}
-
-		public void PlayMoveAnimation(Direction direction)
-		{
-			animationTree.Set("parameters/Transition/transition_request", "move");
-			ChangeDirection(direction);
-		}
+		
 
 		public void ShowDialogueBallon(Resource resource, string title)
 		{

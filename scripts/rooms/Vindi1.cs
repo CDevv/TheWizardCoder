@@ -65,6 +65,7 @@ namespace TheWizardCoder.Rooms
             await timothy.WalkToPoint(new Vector2(timothyHouseMarker.Position.X, timothy.Position.Y));
             await timothy.WalkToPoint(new Vector2(timothy.Position.X, point2.Y));
             timothy.Hide();
+			timothy.Position = new(0, 0);
         }
 	}
 }

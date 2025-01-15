@@ -1,7 +1,5 @@
 using Godot;
 using System;
-using DialogueManagerRuntime;
-using TheWizardCoder.Abstractions;
 using TheWizardCoder.Enums;
 using TheWizardCoder.Components;
 using TheWizardCoder.Data;
@@ -35,6 +33,7 @@ namespace TheWizardCoder.Interactables
 		private Queue<CharacterPathway> pathways = new();
 		private bool walkingToPoint = false;
 		private Vector2 targetPoint = Vector2.Zero;
+		private Direction direction;
 
 		public AnimatedSprite2D Sprite { get { return sprite; } }
 		public bool FollowingPlayer { get { return followingPlayer; } }
@@ -212,6 +211,8 @@ namespace TheWizardCoder.Interactables
 
 		public void PlayAnimation(Direction direction)
 		{
+			this.direction = direction;
+
 			PlayAnimation(direction.ToString().ToLower());
 		}
 

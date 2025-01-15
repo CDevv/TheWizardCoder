@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2dpwk6p1w706"
-path="res://.godot/imported/JuniorBug.png-f19ff72617532d4946030154b442bb89.ctex"
+uid="uid://bmwhgmtvomkql"
+path="res://.godot/imported/wizard-fishing.png-89ba4a1009d007c5e555aba8cc62e48a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/JuniorBug.png"
-dest_files=["res://.godot/imported/JuniorBug.png-f19ff72617532d4946030154b442bb89.ctex"]
+source_file="res://assets/characters/movement/wizard-fishing.png"
+dest_files=["res://.godot/imported/wizard-fishing.png-89ba4a1009d007c5e555aba8cc62e48a.ctex"]
 
 [params]
 
