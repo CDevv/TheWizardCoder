@@ -385,6 +385,7 @@ texture = ExtResource("2_jyalx")
 0:15/0 = 0
 0:15/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:15/0/physics_layer_0/angular_velocity = 0.0
+0:15/0/custom_data_0 = true
 0:16/animation_frame_0/duration = 1.0
 0:16/animation_frame_1/duration = 1.0
 0:16/animation_frame_2/duration = 1.0
@@ -634,6 +635,8 @@ texture = ExtResource("3_feuk5")
 
 [resource]
 physics_layer_0/collision_layer = 1
+custom_data_layer_0/name = "isWater"
+custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_1w6mj")
 sources/1 = SubResource("TileSetAtlasSource_bvu6t")
 sources/2 = SubResource("TileSetAtlasSource_bquyk")

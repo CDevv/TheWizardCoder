@@ -125,7 +125,19 @@ namespace TheWizardCoder.Displays
 			{
 				if (item.AdditionalData.Length > 0)
 				{
-					global.CurrentRoom.Get(item.AdditionalData[0]).As<Node>().Call("ShowDisplay", item.AdditionalData[1]);
+                    if (item.AdditionalData[0] == "Display")
+                    {
+                        global.CurrentRoom.Get(item.AdditionalData[1]).As<Node>().Call("ShowDisplay", item.AdditionalData[2]);
+                    }
+                    else if (item.AdditionalData[0] == "RoomMethod")
+                    {
+						global.CurrentRoom.Call(item.AdditionalData[1], item.AdditionalData[2]);
+                    }
+					else if (item.AdditionalData[0] == "PlayerMethod")
+					{
+                        global.CurrentRoom.Player.Call(item.AdditionalData[1], item.AdditionalData[2]);
+                    }
+                    
 					level = 0;
 					HideDisplay();
 					HideAllSubdisplays();

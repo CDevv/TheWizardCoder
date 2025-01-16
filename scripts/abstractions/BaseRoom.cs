@@ -37,8 +37,9 @@ namespace TheWizardCoder.Abstractions
 		public Player Player { get; private set; }
 		public Camera2D Camera { get; private set; }
 		public Actor Gertrude { get; private set; }
+		public TileMap TileMap { get; private set; }
 
-        private bool WillLoadNextRoom { get; set; }
+		private bool WillLoadNextRoom { get; set; }
         private string NextRoomPath { get; set; }
 		private Godot.Collections.Array loadProgress;
 
@@ -71,6 +72,7 @@ namespace TheWizardCoder.Abstractions
 			LevelUp = GetNode<LevelUpDisplay>("LevelUpDisplay");
 			Player = GetNode<Player>("Player");
 			Camera = GetNode<Camera2D>("Camera");
+			TileMap = GetNode<TileMap>("TileMap");
 
 			Gertrude = GetNode<Actor>("Gertrude");
 
@@ -161,6 +163,14 @@ namespace TheWizardCoder.Abstractions
 		public async Task TweenCameraToPlayer(float duration)
 		{
 			await TweenCamera(Player.Position, duration);
+		}
+
+		public TileData GetTileAtPosition(int layer, Vector2 position)
+		{
+			Vector2I tileMapPos = TileMap.LocalToMap(position);
+			Vector2I atlasPos = TileMap.GetCellAtlasCoords(layer, tileMapPos);
+			TileData tileData = TileMap.GetCellTileData(layer, atlasPos);
+			return tileData;
 		}
 	}
 }

@@ -45,7 +45,7 @@
 		"Description":"Instructions.",
 		"Type": "Key",
 		"Effect": 0,
-		"AdditionalData": ["CodeMessage",
+		"AdditionalData": ["Display","CodeMessage",
 		"GoRight();
 		"]
 	},
@@ -53,7 +53,7 @@
 		"Description":"Instructions.",
 		"Type": "Key",
 		"Effect": 0,
-		"AdditionalData": ["CodeMessage",
+		"AdditionalData": ["Display","CodeMessage",
 		"GoRight();
 GoUp();
 		"]
@@ -62,7 +62,7 @@ GoUp();
 		"Description":"Instructions.",
 		"Type": "Key",
 		"Effect": 0,
-		"AdditionalData": ["CodeMessage",
+		"AdditionalData": ["Display","CodeMessage",
 		"GoUp();
 GoLeft();
 GoLeft();
@@ -73,7 +73,7 @@ GoUp();
 		"Description":"Instructions.",
 		"Type": "Key",
 		"Effect": 0,
-		"AdditionalData": ["CodeMessage",
+		"AdditionalData": ["Display","CodeMessage",
 		"GoUp();
 GoRight();
 GoUp();
@@ -83,7 +83,7 @@ GoUp();
 		"Description":"Instructions.",
 		"Type": "Key",
 		"Effect": 0,
-		"AdditionalData": ["CodeMessage",
+		"AdditionalData": ["Display","CodeMessage",
 		"GoUp();
 GoRight();
 GoUp();
@@ -94,7 +94,7 @@ GoUp();
 		"Description":"Instructions.",
 		"Type": "Key",
 		"Effect": 0,
-		"AdditionalData": ["CodeMessage",
+		"AdditionalData": ["Display","CodeMessage",
 		"GoUp();
 GoRight();
 GoDown();
@@ -107,7 +107,7 @@ GoRight();
 		"Description":"Instructions.",
 		"Type": "Key",
 		"Effect": 0,
-		"AdditionalData": ["CodeMessage",
+		"AdditionalData": ["Display","CodeMessage",
 		"GoRight();
 GoUp();
 GoUp();
@@ -120,7 +120,7 @@ MeetGertrude();
 		"Description":"Instructions.",
 		"Type": "Key",
 		"Effect": 0,
-		"AdditionalData": ["CodeMessage",
+		"AdditionalData": ["Display","CodeMessage",
 		"MeetGertrude();"]
 	},
 	"Apple Juice":{
@@ -140,6 +140,6 @@ MeetGertrude();
 		"Type": "Key",
 		"Effect": 0,
 		"Price": 25,
-		"AdditionalData": []
+		"AdditionalData": ["PlayerMethod","EquipItem","Fishing Rod"]
 	}
 }

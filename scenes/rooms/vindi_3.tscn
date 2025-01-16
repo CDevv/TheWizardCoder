@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dv4ul8ri4osvw"]
+[gd_scene load_steps=8 format=3 uid="uid://bt13160l1g2sc"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_4t6ux"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_5ga1n"]
-[ext_resource type="TileSet" uid="uid://g6httogfukc2" path="res://tilesets/vindi_env.tres" id="3_p5r1r"]
+[ext_resource type="TileSet" uid="uid://dqirfdrc3jlyd" path="res://tilesets/vindi_env.tres" id="3_p5r1r"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_m8d4p"]
+[ext_resource type="PackedScene" path="res://scenes/components/ground_item.tscn" id="5_4t3cp"]
+[ext_resource type="Texture2D" uid="uid://ssogye25ef45" path="res://assets/props/barrier.png" id="6_e61ka"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_dx5vu"]
 a = Vector2(128, 968)
@@ -12,13 +14,14 @@ b = Vector2(128, 920)
 [node name="Vindi3" instance=ExtResource("1_4t6ux")]
 y_sort_enabled = true
 
-[node name="Camera" parent="." index="5"]
+[node name="Camera" parent="." index="6"]
 limit_right = 1792
 limit_bottom = 1216
 
 [node name="Player" parent="." index="15" instance=ExtResource("2_5ga1n")]
 z_index = 1
 y_sort_enabled = true
+position = Vector2(344, 712)
 
 [node name="TileMap" type="TileMap" parent="." index="16"]
 y_sort_enabled = true
@@ -58,3 +61,13 @@ scale = Vector2(1, 10)
 TargetRoomName = "vindi_6"
 TargetLocation = "Section3Marker"
 PlayerDirection = 3
+
+[node name="GroundItem" parent="." index="22" instance=ExtResource("5_4t3cp")]
+z_index = 1
+position = Vector2(256, 688)
+ItemName = "Fishing Rod"
+
+[node name="Sprite" type="Sprite2D" parent="GroundItem" index="2"]
+position = Vector2(0, -8)
+scale = Vector2(2, 2)
+texture = ExtResource("6_e61ka")

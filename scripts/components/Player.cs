@@ -24,6 +24,8 @@ namespace TheWizardCoder.Components
 		private Area2D interactableFinder;
 		private Vector2 lastDirection;
 		private AnimatedSprite2D animatedSprite;
+		private Vector2 normalPosition = new(0, -35);
+		private Vector2 equippedPosition = new(0, -22);
 
 		public Actor Follower { get; set; }
 		public bool HasFollower { get; set; } = false;
@@ -32,8 +34,10 @@ namespace TheWizardCoder.Components
 		public int PlayerSpeed { get; private set; } = DefaultSpeed;
 		public float DistanceWalked { get; set; } = 0;
 		public bool CameraEnabled { get; set; } = true;
-        public new Vector2 Velocity { get; set; }
+        public new Vector2 Velocity { get; private set; }
 		public bool IsSprinting { get; private set; } = false;
+		public bool IsItemEquipped { get; private set; } = false;
+		public string EquippedItem { get; private set; }
 
         public override void _Ready()	
 		{
@@ -124,7 +128,7 @@ namespace TheWizardCoder.Components
 			lastDirection = directionVector;
 		}
 
-		public override void _UnhandledInput(InputEvent @event)
+		public override async void _UnhandledInput(InputEvent @event)
 		{
 			if (Input.IsActionJustPressed("ui_accept"))
 			{
@@ -134,29 +138,65 @@ namespace TheWizardCoder.Components
 				}
 
 				var overlappingAreas = interactableFinder.GetOverlappingAreas();
-				if (overlappingAreas.Count > 0 && global.CanWalk)
+				if (overlappingAreas.Count > 0)
 				{
-					global.CanWalk = false;
+                    if (global.CanWalk)
+                    {
+                        global.CanWalk = false;
 
-					for (int i = 0; i < overlappingAreas.Count; i++)
-					{
-						Interactable interactable = (Interactable)overlappingAreas[i];
-						
-						if (interactable.Active)
-						{
-							PlayIdleAnimation(Direction);
-							interactable.Action();
-							break;
-						}
-						else
-						{
-							interactable.OnNotActive();
-						}
-					}
+                        for (int i = 0; i < overlappingAreas.Count; i++)
+                        {
+                            Interactable interactable = (Interactable)overlappingAreas[i];
+
+                            if (interactable.Active)
+                            {
+                                PlayIdleAnimation(Direction);
+                                interactable.Action();
+                                break;
+                            }
+                            else
+                            {
+                                interactable.OnNotActive();
+                            }
+                        }
+                    }
 				}
-			}
+                else
+                {
+                    if (IsItemEquipped)
+                    {
+						TileData tileData = global.CurrentRoom.GetTileAtPosition(1, Position + Direction.ToVector() * 24);
+						GD.Print(tileData.GetCustomData("isWater"));
+                        if (EquippedItem == "Fishing Rod" && tileData.GetCustomData("isWater").AsBool())
+                        {
+							global.CanWalk = false;
+							global.GameDisplayEnabled = false;
 
-			if (Input.IsActionPressed("sprint"))
+							animatedSprite.Position = equippedPosition;
+							animatedSprite.Play("fish_down");
+                        }
+                    }
+                }
+            }
+
+            if (Input.IsActionJustPressed("ui_cancel"))
+            {
+                if (IsItemEquipped)
+                {
+					animatedSprite.PlayBackwards("fish_down");
+
+					await ToSignal(animatedSprite, AnimatedSprite2D.SignalName.AnimationFinished);
+					animatedSprite.Position = normalPosition;
+
+                    global.CanWalk = true;
+                    global.GameDisplayEnabled = true;
+					IsItemEquipped = false;
+
+					PlayIdleAnimation(Direction);
+                }
+            }
+
+            if (Input.IsActionPressed("sprint"))
 			{
 				IsSprinting = true;
 				animationTree.Set("parameters/TimeScale/scale", 2);
@@ -166,6 +206,17 @@ namespace TheWizardCoder.Components
 				IsSprinting = false;
 				animationTree.Set("parameters/TimeScale/scale", 1);
 			}
+		}
+
+		public void EquipItem(string item)
+		{
+			IsItemEquipped = true;
+			EquippedItem = item;
+		}
+
+        public void Unequip()
+		{
+			IsItemEquipped = false;
 		}
 
         public void PlaySideAnimation(string name)
@@ -189,7 +240,7 @@ namespace TheWizardCoder.Components
         {
 			Direction = direction;
 
-            animatedSprite.Play(direction.ToString().ToLower());
+            animatedSprite.Play(direction.ToString().ToLower(), PlayerSpeed / 2);
 
             interactableFinder.Rotation = direction.ToVector().Angle() - (Mathf.Pi / 2);
         }

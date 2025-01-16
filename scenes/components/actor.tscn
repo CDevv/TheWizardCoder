@@ -1,29 +1,28 @@
 [gd_scene load_steps=5 format=3 uid="uid://bk3a4lc0i5uwk"]
 
 [ext_resource type="Script" path="res://scripts/interactables/Actor.cs" id="1_jp4ki"]
-[ext_resource type="Script" path="res://scripts/interactables/ActorInteractable.cs" id="2_gcden"]
+[ext_resource type="Script" path="res://scripts/interactables/ActorInteractable.cs" id="2_ano2p"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ved1"]
-size = Vector2(32, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jw71i"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yl0hy"]
 size = Vector2(22, 14)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fly64"]
+size = Vector2(32, 32)
+
 [node name="Actor" type="CharacterBody2D"]
+y_sort_enabled = true
 script = ExtResource("1_jp4ki")
-
-[node name="Interactable" type="Area2D" parent="."]
-position = Vector2(0, -16)
-script = ExtResource("2_gcden")
-
-[node name="Detection" type="CollisionShape2D" parent="Interactable"]
-z_index = 2
-shape = SubResource("RectangleShape2D_6ved1")
-debug_color = Color(0.252721, 0.952149, 0.851056, 0.42)
 
 [node name="BodyCollision" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
-z_index = 2
 position = Vector2(0, -9)
-shape = SubResource("RectangleShape2D_jw71i")
+shape = SubResource("RectangleShape2D_yl0hy")
 debug_color = Color(1.15514e-06, 0.3932, 0.461628, 0.42)
+
+[node name="Interactable" type="Area2D" parent="."]
+script = ExtResource("2_ano2p")
+
+[node name="Detection" type="CollisionShape2D" parent="Interactable"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_fly64")
+debug_color = Color(0.252721, 0.952149, 0.851056, 0.42)
