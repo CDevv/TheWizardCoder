@@ -36,8 +36,11 @@ namespace TheWizardCoder.Components
 		public bool CameraEnabled { get; set; } = true;
         public new Vector2 Velocity { get; private set; }
 		public bool IsSprinting { get; private set; } = false;
-		public bool IsItemEquipped { get; private set; } = false;
-		public string EquippedItem { get; private set; }
+
+		private bool isItemEquipped = false;
+		private string equippedItem;
+
+		private bool itemIsInUse = false;
 
         public override void _Ready()	
 		{
@@ -163,17 +166,21 @@ namespace TheWizardCoder.Components
 				}
                 else
                 {
-                    if (IsItemEquipped)
+                    if (isItemEquipped)
                     {
-						TileData tileData = global.CurrentRoom.GetTileAtPosition(1, Position + Direction.ToVector() * 24);
-						GD.Print(tileData.GetCustomData("isWater"));
-                        if (EquippedItem == "Fishing Rod" && tileData.GetCustomData("isWater").AsBool())
+						TileData tileData = global.CurrentRoom.GetTileAtPosition(1, Position + (Direction.ToVector() * 24));
+                        if (equippedItem == "Fishing Rod" && tileData.GetCustomData("isWater").AsBool())
                         {
-							global.CanWalk = false;
-							global.GameDisplayEnabled = false;
+							if (!itemIsInUse)
+							{
+                                itemIsInUse = true;
 
-							animatedSprite.Position = equippedPosition;
-							animatedSprite.Play("fish_down");
+                                global.CanWalk = false;
+                                global.GameDisplayEnabled = false;
+
+                                animatedSprite.Position = equippedPosition;
+                                animatedSprite.Play("fish_" + Direction.ToString().ToLower());
+                            }
                         }
                     }
                 }
@@ -181,16 +188,17 @@ namespace TheWizardCoder.Components
 
             if (Input.IsActionJustPressed("ui_cancel"))
             {
-                if (IsItemEquipped)
+                if (isItemEquipped && itemIsInUse)
                 {
-					animatedSprite.PlayBackwards("fish_down");
+					animatedSprite.PlayBackwards("fish_" + Direction.ToString().ToLower());
 
 					await ToSignal(animatedSprite, AnimatedSprite2D.SignalName.AnimationFinished);
 					animatedSprite.Position = normalPosition;
 
                     global.CanWalk = true;
                     global.GameDisplayEnabled = true;
-					IsItemEquipped = false;
+					isItemEquipped = false;
+					itemIsInUse = false;
 
 					PlayIdleAnimation(Direction);
                 }
@@ -210,13 +218,13 @@ namespace TheWizardCoder.Components
 
 		public void EquipItem(string item)
 		{
-			IsItemEquipped = true;
-			EquippedItem = item;
+			isItemEquipped = true;
+			equippedItem = item;
 		}
 
         public void Unequip()
 		{
-			IsItemEquipped = false;
+			isItemEquipped = false;
 		}
 
         public void PlaySideAnimation(string name)

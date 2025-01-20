@@ -167,9 +167,10 @@ namespace TheWizardCoder.Abstractions
 
 		public TileData GetTileAtPosition(int layer, Vector2 position)
 		{
-			Vector2I tileMapPos = TileMap.LocalToMap(position);
-			Vector2I atlasPos = TileMap.GetCellAtlasCoords(layer, tileMapPos);
-			TileData tileData = TileMap.GetCellTileData(layer, atlasPos);
+			Vector2 localPosition = TileMap.ToLocal(position);
+            Vector2I tileMapPos = TileMap.LocalToMap(localPosition);
+
+			TileData tileData = TileMap.GetCellTileData(layer, tileMapPos);
 			return tileData;
 		}
 	}

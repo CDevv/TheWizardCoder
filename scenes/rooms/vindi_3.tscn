@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_5ga1n"]
 [ext_resource type="TileSet" uid="uid://dqirfdrc3jlyd" path="res://tilesets/vindi_env.tres" id="3_p5r1r"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_m8d4p"]
-[ext_resource type="PackedScene" path="res://scenes/components/ground_item.tscn" id="5_4t3cp"]
-[ext_resource type="Texture2D" uid="uid://ssogye25ef45" path="res://assets/props/barrier.png" id="6_e61ka"]
+[ext_resource type="PackedScene" uid="uid://dej8mnaswqovl" path="res://scenes/components/ground_item.tscn" id="5_4t3cp"]
+[ext_resource type="Texture2D" uid="uid://scn2mtj1ksw3" path="res://assets/props/fishingrod.png" id="6_745g3"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_dx5vu"]
 a = Vector2(128, 968)
@@ -64,10 +64,11 @@ PlayerDirection = 3
 
 [node name="GroundItem" parent="." index="22" instance=ExtResource("5_4t3cp")]
 z_index = 1
+y_sort_enabled = true
 position = Vector2(256, 688)
 ItemName = "Fishing Rod"
 
 [node name="Sprite" type="Sprite2D" parent="GroundItem" index="2"]
-position = Vector2(0, -8)
+position = Vector2(0, -14)
 scale = Vector2(2, 2)
-texture = ExtResource("6_e61ka")
+texture = ExtResource("6_745g3")
