@@ -14,7 +14,10 @@ namespace TheWizardCoder.Components
 {
 	public partial class Player : CharacterBody2D
 	{
-		[Signal]
+        [Export]
+        public Resource SnippetsResource { get; set; }
+
+        [Signal]
 		public delegate void AnimationFinishedEventHandler();
 		public Direction Direction { get; private set; }
 		public const int DefaultSpeed = 2;
@@ -178,8 +181,12 @@ namespace TheWizardCoder.Components
                                 global.CanWalk = false;
                                 global.GameDisplayEnabled = false;
 
+								
                                 animatedSprite.Position = equippedPosition;
                                 animatedSprite.Play("fish_" + Direction.ToString().ToLower());
+
+                                SceneTreeTimer timer = GetTree().CreateTimer(5);
+								timer.Timeout += OnFishingTimeout;
                             }
                         }
                     }
@@ -188,20 +195,7 @@ namespace TheWizardCoder.Components
 
             if (Input.IsActionJustPressed("ui_cancel"))
             {
-                if (isItemEquipped && itemIsInUse)
-                {
-					animatedSprite.PlayBackwards("fish_" + Direction.ToString().ToLower());
-
-					await ToSignal(animatedSprite, AnimatedSprite2D.SignalName.AnimationFinished);
-					animatedSprite.Position = normalPosition;
-
-                    global.CanWalk = true;
-                    global.GameDisplayEnabled = true;
-					isItemEquipped = false;
-					itemIsInUse = false;
-
-					PlayIdleAnimation(Direction);
-                }
+				Unequip();
             }
 
             if (Input.IsActionPressed("sprint"))
@@ -220,12 +214,50 @@ namespace TheWizardCoder.Components
 		{
 			isItemEquipped = true;
 			equippedItem = item;
+
+            if (item == "Fishing Rod")
+            {
+                global.CurrentRoom.ShowDisplay("FishingDisplay");
+            }
+        }
+
+        public async Task Unequip()
+		{
+            if (equippedItem == "Fishing Rod")
+            {
+                if (isItemEquipped && itemIsInUse)
+                {
+                    animatedSprite.PlayBackwards("fish_" + Direction.ToString().ToLower());
+
+                    await ToSignal(animatedSprite, AnimatedSprite2D.SignalName.AnimationFinished);
+                    animatedSprite.Position = normalPosition;
+
+                    global.CanWalk = true;
+                    global.GameDisplayEnabled = true;
+                    isItemEquipped = false;
+                    itemIsInUse = false;
+
+                    global.CurrentRoom.HideDisplay("FishingDisplay");
+                    PlayIdleAnimation(Direction);
+                }
+            }
+
+            isItemEquipped = false;
 		}
 
-        public void Unequip()
+		private async void OnFishingTimeout()
 		{
-			isItemEquipped = false;
-		}
+            if (itemIsInUse)
+            {
+				string itemName = "null";
+
+                await Unequip();
+                global.CurrentRoom.Dialogue.ShowDisplay(SnippetsResource, "fish", new()
+                                        { itemName }, true);
+
+				global.AddToInventory(itemName);
+            }
+        }
 
         public void PlaySideAnimation(string name)
         {

@@ -5,3 +5,7 @@ Narrator: You got a {0} from this chest.
 ~ chest_gold
 Narrator: You got {0} gold from this chest.
 => END!
+
+~ fish
+Narrator: You caught a {0}!
+=> END!

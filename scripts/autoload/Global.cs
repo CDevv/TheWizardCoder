@@ -24,7 +24,8 @@ namespace TheWizardCoder.Autoload
 		public bool StairsInverted { get; set; } = false;
 		public bool StairsGoUp { get; set; } = true;
 		public bool IsInCutscene { get; set; } = false;
-		public SaveFileData PlayerData 
+		public bool IsFishing { get; set; } = false;
+        public SaveFileData PlayerData 
 		{ 
 			get { return SaveFiles.PlayerData; }
 		}

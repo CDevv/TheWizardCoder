@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://d4l7knv3bdq7b"]
+[gd_scene load_steps=4 format=3 uid="uid://d4l7knv3bdq7b"]
 
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_46ma0"]
+[ext_resource type="Script" path="res://scripts/displays/FishingDisplay.cs" id="1_ugy5s"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="2_pe2pl"]
 
 [node name="FishingDisplay" type="CanvasLayer"]
+script = ExtResource("1_ugy5s")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 offset_left = 456.0

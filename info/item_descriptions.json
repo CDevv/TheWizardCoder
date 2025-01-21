@@ -141,5 +141,12 @@ MeetGertrude();
 		"Effect": 0,
 		"Price": 25,
 		"AdditionalData": ["PlayerMethod","EquipItem","Fishing Rod"]
+	},
+	"null":{
+		"Description":"System.NullReferenceException",
+		"Type": "Key",
+		"Effect": 0,
+		"Price": 0,
+		"AdditionalData": []
 	}
 }

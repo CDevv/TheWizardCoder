@@ -173,5 +173,20 @@ namespace TheWizardCoder.Abstractions
 			TileData tileData = TileMap.GetCellTileData(layer, tileMapPos);
 			return tileData;
 		}
+
+		public void ShowDisplay(string displayName)
+		{
+			GetNode(displayName).Call("ShowDisplay");
+		}
+
+		public void ShowDisplay(string displayName, params Variant[] args)
+		{
+			GetNode(displayName).Call("ShowDisplay", args);
+		}
+
+		public void HideDisplay(string displayName)
+		{
+			GetNode(displayName).Call("HideDisplay");
+		}
 	}
 }
