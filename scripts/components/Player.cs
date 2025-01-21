@@ -198,6 +198,17 @@ namespace TheWizardCoder.Components
 				Unequip();
             }
 
+            if (Input.IsActionJustPressed("secondary"))
+            {
+                if (isItemEquipped && !itemIsInUse)
+                {
+                    if (equippedItem == "Fishing Rod" && !global.PlayerData.FishingRodSolved)
+                    {
+						global.CurrentRoom.Call("OpenFishingRodProblem");
+                    }
+                }
+            }
+
             if (Input.IsActionPressed("sprint"))
 			{
 				IsSprinting = true;
@@ -250,6 +261,10 @@ namespace TheWizardCoder.Components
             if (itemIsInUse)
             {
 				string itemName = "null";
+                if (global.PlayerData.FishingRodSolved)
+                {
+					itemName = "Fish";
+                }
 
                 await Unequip();
                 global.CurrentRoom.Dialogue.ShowDisplay(SnippetsResource, "fish", new()

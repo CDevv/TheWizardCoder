@@ -148,5 +148,11 @@ MeetGertrude();
 		"Effect": 0,
 		"Price": 0,
 		"AdditionalData": []
+	},
+	"Fish":{
+		"Description":"Fishy!",
+		"Type": "Heal",
+		"Effect": 15,
+		"Price": 7,
 	}
 }

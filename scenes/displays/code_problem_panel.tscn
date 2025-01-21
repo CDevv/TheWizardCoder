@@ -109,14 +109,14 @@ offset_bottom = 184.0
 mouse_filter = 2
 theme = ExtResource("2_cm4ur")
 theme_override_font_sizes/font_size = 16
-text = "char[] code = {
-          ,		     ,
+text = "if (fish == null)
+{
 
-		  ,
-};
-string strCode = code.ToString();
-		 (strCode == this.AccessCode)
-	Door.Unlock();"
+}
+else
+{
+
+}"
 editable = false
 context_menu_enabled = false
 shortcut_keys_enabled = false
@@ -125,9 +125,6 @@ drag_and_drop_selection_enabled = false
 virtual_keyboard_enabled = false
 middle_mouse_paste_enabled = false
 wrap_mode = 1
-
-[node name="PickableButtonArea" parent="CodeRect/CodeEdit" instance=ExtResource("4_vm0ji")]
-position = Vector2(0, -32)
 
 [node name="ItemsRect" type="NinePatchRect" parent="."]
 offset_left = 64.0
