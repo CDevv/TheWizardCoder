@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2dpwk6p1w706"
-path="res://.godot/imported/juniorbug.png-b4afe3130f7a719a86df857d0b302371.ctex"
+uid="uid://bqa0e4rd37uk1"
+path="res://.godot/imported/johnson.png-c9743217382cba02b7ae28b01c61c2f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/juniorbug.png"
-dest_files=["res://.godot/imported/juniorbug.png-b4afe3130f7a719a86df857d0b302371.ctex"]
+source_file="res://assets/characters/portraits/johnson.png"
+dest_files=["res://.godot/imported/johnson.png-c9743217382cba02b7ae28b01c61c2f1.ctex"]
 
 [params]
 
