@@ -136,6 +136,7 @@ namespace TheWizardCoder.Displays
 					else if (item.AdditionalData[0] == "PlayerMethod")
 					{
                         global.CurrentRoom.Player.Call(item.AdditionalData[1], item.AdditionalData[2]);
+						global.CanWalk = true;
                     }
                     
 					level = 0;

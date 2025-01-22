@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bb1itrnd1e8am"]
+[gd_scene load_steps=16 format=3 uid="uid://bb1itrnd1e8am"]
 
 [ext_resource type="PackedScene" uid="uid://de21qftn035us" path="res://scenes/displays/game_display.tscn" id="1_hid6f"]
 [ext_resource type="Script" path="res://scripts/abstractions/BaseRoom.cs" id="1_rfc1d"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bap5mf0chx1uc" path="res://scenes/displays/code_message_display.tscn" id="10_vippa"]
 [ext_resource type="PackedScene" uid="uid://dh3hemp3t81x5" path="res://scenes/displays/level_up_display.tscn" id="11_c8vxm"]
 [ext_resource type="SpriteFrames" uid="uid://baxuf0ifo3bd4" path="res://assets/characters/movement/spriteframes/gertrude.tres" id="13_e7w2n"]
+[ext_resource type="PackedScene" uid="uid://d4l7knv3bdq7b" path="res://scenes/displays/fishing_display.tscn" id="15_mrb4s"]
 
 [node name="BaseRoom" type="Node2D"]
 script = ExtResource("1_rfc1d")
@@ -77,3 +78,6 @@ y_sort_enabled = true
 position = Vector2(0, -41)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("13_e7w2n")
+
+[node name="FishingDisplay" parent="." instance=ExtResource("15_mrb4s")]
+visible = false

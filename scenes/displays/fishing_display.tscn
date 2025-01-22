@@ -8,9 +8,9 @@
 script = ExtResource("1_ugy5s")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
-offset_left = 456.0
+offset_left = 448.0
 offset_top = 360.0
-offset_right = 540.0
+offset_right = 536.0
 offset_bottom = 412.0
 scale = Vector2(2, 2)
 texture = ExtResource("1_46ma0")
@@ -24,7 +24,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 84.0
+offset_left = -1.0
+offset_right = 89.0
 offset_bottom = 52.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -38,6 +39,7 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 theme = ExtResource("2_pe2pl")
 theme_override_font_sizes/font_size = 32
-text = "Fishing Rod
+text = "[Z] - Cast Rod
 [X] - Unequip
-[Z] - Cast Rod"
+[Q] - View code
+"

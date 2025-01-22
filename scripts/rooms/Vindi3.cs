@@ -25,12 +25,16 @@ namespace TheWizardCoder.Rooms
 
         private void OpenFishingRodProblem()
         {
-            CodeProblemPanel.ProblemId = problemPoint.UniqueIdentifier;
-            CodeProblemPanel.Point = problemPoint;
+            if (!global.PlayerData.FishingRodSolved)
+            {
+                CodeProblemPanel.ProblemId = problemPoint.UniqueIdentifier;
+                CodeProblemPanel.Point = problemPoint;
 
-            CodeProblemPanel.ShowDisplay(problemPoint.Code,
-                problemPoint.Items,
-                problemPoint.SolvableAreas, false);
+                CodeProblemPanel.Reset();
+                CodeProblemPanel.ShowDisplay(problemPoint.Code,
+                    problemPoint.Items,
+                    problemPoint.SolvableAreas, false);
+            }
         }
     }
 }

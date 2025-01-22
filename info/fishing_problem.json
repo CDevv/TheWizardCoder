@@ -1,0 +1,16 @@
+{
+	"UniqueIdentifier":"FishingRodSolved",
+	"Code":"if (fish == null)
+{
+
+}
+else
+{
+
+}",
+	"Items": ["null", " ", "AddToInventory(fish);"],
+	"SolvableAreas":{
+		" ": [8, 40],
+		"AddToInventory(fish);": [8, 104]
+	}
+}

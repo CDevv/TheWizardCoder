@@ -114,6 +114,7 @@ color = Color(0.117518, 0.0336082, 0, 1)
 z_index = 1
 y_sort_enabled = true
 position = Vector2(448, 376)
+SnippetsResource = null
 
 [node name="TileMap" type="TileMap" parent="." index="17"]
 y_sort_enabled = true

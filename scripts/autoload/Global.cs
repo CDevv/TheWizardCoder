@@ -35,9 +35,10 @@ namespace TheWizardCoder.Autoload
 		public System.Collections.Generic.Dictionary<string, Item> ItemDescriptions { get; private set; } = new();
 		public System.Collections.Generic.Dictionary<string, MagicSpell> MagicSpells { get; private set; } = new();
 		public System.Collections.Generic.Dictionary<string, CharacterData> Characters { get; private set; } = new();
-		public System.Collections.Generic.Dictionary<string, Shop> Shops { get; set; } = new();
-		public System.Collections.Generic.Dictionary<string, string> GameIntroStrings { get; set; } = new();
-		public int[] ReverseDirections { get; } = { 1, 0, 3, 2 };
+		public System.Collections.Generic.Dictionary<string, Shop> Shops { get; private set; } = new();
+		public System.Collections.Generic.Dictionary<string, string> GameIntroStrings { get; private set; } = new();
+        public CodeProblem FishingProblemData { get; private set; } = new();
+        public int[] ReverseDirections { get; } = { 1, 0, 3, 2 };
 
 		public override void _Ready()
 		{
@@ -63,7 +64,14 @@ namespace TheWizardCoder.Autoload
 			MagicSpells = DataLoader.LoadMagicSpells();
 			Characters = DataLoader.LoadCharacters();
 			Shops = DataLoader.LoadShops();
-		}
+
+            Variant jsonData = DataLoader.GetJsonData("res://info/fishing_problem.json");
+            Dictionary<string, Variant> parsedData = (Dictionary<string, Variant>)jsonData;
+
+			CodeProblem codeProblem = new();
+			codeProblem.ApplyDictionary(parsedData);
+			FishingProblemData = codeProblem;
+        }
 
 		public void AddToInventory(string item, bool onlyOne = false)
 		{

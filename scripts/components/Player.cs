@@ -12,72 +12,72 @@ using TheWizardCoder.Utils;
 
 namespace TheWizardCoder.Components
 {
-	public partial class Player : CharacterBody2D
-	{
+    public partial class Player : CharacterBody2D
+    {
         [Export]
         public Resource SnippetsResource { get; set; }
 
         [Signal]
-		public delegate void AnimationFinishedEventHandler();
-		public Direction Direction { get; private set; }
-		public const int DefaultSpeed = 2;
-		private Global global;
-		private AnimationPlayer animationPlayer;
-		private AnimationTree animationTree;
-		private Area2D interactableFinder;
-		private Vector2 lastDirection;
-		private AnimatedSprite2D animatedSprite;
-		private Vector2 normalPosition = new(0, -35);
-		private Vector2 equippedPosition = new(0, -22);
+        public delegate void AnimationFinishedEventHandler();
+        public Direction Direction { get; private set; }
+        public const int DefaultSpeed = 2;
+        private Global global;
+        private AnimationPlayer animationPlayer;
+        private AnimationTree animationTree;
+        private Area2D interactableFinder;
+        private Vector2 lastDirection;
+        private AnimatedSprite2D animatedSprite;
+        private Vector2 normalPosition = new(0, -35);
+        private Vector2 equippedPosition = new(0, -22);
 
-		public Actor Follower { get; set; }
-		public bool HasFollower { get; set; } = false;
-		public GroundEnemy Enemy { get; set; }
+        public Actor Follower { get; set; }
+        public bool HasFollower { get; set; } = false;
+        public GroundEnemy Enemy { get; set; }
 
-		public int PlayerSpeed { get; private set; } = DefaultSpeed;
-		public float DistanceWalked { get; set; } = 0;
-		public bool CameraEnabled { get; set; } = true;
+        public int PlayerSpeed { get; private set; } = DefaultSpeed;
+        public float DistanceWalked { get; set; } = 0;
+        public bool CameraEnabled { get; set; } = true;
         public new Vector2 Velocity { get; private set; }
-		public bool IsSprinting { get; private set; } = false;
+        public bool IsSprinting { get; private set; } = false;
 
-		private bool isItemEquipped = false;
-		private string equippedItem;
+        private bool isItemEquipped = false;
+        private string equippedItem;
 
-		private bool itemIsInUse = false;
+        private bool itemIsInUse = false;
 
-        public override void _Ready()	
-		{
-			global = GetNode<Global>("/root/Global");
-			animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-			animationTree = GetNode<AnimationTree>("AnimationTree");
-			interactableFinder = GetNode<Area2D>("InteractableFinder");
+        public override void _Ready()
+        {
+            global = GetNode<Global>("/root/Global");
+            animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+            animationTree = GetNode<AnimationTree>("AnimationTree");
+            interactableFinder = GetNode<Area2D>("InteractableFinder");
 
-			animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+            animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 
-			DistanceWalked = 0;
-		}
+            DistanceWalked = 0;
+        }
 
-		public override void _PhysicsProcess(double delta)
-		{
-			if (!global.CanWalk)
-			{
-				return;
-			}
+        public override void _PhysicsProcess(double delta)
+        {
+            if (!global.CanWalk)
+            {
+                return;
+            }
 
-			Vector2 directionVector = Input.GetVector("left", "right", "up", "down").Normalized();
-			Vector2 velocity = directionVector * DefaultSpeed;
+            Vector2 directionVector = Input.GetVector("left", "right", "up", "down").Normalized();
+            Vector2 velocity = directionVector * DefaultSpeed;
 
-			if (IsSprinting || global.Settings.AutoSprint)
-			{
-				velocity *= 2;
-				PlayerSpeed = DefaultSpeed * 2;
-			}
-			else
-			{
-				PlayerSpeed = DefaultSpeed;
-			}
+            if (IsSprinting || global.Settings.AutoSprint)
+            {
+                velocity *= 2;
+                PlayerSpeed = DefaultSpeed * 2;
+            }
+            else
+            {
+                PlayerSpeed = DefaultSpeed;
+            }
 
-			Velocity = velocity;
+            Velocity = velocity;
 
             if (directionVector != Vector2.Zero)
             {
@@ -85,42 +85,42 @@ namespace TheWizardCoder.Components
             }
 
             if (velocity == Vector2.Zero)
-			{
-				PlayIdleAnimation(Direction);
-			}
-			else
-			{
-				PlayMoveAnimation(directionVector);
-			}
+            {
+                PlayIdleAnimation(Direction);
+            }
+            else
+            {
+                PlayMoveAnimation(directionVector);
+            }
 
             if (global.CurrentRoom.Camera != null && CameraEnabled)
-			{
-				global.CurrentRoom.Camera.Set(Camera2D.PropertyName.Position, Position + velocity);
-			}
+            {
+                global.CurrentRoom.Camera.Set(Camera2D.PropertyName.Position, Position + velocity);
+            }
 
-			if (global.PlayerIsOnStairs && velocity.X != 0)
-			{
-				float addedY = (float)(100 * delta);
-				if (velocity.X > 0)
-				{
-					if (global.StairsGoUp)
-					{
-						velocity.Y += global.StairsInverted ? -addedY : addedY;
-					}
-				}
-				else
-				{
-					velocity.Y -= global.StairsInverted ? -addedY : addedY;
-				}
-			}
+            if (global.PlayerIsOnStairs && velocity.X != 0)
+            {
+                float addedY = (float)(100 * delta);
+                if (velocity.X > 0)
+                {
+                    if (global.StairsGoUp)
+                    {
+                        velocity.Y += global.StairsInverted ? -addedY : addedY;
+                    }
+                }
+                else
+                {
+                    velocity.Y -= global.StairsInverted ? -addedY : addedY;
+                }
+            }
 
-			var collision = MoveAndCollide(velocity); 
-			DistanceWalked += Position.DistanceTo(Position + velocity);
+            var collision = MoveAndCollide(velocity);
+            DistanceWalked += Position.DistanceTo(Position + velocity);
 
-			if (Follower != null && collision == null)
-			{
-				if (velocity != Vector2.Zero)
-				{
+            if (Follower != null && collision == null)
+            {
+                if (velocity != Vector2.Zero)
+                {
                     if (Follower.FollowingPlayer)
                     {
                         if (lastDirection != directionVector)
@@ -129,23 +129,23 @@ namespace TheWizardCoder.Components
                         }
                     }
                 }
-			}
+            }
 
-			lastDirection = directionVector;
-		}
+            lastDirection = directionVector;
+        }
 
-		public override async void _UnhandledInput(InputEvent @event)
-		{
-			if (Input.IsActionJustPressed("ui_accept"))
-			{
-				if (global.IsInCutscene)
-				{
-					return;
-				}
+        public override void _UnhandledInput(InputEvent @event)
+        {
+            if (Input.IsActionJustPressed("ui_accept"))
+            {
+                if (global.IsInCutscene)
+                {
+                    return;
+                }
 
-				var overlappingAreas = interactableFinder.GetOverlappingAreas();
-				if (overlappingAreas.Count > 0)
-				{
+                var overlappingAreas = interactableFinder.GetOverlappingAreas();
+                if (overlappingAreas.Count > 0)
+                {
                     if (global.CanWalk)
                     {
                         global.CanWalk = false;
@@ -166,27 +166,26 @@ namespace TheWizardCoder.Components
                             }
                         }
                     }
-				}
+                }
                 else
                 {
                     if (isItemEquipped)
                     {
-						TileData tileData = global.CurrentRoom.GetTileAtPosition(1, Position + (Direction.ToVector() * 24));
+                        TileData tileData = global.CurrentRoom.GetTileAtPosition(1, Position + (Direction.ToVector() * 24));
                         if (equippedItem == "Fishing Rod" && tileData.GetCustomData("isWater").AsBool())
                         {
-							if (!itemIsInUse)
-							{
+                            if (!itemIsInUse)
+                            {
                                 itemIsInUse = true;
 
                                 global.CanWalk = false;
                                 global.GameDisplayEnabled = false;
 
-								
                                 animatedSprite.Position = equippedPosition;
                                 animatedSprite.Play("fish_" + Direction.ToString().ToLower());
 
                                 SceneTreeTimer timer = GetTree().CreateTimer(5);
-								timer.Timeout += OnFishingTimeout;
+                                timer.Timeout += OnFishingTimeout;
                             }
                         }
                     }
@@ -195,7 +194,7 @@ namespace TheWizardCoder.Components
 
             if (Input.IsActionJustPressed("ui_cancel"))
             {
-				Unequip();
+                Unequip();
             }
 
             if (Input.IsActionJustPressed("secondary"))
@@ -204,27 +203,36 @@ namespace TheWizardCoder.Components
                 {
                     if (equippedItem == "Fishing Rod" && !global.PlayerData.FishingRodSolved)
                     {
-						global.CurrentRoom.Call("OpenFishingRodProblem");
+                        if (!global.CurrentRoom.CodeProblemPanel.Visible && !global.PlayerData.FishingRodSolved)
+                        {
+                            CodeProblem codeProblem = global.FishingProblemData;
+                            global.CurrentRoom.CodeProblemPanel.ProblemId = codeProblem.UniqueIdentifier;
+
+                            global.CurrentRoom.CodeProblemPanel.Reset();
+                            global.CurrentRoom.CodeProblemPanel.ShowDisplay(codeProblem.Code,
+                                codeProblem.Items,
+                                codeProblem.SolvableAreas, false);
+                        }
                     }
                 }
             }
 
             if (Input.IsActionPressed("sprint"))
-			{
-				IsSprinting = true;
-				animationTree.Set("parameters/TimeScale/scale", 2);
-			}
-			else 
-			{
-				IsSprinting = false;
-				animationTree.Set("parameters/TimeScale/scale", 1);
-			}
-		}
+            {
+                IsSprinting = true;
+                animationTree.Set("parameters/TimeScale/scale", 2);
+            }
+            else
+            {
+                IsSprinting = false;
+                animationTree.Set("parameters/TimeScale/scale", 1);
+            }
+        }
 
-		public void EquipItem(string item)
-		{
-			isItemEquipped = true;
-			equippedItem = item;
+        public void EquipItem(string item)
+        {
+            isItemEquipped = true;
+            equippedItem = item;
 
             if (item == "Fishing Rod")
             {
@@ -233,44 +241,59 @@ namespace TheWizardCoder.Components
         }
 
         public async Task Unequip()
-		{
+        {
             if (equippedItem == "Fishing Rod")
             {
-                if (isItemEquipped && itemIsInUse)
+                if (isItemEquipped)
                 {
-                    animatedSprite.PlayBackwards("fish_" + Direction.ToString().ToLower());
+                    if (!itemIsInUse)
+                    {
+                        global.CanWalk = true;
+                    }
 
-                    await ToSignal(animatedSprite, AnimatedSprite2D.SignalName.AnimationFinished);
-                    animatedSprite.Position = normalPosition;
-
-                    global.CanWalk = true;
                     global.GameDisplayEnabled = true;
                     isItemEquipped = false;
-                    itemIsInUse = false;
 
                     global.CurrentRoom.HideDisplay("FishingDisplay");
-                    PlayIdleAnimation(Direction);
+
+                    if (itemIsInUse)
+                    {
+                        animatedSprite.PlayBackwards("fish_" + Direction.ToString().ToLower());
+
+                        await ToSignal(animatedSprite, AnimatedSprite2D.SignalName.AnimationFinished);
+                        animatedSprite.Position = normalPosition;
+
+                        global.CanWalk = true;
+                        itemIsInUse = false;
+                        PlayIdleAnimation(Direction);
+                    }
                 }
             }
 
             isItemEquipped = false;
-		}
+        }
 
-		private async void OnFishingTimeout()
-		{
+        private async void OnFishingTimeout()
+        {
             if (itemIsInUse)
             {
-				string itemName = "null";
+                string itemName = "null";
                 if (global.PlayerData.FishingRodSolved)
                 {
-					itemName = "Fish";
+                    itemName = "Fish";
+
+                    float chance = GD.Randf();
+                    if (chance <= 0.1f)
+                    {
+                        itemName = "Kris";
+                    }
                 }
 
                 await Unequip();
                 global.CurrentRoom.Dialogue.ShowDisplay(SnippetsResource, "fish", new()
                                         { itemName }, true);
 
-				global.AddToInventory(itemName);
+                global.AddToInventory(itemName);
             }
         }
 
@@ -281,9 +304,9 @@ namespace TheWizardCoder.Components
 
         public void PlayIdleAnimation(Direction direction)
         {
-			Direction = direction;
+            Direction = direction;
 
-			animatedSprite.Stop();
+            animatedSprite.Stop();
 
             animatedSprite.Animation = "default";
             animatedSprite.Frame = (int)direction;
@@ -293,7 +316,7 @@ namespace TheWizardCoder.Components
 
         public void PlayMoveAnimation(Direction direction)
         {
-			Direction = direction;
+            Direction = direction;
 
             animatedSprite.Play(direction.ToString().ToLower(), PlayerSpeed / 2);
 
@@ -311,88 +334,88 @@ namespace TheWizardCoder.Components
         }
 
         public void Freeze()
-		{
-			global.CanWalk = false;
-			global.GameDisplayEnabled = false;
-			PlayIdleAnimation(Direction);
-		}
+        {
+            global.CanWalk = false;
+            global.GameDisplayEnabled = false;
+            PlayIdleAnimation(Direction);
+        }
 
-		public void Unfreeze()
-		{
-			global.CanWalk = true;
-			global.GameDisplayEnabled = true;
-		}
+        public void Unfreeze()
+        {
+            global.CanWalk = true;
+            global.GameDisplayEnabled = true;
+        }
 
-		public async void TransitionToRoom(Warper warper)
-		{
-			global.CurrentRoom.TransitionRect.PlayAnimation();
-			await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
-			if (string.IsNullOrEmpty(warper.TargetLocation))
-			{
-				global.ChangeRoom(warper.TargetRoomName);
-			}
-			else
-			{
-				global.ChangeRoom(warper.TargetRoomName, warper.TargetLocation, warper.PlayerDirection);
-			}
-		}
+        public async void TransitionToRoom(Warper warper)
+        {
+            global.CurrentRoom.TransitionRect.PlayAnimation();
+            await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
+            if (string.IsNullOrEmpty(warper.TargetLocation))
+            {
+                global.ChangeRoom(warper.TargetRoomName);
+            }
+            else
+            {
+                global.ChangeRoom(warper.TargetRoomName, warper.TargetLocation, warper.PlayerDirection);
+            }
+        }
 
-		public async void TransitionToRoomName(string roomName, string markerName, Direction direction)
-		{
-			global.CurrentRoom.TransitionRect.PlayAnimation();
-			await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
-			if (string.IsNullOrEmpty(markerName))
-			{
-				global.ChangeRoom(roomName);
-			}
-			else
-			{
-				global.ChangeRoom(roomName, markerName, direction);
-			}
-		}
+        public async void TransitionToRoomName(string roomName, string markerName, Direction direction)
+        {
+            global.CurrentRoom.TransitionRect.PlayAnimation();
+            await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
+            if (string.IsNullOrEmpty(markerName))
+            {
+                global.ChangeRoom(roomName);
+            }
+            else
+            {
+                global.ChangeRoom(roomName, markerName, direction);
+            }
+        }
 
-		public void ChangeDirection(Vector2 vectorDirection)
-		{
-			//animationTree.Set("parameters/Idle/blend_position", vectorDirection);
-			//animationTree.Set("parameters/Move/blend_position", vectorDirection);
-		}
+        public void ChangeDirection(Vector2 vectorDirection)
+        {
+            //animationTree.Set("parameters/Idle/blend_position", vectorDirection);
+            //animationTree.Set("parameters/Move/blend_position", vectorDirection);
+        }
 
-		public void ChangeDirection(Direction direction)
-		{
-			//Vector2 resultVector = global.GetDirectionVector(direction);
-			//Vector2 resultVector = direction.ToVector();
+        public void ChangeDirection(Direction direction)
+        {
+            //Vector2 resultVector = global.GetDirectionVector(direction);
+            //Vector2 resultVector = direction.ToVector();
 
-			//animationTree.Set("parameters/Idle/blend_position", resultVector);
-			//animationTree.Set("parameters/Move/blend_position", resultVector);
-		}
+            //animationTree.Set("parameters/Idle/blend_position", resultVector);
+            //animationTree.Set("parameters/Move/blend_position", resultVector);
+        }
 
-		
 
-		
 
-		public void ShowDialogueBallon(Resource resource, string title)
-		{
-			DialogueManager.ShowDialogueBalloon(resource, title);
-		}
 
-		public Actor AddAlly(string name, bool setPos)
-		{
-			Follower = global.CurrentRoom.GetNode<Actor>(name);	
-			if (!global.PlayerData.Allies.Exists(x => x.Name == name))
-			{
-				global.PlayerData.Allies.Add(global.Characters[name]);
-			}
 
-			if (setPos)
-			{
-				Follower.GlobalPosition = GlobalPosition;
-			}
-			Follower.MakeFollower();
-			Follower.Show();
+        public void ShowDialogueBallon(Resource resource, string title)
+        {
+            DialogueManager.ShowDialogueBalloon(resource, title);
+        }
 
-			HasFollower = true;
+        public Actor AddAlly(string name, bool setPos)
+        {
+            Follower = global.CurrentRoom.GetNode<Actor>(name);
+            if (!global.PlayerData.Allies.Exists(x => x.Name == name))
+            {
+                global.PlayerData.Allies.Add(global.Characters[name]);
+            }
 
-			return Follower;
-		}
-	}
+            if (setPos)
+            {
+                Follower.GlobalPosition = GlobalPosition;
+            }
+            Follower.MakeFollower();
+            Follower.Show();
+
+            HasFollower = true;
+
+            return Follower;
+        }
+    }
 }

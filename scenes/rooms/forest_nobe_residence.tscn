@@ -201,6 +201,7 @@ layer_1/tile_data = PackedInt32Array(1376256, 1310721, 5, 1441792, 1310721, 3, 1
 [node name="Player" parent="." index="13" instance=ExtResource("3_c133m")]
 z_index = 1
 position = Vector2(2560, 712)
+SnippetsResource = null
 
 [node name="Warper" parent="." index="14" instance=ExtResource("4_i61hm")]
 y_sort_enabled = true

@@ -68,6 +68,7 @@ color = Color(0, 0, 0, 1)
 [node name="Player" parent="." index="4" instance=ExtResource("3_bjkae")]
 z_index = 1
 position = Vector2(251, 282)
+SnippetsResource = null
 
 [node name="TileMap" type="TileMap" parent="." index="5"]
 y_sort_enabled = true

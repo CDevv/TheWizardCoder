@@ -149,16 +149,19 @@ namespace TheWizardCoder.Displays
 
 		private void OnAreaButtonRemoved(int index)
 		{
-			if (!Point.Active)
-			{
-				if (items.Count > index)
-				{
-					items[index].CurrentAnswer = "";
-					items[index].IsSolved = false;
-					EmitSignal(SignalName.ProblemItemsChanged);
-				}
-			}
-		}
+            if (Point != null)
+            {
+                if (!Point.Active)
+                {
+                    if (items.Count > index)
+                    {
+                        items[index].CurrentAnswer = "";
+                        items[index].IsSolved = false;
+                        EmitSignal(SignalName.ProblemItemsChanged);
+                    }
+                }
+            }
+        }
 
 		public void Reset()
 		{
@@ -201,8 +204,12 @@ namespace TheWizardCoder.Displays
 			GD.Print("SOLVED!!");
 			global.CanWalk = true;
 			global.GameDisplayEnabled = true;
+            if (!string.IsNullOrEmpty(ProblemId))
+            {
+				global.PlayerData.Set(ProblemId, true);
+            }
 
-			LastProblemItems = new(items);
+            LastProblemItems = new(items);
 			GD.Print(LastProblemItems.Count);
 			Reset();
 

@@ -150,9 +150,15 @@ MeetGertrude();
 		"AdditionalData": []
 	},
 	"Fish":{
-		"Description":"Fishy!",
+		"Description":"Fishy! Heals 15 HP.",
 		"Type": "Heal",
 		"Effect": 15,
 		"Price": 7,
+	},
+	"Kris":{
+		"Description":"Kris, where are we?? Heals 30 HP.",
+		"Type": "Heal",
+		"Effect": 30,
+		"Price": 30,
 	}
 }
