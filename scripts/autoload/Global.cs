@@ -37,7 +37,7 @@ namespace TheWizardCoder.Autoload
 		public System.Collections.Generic.Dictionary<string, CharacterData> Characters { get; private set; } = new();
 		public System.Collections.Generic.Dictionary<string, Shop> Shops { get; private set; } = new();
 		public System.Collections.Generic.Dictionary<string, string> GameIntroStrings { get; private set; } = new();
-        public CodeProblem FishingProblemData { get; private set; } = new();
+		public CodeProblem FishingProblemData { get; private set; }
         public int[] ReverseDirections { get; } = { 1, 0, 3, 2 };
 
 		public override void _Ready()
@@ -68,8 +68,7 @@ namespace TheWizardCoder.Autoload
             Variant jsonData = DataLoader.GetJsonData("res://info/fishing_problem.json");
             Dictionary<string, Variant> parsedData = (Dictionary<string, Variant>)jsonData;
 
-			CodeProblem codeProblem = new();
-			codeProblem.ApplyDictionary(parsedData);
+			CodeProblem codeProblem = new(parsedData);
 			FishingProblemData = codeProblem;
         }
 

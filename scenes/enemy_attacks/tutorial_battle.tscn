@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cimhskosuaad7"]
-
-[ext_resource type="Script" path="res://scripts/enemy_battles/TutorialBattle.cs" id="1_q2wwj"]
-[ext_resource type="PackedScene" uid="uid://1qbi8tkkk2en" path="res://scenes/components/enemy_bullet.tscn" id="2_1b18p"]
-
-[node name="TutorialBattle" type="Node2D"]
-script = ExtResource("1_q2wwj")
-EnemyBullet = ExtResource("2_1b18p")

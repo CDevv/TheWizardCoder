@@ -4,15 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheWizardCoder.Abstractions;
 
 namespace TheWizardCoder.Data
 {
-    public class CodeProblem
+    public class CodeProblem : IApplyDictionary
     {
         public string UniqueIdentifier { get; set; }
         public string Code { get; set; }
         public Godot.Collections.Array<string> Items { get; set; }
         public Godot.Collections.Dictionary<string, Vector2> SolvableAreas { get; set; }
+
+        public CodeProblem(Godot.Collections.Dictionary<string, Variant> dict)
+        {
+            ApplyDictionary(dict);
+        }
 
         public void ApplyDictionary(Godot.Collections.Dictionary<string, Variant> dict)
         {

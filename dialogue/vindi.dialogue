@@ -75,3 +75,13 @@ else:
 		
 do SetPlayerData("HasMetGregory", true)
 => END!
+
+~ craig_point
+Craig: 'Ello! You here to fish?
+Nolan: [#portrait=0] I guess..?
+Craig: Well uhh.. Hope you catch some fish 'cause apperently I can't!
+if GetPlayerData("HasMetGregory"):
+	Nolan: [#portrait=0] Oh! Gregory already told me!
+else:
+	Nolan: [#portrait=0] Uhh.. okay!
+=> END!

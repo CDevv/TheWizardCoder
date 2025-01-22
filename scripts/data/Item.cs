@@ -1,11 +1,12 @@
 using System;
 using Godot;
 using Godot.Collections;
+using TheWizardCoder.Abstractions;
 using TheWizardCoder.Enums;
 
 namespace TheWizardCoder.Data
 {
-    public class Item
+    public class Item : IApplyDictionary
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -14,6 +15,11 @@ namespace TheWizardCoder.Data
         public int Price { get; set; }
         public bool Sellable { get; set; }
         public string[] AdditionalData { get; set; }
+
+        public Item(Dictionary<string, Variant> dict)
+        {
+            ApplyDictionary(dict);
+        }
 
         public void ApplyDictionary(Dictionary<string, Variant> dict)
         {

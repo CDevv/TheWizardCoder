@@ -47,8 +47,7 @@ namespace TheWizardCoder.Utils
 
 			foreach (var pair in parsedData)
 			{
-				Item item = new Item();
-				item.ApplyDictionary(pair.Value);
+				Item item = new Item(pair.Value);
 				item.Name = pair.Key;
 				items.Add(item.Name, item);
 			}
@@ -65,8 +64,7 @@ namespace TheWizardCoder.Utils
 
 			foreach (var pair in parsedData)
 			{
-				MagicSpell magicSpell = new MagicSpell();
-				magicSpell.ApplyDictionary(pair.Value);
+				MagicSpell magicSpell = new MagicSpell(pair.Value);
 				magicSpells.Add(pair.Key, magicSpell);
 			}
 
@@ -85,9 +83,7 @@ namespace TheWizardCoder.Utils
 				Dictionary<string, Variant> dict = pair.Value;
 				dict["Name"] = pair.Key;
 
-				Shop shop = new();
-				shop.ApplyDictionary(dict);
-
+				Shop shop = new(dict);
 				shops.Add(pair.Key, shop);
 			}
 

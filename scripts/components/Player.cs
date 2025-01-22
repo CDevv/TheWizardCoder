@@ -231,12 +231,21 @@ namespace TheWizardCoder.Components
 
         public void EquipItem(string item)
         {
+            global.GameDisplayEnabled = false;
             isItemEquipped = true;
             equippedItem = item;
 
             if (item == "Fishing Rod")
             {
                 global.CurrentRoom.ShowDisplay("FishingDisplay");
+
+                global.CurrentRoom.CodeProblemPanel.ProblemSolved += () =>
+                {
+                    if (global.CurrentRoom.CodeProblemPanel.ProblemId == global.FishingProblemData.UniqueIdentifier)
+                    {
+                        global.PlayerData.Stats.AddLevelPoints(7);
+                    }
+                };
             }
         }
 
@@ -258,13 +267,15 @@ namespace TheWizardCoder.Components
 
                     if (itemIsInUse)
                     {
+                        itemIsInUse = false;
+
                         animatedSprite.PlayBackwards("fish_" + Direction.ToString().ToLower());
 
                         await ToSignal(animatedSprite, AnimatedSprite2D.SignalName.AnimationFinished);
                         animatedSprite.Position = normalPosition;
 
                         global.CanWalk = true;
-                        itemIsInUse = false;
+                        
                         PlayIdleAnimation(Direction);
                     }
                 }
