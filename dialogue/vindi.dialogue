@@ -97,3 +97,21 @@ else:
 	else:
 		Nolan: [#portrait=0] Uhh.. okay!
 => END!
+
+~ gerald_point
+Gerald: [#portrait=0] 'Ello, what can I do for ya today?
+Nolan: [#portrait=0] Hmm..
+- Who are you?
+	Nolan: [#portrait=0] Who are you?
+	Gerald: [#portrait=0] My name is Gerald, local merchant in Vindi.
+	Gerald: [#portrait=0] Most items I sell are healing ones. If you are looking to heal, this is yer place.
+	=> gerald_point
+- Can I buy..
+	Nolan: [#portrait=0] Can I buy something?
+	Gerald: [#portrait=0] Yeah, sure!
+	do OpenShop("GeraldShop")
+=> END!
+
+~ johnson_point
+
+=> END!

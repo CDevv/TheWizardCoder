@@ -5,16 +5,22 @@
 			"item", "Apple"
 		]
 	},
+	"TestMagic":{
+		"Type": "Magic",
+		"Items": [
+			"Fireball", "Fireball2"
+		]
+	},
 	"NobeShop":{
 		"Type": "Item",
 		"Items": [
 			"Apple", "Apple Juice", "Purple Fruit"
 		]
 	},
-	"TestMagic":{
-		"Type": "Magic",
+	"GeraldShop":{
+		"Type": "Item",
 		"Items": [
-			"Fireball", "Fireball2"
+			"Cyanberry", "Rounded Bread", "Cyanberry Pie", "Pretzel"
 		]
 	}
 }

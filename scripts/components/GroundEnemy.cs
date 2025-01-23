@@ -9,7 +9,8 @@ namespace TheWizardCoder.Components
 {
 	public partial class GroundEnemy : Area2D
 	{
-		private const float Speed = 0.25f;
+        private const int PixelsPerSecond = 120; //120 pixels per frame
+        private const float Speed = 0.25f;
 
 		[Export]
 		public string EnemyName { get; set; } = "Glitch";
@@ -35,11 +36,13 @@ namespace TheWizardCoder.Components
 			sprite.SpriteFrames = enemyTexture;
 		}
 
-		public override void _Process(double delta)
+		public override void _PhysicsProcess(double delta)
 		{
 			if (following)
 			{
-				Vector2 velocity = (global.CurrentRoom.Player.Position - Position).Normalized() * Speed;
+				Vector2 difference = (global.CurrentRoom.Player.Position - Position);
+				Vector2 normalizedDifference = difference.Normalized();
+                Vector2 velocity = normalizedDifference * PixelsPerSecond * (float)delta;
 				Position += velocity;
 
 				if (velocity.X > 0)
