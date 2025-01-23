@@ -82,27 +82,19 @@ namespace TheWizardCoder.Abstractions
 			Characters[index].Health -= damage;
 		}
 
-		public async Task HealCharacter(int healerIndex)
+		public async Task HealCharacter(int targetIndex, int addedHealth)
 		{
-			CharacterBattleState state = BattleStates[healerIndex];
-			string itemName = global.PlayerData.Inventory[state.ActionModifier];
-			Item item = global.ItemDescriptions[itemName];
-			CharacterData target = BattleStates[state.Target].Character;
+			CharacterBattleState state = BattleStates[targetIndex];
 
-			if (state.Target == healerIndex)
-			{
-				BattleOptions.ShowInfoLabel($"{state.Character.Name} gave {itemName} to themselves!");
-			}
-			else
-			{
-				BattleOptions.ShowInfoLabel($"{state.Character.Name} gave {itemName} to {target.Name}!");
-			}
+			//string itemName = global.PlayerData.Inventory[state.ActionModifier];
+			//Item item = global.ItemDescriptions[itemName];
+			//CharacterData target = BattleStates[state.Target].Character;
+
+            int healthChange = Mathf.Clamp(addedHealth, 0, state.Character.MaxHealth - state.Character.Health);
+			Characters[state.Target].AddHealth(addedHealth);
 			
-			int healthChange = Mathf.Clamp(item.Effect, 0, target.MaxHealth - target.Health);
-			Characters[state.Target].AddHealth(healthChange);
-			global.PlayerData.RemoveFromInventory(state.ActionModifier);
 
-			await DisplayHealthChange(state.Target, healthChange);
+			await DisplayHealthChange(targetIndex, addedHealth);
 
 			SceneTreeTimer timer = GetTree().CreateTimer(3);
 			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);

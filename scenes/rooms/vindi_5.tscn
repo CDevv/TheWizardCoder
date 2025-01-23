@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfcojka562a2o"]
+[gd_scene load_steps=8 format=3 uid="uid://cfpxynvq4iy72"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_ols44"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_iiix6"]
 [ext_resource type="TileSet" uid="uid://dqirfdrc3jlyd" path="res://tilesets/vindi_env.tres" id="3_j6iob"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_7lh7w"]
+[ext_resource type="PackedScene" uid="uid://bk3a4lc0i5uwk" path="res://scenes/components/actor.tscn" id="5_carfj"]
+[ext_resource type="SpriteFrames" uid="uid://c6rakfbem11de" path="res://assets/characters/movement/spriteframes/gerald.tres" id="6_25qfs"]
+[ext_resource type="SpriteFrames" uid="uid://dgosjvmms3hap" path="res://assets/characters/movement/spriteframes/johnson.tres" id="7_02trl"]
 
 [node name="Vindi5" instance=ExtResource("1_ols44")]
 y_sort_enabled = true
@@ -52,3 +55,19 @@ position = Vector2(27, 384)
 
 [node name="Section7Marker" type="Marker2D" parent="." index="20"]
 position = Vector2(1184, 384)
+
+[node name="Gerald" parent="." index="22" instance=ExtResource("5_carfj")]
+position = Vector2(528, 280)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Gerald" index="2"]
+position = Vector2(0, -33)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("6_25qfs")
+
+[node name="Johnson" parent="." index="23" instance=ExtResource("5_carfj")]
+position = Vector2(656, 280)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Johnson" index="2"]
+position = Vector2(0, -35)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("7_02trl")

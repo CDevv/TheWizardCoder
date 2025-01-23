@@ -77,7 +77,12 @@ namespace TheWizardCoder.Displays
 
 		public void ShowDisplay(string code, Array<string> items, Godot.Collections.Dictionary<string, Vector2> areas, bool useInventory)
 		{
-			global.GameDisplayEnabled = false;
+            if (Visible)
+            {
+				return;
+            }
+
+            global.GameDisplayEnabled = false;
 
 			codeEdit.Text = code;
 

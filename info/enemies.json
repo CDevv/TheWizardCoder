@@ -13,12 +13,12 @@
 	"ZenDummy": {
 		"Health": 20,
 		"MaxHealth": 20,
-		"Points": 0,
-		"MaxPoints": 0,
+		"Points": 20,
+		"MaxPoints": 20,
 		"AttackPoints": 10,
 		"DefensePoints": 5,
 		"AgilityPoints": 2,
-		"MagicSpells": [],
+		"MagicSpells": ["Fireball3"],
 		"Type": "Ally",
 	},
 	"Glitch": {

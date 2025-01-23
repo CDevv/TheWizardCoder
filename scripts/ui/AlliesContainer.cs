@@ -9,6 +9,7 @@ using TheWizardCoder.Displays;
 using TheWizardCoder.Subdisplays;
 using TheWizardCoder.Data;
 using TheWizardCoder.Abstractions;
+using System.Linq;
 
 namespace TheWizardCoder.UI
 {
@@ -54,6 +55,16 @@ namespace TheWizardCoder.UI
 			rect.Position = startingPoint - new Vector2(0, currentIndex * (rect.Size.Y + 4) * 2);
 			rect.ApplyData(character);
 			rect.Pressed += () => OnCharacterCardPressed(currentIndex);
+
+            if (alliesCards.Count >= 1)
+            {
+                rect.FocusNeighborBottom = alliesCards[alliesCards.Count - 1].GetPath();
+				alliesCards[alliesCards.Count - 1].FocusNeighborTop = rect.GetPath();
+
+				rect.FocusNeighborTop = alliesCards[0].GetPath();
+                alliesCards[0].FocusNeighborBottom = rect.GetPath();
+            }
+            
 
 			alliesCards.Add(rect);
 			collectedExperience[currentIndex] = 0;
@@ -103,8 +114,25 @@ namespace TheWizardCoder.UI
 					await DefendCharacter(i);
 					break;
 				case CharacterAction.Items:
-					await HealCharacter(i);
-					break;
+					int healerIndex = i;
+                    string itemName = global.PlayerData.Inventory[state.ActionModifier];
+                    Item item = global.ItemDescriptions[itemName];
+                    CharacterData target = BattleStates[state.Target].Character;
+
+                    if (state.Target == healerIndex)
+                    {
+                        BattleOptions.ShowInfoLabel($"{state.Character.Name} gave {itemName} to themselves!");
+                    }
+                    else
+                    {
+                        BattleOptions.ShowInfoLabel($"{state.Character.Name} gave {itemName} to {target.Name}!");
+                    }
+
+                    //int healthChange = Mathf.Clamp(item.Effect, 0, target.MaxHealth - target.Health);
+                    await HealCharacter(state.Target, item.Effect);
+
+                    global.PlayerData.RemoveFromInventory(state.ActionModifier);
+                    break;
 				case CharacterAction.Magic:
 					string currentMagicSpellName = ally.MagicSpells[state.ActionModifier];
 					MagicSpell currentMagicSpell = global.MagicSpells[currentMagicSpellName];
@@ -116,7 +144,22 @@ namespace TheWizardCoder.UI
 
 						collectedExperience[i] += (ally.Level + 2);
 					}
-					break;
+					else if (currentMagicSpell.TargetType == CharacterType.Ally)
+                    {
+						string healedAllyName = Characters[state.Target].Name;
+
+                        if (ally.Name == healedAllyName)
+                        {
+                            BattleOptions.ShowInfoLabel($"{ally.Name} casted {currentMagicSpellName} on themselves!");
+                        }
+                        else
+                        {
+                            BattleOptions.ShowInfoLabel($"{ally.Name} casted {currentMagicSpellName} on {healedAllyName}!");
+                        }
+
+                        await HealCharacter(state.Target, currentMagicSpell.Effect);
+                    }
+                    break;
 			}
 		}
 
@@ -220,7 +263,12 @@ namespace TheWizardCoder.UI
 				Enemies.FocusOnFirst();
 				BattleOptions.ShowInfoLabel("Select an enemy to cast on!");
 			}
-		}
+            else
+            {
+				alliesCards.First().GrabFocus();
+                BattleOptions.ShowInfoLabel("Select an ally to cast on!");
+            }
+        }
 
 		public override void Clear()
 		{

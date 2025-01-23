@@ -14,5 +14,13 @@
 		"Cost": 5,
 		"ShopPrice": 5,
 		"TargetType": "Enemy"
-	}
+	},
+	"Fireball3":{
+		"Name":"Fireball",
+		"Description":"A simple fireball that does small damage on enemy.",
+		"Effect":15,
+		"Cost": 5,
+		"ShopPrice": 5,
+		"TargetType": "Ally"
+	},
 }
