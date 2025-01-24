@@ -10,6 +10,8 @@ namespace TheWizardCoder.Data
         public int ActionModifier { get; set; }
         public CharacterData Character { get; set; }
         public int InternalIndex { get; private set; }
+        public bool HasBattleEffect { get; set; }
+        public BattleEffect BattleEffect { get; set; }
 
         public CharacterBattleState(CharacterData character, int internalIndex)
         {
@@ -19,6 +21,8 @@ namespace TheWizardCoder.Data
 
             Character = character;
             InternalIndex = internalIndex;
+
+            HasBattleEffect = false;
         }
 
         public void Reset()
@@ -26,6 +30,8 @@ namespace TheWizardCoder.Data
             Target = 0;
             Action = CharacterAction.Attack;
             ActionModifier = 0;
+
+            HasBattleEffect = false;
         }
     }
 }

@@ -167,19 +167,41 @@ public partial class ShopDisplay : Display
         }
         else
         {
-			MagicSpell spell = global.MagicSpells[itemName];
-			description.Text = spell.Description;
-            priceLabel.Text = $"Price: {spell.ShopPrice}";
-
-            if (global.PlayerData.MagicSpells.Contains(itemName))
+            if (global.ItemDescriptions.ContainsKey(itemName))
             {
-				possessionLabel.Text = "Owned";
+				ShowMagicItemDescription(itemName);
             }
             else
             {
-                possessionLabel.Text = "";
+                ShowMagicSpellDescription(itemName);
             }
         }
+    }
+
+	private void ShowMagicSpellDescription(string name)
+	{
+        MagicSpell spell = global.MagicSpells[name];
+        description.Text = spell.Description;
+        priceLabel.Text = $"Price: {spell.ShopPrice}";
+
+        if (global.PlayerData.MagicSpells.Contains(name))
+        {
+            possessionLabel.Text = "Owned";
+        }
+        else
+        {
+            possessionLabel.Text = "";
+        }
+    }
+
+	private void ShowMagicItemDescription(string name)
+	{
+        int possession = global.PlayerData.Inventory.Count(x => x == name);
+        Item item = global.ItemDescriptions[name];
+
+        description.Text = item.Description;
+        priceLabel.Text = $"Price: {item.Price}";
+        possessionLabel.Text = $"Possesion: {possession}";
     }
 
 	private Button UpdateShopItems()
@@ -293,19 +315,33 @@ public partial class ShopDisplay : Display
 
 	private void OnMagicSpell(int index, string spellName, ShopAction shopAction)
 	{
-		MagicSpell magicSpell = global.MagicSpells[spellName];
+		ShopType type = ShopType.Magic;
 
-        if (shopAction == ShopAction.Sell || global.PlayerData.MagicSpells.Contains(spellName))
+        if (global.ItemDescriptions.Any(x => x.Key == spellName))
         {
-			return;
+			type = ShopType.Item;
         }
 
-        if (magicSpell.ShopPrice <= global.PlayerData.Gold)
+        if (type == ShopType.Magic)
         {
-			global.PlayerData.Gold -= magicSpell.ShopPrice;
-			global.PlayerData.AddMagicSpell(spellName);
-            UpdateDisplay();
-            ShowDisplay();
+            MagicSpell magicSpell = global.MagicSpells[spellName];
+
+            if (shopAction == ShopAction.Sell || global.PlayerData.MagicSpells.Contains(spellName))
+            {
+                return;
+            }
+
+            if (magicSpell.ShopPrice <= global.PlayerData.Gold)
+            {
+                global.PlayerData.Gold -= magicSpell.ShopPrice;
+                global.PlayerData.AddMagicSpell(spellName);
+                UpdateDisplay();
+                ShowDisplay();
+            }
+        }
+        else
+        {
+            OnItem(index, spellName, shopAction);
         }
     }
 

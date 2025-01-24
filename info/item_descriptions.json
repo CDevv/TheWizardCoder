@@ -184,5 +184,12 @@ MeetGertrude();
 		"Type": "Heal",
 		"Effect": 15,
 		"Price": 25,
+	},
+	"Magi-hibble":{
+		"Description":"A magical drink that boosts an ally's defence",
+		"Type": "Magic",
+		"Effect": 15,
+		"Price": 25,
+		"AdditionalData": ["Defend","Ally",3,7]
 	}
 }

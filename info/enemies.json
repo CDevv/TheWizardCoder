@@ -18,7 +18,7 @@
 		"AttackPoints": 10,
 		"DefensePoints": 5,
 		"AgilityPoints": 2,
-		"MagicSpells": ["Fireball3"],
+		"MagicSpells": ["Hibble"],
 		"Type": "Ally",
 	},
 	"Glitch": {
@@ -62,7 +62,7 @@
 		"AttackPoints": 15,
 		"DefensePoints": 5,
 		"AgilityPoints": 5,
-		"MagicSpells": [],
+		"MagicSpells": ["Hibble"],
 		"Type": "Ally",
 	}
 }

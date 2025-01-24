@@ -77,6 +77,10 @@ namespace TheWizardCoder.Abstractions
 
 		public abstract Task DisplayHealthChange(int index, int change);
 
+		public abstract Task DisplayBattleEffect(int index);
+
+		public abstract void HideBattleEffect(int index);
+
 		public virtual async Task DamageCharacter(int index, int damage)
 		{
 			Characters[index].Health -= damage;
@@ -86,15 +90,10 @@ namespace TheWizardCoder.Abstractions
 		{
 			CharacterBattleState state = BattleStates[targetIndex];
 
-			//string itemName = global.PlayerData.Inventory[state.ActionModifier];
-			//Item item = global.ItemDescriptions[itemName];
-			//CharacterData target = BattleStates[state.Target].Character;
-
             int healthChange = Mathf.Clamp(addedHealth, 0, state.Character.MaxHealth - state.Character.Health);
-			Characters[state.Target].AddHealth(addedHealth);
-			
+			Characters[state.Target].AddHealth(healthChange);		
 
-			await DisplayHealthChange(targetIndex, addedHealth);
+			await DisplayHealthChange(targetIndex, healthChange);
 
 			SceneTreeTimer timer = GetTree().CreateTimer(3);
 			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
@@ -106,6 +105,50 @@ namespace TheWizardCoder.Abstractions
 			SceneTreeTimer timer = GetTree().CreateTimer(3);
 			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
 		}
+
+		public async Task ApplyBattleEffect(int targetIndex, BattleEffect effect)
+		{
+			BattleStates[targetIndex].BattleEffect = effect;
+			BattleStates[targetIndex].HasBattleEffect = true;
+
+			GD.Print(effect.Effect);
+
+			switch (effect.Action)
+			{
+				case Enums.CharacterAction.Attack:
+					Characters[targetIndex].AttackPoints += effect.Effect;
+					break;
+				case Enums.CharacterAction.Defend:
+					Characters[targetIndex].DefensePoints += effect.Effect;
+					break;
+			}
+
+            GD.Print(Characters[targetIndex].DefensePoints);
+
+            await DisplayBattleEffect(targetIndex);
+        }
+
+		public void RemoveBattleEffect(int targetIndex)
+		{
+			BattleEffect effect = BattleStates[targetIndex].BattleEffect;
+
+            switch (effect.Action)
+            {
+                case Enums.CharacterAction.Attack:
+                    Characters[targetIndex].AttackPoints -= effect.Effect;
+                    break;
+                case Enums.CharacterAction.Defend:
+                    Characters[targetIndex].DefensePoints -= effect.Effect;
+                    break;
+            }
+
+			GD.Print(Characters[targetIndex].DefensePoints);
+
+			BattleStates[targetIndex].BattleEffect = null;
+			BattleStates[targetIndex].HasBattleEffect = false;
+
+			HideBattleEffect(targetIndex);
+        }
 
 		public int GetTotalHealth()
 		{

@@ -37,7 +37,7 @@ namespace TheWizardCoder.Data
                 Sellable = false;
             }
 
-            if (Type == ItemType.Key)
+            if (Type == ItemType.Key || Type == ItemType.Magic)
             {
                 AdditionalData = (string[])dict["AdditionalData"];
             }         

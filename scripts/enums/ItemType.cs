@@ -2,6 +2,6 @@ namespace TheWizardCoder.Enums
 {
     public enum ItemType
     {
-        Heal, Key
+        Heal, Key, Magic
     }
 }

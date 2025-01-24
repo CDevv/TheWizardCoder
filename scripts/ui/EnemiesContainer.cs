@@ -99,7 +99,17 @@ namespace TheWizardCoder.UI
 			await EnemyHealthBar.ShowHealthBar(enemyData.Health, enemyData.Health - change, enemyData.MaxHealth);
 		}
 
-		public override void Clear()
+        public override Task DisplayBattleEffect(int index)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void HideBattleEffect(int index)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Clear()
 		{
 			base.Clear();
 			foreach (var item in enemySprites)

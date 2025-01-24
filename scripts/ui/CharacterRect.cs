@@ -19,6 +19,7 @@ namespace TheWizardCoder.UI
 		private Label pointsLabel;
 		private ColorRect background;
 		private AnimatedSprite2D selectArrow;
+		private Sprite2D effectIndicator;
 		private bool focused = false;
 
 		public override void _Ready()
@@ -30,6 +31,7 @@ namespace TheWizardCoder.UI
 			healthLabel = GetNode<Label>("HealthLabel");
 			pointsLabel = GetNode<Label>("PointsLabel");
 			selectArrow = GetNode<AnimatedSprite2D>("SelectArrow");
+			effectIndicator = GetNode<Sprite2D>("EffectIndicator");
 		}
 
 		private void OnGuiInput(InputEvent inputEvent)
@@ -76,6 +78,16 @@ namespace TheWizardCoder.UI
 		public void HideBackground()
 		{
 			background.Modulate = invisibleColor;
+		}
+
+		public void ShowEffectIndicator()
+		{
+			effectIndicator.Show();
+		}
+
+		public void HideEffectIndicator()
+		{
+			effectIndicator.Hide();
 		}
 
 		private void OnFocusEntered()

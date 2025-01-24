@@ -246,7 +246,9 @@ namespace TheWizardCoder.Displays
 				Button button = ResponseTemplate.Instantiate<Button>();
 				button.Text = response.Text;
 				button.Set("theme_override_font_sizes/font_size", 16);
+
 				button.Pressed += () => OnResponseSelected(response.NextId);
+
 				responsesMenu.AddChild(button);
 				buttons.Add(button);
 

@@ -59,7 +59,12 @@ namespace TheWizardCoder.Displays
 
 		public override void _Input(InputEvent inputEvent)
 		{
-			if (Input.IsActionJustPressed("ui_cancel"))
+            if (!Visible)
+            {
+				return;
+            }
+
+            if (Input.IsActionJustPressed("ui_cancel"))
 			{
 				battleOptions.ShowOptions();
 			}

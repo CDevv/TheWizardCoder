@@ -97,6 +97,16 @@ namespace TheWizardCoder.UI
 			CharacterBattleState state = BattleStates[i];
 			CharacterData ally = state.Character;
 
+			if (state.HasBattleEffect)
+			{
+				BattleStates[i].BattleEffect.Turns--;
+
+                if (BattleStates[i].BattleEffect.Turns == 0)
+                {
+					RemoveBattleEffect(i);
+                }
+            }
+
 			if (ally.Health <= 0)
 			{
 				return;
@@ -128,10 +138,20 @@ namespace TheWizardCoder.UI
                         BattleOptions.ShowInfoLabel($"{state.Character.Name} gave {itemName} to {target.Name}!");
                     }
 
-                    //int healthChange = Mathf.Clamp(item.Effect, 0, target.MaxHealth - target.Health);
-                    await HealCharacter(state.Target, item.Effect);
+                    switch (item.Type)
+					{
+						case ItemType.Heal:
+                            await HealCharacter(state.Target, item.Effect);
 
-                    global.PlayerData.RemoveFromInventory(state.ActionModifier);
+                            break;
+						case ItemType.Magic:
+							BattleEffect battleEffect = new BattleEffect(item.AdditionalData);
+							await ApplyBattleEffect(state.Target, battleEffect);
+
+							break;
+					}
+
+					global.PlayerData.RemoveFromInventory(state.ActionModifier);
                     break;
 				case CharacterAction.Magic:
 					string currentMagicSpellName = ally.MagicSpells[state.ActionModifier];
@@ -204,7 +224,20 @@ namespace TheWizardCoder.UI
 			await alliesCards[index].TweenDamage(backgroundColor);
 		}
 
-		private void OnCharacterCardPressed(int index)
+        public override async Task DisplayBattleEffect(int index)
+        {
+            SceneTreeTimer timer = GetTree().CreateTimer(3);
+            await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
+
+            alliesCards[index].ShowEffectIndicator();
+        }
+
+        public override void HideBattleEffect(int index)
+        {
+            alliesCards[index].HideEffectIndicator();
+        }
+
+        private void OnCharacterCardPressed(int index)
 		{
 			BattleStates[CurrentCharacter].Target = index;
 			PassToNext();
