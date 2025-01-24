@@ -23,18 +23,24 @@ namespace TheWizardCoder.UI
 		public DamageIndicator DamageIndicator { get; set; }
 		[Export]
 		public Marker2D BaseEnemyPosition { get; set; }
-		[Export]
+        [Export]
+        public Marker2D BaseEnemyCardPosition { get; set; }
+        [Export]
 		public PackedScene EnemySpriteScene { get; set; }
+        [Export]
+        public PackedScene CharacterRectScene { get; set; }
 
-		private Vector2 enemySpritePoint = Vector2.Zero;
+        private Vector2 enemySpritePoint = Vector2.Zero;
+		private Vector2 enemyCardPoint = Vector2.Zero;
 
 		private Array<EnemySprite> enemySprites = new();
-
+		private Array<CharacterRect> enemyCards = new();
 
 		public override void _Ready()
 		{
 			base._Ready();
 			enemySpritePoint = BaseEnemyPosition.Position;
+			enemyCardPoint = BaseEnemyCardPosition.Position;
 		}
 
 		public override void AddCharacter(CharacterData character)
@@ -55,9 +61,17 @@ namespace TheWizardCoder.UI
 			};
 
 			enemySprites.Add(enemySprite);
-		}
 
-		public void FocusOnFirst()
+			CharacterRect enemyRect = CharacterRectScene.Instantiate<CharacterRect>();
+			BattleDisplay.AddChild(enemyRect);
+
+            enemyRect.Position = enemyCardPoint + new Vector2(0, currentIndex * (enemyRect.Size.Y + 4) * 2);
+			enemyRect.ApplyData(character);
+
+			enemyCards.Add(enemyRect);
+        }
+
+        public void FocusOnFirst()
 		{
 			enemySprites[0].GrabFocus();
 		}
@@ -85,6 +99,7 @@ namespace TheWizardCoder.UI
 		{
 			await DisplayHealthChange(index, damage);
 			await base.DamageCharacter(index, damage);
+			
 		}
 
 		public override async Task DisplayHealthChange(int index, int change)
@@ -92,7 +107,9 @@ namespace TheWizardCoder.UI
 			CharacterData enemyData = Characters[index];
 			EnemySprite sprite = enemySprites[index];
 
-			DamageIndicator.PlayAnimation(change, sprite.Position - new Vector2(DamageIndicator.Size.X, 10), new Color(255, 0, 0));
+			enemyCards[index].SetHealthValue(enemyData.Health - change, enemyData.MaxHealth);
+
+            DamageIndicator.PlayAnimation(change, sprite.Position - new Vector2(DamageIndicator.Size.X, 10), new Color(255, 0, 0));
 
 			Vector2 barPosition = sprite.Position - new Vector2(EnemyHealthBar.Size.X/2, -20);
 			EnemyHealthBar.Position = barPosition;
@@ -117,6 +134,12 @@ namespace TheWizardCoder.UI
 				item.QueueFree();
 			}
 			enemySprites = new();
-		}
+
+            foreach (var item in enemyCards)
+            {
+				item.QueueFree();
+            }
+			enemyCards = new();
+        }
     }
 }

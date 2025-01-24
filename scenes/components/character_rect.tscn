@@ -1,16 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://cil04fbnlnhn3"]
+[gd_scene load_steps=9 format=3 uid="uid://cil04fbnlnhn3"]
 
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_br32s"]
 [ext_resource type="Script" path="res://scripts/ui/CharacterRect.cs" id="2_142cy"]
 [ext_resource type="SpriteFrames" uid="uid://c3e5witb4onuf" path="res://assets/characters/secondary_portraits.tres" id="3_01p47"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="4_0hco1"]
+[ext_resource type="Texture2D" uid="uid://00inqs1v3lxi" path="res://assets/ui/base.png" id="4_buk57"]
 [ext_resource type="PackedScene" uid="uid://beu5pufxcqifb" path="res://scenes/ui/damage_indicator.tscn" id="5_yx2xm"]
 [ext_resource type="SpriteFrames" uid="uid://b4ylh7xe358iv" path="res://assets/ui/spriteframes/select_arrow.tres" id="6_d5oth"]
 [ext_resource type="Texture2D" uid="uid://ssogye25ef45" path="res://assets/props/barrier.png" id="7_fkpc5"]
 
 [node name="CharacterRect" type="NinePatchRect"]
 offset_right = 92.0
-offset_bottom = 28.0
+offset_bottom = 32.0
 scale = Vector2(2, 2)
 texture = ExtResource("1_br32s")
 region_rect = Rect2(0, 0, 16, 16)
@@ -26,13 +27,26 @@ layout_mode = 0
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 88.0
-offset_bottom = 24.0
+offset_bottom = 28.0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(12, 12)
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("3_01p47")
 animation = &"Nolan"
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 88.0
+offset_bottom = 26.0
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("4_buk57")
+texture_progress = ExtResource("4_buk57")
+tint_under = Color(1, 1, 1, 0.372549)
+tint_progress = Color(1, 0.0117647, 0, 1)
 
 [node name="NameLabel" type="Label" parent="."]
 layout_mode = 0
@@ -47,22 +61,22 @@ text = "Nolan"
 
 [node name="HealthLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 48.0
-offset_top = 4.0
-offset_right = 128.0
-offset_bottom = 28.0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 152.0
+offset_bottom = 35.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("4_0hco1")
 theme_override_font_sizes/font_size = 24
-text = "100 HP"
+text = "100/100 HP"
 horizontal_alignment = 2
 
 [node name="PointsLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 48.0
-offset_top = 13.5
+offset_top = 4.0
 offset_right = 128.0
-offset_bottom = 37.5
+offset_bottom = 28.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("4_0hco1")
 theme_override_font_sizes/font_size = 24
@@ -71,7 +85,7 @@ horizontal_alignment = 2
 
 [node name="DamageIndicator" parent="." instance=ExtResource("5_yx2xm")]
 layout_mode = 0
-offset_top = 0.0
+offset_right = 46.0
 offset_bottom = 23.0
 
 [node name="SelectArrow" type="AnimatedSprite2D" parent="."]

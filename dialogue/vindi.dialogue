@@ -113,5 +113,11 @@ Nolan: [#portrait=0] Hmm..
 => END!
 
 ~ johnson_point
-
+Johnson: [#portrait=0] Heya, what what would you like?
+- Can I buy something?
+	Nolan: [#portrait=0] I wanna buy something from your shop.
+	Johnson: [#portrait=0] Alright!
+	do OpenShop("JohnsonShop")
+- Nevermind.
+	Nolan: [#portrait=0] Nevermind.
 => END!

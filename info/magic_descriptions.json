@@ -1,7 +1,7 @@
 {
 	"Fireball":{
 		"Name":"Fireball",
-		"Description":"A simple fireball that does small damage on enemy.",
+		"Description":"A simple fireball that does 15 HP on enemy.",
 		"Effect":15,
 		"Cost": 5,
 		"ShopPrice": 5,

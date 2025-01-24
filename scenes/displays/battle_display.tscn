@@ -35,12 +35,14 @@ CharacterRectScene = ExtResource("3_xy74d")
 BattleDisplay = NodePath("..")
 BattleOptions = NodePath("../BattleOptions")
 
-[node name="EnemiesContainer" parent="." node_paths=PackedStringArray("Allies", "EnemyHealthBar", "DamageIndicator", "BaseEnemyPosition", "BattleDisplay", "BattleOptions") instance=ExtResource("9_aigq0")]
+[node name="EnemiesContainer" parent="." node_paths=PackedStringArray("Allies", "EnemyHealthBar", "DamageIndicator", "BaseEnemyPosition", "BaseEnemyCardPosition", "BattleDisplay", "BattleOptions") instance=ExtResource("9_aigq0")]
 Allies = NodePath("../AlliesContainer")
 EnemyHealthBar = NodePath("../EnemyHealthBar")
 DamageIndicator = NodePath("../DamageIndicator")
 BaseEnemyPosition = NodePath("../EnemySpritePoint")
+BaseEnemyCardPosition = NodePath("../EnemyCardPoint")
 EnemySpriteScene = ExtResource("3_xj7hs")
+CharacterRectScene = ExtResource("3_xy74d")
 BattleDisplay = NodePath("..")
 BattleOptions = NodePath("../BattleOptions")
 
@@ -57,14 +59,15 @@ visible = false
 
 [node name="DamageIndicator" parent="." instance=ExtResource("10_bocww")]
 z_index = 2
-offset_top = 0.0
-offset_bottom = 16.0
 
 [node name="RectPoint" type="Marker2D" parent="."]
-position = Vector2(16, 408)
+position = Vector2(16, 400)
 
 [node name="EnemySpritePoint" type="Marker2D" parent="."]
 position = Vector2(320, 208)
+
+[node name="EnemyCardPoint" type="Marker2D" parent="."]
+position = Vector2(448, 8)
 
 [node name="InvisButton" type="Button" parent="."]
 offset_right = 8.0

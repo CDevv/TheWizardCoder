@@ -17,6 +17,7 @@ namespace TheWizardCoder.UI
 		private Label nameLabel;
 		private Label healthLabel;
 		private Label pointsLabel;
+		private TextureProgressBar healthBar;
 		private ColorRect background;
 		private AnimatedSprite2D selectArrow;
 		private Sprite2D effectIndicator;
@@ -30,11 +31,20 @@ namespace TheWizardCoder.UI
 			background = GetNode<ColorRect>("BackgroundColor");
 			healthLabel = GetNode<Label>("HealthLabel");
 			pointsLabel = GetNode<Label>("PointsLabel");
+			healthBar = GetNode<TextureProgressBar>("HealthBar");
 			selectArrow = GetNode<AnimatedSprite2D>("SelectArrow");
 			effectIndicator = GetNode<Sprite2D>("EffectIndicator");
 		}
 
-		private void OnGuiInput(InputEvent inputEvent)
+        public void ApplyData(CharacterData data)
+        {
+            SetNameText(data.Name);
+            SetHealthValue(data.Health, data.MaxHealth);
+            SetPointsValue(data.Points);
+            SetSpriteTexture(data.Name);
+        }
+
+        private void OnGuiInput(InputEvent inputEvent)
 		{
 			if (Input.IsActionJustPressed("ui_accept") && focused)
 			{
@@ -52,22 +62,17 @@ namespace TheWizardCoder.UI
 			nameLabel.Text = text;
 		}
 
-		public void SetHealthValue(int value)
+		public void SetHealthValue(int value, int maxValue)
 		{
-			healthLabel.Text = $"{value} HP";
+			healthLabel.Text = $"{value}/{maxValue} HP";
+
+			healthBar.MaxValue = maxValue;
+			healthBar.Value = value;
 		}
 
 		public void SetPointsValue(int value)
 		{
 			pointsLabel.Text = $"{value} MP";
-		}
-
-		public void ApplyData(CharacterData data)
-		{
-			SetNameText(data.Name);
-			SetHealthValue(data.Health);
-			SetPointsValue(data.Points);
-			SetSpriteTexture(data.Name);
 		}
 
 		public void ShowAsCurrentCharacter()

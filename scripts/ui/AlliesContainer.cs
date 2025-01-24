@@ -219,7 +219,7 @@ namespace TheWizardCoder.UI
 				backgroundColor = new(255, 0, 0);
 			}
 
-			alliesCards[index].SetHealthValue(Characters[index].Health);
+			alliesCards[index].SetHealthValue(Characters[index].Health, Characters[index].MaxHealth);
 			DamageIndicator.PlayAnimation(healthChange, alliesCards[index].Position + new Vector2(64, 0), backgroundColor);
 			await alliesCards[index].TweenDamage(backgroundColor);
 		}

@@ -22,5 +22,11 @@
 		"Items": [
 			"Cyanberry", "Rounded Bread", "Cyanberry Pie", "Pretzel"
 		]
+	},
+	"JohnsonShop":{
+		"Type": "Magic",
+		"Items": [
+			"Magi-hibble"
+		]
 	}
 }

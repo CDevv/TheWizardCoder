@@ -187,8 +187,8 @@ position = Vector2(336, 464)
 ShopName = "TestMagic"
 
 [node name="ZenDummy" parent="." index="32"]
-visible = true
-position = Vector2(592, 224)
+y_sort_enabled = false
+position = Vector2(524, 224)
 DialogueResource = ExtResource("8_bj7jj")
 DialogueTitle = "demo"
 

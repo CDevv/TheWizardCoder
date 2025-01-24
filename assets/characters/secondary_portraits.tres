@@ -1,7 +1,8 @@
-[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://c3e5witb4onuf"]
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://c3e5witb4onuf"]
 
 [ext_resource type="Texture2D" uid="uid://b3icfmgjqjfwf" path="res://assets/battle/battle-portraits/nolan.png" id="1_h658e"]
 [ext_resource type="Texture2D" uid="uid://cbx06dqvwrq8s" path="res://assets/battle/battle-portraits/gertrude-battle.png" id="1_voq8k"]
+[ext_resource type="Texture2D" uid="uid://3km65v6th4lx" path="res://assets/battle/battle-portraits/glitch.png" id="2_5wkvi"]
 
 [resource]
 animations = [{
@@ -11,6 +12,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"Gertrude",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5wkvi")
+}],
+"loop": true,
+"name": &"Glitch",
 "speed": 5.0
 }, {
 "frames": [{
