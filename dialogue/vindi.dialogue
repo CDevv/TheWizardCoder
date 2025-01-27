@@ -110,6 +110,8 @@ Nolan: [#portrait=0] Hmm..
 	Nolan: [#portrait=0] Can I buy something?
 	Gerald: [#portrait=0] Yeah, sure!
 	do OpenShop("GeraldShop")
+- Nevermind.
+	Nolan: [#portrait=0] Nevermind.
 => END!
 
 ~ johnson_point

@@ -60,6 +60,7 @@ position = Vector2(27, 384)
 position = Vector2(1184, 384)
 
 [node name="Gerald" parent="." index="22" instance=ExtResource("5_carfj")]
+z_index = 1
 position = Vector2(528, 280)
 DialogueResource = ExtResource("6_8d3ja")
 DialogueTitle = "gerald_point"
@@ -70,8 +71,10 @@ scale = Vector2(2, 2)
 sprite_frames = ExtResource("6_25qfs")
 
 [node name="Johnson" parent="." index="23" instance=ExtResource("5_carfj")]
+z_index = 1
 position = Vector2(656, 280)
 DialogueResource = ExtResource("6_8d3ja")
+DialogueTitle = "johnson_point"
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Johnson" index="2"]
 position = Vector2(0, -35)
@@ -90,3 +93,4 @@ z_index = 2
 position = Vector2(656, 276)
 scale = Vector2(4, 1)
 DialogueResource = ExtResource("6_8d3ja")
+DialogueTitle = "johnson_point"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cil04fbnlnhn3"]
+[gd_scene load_steps=8 format=3 uid="uid://cil04fbnlnhn3"]
 
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_br32s"]
 [ext_resource type="Script" path="res://scripts/ui/CharacterRect.cs" id="2_142cy"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://00inqs1v3lxi" path="res://assets/ui/base.png" id="4_buk57"]
 [ext_resource type="PackedScene" uid="uid://beu5pufxcqifb" path="res://scenes/ui/damage_indicator.tscn" id="5_yx2xm"]
 [ext_resource type="SpriteFrames" uid="uid://b4ylh7xe358iv" path="res://assets/ui/spriteframes/select_arrow.tres" id="6_d5oth"]
-[ext_resource type="Texture2D" uid="uid://ssogye25ef45" path="res://assets/props/barrier.png" id="7_fkpc5"]
 
 [node name="CharacterRect" type="NinePatchRect"]
 offset_right = 92.0
@@ -96,9 +95,8 @@ frame_progress = 0.19676
 
 [node name="EffectIndicator" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(8, 20)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_fkpc5")
+position = Vector2(8, 21.5)
+texture = ExtResource("4_buk57")
 
 [connection signal="focus_entered" from="." to="." method="OnFocusEntered"]
 [connection signal="focus_exited" from="." to="." method="OnFocusExited"]
