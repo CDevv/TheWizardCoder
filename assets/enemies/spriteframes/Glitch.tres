@@ -1,6 +1,7 @@
-[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://phvtxqaj4s25"]
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://phvtxqaj4s25"]
 
 [ext_resource type="Texture2D" uid="uid://kicysorc6o6d" path="res://assets/enemies/Glitch.png" id="1_6ouje"]
+[ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="2_3bmjb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8d56g"]
 atlas = ExtResource("1_6ouje")
@@ -19,9 +20,26 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8d56g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_3bmjb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_3bmjb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_3bmjb")
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3bmjb")
+}],
+"loop": true,
+"name": &"down",
 "speed": 5.0
 }, {
 "frames": [{
@@ -38,5 +56,13 @@ animations = [{
 }],
 "loop": true,
 "name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3bmjb")
+}],
+"loop": true,
+"name": &"up",
 "speed": 5.0
 }]

@@ -3,7 +3,7 @@ using System;
 using TheWizardCoder.Autoload;
 using TheWizardCoder.Enums;
 using TheWizardCoder.Interactables;
-
+using TheWizardCoder.Utils;
 
 namespace TheWizardCoder.Components
 {
@@ -53,8 +53,29 @@ namespace TheWizardCoder.Components
 				{
 					sprite.FlipH = false;
 				}
-			}
+
+                if (Vector2Helper.IsInOneDirection(velocity))
+                {
+					direction = velocity.ToDirection();
+					PlayMoveAnimation(velocity);
+                }
+            }
+            else
+            {
+				PlayIdleAnimation(direction);
+            }
+        }
+
+		private void PlayIdleAnimation(Direction direction)
+		{
+			sprite.Animation = "default";
+			sprite.Frame = (int)direction;
 		}
+
+		private void PlayMoveAnimation(Vector2 velocity)
+		{
+            sprite.Play(velocity.ToDirection().ToString().ToLower());
+        }
 
 		private void OnBodyEntered(Node2D body)
 		{

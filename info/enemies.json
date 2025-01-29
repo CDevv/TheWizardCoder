@@ -54,6 +54,17 @@
 		"MagicSpells": [],
 		"Type": "Enemy",
 	},
+	"LagMan": {
+		"Health": 50,
+		"MaxHealth": 50,
+		"Points": 0,
+		"MaxPoints": 0,
+		"AttackPoints": 15,
+		"DefensePoints": 2,
+		"AgilityPoints": 5,
+		"MagicSpells": [],
+		"Type": "Enemy",
+	},
 	"Gertrude": {
 		"Health": 40,
 		"MaxHealth": 40,

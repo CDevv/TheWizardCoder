@@ -13,7 +13,7 @@
 y_sort_enabled = true
 script = ExtResource("2_6hjdj")
 
-[node name="Camera" parent="." index="5"]
+[node name="Camera" parent="." index="6"]
 limit_right = 2336
 limit_bottom = 1280
 

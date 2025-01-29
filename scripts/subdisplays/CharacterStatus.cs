@@ -17,6 +17,8 @@ namespace TheWizardCoder.Subdisplays
 		private Label agilityPoints;
 		private Label levelLabel;
 		private TextureProgressBar levelBar;
+		private AnimatedSprite2D healthIcon;
+		private AnimatedSprite2D manaIcon;
 
 		public override void _Ready()
 		{
@@ -32,6 +34,8 @@ namespace TheWizardCoder.Subdisplays
 			agilityPoints = GetNode<Label>("%AgilityPointsLabel");
 			levelLabel = GetNode<Label>("%LevelLabel");
 			levelBar = GetNode<TextureProgressBar>("%LevelBar");
+			healthIcon = GetNode<AnimatedSprite2D>("%HealthIcon");
+			manaIcon = GetNode<AnimatedSprite2D>("%ManaIcon");
 		}
 
 		public override void ShowDisplay()
@@ -44,11 +48,11 @@ namespace TheWizardCoder.Subdisplays
 			portrait.Animation = character.Name;
 			name.Text = character.Name;
 
-			health.Text = $"Health: {character.Health}";
+			health.Text = $"Health: {character.Health}/{character.MaxHealth}";
 			healthBar.MaxValue = character.MaxHealth;
 			healthBar.Value = character.Health;
 
-			points.Text = $"MP: {character.Points}";
+			points.Text = $"MP: {character.Points}/{character.MaxPoints}";
 			attackPoints.Text = $"Attack: {character.AttackPoints}";
 			defensePoints.Text = $"Defense: {character.DefensePoints}";
 			agilityPoints.Text = $"Agility: {character.AgilityPoints}";
@@ -58,6 +62,21 @@ namespace TheWizardCoder.Subdisplays
 			levelBar.Value = character.LevelPoints;
 
 			Show();
+		}
+
+		private void OnHealthLabelResized()
+		{
+            Vector2 healthIconPosition = new Vector2(health.Position.X - (8), health.Position.Y + (health.Size.Y/3));
+            healthIcon.Position = healthIconPosition;
+        }
+
+		private void OnManaLabelResized()
+		{
+            if (points != null)
+            {
+                Vector2 manaIconPosition = new Vector2(points.Position.X - 8, points.Position.Y + (points.Size.Y / 3));
+                manaIcon.Position = manaIconPosition;
+            }
 		}
 	}
 }

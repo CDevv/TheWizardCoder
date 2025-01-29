@@ -1,8 +1,10 @@
-[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://c3e5witb4onuf"]
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://c3e5witb4onuf"]
 
 [ext_resource type="Texture2D" uid="uid://b3icfmgjqjfwf" path="res://assets/battle/battle-portraits/nolan.png" id="1_h658e"]
 [ext_resource type="Texture2D" uid="uid://cbx06dqvwrq8s" path="res://assets/battle/battle-portraits/gertrude-battle.png" id="1_voq8k"]
 [ext_resource type="Texture2D" uid="uid://3km65v6th4lx" path="res://assets/battle/battle-portraits/glitch.png" id="2_5wkvi"]
+[ext_resource type="Texture2D" uid="uid://duq71r0givmwr" path="res://assets/battle/battle-portraits/juniorbug.png" id="3_sm8n0"]
+[ext_resource type="Texture2D" uid="uid://d1h3qx0k6fsvt" path="res://assets/battle/battle-portraits/lagman.png" id="4_dknw7"]
 
 [resource]
 animations = [{
@@ -20,6 +22,22 @@ animations = [{
 }],
 "loop": true,
 "name": &"Glitch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_sm8n0")
+}],
+"loop": true,
+"name": &"JuniorBug",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_dknw7")
+}],
+"loop": true,
+"name": &"LagMan",
 "speed": 5.0
 }, {
 "frames": [{

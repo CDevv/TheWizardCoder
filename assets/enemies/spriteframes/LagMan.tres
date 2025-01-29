@@ -1,0 +1,66 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://clrcfm2nj8c1p"]
+
+[ext_resource type="Texture2D" uid="uid://dmowdmqvtrm4c" path="res://assets/enemies/LagMan.png" id="1_24kak"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2m4p"]
+atlas = ExtResource("1_24kak")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nu74h"]
+atlas = ExtResource("1_24kak")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knatu"]
+atlas = ExtResource("1_24kak")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oeana"]
+atlas = ExtResource("1_24kak")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35qly"]
+atlas = ExtResource("1_24kak")
+region = Rect2(48, 0, 16, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2m4p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nu74h")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_knatu")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oeana")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35qly")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]

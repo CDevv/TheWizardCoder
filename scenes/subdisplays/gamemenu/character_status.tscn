@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bd6352ak6gjj6"]
+[gd_scene load_steps=7 format=3 uid="uid://bd6352ak6gjj6"]
 
 [ext_resource type="Script" path="res://scripts/subdisplays/CharacterStatus.cs" id="1_epibd"]
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_ki4qp"]
 [ext_resource type="SpriteFrames" uid="uid://c3e5witb4onuf" path="res://assets/characters/secondary_portraits.tres" id="2_0c146"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="3_1vr5o"]
 [ext_resource type="Texture2D" uid="uid://00inqs1v3lxi" path="res://assets/ui/base.png" id="4_cr4wu"]
+[ext_resource type="SpriteFrames" uid="uid://d0q5psj5bn44m" path="res://assets/ui/spriteframes/stats-icons.tres" id="6_5evwl"]
 
 [node name="CharacterStatus" type="CanvasLayer"]
 script = ExtResource("1_epibd")
@@ -39,11 +40,15 @@ text = "Label"
 
 [node name="PointsLabel" type="Label" parent="Container"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 148.0
-offset_top = 40.0
-offset_right = 188.0
-offset_bottom = 63.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = 44.0
+offset_right = -8.0
+offset_bottom = 60.0
+grow_horizontal = 0
 theme = ExtResource("3_1vr5o")
 theme_override_colors/font_color = Color(0.564706, 0, 0.517647, 1)
 text = "Label"
@@ -52,9 +57,9 @@ horizontal_alignment = 2
 [node name="AttackPointsLabel" type="Label" parent="Container"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 8.0
+offset_left = 20.0
 offset_top = 64.0
-offset_right = 98.0
+offset_right = 110.0
 offset_bottom = 80.0
 theme = ExtResource("3_1vr5o")
 text = "Attack:
@@ -63,9 +68,9 @@ text = "Attack:
 [node name="DefensePointsLabel" type="Label" parent="Container"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 98.0
+offset_left = 108.0
 offset_top = 64.0
-offset_right = 188.0
+offset_right = 198.0
 offset_bottom = 80.0
 theme = ExtResource("3_1vr5o")
 text = "Defense:
@@ -74,9 +79,9 @@ text = "Defense:
 [node name="AgilityPointsLabel" type="Label" parent="Container"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 8.0
+offset_left = 20.0
 offset_top = 80.0
-offset_right = 98.0
+offset_right = 110.0
 offset_bottom = 96.0
 theme = ExtResource("3_1vr5o")
 text = "Agility:
@@ -84,14 +89,17 @@ text = "Agility:
 
 [node name="HealthLabel" type="Label" parent="Container"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 120.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
 offset_top = 8.0
-offset_right = 188.0
+offset_right = -8.0
 offset_bottom = 31.0
+grow_horizontal = 0
 theme = ExtResource("3_1vr5o")
 text = "Label"
-horizontal_alignment = 2
 
 [node name="LevelLabel" type="Label" parent="Container"]
 unique_name_in_owner = true
@@ -135,3 +143,32 @@ texture_progress = ExtResource("4_cr4wu")
 tint_under = Color(0.685835, 0.685835, 0.685835, 1)
 tint_over = Color(1, 1, 1, 0)
 tint_progress = Color(1, 0.921569, 0.270588, 1)
+
+[node name="DefenseIcon" type="AnimatedSprite2D" parent="Container"]
+position = Vector2(100, 72)
+sprite_frames = ExtResource("6_5evwl")
+
+[node name="AttackIcon" type="AnimatedSprite2D" parent="Container"]
+position = Vector2(12, 72)
+sprite_frames = ExtResource("6_5evwl")
+frame = 1
+
+[node name="AgilityIcon" type="AnimatedSprite2D" parent="Container"]
+position = Vector2(12, 88)
+sprite_frames = ExtResource("6_5evwl")
+frame = 3
+
+[node name="HealthIcon" type="AnimatedSprite2D" parent="Container"]
+unique_name_in_owner = true
+position = Vector2(108, 16)
+sprite_frames = ExtResource("6_5evwl")
+frame = 4
+
+[node name="ManaIcon" type="AnimatedSprite2D" parent="Container"]
+unique_name_in_owner = true
+position = Vector2(108, 48)
+sprite_frames = ExtResource("6_5evwl")
+frame = 2
+
+[connection signal="resized" from="Container/PointsLabel" to="." method="OnManaLabelResized"]
+[connection signal="resized" from="Container/HealthLabel" to="." method="OnHealthLabelResized"]
