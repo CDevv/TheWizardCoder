@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bk3a4lc0i5uwk" path="res://scenes/components/actor.tscn" id="9_aw70h"]
 [ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/components/code_problem_point.tscn" id="9_cmpyf"]
 [ext_resource type="Resource" uid="uid://ukx1i3qsx6q2" path="res://dialogue/vindi.dialogue" id="10_htbxa"]
-[ext_resource type="SpriteFrames" uid="uid://dd1d26niltn6l" path="res://assets/characters/movement/spriteframes/craig.tres" id="10_kelch"]
+[ext_resource type="SpriteFrames" uid="uid://dd1d26niltn6l" path="res://assets/characters/movement/spriteframes/brook.tres" id="10_kelch"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_dx5vu"]
 a = Vector2(128, 968)
@@ -95,13 +95,13 @@ SolvableAreas = {
 "AddToInventory(fish);": Vector2(8, 104)
 }
 
-[node name="Craig" parent="." index="25" instance=ExtResource("9_aw70h")]
+[node name="Brook" parent="." index="25" instance=ExtResource("9_aw70h")]
 z_index = 1
 position = Vector2(208, 768)
 DialogueResource = ExtResource("10_htbxa")
-DialogueTitle = "craig_point"
+DialogueTitle = "brook_point"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="Craig" index="2"]
+[node name="Sprite" type="AnimatedSprite2D" parent="Brook" index="2"]
 position = Vector2(0, -32)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("10_kelch")

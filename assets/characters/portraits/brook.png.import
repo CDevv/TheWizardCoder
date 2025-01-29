@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1m0h5l6egnfq"
-path="res://.godot/imported/brooklynanims.png-3ecbfd4397260e4dff3864dffab1e580.ctex"
+uid="uid://dmd5bebih1ohb"
+path="res://.godot/imported/brook.png-657b5e5897f2b0b0b0064e89871c7756.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/movement/brooklynanims.png"
-dest_files=["res://.godot/imported/brooklynanims.png-3ecbfd4397260e4dff3864dffab1e580.ctex"]
+source_file="res://assets/characters/portraits/brook.png"
+dest_files=["res://.godot/imported/brook.png-657b5e5897f2b0b0b0064e89871c7756.ctex"]
 
 [params]
 

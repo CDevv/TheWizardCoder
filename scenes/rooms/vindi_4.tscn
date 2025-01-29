@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_7tuwd"]
 [ext_resource type="Texture2D" uid="uid://d2hm4l4jkf1yg" path="res://assets/ui/parallax-vindi.png" id="2_v8m6p"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="3_73jxe"]
-[ext_resource type="TileSet" uid="uid://g6httogfukc2" path="res://tilesets/vindi_env.tres" id="4_t8ngs"]
+[ext_resource type="TileSet" uid="uid://dqirfdrc3jlyd" path="res://tilesets/vindi_env.tres" id="4_t8ngs"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="5_eepc4"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_0hms2"]
@@ -16,7 +16,7 @@ b = Vector2(1120, 480)
 [node name="Vindi4" instance=ExtResource("1_7tuwd")]
 y_sort_enabled = true
 
-[node name="Camera" parent="." index="5"]
+[node name="Camera" parent="." index="6"]
 limit_right = 1120
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="13"]
@@ -29,6 +29,7 @@ texture = ExtResource("2_v8m6p")
 [node name="Player" parent="." index="16" instance=ExtResource("3_73jxe")]
 z_index = 1
 y_sort_enabled = true
+position = Vector2(336, 308)
 
 [node name="TileMap" type="TileMap" parent="." index="17"]
 y_sort_enabled = true

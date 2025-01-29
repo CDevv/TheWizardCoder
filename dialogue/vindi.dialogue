@@ -82,16 +82,16 @@ else:
 do SetPlayerData("HasMetGregory", true)
 => END!
 
-~ craig_point
+~ brook_point
 if GetPlayerData("FishingRodSolved"):
 	Nolan: [#portrait=0] So.. I fixed the fishing rod!
-	Craig: [#portrait=1] Really?
+	Brook: [#portrait=1] Really?
 	Nolan: [#portrait=0] Yes! You can have it back.
-	Craig: [#portrait=0] Nah mate, you have it. That's a reward for helpin' us.
+	Brook: [#portrait=0] Nah mate, you have it. That's a reward for helpin' us.
 else:
-	Craig: [#portrait=0] 'Ello! You here to fish?
+	Brook: [#portrait=0] 'Ello! You here to fish?
 	Nolan: [#portrait=0] I guess..?
-	Craig: [#portrait=2] Well uhh.. Hope you catch some fish 'cause apperently I can't!
+	Brook: [#portrait=2] Well uhh.. Hope you catch some fish 'cause apperently I can't!
 	if GetPlayerData("HasMetGregory"):
 		Nolan: [#portrait=0] Oh! Gregory already told me!
 	else:

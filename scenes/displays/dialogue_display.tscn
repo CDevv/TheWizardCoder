@@ -7,18 +7,18 @@
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="3_0qck7"]
 [ext_resource type="Texture2D" uid="uid://dnwl13wb4jxy2" path="res://assets/characters/portraits/keenelm.png" id="4_7t36c"]
 [ext_resource type="Texture2D" uid="uid://dr0pu0n4whup7" path="res://assets/characters/portraits/berry.png" id="4_mfeyw"]
-[ext_resource type="Texture2D" uid="uid://dmd5bebih1ohb" path="res://assets/characters/portraits/craig.png" id="5_dotc7"]
 [ext_resource type="Texture2D" uid="uid://yyw2mjmjrp8x" path="res://assets/characters/portraits/shimble.png" id="5_dsymk"]
 [ext_resource type="Texture2D" uid="uid://b82ubblioamoo" path="res://assets/characters/portraits/nara.png" id="5_iw7gq"]
 [ext_resource type="Texture2D" uid="uid://dojurbs5k8wnd" path="res://assets/characters/portraits/dudeley.png" id="5_k3maw"]
+[ext_resource type="Texture2D" uid="uid://dmd5bebih1ohb" path="res://assets/characters/portraits/brook.png" id="5_srfo1"]
 [ext_resource type="Texture2D" uid="uid://qbru1t4okg4k" path="res://assets/characters/portraits/zenith.png" id="5_wun3d"]
 [ext_resource type="Texture2D" uid="uid://cg4abd46clb5w" path="res://assets/characters/portraits/gertrude.png" id="6_3iyw6"]
 [ext_resource type="Texture2D" uid="uid://c8jyb05cf4i13" path="res://assets/characters/portraits/linton.png" id="6_87rob"]
-[ext_resource type="Texture2D" uid="uid://4ui0kxhdxv2t" path="res://assets/characters/portraits/fred.png" id="7_3k06k"]
 [ext_resource type="Texture2D" uid="uid://dwddyqemmghcc" path="res://assets/characters/portraits/gregory.png" id="7_kq7ba"]
 [ext_resource type="Texture2D" uid="uid://k0tu1vy0o781" path="res://assets/characters/portraits/gerald.png" id="8_vyhfr"]
 [ext_resource type="Texture2D" uid="uid://5evvqmuv2ujj" path="res://assets/characters/portraits/nobe.png" id="10_ye061"]
 [ext_resource type="Texture2D" uid="uid://bqa0e4rd37uk1" path="res://assets/characters/portraits/johnson.png" id="11_pwq53"]
+[ext_resource type="Texture2D" uid="uid://4ui0kxhdxv2t" path="res://assets/characters/portraits/kulber.png" id="12_pwvsh"]
 [ext_resource type="Texture2D" uid="uid://hqi47s7722dw" path="res://assets/characters/portraits/timothy.png" id="14_p7rx0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8h35u"]
@@ -38,15 +38,15 @@ atlas = ExtResource("4_mfeyw")
 region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hxa6d"]
-atlas = ExtResource("5_dotc7")
+atlas = ExtResource("5_srfo1")
 region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_78c8w"]
-atlas = ExtResource("5_dotc7")
+atlas = ExtResource("5_srfo1")
 region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2piy"]
-atlas = ExtResource("5_dotc7")
+atlas = ExtResource("5_srfo1")
 region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_30uur"]
@@ -207,7 +207,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_g2piy")
 }],
 "loop": true,
-"name": &"craig",
+"name": &"brook",
 "speed": 5.0
 }, {
 "frames": [{
@@ -222,14 +222,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"dudeley",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("7_3k06k")
-}],
-"loop": true,
-"name": &"fred",
 "speed": 5.0
 }, {
 "frames": [{
@@ -294,6 +286,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"keenelm",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_pwvsh")
+}],
+"loop": true,
+"name": &"kulber",
 "speed": 5.0
 }, {
 "frames": [{
