@@ -34,6 +34,7 @@ offset_bottom = 36.0
 theme = ExtResource("3_6qd7x")
 theme_override_font_sizes/font_size = 16
 text = "Label"
+autowrap_mode = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="Container"]
 layout_mode = 0

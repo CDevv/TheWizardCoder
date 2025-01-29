@@ -97,9 +97,8 @@ namespace TheWizardCoder.UI
 
 		public override async Task DamageCharacter(int index, int damage)
 		{
-			await DisplayHealthChange(index, damage);
-			await base.DamageCharacter(index, damage);
-			
+            await base.DamageCharacter(index, damage);
+            await DisplayHealthChange(index, damage);
 		}
 
 		public override async Task DisplayHealthChange(int index, int change)
@@ -107,7 +106,7 @@ namespace TheWizardCoder.UI
 			CharacterData enemyData = Characters[index];
 			EnemySprite sprite = enemySprites[index];
 
-			enemyCards[index].SetHealthValue(enemyData.Health - change, enemyData.MaxHealth);
+			enemyCards[index].SetHealthValue(enemyData.Health, enemyData.MaxHealth);
 
             DamageIndicator.PlayAnimation(change, sprite.Position - new Vector2(DamageIndicator.Size.X, 10), new Color(255, 0, 0));
 

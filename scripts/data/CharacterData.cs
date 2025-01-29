@@ -65,6 +65,12 @@ namespace TheWizardCoder.Data
             Health = newValue;
         }
 
+        public void RemoveHealth(int value)
+        {
+            int newValue = Mathf.Clamp(Health - value, 0, MaxHealth);
+            Health = newValue;
+        }
+
         public void AddLevelPoints(int value)
         {
             LevelPoints += value;

@@ -100,6 +100,7 @@ namespace TheWizardCoder.UI
 			if (state.HasBattleEffect)
 			{
 				BattleStates[i].BattleEffect.Turns--;
+				alliesCards[i].UpdateTurnsLabel(BattleStates[i].BattleEffect.Turns);
 
                 if (BattleStates[i].BattleEffect.Turns == 0)
                 {
@@ -229,7 +230,10 @@ namespace TheWizardCoder.UI
             SceneTreeTimer timer = GetTree().CreateTimer(3);
             await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
 
-            alliesCards[index].ShowEffectIndicator();
+			BattleEffect battleEffect = BattleStates[index].BattleEffect;
+
+            alliesCards[index].ShowEffectIndicator(battleEffect.Action, battleEffect.Effect);
+			alliesCards[index].UpdateTurnsLabel(battleEffect.Turns);
         }
 
         public override void HideBattleEffect(int index)

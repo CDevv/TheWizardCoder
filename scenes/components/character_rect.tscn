@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cil04fbnlnhn3"]
+[gd_scene load_steps=25 format=3 uid="uid://cil04fbnlnhn3"]
 
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_br32s"]
 [ext_resource type="Script" path="res://scripts/ui/CharacterRect.cs" id="2_142cy"]
@@ -7,6 +7,130 @@
 [ext_resource type="Texture2D" uid="uid://00inqs1v3lxi" path="res://assets/ui/base.png" id="4_buk57"]
 [ext_resource type="PackedScene" uid="uid://beu5pufxcqifb" path="res://scenes/ui/damage_indicator.tscn" id="5_yx2xm"]
 [ext_resource type="SpriteFrames" uid="uid://b4ylh7xe358iv" path="res://assets/ui/spriteframes/select_arrow.tres" id="6_d5oth"]
+[ext_resource type="Texture2D" uid="uid://bhq67jtavyesc" path="res://assets/ui/stats-icons.png" id="7_bks83"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxwxr"]
+atlas = ExtResource("7_bks83")
+region = Rect2(0, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iy0ge"]
+atlas = ExtResource("7_bks83")
+region = Rect2(12, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptghw"]
+atlas = ExtResource("7_bks83")
+region = Rect2(24, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgi36"]
+atlas = ExtResource("7_bks83")
+region = Rect2(36, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eii62"]
+atlas = ExtResource("7_bks83")
+region = Rect2(48, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gsk3v"]
+atlas = ExtResource("7_bks83")
+region = Rect2(0, 12, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5w0t"]
+atlas = ExtResource("7_bks83")
+region = Rect2(12, 12, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmkwk"]
+atlas = ExtResource("7_bks83")
+region = Rect2(24, 12, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qpiy"]
+atlas = ExtResource("7_bks83")
+region = Rect2(36, 12, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c823g"]
+atlas = ExtResource("7_bks83")
+region = Rect2(48, 12, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cltrh"]
+atlas = ExtResource("7_bks83")
+region = Rect2(0, 24, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfob3"]
+atlas = ExtResource("7_bks83")
+region = Rect2(12, 24, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vq1lo"]
+atlas = ExtResource("7_bks83")
+region = Rect2(24, 24, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3pkw"]
+atlas = ExtResource("7_bks83")
+region = Rect2(36, 24, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2g5a"]
+atlas = ExtResource("7_bks83")
+region = Rect2(48, 24, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_se6q2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxwxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iy0ge")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptghw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sgi36")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eii62")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gsk3v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5w0t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmkwk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5qpiy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c823g")
+}],
+"loop": true,
+"name": &"effect+",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cltrh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfob3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vq1lo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3pkw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2g5a")
+}],
+"loop": true,
+"name": &"effect-",
+"speed": 5.0
+}]
 
 [node name="CharacterRect" type="NinePatchRect"]
 offset_right = 92.0
@@ -87,16 +211,29 @@ layout_mode = 0
 offset_right = 46.0
 offset_bottom = 23.0
 
+[node name="EffectIndicator" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(8, 20)
+sprite_frames = SubResource("SpriteFrames_se6q2")
+animation = &"effect-"
+
+[node name="EffectTurns" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 15.0
+offset_top = 14.5
+offset_right = 55.0
+offset_bottom = 37.5
+theme = ExtResource("4_0hco1")
+theme_override_font_sizes/font_size = 16
+text = "3
+"
+
 [node name="SelectArrow" type="AnimatedSprite2D" parent="."]
 visible = false
 position = Vector2(0, 13.5)
 sprite_frames = ExtResource("6_d5oth")
 frame_progress = 0.19676
-
-[node name="EffectIndicator" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(8, 21.5)
-texture = ExtResource("4_buk57")
 
 [connection signal="focus_entered" from="." to="." method="OnFocusEntered"]
 [connection signal="focus_exited" from="." to="." method="OnFocusExited"]

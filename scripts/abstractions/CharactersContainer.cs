@@ -83,7 +83,7 @@ namespace TheWizardCoder.Abstractions
 
 		public virtual async Task DamageCharacter(int index, int damage)
 		{
-			Characters[index].Health -= damage;
+			Characters[index].RemoveHealth(damage);
 		}
 
 		public async Task HealCharacter(int targetIndex, int addedHealth)
@@ -91,7 +91,7 @@ namespace TheWizardCoder.Abstractions
 			CharacterBattleState state = BattleStates[targetIndex];
 
             int healthChange = Mathf.Clamp(addedHealth, 0, state.Character.MaxHealth - state.Character.Health);
-			Characters[state.Target].AddHealth(healthChange);		
+			Characters[state.Target].AddHealth(healthChange);	
 
 			await DisplayHealthChange(targetIndex, healthChange);
 
@@ -115,10 +115,10 @@ namespace TheWizardCoder.Abstractions
 
 			switch (effect.Action)
 			{
-				case Enums.CharacterAction.Attack:
+				case Enums.BattleEffectType.Attack:
 					Characters[targetIndex].AttackPoints += effect.Effect;
 					break;
-				case Enums.CharacterAction.Defend:
+				case Enums.BattleEffectType.Defense:
 					Characters[targetIndex].DefensePoints += effect.Effect;
 					break;
 			}
@@ -134,10 +134,10 @@ namespace TheWizardCoder.Abstractions
 
             switch (effect.Action)
             {
-                case Enums.CharacterAction.Attack:
+                case Enums.BattleEffectType.Attack:
                     Characters[targetIndex].AttackPoints -= effect.Effect;
                     break;
-                case Enums.CharacterAction.Defend:
+                case Enums.BattleEffectType.Defense:
                     Characters[targetIndex].DefensePoints -= effect.Effect;
                     break;
             }

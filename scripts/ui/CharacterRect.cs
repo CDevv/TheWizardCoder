@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Threading.Tasks;
 using TheWizardCoder.Data;
+using TheWizardCoder.Enums;
 
 namespace TheWizardCoder.UI
 {
@@ -20,7 +21,8 @@ namespace TheWizardCoder.UI
 		private TextureProgressBar healthBar;
 		private ColorRect background;
 		private AnimatedSprite2D selectArrow;
-		private Sprite2D effectIndicator;
+		private AnimatedSprite2D effectIndicator;
+		private Label effectTurns;
 		private bool focused = false;
 
 		public override void _Ready()
@@ -33,7 +35,8 @@ namespace TheWizardCoder.UI
 			pointsLabel = GetNode<Label>("PointsLabel");
 			healthBar = GetNode<TextureProgressBar>("HealthBar");
 			selectArrow = GetNode<AnimatedSprite2D>("SelectArrow");
-			effectIndicator = GetNode<Sprite2D>("EffectIndicator");
+			effectIndicator = GetNode<AnimatedSprite2D>("EffectIndicator");
+			effectTurns = GetNode<Label>("EffectTurns");
 		}
 
         public void ApplyData(CharacterData data)
@@ -85,14 +88,32 @@ namespace TheWizardCoder.UI
 			background.Modulate = invisibleColor;
 		}
 
-		public void ShowEffectIndicator()
+		public void ShowEffectIndicator(BattleEffectType type, int effect)
 		{
-			effectIndicator.Show();
+			effectIndicator.Frame = (int)type;
+
+            if (effect > 0)
+            {
+				effectIndicator.Animation = "effect+";
+            }
+            else
+            {
+				effectIndicator.Animation = "effect-";
+            }
+
+            effectIndicator.Show();
+			effectTurns.Show();
 		}
 
 		public void HideEffectIndicator()
 		{
 			effectIndicator.Hide();
+			effectTurns.Hide();
+		}
+
+		public void UpdateTurnsLabel(int turns)
+		{
+			effectTurns.Text = $"{turns}";
 		}
 
 		private void OnFocusEntered()
