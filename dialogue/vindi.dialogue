@@ -123,3 +123,10 @@ Johnson: [#portrait=0] Heya, what what would you like?
 - Nevermind.
 	Nolan: [#portrait=0] Nevermind.
 => END!
+
+~ kulber_point
+if GetPlayerData("VindiTreeSolved"):
+	Kulber: [#portrait=0] Thanks, man!
+else:
+	Kulber: [#portrait=0] A tree has been blockin' my house, man!
+=> END!
