@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bcdc2k6p8yj3g"]
+[gd_scene load_steps=16 format=3 uid="uid://bcdc2k6p8yj3g"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_6m840"]
 [ext_resource type="Script" path="res://scripts/rooms/Vindi1.cs" id="2_r8lsh"]
@@ -10,6 +10,7 @@
 [ext_resource type="SpriteFrames" uid="uid://82bwjhoam6g6" path="res://assets/characters/movement/spriteframes/timothy.tres" id="6_6p1xo"]
 [ext_resource type="SpriteFrames" uid="uid://bgjlmh25ggtru" path="res://assets/characters/movement/spriteframes/gregory.tres" id="8_6chff"]
 [ext_resource type="PackedScene" uid="uid://mmm0k3msmmm5" path="res://scenes/components/cutscene_point.tscn" id="9_c7nka"]
+[ext_resource type="PackedScene" uid="uid://doyfot0kgcxa2" path="res://scenes/components/snow_particles.tscn" id="11_v1fc0"]
 
 [sub_resource type="Animation" id="Animation_h1hts"]
 resource_name = "hide"
@@ -311,3 +312,11 @@ position = Vector2(640, 736)
 scale = Vector2(1, 12)
 PlaythroughPropertyName = "HasMetTimothy"
 RoomMethodName = "IntroCutscene"
+
+[node name="SnowParticles" parent="." index="28" instance=ExtResource("11_v1fc0")]
+z_index = 3
+position = Vector2(352, 392)
+
+[node name="SnowParticles2" parent="." index="29" instance=ExtResource("11_v1fc0")]
+z_index = 3
+position = Vector2(1040, 392)

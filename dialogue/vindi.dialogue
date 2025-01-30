@@ -34,6 +34,7 @@ if GetPlayerData("FishingRodSolved"):
 	Nolan: [#portrait=0] Yep! The fishing rod now works.
 	Timothy: [#portrait=0] Epic! Do you want me to tell about other issues?
 	Nolan: [#portrait=0] Yeah, sure.
+	Timothy: [#portrait=0] Placeholder.
 else:
 	Timothy: [#portrait=0] Oh, heya! 
 	Nolan: [#portrait=0] Hello! What details were you talking about?
