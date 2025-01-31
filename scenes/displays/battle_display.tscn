@@ -1,11 +1,11 @@
 [gd_scene load_steps=15 format=3 uid="uid://t2oe67lsq1j2"]
 
 [ext_resource type="Script" path="res://scripts/displays/BattleDisplay.cs" id="1_py1kc"]
-[ext_resource type="Texture2D" uid="uid://buwq8pssigdcx" path="res://assets/battle/battle-bg.png" id="2_8bsa4"]
 [ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="2_gbd0r"]
 [ext_resource type="PackedScene" uid="uid://iglkgt85o6wb" path="res://scenes/ui/enemy_sprite.tscn" id="3_xj7hs"]
 [ext_resource type="PackedScene" uid="uid://cil04fbnlnhn3" path="res://scenes/components/character_rect.tscn" id="3_xy74d"]
 [ext_resource type="PackedScene" uid="uid://bpiouthd683jq" path="res://scenes/ui/enemy_health_bar.tscn" id="6_s2ji1"]
+[ext_resource type="Texture2D" uid="uid://bkcqub1bq0kvx" path="res://assets/battle/backgrounds/battle-bg.png" id="7_4rtm4"]
 [ext_resource type="PackedScene" uid="uid://dbc02qtax1to" path="res://scenes/ui/allies_container.tscn" id="8_xfudy"]
 [ext_resource type="PackedScene" uid="uid://lj6v8jcpq0gm" path="res://scenes/ui/enemies_container.tscn" id="9_aigq0"]
 [ext_resource type="PackedScene" uid="uid://cevwsglbjkiip" path="res://scenes/subdisplays/battle/battle_options.tscn" id="9_py3yx"]
@@ -49,7 +49,7 @@ BattleOptions = NodePath("../BattleOptions")
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 640.0
 offset_bottom = 480.0
-texture = ExtResource("2_8bsa4")
+texture = ExtResource("7_4rtm4")
 
 [node name="BattleOptions" parent="." instance=ExtResource("9_py3yx")]
 visible = false
