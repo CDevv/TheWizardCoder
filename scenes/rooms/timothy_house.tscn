@@ -154,6 +154,8 @@ position = Vector2(448, 376)
 [node name="Timothy" parent="." index="21" instance=ExtResource("5_6bhd4")]
 z_index = 1
 position = Vector2(352, 320)
+DialogueResource = ExtResource("3_1mw1v")
+DialogueTitle = "timothy_intro"
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Timothy" index="2"]
 position = Vector2(0, -32)

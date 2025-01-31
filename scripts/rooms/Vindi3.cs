@@ -13,14 +13,6 @@ namespace TheWizardCoder.Rooms
         {
             base.OnReady();
             problemPoint = GetNode<CodeProblemPoint>("CodeProblemPoint");
-
-            CodeProblemPanel.ProblemSolved += () =>
-            {
-                if (CodeProblemPanel.ProblemId == problemPoint.UniqueIdentifier)
-                {
-                    global.PlayerData.FishingRodSolved = true;
-                }
-            };
         }
 
         private void OpenFishingRodProblem()
@@ -35,6 +27,14 @@ namespace TheWizardCoder.Rooms
                     problemPoint.Items,
                     problemPoint.SolvableAreas, false);
             }
+        }
+
+        private void OnProblemSolved()
+        {
+            GD.Print("fishing rod problem solved");
+
+            global.PlayerData.FishingRodSolved = true;
+            global.PlayerData.Stats.AddLevelPoints(7);
         }
     }
 }

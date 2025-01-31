@@ -16,6 +16,7 @@ namespace TheWizardCoder.Subdisplays
 		private Label defensePoints;
 		private Label agilityPoints;
 		private Label levelLabel;
+		private Label levelPointsLabel;
 		private TextureProgressBar levelBar;
 		private AnimatedSprite2D healthIcon;
 		private AnimatedSprite2D manaIcon;
@@ -33,6 +34,7 @@ namespace TheWizardCoder.Subdisplays
 			defensePoints = GetNode<Label>("%DefensePointsLabel");
 			agilityPoints = GetNode<Label>("%AgilityPointsLabel");
 			levelLabel = GetNode<Label>("%LevelLabel");
+			levelPointsLabel = GetNode<Label>("%LevelPointsLabel");
 			levelBar = GetNode<TextureProgressBar>("%LevelBar");
 			healthIcon = GetNode<AnimatedSprite2D>("%HealthIcon");
 			manaIcon = GetNode<AnimatedSprite2D>("%ManaIcon");
@@ -58,6 +60,8 @@ namespace TheWizardCoder.Subdisplays
 			agilityPoints.Text = $"Agility: {character.AgilityPoints}";
 
 			levelLabel.Text = $"Level: {character.Level}";
+			levelPointsLabel.Text = $"XP: {character.LevelPoints}/{character.GetMaxLevelPoints()}";
+
 			levelBar.MaxValue = character.GetMaxLevelPoints();
 			levelBar.Value = character.LevelPoints;
 

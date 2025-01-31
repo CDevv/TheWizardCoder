@@ -206,7 +206,7 @@ namespace TheWizardCoder.Displays
 
 		private async void OnProblemSolved()
 		{
-			GD.Print("SOLVED!!");
+			GD.Print("CodeProblemPanel: Problem Solved");
 			global.CanWalk = true;
 			global.GameDisplayEnabled = true;
             if (!string.IsNullOrEmpty(ProblemId))
@@ -215,7 +215,6 @@ namespace TheWizardCoder.Displays
             }
 
             LastProblemItems = new(items);
-			GD.Print(LastProblemItems.Count);
 			Reset();
 
 			animationPlayer.PlayBackwards("show");

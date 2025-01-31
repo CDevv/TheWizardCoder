@@ -161,7 +161,7 @@ a = Vector2(1032, 0)
 b = Vector2(1032, 480)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gf2ta"]
-size = Vector2(56, 16)
+size = Vector2(32, 24)
 
 [node name="Vindi4" instance=ExtResource("1_7tuwd")]
 y_sort_enabled = true
@@ -222,7 +222,7 @@ z_index = 2
 
 [node name="TreeCollisionShape" type="CollisionShape2D" parent="TreeCollision" index="0"]
 unique_name_in_owner = true
-position = Vector2(916, 224)
+position = Vector2(912, 228)
 shape = SubResource("RectangleShape2D_gf2ta")
 
 [node name="CodeProblemPoint" parent="." index="23" instance=ExtResource("6_evcuj")]
@@ -259,12 +259,9 @@ position = Vector2(0, -32)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("11_t6mmq")
 
-[node name="SnowParticles" parent="." index="26" instance=ExtResource("13_0lfjg")]
-z_index = 3
-position = Vector2(608, 8)
-
-[node name="BigTree" type="Node2D" parent="." index="27"]
+[node name="BigTree" type="Node2D" parent="." index="26"]
 z_index = 1
+y_sort_enabled = true
 position = Vector2(912, 232)
 
 [node name="Trunk1" type="Sprite2D" parent="BigTree" index="0"]
@@ -287,22 +284,28 @@ texture = ExtResource("14_oqv5o")
 
 [node name="Trunk4" type="Sprite2D" parent="BigTree" index="3"]
 unique_name_in_owner = true
+z_index = 1
 position = Vector2(0, -112)
 scale = Vector2(2, 2)
 texture = ExtResource("14_oqv5o")
 
 [node name="Branch" type="Sprite2D" parent="BigTree" index="4"]
+z_index = 1
 position = Vector2(0, -240)
 scale = Vector2(2, 2)
 texture = ExtResource("15_g2oer")
 
-[node name="SelectionBox" type="Sprite2D" parent="." index="28"]
+[node name="SelectionBox" type="Sprite2D" parent="." index="27"]
 visible = false
 modulate = Color(0, 1, 0, 1)
-z_index = 2
+z_index = 3
 position = Vector2(912, 88)
 scale = Vector2(2, 2)
 texture = ExtResource("16_xc73e")
+
+[node name="SnowParticles" parent="." index="28" instance=ExtResource("13_0lfjg")]
+z_index = 3
+position = Vector2(608, 8)
 
 [connection signal="ProblemSolved" from="CodeProblemPanel" to="." method="OnSubmitted" binds= [true]]
 [connection signal="Submitted" from="CodeProblemPanel" to="." method="OnSubmitted" binds= [false]]

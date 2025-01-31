@@ -238,14 +238,6 @@ namespace TheWizardCoder.Components
             if (item == "Fishing Rod")
             {
                 global.CurrentRoom.ShowDisplay("FishingDisplay");
-
-                global.CurrentRoom.CodeProblemPanel.ProblemSolved += () =>
-                {
-                    if (global.CurrentRoom.CodeProblemPanel.ProblemId == global.FishingProblemData.UniqueIdentifier)
-                    {
-                        global.PlayerData.Stats.AddLevelPoints(7);
-                    }
-                };
             }
         }
 

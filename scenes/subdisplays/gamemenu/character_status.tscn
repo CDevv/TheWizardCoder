@@ -104,12 +104,22 @@ text = "Label"
 [node name="LevelLabel" type="Label" parent="Container"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 120.0
+offset_left = 8.0
 offset_top = 96.0
 offset_right = 188.0
 offset_bottom = 119.0
 theme = ExtResource("3_1vr5o")
-text = "Label"
+text = "Level: 1"
+
+[node name="LevelPointsLabel" type="Label" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 96.0
+offset_right = 188.0
+offset_bottom = 119.0
+theme = ExtResource("3_1vr5o")
+text = "XP: 100/100"
 horizontal_alignment = 2
 
 [node name="HealthBar" type="TextureProgressBar" parent="Container"]

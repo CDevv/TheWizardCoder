@@ -47,15 +47,7 @@ namespace TheWizardCoder.Rooms
                 Vector2 baseVelocity = new Vector2(0, 32);
                 int multiplier = 0;
                 int num = 0;
-
-                if (items[2].CurrentAnswer == "n--;")
-                {
-                    multiplier = 1;
-                }
-                else if (items[2].CurrentAnswer == "n++;")
-                {
-                    multiplier = -1;
-                }
+                int conditionNum = -1;
 
                 if (items[0].CurrentAnswer == "7;")
                 {
@@ -66,13 +58,35 @@ namespace TheWizardCoder.Rooms
                     num = 4;
                 }
 
-                if (num != 0)
+                if (items[1].CurrentAnswer == "n != 0")
+                {
+                    conditionNum = 0;
+                }
+                else if (items[1].CurrentAnswer == "n != 1")
+                {
+                    conditionNum = 1;
+                }
+                else if (items[1].CurrentAnswer == "n != 5")
+                {
+                    conditionNum = 5;
+                }
+
+                if (items[2].CurrentAnswer == "n--;")
+                {
+                    multiplier = 1;
+                }
+                else if (items[2].CurrentAnswer == "n++;")
+                {
+                    multiplier = -1;
+                }
+
+                if (num != 0 && conditionNum != -1 && multiplier != 0)
                 {
                     selectionBox.Show();
                     int n = 1;
 
                     // The fake program
-                    while (num != 0 && num != 10)
+                    while (num != conditionNum && num != 10)
                     {
                         GD.Print(num);
 
@@ -103,8 +117,6 @@ namespace TheWizardCoder.Rooms
                     selectionBox.Hide();
                     selectionBox.Position = basePosition;
 
-                    Player.Unfreeze();
-
                     //If all the answers are correct
                     if (solved)
                     {
@@ -116,6 +128,8 @@ namespace TheWizardCoder.Rooms
                     }
                 }
             }
+
+            Player.Unfreeze();
         }
 
         private void ResetTrunks()
