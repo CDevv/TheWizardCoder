@@ -115,6 +115,7 @@ namespace TheWizardCoder.Abstractions
         {
             if (WillLoadNextRoom)
             {
+				GD.Print("loading");
 				ResourceLoader.ThreadLoadStatus status = ResourceLoader.LoadThreadedGetStatus(NextRoomPath);
 
                 if (status == ResourceLoader.ThreadLoadStatus.Loaded)
@@ -122,18 +123,29 @@ namespace TheWizardCoder.Abstractions
 					Resource resource = ResourceLoader.LoadThreadedGet(NextRoomPath);
 					GetTree().ChangeSceneToPacked((PackedScene)resource);
                 }
+				else if (status == ResourceLoader.ThreadLoadStatus.Failed)
+                {
+                    GD.Print("loading scene failed.");
+                }
+                else if (status == ResourceLoader.ThreadLoadStatus.InvalidResource)
+                {
+                    GD.Print("invalid scene resource.");
+                }
             }
         }
 
 		public void TransitionToRoom(string room, string playerLocation, Direction direction)
 		{
+			global.ChangeRoom(room, playerLocation, direction);
+            /*
 			global.LocationMarkerName = playerLocation;
 			global.PlayerDirection = direction;
 
             NextRoomPath = $"res://scenes/rooms/{room}.tscn";
             WillLoadNextRoom = true;
             ResourceLoader.LoadThreadedRequest(NextRoomPath);
-		}
+			*/
+        }
 
         public async Task PlayCutscene(string name)
 		{

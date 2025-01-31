@@ -184,7 +184,6 @@ texture = ExtResource("2_v8m6p")
 
 [node name="Player" parent="." index="16" instance=ExtResource("3_73jxe")]
 z_index = 1
-y_sort_enabled = true
 position = Vector2(336, 308)
 
 [node name="TileMap" type="TileMap" parent="." index="17"]
@@ -203,7 +202,7 @@ layer_1/tile_data = PackedInt32Array(458759, 196608, 3, 524295, 327680, 3, 58983
 position = Vector2(336, 448)
 
 [node name="Section2Warper" parent="." index="19" instance=ExtResource("5_eepc4")]
-position = Vector2(336, 496)
+position = Vector2(336, 512)
 scale = Vector2(3, 1)
 TargetRoomName = "vindi_2"
 TargetLocation = "Section4Marker"

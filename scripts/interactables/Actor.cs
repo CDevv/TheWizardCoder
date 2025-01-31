@@ -222,5 +222,10 @@ namespace TheWizardCoder.Interactables
 			sprite.Animation = "default";
 			sprite.Frame = (int)direction;
 		}
+
+		public void PlayIdleAnimation()
+		{
+			PlayIdleAnimation(direction);
+		}
 	}
 }

@@ -112,7 +112,6 @@ color = Color(0.117518, 0.0336082, 0, 1)
 
 [node name="Player" parent="." index="16" instance=ExtResource("2_mk083")]
 z_index = 1
-y_sort_enabled = true
 position = Vector2(448, 376)
 SnippetsResource = null
 

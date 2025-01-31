@@ -15,7 +15,7 @@ script = ExtResource("2_hvbiv")
 SceneFileName = "forest_6"
 LocationName = "Deep Forest"
 
-[node name="Camera" parent="." index="5"]
+[node name="Camera" parent="." index="6"]
 limit_right = 4096
 limit_bottom = 1120
 
@@ -33,7 +33,6 @@ layer_1/tile_data = PackedInt32Array(458752, 1245185, 5, 524288, 1245185, 5, 589
 
 [node name="Player" parent="." index="13" instance=ExtResource("3_wyday")]
 z_index = 1
-y_sort_enabled = true
 position = Vector2(2168, 528)
 
 [node name="Section5Warper" parent="." index="14" instance=ExtResource("4_nck5e")]

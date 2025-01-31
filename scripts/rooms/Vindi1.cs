@@ -33,9 +33,19 @@ namespace TheWizardCoder.Rooms
             }
         }
 
-		private async void IntroCutscene()
+        public override void _Process(double delta)
+        {
+            if (!global.CanWalk)
+            {
+				Gertrude.PlayIdleAnimation();
+            }
+        }
+
+        private async void IntroCutscene()
 		{
-			Player.Freeze();
+            Player.Freeze();
+            Gertrude.PlayIdleAnimation();
+			
 			await ShowDialogue(DialogueResource, "vindi_intro_1");
 			await PlayCutscene("vindi_intro_2");
             await ShowDialogue(DialogueResource, "vindi_intro_2");
@@ -43,7 +53,12 @@ namespace TheWizardCoder.Rooms
             await WalkToPlayer();
             await ShowDialogue(DialogueResource, "vindi_intro_3");
 			await WalkToMarker();
-			Player.Unfreeze();
+            if (Player.HasFollower)
+            {
+                await ShowDialogue(DialogueResource, "vindi_intro_gertrude");
+            }
+
+            Player.Unfreeze();
         }
 
 		private async Task WalkToPlayer()

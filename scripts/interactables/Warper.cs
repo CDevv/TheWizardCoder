@@ -27,7 +27,7 @@ namespace TheWizardCoder.Interactables
 			global.CurrentRoom.TransitionRect.PlayAnimation();
 			await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
 
-			global.ChangeRoom(TargetRoomName, TargetLocation, PlayerDirection);
+			global.CurrentRoom.TransitionToRoom(TargetRoomName, TargetLocation, PlayerDirection);
 		}
 
 		public override void OnNotActive()

@@ -27,7 +27,6 @@ limit_bottom = 1216
 
 [node name="Player" parent="." index="15" instance=ExtResource("2_5ga1n")]
 z_index = 1
-y_sort_enabled = true
 position = Vector2(344, 712)
 
 [node name="TileMap" type="TileMap" parent="." index="16"]

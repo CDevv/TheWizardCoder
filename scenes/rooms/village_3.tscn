@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_85gv2"]
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="5_e8sk1"]
 [ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="6_7mst3"]
-[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/actor.tscn" id="7_ipt30"]
+[ext_resource type="PackedScene" uid="uid://bk3a4lc0i5uwk" path="res://scenes/components/actor.tscn" id="7_ipt30"]
 [ext_resource type="SpriteFrames" uid="uid://d1gxee3phytrf" path="res://assets/characters/movement/spriteframes/dudeley.tres" id="8_20wkg"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_7v5mn"]
@@ -30,12 +30,12 @@ b = Vector2(1888, 1568)
 y_sort_enabled = true
 script = ExtResource("2_wb2jq")
 
-[node name="BattleDisplay" parent="." index="1"]
+[node name="BattleDisplay" parent="." index="2"]
 TutorialDialogueResource = null
 CharacterRectScene = null
 EnemySpriteScene = null
 
-[node name="Camera" parent="." index="5"]
+[node name="Camera" parent="." index="6"]
 limit_right = 1888
 limit_bottom = 1952
 
@@ -58,7 +58,6 @@ layer_3/tile_data = PackedInt32Array(655361, 65536, 6, 720897, 0, 4, 786433, 655
 
 [node name="Player" parent="." index="9" instance=ExtResource("3_w6fsl")]
 z_index = 2
-y_sort_enabled = true
 position = Vector2(488, 888)
 
 [node name="PathWarper" parent="." index="10" instance=ExtResource("4_85gv2")]

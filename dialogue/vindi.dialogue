@@ -12,7 +12,15 @@ Timothy: [#portrait=1] Hm? Who is that?
 
 ~ vindi_intro_3
 if PlayerHasFollower():
-	Timothy: Huh? Two travellers 'ere?
+	Timothy: [#portrait=0] Huh? Two travellers 'ere?
+	Gertrude: [#portrait=0] Yep! We got here using a raft!
+	Timothy: [#portrait=0] Oh.. I see. You two seem to be mages, yes?
+	Nolan: [#portrait=1] Yeah!
+	Timothy: [#portrait=0] Ah, nice. You guys might be able to help us with some issues in our town, then.
+	Timothy: [#portrait=0] You can come in my house if you wanna know some details. See ya!
+	Gertrude: [#portrait=2] Hold on! Are you guys cats?
+	Timothy: [#portrait=0] Nope! We are so called 'wolf-people'
+	Gertrude: [#portrait=0] Ah, okay.
 else:
 	Timothy: [#portrait=1] What ya doin' here, mate?
 	Nolan: [#portrait=0] Uh.. I just got here using the raft that is on the coast outside this forest.
@@ -28,6 +36,11 @@ else:
 	Timothy: [#portrait=0] Alright, come inside and I'll tell ya the details.
 => END!
 
+~ vindi_intro_gertrude
+Gertrude: [#portrait=3] So? Let's go help them!
+Nolan: [#portrait=0] Yeah, let's see what we have to do..
+=> END!
+
 ~ timothy_intro
 if GetPlayerData("FishingRodSolved") and GetPlayerData("VindiTreeSolved"):
 	Nolan: [#portrait=1] I fixed that issue as well.
@@ -35,6 +48,8 @@ if GetPlayerData("FishingRodSolved") and GetPlayerData("VindiTreeSolved"):
 	Timothy: [#portrait=2] I can't think of anything else.. 
 	Timothy: [#portrait=0] You can have a look around if you want to.
 	Nolan: [#portrait=0] Ah, okay then.
+	Timothy: [#portrait=0] Oh, and.. thank you!
+	Nolan: [#portrait=1] No problem!
 elif not GetPlayerData("FishingRodSolved") and GetPlayerData("VindiTreeSolved"):
 	Nolan: [#portrait=1] I've fixed the issue with the big tree.. somehow.
 	Timothy: [#portrait=1] Oh, you fixed that? What about the fishing rod?
@@ -44,29 +59,50 @@ elif GetPlayerData("FishingRodSolved") and not GetPlayerData("VindiTreeSolved"):
 	Nolan: [#portrait=0] Yep! The fishing rod now works.
 	Timothy: [#portrait=0] Epic! Do you want me to tell about other issues?
 	Nolan: [#portrait=0] Yeah, sure.
-	Timothy: [#portrait=0] Placeholder.
-else:
-	Timothy: [#portrait=0] Oh, heya! 
-	Nolan: [#portrait=0] Hello! What details were you talking about?
-	Timothy: [#portrait=0] Oh, right. 
-	Timothy: [#portrait=0] Okay so I've noticed several spots 'round here that have strange stuff goin' on.
-	Timothy: [#portrait=0] To the south of here is my friend Gregory's usual fishing spot. 
-	Timothy: [#portrait=0] There are a couple of houses here and there. The issue is when you try to catch fish.
-	Timothy: [#portrait=0] You always get strange black squares n stuff.. Dunno if that's nature's doing or some madlad playing around.
-	Timothy: [#portrait=0] You could look into that.
-	Nolan: [#portrait=0] Hmm.. alright. Anything else?
-	Timothy: [#portrait=0] You can talk to me again once you complete that one.
-	Timothy: [#portrait=0] Also, may I know your name? So I know who to thank later, heh!
-	Nolan: [#portrait=0] My name is Nolan. What about yours?
-	Timothy: [#portrait=0] I'm Timothy!
-	Nolan: [#portrait=0] Nice to meet you! My name is Nolan.
+	Timothy: [#portrait=0] I have another friend who lives a bit to the north. 
+	Timothy: [#portrait=2] There is a big tree right in front of his house' entrance.
+	Timothy: [#portrait=1] Who knows how it ended up there..? 
+	Timothy: [#portrait=0] Can you look into that?
+	Nolan: [#portrait=0] Alright.
+else:	
+	if PlayerHasFollower():
+		Timothy: [#portrait=0] Oh, heya! 
+		Nolan: [#portrait=0] Hello! What details were you talking about?
+		Timothy: [#portrait=0] Oh, right. 
+		Timothy: [#portrait=0] Okay so I've noticed several spots 'round here that have strange stuff goin' on.
+		Timothy: [#portrait=0] To the south of here is my friend Gregory's usual fishing spot. 
+		Timothy: [#portrait=0] There are a couple of houses here and there. The issue is when you try to catch fish.
+		Timothy: [#portrait=0] You always get strange black squares n stuff.. Dunno if that's nature's doing or some madlad playing around.
+		Timothy: [#portrait=0] You two could look into that.
+		Timothy: [#portrait=0] Also, can I know your names if that's no issue?
+		Nolan: [#portrait=0] My name is Nolan!
+		Gertrude: [#portrait=0] And mine is Gertrude!
+		Timothy: [#portrait=0] Nice to meet you two! You can call me Timothy.
+	else:
+		Timothy: [#portrait=0] Oh, heya! 
+		Nolan: [#portrait=0] Hello! What details were you talking about?
+		Timothy: [#portrait=0] Oh, right. 
+		Timothy: [#portrait=0] Okay so I've noticed several spots 'round here that have strange stuff goin' on.
+		Timothy: [#portrait=0] To the south of here is my friend Gregory's usual fishing spot. 
+		Timothy: [#portrait=0] There are a couple of houses here and there. The issue is when you try to catch fish.
+		Timothy: [#portrait=0] You always get strange black squares n stuff.. Dunno if that's nature's doing or some madlad playing around.
+		Timothy: [#portrait=0] You could look into that.
+		Nolan: [#portrait=0] Hmm.. alright. Anything else?
+		Timothy: [#portrait=0] You can talk to me again once you complete that one.
+		Timothy: [#portrait=0] Also, may I know your name? So I know who to thank later, heh!
+		Nolan: [#portrait=0] My name is Nolan. What about yours?
+		Timothy: [#portrait=0] I'm Timothy!
+		Nolan: [#portrait=0] Nice to meet you! My name is Nolan.
 => END!
 
 ~ gregory_point
 Gregory: [#portrait=0] Oh, heya!
 if GetPlayerData("HasMetGregory"):
 	Gregory: [#portrait=0] So, did ya fix that fishing thing yet?
-	Nolan: [#portrait=0] Nope..
+	if GetPlayerData("FishingRodSolved"):
+		Nolan: [#portrait=0] Yes!
+	else:
+		Nolan: [#portrait=0] Nope..
 else:
 	if GetPlayerData("HasMetTimothy"):
 		Nolan: [#portrait=0] Heya! You must be the other wolf's friend!
@@ -78,12 +114,20 @@ else:
 		Gregory: [#portrait=0] Yeah, I am!
 		Gregory: [#portrait=0] My name is Gregory. And you?
 		Nolan: [#portrait=0] My name is Nolan, nice to meet ya!
+		if PlayerHasFollower():
+			Gertrude: [#portrait=0] And mine is Gertrude!
 		
-	Gregory: [#portrait=0] So.. you a mage, huh? We have quite strange stuff happenin' here.. 
+	if PlayerHasFollower():
+		Gregory: [#portrait=0] So.. you two are mages, huh? We have quite strange stuff happenin' here.. 
+	else:
+		Gregory: [#portrait=0] So.. you a mage, huh? We have quite strange stuff happenin' here.. 
 	Gregory: [#portrait=0] Other than the everyday snow, of course.
 	
 	if GetPlayerData("VisitedTimothyHouse"):
-		Nolan: [#portrait=0] If you mean the weird fishing phenomenon, then Timothy already told me.
+		if PlayerHasFollower():
+			Gertrude: [#portrait=0] Timothy already told us about the fishing rod thing..
+		else:
+			Nolan: [#portrait=0] If you mean the weird fishing phenomenon, then Timothy already told me.
 		Gregory: [#portrait=0] Oh. Alright then, good luck on that!
 	else:
 		Gregory: [#portrait=0] So.. I usually spend my time fishing. My usual fishing spot is to the south of here. Go right and then south. 

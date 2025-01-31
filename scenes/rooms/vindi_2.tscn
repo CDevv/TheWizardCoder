@@ -15,7 +15,6 @@ limit_bottom = 608
 
 [node name="Player" parent="." index="15" instance=ExtResource("2_dcjt7")]
 z_index = 1
-y_sort_enabled = true
 
 [node name="TileMap" type="TileMap" parent="." index="16"]
 y_sort_enabled = true
