@@ -88,6 +88,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." index="11" instance=ExtResource("2_576sm")]
 z_index = 2
+position = Vector2(272, 298)
 
 [node name="TileMap" type="TileMap" parent="." index="12"]
 y_sort_enabled = true

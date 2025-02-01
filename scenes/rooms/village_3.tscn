@@ -58,7 +58,7 @@ layer_3/tile_data = PackedInt32Array(655361, 65536, 6, 720897, 0, 4, 786433, 655
 
 [node name="Player" parent="." index="9" instance=ExtResource("3_w6fsl")]
 z_index = 2
-position = Vector2(488, 888)
+position = Vector2(1088, 1136)
 
 [node name="PathWarper" parent="." index="10" instance=ExtResource("4_85gv2")]
 position = Vector2(-16, 864)
@@ -123,6 +123,7 @@ DialogueTitle = "niko"
 
 [node name="Dudeley" parent="." index="21" instance=ExtResource("7_ipt30")]
 z_index = 2
+y_sort_enabled = false
 position = Vector2(1040, 1136)
 DialogueResource = ExtResource("6_7mst3")
 DialogueTitle = "dudeley_point"

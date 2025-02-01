@@ -102,11 +102,6 @@ namespace TheWizardCoder.Data
 
             Stats = stats;
             Gold = 0;
-
-            if (OS.IsDebugBuild())
-            {
-                Gold = 100;
-            }
         }
 
         public void AddToInventory(string item, bool onlyOne = false)

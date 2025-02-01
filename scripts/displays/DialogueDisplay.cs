@@ -135,27 +135,27 @@ namespace TheWizardCoder.Displays
 			ShowDisplay(dialogueResource, title);
 		}
 
-		public async void ShowDisplay(Resource dialogueResource, string title)
+		public void ShowDisplay(Resource dialogueResource, string title)
 		{
-			global.CanWalk = false;
-			global.GameDisplayEnabled = false;
-			this.dialogueResource = dialogueResource;
-
-			dialogueLine = await DialogueManager.GetNextDialogueLine(dialogueResource, title, new Array<Variant>());
-			initialTitle = title;
-			currentTitle = title;
-
-			UpdateDisplay(dialogueLine);
-			Show();
-			format = new();
+			ShowDisplay(dialogueResource, title, new(), true);
 		}
 
-		public void ShowDisplay(Resource dialogueResource, string title, List<string> format, bool shouldUnlockPlayer = true)
+		public async void ShowDisplay(Resource dialogueResource, string title, List<string> format, bool shouldUnlockPlayer = true)
 		{
-			ShowDisplay(dialogueResource, title);
 			this.format = format;
 			this.shouldUnlockPlayer = shouldUnlockPlayer;
-		}
+
+            global.CanWalk = false;
+            global.GameDisplayEnabled = false;
+            this.dialogueResource = dialogueResource;
+
+            dialogueLine = await DialogueManager.GetNextDialogueLine(dialogueResource, title, new Array<Variant>());
+            initialTitle = title;
+            currentTitle = title;
+
+            UpdateDisplay(dialogueLine);
+            Show();
+        }
 
 		public override void UpdateDisplay()
 		{

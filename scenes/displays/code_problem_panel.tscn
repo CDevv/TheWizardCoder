@@ -125,18 +125,6 @@ virtual_keyboard_enabled = false
 middle_mouse_paste_enabled = false
 wrap_mode = 1
 
-[node name="PickableButtonArea" parent="CodeRect/CodeEdit" instance=ExtResource("4_vm0ji")]
-visible = false
-position = Vector2(44, 4)
-
-[node name="PickableButtonArea2" parent="CodeRect/CodeEdit" instance=ExtResource("4_vm0ji")]
-visible = false
-position = Vector2(20, 92)
-
-[node name="PickableButtonArea3" parent="CodeRect/CodeEdit" instance=ExtResource("4_vm0ji")]
-visible = false
-position = Vector2(44, 36)
-
 [node name="ItemsRect" type="NinePatchRect" parent="."]
 offset_left = 64.0
 offset_top = 48.0

@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="3_cb2u5"]
 [ext_resource type="TileSet" uid="uid://clhrfovy5lcgu" path="res://tilesets/houses_interiors.tres" id="3_w0hq8"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_l2p8p"]
-[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/actor.tscn" id="5_fppg3"]
+[ext_resource type="PackedScene" uid="uid://bk3a4lc0i5uwk" path="res://scenes/components/actor.tscn" id="5_fppg3"]
 [ext_resource type="SpriteFrames" uid="uid://bmnwdib5t7mxq" path="res://assets/characters/movement/spriteframes/berry.tres" id="6_hi0d1"]
 [ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="9_5dtpd"]
 [ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/components/code_problem_point.tscn" id="10_etg8e"]
@@ -223,7 +223,7 @@ y_sort_enabled = true
 script = ExtResource("2_mx4en")
 DialogueResource = ExtResource("3_cb2u5")
 
-[node name="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" parent="." index="5"]
 libraries = {
 "": SubResource("AnimationLibrary_thptd")
 }
@@ -274,6 +274,7 @@ TargetLocation = "BarrelsRoomMarker"
 
 [node name="Berry" parent="." index="15" instance=ExtResource("5_fppg3")]
 z_index = 1
+position = Vector2(216, 329)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Berry" index="2"]
 position = Vector2(0, -32)
@@ -290,6 +291,7 @@ texture = ExtResource("9_5dtpd")
 [node name="CollisionShape" type="CollisionShape2D" parent="Glitch/Collision" index="0"]
 position = Vector2(2, -6)
 shape = SubResource("RectangleShape2D_rc6yv")
+disabled = true
 
 [node name="CodeProblemPoint" parent="." index="17" instance=ExtResource("10_etg8e")]
 z_index = 2

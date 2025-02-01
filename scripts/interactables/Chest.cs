@@ -28,12 +28,14 @@ namespace TheWizardCoder.Interactables
 
 			if (!string.IsNullOrEmpty(PlaythroughPropertyName) && global.PlayerData.Get(PlaythroughPropertyName).AsBool())
 			{
-				DisabledState();
+				DisabledState(true);
 			}
 		}
 
 		public override void Action()
 		{
+			global.CurrentRoom.Player.Freeze();
+
 			switch (ChestType)
 			{
 				case ChestType.Item:
@@ -45,7 +47,8 @@ namespace TheWizardCoder.Interactables
 					global.PlayerData.Gold += GoldAmount;
 					break;
 			}
-			DisabledState();
+
+			DisabledState(false);
 
 			if (!string.IsNullOrEmpty(PlaythroughPropertyName))
 			{
@@ -53,18 +56,20 @@ namespace TheWizardCoder.Interactables
 			}
 		}
 
-		private void DisabledState()
+		private void DisabledState(bool unfreezePlayer)
 		{
 			sprite.Frame = 1;
 			Active = false;
 
-			global.CanWalk = true;
-			global.GameDisplayEnabled = true;
+			if (unfreezePlayer)
+			{
+				global.CurrentRoom.Player.Unfreeze();
+			}
 		}
 
 		public override void OnNotActive()
 		{
-			DisabledState();
+			DisabledState(true);
 		}
 	}
 }
