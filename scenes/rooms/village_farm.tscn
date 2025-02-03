@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b4eifo05is5sh"]
+[gd_scene load_steps=28 format=3 uid="uid://b4eifo05is5sh"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_xd11b"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_6625t"]
@@ -8,10 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="5_hwpiv"]
 [ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="6_eeq7a"]
 [ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="7_bewxe"]
-[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/actor.tscn" id="8_qga0w"]
+[ext_resource type="PackedScene" uid="uid://bk3a4lc0i5uwk" path="res://scenes/components/actor.tscn" id="8_qga0w"]
 [ext_resource type="SpriteFrames" uid="uid://c3u650qgmryo7" path="res://assets/characters/movement/spriteframes/keenelm.tres" id="9_73pyg"]
 [ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/components/code_problem_point.tscn" id="10_qkqpl"]
 [ext_resource type="PackedScene" uid="uid://mmm0k3msmmm5" path="res://scenes/components/cutscene_point.tscn" id="12_1wghb"]
+[ext_resource type="PackedScene" uid="uid://wj04chm4vh08" path="res://scenes/components/stairs_area.tscn" id="13_kbsf6"]
 
 [sub_resource type="Animation" id="Animation_0u8bh"]
 resource_name = "final_pos"
@@ -288,6 +289,10 @@ b = Vector2(208, 0)
 a = Vector2(1728, 0)
 b = Vector2(432, 0)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_3jbxt"]
+a = Vector2(272, 584)
+b = Vector2(232, 544)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gwoj0"]
 size = Vector2(36, 32)
 
@@ -296,12 +301,12 @@ y_sort_enabled = true
 script = ExtResource("2_qfxx8")
 DialogueResource = ExtResource("6_eeq7a")
 
-[node name="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" parent="." index="5"]
 libraries = {
 "": SubResource("AnimationLibrary_h0k27")
 }
 
-[node name="Camera" parent="." index="5"]
+[node name="Camera" parent="." index="6"]
 limit_right = 1728
 limit_bottom = 1280
 
@@ -349,6 +354,9 @@ shape = SubResource("SegmentShape2D_6spuc")
 
 [node name="Wall4" type="CollisionShape2D" parent="RoomCollision" index="3"]
 shape = SubResource("SegmentShape2D_dcikk")
+
+[node name="Wall5" type="CollisionShape2D" parent="RoomCollision" index="4"]
+shape = SubResource("SegmentShape2D_3jbxt")
 
 [node name="HouseWarper" parent="." index="15" instance=ExtResource("4_q4jss")]
 z_index = 1
@@ -424,9 +432,18 @@ RoomMethodName = "OnKeenelmEncounter"
 
 [node name="LockedHouse" parent="." index="24" instance=ExtResource("5_hwpiv")]
 z_index = 2
-position = Vector2(232, 560)
-scale = Vector2(1, 2)
+position = Vector2(232, 582)
+scale = Vector2(1, 1.5)
 DialogueResource = ExtResource("6_eeq7a")
 DialogueTitle = "locked"
+
+[node name="StairsArea2" parent="." index="31" instance=ExtResource("13_kbsf6")]
+z_index = 3
+position = Vector2(-578, -416)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StairsArea2" index="0"]
+z_index = 3
+position = Vector2(-606, 160)
+polygon = PackedVector2Array(1458, 880, 1426, 880, 1426, 848, 1458, 856)
 
 [connection signal="ProblemSolved" from="CodeProblemPoint" to="." method="OnProblemSolved"]

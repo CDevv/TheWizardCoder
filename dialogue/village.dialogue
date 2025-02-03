@@ -150,7 +150,7 @@ do CallRoomMethod("DisableCutscene")
 => END!
 
 ~ keenelm_code_solved
-Keenelm: [#portrait=2] Oh! You managed to get red of it! Pretty nice!
+Keenelm: [#portrait=2] Oh! You managed to get rid of it! Pretty nice!
 Nolan: [#portrait=0] Yeah!
 => END!
 

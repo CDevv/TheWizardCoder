@@ -33,7 +33,7 @@ z_index = 1
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="10"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" index="0"]
-polygon = PackedVector2Array(480, 64, 496, 48, 496, 400, 144, 400, 144, 264, 112, 264, 112, 352, 32, 352, 32, 208, 144, 208, 144, 48, 496, 48, 480, 64, 160, 64, 160, 224, 48, 224, 48, 336, 96, 336, 96, 248, 160, 248, 160, 384, 480, 384)
+polygon = PackedVector2Array(480, 64, 496, 48, 496, 400, 144, 400, 144, 264, 112, 264, 112, 352, 32, 352, 32, 200, 144, 200, 144, 48, 496, 48, 480, 64, 160, 64, 160, 216, 48, 216, 48, 336, 96, 336, 96, 248, 160, 248, 160, 384, 480, 384)
 
 [node name="DoorMarker" type="Marker2D" parent="." index="11"]
 position = Vector2(312, 224)

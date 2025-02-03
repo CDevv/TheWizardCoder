@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 using TheWizardCoder.Autoload;
 
@@ -18,7 +19,7 @@ namespace TheWizardCoder.UI
 
 		public bool AreaIsDetected { get; set; } = false;
 		public PickableButtonArea Area { get; set; }
-		
+
 		private Vector2 originalPosition;
 		private bool isDragging = false;
 		private Vector2 offset;
@@ -66,12 +67,24 @@ namespace TheWizardCoder.UI
 
 		private void OnButtonUp()
 		{
-			isDragging = false;
+            if (Area != null)
+            {
+				Area.ButtonText = string.Empty;
+				Area.Taken = false;
+
+				Area.EmitSignal(PickableButtonArea.SignalName.ButtonRemoved);
+            }
+
+            isDragging = false;
+			GetDetectedAreas();
+
 			if (AreaIsDetected)
 			{
 				Tween tween = GetTree().CreateTween();
 				tween.TweenProperty(this, "global_position", Area.GlobalPosition, 0.5);
 				tween.Finished += () => {
+					Area.Taken = true;
+					Area.ButtonText = text;
 					Area.EmitSignal(PickableButtonArea.SignalName.ButtonAdded, Text);
 				};
 				tween.Play();
@@ -83,5 +96,33 @@ namespace TheWizardCoder.UI
 				tween.Play();
 			}
 		}
+
+		private void GetDetectedAreas()
+		{
+			Array<Area2D> areas = GetOverlappingAreas();
+
+            if (areas.Count > 0)
+            {
+				float min = int.MaxValue;
+
+                foreach (var area in areas)
+                {
+					PickableButtonArea buttonArea = (PickableButtonArea)area;
+					float distance = Position.DistanceTo(buttonArea.Position);
+
+                    if (!buttonArea.Taken && distance < min)
+                    {
+						min = distance;
+
+						Area = buttonArea;
+						AreaIsDetected = true;
+                    }
+                }
+            }
+            else
+            {
+				AreaIsDetected = false;
+            }
+        }
 	}
 }
