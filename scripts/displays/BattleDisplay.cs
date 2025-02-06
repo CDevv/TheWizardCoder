@@ -46,6 +46,8 @@ namespace TheWizardCoder.Displays
 		private Button invisButton;
 		private TextureRect backgroundRect;
 
+		public BattleOptions BattleOptions => battleOptions;
+
 		public override void _Ready()
 		{
 			base._Ready();

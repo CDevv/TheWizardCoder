@@ -7,6 +7,7 @@ using TheWizardCoder.Enums;
 using TheWizardCoder.Data;
 using TheWizardCoder.Utils;
 using System.Threading.Tasks;
+using TheWizardCoder.UI;
 
 public partial class RaftWater : BaseRoom
 {
@@ -251,8 +252,8 @@ public partial class RaftWater : BaseRoom
             return;
         }
 
-        boxCountText.SetText($"Count = {boxStack.Count}");
-        conditionText.SetText($"if ({challenges[currentChallenge].ConditionString})");
+        boxCountText.Text = $"Count = {boxStack.Count}";
+        conditionText.Text = $"if ({challenges[currentChallenge].ConditionString})";
 
         ClearTextBoxes();
         for (var i = 0; i < 4; i++)

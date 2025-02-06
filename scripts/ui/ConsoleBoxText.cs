@@ -1,32 +1,58 @@
 using Godot;
 using System;
 
-public partial class ConsoleBoxText : NinePatchRect
+namespace TheWizardCoder.UI
 {
-	[Export]
-	public string Text { get; set; }
+    [Tool]
+    public partial class ConsoleBoxText : NinePatchRect
+    {
+        [Signal]
+        public delegate void OnResizedEventHandler();
 
-	private Label label;
-	private MarginContainer marginContainer;
+        private string text = string.Empty;
 
-	public override void _Ready()
-	{
-		marginContainer = GetNode<MarginContainer>("MarginContainer");
-		label = GetNode<Label>("%Label");
-		label.Text = Text;
-	}
+        [Export]
+        public string Text
+        {
+            get { return text; }
+            set
+            {
+                text = value;
 
-	public void SetText(string text)
-	{
-		label.Text = text;
-		OnLabelResized();
-	}
+                label = GetNodeOrNull<Label>("%Label");
 
-	private void OnLabelResized()
-	{
-		if (marginContainer != null)
-		{
-			Size = marginContainer.Size;
-		}
-	}
+                if (label != null)
+                {
+                    label.Text = value;
+                    OnLabelResized();
+                }
+            }
+        }
+
+        private Label label;
+        private MarginContainer marginContainer;
+
+        public override void _Ready()
+        {
+            marginContainer = GetNode<MarginContainer>("MarginContainer");
+            label = GetNode<Label>("%Label");
+            label.Text = Text;
+        }
+
+        public void SetText(string text)
+        {
+            label.Text = text;
+            OnLabelResized();
+        }
+
+        private void OnLabelResized()
+        {
+            marginContainer = GetNodeOrNull<MarginContainer>("MarginContainer");
+
+            if (marginContainer != null)
+            {
+                Size = marginContainer.Size;
+            }
+        }
+    }
 }

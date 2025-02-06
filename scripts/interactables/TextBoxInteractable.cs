@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using TheWizardCoder.Abstractions;
+using TheWizardCoder.UI;
 
 namespace TheWizardCoder.Interactables
 {
@@ -23,7 +24,7 @@ namespace TheWizardCoder.Interactables
 			consoleBoxText = GetNode<ConsoleBoxText>("ConsoleBoxText");
 			onScreenNotifier = GetNode<VisibleOnScreenNotifier2D>("OnScreenNotifier");
 
-			consoleBoxText.SetText(Text);
+			consoleBoxText.Text = Text;
 		}
 
 		public override void _PhysicsProcess(double delta)
@@ -41,26 +42,29 @@ namespace TheWizardCoder.Interactables
 		public void SetText(string text)
 		{
 			Text = text;
-			consoleBoxText.SetText(text);
+			consoleBoxText.Text = text;
 			OnBoxResized();
 		}
 
 		private void OnBoxResized()
 		{
-			Vector2 shapeSize = new Vector2(consoleBoxText.Size.X, consoleBoxText.Size.Y);
+            if (consoleBoxText != null)
+            {
+                Vector2 shapeSize = new Vector2(consoleBoxText.Size.X, consoleBoxText.Size.Y);
 
-			RectangleShape2D newShape = new();
-			newShape.Size = shapeSize;
-			collisionShape.Shape = newShape;
+                RectangleShape2D newShape = new();
+                newShape.Size = shapeSize;
+                collisionShape.Shape = newShape;
 
-			collisionShape.Position = shapeSize;
+                collisionShape.Position = shapeSize;
 
-			onScreenNotifier.Position = shapeSize;
+                onScreenNotifier.Position = shapeSize;
 
-			Rect2 rect = new();
-			rect.Size = shapeSize;
-			onScreenNotifier.Rect = rect;
-		}
+                Rect2 rect = new();
+                rect.Size = shapeSize;
+                onScreenNotifier.Rect = rect;
+            }
+        }
 
 		private void OnScreenExited()
 		{

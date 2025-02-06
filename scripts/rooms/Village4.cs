@@ -14,12 +14,14 @@ namespace TheWizardCoder.Rooms
 		private Warper watchtowerWarper;
 		private CodeProblemPoint codeProblem;
 		private int tutorialProgress = 1;
+		private Button invisButton;
 
 		public override async void OnReady()
 		{
 			base.OnReady();
 			watchtowerWarper = GetNode<Warper>("WatchtowerWarper");
 			codeProblem = GetNode<CodeProblemPoint>("CodeProblemPoint");
+			invisButton = GetNode<Button>("%InvisButton");
 
 			if (global.PlayerData.HasSolvedWatchtowerGlitch)
 			{
@@ -32,9 +34,12 @@ namespace TheWizardCoder.Rooms
 					await PlayCutscene("linton_4");
 					await ShowDialogue(DialogueResource, "linton_3");
 					BattleDisplay.IsTutorial = true;
-					BattleDisplay.ShowDisplay(new() {"Dummy"});
+                    invisButton.GrabFocus();
+                    BattleDisplay.ShowDisplay(new() {"Dummy"});
+
+					
 				}
-				else if(global.PlayerData.LintonDummyCutscene)
+				else if (global.PlayerData.LintonDummyCutscene)
 				{
 					AnimationPlayer.Play("linton_7");
 				}
@@ -60,6 +65,14 @@ namespace TheWizardCoder.Rooms
 			await ShowDialogue(DialogueResource, "linton_4");
 			await PlayCutscene("linton_7");		
 		}
+
+		private void OnDialogueEnded(string initialTitle, string lastTitle)
+		{
+            if (initialTitle.Contains("tutorial_"))
+            {
+				BattleDisplay.BattleOptions.ShowOptions();
+            }
+        }
 
 		private void OnTurnFinished()
 		{
@@ -87,7 +100,10 @@ namespace TheWizardCoder.Rooms
 
 		private async void NextTutorialStep()
 		{
-			await ShowDialogue(DialogueResource, $"tutorial_battle_{tutorialProgress}");
+            invisButton.GrabFocus();
+            await ShowDialogue(DialogueResource, $"tutorial_battle_{tutorialProgress}");
+			BattleDisplay.BattleOptions.ShowOptions();
+			
 			global.GameDisplayEnabled = false;
 			tutorialProgress++;
 		}

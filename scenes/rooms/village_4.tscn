@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ddwumkhu3bon7"]
+[gd_scene load_steps=25 format=3 uid="uid://ddwumkhu3bon7"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_ujid1"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_ehys0"]
@@ -13,6 +13,7 @@
 [ext_resource type="SpriteFrames" uid="uid://b7q7c8vycomy0" path="res://assets/characters/movement/spriteframes/linton.tres" id="10_yrt8o"]
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="12_53b5a"]
 [ext_resource type="Texture2D" uid="uid://ssogye25ef45" path="res://assets/props/barrier.png" id="13_logau"]
+[ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="14_sw8wt"]
 
 [sub_resource type="Animation" id="Animation_m84pa"]
 resource_name = "code_solved"
@@ -672,6 +673,15 @@ position = Vector2(2.77162e-06, -9.53674e-07)
 scale = Vector2(2, 2)
 texture = ExtResource("13_logau")
 
+[node name="InvisButtonCanvas" type="CanvasLayer" parent="." index="37"]
+
+[node name="InvisButton" type="Button" parent="InvisButtonCanvas" index="0"]
+unique_name_in_owner = true
+offset_right = 8.0
+offset_bottom = 8.0
+theme = ExtResource("14_sw8wt")
+
 [connection signal="BattleEnded" from="BattleDisplay" to="." method="OnBattleFinished"]
 [connection signal="TurnFinished" from="BattleDisplay" to="." method="OnTurnFinished"]
+[connection signal="DialogueEnded" from="Dialogue" to="." method="OnDialogueEnded"]
 [connection signal="ProblemSolved" from="CodeProblemPoint" to="." method="OnCodeSolved"]

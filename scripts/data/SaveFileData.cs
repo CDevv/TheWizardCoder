@@ -72,8 +72,9 @@ namespace TheWizardCoder.Data
         public bool HasMetBerry { get; set; } = false;
         public bool TavernPuzzleIntro { get; set; } = false;
         public bool HasSolvedTavernGlitch { get; set; } = false;
-        public bool HasSolvedWatchtowerGlitch { get; set; } = false;
-        public bool HasMetLinton { get; set; } = false;
+        public bool HasSolvedWatchtowerGlitch { get; set; } = //false;
+                                                              true;
+        public bool HasMetLinton { get; set; } = true;
         public bool LintonDummyCutscene { get; set; } = false;
         public bool WatchtowerChest { get; set; } = false;
         public bool VillageAppleChest { get; set; } = false;
