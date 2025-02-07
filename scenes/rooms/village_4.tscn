@@ -557,7 +557,7 @@ Code = "char[] code = {
 string strCode = code.ToString();
 		 (strCode == this.AccessCode)
 	Door.Unlock();"
-Items = Array[String](["if", "'s'", "'t'", "'a'", "'r'"])
+Items = Array[String](["if"])
 SolvableAreas = {
 "'a'": Vector2(0, 52),
 "'r'": Vector2(56, 52),

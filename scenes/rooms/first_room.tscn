@@ -249,11 +249,6 @@ position = Vector2(192, 220)
 shape = SubResource("RectangleShape2D_j5kme")
 debug_color = Color(0, 0.626061, 0.43366, 0.419608)
 
-[node name="AnimationPlayer" parent="." index="14"]
-libraries = {
-"": SubResource("AnimationLibrary_oru1b")
-}
-
 [node name="RoomEnterMarker" type="Marker2D" parent="." index="15"]
 position = Vector2(248, 376)
 
@@ -264,3 +259,8 @@ position = Vector2(240, 208)
 position = Vector2(248, 416)
 TargetRoomName = "first_floor"
 TargetLocation = "DoorMarker"
+
+[node name="AnimationPlayer" parent="." index="18"]
+libraries = {
+"": SubResource("AnimationLibrary_oru1b")
+}
