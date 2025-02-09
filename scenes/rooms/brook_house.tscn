@@ -1,0 +1,81 @@
+[gd_scene load_steps=10 format=3 uid="uid://ddudb3b2j8vwq"]
+
+[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_lnd3s"]
+[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_qupqs"]
+[ext_resource type="TileSet" uid="uid://dqirfdrc3jlyd" path="res://tilesets/vindi_env.tres" id="3_p2412"]
+[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="4_vr2es"]
+[ext_resource type="Resource" uid="uid://ukx1i3qsx6q2" path="res://dialogue/vindi.dialogue" id="5_qnt3h"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_b3e28"]
+a = Vector2(224, 512)
+b = Vector2(224, 64)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_obipm"]
+a = Vector2(224, 512)
+b = Vector2(416, 512)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_y0myu"]
+a = Vector2(416, 512)
+b = Vector2(416, 480)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_0mdmf"]
+a = Vector2(416, 64)
+b = Vector2(416, 416)
+
+[node name="BrookHouse" instance=ExtResource("1_lnd3s")]
+y_sort_enabled = true
+
+[node name="Camera" parent="." index="6"]
+limit_bottom = 576
+
+[node name="ColorRect" type="ColorRect" parent="." index="16"]
+offset_right = 640.0
+offset_bottom = 576.0
+color = Color(0.117518, 0.0336082, 0, 1)
+
+[node name="Player" parent="." index="17" instance=ExtResource("2_qupqs")]
+z_index = 2
+position = Vector2(388, 456)
+
+[node name="TileMap" type="TileMap" parent="." index="18"]
+y_sort_enabled = true
+scale = Vector2(2, 2)
+tile_set = ExtResource("3_p2412")
+format = 2
+layer_0/name = "props"
+layer_0/y_sort_enabled = true
+layer_0/z_index = 2
+layer_0/tile_data = PackedInt32Array(851975, 65538, 4, 458761, 655362, 6, 458763, 655362, 4, 458759, 720898, 4, 458762, 786434, 6, 720903, 393218, 4)
+layer_1/name = "windows"
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array(262153, 589826, 0)
+layer_2/name = "ground"
+layer_2/tile_data = PackedInt32Array(131082, 196610, 0, 196618, 196610, 0, 262154, 196610, 0, 327690, 196610, 1, 393226, 65538, 2, 458762, 65538, 2, 524298, 65538, 2, 589834, 65538, 2, 655370, 65538, 2, 720906, 65538, 2, 786442, 65538, 2, 131083, 196610, 0, 196619, 196610, 0, 262155, 196610, 0, 327691, 196610, 1, 393227, 65538, 2, 458763, 65538, 2, 524299, 65538, 2, 589835, 65538, 2, 655371, 65538, 2, 720907, 65538, 2, 786443, 65538, 2, 131084, 196610, 0, 196620, 196610, 0, 262156, 196610, 0, 327692, 196610, 1, 393228, 131074, 0, 458764, 65538, 2, 524300, 65538, 2, 589836, 65538, 2, 655372, 65538, 2, 720908, 65538, 2, 786444, 65538, 2, 131079, 196610, 0, 196615, 196610, 0, 262151, 196610, 0, 327687, 196610, 1, 393223, 65538, 2, 458759, 65538, 2, 524295, 65538, 2, 589831, 65538, 2, 655367, 65538, 2, 720903, 65538, 2, 786439, 65538, 2, 851975, 65538, 2, 917511, 65538, 2, 983047, 2, 2, 131080, 196610, 0, 196616, 196610, 0, 262152, 196610, 0, 327688, 196610, 1, 393224, 65538, 2, 458760, 65538, 2, 524296, 65538, 2, 589832, 65538, 2, 655368, 65538, 2, 720904, 65538, 2, 786440, 65538, 2, 851976, 65538, 2, 917512, 65538, 2, 983048, 65538, 2, 131081, 196610, 0, 196617, 196610, 0, 262153, 196610, 0, 327689, 196610, 1, 393225, 65538, 2, 458761, 65538, 2, 524297, 65538, 2, 589833, 65538, 2, 655369, 65538, 2, 720905, 65538, 2, 786441, 65538, 2, 851977, 65538, 2, 917513, 65538, 2, 983049, 65538, 2, 851978, 65538, 2, 917514, 65538, 2, 983050, 65538, 2, 851979, 65538, 2, 917515, 65538, 2, 983051, 65538, 2, 851980, 65538, 2, 917516, 65538, 2, 983052, 131074, 2, 917517, 131074, 4, 851981, 131074, 3)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="19"]
+
+[node name="Wall1" type="CollisionShape2D" parent="StaticBody2D" index="0"]
+shape = SubResource("SegmentShape2D_b3e28")
+
+[node name="Wall2" type="CollisionShape2D" parent="StaticBody2D" index="1"]
+shape = SubResource("SegmentShape2D_obipm")
+
+[node name="Wall3" type="CollisionShape2D" parent="StaticBody2D" index="2"]
+shape = SubResource("SegmentShape2D_y0myu")
+
+[node name="Wall4" type="CollisionShape2D" parent="StaticBody2D" index="3"]
+shape = SubResource("SegmentShape2D_0mdmf")
+
+[node name="BucketDialogue" parent="." index="20" instance=ExtResource("4_vr2es")]
+z_index = 4
+position = Vector2(240, 438)
+scale = Vector2(1.5, 1)
+DialogueResource = ExtResource("5_qnt3h")
+DialogueTitle = "fish_bucket"
+
+[node name="DrawerDialogue" parent="." index="21" instance=ExtResource("4_vr2es")]
+z_index = 4
+position = Vector2(247, 354)
+scale = Vector2(2.5, 3)
+DialogueResource = ExtResource("5_qnt3h")
+DialogueTitle = "fisher_drawer"

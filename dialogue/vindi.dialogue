@@ -1,5 +1,39 @@
 using Global
 
+~ trash_bucket
+Narrator: Seems to be a bucket that is used for trash.
+Nolan: [#portrait=0] Really?
+=> END!
+
+~ ink_and_quill
+Narrator: A table with ink and quill. This person really is a writer.
+=> END!
+
+~ writers_chair
+Narrator: A chair in front of a desk.
+=> END!
+
+~ writers_bookshelf
+Narrator: A bookshelf with one book - "Forest Wildlife: A Guide."
+Nolan: [#portrait=0] I guess this person was really interested in nature as well..
+=> END!
+
+~ forest_painting
+Narrator: A painting, resembling the forest just outside the town.
+=> END!
+
+~ forest_window
+Narrator: Through the window you could see a landscape of the nearby forest, just like in the painting.
+=> END!
+
+~ fish_bucket
+Narrator: A bucket full of water.. and fish.
+=> END!
+
+~ fisher_drawer
+Narrator: It appears to be a drawer.
+=> END!
+
 ~ vindi_intro_1
 Timothy: [#portrait=1] So, how was the fishing?
 Gregory: [#portrait=1] Eh, I got almost nothing, mate!
