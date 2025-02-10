@@ -239,3 +239,22 @@ if GetPlayerData("VindiTreeSolved"):
 else:
 	Kulber: [#portrait=0] A tree has been blockin' my house, man!
 => END!
+
+~ craig_point
+if GetPlayerData("HasMetCraig"):
+	Craig: [#portrait=0] Have you defeated them yet?
+	if GetPlayerData("HasFinishedCraigQuest"):
+		Nolan: [#portrait=0] Yes!
+		Craig: [#portrait=0] Nice! Thank you!
+	else:
+		Nolan: [#portrait=0] Nope..
+else:
+	Craig: [#portrait=0] Oh, hello there!
+	Nolan: [#portrait=0] Heya!
+	Craig: [#portrait=0] Hmm, you must be a wizard.
+	Craig: [#portrait=0] Have you seen some.. monsters along the way?
+	Craig: [#portrait=0] If so, please help me defeat them. They're right along the seaside. Can you do that?
+	Craig: [#portrait=0] Yeah.. sure!
+	
+	do SetPlayerData("HasMetCraig", true)
+=> END!

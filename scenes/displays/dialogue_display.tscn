@@ -210,6 +210,11 @@ animations = [{
 "name": &"brook",
 "speed": 5.0
 }, {
+"frames": [],
+"loop": true,
+"name": &"craig",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_30uur")

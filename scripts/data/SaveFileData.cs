@@ -88,6 +88,11 @@ namespace TheWizardCoder.Data
         public bool FishingRodSolved { get; set; } = false;
         public bool VindiTreeSolved { get; set; } = false;
         public bool HasMetKulber { get; set; } = false;
+        public bool HasMetCraig { get; set; } = false;
+        public bool HasFinishedCraigQuest { get; set; } = false;
+        public bool DefeatedQuestEnemy1 { get; set; } = false;
+        public bool DefeatedQuestEnemy2 { get; set; } = false;
+        public bool DefeatedQuestEnemy3 { get; set; } = false;
 
         public SaveFileData(CharacterData stats)
         {

@@ -45,8 +45,9 @@ namespace TheWizardCoder.Displays
 		private Marker2D enemySpritePoint;
 		private Button invisButton;
 		private TextureRect backgroundRect;
+		private bool lockBattleOptions = false;
 
-		public BattleOptions BattleOptions => battleOptions;
+        public BattleOptions BattleOptions => battleOptions;
 
 		public override void _Ready()
 		{
@@ -68,8 +69,11 @@ namespace TheWizardCoder.Displays
 
             if (Input.IsActionJustPressed("ui_cancel"))
 			{
-				battleOptions.ShowOptions();
-			}
+                if (!lockBattleOptions)
+                {
+                    battleOptions.ShowOptions();
+                }
+            }
 		}
 
 		public override void ShowDisplay()
@@ -84,6 +88,7 @@ namespace TheWizardCoder.Displays
 
 		public async void ShowDisplay(Array<string> enemies, Texture2D background)
 		{
+			lockBattleOptions = false;
 			IsBattleEnded = false;
 			backgroundRect.Texture = background;
 
@@ -137,6 +142,8 @@ namespace TheWizardCoder.Displays
 
 		public async Task Routine()
 		{
+			lockBattleOptions = true;
+
 			invisButton.GrabFocus();
 
 			List<CharacterBattleState> participants = new();
@@ -159,7 +166,7 @@ namespace TheWizardCoder.Displays
 				if (Enemies.GetTotalHealth() <= 0)
 				{
 					HideDisplay();
-					break;
+					return;
 				}
 				else if (Allies.GetTotalHealth() <= 0)
 				{
@@ -180,12 +187,15 @@ namespace TheWizardCoder.Displays
 			{
 				EmitSignal(SignalName.TurnFinished);
 			}
+
+			lockBattleOptions = false;
 		}
 
 		public override async void HideDisplay()
 		{
 			IsBattleEnded = true;
 			IsTutorial = false;
+			lockBattleOptions = true;
 
 			int wonGold = Allies.Characters.Sum(x => x.AttackPoints * x.Level);
 

@@ -112,7 +112,7 @@ namespace TheWizardCoder.UI
 
 			Vector2 barPosition = sprite.Position - new Vector2(EnemyHealthBar.Size.X/2, -20);
 			EnemyHealthBar.Position = barPosition;
-			await EnemyHealthBar.ShowHealthBar(enemyData.Health, enemyData.Health - change, enemyData.MaxHealth);
+			await EnemyHealthBar.ShowHealthBar(enemyData.Health + change, enemyData.Health, enemyData.MaxHealth);
 		}
 
         public override Task DisplayBattleEffect(int index)
@@ -121,6 +121,11 @@ namespace TheWizardCoder.UI
         }
 
         public override void HideBattleEffect(int index)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task DisplayManaChange(int index, int change)
         {
             throw new NotImplementedException();
         }

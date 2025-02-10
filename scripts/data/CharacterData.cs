@@ -71,6 +71,12 @@ namespace TheWizardCoder.Data
             Health = newValue;
         }
 
+        public void AddMana(int value)
+        {
+            int newValue = Mathf.Clamp(Points + value, 0, MaxPoints);
+            Points = newValue;
+        }
+
         public void AddLevelPoints(int value)
         {
             LevelPoints += value;

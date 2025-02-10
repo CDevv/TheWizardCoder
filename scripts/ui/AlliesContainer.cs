@@ -150,6 +150,10 @@ namespace TheWizardCoder.UI
 							await ApplyBattleEffect(state.Target, battleEffect);
 
 							break;
+						case ItemType.Mana:
+							await AddManaToCharacter(state.Target, item.Effect);
+
+							break;
 					}
 
 					global.PlayerData.RemoveFromInventory(state.ActionModifier);
@@ -225,6 +229,15 @@ namespace TheWizardCoder.UI
 			await alliesCards[index].TweenDamage(backgroundColor);
 		}
 
+        public override async Task DisplayManaChange(int index, int change)
+        {
+			Color backgroundColor = new(255, 48, 255);
+
+			alliesCards[index].SetPointsValue(Characters[index].Points);
+            DamageIndicator.PlayAnimation(change, alliesCards[index].Position + new Vector2(64, 0), backgroundColor);
+            await alliesCards[index].TweenDamage(backgroundColor);
+        }
+
         public override async Task DisplayBattleEffect(int index)
         {
             SceneTreeTimer timer = GetTree().CreateTimer(3);
@@ -278,13 +291,18 @@ namespace TheWizardCoder.UI
 			PassToNext();
 		}
 
-		private void OnItemButton(int index)
+		private void OnItemButton(int index, string itemName)
 		{
-			BattleStates[CurrentCharacter].Action = CharacterAction.Items;
-			BattleStates[CurrentCharacter].ActionModifier = index;
-			alliesCards[0].GrabFocus();
-			BattleOptions.ShowInfoLabel("Select an ally!");
-		}
+			Item item = global.ItemDescriptions[itemName];
+
+            if (item.Type != ItemType.Key)
+            {
+                BattleStates[CurrentCharacter].Action = CharacterAction.Items;
+                BattleStates[CurrentCharacter].ActionModifier = index;
+                alliesCards[0].GrabFocus();
+                BattleOptions.ShowInfoLabel("Select an ally!");
+            }
+        }
 
 		private void OnMagicButton(int index)
 		{

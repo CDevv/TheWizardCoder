@@ -114,37 +114,37 @@ namespace TheWizardCoder.Displays
 			string itemName = global.PlayerData.Inventory[index];
 			Item item = global.ItemDescriptions[itemName];
 
-			if (item.Type == ItemType.Heal)
+			if (item.Type == ItemType.Heal || item.Type == ItemType.Mana)
 			{
 				itemIndex = index;
 				level = 1;
 				action = MenuAction.Items;
 				ChangeSubdisplay("PartyMembers");
 			}
-			else if (item.Type == ItemType.Key)
-			{
-				if (item.AdditionalData.Length > 0)
-				{
+            else if (item.Type == ItemType.Key)
+            {
+                if (item.AdditionalData.Length > 0)
+                {
                     if (item.AdditionalData[0] == "Display")
                     {
                         global.CurrentRoom.Get(item.AdditionalData[1]).As<Node>().Call("ShowDisplay", item.AdditionalData[2]);
                     }
                     else if (item.AdditionalData[0] == "RoomMethod")
                     {
-						global.CurrentRoom.Call(item.AdditionalData[1], item.AdditionalData[2]);
+                        global.CurrentRoom.Call(item.AdditionalData[1], item.AdditionalData[2]);
                     }
-					else if (item.AdditionalData[0] == "PlayerMethod")
-					{
+                    else if (item.AdditionalData[0] == "PlayerMethod")
+                    {
                         global.CurrentRoom.Player.Call(item.AdditionalData[1], item.AdditionalData[2]);
-						global.CanWalk = true;
+                        global.CanWalk = true;
                     }
-                    
-					level = 0;
-					HideDisplay();
-					HideAllSubdisplays();
-				}
-			}
-		}
+
+                    level = 0;
+                    HideDisplay();
+                    HideAllSubdisplays();
+                }
+            }
+        }
 
 		private void OnStatusMenu()
 		{
@@ -179,8 +179,16 @@ namespace TheWizardCoder.Displays
 					string itemName = global.PlayerData.Inventory[itemIndex];
 					Item itemData = global.ItemDescriptions[itemName];
 
-					character.AddHealth(itemData.Effect);
-					global.PlayerData.RemoveFromInventory(itemIndex);
+                    if (itemData.Type == ItemType.Heal)
+                    {
+                        character.AddHealth(itemData.Effect);
+                    }
+					else if (itemData.Type == ItemType.Mana)
+                    {
+                        character.AddMana(itemData.Effect);
+                    }
+
+                    global.PlayerData.RemoveFromInventory(itemIndex);
 
 					UpdateAllSubdisplays();
 					itemsButton.GrabFocus();

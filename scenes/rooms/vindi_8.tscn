@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://pg4lt7xbt1ru"]
+[gd_scene load_steps=11 format=3 uid="uid://pg4lt7xbt1ru"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_lb3gd"]
+[ext_resource type="Script" path="res://scripts/rooms/Vindi8.cs" id="2_w7lj6"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_wlgji"]
 [ext_resource type="TileSet" uid="uid://dqirfdrc3jlyd" path="res://tilesets/vindi_env.tres" id="3_lrfwm"]
 [ext_resource type="PackedScene" uid="uid://bk3a4lc0i5uwk" path="res://scenes/components/actor.tscn" id="4_4hrn8"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_vu3je"]
 [ext_resource type="SpriteFrames" uid="uid://bofoatlx8u0r4" path="res://assets/characters/movement/spriteframes/craig.tres" id="5_561uj"]
+[ext_resource type="Resource" uid="uid://ukx1i3qsx6q2" path="res://dialogue/vindi.dialogue" id="5_jqg78"]
 [ext_resource type="PackedScene" uid="uid://doyfot0kgcxa2" path="res://scenes/components/snow_particles.tscn" id="5_n4akj"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_bs5pw"]
@@ -14,6 +16,7 @@ b = Vector2(664, 0)
 
 [node name="Vindi8" instance=ExtResource("1_lb3gd")]
 y_sort_enabled = true
+script = ExtResource("2_w7lj6")
 
 [node name="Camera" parent="." index="6"]
 limit_right = 1632
@@ -38,6 +41,8 @@ layer_1/tile_data = PackedInt32Array(917510, 196608, 3, 983046, 196608, 3, 10485
 z_index = 1
 y_sort_enabled = false
 position = Vector2(352, 576)
+DialogueResource = ExtResource("5_jqg78")
+DialogueTitle = "craig_point"
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Craig" index="2"]
 position = Vector2(0, -32)

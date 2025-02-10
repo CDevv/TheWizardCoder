@@ -59,7 +59,7 @@ namespace TheWizardCoder.Interactables
 
         public override void _PhysicsProcess(double delta)
         {
-            if (global.CurrentRoom.Player.IsSprinting)
+            if (global.CurrentRoom.Player.IsSprinting || global.Settings.AutoSprint)
             {
 				Speed = Player.DefaultSpeed * 2;
             }

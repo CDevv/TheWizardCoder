@@ -4,6 +4,7 @@ using System;
 using TheWizardCoder.Autoload;
 using TheWizardCoder.Abstractions;
 using TheWizardCoder.Data;
+using System.Linq;
 
 namespace TheWizardCoder.Subdisplays
 {
@@ -17,7 +18,7 @@ namespace TheWizardCoder.Subdisplays
 		[Signal]
 		public delegate void FightButtonTriggeredEventHandler();
 		[Signal]
-		public delegate void ItemsButtonTriggeredEventHandler(int itemIndex);
+		public delegate void ItemsButtonTriggeredEventHandler(int itemIndex, string itemName);
 		[Signal]
 		public delegate void MagicButtonTriggeredEventHandler(int index);
 		[Signal]
@@ -190,6 +191,12 @@ namespace TheWizardCoder.Subdisplays
 		{
 			if (global.PlayerData.Inventory.Count == 0) return null;
 
+			string[] availableItems = global.PlayerData.Inventory.Where((itemName) =>
+			{
+				Item item = global.ItemDescriptions[itemName];
+				return (!(item.Type == Enums.ItemType.Key));
+			}).ToArray();
+
 			Button firstButton = null;
 			for (int i = currentPage * ItemsPerPage; i < (currentPage + 1) * ItemsPerPage; i++)
 			{
@@ -206,7 +213,7 @@ namespace TheWizardCoder.Subdisplays
 					itemDescription.Text = global.ItemDescriptions[item].Description;
 				};
 				buttonItem.Pressed += () => {
-					EmitSignal(SignalName.ItemsButtonTriggered, currentIndex);
+					EmitSignal(SignalName.ItemsButtonTriggered, currentIndex, item);
 				};
 
 				if (global.PlayerData.Inventory.Count > ItemsPerPage)

@@ -68,8 +68,8 @@
 	"Gertrude": {
 		"Health": 40,
 		"MaxHealth": 40,
-		"Points": 0,
-		"MaxPoints": 0,
+		"Points": 20,
+		"MaxPoints": 20,
 		"AttackPoints": 15,
 		"DefensePoints": 5,
 		"AgilityPoints": 5,

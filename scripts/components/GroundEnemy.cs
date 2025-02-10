@@ -16,8 +16,10 @@ namespace TheWizardCoder.Components
 		public string EnemyName { get; set; } = "Glitch";
 		[Export]
 		public Texture2D BackgroundImage { get; set; } = ResourceLoader.Load<Texture2D>("res://assets/battle/backgrounds/battle-bg.png");
+		[Export]
+		public string PlaythroughProperty { get; set; } = string.Empty;
 
-		private Global global;
+        private Global global;
 		private BattlePoint battlePoint;
 		private AnimatedSprite2D sprite;
 		private bool following;
@@ -34,7 +36,12 @@ namespace TheWizardCoder.Components
 
 			SpriteFrames enemyTexture = ResourceLoader.Load<SpriteFrames>($"res://assets/enemies/spriteframes/{EnemyName}.tres");
 			sprite.SpriteFrames = enemyTexture;
-		}
+
+            if (!string.IsNullOrEmpty(PlaythroughProperty) && global.PlayerData.Get(PlaythroughProperty).AsBool())
+            {
+				QueueFree();
+            }
+        }
 
 		public override void _PhysicsProcess(double delta)
 		{
@@ -111,7 +118,12 @@ namespace TheWizardCoder.Components
 			following = false;
 
 			sprite.Stop();
-		}
+
+            if (!string.IsNullOrEmpty(PlaythroughProperty))
+            {
+				global.PlayerData.Set(PlaythroughProperty, true);
+            }
+        }
 
 		private void OnInteracted()
 		{

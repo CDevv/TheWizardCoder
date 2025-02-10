@@ -76,6 +76,7 @@ namespace TheWizardCoder.Abstractions
 		public abstract Task Turn(int index);
 
 		public abstract Task DisplayHealthChange(int index, int change);
+		public abstract Task DisplayManaChange(int index, int change);
 
 		public abstract Task DisplayBattleEffect(int index);
 
@@ -105,6 +106,19 @@ namespace TheWizardCoder.Abstractions
 			SceneTreeTimer timer = GetTree().CreateTimer(3);
 			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
 		}
+
+		public async Task AddManaToCharacter(int targetIndex, int addedMana)
+		{
+            CharacterBattleState state = BattleStates[targetIndex];
+
+            int manaChange = Mathf.Clamp(addedMana, 0, state.Character.MaxPoints - state.Character.Points);
+			Characters[targetIndex].Points += manaChange;
+
+			await DisplayManaChange(targetIndex, manaChange);
+
+            SceneTreeTimer timer = GetTree().CreateTimer(3);
+            await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
+        }
 
 		public async Task ApplyBattleEffect(int targetIndex, BattleEffect effect)
 		{
