@@ -34,6 +34,14 @@ Narrator: A bucket full of water.. and fish.
 Narrator: It appears to be a drawer.
 => END!
 
+~ sword_stand
+Narrator: A sword on a stand. Try pulling it out?
+- Yes
+	Narrator: You decide to pull it out, but it somehow threw a InvalidOperationException
+- No
+	Narrator: You decide to not try to pull it out.
+=> END!
+
 ~ vindi_intro_1
 Timothy: [#portrait=1] So, how was the fishing?
 Gregory: [#portrait=1] Eh, I got almost nothing, mate!
@@ -215,7 +223,19 @@ Johnson: [#portrait=0] Heya, what what would you like?
 
 ~ kulber_point
 if GetPlayerData("VindiTreeSolved"):
-	Kulber: [#portrait=0] Thanks, man!
+	if GetPlayerData("HasMetKulber"):
+		Kulber: [#portrait=0] What's up?
+	else:
+		Kulber: [#portrait=0] Thanks, man!
+		Kulber: [#portrait=0] Hey, you could look around my house!
+	- See ya!
+		Nolan: [#portrait=0] See ya!
+		Kulber: [#portrait=0] C'ya!
+	- Tell me about yourself
+		Nolan: [#portrait=0] Uhh, could you tell me a bit about yourself?
+		Kulber: [#portrait=0] Sure, what do you wanna know?
+		
+	do SetPlayerData("HasMetKulber", true)
 else:
 	Kulber: [#portrait=0] A tree has been blockin' my house, man!
 => END!

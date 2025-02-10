@@ -27,7 +27,7 @@ limit_bottom = 1216
 
 [node name="Player" parent="." index="15" instance=ExtResource("2_5ga1n")]
 z_index = 1
-position = Vector2(344, 712)
+position = Vector2(360, 728)
 
 [node name="TileMap" type="TileMap" parent="." index="16"]
 y_sort_enabled = true
@@ -52,7 +52,10 @@ position = Vector2(240, 64)
 [node name="Section6Marker" type="Marker2D" parent="." index="19"]
 position = Vector2(1760, 880)
 
-[node name="Section2Warper" parent="." index="20" instance=ExtResource("4_m8d4p")]
+[node name="BrookMarker" type="Marker2D" parent="." index="20"]
+position = Vector2(304, 680)
+
+[node name="Section2Warper" parent="." index="21" instance=ExtResource("4_m8d4p")]
 z_index = 2
 position = Vector2(296, -16)
 scale = Vector2(12, 1)
@@ -60,7 +63,7 @@ TargetRoomName = "vindi_2"
 TargetLocation = "Section3Marker"
 PlayerDirection = 1
 
-[node name="Section6Warper" parent="." index="21" instance=ExtResource("4_m8d4p")]
+[node name="Section6Warper" parent="." index="22" instance=ExtResource("4_m8d4p")]
 z_index = 2
 position = Vector2(1808, 880)
 scale = Vector2(1, 10)
@@ -68,7 +71,14 @@ TargetRoomName = "vindi_6"
 TargetLocation = "Section3Marker"
 PlayerDirection = 3
 
-[node name="GroundItem" parent="." index="22" instance=ExtResource("5_4t3cp")]
+[node name="BrookWarper" parent="." index="23" instance=ExtResource("4_m8d4p")]
+z_index = 2
+position = Vector2(256, 664)
+TargetRoomName = "brook_house"
+TargetLocation = "EnterMarker"
+PlayerDirection = 2
+
+[node name="GroundItem" parent="." index="24" instance=ExtResource("5_4t3cp")]
 z_index = 1
 y_sort_enabled = true
 position = Vector2(256, 688)
@@ -79,7 +89,7 @@ position = Vector2(0, -14)
 scale = Vector2(2, 2)
 texture = ExtResource("6_745g3")
 
-[node name="CodeProblemPoint" parent="." index="23" instance=ExtResource("9_cmpyf")]
+[node name="CodeProblemPoint" parent="." index="25" instance=ExtResource("9_cmpyf")]
 UniqueIdentifier = "FishingRodSolved"
 Code = "if (fish == null)
 {
@@ -95,7 +105,7 @@ SolvableAreas = {
 "AddToInventory(fish);": Vector2(8, 104)
 }
 
-[node name="Brook" parent="." index="25" instance=ExtResource("9_aw70h")]
+[node name="Brook" parent="." index="27" instance=ExtResource("9_aw70h")]
 z_index = 1
 position = Vector2(208, 768)
 DialogueResource = ExtResource("10_htbxa")
@@ -106,15 +116,15 @@ position = Vector2(0, -32)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("10_kelch")
 
-[node name="SnowParticles" parent="." index="26" instance=ExtResource("12_ncb4i")]
+[node name="SnowParticles" parent="." index="28" instance=ExtResource("12_ncb4i")]
 z_index = 3
 position = Vector2(396, 1)
 
-[node name="SnowParticles2" parent="." index="27" instance=ExtResource("12_ncb4i")]
+[node name="SnowParticles2" parent="." index="29" instance=ExtResource("12_ncb4i")]
 z_index = 3
 position = Vector2(1084, 1)
 
-[node name="SnowParticles3" parent="." index="28" instance=ExtResource("12_ncb4i")]
+[node name="SnowParticles3" parent="." index="30" instance=ExtResource("12_ncb4i")]
 z_index = 3
 position = Vector2(1440, 252)
 
