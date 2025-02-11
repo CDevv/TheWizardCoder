@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://d1k1cp4qwf0t2"]
+[gd_scene load_steps=29 format=3 uid="uid://d1k1cp4qwf0t2"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_pxhvl"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_3l18c"]
@@ -655,6 +655,14 @@ b = Vector2(3608, 904)
 a = Vector2(4248, 1384)
 b = Vector2(4248, 904)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_x1e1a"]
+a = Vector2(40, 8)
+b = Vector2(680, 8)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_jy16a"]
+a = Vector2(40, 376)
+b = Vector2(680, 376)
+
 [node name="RaftWater" instance=ExtResource("1_pxhvl")]
 y_sort_enabled = true
 script = ExtResource("2_cb5y6")
@@ -738,6 +746,14 @@ shape = SubResource("SegmentShape2D_rxxly")
 [node name="Wall4" type="CollisionShape2D" parent="BattleCollisions" index="3"]
 shape = SubResource("SegmentShape2D_js1gc")
 
+[node name="Wall5" type="CollisionShape2D" parent="BattleCollisions" index="4"]
+position = Vector2(3568, 968)
+shape = SubResource("SegmentShape2D_x1e1a")
+
+[node name="Wall6" type="CollisionShape2D" parent="BattleCollisions" index="5"]
+position = Vector2(3568, 968)
+shape = SubResource("SegmentShape2D_jy16a")
+
 [node name="TextBoxBase1" type="Marker2D" parent="." index="20"]
 position = Vector2(4234, 1002)
 
@@ -750,7 +766,10 @@ position = Vector2(4234, 1194)
 [node name="TextBoxBase4" type="Marker2D" parent="." index="23"]
 position = Vector2(4234, 1290)
 
-[node name="ChallengeDisplay" type="CanvasLayer" parent="." index="24"]
+[node name="TextBoxLimit" type="Marker2D" parent="." index="24"]
+position = Vector2(3984, 1000)
+
+[node name="ChallengeDisplay" type="CanvasLayer" parent="." index="25"]
 visible = false
 
 [node name="BoxCountText" parent="ChallengeDisplay" index="0" instance=ExtResource("9_lt87v")]
@@ -769,14 +788,14 @@ offset_right = 44.0
 offset_bottom = 73.0
 Text = "if ()"
 
-[node name="RaftSunkDisplay" parent="." index="25" instance=ExtResource("10_of6yc")]
+[node name="RaftSunkDisplay" parent="." index="26" instance=ExtResource("10_of6yc")]
 visible = false
 
-[node name="SavePoint" parent="." index="26" instance=ExtResource("11_r68u4")]
+[node name="SavePoint" parent="." index="27" instance=ExtResource("11_r68u4")]
 z_index = 1
 position = Vector2(5968, 1072)
 
-[node name="Warper" parent="." index="27" instance=ExtResource("12_q1f2i")]
+[node name="Warper" parent="." index="28" instance=ExtResource("12_q1f2i")]
 z_index = 2
 position = Vector2(6032, 1176)
 scale = Vector2(1, 12)
@@ -784,7 +803,7 @@ TargetRoomName = "vindi_1"
 TargetLocation = "RaftWaterMarker"
 PlayerDirection = 3
 
-[node name="VindiMarker" type="Marker2D" parent="." index="28"]
+[node name="VindiMarker" type="Marker2D" parent="." index="29"]
 position = Vector2(5992, 1200)
 
 [connection signal="DialogueEnded" from="Dialogue" to="." method="OnDialogueEnded"]

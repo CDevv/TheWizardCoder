@@ -37,7 +37,7 @@
 	},
 	"10": {
 		"Condition": "== 4",
-		"BoxTypes": ["AddFiveBoxes","AddTwoBoxes","AddBox","AddNoBoxes"]
+		"BoxTypes": ["AddFourBoxes","AddTwoBoxes","AddBox","AddNoBoxes"]
 	},
 	"11": {
 		"Condition": "<= 5",

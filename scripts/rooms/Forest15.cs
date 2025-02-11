@@ -103,15 +103,17 @@ public partial class Forest15 : BaseRoom
 			global.CurrentRoom.Player.Follower.DisableFollowing();
 
 			await PlayCutscene("puzzle_intro_1");
-		await ShowDialogue(DialogueResource, "puzzle_intro_1");
-		await PlayCutscene("puzzle_intro_2");
-		await ShowDialogue(DialogueResource, "puzzle_intro_2");
+			await ShowDialogue(DialogueResource, "puzzle_intro_1");
+			await PlayCutscene("puzzle_intro_2");
+			await ShowDialogue(DialogueResource, "puzzle_intro_2");
 		}
 	}
 
 	private async Task PuzzleSolvedCutscene()
 	{
-		await TweenCamera(new Vector2(1840, 408), 0.3f);
+		Player.Freeze();
+
+		await TweenCamera(new Vector2(1840, 408), 0.9f);
 
 		if (Player.Follower != null)
 		{
@@ -120,7 +122,7 @@ public partial class Forest15 : BaseRoom
 			global.CanWalk = false;
 		}
 
-		await TweenCameraToPlayer(0.3f);
+		await TweenCameraToPlayer(0.9f);
 
 		if (Player.Follower != null)
 		{
@@ -143,6 +145,6 @@ public partial class Forest15 : BaseRoom
 	
 		global.CurrentRoom.Player.DistanceWalked = 0;
 		
-		global.CanWalk = true;
+		Player.Unfreeze();
 	}
 }

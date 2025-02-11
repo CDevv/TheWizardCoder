@@ -1,9 +1,10 @@
 {
 	"item":{
 		"Description":"Description",
-		"Type": "Heal",
+		"Type": "Key",
 		"Effect": 15,
 		"Price": 10,
+		"AdditionalData": []
 	},
 	"Apple":{
 		"Description":"Apple from a farm.",

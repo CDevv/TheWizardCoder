@@ -28,6 +28,7 @@ public partial class RaftWater : BaseRoom
     private ConsoleBoxText boxCountText;
     private ConsoleBoxText conditionText;
     private List<Vector2> spawnPositions;
+    private float horizontalBoxPositionLimit;
     private List<TextBoxInteractable> challengeBoxes = new();
     private string[] boxTitles = new string[Enum.GetValues(typeof(ChallengeTextBoxType)).Length];
     private Action[] boxTypeFuncs = new Action[Enum.GetValues(typeof(ChallengeTextBoxType)).Length];
@@ -60,6 +61,7 @@ public partial class RaftWater : BaseRoom
             GetNode<Marker2D>("TextBoxBase3").Position,
             GetNode<Marker2D>("TextBoxBase4").Position
         };
+        horizontalBoxPositionLimit = GetNode<Marker2D>("TextBoxLimit").Position.X;
 
         InitBoxTypes();
         InitChallenges();
@@ -112,6 +114,13 @@ public partial class RaftWater : BaseRoom
                 boxStack.AddBox();
             }
         };
+        boxTypeFuncs[(int)(ChallengeTextBoxType.AddFourBoxes)] = () =>
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                boxStack.AddBox();
+            }
+        };
 
         boxTitles[(int)ChallengeTextBoxType.AddBox] = "AddBox();";
         boxTitles[(int)ChallengeTextBoxType.RemoveBox] = "RemoveBox();";
@@ -121,6 +130,7 @@ public partial class RaftWater : BaseRoom
         boxTitles[(int)ChallengeTextBoxType.AddNoBoxes] = "AddBoxes(0);";
         boxTitles[(int)ChallengeTextBoxType.RemoveTwoBoxes] = "RemoveBoxes(2);";
         boxTitles[(int)ChallengeTextBoxType.AddSevenBoxes] = "AddBoxes(7);";
+        boxTitles[(int)(ChallengeTextBoxType.AddFourBoxes] = "AddBoxes(4);";
     }
 
     private void InitChallenges()
@@ -207,6 +217,7 @@ public partial class RaftWater : BaseRoom
 
         TextBoxInteractable textBox = TextBoxScene.Instantiate<TextBoxInteractable>();
         textBox.Text = boxTitles[(int)boxType];
+        textBox.HorizontalPositionLimit = horizontalBoxPositionLimit;
         textBox.Position = boxPosition;
         textBox.Touched += () =>
         {

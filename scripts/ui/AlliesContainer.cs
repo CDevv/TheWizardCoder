@@ -161,13 +161,16 @@ namespace TheWizardCoder.UI
 				case CharacterAction.Magic:
 					string currentMagicSpellName = ally.MagicSpells[state.ActionModifier];
 					MagicSpell currentMagicSpell = global.MagicSpells[currentMagicSpellName];
-					if (currentMagicSpell.TargetType == CharacterType.Enemy)
+
+                    ally.RemoveMana(currentMagicSpell.Cost);
+                    alliesCards[i].SetPointsValue(ally.Points);
+
+                    if (currentMagicSpell.TargetType == CharacterType.Enemy)
 					{
 						string enemyName = Enemies.Characters[state.Target].Name;
 						BattleOptions.ShowInfoLabel($"{ally.Name} casted {currentMagicSpellName} on {enemyName}!");
-						await Enemies.DamageCharacter(state.Target, currentMagicSpell.Effect);
 
-						collectedExperience[i] += (ally.Level + 2);
+						await Enemies.DamageCharacter(state.Target, currentMagicSpell.Effect);
 					}
 					else if (currentMagicSpell.TargetType == CharacterType.Ally)
                     {
@@ -184,6 +187,9 @@ namespace TheWizardCoder.UI
 
                         await HealCharacter(state.Target, currentMagicSpell.Effect);
                     }
+
+                    collectedExperience[i] += (ally.Level + 2);
+
                     break;
 			}
 		}
@@ -231,7 +237,7 @@ namespace TheWizardCoder.UI
 
         public override async Task DisplayManaChange(int index, int change)
         {
-			Color backgroundColor = new(255, 48, 255);
+			Color backgroundColor = new("ff30ff00");
 
 			alliesCards[index].SetPointsValue(Characters[index].Points);
             DamageIndicator.PlayAnimation(change, alliesCards[index].Position + new Vector2(64, 0), backgroundColor);
@@ -264,18 +270,8 @@ namespace TheWizardCoder.UI
 		private void OnEnemyPressed(int index)
 		{
 			BattleStates[CurrentCharacter].Target = index;
-			if (BattleStates[CurrentCharacter].Action == CharacterAction.Magic)
-			{
-				int indexInInventory = BattleStates[CurrentCharacter].ActionModifier;
-				
-				string magicSpellName = BattleStates[CurrentCharacter].Character.MagicSpells[indexInInventory];
-				MagicSpell magicSpell = global.MagicSpells[magicSpellName];
 
-				BattleStates[CurrentCharacter].Character.Points -= magicSpell.Cost;
-				alliesCards[CurrentCharacter].SetPointsValue(BattleStates[CurrentCharacter].Character.Points);
-			}
-
-			PassToNext();
+            PassToNext();
 		}
 
 		private void OnAttackButton()

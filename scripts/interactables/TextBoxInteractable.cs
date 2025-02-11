@@ -13,8 +13,9 @@ namespace TheWizardCoder.Interactables
 		public delegate void TouchedEventHandler();
 
 		public string Text { get; set; }
+        public float HorizontalPositionLimit { get; set; }
 
-		private CollisionShape2D collisionShape;
+        private CollisionShape2D collisionShape;
 		private ConsoleBoxText consoleBoxText;
 		private VisibleOnScreenNotifier2D onScreenNotifier;
 
@@ -30,8 +31,13 @@ namespace TheWizardCoder.Interactables
 		public override void _PhysicsProcess(double delta)
 		{
 			Vector2 velocity = new Vector2(-BoxSpeed, 0);
-			Position += velocity;
-		}
+			Vector2 newPosition = Position + velocity;
+
+            if (newPosition.X > HorizontalPositionLimit)
+            {
+                Position += velocity;
+            }
+        }
 
 		public override void Action()
 		{
