@@ -11,5 +11,7 @@ namespace TheWizardCoder.Enums
         RemoveTwoBoxes = 6,
         AddSevenBoxes = 7,
         AddFourBoxes = 8,
+        AddThreeBoxes = 9,
+        AddNineBoxes = 10,
     }
 }

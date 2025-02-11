@@ -114,9 +114,23 @@ public partial class RaftWater : BaseRoom
                 boxStack.AddBox();
             }
         };
-        boxTypeFuncs[(int)(ChallengeTextBoxType.AddFourBoxes)] = () =>
+        boxTypeFuncs[(int)ChallengeTextBoxType.AddFourBoxes] = () =>
         {
             for (int i = 0; i < 4; i++)
+            {
+                boxStack.AddBox();
+            }
+        };
+        boxTypeFuncs[(int)ChallengeTextBoxType.AddThreeBoxes] = () =>
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                boxStack.AddBox();
+            }
+        };
+        boxTypeFuncs[(int)ChallengeTextBoxType.AddNineBoxes] = () =>
+        {
+            for (int i = 0; i < 9; i++)
             {
                 boxStack.AddBox();
             }
@@ -130,7 +144,9 @@ public partial class RaftWater : BaseRoom
         boxTitles[(int)ChallengeTextBoxType.AddNoBoxes] = "AddBoxes(0);";
         boxTitles[(int)ChallengeTextBoxType.RemoveTwoBoxes] = "RemoveBoxes(2);";
         boxTitles[(int)ChallengeTextBoxType.AddSevenBoxes] = "AddBoxes(7);";
-        boxTitles[(int)(ChallengeTextBoxType.AddFourBoxes] = "AddBoxes(4);";
+        boxTitles[(int)ChallengeTextBoxType.AddFourBoxes] = "AddBoxes(4);";
+        boxTitles[(int)ChallengeTextBoxType.AddThreeBoxes] = "AddBoxes(3);";
+        boxTitles[(int)ChallengeTextBoxType.AddNineBoxes] = "AddBoxes(9);";
     }
 
     private void InitChallenges()

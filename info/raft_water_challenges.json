@@ -45,7 +45,7 @@
 	},
 	"12": {
 		"Condition": "== 3",
-		"BoxTypes": ["RemoveTwoBoxes","AddFiveBoxes","RemoveBox","AddNoBoxes"]
+		"BoxTypes": ["RemoveTwoBoxes","AddThreeBoxes","RemoveBox","AddNoBoxes"]
 	},
 	"13": {
 		"Condition": "> 2 * 2",
@@ -73,7 +73,7 @@
 	},
 	"19": {
 		"Condition": "== (2 * 3) + ((-4) * (-1))",
-		"BoxTypes": ["AddFiveBoxes","AddSevenBoxes","ClearAllBoxes","AddTwoBoxes"]
+		"BoxTypes": ["AddFiveBoxes","AddSevenBoxes","AddNineBoxes","AddTwoBoxes"]
 	},
 	"20": {
 		"Condition": "<= 0",
