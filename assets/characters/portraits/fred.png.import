@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2dpwk6p1w706"
-path="res://.godot/imported/juniorbug.png-b4afe3130f7a719a86df857d0b302371.ctex"
+uid="uid://iw1srdb7s8lk"
+path="res://.godot/imported/fred.png-3b4248cb59996901718f50d7857264d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/juniorbug.png"
-dest_files=["res://.godot/imported/juniorbug.png-b4afe3130f7a719a86df857d0b302371.ctex"]
+source_file="res://assets/characters/portraits/fred.png"
+dest_files=["res://.godot/imported/fred.png-3b4248cb59996901718f50d7857264d2.ctex"]
 
 [params]
 

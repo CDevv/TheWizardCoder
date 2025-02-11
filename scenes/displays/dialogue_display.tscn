@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://b8wix4lm5g767"]
+[gd_scene load_steps=66 format=3 uid="uid://b8wix4lm5g767"]
 
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_q5vyp"]
 [ext_resource type="Script" path="res://scripts/displays/DialogueDisplay.cs" id="1_u23wf"]
@@ -14,7 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://qbru1t4okg4k" path="res://assets/characters/portraits/zenith.png" id="5_wun3d"]
 [ext_resource type="Texture2D" uid="uid://cg4abd46clb5w" path="res://assets/characters/portraits/gertrude.png" id="6_3iyw6"]
 [ext_resource type="Texture2D" uid="uid://c8jyb05cf4i13" path="res://assets/characters/portraits/linton.png" id="6_87rob"]
+[ext_resource type="Texture2D" uid="uid://c2fafoom31inb" path="res://assets/characters/portraits/craig.png" id="6_jx80f"]
 [ext_resource type="Texture2D" uid="uid://dwddyqemmghcc" path="res://assets/characters/portraits/gregory.png" id="7_kq7ba"]
+[ext_resource type="Texture2D" uid="uid://iw1srdb7s8lk" path="res://assets/characters/portraits/fred.png" id="8_2r6qf"]
 [ext_resource type="Texture2D" uid="uid://k0tu1vy0o781" path="res://assets/characters/portraits/gerald.png" id="8_vyhfr"]
 [ext_resource type="Texture2D" uid="uid://5evvqmuv2ujj" path="res://assets/characters/portraits/nobe.png" id="10_ye061"]
 [ext_resource type="Texture2D" uid="uid://bqa0e4rd37uk1" path="res://assets/characters/portraits/johnson.png" id="11_pwq53"]
@@ -47,6 +49,18 @@ region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2piy"]
 atlas = ExtResource("5_srfo1")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gexbv"]
+atlas = ExtResource("6_jx80f")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yi832"]
+atlas = ExtResource("6_jx80f")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j11oy"]
+atlas = ExtResource("6_jx80f")
 region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_30uur"]
@@ -210,7 +224,16 @@ animations = [{
 "name": &"brook",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gexbv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yi832")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j11oy")
+}],
 "loop": true,
 "name": &"craig",
 "speed": 5.0
@@ -227,6 +250,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"dudeley",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_2r6qf")
+}],
+"loop": true,
+"name": &"fred",
 "speed": 5.0
 }, {
 "frames": [{

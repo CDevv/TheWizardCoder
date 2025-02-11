@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2dpwk6p1w706"
-path="res://.godot/imported/juniorbug.png-b4afe3130f7a719a86df857d0b302371.ctex"
+uid="uid://c2fafoom31inb"
+path="res://.godot/imported/craig.png-f3c69ae3fd7ef819c28fc5b524ca7b38.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/juniorbug.png"
-dest_files=["res://.godot/imported/juniorbug.png-b4afe3130f7a719a86df857d0b302371.ctex"]
+source_file="res://assets/characters/portraits/craig.png"
+dest_files=["res://.godot/imported/craig.png-f3c69ae3fd7ef819c28fc5b524ca7b38.ctex"]
 
 [params]
 
