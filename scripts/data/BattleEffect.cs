@@ -21,6 +21,16 @@ namespace TheWizardCoder.Data
             TargetType = Enum.Parse<CharacterType>(arr[1]);
             Turns = int.Parse(arr[2]);
             Effect = int.Parse(arr[3]);
+
+            if (Turns < 0)
+            {
+                throw new ArgumentException("Turns cannot be negative.");
+            }
+
+            if (Effect < 0)
+            {
+                throw new ArgumentException("Effect cannot be negative.");
+            }
         }
     }
 }
