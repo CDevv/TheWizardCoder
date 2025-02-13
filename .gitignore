@@ -5,3 +5,5 @@
 /.vscode
 .vscode/launch.json
 .vs
+/.runsettings
+/TestResults
