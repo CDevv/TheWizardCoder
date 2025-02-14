@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cshmmklhmboca"
-path="res://.godot/imported/amyanims.png-f7a12040f872859fdea0642035929d70.ctex"
+uid="uid://d0r02j6y2ri26"
+path="res://.godot/imported/sigbert.png-22e023c12790e2602ff5030439b682d5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/movement/amyanims.png"
-dest_files=["res://.godot/imported/amyanims.png-f7a12040f872859fdea0642035929d70.ctex"]
+source_file="res://assets/characters/portraits/sigbert.png"
+dest_files=["res://.godot/imported/sigbert.png-22e023c12790e2602ff5030439b682d5.ctex"]
 
 [params]
 

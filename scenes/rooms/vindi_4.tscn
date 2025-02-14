@@ -285,7 +285,7 @@ texture = ExtResource("7_vwq77")
 
 [node name="Kulber" parent="." index="25" instance=ExtResource("10_bltc8")]
 z_index = 1
-position = Vector2(784, 256)
+position = Vector2(784, 240)
 DialogueResource = ExtResource("11_27bqk")
 DialogueTitle = "kulber_point"
 

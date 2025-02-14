@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://b8wix4lm5g767"]
+[gd_scene load_steps=70 format=3 uid="uid://b8wix4lm5g767"]
 
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_q5vyp"]
 [ext_resource type="Script" path="res://scripts/displays/DialogueDisplay.cs" id="1_u23wf"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://bqa0e4rd37uk1" path="res://assets/characters/portraits/johnson.png" id="11_pwq53"]
 [ext_resource type="Texture2D" uid="uid://4ui0kxhdxv2t" path="res://assets/characters/portraits/kulber.png" id="12_pwvsh"]
 [ext_resource type="Texture2D" uid="uid://hqi47s7722dw" path="res://assets/characters/portraits/timothy.png" id="14_p7rx0"]
+[ext_resource type="Texture2D" uid="uid://d0r02j6y2ri26" path="res://assets/characters/portraits/sigbert.png" id="20_bp7kd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8h35u"]
 atlas = ExtResource("4_mfeyw")
@@ -102,6 +103,18 @@ region = Rect2(0, 0, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_oqhmi"]
 atlas = ExtResource("7_kq7ba")
 region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2eku"]
+atlas = ExtResource("11_pwq53")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ahhnu"]
+atlas = ExtResource("11_pwq53")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g03x1"]
+atlas = ExtResource("11_pwq53")
+region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p1wo0"]
 atlas = ExtResource("4_7t36c")
@@ -301,7 +314,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("11_pwq53")
+"texture": SubResource("AtlasTexture_g2eku")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ahhnu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g03x1")
 }],
 "loop": true,
 "name": &"johnson",
@@ -394,6 +413,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"shimble",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_bp7kd")
+}],
+"loop": true,
+"name": &"sigbert",
 "speed": 5.0
 }, {
 "frames": [{

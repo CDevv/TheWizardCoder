@@ -217,6 +217,10 @@ Johnson: [#portrait=0] Heya, what what would you like?
 	Nolan: [#portrait=0] I wanna buy something from your shop.
 	Johnson: [#portrait=0] Alright!
 	do OpenShop("JohnsonShop")
+- Why are you dressed in purple?
+	Nolan: [#portrait=0] Why are you dressed in purple?
+	Johnson: [#portrait=1] Because I'm a wizard! 
+	Johnson: [#portrait=2] Or at least I wish I was.
 - Nevermind.
 	Nolan: [#portrait=0] Nevermind.
 => END!
@@ -234,6 +238,14 @@ if GetPlayerData("VindiTreeSolved"):
 	- Tell me about yourself
 		Nolan: [#portrait=0] Uhh, could you tell me a bit about yourself?
 		Kulber: [#portrait=0] Sure, what do you wanna know?
+		Nolan: [#portrait=0] Hmm..
+		- Why do you live on a cliffside?
+			Nolan: [#portrait=0] Why do you live on this cliffside?
+			Kulber: [#portrait=0] I couldn't find another place to live. Also, the view is actually quite nice.
+		- What do you usually do?
+			Nolan: [#portrait=0] Do you have a profession or something you usually do?
+			Kulber: [#portrait=0] Actually, I do! I sometimes write in my free time.
+			Kulber: [#portrait=0] Also, I am interested in nature. It's why I have a painting of the forest in my house.
 		
 	do SetPlayerData("HasMetKulber", true)
 else:
