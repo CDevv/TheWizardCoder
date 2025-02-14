@@ -15,12 +15,12 @@ namespace TheWizardCoder.Data
         public int ShopPrice { get; set; }
         public CharacterType TargetType { get; private set; }
 
-        public MagicSpell(Godot.Collections.Dictionary<string, Variant> dict)
+        public MagicSpell(Dictionary<string, Variant> dict)
         {
             ApplyDictionary(dict);
         }
 
-        public void ApplyDictionary(Godot.Collections.Dictionary<string, Variant> dict)
+        public void ApplyDictionary(Dictionary<string, Variant> dict)
         {
             Name = (string)dict["Name"];
             Description = (string)dict["Description"];

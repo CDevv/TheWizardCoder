@@ -6,24 +6,13 @@
 	<LangVersion>11.0</LangVersion>
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <EnableDynamicLoading>true</EnableDynamicLoading>
-	<ImplicitUsings>disable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="gdunit4_testadapter\**" />
-    <Compile Remove="TheWizardCoder.Tests\**" />
-    <EmbeddedResource Remove="gdunit4_testadapter\**" />
-    <EmbeddedResource Remove="TheWizardCoder.Tests\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="scripts\tests\BattleEffectTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
 	<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="gdUnit4.api" Version="4.3.1" />
+    <PackageReference Include="gdUnit4.test.adapter" Version="2.0.0" />
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.3</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="scripts\tests\" />
   </ItemGroup>
 </Project>

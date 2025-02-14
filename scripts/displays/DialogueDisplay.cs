@@ -33,7 +33,7 @@ namespace TheWizardCoder.Displays
 		private string currentTitle;
 		private Resource dialogueResource;
 		private Marker2D responsesRectMarker;
-		private Godot.Timer lineTimer;
+		private Timer lineTimer;
 		private bool isTyping = false;
 		private double waitingTime = DefaultWaitingTime;
 		private double lineTime = 0;
@@ -55,7 +55,7 @@ namespace TheWizardCoder.Displays
 			responsesMenu = GetNode<VBoxContainer>("%Responses");
 			audioPlayer = GetNode<AudioStreamPlayer>("%AudioPlayer");
 			responsesRectMarker = GetNode<Marker2D>("ResponsesContainerMarker");
-			lineTimer = GetNode<Godot.Timer>("LineTimer");
+			lineTimer = GetNode<Timer>("LineTimer");
 
 			responsesRectBasePosition = responsesRectMarker.Position;
 		}
