@@ -13,7 +13,7 @@ namespace TheWizardCoder.Data
         public bool Fullscreen { get; set; } = false;
         public bool AutoSprint { get; set; } = false;
 
-        private Dictionary<string, InputEvent> controls = new()
+        private Godot.Collections.Dictionary<string, InputEvent> controls = new()
         {
             {"left", new InputEventKey(){Keycode = Key.Left, PhysicalKeycode = Key.Left}},
             {"right", new InputEventKey(){Keycode = Key.Right, PhysicalKeycode = Key.Right}},
@@ -21,7 +21,7 @@ namespace TheWizardCoder.Data
             {"up", new InputEventKey(){Keycode = Key.Up, PhysicalKeycode = Key.Up}}
         };
 
-        public Dictionary<string, InputEvent> Controls 
+        public Godot.Collections.Dictionary<string, InputEvent> Controls 
         {
             get 
             {

@@ -29,9 +29,9 @@ namespace TheWizardCoder.Data
         public int Level { get; set; } = 1;
         public int LevelPoints { get; set; }
 
-        private Dictionary<string, Variant> dict;
+        private Godot.Collections.Dictionary<string, Variant> dict;
 
-        public CharacterData(Dictionary<string, Variant> dict, Global global)
+        public CharacterData(Godot.Collections.Dictionary<string, Variant> dict, Global global)
         {
             Global = global;
             this.dict = dict;

@@ -18,7 +18,7 @@ namespace TheWizardCoder.Data
             BoxTypes = boxTypes;
         }
 
-        public RaftWaterChallenge(Dictionary<string, Variant> dict) : this(
+        public RaftWaterChallenge(Godot.Collections.Dictionary<string, Variant> dict) : this(
             (boxStack) => boxStack.Count == (int)dict["Condition"],
             $"Count {(string)dict["Condition"]}",
             new ChallengeTextBoxType[4]

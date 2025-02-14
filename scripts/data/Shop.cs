@@ -12,12 +12,12 @@ namespace TheWizardCoder.Data
         public ShopType Type { get; set; }
         public Array<string> Items { get; set; }
 
-        public Shop(Dictionary<string, Variant> dict)
+        public Shop(Godot.Collections.Dictionary<string, Variant> dict)
         {
             ApplyDictionary(dict);
         }
 
-        public void ApplyDictionary(Dictionary<string, Variant> dict)
+        public void ApplyDictionary(Godot.Collections.Dictionary<string, Variant> dict)
         {
             Name = (string)dict["Name"];
             Type = Enum.Parse<ShopType>((string)dict["Type"]);

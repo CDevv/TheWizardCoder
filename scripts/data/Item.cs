@@ -16,12 +16,12 @@ namespace TheWizardCoder.Data
         public bool Sellable { get; set; }
         public string[] AdditionalData { get; set; }
 
-        public Item(Dictionary<string, Variant> dict)
+        public Item(Godot.Collections.Dictionary<string, Variant> dict)
         {
             ApplyDictionary(dict);
         }
 
-        public void ApplyDictionary(Dictionary<string, Variant> dict)
+        public void ApplyDictionary(Godot.Collections.Dictionary<string, Variant> dict)
         {
             Description = (string)dict["Description"];
             Effect = (int)dict["Effect"];

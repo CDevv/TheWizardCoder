@@ -1,12 +1,12 @@
-﻿using System;
+﻿using GdUnit4;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using GdUnit4;
 using TheWizardCoder.Data;
 using TheWizardCoder.Enums;
+
 using static GdUnit4.Assertions;
 
 namespace TheWizardCoder.Tests
@@ -14,7 +14,7 @@ namespace TheWizardCoder.Tests
     [TestSuite]
     public class BattleEffectTests
     {
-        [TestCase("Defense","Ally","3","5")]
+        [TestCase("Defense", "Ally", "3", "5")]
         [TestCase("Attack", "Ally", "3", "5")]
         [TestCase("Defense", "Enemy", "3", "5")]
         [TestCase("Attack", "Enemy", "3", "5")]
