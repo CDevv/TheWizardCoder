@@ -15,6 +15,11 @@ namespace TheWizardCoder.Data
             Direction = direction;
             Position = position;
             Speed = speed;
+
+            if (Speed < 0)
+            {
+                throw new ArgumentException("Speed cannot be negative.");
+            }
         }
     }
 }

@@ -6,22 +6,17 @@ using TheWizardCoder.Enums;
 
 namespace TheWizardCoder.Data
 {
-    public class Shop : IApplyDictionary
+    public class Shop
     {
         public string Name { get; set; }
         public ShopType Type { get; set; }
         public Array<string> Items { get; set; }
 
-        public Shop(Dictionary<string, Variant> dict)
+        public Shop(string name, ShopType type, Array<string> items)
         {
-            ApplyDictionary(dict);
-        }
-
-        public void ApplyDictionary(Dictionary<string, Variant> dict)
-        {
-            Name = (string)dict["Name"];
-            Type = Enum.Parse<ShopType>((string)dict["Type"]);
-            Items = (Array<string>)dict["Items"];
+            Name = name;
+            Type = type;
+            Items = items;
         }
     }
 }

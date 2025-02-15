@@ -21,7 +21,7 @@ namespace TheWizardCoder.Data
         public string SceneDefaultMarker { get; set; }
         public string Location { get; set; }
         public Vector2 LocationVector { get; set; }
-        public CharacterData Stats { get; set; }
+        public Character Stats { get; set; }
         public int Gold { get; set; }
         private Array<string> inventory = new();
         private Array<string> magicSpells = new();
@@ -50,7 +50,7 @@ namespace TheWizardCoder.Data
             }
         }
 
-        public List<CharacterData> Allies { get; set; } = new();
+        public List<Character> Allies { get; set; } = new();
 
         public bool TestCodeProblem { get; set; } = false;
         public bool TestChest { get; set; } = false;
@@ -94,7 +94,7 @@ namespace TheWizardCoder.Data
         public bool DefeatedQuestEnemy2 { get; set; } = false;
         public bool DefeatedQuestEnemy3 { get; set; } = false;
 
-        public SaveFileData(CharacterData stats)
+        public SaveFileData(Character stats)
         {
             IsSaveEmpty = true;
             

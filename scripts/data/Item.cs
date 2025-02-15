@@ -6,7 +6,7 @@ using TheWizardCoder.Enums;
 
 namespace TheWizardCoder.Data
 {
-    public class Item : IApplyDictionary
+    public class Item
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -16,31 +16,33 @@ namespace TheWizardCoder.Data
         public bool Sellable { get; set; }
         public string[] AdditionalData { get; set; }
 
-        public Item(Dictionary<string, Variant> dict)
+        public Item(string name, string description, int effect, ItemType type)
         {
-            ApplyDictionary(dict);
+            Name = name;
+            Description = description;
+            Effect = effect;
+            Type = type;
+
+            if (Effect < 0)
+            {
+                throw new ArgumentException("Effect cannot be negative.");
+            }
         }
 
-        public void ApplyDictionary(Dictionary<string, Variant> dict)
+        public void MakeSellable(int price)
         {
-            Description = (string)dict["Description"];
-            Effect = (int)dict["Effect"];
-            Type = Enum.Parse<ItemType>((string)dict["Type"]);          
+            Sellable = true;
+            Price = price;
 
-            if (dict.ContainsKey("Price"))
+            if (Price < 0)
             {
-                Sellable = true;
-                Price = (int)dict["Price"];
+                throw new ArgumentException("Price cannot be negative.");
             }
-            else
-            {
-                Sellable = false;
-            }
+        }
 
-            if (Type == ItemType.Key || Type == ItemType.Magic)
-            {
-                AdditionalData = (string[])dict["AdditionalData"];
-            }         
+        public void AddAdditionalData(string[] data)
+        {
+            AdditionalData = data;
         }
     }
 }

@@ -43,7 +43,7 @@ namespace TheWizardCoder.UI
 			enemyCardPoint = BaseEnemyCardPosition.Position;
 		}
 
-		public override void AddCharacter(CharacterData character)
+		public override void AddCharacter(Character character)
 		{
 			int currentIndex = Characters.Count;
 
@@ -103,7 +103,7 @@ namespace TheWizardCoder.UI
 
 		public override async Task DisplayHealthChange(int index, int change)
 		{
-			CharacterData enemyData = Characters[index];
+			Character enemyData = Characters[index];
 			EnemySprite sprite = enemySprites[index];
 
 			enemyCards[index].SetHealthValue(enemyData.Health, enemyData.MaxHealth);

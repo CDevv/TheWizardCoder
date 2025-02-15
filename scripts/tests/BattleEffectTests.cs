@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using GdUnit4;
+﻿using GdUnit4;
 using TheWizardCoder.Data;
 using TheWizardCoder.Enums;
 using static GdUnit4.Assertions;
@@ -14,33 +8,29 @@ namespace TheWizardCoder.Tests
     [TestSuite]
     public class BattleEffectTests
     {
-        [TestCase("Defense","Ally","3","5")]
-        [TestCase("Attack", "Ally", "3", "5")]
-        [TestCase("Defense", "Enemy", "3", "5")]
-        [TestCase("Attack", "Enemy", "3", "5")]
-        public void ValidConstructorCalls(string action, string targetType, string turns, string effect)
+        [TestCase(BattleEffectType.Defense, CharacterType.Ally,3, 5)]
+        [TestCase(BattleEffectType.Attack, CharacterType.Ally, 3, 5)]
+        [TestCase(BattleEffectType.Defense, CharacterType.Enemy, 3, 5)]
+        [TestCase(BattleEffectType.Attack,  CharacterType.Enemy, 3, 5)]
+        public void ValidConstructorCalls(BattleEffectType action, CharacterType targetType, int turns, int effect)
         {
-            string[] arr = new string[] { action, targetType, turns, effect };
-            BattleEffect battleEffect = new(arr);
+            BattleEffect battleEffect = new(action, targetType, turns, effect);
 
-            AssertBool(battleEffect.Action == Enum.Parse<BattleEffectType>(action)).IsTrue();
-            AssertBool(battleEffect.TargetType == Enum.Parse<CharacterType>(targetType)).IsTrue();
-            AssertBool(battleEffect.Turns == int.Parse(turns)).IsTrue();
-            AssertBool(battleEffect.Effect == int.Parse(effect)).IsTrue();
+            AssertBool(battleEffect.Action == action).IsTrue();
+            AssertBool(battleEffect.TargetType == targetType).IsTrue();
+            AssertBool(battleEffect.Turns == turns).IsTrue();
+            AssertBool(battleEffect.Effect == effect).IsTrue();
         }
 
-        [TestCase("Banichka", "Ally", "3", "5")]
-        [TestCase("Attack", "Ally", "-1", "5")]
-        [TestCase("Defense", "Enemy", "3", "-5")]
-        [TestCase("Trufel", "Enemy", "3", "5")]
-        public void InvalidConstructorCalls(string action, string targetType, string turns, string effect)
+        [TestCase(BattleEffectType.Attack, CharacterType.Ally, 3, -5)]
+        [TestCase(BattleEffectType.Defense, CharacterType.Ally, -1, 5)]
+        public void InvalidConstructorCalls(BattleEffectType action, CharacterType targetType, int turns, int effect)
         {
-            string[] arr = new string[] { action, targetType, turns, effect };
             BattleEffect battleEffect;
 
             AssertThrown(() =>
             {
-                battleEffect = new(arr);
+                battleEffect = new(action, targetType, turns, effect);
             });
         }
     }

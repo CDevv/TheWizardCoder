@@ -43,7 +43,7 @@ namespace TheWizardCoder.UI
 			startingPoint = BaseCardPosition.Position;
 		}
 
-        public override void AddCharacter(CharacterData character)
+        public override void AddCharacter(Character character)
         {
             base.AddCharacter(character);
 
@@ -95,7 +95,7 @@ namespace TheWizardCoder.UI
 			}
 
 			CharacterBattleState state = BattleStates[i];
-			CharacterData ally = state.Character;
+			Character ally = state.Character;
 
 			if (state.HasBattleEffect)
 			{
@@ -128,7 +128,7 @@ namespace TheWizardCoder.UI
 					int healerIndex = i;
                     string itemName = global.PlayerData.Inventory[state.ActionModifier];
                     Item item = global.ItemDescriptions[itemName];
-                    CharacterData target = BattleStates[state.Target].Character;
+                    Character target = BattleStates[state.Target].Character;
 
                     if (state.Target == healerIndex)
                     {
@@ -146,7 +146,12 @@ namespace TheWizardCoder.UI
 
                             break;
 						case ItemType.Magic:
-							BattleEffect battleEffect = new BattleEffect(item.AdditionalData);
+                            BattleEffectType action = Enum.Parse<BattleEffectType>(item.AdditionalData[0]);
+                            CharacterType targetType = Enum.Parse<CharacterType>(item.AdditionalData[1]);
+                            int turns = int.Parse(item.AdditionalData[2]);
+                            int effect = int.Parse(item.AdditionalData[3]);
+
+                            BattleEffect battleEffect = new BattleEffect(action, targetType, turns, effect);
 							await ApplyBattleEffect(state.Target, battleEffect);
 
 							break;
@@ -302,7 +307,7 @@ namespace TheWizardCoder.UI
 
 		private void OnMagicButton(int index)
 		{
-			CharacterData ally = BattleStates[CurrentCharacter].Character;
+			Character ally = BattleStates[CurrentCharacter].Character;
 
 			BattleStates[CurrentCharacter].Action = CharacterAction.Magic;
 			BattleStates[CurrentCharacter].ActionModifier = index;

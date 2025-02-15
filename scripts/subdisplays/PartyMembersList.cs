@@ -22,7 +22,7 @@ namespace TheWizardCoder.Subdisplays
 		private Marker2D basePos;
 
 		private List<CharacterPartyMember> partyMembers = new();
-		private List<CharacterData> characterData = new();
+		private List<Character> characterData = new();
 
 		public override void _Ready()
 		{
@@ -60,7 +60,7 @@ namespace TheWizardCoder.Subdisplays
 			}
 		}
 
-		public void AddCard(CharacterData character)
+		public void AddCard(Character character)
 		{
 			int currentIndex = partyMembers.Count;
 

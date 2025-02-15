@@ -19,7 +19,7 @@ namespace TheWizardCoder.UI
 			nameLabel = GetNode<Label>("Label");
 		}
 
-		public void ApplyData(CharacterData data)
+		public void ApplyData(Character data)
 		{
 			nameLabel.Text = data.Name;
 			Texture = ResourceLoader.Load<Texture2D>($"res://assets/battle/enemies/{data.Name}.png");

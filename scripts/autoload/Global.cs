@@ -7,6 +7,7 @@ using TheWizardCoder.Data;
 using TheWizardCoder.Enums;
 using TheWizardCoder.Abstractions;
 using TheWizardCoder.Utils;
+using Moq;
 
 namespace TheWizardCoder.Autoload
 {
@@ -34,7 +35,7 @@ namespace TheWizardCoder.Autoload
 		public SettingsConfig Settings { get; set; } = new();
 		public System.Collections.Generic.Dictionary<string, Item> ItemDescriptions { get; private set; } = new();
 		public System.Collections.Generic.Dictionary<string, MagicSpell> MagicSpells { get; private set; } = new();
-		public System.Collections.Generic.Dictionary<string, CharacterData> Characters { get; private set; } = new();
+		public System.Collections.Generic.Dictionary<string, Character> Characters { get; private set; } = new();
 		public System.Collections.Generic.Dictionary<string, Shop> Shops { get; private set; } = new();
 		public System.Collections.Generic.Dictionary<string, string> GameIntroStrings { get; private set; } = new();
 		public CodeProblem FishingProblemData { get; private set; }
@@ -65,11 +66,29 @@ namespace TheWizardCoder.Autoload
 			Characters = DataLoader.LoadCharacters();
 			Shops = DataLoader.LoadShops();
 
-            Variant jsonData = DataLoader.GetJsonData("res://info/fishing_problem.json");
-            Dictionary<string, Variant> parsedData = (Dictionary<string, Variant>)jsonData;
+			LoadFishingProblemData();
+        }
 
-			CodeProblem codeProblem = new(parsedData);
-			FishingProblemData = codeProblem;
+		private void LoadFishingProblemData()
+		{
+            Variant jsonData = DataLoader.GetJsonData("res://info/fishing_problem.json");
+            var dict = (Dictionary<string, Variant>)jsonData;
+
+            string uniqueIdentifier = (string)dict["UniqueIdentifier"];
+            string code = (string)dict["Code"];
+            var items = new Array<string>((string[])dict["Items"]);
+
+            var solvableAreasVectors = new Dictionary<string, Vector2>();
+            var solvableAreas = (Dictionary<string, Variant>)dict["SolvableAreas"];
+            foreach (var item in solvableAreas)
+            {
+                int[] arr = (int[])item.Value;
+                Vector2 vector = new Vector2(arr[0], arr[1]);
+
+                solvableAreasVectors[item.Key] = vector;
+            }
+
+            FishingProblemData = new(uniqueIdentifier, code, items, solvableAreasVectors);
         }
 
 		public void AddToInventory(string item, bool onlyOne = false)

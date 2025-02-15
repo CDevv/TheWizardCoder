@@ -6,7 +6,7 @@ using TheWizardCoder.Enums;
 
 namespace TheWizardCoder.Data
 {
-    public class MagicSpell : IApplyDictionary
+    public class MagicSpell
     {
         public string Name { get; private set; }
         public string Description { get; private set; }
@@ -15,19 +15,14 @@ namespace TheWizardCoder.Data
         public int ShopPrice { get; set; }
         public CharacterType TargetType { get; private set; }
 
-        public MagicSpell(Dictionary<string, Variant> dict)
+        public MagicSpell(string name, string description, int effect, int cost, int shopPrice, CharacterType targetType)
         {
-            ApplyDictionary(dict);
-        }
-
-        public void ApplyDictionary(Dictionary<string, Variant> dict)
-        {
-            Name = (string)dict["Name"];
-            Description = (string)dict["Description"];
-            Effect = (int)dict["Effect"];
-            Cost = (int)dict["Cost"];
-            ShopPrice = (int)dict["ShopPrice"];
-            TargetType = Enum.Parse<CharacterType>((string)dict["TargetType"]);
+            Name = name;
+            Description = description;
+            Effect = effect;
+            Cost = cost;
+            ShopPrice = shopPrice;
+            TargetType = targetType;
         }
     }
 }

@@ -45,7 +45,7 @@ namespace TheWizardCoder.Subdisplays
 			throw new NotImplementedException();
 		}
 
-		public void ShowDisplay(CharacterData character)
+		public void ShowDisplay(Character character)
 		{
 			portrait.Animation = character.Name;
 			name.Text = character.Name;

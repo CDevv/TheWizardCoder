@@ -162,7 +162,7 @@ namespace TheWizardCoder.Displays
 
 		private void OnCharacterPressed(bool isProtagonist, int allyIndex)
 		{
-			CharacterData character;
+			Character character;
 			if (isProtagonist)
 			{
 				character = global.PlayerData.Stats;

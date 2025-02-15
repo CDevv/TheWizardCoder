@@ -11,7 +11,7 @@ namespace TheWizardCoder.Subdisplays
 		[Export]
 		public PackedScene TextButtonTemplate { get; set; }
 
-		private CharacterData character;
+		private Character character;
 		private Button firstItem;
 		private AnimatedSprite2D portrait;
 		private Label name;
@@ -34,7 +34,7 @@ namespace TheWizardCoder.Subdisplays
 			pointsCost = GetNode<Label>("%MagicCost");
 		}
 
-		public void ShowDisplay(CharacterData character)
+		public void ShowDisplay(Character character)
 		{
 			this.character = character;
 			firstItem = null;

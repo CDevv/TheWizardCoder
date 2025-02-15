@@ -100,7 +100,7 @@ namespace TheWizardCoder.Abstractions
 
 			if (global.PlayerData.Allies.Count > 0)
 			{
-				foreach (CharacterData ally in global.PlayerData.Allies)
+				foreach (Character ally in global.PlayerData.Allies)
 				{
 					var allyCharacter = Player.AddAlly(ally.Name, true);
 					allyCharacter.PlayIdleAnimation(global.PlayerDirection);

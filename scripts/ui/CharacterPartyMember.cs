@@ -36,7 +36,7 @@ namespace TheWizardCoder.UI
 		{
 		}
 
-		public void ApplyData(CharacterData data)
+		public void ApplyData(Character data)
 		{
 			name.Text = data.Name;
 			sprite.Play(data.Name);

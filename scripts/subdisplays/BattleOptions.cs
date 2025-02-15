@@ -179,7 +179,7 @@ namespace TheWizardCoder.Subdisplays
 			UpdateDisplay(global.PlayerData.Stats);
 		}
 
-		public void UpdateDisplay(CharacterData characterData)
+		public void UpdateDisplay(Character characterData)
 		{
 			ClearContainers();
 
@@ -239,7 +239,7 @@ namespace TheWizardCoder.Subdisplays
 			return firstButton;
 		}
 
-		private void PopulateMagicSpells(CharacterData characterData)
+		private void PopulateMagicSpells(Character characterData)
 		{
 			for (int i = 0; i < characterData.MagicSpells.Count; i++)
 			{

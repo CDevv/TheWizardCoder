@@ -8,7 +8,7 @@ namespace TheWizardCoder.Data
 {
     public delegate void LeveledUpEventHandler();
 
-    public partial class CharacterData
+    public class Character
     {
         public event LeveledUpEventHandler LeveledUp;
 
@@ -16,7 +16,7 @@ namespace TheWizardCoder.Data
 
         public Global Global { get; set; }
 
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
         public int Health { get; set; }
         public int MaxHealth { get; set; }
         public int Points { get; set; }
@@ -31,7 +31,12 @@ namespace TheWizardCoder.Data
 
         private Dictionary<string, Variant> dict;
 
-        public CharacterData(Dictionary<string, Variant> dict, Global global)
+        public Character()
+        {
+
+        }
+
+        public Character(Dictionary<string, Variant> dict, Global global)
         {
             Global = global;
             this.dict = dict;
@@ -53,9 +58,9 @@ namespace TheWizardCoder.Data
             }
         }
 
-        public CharacterData Clone()
+        public Character Clone()
         {
-            CharacterData newData = new(this.dict, Global);
+            Character newData = new(this.dict, Global);
             return newData;
         }
 

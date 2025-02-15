@@ -15,12 +15,12 @@ namespace TheWizardCoder.Data
         public int Turns { get; set; }
         public int Effect { get; set; }
 
-        public BattleEffect(string[] arr)
+        public BattleEffect(BattleEffectType action, CharacterType targetType, int turns, int effect)
         {
-            Action = Enum.Parse<BattleEffectType>(arr[0]);
-            TargetType = Enum.Parse<CharacterType>(arr[1]);
-            Turns = int.Parse(arr[2]);
-            Effect = int.Parse(arr[3]);
+            Action = action;
+            TargetType = targetType;
+            Turns = turns;
+            Effect = effect;
 
             if (Turns < 0)
             {

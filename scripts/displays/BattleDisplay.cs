@@ -96,7 +96,7 @@ namespace TheWizardCoder.Displays
 			Allies.AddCharacter(global.PlayerData.Stats);
 			if (global.PlayerData.Allies.Count > 0)
 			{
-				foreach (CharacterData ally in global.PlayerData.Allies)
+				foreach (Character ally in global.PlayerData.Allies)
 				{
 					Allies.AddCharacter(ally);
 				}
@@ -105,7 +105,7 @@ namespace TheWizardCoder.Displays
 			//Add enemies
 			foreach (string enemyName in enemies)
 			{
-				CharacterData newEnemy = global.Characters[enemyName];
+				Character newEnemy = global.Characters[enemyName];
 				Enemies.AddCharacter(newEnemy);
 			}
 
@@ -129,7 +129,7 @@ namespace TheWizardCoder.Displays
 		{
 			for (int i = 0; i < Allies.Characters.Count; i++)
 			{
-				CharacterData character = Allies.Characters[i];
+				Character character = Allies.Characters[i];
 				if (character.Health <= 0)
 				{
 					character.Health = 5;

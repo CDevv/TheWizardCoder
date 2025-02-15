@@ -8,12 +8,12 @@ namespace TheWizardCoder.Data
         public int Target { get; set; }
         public CharacterAction Action { get; set; }
         public int ActionModifier { get; set; }
-        public CharacterData Character { get; set; }
+        public Character Character { get; set; }
         public int InternalIndex { get; private set; }
         public bool HasBattleEffect { get; set; }
         public BattleEffect BattleEffect { get; set; }
 
-        public CharacterBattleState(CharacterData character, int internalIndex)
+        public CharacterBattleState(Character character, int internalIndex)
         {
             Target = 0;
             Action = CharacterAction.Attack;
@@ -23,6 +23,11 @@ namespace TheWizardCoder.Data
             InternalIndex = internalIndex;
 
             HasBattleEffect = false;
+
+            if (internalIndex < 0)
+            {
+                throw new ArgumentException("InternalIndex cannot be negative.");
+            }
         }
 
         public void Reset()

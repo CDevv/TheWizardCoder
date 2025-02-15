@@ -39,7 +39,7 @@ namespace TheWizardCoder.UI
 			effectTurns = GetNode<Label>("EffectTurns");
 		}
 
-        public void ApplyData(CharacterData data)
+        public void ApplyData(Character data)
         {
             SetNameText(data.Name);
             SetHealthValue(data.Health, data.MaxHealth);

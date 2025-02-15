@@ -16,7 +16,7 @@ namespace TheWizardCoder.Abstractions
 		[Export]
 		public BattleOptions BattleOptions { get; set; }
 
-		public List<CharacterData> Characters { get; private set; } = new();
+		public List<Character> Characters { get; private set; } = new();
 		public List<CharacterBattleState> BattleStates { get; set; } = new();
 		public int CurrentCharacter { get; set; } = 0;
 		protected Global global;
@@ -26,7 +26,7 @@ namespace TheWizardCoder.Abstractions
 			global = GetNode<Global>("/root/Global");
 		}
 
-		public virtual void AddCharacter(CharacterData character)
+		public virtual void AddCharacter(Character character)
 		{
 			int currentIndex = Characters.Count;
 
