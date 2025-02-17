@@ -42,6 +42,27 @@ Narrator: A sword on a stand. Try pulling it out?
 	Narrator: You decide to not try to pull it out.
 => END!
 
+~ cyanberry_basket
+if GetPlayerData("GotGeraldHouseCyanberry"):
+	Narrator: You already got something from here.
+else:
+	Narrator: A basket full of cyanberries. Get one?
+	- Yes
+		Narrator: You received a Cyanberry.
+		do AddToInventory("Cyanberry")
+		do SetPlayerData("GotGeraldHouseCyanberry", true)
+	- No
+		Narrator: Maybe stealing isn't a good deed.
+=> END!
+
+~ bread_bookshelf
+Narrator: A bookshelf that is seemingly used for storing bread.
+=> END!
+
+~ magic_book_table
+Narrator: On top of this table is a book titled "A Guide to Arcane Arts". Only the first few pages are read.
+=> END!
+
 ~ vindi_intro_1
 Timothy: [#portrait=1] So, how was the fishing?
 Gregory: [#portrait=1] Eh, I got almost nothing, mate!
@@ -269,4 +290,9 @@ else:
 	Nolan: [#portrait=0] Yeah.. sure!
 	
 	do SetPlayerData("HasMetCraig", true)
+=> END!
+
+~ theodore_point
+Theodore: [#portrait=0] Can't walk over there unfortunately. 
+Theodore: [#portrait=0] Like, what is that large pile of snow? 
 => END!

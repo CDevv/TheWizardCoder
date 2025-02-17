@@ -93,6 +93,8 @@ namespace TheWizardCoder.Data
         public bool DefeatedQuestEnemy1 { get; set; } = false;
         public bool DefeatedQuestEnemy2 { get; set; } = false;
         public bool DefeatedQuestEnemy3 { get; set; } = false;
+        public bool GotGeraldHouseCyanberry { get; set; } = false;
+        public bool CompletedAllVindiQuests { get; set; } = false;
 
         public SaveFileData(Character stats)
         {

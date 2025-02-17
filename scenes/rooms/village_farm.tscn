@@ -307,12 +307,13 @@ libraries = {
 }
 
 [node name="Camera" parent="." index="6"]
+position = Vector2(1013, 928)
 limit_right = 1728
 limit_bottom = 1280
 
 [node name="Player" parent="." index="8" instance=ExtResource("2_6625t")]
 z_index = 1
-position = Vector2(304, 72)
+position = Vector2(320, 176)
 
 [node name="TileMap" type="TileMap" parent="." index="9"]
 y_sort_enabled = true
@@ -400,7 +401,7 @@ shape = SubResource("RectangleShape2D_gwoj0")
 
 [node name="Keenelm" parent="." index="20" instance=ExtResource("8_qga0w")]
 z_index = 1
-position = Vector2(1128, 832)
+position = Vector2(1128, 816)
 DialogueResource = ExtResource("6_eeq7a")
 DialogueTitle = "keenelm_point"
 

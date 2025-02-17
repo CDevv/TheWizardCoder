@@ -32,6 +32,7 @@ limit_bottom = 1120
 
 [node name="Player" parent="." index="15" instance=ExtResource("2_wlgji")]
 z_index = 1
+position = Vector2(304, 384)
 
 [node name="TileMap" type="TileMap" parent="." index="16"]
 y_sort_enabled = true
@@ -47,7 +48,6 @@ layer_1/tile_data = PackedInt32Array(917510, 196608, 3, 983046, 196608, 3, 10485
 
 [node name="Craig" parent="." index="17" instance=ExtResource("4_4hrn8")]
 z_index = 1
-y_sort_enabled = false
 position = Vector2(352, 576)
 DialogueResource = ExtResource("5_jqg78")
 DialogueTitle = "craig_point"

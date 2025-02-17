@@ -17,8 +17,10 @@ namespace TheWizardCoder.Interactables
 		public string ItemName { get; set; }
 		[Export]
 		public int GoldAmount { get; set; }
+		[Export]
+		public bool HideChestSprite { get; set; } = false;
 
-		private AnimatedSprite2D sprite;
+        private AnimatedSprite2D sprite;
 
 		public override void _Ready()
 		{
@@ -30,7 +32,12 @@ namespace TheWizardCoder.Interactables
 			{
 				DisabledState(true);
 			}
-		}
+
+            if (HideChestSprite)
+            {
+				sprite.Hide();
+            }
+        }
 
 		public override void Action()
 		{
