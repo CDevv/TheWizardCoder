@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using GdUnit4;
+﻿using GdUnit4;
 using TheWizardCoder.Data;
 using TheWizardCoder.Enums;
 using static GdUnit4.Assertions;
@@ -67,6 +61,21 @@ namespace TheWizardCoder.Tests
             {
                 item.MakeSellable(price);
             });
+        }
+
+        [TestCase("Display", "CodeMessage", "GoUp();")]
+        [TestCase("PlayerMethod", "EquipItem", "Fishing Rod")]
+        [TestCase("Display", "CodeMessage", "GoRight();")]
+        [TestCase("Defense", "Ally", "3")]
+        public void AddAdditionalDataSuccess(string item1, string item2, string item3)
+        {
+            Item item = new("Test Item", "Test Description", 10, ItemType.Key);
+
+            string[] additionalData = { item1, item2, item3 };
+            item.AddAdditionalData(additionalData);
+
+            AssertBool(item.AdditionalData.Length == 3).IsTrue();
+            AssertArray(item.AdditionalData).ContainsExactly(additionalData);
         }
     }
 }

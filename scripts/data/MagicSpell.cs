@@ -23,6 +23,21 @@ namespace TheWizardCoder.Data
             Cost = cost;
             ShopPrice = shopPrice;
             TargetType = targetType;
+
+            if (Effect < 0)
+            {
+                throw new ArgumentException("Effect cannot be negative.");
+            }
+
+            if (Cost < 0)
+            {
+                throw new ArgumentException("Cost cannot be negative.");
+            }
+
+            if (ShopPrice < 0)
+            {
+                throw new ArgumentException("ShopPrice cannot be negative.");
+            }
         }
     }
 }
