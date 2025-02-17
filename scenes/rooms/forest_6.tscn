@@ -33,16 +33,16 @@ layer_1/tile_data = PackedInt32Array(458752, 1245185, 5, 524288, 1245185, 5, 589
 
 [node name="Player" parent="." index="13" instance=ExtResource("3_wyday")]
 z_index = 1
-position = Vector2(2168, 528)
+position = Vector2(3136, 148)
 
 [node name="Section5Warper" parent="." index="14" instance=ExtResource("4_nck5e")]
 z_index = 1
 position = Vector2(352, 1152)
 scale = Vector2(12, 1)
 TargetRoomName = "forest_5"
-TargetLocation = "Forest6Marker"
+TargetLocation = "Section6Marker"
 
-[node name="Section7Marker" parent="." index="15" instance=ExtResource("4_nck5e")]
+[node name="Section7Warper" parent="." index="15" instance=ExtResource("4_nck5e")]
 z_index = 1
 position = Vector2(3136, -16)
 scale = Vector2(12, 1)
@@ -63,7 +63,7 @@ position = Vector2(352, 1072)
 [node name="SidePathMarker" type="Marker2D" parent="." index="18"]
 position = Vector2(3808, 1080)
 
-[node name="Section7Marker2" type="Marker2D" parent="." index="19"]
+[node name="Section7Marker" type="Marker2D" parent="." index="19"]
 position = Vector2(3136, 40)
 
 [node name="GroundEnemy" parent="." index="22" instance=ExtResource("6_ac12k")]

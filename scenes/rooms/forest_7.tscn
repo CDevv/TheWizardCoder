@@ -31,10 +31,10 @@ z_index = 1
 position = Vector2(64, 592)
 
 [node name="Section6Warper" parent="." index="14" instance=ExtResource("4_6jdm0")]
-position = Vector2(736, 1168)
+position = Vector2(736, 1184)
 scale = Vector2(12, 1)
 TargetRoomName = "forest_6"
-TargetLocation = "Forest7Marker"
+TargetLocation = "Section7Marker"
 
 [node name="SidePathWarper" parent="." index="15" instance=ExtResource("4_6jdm0")]
 position = Vector2(-16, 616)

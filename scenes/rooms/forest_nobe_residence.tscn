@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cbqxxfyq2suom"]
+[gd_scene load_steps=32 format=3 uid="uid://cbqxxfyq2suom"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_4vyfw"]
 [ext_resource type="TileSet" uid="uid://b5gmhkessquy0" path="res://tilesets/forest_environment.tres" id="2_px0j1"]
@@ -178,6 +178,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_uglda"]
+a = Vector2(720, 1200)
+b = Vector2(640, 1200)
+
 [node name="ForestNobeResidence" instance=ExtResource("1_4vyfw")]
 y_sort_enabled = true
 script = ExtResource("2_yo7nr")
@@ -200,7 +204,7 @@ layer_1/tile_data = PackedInt32Array(1376256, 1310721, 5, 1441792, 1310721, 3, 1
 
 [node name="Player" parent="." index="13" instance=ExtResource("3_c133m")]
 z_index = 1
-position = Vector2(2560, 712)
+position = Vector2(704, 800)
 SnippetsResource = null
 
 [node name="Warper" parent="." index="14" instance=ExtResource("4_i61hm")]
@@ -260,3 +264,9 @@ position = Vector2(1808, 440)
 scale = Vector2(2, 1)
 DialogueResource = ExtResource("6_lkysj")
 DialogueTitle = "nobe_cabin"
+
+[node name="RoomCollision" type="StaticBody2D" parent="." index="27"]
+z_index = 2
+
+[node name="Wall1" type="CollisionShape2D" parent="RoomCollision" index="0"]
+shape = SubResource("SegmentShape2D_uglda")

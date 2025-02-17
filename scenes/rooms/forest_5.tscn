@@ -44,4 +44,4 @@ PlayerDirection = 1
 position = Vector2(64, 880)
 
 [node name="Section6Marker" type="Marker2D" parent="." index="17"]
-position = Vector2(928, 32)
+position = Vector2(928, 80)
