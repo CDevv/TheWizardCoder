@@ -90,6 +90,7 @@ namespace TheWizardCoder.Displays
 			{
 				AddItem(item);
 			}
+
 			if (useInventory)
 			{
 				foreach (string item in global.PlayerData.Inventory)

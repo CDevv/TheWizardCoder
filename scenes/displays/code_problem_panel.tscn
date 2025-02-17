@@ -109,12 +109,11 @@ offset_bottom = 184.0
 mouse_filter = 2
 theme = ExtResource("2_cm4ur")
 theme_override_font_sizes/font_size = 16
-text = "int n = 
-
-while (			   )
+text = "int i = 
+while (i != HousesCount)
 {
-	CutTree();
-	
+
+	i++;
 }"
 editable = false
 context_menu_enabled = false
