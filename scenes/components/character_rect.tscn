@@ -92,7 +92,7 @@ offset_bottom = 23.0
 visible = false
 position = Vector2(8, 20)
 sprite_frames = ExtResource("7_un6ef")
-animation = &"effect-"
+animation = &"effect+"
 
 [node name="EffectTurns" type="Label" parent="."]
 visible = false

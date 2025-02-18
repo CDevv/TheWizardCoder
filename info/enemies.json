@@ -29,8 +29,11 @@
 		"AttackPoints": 10,
 		"DefensePoints": 5,
 		"AgilityPoints": 5,
-		"MagicSpells": [],
+		"MagicSpells": ["Slow-down!"],
 		"Type": "Enemy",
+		"Behaviour": {
+			"25": ["Magic"]
+		}
 	},
 	"Dummy": {
 		"Health": 20,

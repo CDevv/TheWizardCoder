@@ -28,6 +28,7 @@ namespace TheWizardCoder.Data
         public CharacterType Type { get; set; }
         public int Level { get; set; } = 1;
         public int LevelPoints { get; set; }
+        public Dictionary<int, Array<CharacterAction>> Behaviour { get; set; }
 
         private Dictionary<string, Variant> dict;
 
@@ -55,6 +56,36 @@ namespace TheWizardCoder.Data
                 Type = Enum.Parse<CharacterType>((string)dict["Type"]);
                 Level = 1;
                 LevelPoints = 0;
+
+                if (Type == CharacterType.Enemy)
+                {
+                    if (dict.ContainsKey("Behaviour"))
+                    {
+                        FetchBehaviour(dict["Behaviour"]);
+                    }
+                }
+            }
+        }
+
+        private void FetchBehaviour(Variant variant)
+        {
+            Behaviour = new();
+            var dict = (Dictionary<string, Variant>)variant;
+
+            foreach (var item in dict)
+            {
+                int healthLevel = int.Parse(item.Key);
+
+                var possibleActionsStrings = (Array<string>)item.Value;
+                Array<CharacterAction> possibleActions = new Array<CharacterAction>();
+
+                foreach (var actionString in possibleActionsStrings)
+                {
+                    CharacterAction action = Enum.Parse<CharacterAction>(actionString);
+                    possibleActions.Add(action);
+                }
+
+                Behaviour[healthLevel] = possibleActions;
             }
         }
 
@@ -119,6 +150,43 @@ namespace TheWizardCoder.Data
         {
             MaxPoints = value;
             Points = value;
+        }
+
+        public CharacterAction ChooseBehaviour()
+        {
+            if (Behaviour == null)
+            {
+                return CharacterAction.Attack;
+            }
+            else
+            {
+                bool found = false;
+                System.Collections.Generic.KeyValuePair<int, Array<CharacterAction>> pair = new();
+
+                foreach (var item in Behaviour)
+                {
+                    if (Health <= item.Key)
+                    {
+                        found = true;
+                        pair = item;
+                    }
+                }
+
+                if (found)
+                {
+                    CharacterAction chosenAction = pair.Value.PickRandom();
+                    return chosenAction;
+                }
+                else
+                {
+                    return CharacterAction.Attack;
+                }
+            }
+        }
+
+        public string GetRandomMagicSpell()
+        {
+            return MagicSpells.PickRandom();
         }
     }
 }

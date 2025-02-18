@@ -93,9 +93,17 @@ namespace TheWizardCoder.Utils
                 int cost = (int)dict["Cost"];
                 int shopPrice = (int)dict["ShopPrice"];
                 CharacterType targetType = Enum.Parse<CharacterType>((string)dict["TargetType"]);
+                MagicSpellType spellType = Enum.Parse<MagicSpellType>((string)dict["Type"]);
 
-                MagicSpell magicSpell = new MagicSpell(name, description, effect, cost, shopPrice, targetType);
-				magicSpells.Add(pair.Key, magicSpell);
+                MagicSpell magicSpell = new MagicSpell(name, description, effect, cost, shopPrice, targetType, spellType);
+
+                if (magicSpell.SpellType == MagicSpellType.ApplyBattleEffect)
+                {
+                    string[] additionalData = (string[])dict["BattleEffect"];
+                    magicSpell.SetBattleEffectData(additionalData);
+                }
+
+                magicSpells.Add(pair.Key, magicSpell);
 			}
 
             return magicSpells;

@@ -14,8 +14,11 @@ namespace TheWizardCoder.Data
         public int Cost { get; private set; }
         public int ShopPrice { get; set; }
         public CharacterType TargetType { get; private set; }
+        public MagicSpellType SpellType { get; set; }
+        public bool HasBattleEffect { get; set; } = false;
+        public BattleEffect BattleEffect { get; set; }
 
-        public MagicSpell(string name, string description, int effect, int cost, int shopPrice, CharacterType targetType)
+        public MagicSpell(string name, string description, int effect, int cost, int shopPrice, CharacterType targetType, MagicSpellType type)
         {
             Name = name;
             Description = description;
@@ -23,6 +26,9 @@ namespace TheWizardCoder.Data
             Cost = cost;
             ShopPrice = shopPrice;
             TargetType = targetType;
+            SpellType = type;
+
+            GD.Print(SpellType);
 
             if (Effect < 0)
             {
@@ -38,6 +44,21 @@ namespace TheWizardCoder.Data
             {
                 throw new ArgumentException("ShopPrice cannot be negative.");
             }
+        }
+
+        public void SetBattleEffectData(string[] data)
+        {
+            HasBattleEffect = true;
+
+            BattleEffectType action = Enum.Parse<BattleEffectType>(data[0]);
+            CharacterType targetType = TargetType;
+            int turns = int.Parse(data[1]);
+            int effect = int.Parse(data[2]);
+            bool isNegative = bool.Parse(data[3]);
+
+            BattleEffect = new(action, targetType, turns, effect, isNegative);
+
+            GD.Print(BattleEffect);
         }
     }
 }

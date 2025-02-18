@@ -122,18 +122,35 @@ namespace TheWizardCoder.Abstractions
 
 		public async Task ApplyBattleEffect(int targetIndex, BattleEffect effect)
 		{
-			BattleStates[targetIndex].BattleEffect = effect;
+            if (BattleStates[targetIndex].HasBattleEffect)
+            {
+				return;
+            }
+
+            BattleStates[targetIndex].BattleEffect = effect;
 			BattleStates[targetIndex].HasBattleEffect = true;
+			int multiplier = effect.IsNegative ? -1 : 1;
 
 			GD.Print(effect.Effect);
 
 			switch (effect.Action)
 			{
 				case Enums.BattleEffectType.Attack:
-					Characters[targetIndex].AttackPoints += effect.Effect;
+					Characters[targetIndex].AttackPoints += effect.Effect * multiplier;
 					break;
 				case Enums.BattleEffectType.Defense:
-					Characters[targetIndex].DefensePoints += effect.Effect;
+					Characters[targetIndex].DefensePoints += effect.Effect * multiplier;
+					break;
+				case Enums.BattleEffectType.Mana:
+					Characters[targetIndex].MaxPoints += effect.Effect * multiplier;
+					Characters[targetIndex].Points = Characters[targetIndex].MaxPoints;
+                    break;
+				case Enums.BattleEffectType.Speed:
+					Characters[targetIndex].AgilityPoints += effect.Effect * multiplier;
+					break;
+				case Enums.BattleEffectType.Health:
+					Characters[targetIndex].MaxHealth += effect.Effect * multiplier;
+					Characters[targetIndex].Health = Characters[targetIndex].MaxHealth;
 					break;
 			}
 
@@ -145,18 +162,26 @@ namespace TheWizardCoder.Abstractions
 		public void RemoveBattleEffect(int targetIndex)
 		{
 			BattleEffect effect = BattleStates[targetIndex].BattleEffect;
+            int multiplier = effect.IsNegative ? 1 : -1;
 
             switch (effect.Action)
             {
                 case Enums.BattleEffectType.Attack:
-                    Characters[targetIndex].AttackPoints -= effect.Effect;
+                    Characters[targetIndex].AttackPoints += effect.Effect * multiplier;
                     break;
                 case Enums.BattleEffectType.Defense:
-                    Characters[targetIndex].DefensePoints -= effect.Effect;
+                    Characters[targetIndex].DefensePoints += effect.Effect * multiplier;
                     break;
+				case Enums.BattleEffectType.Speed:
+					Characters[targetIndex].AgilityPoints += effect.Effect * multiplier;
+					break;
+				case Enums.BattleEffectType.Health:
+					Characters[targetIndex].MaxHealth += effect.Effect * multiplier;
+					break;
+				case Enums.BattleEffectType.Mana:
+					Characters[targetIndex].MaxPoints += effect.Effect * multiplier;
+					break;
             }
-
-			GD.Print(Characters[targetIndex].DefensePoints);
 
 			BattleStates[targetIndex].BattleEffect = null;
 			BattleStates[targetIndex].HasBattleEffect = false;

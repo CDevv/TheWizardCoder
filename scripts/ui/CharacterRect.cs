@@ -88,11 +88,9 @@ namespace TheWizardCoder.UI
 			background.Modulate = invisibleColor;
 		}
 
-		public void ShowEffectIndicator(BattleEffectType type, int effect)
+		public void ShowEffectIndicator(BattleEffectType type, int effect, bool isNegative)
 		{
-			effectIndicator.Frame = (int)type;
-
-            if (effect > 0)
+            if (!isNegative)
             {
 				effectIndicator.Animation = "effect+";
             }
@@ -100,6 +98,7 @@ namespace TheWizardCoder.UI
             {
 				effectIndicator.Animation = "effect-";
             }
+            effectIndicator.Frame = (int)type;
 
             effectIndicator.Show();
 			effectTurns.Show();

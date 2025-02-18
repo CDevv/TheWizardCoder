@@ -191,7 +191,7 @@ MeetGertrude();
 		"Type": "Magic",
 		"Effect": 15,
 		"Price": 25,
-		"AdditionalData": ["Defense","Ally",3,7]
+		"AdditionalData": ["Defense","Ally",3,7,"false"]
 	},
 	"Magi-hibble":{
 		"Description":"A magical drink that gives 4 MP to an ally",

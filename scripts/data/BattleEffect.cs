@@ -14,13 +14,15 @@ namespace TheWizardCoder.Data
         public CharacterType TargetType { get; set; }
         public int Turns { get; set; }
         public int Effect { get; set; }
+        public bool IsNegative { get; set; } = false;
 
-        public BattleEffect(BattleEffectType action, CharacterType targetType, int turns, int effect)
+        public BattleEffect(BattleEffectType action, CharacterType targetType, int turns, int effect, bool isNegative)
         {
             Action = action;
             TargetType = targetType;
             Turns = turns;
             Effect = effect;
+            IsNegative = isNegative;
 
             if (Turns < 0)
             {

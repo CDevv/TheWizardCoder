@@ -2,11 +2,13 @@ using Godot;
 using Godot.Collections;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading.Tasks;
 using TheWizardCoder.Abstractions;
 using TheWizardCoder.Autoload;
 using TheWizardCoder.Data;
 using TheWizardCoder.Displays;
+using TheWizardCoder.Enums;
 
 namespace TheWizardCoder.UI
 {
@@ -84,11 +86,95 @@ namespace TheWizardCoder.UI
 			}
 
 			int targetIndex = (int)(GD.Randi() % Allies.Characters.Count);
-			string enemyName = Characters[index].Name;
+			string targetName = Allies.Characters[targetIndex].Name;
 
-			BattleOptions.ShowInfoLabel($"{enemyName} attacks {Allies.Characters[targetIndex].Name}!");
-			await Allies.DamageCharacter(targetIndex, Characters[index].AttackPoints);
+            Character currentEnemy = Characters[index];
+			string enemyName = currentEnemy.Name;
+
+			CharacterAction action = currentEnemy.ChooseBehaviour();
+
+			switch (action)
+			{
+				case CharacterAction.Attack:
+                    BattleOptions.ShowInfoLabel($"{enemyName} attacks {targetName}!");
+                    await Allies.DamageCharacter(targetIndex, currentEnemy.AttackPoints);
+
+                    break;
+				case CharacterAction.Defend:
+					break;
+				case CharacterAction.Items:
+					break;
+				case CharacterAction.Magic:
+					string currentMagicSpellName = currentEnemy.GetRandomMagicSpell();
+                    MagicSpell currentMagicSpell = global.MagicSpells[currentMagicSpellName];
+
+					
+
+					switch (currentMagicSpell.TargetType)
+					{
+						case CharacterType.Enemy:
+							await OnMagicSpellEnemyTarget(index, targetIndex, currentMagicSpell);
+
+							break;
+						case CharacterType.Ally:
+							await OnMagicSpellAllyTarget(index, targetIndex, currentMagicSpell);
+
+							break;
+					}
+
+					break;
+				default:
+					break;
+			}
 		}
+
+		private async Task OnMagicSpellAllyTarget(int currentEnemyIndex, int targetIndex, MagicSpell spell)
+		{
+            string targetName = Allies.Characters[targetIndex].Name;
+
+            Character currentEnemy = Characters[currentEnemyIndex];
+            string enemyName = currentEnemy.Name;
+
+            switch (spell.SpellType)
+			{
+				case MagicSpellType.Attack:
+                    break;
+				case MagicSpellType.Heal:
+					break;
+				case MagicSpellType.ApplyBattleEffect:
+					break;
+			}
+		}
+
+		private async Task OnMagicSpellEnemyTarget(int currentEnemyIndex, int targetIndex, MagicSpell spell)
+		{
+            string targetName = Allies.Characters[targetIndex].Name;
+
+            Character currentEnemy = Characters[currentEnemyIndex];
+            string enemyName = currentEnemy.Name;
+
+            BattleOptions.ShowInfoLabel($"{enemyName} casted {spell.Name} on {targetName}!");
+            switch (spell.SpellType)
+            {
+                case MagicSpellType.Attack:
+                    await Allies.DamageCharacter(targetIndex, spell.Effect);
+
+                    break;
+                case MagicSpellType.Heal:
+                    break;
+                case MagicSpellType.ApplyBattleEffect:
+                    if (Allies.BattleStates[targetIndex].HasBattleEffect)
+                    {
+                        await Allies.DamageCharacter(targetIndex, spell.Effect);
+                    }
+                    else
+                    {
+                        await Allies.ApplyBattleEffect(targetIndex, spell.BattleEffect);
+                    }
+
+                    break;
+            }
+        }
 
 		public override void OnNextCharacterPassed()
         {

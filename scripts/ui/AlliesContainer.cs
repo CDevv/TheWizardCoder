@@ -150,8 +150,9 @@ namespace TheWizardCoder.UI
                             CharacterType targetType = Enum.Parse<CharacterType>(item.AdditionalData[1]);
                             int turns = int.Parse(item.AdditionalData[2]);
                             int effect = int.Parse(item.AdditionalData[3]);
+							bool isNegative = bool.Parse(item.AdditionalData[4]);
 
-                            BattleEffect battleEffect = new BattleEffect(action, targetType, turns, effect);
+                            BattleEffect battleEffect = new BattleEffect(action, targetType, turns, effect, isNegative);
 							await ApplyBattleEffect(state.Target, battleEffect);
 
 							break;
@@ -256,7 +257,7 @@ namespace TheWizardCoder.UI
 
 			BattleEffect battleEffect = BattleStates[index].BattleEffect;
 
-            alliesCards[index].ShowEffectIndicator(battleEffect.Action, battleEffect.Effect);
+            alliesCards[index].ShowEffectIndicator(battleEffect.Action, battleEffect.Effect, battleEffect.IsNegative);
 			alliesCards[index].UpdateTurnsLabel(battleEffect.Turns);
         }
 
