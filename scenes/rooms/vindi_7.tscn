@@ -13,6 +13,21 @@
 [ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/components/code_problem_point.tscn" id="10_o5psq"]
 [ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="11_oye6h"]
 
+[sub_resource type="Animation" id="Animation_20cih"]
+resource_name = "hide_glitch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Glitch:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_yxbie"]
 resource_name = "puzzle_solved"
 length = 0.5
@@ -27,21 +42,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_20cih"]
-resource_name = "hide_glitch"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Glitch:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rfem3"]
@@ -215,6 +215,3 @@ texture = ExtResource("11_oye6h")
 z_index = 3
 position = Vector2(1352, 848)
 texture = ExtResource("11_oye6h")
-
-[connection signal="ProblemSolved" from="CodeProblemPanel" to="." method="OnSubmitted" binds= [true]]
-[connection signal="Submitted" from="CodeProblemPanel" to="." method="OnSubmitted" binds= [false]]

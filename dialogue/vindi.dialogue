@@ -59,6 +59,10 @@ else:
 Narrator: A bookshelf that is seemingly used for storing bread.
 => END!
 
+~ house_oven
+Narrator: A conveniently placed oven for baking bread.
+=> END!
+
 ~ magic_book_table
 Narrator: On top of this table is a book titled "A Guide to Arcane Arts". Only the first few pages are read.
 => END!

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2dpwk6p1w706"
-path="res://.godot/imported/juniorbug.png-b4afe3130f7a719a86df857d0b302371.ctex"
+uid="uid://41m3wsv2nxbs"
+path="res://.godot/imported/theodore.png-fc735cb141ddb6ac5179e77fbbac59b0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/juniorbug.png"
-dest_files=["res://.godot/imported/juniorbug.png-b4afe3130f7a719a86df857d0b302371.ctex"]
+source_file="res://assets/characters/portraits/theodore.png"
+dest_files=["res://.godot/imported/theodore.png-fc735cb141ddb6ac5179e77fbbac59b0.ctex"]
 
 [params]
 
