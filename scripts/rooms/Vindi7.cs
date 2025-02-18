@@ -3,15 +3,23 @@ using System;
 using System.Collections.Generic;
 using TheWizardCoder.Abstractions;
 using TheWizardCoder.Data;
+using TheWizardCoder.Interactables;
 
 public partial class Vindi7 : BaseRoom
 {
     private Vector2I[] houseTilePositions;
     private Vector2I houseAtlas;
+    private CollisionShape2D questWall;
+    private Warper theodoreHouseWarper;
+    private DialoguePoint theodoreHouseDialogue;
 
     public override void OnReady()
     {
         base.OnReady();
+
+        questWall = GetNode<CollisionShape2D>("%QuestWall");
+        theodoreHouseWarper = GetNode<Warper>("TheodoreWarper");
+        theodoreHouseDialogue = GetNode<DialoguePoint>("TheodoreHouseDialogue");
 
         houseTilePositions = new Vector2I[6];
         houseTilePositions[0] = new Vector2I(9, 25);
@@ -27,6 +35,10 @@ public partial class Vindi7 : BaseRoom
         {
             FixHouses();
             AnimationPlayer.Play("hide_glitch");
+            theodoreHouseWarper.Active = true;
+            theodoreHouseDialogue.Active = false;
+
+            RemoveQuestWallCollision();
         }
     }
 
@@ -71,10 +83,9 @@ public partial class Vindi7 : BaseRoom
             if (solved)
             {
                 AnimationPlayer.Play("puzzle_solved");
-            }
-            else
-            {
-                //ResetHouses();
+                theodoreHouseWarper.Active = true;
+                theodoreHouseDialogue.Active = false;
+                RemoveQuestWallCollision();
             }
         }
     }
@@ -94,6 +105,22 @@ public partial class Vindi7 : BaseRoom
         {
             GetNode<Sprite2D>($"HouseGlitch{i}").Hide();
             TileMap.SetCell(0, houseTilePositions[i], 0, houseAtlas);
+        }
+    }
+
+    private void RemoveQuestWallCollision()
+    {
+        if (global.PlayerData.FishingRodSolved &&
+            global.PlayerData.VindiTreeSolved &&
+            global.PlayerData.HasFinishedCraigQuest &&
+            global.PlayerData.VindiHousesPuzzle)
+        {
+            global.PlayerData.CompletedAllVindiQuests = true;
+        }
+
+        if (global.PlayerData.CompletedAllVindiQuests)
+        {
+            questWall.Disabled = true;
         }
     }
 }

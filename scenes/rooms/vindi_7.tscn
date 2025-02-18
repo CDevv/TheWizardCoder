@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ccfivysfrw04h"]
+[gd_scene load_steps=19 format=3 uid="uid://ccfivysfrw04h"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_50tq3"]
 [ext_resource type="Script" path="res://scripts/rooms/Vindi7.cs" id="2_7rtrx"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://hxmst0tc6gbs" path="res://assets/ui/area_border.png" id="9_k1p0f"]
 [ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/components/code_problem_point.tscn" id="10_o5psq"]
 [ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="11_oye6h"]
+[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="13_oc5s0"]
 
 [sub_resource type="Animation" id="Animation_20cih"]
 resource_name = "hide_glitch"
@@ -72,8 +73,7 @@ limit_bottom = 992
 
 [node name="Player" parent="." index="15" instance=ExtResource("2_8o435")]
 z_index = 1
-position = Vector2(752, 736)
-SnippetsResource = null
+position = Vector2(688, 744)
 
 [node name="TileMap" type="TileMap" parent="." index="16"]
 y_sort_enabled = true
@@ -110,21 +110,42 @@ scale = Vector2(10, 1)
 TargetRoomName = "vindi_8"
 TargetLocation = "Section7Marker"
 
-[node name="Section5Marker" type="Marker2D" parent="." index="20"]
+[node name="TheodoreWarper" parent="." index="20" instance=ExtResource("4_uic8l")]
+z_index = 3
+position = Vector2(848, 528)
+TargetRoomName = "theodore_house"
+TargetLocation = "EnterMarker"
+PlayerDirection = 1
+Active = false
+
+[node name="SigbertWarper" parent="." index="21" instance=ExtResource("4_uic8l")]
+z_index = 3
+position = Vector2(1040, 176)
+TargetRoomName = "sigbert_house"
+TargetLocation = "EnterMarker"
+PlayerDirection = 1
+
+[node name="Section5Marker" type="Marker2D" parent="." index="22"]
 position = Vector2(32, 704)
 
-[node name="Section8Marker" type="Marker2D" parent="." index="21"]
+[node name="Section8Marker" type="Marker2D" parent="." index="23"]
 position = Vector2(640, 968)
 
-[node name="Section10Marker" type="Marker2D" parent="." index="22"]
+[node name="Section10Marker" type="Marker2D" parent="." index="24"]
 position = Vector2(1792, 720)
 
-[node name="RoomCollision" type="StaticBody2D" parent="." index="23"]
+[node name="TheodoreMarker" type="Marker2D" parent="." index="25"]
+position = Vector2(848, 576)
+
+[node name="SigbertMarker" type="Marker2D" parent="." index="26"]
+position = Vector2(1040, 216)
+
+[node name="RoomCollision" type="StaticBody2D" parent="." index="27"]
 
 [node name="Wall" type="CollisionShape2D" parent="RoomCollision" index="0"]
 shape = SubResource("SegmentShape2D_x6u5b")
 
-[node name="QuestCollision" type="StaticBody2D" parent="." index="24"]
+[node name="QuestCollision" type="StaticBody2D" parent="." index="28"]
 z_index = 3
 
 [node name="QuestWall" type="CollisionShape2D" parent="QuestCollision" index="0"]
@@ -132,15 +153,15 @@ unique_name_in_owner = true
 position = Vector2(1655.5, 699)
 shape = SubResource("RectangleShape2D_mu6ue")
 
-[node name="SnowParticles" parent="." index="26" instance=ExtResource("5_p5ogs")]
+[node name="SnowParticles" parent="." index="30" instance=ExtResource("5_p5ogs")]
 z_index = 3
 position = Vector2(480, 0)
 
-[node name="SnowParticles2" parent="." index="27" instance=ExtResource("5_p5ogs")]
+[node name="SnowParticles2" parent="." index="31" instance=ExtResource("5_p5ogs")]
 z_index = 3
 position = Vector2(1168, 0)
 
-[node name="Theodore" parent="." index="28" instance=ExtResource("6_arpta")]
+[node name="Theodore" parent="." index="32" instance=ExtResource("6_arpta")]
 z_index = 1
 position = Vector2(1592, 632)
 DialogueResource = ExtResource("7_lbn5x")
@@ -152,7 +173,7 @@ position = Vector2(0, -32)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("7_tntbh")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="." index="29"]
+[node name="NinePatchRect" type="NinePatchRect" parent="." index="33"]
 visible = false
 z_index = 3
 offset_left = 648.0
@@ -166,7 +187,7 @@ patch_margin_top = 1
 patch_margin_right = 1
 patch_margin_bottom = 1
 
-[node name="CodeProblemPoint" parent="." index="30" instance=ExtResource("10_o5psq")]
+[node name="CodeProblemPoint" parent="." index="34" instance=ExtResource("10_o5psq")]
 z_index = 3
 position = Vector2(760, 296)
 UniqueIdentifier = "VindiHousesPuzzle"
@@ -182,36 +203,51 @@ SolvableAreas = {
 "FixHouse(i);": Vector2(20, 52)
 }
 
-[node name="Glitch" type="Sprite2D" parent="." index="31"]
+[node name="Glitch" type="Sprite2D" parent="." index="35"]
 position = Vector2(760, 296)
 texture = ExtResource("11_oye6h")
 
-[node name="HouseGlitch0" type="Sprite2D" parent="." index="32"]
+[node name="HouseGlitch0" type="Sprite2D" parent="." index="36"]
 z_index = 3
 position = Vector2(280, 800)
+scale = Vector2(2, 2)
 texture = ExtResource("11_oye6h")
 
-[node name="HouseGlitch1" type="Sprite2D" parent="." index="33"]
+[node name="HouseGlitch1" type="Sprite2D" parent="." index="37"]
 z_index = 3
 position = Vector2(824, 512)
+scale = Vector2(2, 2)
 texture = ExtResource("11_oye6h")
 
-[node name="HouseGlitch2" type="Sprite2D" parent="." index="34"]
+[node name="HouseGlitch2" type="Sprite2D" parent="." index="38"]
 z_index = 3
 position = Vector2(1064, 520)
+scale = Vector2(2, 2)
 texture = ExtResource("11_oye6h")
 
-[node name="HouseGlitch3" type="Sprite2D" parent="." index="35"]
+[node name="HouseGlitch3" type="Sprite2D" parent="." index="39"]
 z_index = 3
 position = Vector2(1024, 840)
+scale = Vector2(2, 2)
 texture = ExtResource("11_oye6h")
 
-[node name="HouseGlitch4" type="Sprite2D" parent="." index="36"]
+[node name="HouseGlitch4" type="Sprite2D" parent="." index="40"]
 z_index = 3
 position = Vector2(1424, 520)
+scale = Vector2(2, 2)
 texture = ExtResource("11_oye6h")
 
-[node name="HouseGlitch5" type="Sprite2D" parent="." index="37"]
+[node name="HouseGlitch5" type="Sprite2D" parent="." index="41"]
 z_index = 3
 position = Vector2(1352, 848)
+scale = Vector2(2, 2)
 texture = ExtResource("11_oye6h")
+
+[node name="TheodoreHouseDialogue" parent="." index="42" instance=ExtResource("13_oc5s0")]
+z_index = 5
+position = Vector2(848, 536)
+DialogueResource = ExtResource("7_lbn5x")
+DialogueTitle = "theodore_house_glitch"
+
+[connection signal="ProblemSolved" from="CodeProblemPanel" to="." method="OnSubmitted" binds= [true]]
+[connection signal="Submitted" from="CodeProblemPanel" to="." method="OnSubmitted" binds= [false]]

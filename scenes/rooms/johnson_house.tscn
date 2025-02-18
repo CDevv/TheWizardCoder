@@ -77,9 +77,15 @@ TargetLocation = "JohnsonMarker"
 [node name="EnterMarker" type="Marker2D" parent="." index="21"]
 position = Vector2(480, 368)
 
-[node name="DialoguePoint" parent="." index="22" instance=ExtResource("5_53sve")]
+[node name="TableDialogue" parent="." index="22" instance=ExtResource("5_53sve")]
 z_index = 3
 position = Vector2(512, 232)
 scale = Vector2(3, 1)
 DialogueResource = ExtResource("6_r7oew")
 DialogueTitle = "magic_book_table"
+
+[node name="StaffDialogue" parent="." index="23" instance=ExtResource("5_53sve")]
+z_index = 3
+position = Vector2(368, 232)
+DialogueResource = ExtResource("6_r7oew")
+DialogueTitle = "fake_staff"

@@ -64,7 +64,6 @@ visible = false
 [node name="ZenDummy" parent="." instance=ExtResource("9_7x1rq")]
 visible = false
 z_index = 1
-y_sort_enabled = false
 
 [node name="Sprite" type="AnimatedSprite2D" parent="ZenDummy"]
 position = Vector2(1, -32)
@@ -73,7 +72,6 @@ sprite_frames = ExtResource("10_hkyc4")
 
 [node name="Gertrude" parent="." instance=ExtResource("9_7x1rq")]
 z_index = 1
-y_sort_enabled = false
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Gertrude"]
 y_sort_enabled = true

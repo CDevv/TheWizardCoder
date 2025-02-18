@@ -67,6 +67,16 @@ Narrator: A conveniently placed oven for baking bread.
 Narrator: On top of this table is a book titled "A Guide to Arcane Arts". Only the first few pages are read.
 => END!
 
+~ fake_staff
+Narrator: This is a fake magic staff
+Nolan: [#portrait=0] Not all wizards need a staff.
+=> END!
+
+~ theodore_house_glitch
+if not GetPlayerData("VindiHousesPuzzle"):
+	Narrator: The glitch doesn't allow you to open the door.
+=> END!
+
 ~ vindi_intro_1
 Timothy: [#portrait=1] So, how was the fishing?
 Gregory: [#portrait=1] Eh, I got almost nothing, mate!
@@ -297,6 +307,13 @@ else:
 => END!
 
 ~ theodore_point
-Theodore: [#portrait=0] Can't walk over there unfortunately. 
-Theodore: [#portrait=0] Like, what is that large pile of snow? 
+if GetPlayerData("CompletedAllVindiQuests"):
+	Theodore: [#portrait=0] The pile of snow is.. gone now?
+else:
+	Theodore: [#portrait=0] Can't walk over there unfortunately. 
+	Theodore: [#portrait=0] Like, what is that large pile of snow? 
+=> END!
+
+~ sigbert_point
+Sigbert: [#portrait=0] Oh, hello there!
 => END!
