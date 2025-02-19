@@ -77,6 +77,21 @@ if not GetPlayerData("VindiHousesPuzzle"):
 	Narrator: The glitch doesn't allow you to open the door.
 => END!
 
+~ table_tea
+Narrator: There is a cup of tea here.
+Nolan: [#portrait=0] Tea, huh?
+Sigbert: [#portrait=0] Yeah! Would you like to stay for tea?
+Nolan: [#portrait=0] No thanks.
+=> END!
+
+~ combat_book
+Narrator: This book seems to be a combat guide.
+=> END!
+
+~ combat_marks
+Narrator: This is a paper, filled with good marks on combat-related subjects.
+=> END!
+
 ~ vindi_intro_1
 Timothy: [#portrait=1] So, how was the fishing?
 Gregory: [#portrait=1] Eh, I got almost nothing, mate!
