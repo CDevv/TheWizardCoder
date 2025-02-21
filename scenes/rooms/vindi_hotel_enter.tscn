@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://v2nxi3owkseb"]
+[gd_scene load_steps=14 format=3 uid="uid://v2nxi3owkseb"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_qj5dc"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_44nw2"]
 [ext_resource type="TileSet" uid="uid://dqirfdrc3jlyd" path="res://tilesets/vindi_env.tres" id="3_2sosd"]
+[ext_resource type="PackedScene" uid="uid://bk3a4lc0i5uwk" path="res://scenes/components/actor.tscn" id="3_w7x8h"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_i7lo2"]
+[ext_resource type="SpriteFrames" uid="uid://p6rgjei1r7hm" path="res://assets/characters/movement/spriteframes/amy.tres" id="4_ox6pk"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_gv160"]
 a = Vector2(0, 384)
@@ -45,7 +47,16 @@ color = Color(0.117518, 0.0336082, 0, 1)
 z_index = 2
 position = Vector2(256, 405)
 
-[node name="TileMap" type="TileMap" parent="." index="18"]
+[node name="Amy" parent="." index="18" instance=ExtResource("3_w7x8h")]
+z_index = 2
+position = Vector2(256, 232)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Amy" index="2"]
+position = Vector2(0, -32)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("4_ox6pk")
+
+[node name="TileMap" type="TileMap" parent="." index="19"]
 y_sort_enabled = true
 scale = Vector2(2, 2)
 tile_set = ExtResource("3_2sosd")
@@ -53,14 +64,14 @@ format = 2
 layer_0/name = "props"
 layer_0/y_sort_enabled = true
 layer_0/z_index = 2
-layer_0/tile_data = PackedInt32Array(458761, 786434, 9, 458758, 655362, 9, 458759, 720898, 9, 458760, 720898, 9, 327689, 851970, 10, 327686, 851970, 9)
+layer_0/tile_data = PackedInt32Array(458759, 720898, 9, 458760, 720898, 9, 458758, 720898, 9, 458757, 720898, 9, 458761, 720898, 9, 458762, 720898, 9, 458763, 786434, 9, 458756, 655362, 9, 327691, 851970, 9, 327684, 851970, 9)
 layer_1/name = "wall"
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array(720902, 393218, 7, 524303, 262146, 8, 589825, 196610, 9)
 layer_2/name = "ground"
 layer_2/tile_data = PackedInt32Array(196609, 196610, 0, 262145, 196610, 0, 327681, 196610, 0, 393217, 196610, 1, 458753, 65538, 1, 524289, 65538, 1, 589825, 65538, 1, 655361, 65538, 1, 720897, 65538, 1, 131074, 196610, 0, 196610, 196610, 0, 262146, 196610, 0, 327682, 196610, 1, 393218, 65538, 1, 458754, 65538, 1, 524290, 65538, 1, 589826, 65538, 1, 655362, 65538, 1, 720898, 65538, 1, 786434, 2, 2, 131075, 196610, 0, 196611, 196610, 0, 262147, 196610, 0, 327683, 196610, 1, 393219, 65538, 1, 458755, 65538, 1, 524291, 65538, 1, 589827, 65538, 1, 655363, 65538, 1, 720899, 65538, 1, 786435, 65538, 1, 131076, 196610, 0, 196612, 196610, 0, 262148, 196610, 0, 327684, 196610, 1, 393220, 65538, 1, 458756, 65538, 1, 524292, 65538, 1, 589828, 65538, 1, 655364, 65538, 1, 720900, 65538, 1, 786436, 65538, 1, 131077, 196610, 0, 196613, 196610, 0, 262149, 196610, 0, 327685, 196610, 1, 393221, 65538, 1, 458757, 65538, 1, 524293, 65538, 1, 589829, 65538, 1, 655365, 65538, 1, 720901, 65538, 1, 786437, 65538, 1, 131078, 196610, 0, 196614, 196610, 0, 262150, 196610, 0, 327686, 196610, 1, 393222, 65538, 1, 458758, 65538, 1, 524294, 65538, 1, 589830, 65538, 1, 655366, 65538, 1, 720902, 65538, 1, 786438, 65538, 1, 131079, 196610, 0, 196615, 196610, 0, 262151, 196610, 0, 327687, 196610, 1, 393223, 65538, 1, 458759, 65538, 1, 524295, 65538, 1, 589831, 65538, 1, 655367, 65538, 1, 720903, 65538, 1, 786439, 65538, 1, 131080, 196610, 0, 196616, 196610, 0, 262152, 196610, 0, 327688, 196610, 1, 393224, 65538, 1, 458760, 65538, 1, 524296, 65538, 1, 589832, 65538, 1, 655368, 65538, 1, 720904, 65538, 1, 786440, 65538, 1, 131081, 196610, 0, 196617, 196610, 0, 262153, 196610, 0, 327689, 196610, 1, 393225, 65538, 1, 458761, 65538, 1, 524297, 65538, 1, 589833, 65538, 1, 655369, 65538, 1, 720905, 65538, 1, 786441, 65538, 1, 131082, 196610, 0, 196618, 196610, 0, 262154, 196610, 0, 327690, 196610, 1, 393226, 65538, 1, 458762, 65538, 1, 524298, 65538, 1, 589834, 65538, 1, 655370, 65538, 1, 720906, 65538, 1, 786442, 65538, 1, 131083, 196610, 0, 196619, 196610, 0, 262155, 196610, 0, 327691, 196610, 1, 393227, 65538, 1, 458763, 65538, 1, 524299, 65538, 1, 589835, 65538, 1, 655371, 65538, 1, 720907, 65538, 1, 786443, 65538, 1, 131084, 196610, 0, 196620, 196610, 0, 262156, 196610, 0, 327692, 196610, 1, 393228, 65538, 1, 458764, 65538, 1, 524300, 65538, 1, 589836, 65538, 1, 655372, 65538, 1, 720908, 65538, 1, 786444, 65538, 1, 131085, 196610, 0, 196621, 196610, 0, 262157, 196610, 0, 327693, 196610, 1, 393229, 65538, 1, 458765, 65538, 1, 524301, 65538, 1, 589837, 65538, 1, 655373, 65538, 1, 720909, 65538, 1, 786445, 131074, 2, 458752, 65538, 1, 524288, 65538, 1, 589824, 65538, 1, 655360, 65538, 1, 720896, 65538, 1, 458766, 65538, 1, 458769, 65538, 1, 524302, 65538, 1, 524303, 65538, 1, 524304, 65538, 1, 524305, 65538, 1, 589838, 65538, 1, 589839, 65538, 1, 589840, 65538, 1, 589841, 65538, 1, 655374, 65538, 1, 655375, 65538, 1, 655376, 65538, 1, 655377, 131074, 2, 393230, 196610, 1, 393233, 196610, 1, 196622, 196610, 0, 262158, 196610, 0, 327694, 196610, 0, 196625, 196610, 0, 262161, 196610, 0, 327697, 196610, 0, 458767, 851970, 6, 393231, 851970, 6, 327695, 851970, 6, 262159, 851970, 6, 196623, 851970, 6, 458768, 917506, 6, 393232, 917506, 6, 327696, 917506, 6, 262160, 917506, 6, 196624, 917506, 6, 851975, 2, 3, 851976, 65538, 3, 196608, 196610, 0, 262144, 196610, 0, 327680, 196610, 0, 393216, 196610, 1)
 
-[node name="RoomCollision" type="StaticBody2D" parent="." index="19"]
+[node name="RoomCollision" type="StaticBody2D" parent="." index="20"]
 z_index = 4
 
 [node name="Wall1" type="CollisionShape2D" parent="RoomCollision" index="0"]
@@ -84,30 +95,30 @@ shape = SubResource("SegmentShape2D_alloc")
 [node name="Wall7" type="CollisionShape2D" parent="RoomCollision" index="6"]
 shape = SubResource("SegmentShape2D_46lpq")
 
-[node name="HallWarper" parent="." index="20" instance=ExtResource("4_i7lo2")]
+[node name="HallWarper" parent="." index="21" instance=ExtResource("4_i7lo2")]
 position = Vector2(-16, 304)
 scale = Vector2(1, 5)
 TargetRoomName = "vindi_hotel_first_floor_hall"
 TargetLocation = "EnterMarker"
 PlayerDirection = 2
 
-[node name="EnterWarper" parent="." index="21" instance=ExtResource("4_i7lo2")]
+[node name="EnterWarper" parent="." index="22" instance=ExtResource("4_i7lo2")]
 position = Vector2(256, 448)
 scale = Vector2(2, 1)
 TargetRoomName = "vindi_11"
 TargetLocation = "HotelMarker"
 
-[node name="UpstairWarper" parent="." index="22" instance=ExtResource("4_i7lo2")]
+[node name="UpstairWarper" parent="." index="23" instance=ExtResource("4_i7lo2")]
 position = Vector2(512, 80)
 scale = Vector2(2, 1)
 TargetRoomName = "vindi_hotel_second_floor"
 TargetLocation = "StairsMarker"
 
-[node name="EnterMarker" type="Marker2D" parent="." index="23"]
+[node name="EnterMarker" type="Marker2D" parent="." index="24"]
 position = Vector2(256, 405)
 
-[node name="HallMarker" type="Marker2D" parent="." index="24"]
+[node name="HallMarker" type="Marker2D" parent="." index="25"]
 position = Vector2(32, 304)
 
-[node name="StairsMarker" type="Marker2D" parent="." index="25"]
+[node name="StairsMarker" type="Marker2D" parent="." index="26"]
 position = Vector2(512, 128)

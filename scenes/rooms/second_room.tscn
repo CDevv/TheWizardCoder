@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c0iqpqhuxgcn7"]
+[gd_scene load_steps=20 format=3 uid="uid://c0iqpqhuxgcn7"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_xan73"]
 [ext_resource type="Script" path="res://scripts/rooms/TestRoom.cs" id="2_eh4xc"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dej8mnaswqovl" path="res://scenes/components/ground_item.tscn" id="15_d8wuq"]
 [ext_resource type="PackedScene" uid="uid://d38oq7utuerxp" path="res://scenes/components/ground_enemy.tscn" id="15_dhyf2"]
 [ext_resource type="Texture2D" uid="uid://cqg0hnpu5i8bx" path="res://assets/props/box.png" id="16_0qwho"]
+[ext_resource type="PackedScene" uid="uid://b5dj2y7lrxmeq" path="res://scenes/components/mirror.tscn" id="17_v187j"]
 
 [sub_resource type="Animation" id="Animation_h6tmq"]
 resource_name = "test_anim"
@@ -208,3 +209,7 @@ ItemName = "item"
 position = Vector2(0, -8)
 scale = Vector2(2, 2)
 texture = ExtResource("16_0qwho")
+
+[node name="Mirror" parent="." index="37" instance=ExtResource("17_v187j")]
+position = Vector2(240, 224)
+scale = Vector2(2, 2)

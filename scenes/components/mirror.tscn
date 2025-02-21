@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5dj2y7lrxmeq"]
+
+[ext_resource type="Script" path="res://scripts/components/Mirror.cs" id="1_4ddjb"]
+[ext_resource type="Texture2D" uid="uid://blk40pmxaklba" path="res://assets/props/mirror-effect.png" id="1_ybmv2"]
+[ext_resource type="Texture2D" uid="uid://bm1njj0lwqhlt" path="res://assets/props/mirror.png" id="2_v1640"]
+[ext_resource type="SpriteFrames" uid="uid://cg22r6lkovku6" path="res://assets/characters/movement/spriteframes/nolan.tres" id="3_w16km"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7adjf"]
+light_mode = 2
+
+[node name="Mirror" type="Node2D"]
+script = ExtResource("1_4ddjb")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -16)
+color = Color(1, 1, 1, 0)
+texture = ExtResource("1_ybmv2")
+
+[node name="MirrorSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("2_v1640")
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.65098)
+light_mask = 3
+material = SubResource("CanvasItemMaterial_7adjf")
+position = Vector2(0, -1)
+sprite_frames = ExtResource("3_w16km")
+centered = false
+offset = Vector2(-14, -36)

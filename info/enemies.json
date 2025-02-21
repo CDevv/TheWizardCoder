@@ -29,11 +29,8 @@
 		"AttackPoints": 10,
 		"DefensePoints": 5,
 		"AgilityPoints": 5,
-		"MagicSpells": ["Slow-down!"],
-		"Type": "Enemy",
-		"Behaviour": {
-			"25": ["Magic"]
-		}
+		"MagicSpells": [],
+		"Type": "Enemy"
 	},
 	"Dummy": {
 		"Health": 20,
@@ -65,8 +62,11 @@
 		"AttackPoints": 15,
 		"DefensePoints": 2,
 		"AgilityPoints": 5,
-		"MagicSpells": [],
+		"MagicSpells": ["Slow-down!"],
 		"Type": "Enemy",
+		"Behaviour": {
+			"25": ["Magic"]
+		}
 	},
 	"Gertrude": {
 		"Health": 40,

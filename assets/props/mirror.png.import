@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2dpwk6p1w706"
-path="res://.godot/imported/JuniorBug.png-f19ff72617532d4946030154b442bb89.ctex"
+uid="uid://bm1njj0lwqhlt"
+path="res://.godot/imported/mirror.png-245078a4ae866e2492db7c648948acaa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/JuniorBug.png"
-dest_files=["res://.godot/imported/JuniorBug.png-f19ff72617532d4946030154b442bb89.ctex"]
+source_file="res://assets/props/mirror.png"
+dest_files=["res://.godot/imported/mirror.png-245078a4ae866e2492db7c648948acaa.ctex"]
 
 [params]
 

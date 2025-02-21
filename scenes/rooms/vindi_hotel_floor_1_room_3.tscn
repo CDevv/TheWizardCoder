@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://cr8ufal2px7gc"]
+
+[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_kvh12"]
+[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_r7jei"]
+[ext_resource type="TileSet" uid="uid://dqirfdrc3jlyd" path="res://tilesets/vindi_env.tres" id="3_nwmuv"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_4gp1w"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_byvrx"]
+a = Vector2(160, 96)
+b = Vector2(160, 384)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_jvqns"]
+a = Vector2(160, 384)
+b = Vector2(288, 384)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6j5al"]
+a = Vector2(352, 384)
+b = Vector2(480, 384)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_i77ru"]
+a = Vector2(480, 96)
+b = Vector2(480, 384)
+
+[node name="VindiHotelFloor1Room3" instance=ExtResource("1_kvh12")]
+y_sort_enabled = true
+
+[node name="Gertrude" parent="." index="14"]
+z_index = 2
+
+[node name="ColorRect" type="ColorRect" parent="." index="16"]
+offset_right = 640.0
+offset_bottom = 480.0
+color = Color(0.117518, 0.0336082, 0, 1)
+
+[node name="Player" parent="." index="17" instance=ExtResource("2_r7jei")]
+z_index = 2
+position = Vector2(320, 376)
+
+[node name="TileMap" type="TileMap" parent="." index="18"]
+y_sort_enabled = true
+scale = Vector2(2, 2)
+tile_set = ExtResource("3_nwmuv")
+format = 2
+layer_0/name = "props"
+layer_0/y_sort_enabled = true
+layer_0/z_index = 2
+layer_1/name = "wall"
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "ground"
+layer_2/tile_data = PackedInt32Array(262149, 196610, 0, 327685, 196610, 0, 393221, 196610, 1, 458757, 65538, 1, 524293, 65538, 1, 589829, 65538, 1, 655365, 65538, 1, 720901, 2, 2, 262150, 196610, 0, 327686, 196610, 0, 393222, 196610, 1, 458758, 65538, 1, 524294, 65538, 1, 589830, 65538, 1, 655366, 65538, 1, 720902, 65538, 1, 262151, 196610, 0, 327687, 196610, 0, 393223, 196610, 1, 458759, 65538, 1, 524295, 65538, 1, 589831, 65538, 1, 655367, 65538, 1, 720903, 65538, 1, 262152, 196610, 0, 327688, 196610, 0, 393224, 196610, 1, 458760, 65538, 1, 524296, 65538, 1, 589832, 65538, 1, 655368, 65538, 1, 720904, 65538, 1, 262153, 196610, 0, 327689, 196610, 0, 393225, 196610, 1, 458761, 65538, 1, 524297, 65538, 1, 589833, 65538, 1, 655369, 65538, 1, 720905, 65538, 1, 262154, 196610, 0, 327690, 196610, 0, 393226, 196610, 1, 458762, 65538, 1, 524298, 65538, 1, 589834, 65538, 1, 655370, 65538, 1, 720906, 65538, 1, 262155, 196610, 0, 327691, 196610, 0, 393227, 196610, 1, 458763, 65538, 1, 524299, 65538, 1, 589835, 65538, 1, 655371, 65538, 1, 720907, 65538, 1, 262156, 196610, 0, 327692, 196610, 0, 393228, 196610, 1, 458764, 65538, 1, 524300, 65538, 1, 589836, 65538, 1, 655372, 65538, 1, 720908, 65538, 1, 262157, 196610, 0, 327693, 196610, 0, 393229, 196610, 1, 458765, 65538, 1, 524301, 65538, 1, 589837, 65538, 1, 655373, 65538, 1, 720909, 65538, 1, 262158, 196610, 0, 327694, 196610, 0, 393230, 196610, 1, 458766, 65538, 1, 524302, 65538, 1, 589838, 65538, 1, 655374, 65538, 1, 720910, 131074, 2, 196613, 196610, 0, 196614, 196610, 0, 196615, 196610, 0, 196616, 196610, 0, 196617, 196610, 0, 196618, 196610, 0, 196619, 196610, 0, 196620, 196610, 0, 196621, 196610, 0, 196622, 196610, 0, 786441, 2, 3, 786442, 65538, 3)
+
+[node name="RoomCollision" type="StaticBody2D" parent="." index="19"]
+
+[node name="Wall1" type="CollisionShape2D" parent="RoomCollision" index="0"]
+shape = SubResource("SegmentShape2D_byvrx")
+
+[node name="Wall2" type="CollisionShape2D" parent="RoomCollision" index="1"]
+shape = SubResource("SegmentShape2D_jvqns")
+
+[node name="Wall3" type="CollisionShape2D" parent="RoomCollision" index="2"]
+shape = SubResource("SegmentShape2D_6j5al")
+
+[node name="Wall4" type="CollisionShape2D" parent="RoomCollision" index="3"]
+shape = SubResource("SegmentShape2D_i77ru")
+
+[node name="Warper" parent="." index="20" instance=ExtResource("4_4gp1w")]
+position = Vector2(320, 416)
+scale = Vector2(2, 1)
+TargetRoomName = "vindi_hotel_first_floor_hall"
+TargetLocation = "Room3Marker"
+
+[node name="EnterMarker" type="Marker2D" parent="." index="21"]
+position = Vector2(320, 376)
