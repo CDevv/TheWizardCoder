@@ -137,7 +137,6 @@ libraries = {
 }
 
 [node name="Camera" parent="." index="6"]
-position = Vector2(704, 284)
 limit_right = 864
 
 [node name="ColorRect" type="ColorRect" parent="." index="9"]

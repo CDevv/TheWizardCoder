@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://xow4gd46oeps"]
+[gd_scene load_steps=7 format=3 uid="uid://17b83kooc67m"]
 
-[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_n1x47"]
-[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_aj2yf"]
-[ext_resource type="TileSet" uid="uid://dqirfdrc3jlyd" path="res://tilesets/vindi_env.tres" id="3_82rw4"]
-[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_m4u26"]
+[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_h2byi"]
+[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_wjdim"]
+[ext_resource type="TileSet" uid="uid://dqirfdrc3jlyd" path="res://tilesets/vindi_env.tres" id="3_7esy2"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_tuxwn"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_u58d2"]
 a = Vector2(64, 96)
@@ -13,7 +13,7 @@ b = Vector2(64, 384)
 a = Vector2(64, 384)
 b = Vector2(640, 384)
 
-[node name="VindiHotelFirstFloorHall" instance=ExtResource("1_n1x47")]
+[node name="VindiHotelFirstFloorHall" instance=ExtResource("1_h2byi")]
 y_sort_enabled = true
 
 [node name="Gertrude" parent="." index="14"]
@@ -24,14 +24,14 @@ offset_right = 640.0
 offset_bottom = 480.0
 color = Color(0.117518, 0.0336082, 0, 1)
 
-[node name="Player" parent="." index="17" instance=ExtResource("2_aj2yf")]
+[node name="Player" parent="." index="17" instance=ExtResource("2_wjdim")]
 z_index = 2
 position = Vector2(208, 253)
 
 [node name="TileMap" type="TileMap" parent="." index="18"]
 y_sort_enabled = true
 scale = Vector2(2, 2)
-tile_set = ExtResource("3_82rw4")
+tile_set = ExtResource("3_7esy2")
 format = 2
 layer_0/name = "props"
 layer_0/y_sort_enabled = true
@@ -50,17 +50,17 @@ shape = SubResource("SegmentShape2D_u58d2")
 [node name="Wall2" type="CollisionShape2D" parent="RoomCollision" index="1"]
 shape = SubResource("SegmentShape2D_bx65t")
 
-[node name="Warper" parent="." index="20" instance=ExtResource("4_m4u26")]
+[node name="Warper" parent="." index="20" instance=ExtResource("4_tuxwn")]
 position = Vector2(656, 304)
 scale = Vector2(1, 5)
-TargetRoomName = "vindi_hotel_enter"
+TargetRoomName = "vindi_hotel_second_floor"
 TargetLocation = "HallMarker"
 PlayerDirection = 3
 
-[node name="Room1Warper" parent="." index="21" instance=ExtResource("4_m4u26")]
+[node name="Room1Warper" parent="." index="21" instance=ExtResource("4_tuxwn")]
 z_index = 3
 position = Vector2(208, 208)
-TargetRoomName = "vindi_hotel_floor_1_room_1"
+TargetRoomName = "vindi_hotel_floor_2_room_1"
 TargetLocation = "EnterMarker"
 PlayerDirection = 1
 
