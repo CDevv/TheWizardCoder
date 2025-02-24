@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://v2nxi3owkseb"]
+[gd_scene load_steps=16 format=3 uid="uid://v2nxi3owkseb"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_qj5dc"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_44nw2"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bk3a4lc0i5uwk" path="res://scenes/components/actor.tscn" id="3_w7x8h"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_i7lo2"]
 [ext_resource type="SpriteFrames" uid="uid://p6rgjei1r7hm" path="res://assets/characters/movement/spriteframes/amy.tres" id="4_ox6pk"]
+[ext_resource type="Resource" uid="uid://ukx1i3qsx6q2" path="res://dialogue/vindi.dialogue" id="4_sd6lx"]
+[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="8_w82xp"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_gv160"]
 a = Vector2(0, 384)
@@ -50,6 +52,8 @@ position = Vector2(256, 405)
 [node name="Amy" parent="." index="18" instance=ExtResource("3_w7x8h")]
 z_index = 2
 position = Vector2(256, 232)
+DialogueResource = ExtResource("4_sd6lx")
+DialogueTitle = "amy_point"
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Amy" index="2"]
 position = Vector2(0, -32)
@@ -122,3 +126,10 @@ position = Vector2(32, 304)
 
 [node name="StairsMarker" type="Marker2D" parent="." index="26"]
 position = Vector2(512, 128)
+
+[node name="AmyDialogue" parent="." index="27" instance=ExtResource("8_w82xp")]
+z_index = 3
+position = Vector2(256, 248)
+scale = Vector2(2, 1)
+DialogueResource = ExtResource("4_sd6lx")
+DialogueTitle = "amy_point"

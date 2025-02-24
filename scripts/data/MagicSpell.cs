@@ -28,8 +28,6 @@ namespace TheWizardCoder.Data
             TargetType = targetType;
             SpellType = type;
 
-            GD.Print(SpellType);
-
             if (Effect < 0)
             {
                 throw new ArgumentException("Effect cannot be negative.");
@@ -57,8 +55,6 @@ namespace TheWizardCoder.Data
             bool isNegative = bool.Parse(data[3]);
 
             BattleEffect = new(action, targetType, turns, effect, isNegative);
-
-            GD.Print(BattleEffect);
         }
     }
 }

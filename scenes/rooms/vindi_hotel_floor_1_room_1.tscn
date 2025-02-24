@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://bnf1w8fkyjk5"]
+[gd_scene load_steps=12 format=3 uid="uid://bnf1w8fkyjk5"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_gyo7o"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_k478v"]
 [ext_resource type="TileSet" uid="uid://dqirfdrc3jlyd" path="res://tilesets/vindi_env.tres" id="3_q6x4c"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_yfrfp"]
+[ext_resource type="PackedScene" uid="uid://b5dj2y7lrxmeq" path="res://scenes/components/mirror.tscn" id="5_nth0k"]
+[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="6_0a20s"]
+[ext_resource type="Resource" uid="uid://ukx1i3qsx6q2" path="res://dialogue/vindi.dialogue" id="7_8cq5v"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_byvrx"]
 a = Vector2(160, 96)
@@ -44,6 +47,7 @@ format = 2
 layer_0/name = "props"
 layer_0/y_sort_enabled = true
 layer_0/z_index = 2
+layer_0/tile_data = PackedInt32Array(458766, 524290, 3, 458757, 786434, 4, 458759, 655362, 2)
 layer_1/name = "wall"
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array()
@@ -72,3 +76,13 @@ TargetLocation = "Room1Marker"
 
 [node name="EnterMarker" type="Marker2D" parent="." index="21"]
 position = Vector2(320, 376)
+
+[node name="Mirror" parent="." index="22" instance=ExtResource("5_nth0k")]
+position = Vector2(400, 224)
+scale = Vector2(2, 2)
+
+[node name="DialoguePoint" parent="." index="23" instance=ExtResource("6_0a20s")]
+z_index = 3
+position = Vector2(400, 216)
+DialogueResource = ExtResource("7_8cq5v")
+DialogueTitle = "hotel_room_mirror"

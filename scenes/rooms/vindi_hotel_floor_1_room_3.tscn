@@ -44,6 +44,7 @@ format = 2
 layer_0/name = "props"
 layer_0/y_sort_enabled = true
 layer_0/z_index = 2
+layer_0/tile_data = PackedInt32Array(458766, 524290, 3, 458757, 786434, 4, 458759, 655362, 2, 589834, 196610, 2, 589835, 262146, 2, 589836, 327682, 2, 524299, 524290, 4, 655371, 589826, 4)
 layer_1/name = "wall"
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array()

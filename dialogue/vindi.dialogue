@@ -92,6 +92,14 @@ Narrator: This book seems to be a combat guide.
 Narrator: This is a paper, filled with good marks on combat-related subjects.
 => END!
 
+~ tree_pic
+Narrator: A picture of a big tree.
+=> END!
+
+~ hotel_room_mirror
+Narrator: Despite everything, it's still you.
+=> END!
+
 ~ vindi_intro_1
 Timothy: [#portrait=1] So, how was the fishing?
 Gregory: [#portrait=1] Eh, I got almost nothing, mate!
@@ -331,4 +339,10 @@ else:
 
 ~ sigbert_point
 Sigbert: [#portrait=0] Oh, hello there!
+Nolan: [#portrait=0] Interesting house you got here.
+Sigbert: [#portrait=0] Thanks!
+=> END!
+
+~ amy_point
+Amy: [#portrait=0] Hello! How may I help you?
 => END!
