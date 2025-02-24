@@ -119,8 +119,8 @@ if PlayerHasFollower():
 	Timothy: [#portrait=0] Ah, nice. You guys might be able to help us with some issues in our town, then.
 	Timothy: [#portrait=0] You can come in my house if you wanna know some details. See ya!
 	Gertrude: [#portrait=2] Hold on! Are you guys cats?
-	Timothy: [#portrait=0] Nope! We are so called 'wolf-people'
-	Gertrude: [#portrait=0] Ah, okay.
+	Timothy: [#portrait=0] Almost.
+	Gertrude: [#portrait=0] Okay..
 else:
 	Timothy: [#portrait=1] What ya doin' here, mate?
 	Nolan: [#portrait=0] Uh.. I just got here using the raft that is on the coast outside this forest.
@@ -164,7 +164,7 @@ elif GetPlayerData("FishingRodSolved") and not GetPlayerData("VindiTreeSolved"):
 	Timothy: [#portrait=1] Who knows how it ended up there..? 
 	Timothy: [#portrait=0] Can you look into that?
 	Nolan: [#portrait=0] Alright.
-else:	
+else:
 	if PlayerHasFollower():
 		Timothy: [#portrait=0] Oh, heya! 
 		Nolan: [#portrait=0] Hello! What details were you talking about?
@@ -245,12 +245,17 @@ if GetPlayerData("FishingRodSolved"):
 	Brook: [#portrait=0] Nah mate, you have it. That's a reward for helpin' us.
 else:
 	Brook: [#portrait=0] 'Ello! You here to fish?
-	Nolan: [#portrait=0] I guess..?
+	if PlayerHasFollower():
+		Gertrude: [#portrait=3] Yes, we are!
+	else:
+		Nolan: [#portrait=0] I guess..?
 	Brook: [#portrait=2] Well uhh.. Hope you catch some fish 'cause apperently I can't!
 	if GetPlayerData("HasMetGregory"):
 		Nolan: [#portrait=0] Oh! Gregory already told me!
 	else:
 		Nolan: [#portrait=0] Uhh.. okay!
+		if PlayerHasFollower():
+			Gertrude: [#portrait=4] That's unfortunate!
 => END!
 
 ~ gerald_point
@@ -308,6 +313,8 @@ if GetPlayerData("VindiTreeSolved"):
 	do SetPlayerData("HasMetKulber", true)
 else:
 	Kulber: [#portrait=0] A tree has been blockin' my house, man!
+	if PlayerHasFollower():
+		Gertrude: [#portrait=1] We shall cut it..!
 => END!
 
 ~ craig_point
@@ -325,6 +332,8 @@ else:
 	Craig: [#portrait=1] Have you seen some.. monsters along the way?
 	Craig: [#portrait=0] If so, please help me defeat them. They're right along the seaside. Can you do that?
 	Nolan: [#portrait=0] Yeah.. sure!
+	if PlayerHasFollower():
+		Gertrude: [#portrait=1] We will fight!
 	
 	do SetPlayerData("HasMetCraig", true)
 => END!

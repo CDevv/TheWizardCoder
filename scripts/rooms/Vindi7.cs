@@ -86,6 +86,8 @@ public partial class Vindi7 : BaseRoom
                 theodoreHouseWarper.Active = true;
                 theodoreHouseDialogue.Active = false;
                 RemoveQuestWallCollision();
+
+                global.PlayerData.Stats.AddLevelPoints(8);
             }
         }
     }

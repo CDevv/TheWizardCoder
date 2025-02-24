@@ -105,9 +105,6 @@ libraries = {
 "": SubResource("AnimationLibrary_yfglj")
 }
 
-[node name="Gertrude" parent="." index="14"]
-z_index = 2
-
 [node name="ColorRect" type="ColorRect" parent="." index="15"]
 offset_right = 640.0
 offset_bottom = 480.0

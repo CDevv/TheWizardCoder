@@ -144,6 +144,7 @@ namespace TheWizardCoder.Rooms
                     else
                     {
                         AnimationPlayer.Play("code_solved");
+                        global.PlayerData.Stats.AddLevelPoints(8);
                     }
                 }
             }

@@ -20,6 +20,8 @@ b = Vector2(128, 920)
 [node name="Vindi3" instance=ExtResource("1_4t6ux")]
 y_sort_enabled = true
 script = ExtResource("2_h14rx")
+SceneFileName = "vindi_3"
+LocationName = "Town of Vindi"
 
 [node name="Camera" parent="." index="6"]
 limit_right = 1792

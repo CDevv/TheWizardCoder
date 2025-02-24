@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://pg4lt7xbt1ru"]
+[gd_scene load_steps=14 format=3 uid="uid://pg4lt7xbt1ru"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_lb3gd"]
 [ext_resource type="Script" path="res://scripts/rooms/Vindi8.cs" id="2_w7lj6"]
@@ -9,6 +9,7 @@
 [ext_resource type="SpriteFrames" uid="uid://bofoatlx8u0r4" path="res://assets/characters/movement/spriteframes/craig.tres" id="5_561uj"]
 [ext_resource type="Resource" uid="uid://ukx1i3qsx6q2" path="res://dialogue/vindi.dialogue" id="5_jqg78"]
 [ext_resource type="PackedScene" uid="uid://doyfot0kgcxa2" path="res://scenes/components/snow_particles.tscn" id="5_n4akj"]
+[ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/components/save_point.tscn" id="10_px50d"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_bs5pw"]
 a = Vector2(1280, 0)
@@ -25,6 +26,9 @@ b = Vector2(296, 1136)
 [node name="Vindi8" instance=ExtResource("1_lb3gd")]
 y_sort_enabled = true
 script = ExtResource("2_w7lj6")
+SceneFileName = "vindi_8"
+LocationName = "Town of Vindi"
+DefaultMarkerName = "Section7Marker"
 
 [node name="Camera" parent="." index="6"]
 limit_right = 1632
@@ -118,3 +122,7 @@ position = Vector2(472, 0)
 [node name="SnowParticles2" parent="." index="29" instance=ExtResource("5_n4akj")]
 z_index = 3
 position = Vector2(1160, 0)
+
+[node name="SavePoint" parent="." index="30" instance=ExtResource("10_px50d")]
+z_index = 1
+position = Vector2(344, 256)

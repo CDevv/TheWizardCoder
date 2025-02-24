@@ -27,6 +27,7 @@ namespace TheWizardCoder.Rooms
 
         private void OnProblemSolved()
         {
+            global.PlayerData.Stats.AddLevelPoints(8);
             AnimationPlayer.Play("tree_solved_anim");
         }
 

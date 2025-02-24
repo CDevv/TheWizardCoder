@@ -134,7 +134,7 @@ namespace TheWizardCoder.Components
             lastDirection = directionVector;
         }
 
-        public override void _UnhandledInput(InputEvent @event)
+        public override async void _UnhandledInput(InputEvent @event)
         {
             if (Input.IsActionJustPressed("ui_accept"))
             {
@@ -194,7 +194,7 @@ namespace TheWizardCoder.Components
 
             if (Input.IsActionJustPressed("ui_cancel"))
             {
-                Unequip();
+                await Unequip();
             }
 
             if (Input.IsActionJustPressed("secondary"))
@@ -251,8 +251,7 @@ namespace TheWizardCoder.Components
                     {
                         global.CanWalk = true;
                     }
-
-                    global.GameDisplayEnabled = true;
+ 
                     isItemEquipped = false;
 
                     global.CurrentRoom.HideDisplay("FishingDisplay");
@@ -270,6 +269,8 @@ namespace TheWizardCoder.Components
                         
                         PlayIdleAnimation(Direction);
                     }
+
+                    global.GameDisplayEnabled = true;
                 }
             }
 
@@ -376,25 +377,6 @@ namespace TheWizardCoder.Components
                 global.ChangeRoom(roomName, markerName, direction);
             }
         }
-
-        public void ChangeDirection(Vector2 vectorDirection)
-        {
-            //animationTree.Set("parameters/Idle/blend_position", vectorDirection);
-            //animationTree.Set("parameters/Move/blend_position", vectorDirection);
-        }
-
-        public void ChangeDirection(Direction direction)
-        {
-            //Vector2 resultVector = global.GetDirectionVector(direction);
-            //Vector2 resultVector = direction.ToVector();
-
-            //animationTree.Set("parameters/Idle/blend_position", resultVector);
-            //animationTree.Set("parameters/Move/blend_position", resultVector);
-        }
-
-
-
-
 
         public void ShowDialogueBallon(Resource resource, string title)
         {
