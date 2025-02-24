@@ -26,7 +26,7 @@ color = Color(0.117518, 0.0336082, 0, 1)
 
 [node name="Player" parent="." index="17" instance=ExtResource("2_wjdim")]
 z_index = 2
-position = Vector2(208, 253)
+position = Vector2(528, 256)
 
 [node name="TileMap" type="TileMap" parent="." index="18"]
 y_sort_enabled = true
@@ -64,8 +64,28 @@ TargetRoomName = "vindi_hotel_floor_2_room_1"
 TargetLocation = "EnterMarker"
 PlayerDirection = 1
 
-[node name="EnterMarker" type="Marker2D" parent="." index="22"]
+[node name="Room2Warper" parent="." index="22" instance=ExtResource("4_tuxwn")]
+z_index = 3
+position = Vector2(368, 208)
+TargetRoomName = "vindi_hotel_floor_2_room_2"
+TargetLocation = "EnterMarker"
+PlayerDirection = 1
+
+[node name="Room3Warper" parent="." index="23" instance=ExtResource("4_tuxwn")]
+z_index = 3
+position = Vector2(528, 208)
+TargetRoomName = "vindi_hotel_floor_2_room_3"
+TargetLocation = "EnterMarker"
+PlayerDirection = 1
+
+[node name="EnterMarker" type="Marker2D" parent="." index="24"]
 position = Vector2(616, 304)
 
-[node name="Room1Marker" type="Marker2D" parent="." index="23"]
+[node name="Room1Marker" type="Marker2D" parent="." index="25"]
 position = Vector2(208, 253)
+
+[node name="Room2Marker" type="Marker2D" parent="." index="26"]
+position = Vector2(368, 256)
+
+[node name="Room3Marker" type="Marker2D" parent="." index="27"]
+position = Vector2(528, 256)
