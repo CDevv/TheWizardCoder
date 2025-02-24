@@ -1,9 +1,50 @@
-[gd_scene load_steps=9 format=3 uid="uid://1g3lvpfq6f0u"]
+[gd_scene load_steps=16 format=3 uid="uid://1g3lvpfq6f0u"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_6tiuu"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_eh1l7"]
+[ext_resource type="Script" path="res://scripts/rooms/VindiHotelFloor2Room2.cs" id="2_nyr3t"]
 [ext_resource type="TileSet" uid="uid://dqirfdrc3jlyd" path="res://tilesets/vindi_env.tres" id="3_ouc7d"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_w0hct"]
+[ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="5_hcnse"]
+[ext_resource type="Texture2D" uid="uid://hxmst0tc6gbs" path="res://assets/ui/area_border.png" id="6_kenbx"]
+[ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/components/code_problem_point.tscn" id="8_032od"]
+
+[sub_resource type="Animation" id="Animation_v7dtm"]
+resource_name = "hide_glitch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PuzzleGlitch:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_n4fm3"]
+resource_name = "code_solved"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PuzzleGlitch:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q7xx0"]
+_data = {
+"code_solved": SubResource("Animation_n4fm3"),
+"hide_glitch": SubResource("Animation_v7dtm")
+}
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_byvrx"]
 a = Vector2(160, 96)
@@ -23,6 +64,12 @@ b = Vector2(480, 384)
 
 [node name="VindiHotelFloor2Room2" instance=ExtResource("1_6tiuu")]
 y_sort_enabled = true
+script = ExtResource("2_nyr3t")
+
+[node name="AnimationPlayer" parent="." index="5"]
+libraries = {
+"": SubResource("AnimationLibrary_q7xx0")
+}
 
 [node name="Gertrude" parent="." index="14"]
 z_index = 2
@@ -44,6 +91,7 @@ format = 2
 layer_0/name = "props"
 layer_0/y_sort_enabled = true
 layer_0/z_index = 2
+layer_0/tile_data = PackedInt32Array(458766, 524290, 3, 458763, 786434, 4, 458757, 393218, 3, 589829, 720898, 4, 589831, 196610, 2, 589832, 327682, 2, 655367, 196610, 4)
 layer_1/name = "wall"
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array()
@@ -72,3 +120,57 @@ TargetLocation = "Room2Marker"
 
 [node name="EnterMarker" type="Marker2D" parent="." index="21"]
 position = Vector2(320, 376)
+
+[node name="Glitch[11,7]" type="Sprite2D" parent="." index="22" groups=["glitches"]]
+position = Vector2(360, 232)
+texture = ExtResource("5_hcnse")
+
+[node name="Glitch[9,9]" type="Sprite2D" parent="." index="23" groups=["glitches"]]
+position = Vector2(296, 304)
+texture = ExtResource("5_hcnse")
+
+[node name="Glitch[5,9]" type="Sprite2D" parent="." index="24" groups=["glitches"]]
+position = Vector2(176, 304)
+texture = ExtResource("5_hcnse")
+
+[node name="Glitch[13,10]" type="Sprite2D" parent="." index="25" groups=["glitches"]]
+position = Vector2(432, 344)
+texture = ExtResource("5_hcnse")
+
+[node name="WhiteCellBorder" type="Sprite2D" parent="." index="26" groups=["cells"]]
+visible = false
+modulate = Color(1, 1, 1, 0.486275)
+position = Vector2(176, 240)
+scale = Vector2(2, 2)
+texture = ExtResource("6_kenbx")
+
+[node name="SelectCell" type="Sprite2D" parent="." index="27" groups=["cells"]]
+visible = false
+modulate = Color(0, 1, 0, 1)
+z_index = 3
+position = Vector2(176, 240)
+scale = Vector2(2, 2)
+texture = ExtResource("6_kenbx")
+
+[node name="PuzzleGlitch" type="Sprite2D" parent="." index="28"]
+position = Vector2(168, 376)
+texture = ExtResource("5_hcnse")
+
+[node name="CodeProblemPoint" parent="." index="29" instance=ExtResource("8_032od")]
+z_index = 3
+position = Vector2(176, 368)
+UniqueIdentifier = "SolvedHotelRoom"
+Code = "for (int i = 0; 		;  i++)
+{
+	for (int j = 0; 	; j++)
+		if (ContainsGlitch(i,j))
+	RemoveGlitch(i,j);
+}"
+Items = Array[String](["i < 1;", "i < 10;", "j < 5;", "j < 2;"])
+SolvableAreas = {
+"i < 10;": Vector2(88, 4),
+"j < 5;": Vector2(108, 56)
+}
+
+[connection signal="ProblemSolved" from="CodeProblemPanel" to="." method="OnSubmitted" binds= [true]]
+[connection signal="Submitted" from="CodeProblemPanel" to="." method="OnSubmitted" binds= [false]]

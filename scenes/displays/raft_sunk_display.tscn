@@ -33,6 +33,7 @@ offset_bottom = 253.0
 scale = Vector2(2, 2)
 focus_neighbor_top = NodePath("../MainMenu")
 focus_neighbor_bottom = NodePath("../MainMenu")
+mouse_filter = 2
 theme = ExtResource("1_parre")
 text = "Retry
 "
@@ -49,6 +50,7 @@ grow_horizontal = 2
 scale = Vector2(2, 2)
 focus_neighbor_top = NodePath("../Retry")
 focus_neighbor_bottom = NodePath("../Retry")
+mouse_filter = 2
 theme = ExtResource("1_parre")
 text = "Main Menu"
 

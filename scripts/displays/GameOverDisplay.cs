@@ -14,7 +14,7 @@ namespace TheWizardCoder.Displays
 		public override void _Ready()
 		{
 			base._Ready();
-			retryButton = GetNode<Button>("RetryButton");
+			retryButton = GetNode<Button>("Retry");
 		}
 
 		public override void ShowDisplay()

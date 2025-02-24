@@ -101,19 +101,21 @@ text = "chair"
 
 [node name="CodeEdit" type="CodeEdit" parent="CodeRect"]
 unique_name_in_owner = true
-layout_mode = 0
+layout_mode = 2
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 168.0
 offset_bottom = 184.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
 theme = ExtResource("2_cm4ur")
 theme_override_font_sizes/font_size = 16
-text = "int i = 
-while (i != HousesCount)
+text = "for (int i = 0; 		;  i++)
 {
-
-	i++;
+	for (int j = 0; 	; j++)
+		if (ContainsGlitch(i,j))
+	RemoveGlitch(i,j);
 }"
 editable = false
 context_menu_enabled = false

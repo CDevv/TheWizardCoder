@@ -96,6 +96,7 @@ namespace TheWizardCoder.Data
         public bool GotGeraldHouseCyanberry { get; set; } = false;
         public bool VindiHousesPuzzle { get; set; } = false;
         public bool CompletedAllVindiQuests { get; set; } = false;
+        public bool SolvedHotelRoom { get; set; } = false;
 
         public SaveFileData(Character stats)
         {
