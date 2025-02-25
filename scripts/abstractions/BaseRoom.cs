@@ -12,7 +12,10 @@ using TheWizardCoder.Enums;
 
 namespace TheWizardCoder.Abstractions
 {
-	public partial class BaseRoom : Node2D
+	/// <summary>
+	/// Base class for all rooms.
+	/// </summary>
+    public partial class BaseRoom : Node2D
 	{
 		[Export]
 		public string SceneFileName { get; set;}
@@ -41,8 +44,6 @@ namespace TheWizardCoder.Abstractions
 
 		private bool WillLoadNextRoom { get; set; }
         private string NextRoomPath { get; set; }
-		private Godot.Collections.Array loadProgress;
-
 
 		public override void _Ready()
 		{
@@ -134,19 +135,36 @@ namespace TheWizardCoder.Abstractions
             }
         }
 
+		/// <summary>
+		/// Transition to another room with the provided <paramref name="room"/> name.
+		/// The name of the <see cref="Godot.Marker2D"/> is provided with <paramref name="playerLocation"/>
+		/// The direction that the <c>Player</c> should be turning to when they enter the room is
+		/// provided with the <paramref name="direction"/> parameter.
+		/// </summary>
+		/// <param name="room">The name of the room the Player should be transitioned to</param>
+		/// <param name="playerLocation">The name of the target Marker2D location</param>
+		/// <param name="direction">The direction the <c>Player</c> should be turned to</param>
 		public void TransitionToRoom(string room, string playerLocation, Direction direction)
 		{
 			global.ChangeRoom(room, playerLocation, direction);
-            /*
-			global.LocationMarkerName = playerLocation;
-			global.PlayerDirection = direction;
-
-            NextRoomPath = $"res://scenes/rooms/{room}.tscn";
-            WillLoadNextRoom = true;
-            ResourceLoader.LoadThreadedRequest(NextRoomPath);
-			*/
         }
 
+        /// <summary>
+        /// Play a cutscene that is defined in the scene's <see cref="Godot.AnimationPlayer"/>.
+        /// Can be awaited to play in the current thread.
+        /// <example>
+        /// Example with playing a cutscene in a room's <see cref="BaseRoom.OnReady"/> method:
+        /// <code>
+        /// public override async void OnReady()
+        /// {
+        ///		GD.Print("This will print before the cutscene");
+        ///		await PlayCutscene("example_cutscene");
+        ///		GD.Print("This will be print when the cutscene has finished playing.");
+        /// }
+        /// </code>
+        /// </example>
+        /// </summary>
+        /// <param name="name"></param>
         public async Task PlayCutscene(string name)
 		{
 			global.CanWalk = false;
@@ -157,12 +175,24 @@ namespace TheWizardCoder.Abstractions
 			global.GameDisplayEnabled = true;
 		}
 
+		/// <summary>
+		/// Show a dialogue with the provided <paramref name="resource"/> and <paramref name="title"/>. 
+		/// Can be awaited to pause execution in the current thread.
+		/// </summary>
+		/// <param name="resource"></param>
+		/// <param name="title"></param>
 		public async Task ShowDialogue(Resource resource, string title)
 		{
 			Dialogue.ShowDisplay(resource, title);
 			await ToSignal(Dialogue, DialogueDisplay.SignalName.DialogueEnded);
 		}
 
+		/// <summary>
+		/// Tween the <c>Camera</c> to a <paramref name="position"/> for a certain <paramref name="duration"/>.
+		/// Can be awaited to pause the execution until the Camera has finished tweening.
+		/// </summary>
+		/// <param name="position">The position that the <c>Camera</c> should tween to.</param>
+		/// <param name="duration">The duration that the <c>Camera</c> should be tweened for.</param>
 		public async Task TweenCamera(Vector2 position, float duration)
 		{
 			Tween tween = GetTree().CreateTween();
@@ -172,11 +202,34 @@ namespace TheWizardCoder.Abstractions
 			await ToSignal(tween, Tween.SignalName.Finished);
 		}
 
-		public async Task TweenCameraToPlayer(float duration)
+        /// <summary>
+        /// Tween the <c>Camera</c> to the <c>Player</c> for a specified <paramref name="duration"/>.
+        /// Can be awaited just like <see cref="BaseRoom.TweenCamera(Vector2, float)"/>
+        /// </summary>
+        /// <param name="duration">The duration that the <c>Camera</c> should be tweened for.</param>
+        /// <returns></returns>
+        public async Task TweenCameraToPlayer(float duration)
 		{
 			await TweenCamera(Player.Position, duration);
 		}
 
+		/// <summary>
+		/// Get the tile at the specified global <paramref name="position"/> and the <paramref name="layer"/> within
+		/// the <c>TileMap</c>.
+		/// <example>
+		/// Example with requesting a tile and checking a custom property:
+		/// <code>
+		/// TileData tileData = global.CurrentRoom.GetTileAtPosition(1, new Vector2(20, 55));
+		/// if (tileData.GetCustomTile("isWater").AsBool())
+		/// {
+		///		GD.Print("This tile is a water tile.");
+		/// }
+		/// </code>
+		/// </example>
+		/// </summary>
+		/// <param name="layer"></param>
+		/// <param name="position"></param>
+		/// <returns>The data for the quested tile.</returns>
 		public TileData GetTileAtPosition(int layer, Vector2 position)
 		{
 			Vector2 localPosition = TileMap.ToLocal(position);
@@ -186,16 +239,33 @@ namespace TheWizardCoder.Abstractions
 			return tileData;
 		}
 
+		/// <summary>
+		/// Show a <c>Display</c> that this scene containsby calling <c>ShowDisplay()</c>
+		/// </summary>
+		/// <param name="displayName">The display to hide</param>
 		public void ShowDisplay(string displayName)
 		{
 			GetNode(displayName).Call("ShowDisplay");
 		}
 
-		public void ShowDisplay(string displayName, params Variant[] args)
+        /// <summary>
+        /// Show a <c>Display</c> that this scene contains with provided arguments by calling <c>ShowDisplay()</c>
+        /// </summary>
+        /// <remarks>
+		/// <see cref="BaseRoom.ShowDisplay(string, Variant[])"/> may be called via Godot's reflection due to dialogue calls
+		/// </remarks>
+        /// <param name="displayName">The display to hide</param>
+        /// <param name="args">Arguments to <c>ShowDisplay()</c></param>
+        [JetBrains.Annotations.UsedImplicitly]
+        public void ShowDisplay(string displayName, params Variant[] args)
 		{
 			GetNode(displayName).Call("ShowDisplay", args);
 		}
 
+		/// <summary>
+		/// Hide a <c>Display</c> with the provided name
+		/// </summary>
+		/// <param name="displayName">The display to hide</param>
 		public void HideDisplay(string displayName)
 		{
 			GetNode(displayName).Call("HideDisplay");

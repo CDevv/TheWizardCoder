@@ -9,6 +9,9 @@ using TheWizardCoder.Subdisplays;
 
 namespace TheWizardCoder.Abstractions
 {
+	/// <summary>
+	/// A class that acts as container for information about participants during a battle.
+	/// </summary>
 	public abstract partial class CharactersContainer : Node
 	{
 		[Export]

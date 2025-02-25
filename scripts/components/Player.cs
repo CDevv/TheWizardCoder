@@ -12,6 +12,9 @@ using TheWizardCoder.Utils;
 
 namespace TheWizardCoder.Components
 {
+    /// <summary>
+    /// A component, representing the player's character in the world.
+    /// </summary>
     public partial class Player : CharacterBody2D
     {
         [Export]
@@ -33,7 +36,6 @@ namespace TheWizardCoder.Components
         public Actor Follower { get; set; }
         public bool HasFollower { get; set; } = false;
         public GroundEnemy Enemy { get; set; }
-
         public int PlayerSpeed { get; private set; } = DefaultSpeed;
         public float DistanceWalked { get; set; } = 0;
         public bool CameraEnabled { get; set; } = true;
@@ -301,11 +303,19 @@ namespace TheWizardCoder.Components
             }
         }
 
+        /// <summary>
+        /// Play an animation that is neither idle or movement with the provided <paramref name="name"/>
+        /// </summary>
+        /// <param name="name">The name of the animation</param>
         public void PlaySideAnimation(string name)
         {
             animatedSprite.Play(name);
         }
 
+        /// <summary>
+        /// Play an idle animation that corresponds to the provided <paramref name="direction"/>
+        /// </summary>
+        /// <param name="direction">The direction of the animation</param>
         public void PlayIdleAnimation(Direction direction)
         {
             Direction = direction;
@@ -318,6 +328,10 @@ namespace TheWizardCoder.Components
             interactableFinder.Rotation = direction.ToVector().Angle() - (Mathf.Pi / 2);
         }
 
+        /// <summary>
+        /// Play a movement animations that corresponds to the provided <paramref name="direction"/>
+        /// </summary>
+        /// <param name="direction">The direction of the animation</param>
         public void PlayMoveAnimation(Direction direction)
         {
             Direction = direction;
@@ -337,6 +351,9 @@ namespace TheWizardCoder.Components
             PlayMoveAnimation(direction.ToDirection());
         }
 
+        /// <summary>
+        /// Freeze the player in place and disable the GameDisplay. Prevents the player from moving and opening the GameDisplay
+        /// </summary>
         public void Freeze()
         {
             global.CanWalk = false;
@@ -344,48 +361,32 @@ namespace TheWizardCoder.Components
             PlayIdleAnimation(Direction);
         }
 
+        /// <summary>
+        /// Unfreeze the player, by making them able to move and enable the GameDisplay.
+        /// </summary>
         public void Unfreeze()
         {
             global.CanWalk = true;
             global.GameDisplayEnabled = true;
         }
 
-        public async void TransitionToRoom(Warper warper)
-        {
-            global.CurrentRoom.TransitionRect.PlayAnimation();
-            await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
-            if (string.IsNullOrEmpty(warper.TargetLocation))
-            {
-                global.ChangeRoom(warper.TargetRoomName);
-            }
-            else
-            {
-                global.ChangeRoom(warper.TargetRoomName, warper.TargetLocation, warper.PlayerDirection);
-            }
-        }
-
-        public async void TransitionToRoomName(string roomName, string markerName, Direction direction)
-        {
-            global.CurrentRoom.TransitionRect.PlayAnimation();
-            await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
-            if (string.IsNullOrEmpty(markerName))
-            {
-                global.ChangeRoom(roomName);
-            }
-            else
-            {
-                global.ChangeRoom(roomName, markerName, direction);
-            }
-        }
-
-        public void ShowDialogueBallon(Resource resource, string title)
-        {
-            DialogueManager.ShowDialogueBalloon(resource, title);
-        }
-
+        /// <summary>
+        /// Adds an Actor whose name is <paramref name="name"/> to the <c>Player</c>'s party and makes the <c>Actor</c>
+        /// a follower.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="setPos"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException">Thrown when the Actor with name <paramref name="name"/> cannot be found</exception>
         public Actor AddAlly(string name, bool setPos)
         {
-            Follower = global.CurrentRoom.GetNode<Actor>(name);
+            Follower = global.CurrentRoom.GetNodeOrNull<Actor>(name);
+
+            if (Follower == null)
+            {
+                throw new ArgumentException($"The Actor {name} does not exist.");
+            }
+
             if (!global.PlayerData.Allies.Exists(x => x.Name == name))
             {
                 global.PlayerData.Allies.Add(global.Characters[name]);

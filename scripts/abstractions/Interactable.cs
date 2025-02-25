@@ -5,6 +5,9 @@ using TheWizardCoder.Components;
 
 namespace TheWizardCoder.Abstractions
 {
+	/// <summary>
+	/// Base class for interactables. An interactable is what the player can interact with.
+	/// </summary>
 	public partial class Interactable : Area2D
 	{
 		[Signal]

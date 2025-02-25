@@ -8,9 +8,13 @@ using System.Linq;
 using TheWizardCoder.Utils;
 using System.Threading.Tasks;
 using TheWizardCoder.Autoload;
+using TheWizardCoder.Interactables;
 
-namespace TheWizardCoder.Interactables
+namespace TheWizardCoder.Components
 {
+	/// <summary>
+	/// A class representing an Actor, which may just be a Non-Playable Character (NPC) that has a dialogue or follows the player.
+	/// </summary>
 	public partial class Actor : CharacterBody2D
 	{
 		private const int PixelsPerSecond = 120; //120 pixels per frame
@@ -36,6 +40,10 @@ namespace TheWizardCoder.Interactables
 		private Direction direction;
 
 		public AnimatedSprite2D Sprite { get { return sprite; } }
+
+		/// <summary>
+		/// Returns whether or not this <c>Actor</c> is currently following the player.
+		/// </summary>
 		public bool FollowingPlayer { get { return followingPlayer; } }
 		public int Speed { get; set; } = 2;
 		public CharacterPathway LastPathway { get; set; }
@@ -100,6 +108,9 @@ namespace TheWizardCoder.Interactables
 			global.CurrentRoom.Player.Follower = this;
 		}
 
+		/// <summary>
+		/// Enables following the player of an <c>Actor</c>
+		/// </summary>
 		public void EnableFollowing()
 		{
 			interactable.Active = false;
@@ -107,6 +118,9 @@ namespace TheWizardCoder.Interactables
 			collision.Disabled = true;
 		}
 
+		/// <summary>
+		/// Disables following the player. It may be enabled again with <c>EnableFollowing()</c>, thus pausing the following toggle is possible.
+		/// </summary>
 		public void DisableFollowing()
 		{
 			interactable.Active = true;
@@ -116,17 +130,42 @@ namespace TheWizardCoder.Interactables
 			pathways = new();
 		}
 
+		/// <summary>
+		/// Adds a pathway point to the pathways queue of an <c>Actor</c>. When the <c>Actor</c>
+		/// reaches this point, it will change to the provided <paramref name="direction"/> and <paramref name="speed"/>.
+		/// </summary>
+		/// <param name="direction">Direction that the Actor will face.</param>
+		/// <param name="point">The position of the point</param>
+		/// <param name="speed">Speed that the Actor will change to</param>
 		public void AddPathwayPoint(Direction direction, Vector2 point, int speed)
 		{
 			CharacterPathway pathway = new(direction, point, speed);
 			pathways.Enqueue(pathway);
 		}
 
+		/// <summary>
+		/// Adds a pathway point to the pathways queue with the current direction and position and a default speed.
+		/// </summary>
 		public void AddPathwayPoint()
 		{
 			AddPathwayPoint(DefaultDirection, Position, 2);
 		}
 
+		/// <summary>
+		/// Method that advances the movement of an <c>Actor</c> towards the <c>Player</c>. Should be used
+		/// within a <c>_Process</c> or <c>_PhysicsProcess</c> method.
+		/// <example>
+		/// For example:
+		/// <code>
+		/// public void _PhysicsProcess(double delta)
+		/// {
+		///		//...
+		///		FollowPlayer(delta);
+		/// }
+		/// </code>
+		/// </example>
+		/// </summary>
+		/// <param name="delta">Deltatime to be provided by the <c>_PhysicsProcess</c> method.</param>
 		public void FollowPlayer(double delta)
 		{
 			if (global.CurrentRoom.Player.Velocity != Vector2.Zero)
@@ -181,11 +220,30 @@ namespace TheWizardCoder.Interactables
 			}
 		}
 
+		/// <summary>
+		/// Peek the pathways queue of this <c>Actor</c>
+		/// </summary>
+		/// <returns>A <c>CharacterPathway</c> object that describes the last pathway on top of the queue.</returns>
 		public CharacterPathway PeekPathway()
 		{
 			return pathways.Peek();
 		}
 
+		/// <summary>
+		/// Makes the <c>Actor</c> walk to a certain position. Can be awaited in case the <c>Actor</c>
+		/// needs to to walk to several points one by one.
+		/// <example>
+		/// Example with walking to different positions one by one:
+		/// <code>
+		/// private async Task WalkToPoints()
+		/// {
+		///		await WalkToPoint(new Vector2(50, 20));
+		///		await WalkToPoint(new Vector2(50, 70));
+		/// }
+		/// </code>
+		/// </example>
+		/// </summary>
+		/// <param name="point">Position to walk to</param>
 		public async Task WalkToPoint(Vector2 point)
 		{
 			walkingToPoint = true;
@@ -204,11 +262,19 @@ namespace TheWizardCoder.Interactables
 			PlayIdleAnimation(targetDirection);
 		}
 
+		/// <summary>
+		/// Play an animation.
+		/// </summary>
+		/// <param name="name">Name of the animation.</param>
 		public void PlayAnimation(string name)
 		{
 			sprite.Play(name);
 		}
 
+		/// <summary>
+		/// Play a walking animation, corresponding to the provided <paramref name="direction"/>
+		/// </summary>
+		/// <param name="direction"></param>
 		public void PlayAnimation(Direction direction)
 		{
 			this.direction = direction;
@@ -216,6 +282,10 @@ namespace TheWizardCoder.Interactables
 			PlayAnimation(direction.ToString().ToLower());
 		}
 
+		/// <summary>
+		/// Play an idle animation, corresponding to the provided <paramref name="direction"/>
+		/// </summary>
+		/// <param name="direction"></param>
 		public void PlayIdleAnimation(Direction direction)
 		{
 			sprite.Stop();
@@ -223,6 +293,9 @@ namespace TheWizardCoder.Interactables
 			sprite.Frame = (int)direction;
 		}
 
+		/// <summary>
+		/// Play an idle animation for the current direction of the <c>Actor</c>
+		/// </summary>
 		public void PlayIdleAnimation()
 		{
 			PlayIdleAnimation(direction);

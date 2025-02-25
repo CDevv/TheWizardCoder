@@ -2,12 +2,15 @@ using Godot;
 using System;
 using TheWizardCoder.Abstractions;
 
-public partial class Forest6 : BaseRoom
+namespace TheWizardCoder.Rooms
 {
-    public override void OnReady()
+    public partial class Forest6 : BaseRoom
     {
-        base.OnReady();
-		global.RemoveFromInventory("Forest4.cs");
-		global.AddToInventory("Forest5.cs", true);
+        public override void OnReady()
+        {
+            base.OnReady();
+            global.RemoveFromInventory("Forest4.cs");
+            global.AddToInventory("Forest5.cs", true);
+        }
     }
 }

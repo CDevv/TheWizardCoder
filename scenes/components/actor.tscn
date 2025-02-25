@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bk3a4lc0i5uwk"]
 
-[ext_resource type="Script" path="res://scripts/interactables/Actor.cs" id="1_jp4ki"]
+[ext_resource type="Script" path="res://scripts/components/Actor.cs" id="1_jp4ki"]
 [ext_resource type="Script" path="res://scripts/interactables/ActorInteractable.cs" id="2_ano2p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yl0hy"]

@@ -4,28 +4,31 @@ using System;
 using TheWizardCoder.Abstractions;
 using TheWizardCoder.Interactables;
 
-public partial class ForestNobeResidence : BaseRoom
+namespace TheWizardCoder.Rooms
 {
-	private Warper cabinWarper;
-	private DialoguePoint dialoguePoint;
-
-    public override void OnReady()
+    public partial class ForestNobeResidence : BaseRoom
     {
-        base.OnReady();
+        private Warper cabinWarper;
+        private DialoguePoint dialoguePoint;
 
-		cabinWarper = GetNode<Warper>("NobeCabinWarper");
-		dialoguePoint = GetNode<DialoguePoint>("NobeCabinDialogue");
+        public override void OnReady()
+        {
+            base.OnReady();
 
-		if (global.PlayerData.UnlockedNobeCabin)
-		{
-			UnlockCabin();
-		}
+            cabinWarper = GetNode<Warper>("NobeCabinWarper");
+            dialoguePoint = GetNode<DialoguePoint>("NobeCabinDialogue");
+
+            if (global.PlayerData.UnlockedNobeCabin)
+            {
+                UnlockCabin();
+            }
+        }
+
+        private void UnlockCabin()
+        {
+            global.PlayerData.UnlockedNobeCabin = true;
+            cabinWarper.Active = true;
+            dialoguePoint.Active = false;
+        }
     }
-
-    private void UnlockCabin()
-	{
-		global.PlayerData.UnlockedNobeCabin = true;
-		cabinWarper.Active = true;
-		dialoguePoint.Active = false;
-	}
 }

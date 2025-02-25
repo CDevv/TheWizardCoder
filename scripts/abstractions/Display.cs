@@ -5,6 +5,9 @@ using TheWizardCoder.Autoload;
 
 namespace TheWizardCoder.Abstractions
 {
+    /// <summary>
+    /// Base class for all Displays and Subdisplays. A Display contains UI elements like buttons and labels.
+    /// </summary>
     public abstract partial class Display : CanvasLayer
     {
         protected Global global;

@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Threading.Tasks;
 using TheWizardCoder.Abstractions;
+using TheWizardCoder.Components;
 using TheWizardCoder.Enums;
 using TheWizardCoder.Interactables;
 
