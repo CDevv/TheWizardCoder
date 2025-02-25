@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://bk1irawenqect"]
+
+[ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_prrf4"]
+[ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_dbhm1"]
+[ext_resource type="TileSet" uid="uid://bxvx8pmnaw0ed" path="res://tilesets/nolan_house.tres" id="3_ndjqj"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_w201q"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_8kpju"]
+a = Vector2(128, 128)
+b = Vector2(128, 384)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_xn22b"]
+a = Vector2(128, 384)
+b = Vector2(512, 384)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_q1xl7"]
+a = Vector2(512, 128)
+b = Vector2(512, 384)
+
+[node name="HouseBasement" instance=ExtResource("1_prrf4")]
+y_sort_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="." index="16"]
+offset_right = 640.0
+offset_bottom = 480.0
+color = Color(0, 0, 0, 1)
+
+[node name="Player" parent="." index="17" instance=ExtResource("2_dbhm1")]
+z_index = 2
+position = Vector2(184, 286)
+
+[node name="TileMap" type="TileMap" parent="." index="18"]
+y_sort_enabled = true
+scale = Vector2(2, 2)
+tile_set = ExtResource("3_ndjqj")
+format = 2
+layer_0/name = "props"
+layer_0/y_sort_enabled = true
+layer_0/z_index = 2
+layer_0/tile_data = PackedInt32Array(524296, 393216, 3, 524297, 458752, 3, 524298, 458752, 3, 524299, 458752, 3, 524300, 458752, 3, 524301, 458752, 3, 524302, 524288, 3)
+layer_1/name = "wall"
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array(458757, 196608, 5)
+layer_2/name = "ground"
+layer_2/tile_data = PackedInt32Array(524292, 65536, 4, 589828, 131072, 4, 655364, 65536, 4, 720900, 65536, 6, 524293, 131072, 4, 589829, 65536, 4, 655365, 0, 4, 720901, 131072, 4, 524294, 0, 4, 589830, 0, 4, 655366, 65536, 4, 720902, 65536, 4, 524295, 65536, 4, 589831, 131072, 4, 655367, 131072, 4, 720903, 0, 4, 524296, 0, 4, 589832, 65536, 4, 655368, 131072, 4, 720904, 65536, 4, 524297, 65536, 4, 589833, 131072, 4, 655369, 65536, 4, 720905, 131072, 4, 524298, 0, 4, 589834, 0, 4, 655370, 131072, 4, 720906, 0, 4, 524299, 0, 4, 589835, 131072, 4, 655371, 65536, 4, 720907, 0, 4, 524300, 65536, 4, 589836, 131072, 4, 655372, 0, 4, 720908, 131072, 4, 524301, 0, 4, 589837, 65536, 4, 655373, 65536, 4, 720909, 65536, 4, 524302, 65536, 4, 589838, 0, 4, 655374, 131072, 4, 720910, 0, 4, 524303, 0, 4, 589839, 0, 4, 655375, 65536, 4, 720911, 131072, 6, 458756, 0, 8, 458757, 0, 8, 458758, 0, 8, 458759, 0, 8, 458760, 0, 8, 458761, 0, 8, 458762, 0, 8, 458763, 0, 8, 458764, 0, 8, 458765, 0, 8, 458766, 0, 8, 458767, 0, 8, 262148, 65536, 8, 327684, 65536, 8, 262149, 65536, 8, 327685, 65536, 8, 262150, 65536, 8, 327686, 65536, 8, 327687, 65536, 8, 327688, 65536, 8, 393224, 65536, 8, 327689, 65536, 8, 393225, 65536, 8, 327690, 65536, 8, 393226, 65536, 8, 327691, 65536, 8, 393227, 65536, 8, 327692, 65536, 8, 393228, 65536, 8, 327693, 65536, 8, 393229, 65536, 8, 327694, 65536, 8, 393230, 65536, 8, 393231, 65536, 8, 262151, 65536, 8, 262152, 65536, 8, 262153, 65536, 8, 262154, 65536, 8, 262155, 65536, 8, 262156, 65536, 8, 262157, 65536, 8, 262158, 65536, 8, 393220, 65536, 8, 393221, 65536, 8, 393222, 65536, 8, 393223, 65536, 8, 262159, 65536, 8, 327695, 65536, 8)
+
+[node name="RoomCollision" type="StaticBody2D" parent="." index="19"]
+
+[node name="Wall1" type="CollisionShape2D" parent="RoomCollision" index="0"]
+shape = SubResource("SegmentShape2D_8kpju")
+
+[node name="Wall2" type="CollisionShape2D" parent="RoomCollision" index="1"]
+shape = SubResource("SegmentShape2D_xn22b")
+
+[node name="Wall3" type="CollisionShape2D" parent="RoomCollision" index="2"]
+shape = SubResource("SegmentShape2D_q1xl7")
+
+[node name="EnterMarker" type="Marker2D" parent="." index="20"]
+position = Vector2(184, 286)
+
+[node name="Warper" parent="." index="21" instance=ExtResource("4_w201q")]
+z_index = 3
+position = Vector2(184, 240)
+scale = Vector2(1.5, 1)
+TargetRoomName = "outside_home"
+TargetLocation = "BasementMarker"
+PlayerDirection = 2

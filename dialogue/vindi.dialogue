@@ -350,6 +350,8 @@ else:
 Sigbert: [#portrait=0] Oh, hello there!
 Nolan: [#portrait=0] Interesting house you got here.
 Sigbert: [#portrait=0] Thanks!
+if PlayerHasFollower():
+	Gertrude: [#portrait=0] Yeah, it's pretty nice!
 => END!
 
 ~ amy_point
