@@ -9,21 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://hxmst0tc6gbs" path="res://assets/ui/area_border.png" id="6_kenbx"]
 [ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/components/code_problem_point.tscn" id="8_032od"]
 
-[sub_resource type="Animation" id="Animation_v7dtm"]
-resource_name = "hide_glitch"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PuzzleGlitch:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_n4fm3"]
 resource_name = "code_solved"
 length = 0.5
@@ -38,6 +23,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_v7dtm"]
+resource_name = "hide_glitch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PuzzleGlitch:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q7xx0"]
@@ -162,7 +162,7 @@ position = Vector2(176, 368)
 UniqueIdentifier = "SolvedHotelRoom"
 Code = "for (int i = 0; 		;  i++)
 {
-	for (int j = 0; 	; j++)
+	for (int j = 0; 	; 	j++)
 		if (ContainsGlitch(i,j))
 	RemoveGlitch(i,j);
 }"

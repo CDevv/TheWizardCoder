@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ccfivysfrw04h"]
+[gd_scene load_steps=20 format=3 uid="uid://ccfivysfrw04h"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_50tq3"]
 [ext_resource type="Script" path="res://scripts/rooms/Vindi7.cs" id="2_7rtrx"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/components/code_problem_point.tscn" id="10_o5psq"]
 [ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="11_oye6h"]
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="13_oc5s0"]
+[ext_resource type="Texture2D" uid="uid://ssogye25ef45" path="res://assets/props/barrier.png" id="14_vqhln"]
 
 [sub_resource type="Animation" id="Animation_20cih"]
 resource_name = "hide_glitch"
@@ -56,7 +57,7 @@ a = Vector2(1560, 992)
 b = Vector2(800, 992)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mu6ue"]
-size = Vector2(33, 378)
+size = Vector2(32, 376)
 
 [node name="Vindi7" instance=ExtResource("1_50tq3")]
 y_sort_enabled = true
@@ -150,7 +151,7 @@ z_index = 3
 
 [node name="QuestWall" type="CollisionShape2D" parent="QuestCollision" index="0"]
 unique_name_in_owner = true
-position = Vector2(1655.5, 699)
+position = Vector2(1656, 700)
 shape = SubResource("RectangleShape2D_mu6ue")
 
 [node name="SnowParticles" parent="." index="30" instance=ExtResource("5_p5ogs")]
@@ -248,6 +249,72 @@ z_index = 5
 position = Vector2(848, 536)
 DialogueResource = ExtResource("7_lbn5x")
 DialogueTitle = "theodore_house_glitch"
+
+[node name="Barrier1" type="Sprite2D" parent="." index="43" groups=["barrier"]]
+z_index = 1
+position = Vector2(1656, 528)
+scale = Vector2(2, 2)
+texture = ExtResource("14_vqhln")
+
+[node name="Barrier2" type="Sprite2D" parent="." index="44" groups=["barrier"]]
+z_index = 1
+position = Vector2(1656, 560)
+scale = Vector2(2, 2)
+texture = ExtResource("14_vqhln")
+
+[node name="Barrier3" type="Sprite2D" parent="." index="45" groups=["barrier"]]
+z_index = 1
+position = Vector2(1656, 592)
+scale = Vector2(2, 2)
+texture = ExtResource("14_vqhln")
+
+[node name="Barrier4" type="Sprite2D" parent="." index="46" groups=["barrier"]]
+z_index = 1
+position = Vector2(1656, 624)
+scale = Vector2(2, 2)
+texture = ExtResource("14_vqhln")
+
+[node name="Barrier5" type="Sprite2D" parent="." index="47" groups=["barrier"]]
+z_index = 1
+position = Vector2(1656, 656)
+scale = Vector2(2, 2)
+texture = ExtResource("14_vqhln")
+
+[node name="Barrier6" type="Sprite2D" parent="." index="48" groups=["barrier"]]
+z_index = 1
+position = Vector2(1656, 688)
+scale = Vector2(2, 2)
+texture = ExtResource("14_vqhln")
+
+[node name="Barrier7" type="Sprite2D" parent="." index="49" groups=["barrier"]]
+z_index = 1
+position = Vector2(1656, 720)
+scale = Vector2(2, 2)
+texture = ExtResource("14_vqhln")
+
+[node name="Barrier8" type="Sprite2D" parent="." index="50" groups=["barrier"]]
+z_index = 1
+position = Vector2(1656, 752)
+scale = Vector2(2, 2)
+texture = ExtResource("14_vqhln")
+
+[node name="Barrier9" type="Sprite2D" parent="." index="51" groups=["barrier"]]
+z_index = 1
+position = Vector2(1656, 784)
+scale = Vector2(2, 2)
+texture = ExtResource("14_vqhln")
+
+[node name="Barrier10" type="Sprite2D" parent="." index="52" groups=["barrier"]]
+z_index = 1
+position = Vector2(1656, 816)
+scale = Vector2(2, 2)
+texture = ExtResource("14_vqhln")
+
+[node name="Barrier11" type="Sprite2D" parent="." index="53" groups=["barrier"]]
+z_index = 1
+position = Vector2(1656, 848)
+scale = Vector2(2, 2)
+texture = ExtResource("14_vqhln")
 
 [connection signal="ProblemSolved" from="CodeProblemPanel" to="." method="OnSubmitted" binds= [true]]
 [connection signal="Submitted" from="CodeProblemPanel" to="." method="OnSubmitted" binds= [false]]

@@ -340,10 +340,10 @@ else:
 
 ~ theodore_point
 if GetPlayerData("CompletedAllVindiQuests"):
-	Theodore: [#portrait=0] The pile of snow is.. gone now?
+	Theodore: [#portrait=0] The barrier is gone now..?
 else:
 	Theodore: [#portrait=0] Can't walk over there unfortunately. 
-	Theodore: [#portrait=0] Like, what is that large pile of snow? 
+	Theodore: [#portrait=0] Like, what are those red signs?
 => END!
 
 ~ sigbert_point
@@ -355,5 +355,16 @@ if PlayerHasFollower():
 => END!
 
 ~ amy_point
-Amy: [#portrait=0] Hello! How may I help you?
+if GetPlayerData("SolvedHotelRoom"):
+	Nolan: [#portrait=0] It was fixed..
+	Amy: [#portrait=0] Thanks!
+else:
+	Amy: [#portrait=0] Hello! How may I help you?
+	if PlayerHasFollower():
+		Gertrude: [#portrait=2] Actually, shouldn't we help you?
+	else:
+		Nolan: [#portrait=0] Well.. is there not something I can help with?
+	Amy: [#portrait=0] Hmm.. yes, actually.
+	Amy: [#portrait=0] There is a room upstairs that has some strange black holes..
+	Amy: [#portrait=0] Can you look into that?
 => END!

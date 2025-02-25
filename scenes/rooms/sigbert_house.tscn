@@ -28,6 +28,9 @@ b = Vector2(544, 416)
 [node name="SigbertHouse" instance=ExtResource("1_0qp7q")]
 y_sort_enabled = true
 
+[node name="Gertrude" parent="." index="14"]
+z_index = 2
+
 [node name="ColorRect" type="ColorRect" parent="." index="16"]
 offset_right = 640.0
 offset_bottom = 480.0
