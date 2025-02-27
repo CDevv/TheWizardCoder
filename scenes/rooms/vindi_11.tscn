@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_x4567"]
 [ext_resource type="PackedScene" uid="uid://doyfot0kgcxa2" path="res://scenes/components/snow_particles.tscn" id="5_o1vp8"]
 [ext_resource type="PackedScene" uid="uid://d38oq7utuerxp" path="res://scenes/components/ground_enemy.tscn" id="6_vyxch"]
-[ext_resource type="Texture2D" uid="uid://yshsdevpml0u" path="res://assets/battle/backgrounds/battle-bg-forest.png" id="7_2kus4"]
+[ext_resource type="Texture2D" uid="uid://c7lmpb8sd1odv" path="res://assets/battle/backgrounds/battle-bg-snow.png" id="7_p0nyx"]
 
 [node name="Vindi11" instance=ExtResource("1_31n0n")]
 y_sort_enabled = true
@@ -79,9 +79,9 @@ position = Vector2(1760, 0)
 [node name="GroundEnemy" parent="." index="27" instance=ExtResource("6_vyxch")]
 position = Vector2(200, 432)
 EnemyName = "LagMan"
-BackgroundImage = ExtResource("7_2kus4")
+BackgroundImage = ExtResource("7_p0nyx")
 
 [node name="GroundEnemy2" parent="." index="28" instance=ExtResource("6_vyxch")]
 position = Vector2(1984, 328)
 EnemyName = "LagMan"
-BackgroundImage = ExtResource("7_2kus4")
+BackgroundImage = ExtResource("7_p0nyx")

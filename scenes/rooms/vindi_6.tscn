@@ -5,7 +5,7 @@
 [ext_resource type="TileSet" uid="uid://dqirfdrc3jlyd" path="res://tilesets/vindi_env.tres" id="3_7hrr5"]
 [ext_resource type="PackedScene" uid="uid://d38oq7utuerxp" path="res://scenes/components/ground_enemy.tscn" id="4_lv11s"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_pyty7"]
-[ext_resource type="Texture2D" uid="uid://yshsdevpml0u" path="res://assets/battle/backgrounds/battle-bg-forest.png" id="5_od5ed"]
+[ext_resource type="Texture2D" uid="uid://c7lmpb8sd1odv" path="res://assets/battle/backgrounds/battle-bg-snow.png" id="5_ipa4l"]
 [ext_resource type="PackedScene" uid="uid://doyfot0kgcxa2" path="res://scenes/components/snow_particles.tscn" id="5_qfsh5"]
 
 [node name="Vindi6" instance=ExtResource("1_2ppej")]
@@ -35,20 +35,20 @@ layer_2/tile_data = PackedInt32Array()
 [node name="GroundEnemy" parent="." index="17" instance=ExtResource("4_lv11s")]
 z_index = 1
 position = Vector2(296, 256)
-BackgroundImage = ExtResource("5_od5ed")
+BackgroundImage = ExtResource("5_ipa4l")
 PlaythroughProperty = "DefeatedQuestEnemy1"
 
 [node name="GroundEnemy2" parent="." index="18" instance=ExtResource("4_lv11s")]
 z_index = 1
 position = Vector2(752, 288)
-BackgroundImage = ExtResource("5_od5ed")
+BackgroundImage = ExtResource("5_ipa4l")
 PlaythroughProperty = "DefeatedQuestEnemy2"
 
 [node name="GroundEnemy3" parent="." index="19" instance=ExtResource("4_lv11s")]
 z_index = 1
 position = Vector2(496, 296)
 EnemyName = "LagMan"
-BackgroundImage = ExtResource("5_od5ed")
+BackgroundImage = ExtResource("5_ipa4l")
 PlaythroughProperty = "DefeatedQuestEnemy3"
 
 [node name="Section3Marker" type="Marker2D" parent="." index="20"]

@@ -22,8 +22,8 @@
 		"Type": "Ally",
 	},
 	"Glitch": {
-		"Health": 50,
-		"MaxHealth": 50,
+		"Health": 30,
+		"MaxHealth": 30,
 		"Points": 0,
 		"MaxPoints": 0,
 		"AttackPoints": 10,
