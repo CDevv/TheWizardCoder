@@ -29,6 +29,10 @@ namespace TheWizardCoder.Abstractions
 			global = GetNode<Global>("/root/Global");
 		}
 
+		/// <summary>
+		/// Add a character to this container.
+		/// </summary>
+		/// <param name="character">The <c>Character</c> to add</param>
 		public virtual void AddCharacter(Character character)
 		{
 			int currentIndex = Characters.Count;
@@ -38,9 +42,15 @@ namespace TheWizardCoder.Abstractions
 			BattleStates.Add(characterBattleState);
 		}
 
+		/// <summary>
+		/// Start the turn for the participants that this container contains.
+		/// </summary>
 		public virtual void StartTurn()
 		{}
 
+		/// <summary>
+		/// Pass to the next character.
+		/// </summary>
 		public async void PassToNext()
 		{
 			CurrentCharacter++;
@@ -85,11 +95,21 @@ namespace TheWizardCoder.Abstractions
 
 		public abstract void HideBattleEffect(int index);
 
+		/// <summary>
+		/// Damage a <c>Character</c> in this container with the given <paramref name="index"/> and <paramref name="damage"/>
+		/// </summary>
+		/// <param name="index">The target's index</param>
+		/// <param name="damage">The negative health change</param>
 		public virtual async Task DamageCharacter(int index, int damage)
 		{
 			Characters[index].RemoveHealth(damage);
 		}
 
+		/// <summary>
+		/// Heal a <c>Character</c> in this container with <paramref name="targetIndex"/> and <paramref name="addedHealth"/>
+		/// </summary>
+		/// <param name="targetIndex">The index of the <c>Character</c> to heal</param>
+		/// <param name="addedHealth">Added health to the <c>Character</c></param>
 		public async Task HealCharacter(int targetIndex, int addedHealth)
 		{
 			CharacterBattleState state = BattleStates[targetIndex];
@@ -123,6 +143,12 @@ namespace TheWizardCoder.Abstractions
             await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
         }
 
+		/// <summary>
+		/// Apply a <c>BattleEffect</c> to a <c>Character</c> at the <paramref name="targetIndex"/>
+		/// </summary>
+		/// <param name="targetIndex">Index of the target <c>Character</c></param>
+		/// <param name="effect">The <c>BattleEffect</c> object</param>
+		/// <returns></returns>
 		public async Task ApplyBattleEffect(int targetIndex, BattleEffect effect)
 		{
             if (BattleStates[targetIndex].HasBattleEffect)
@@ -162,6 +188,10 @@ namespace TheWizardCoder.Abstractions
             await DisplayBattleEffect(targetIndex);
         }
 
+		/// <summary>
+		/// Remove the <c>BattleEffect</c> of the <c>Character</c> at the specified index.
+		/// </summary>
+		/// <param name="targetIndex">Index of the target <c>Character</c></param>
 		public void RemoveBattleEffect(int targetIndex)
 		{
 			BattleEffect effect = BattleStates[targetIndex].BattleEffect;
@@ -192,6 +222,10 @@ namespace TheWizardCoder.Abstractions
 			HideBattleEffect(targetIndex);
         }
 
+		/// <summary>
+		/// Get the total health of every <c>Character</c> in this container.
+		/// </summary>
+		/// <returns>The total health of every character.</returns>
 		public int GetTotalHealth()
 		{
 			int result = 0;
@@ -202,6 +236,9 @@ namespace TheWizardCoder.Abstractions
 			return result;
 		}
 
+		/// <summary>
+		/// Clear the <c>Character</c>s in this container.
+		/// </summary>
 		public virtual void Clear()
 		{
 			Characters = new();

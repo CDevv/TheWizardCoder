@@ -15,9 +15,11 @@ namespace TheWizardCoder.Abstractions
 
 		protected Global global;
 
-		[Export]
+        /// <value>Whether or not the <c>Interactable</c> can be interacted with.</value>
+        [Export]
 		public bool Active { get; set; } = true;
 
+		/// <value>Whether this <c>Interactable</c> activates when the <c>Player</c> collides with it.</value>
 		[Export]
 		public bool OnCollision { get; set; } = false;
 
@@ -26,6 +28,9 @@ namespace TheWizardCoder.Abstractions
 			global = GetNode<Global>("/root/Global");
 		}
 
+		/// <summary>
+		/// Method to be called when the <c>Player</c> prompts to interact.
+		/// </summary>
 		public void Interact()
 		{
 			if (Active)
@@ -39,6 +44,9 @@ namespace TheWizardCoder.Abstractions
 			}
 		}
 
+		/// <summary>
+		/// Method to be called when the <c>Interactable</c> is <see cref="Interactable.Active"/>
+		/// </summary>
 		public virtual void Action() {}
 
 		private void OnBodyEntered(Node2D node)
@@ -52,9 +60,11 @@ namespace TheWizardCoder.Abstractions
 			}
 		}
 
+		/// <summary>
+		/// Method to be called when the <c>Interactable</c> is not <see cref="Interactable.Active"/>
+		/// </summary>
 		public virtual void OnNotActive()
 		{
-			GD.Print("not active");
 			global.CanWalk = true;
 		}
 	}

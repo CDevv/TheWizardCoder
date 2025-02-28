@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://xhjttm8ohy7a"]
+
+[ext_resource type="Script" path="res://scripts/displays/CreditsDisplay.cs" id="1_v2pwu"]
+[ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="2_j5igo"]
+[ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="3_ktm3t"]
+
+[node name="CreditsDisplay" type="CanvasLayer"]
+script = ExtResource("1_v2pwu")
+
+[node name="Rect" type="NinePatchRect" parent="."]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 320.0
+offset_bottom = 240.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_j5igo")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Label" type="Label" parent="Rect"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 248.0
+offset_bottom = 152.0
+theme = ExtResource("3_ktm3t")
+text = "Developer - cdevv/nikodev
+
+Testers:
+stan2894
+raidev
+thesketchhog
+ly_green"
+
+[node name="Back" type="Button" parent="Rect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -21.0
+offset_right = 11.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("3_ktm3t")
+text = "Back"
+
+[connection signal="pressed" from="Rect/Back" to="." method="OnBackButton"]

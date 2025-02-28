@@ -28,6 +28,7 @@ namespace TheWizardCoder.Displays
 			AddSubdisplay("SavedGames", GetNode<MainMenuSavedGames>("SavedGamesMenu"));
 			AddSubdisplay("Options", GetNode<OptionsMenu>("OptionsMenu"));
 			AddSubdisplay("Controls", GetNode<ControlsMenu>("ControlsMenu"));
+			AddSubdisplay("Credits", GetNode<CreditsDisplay>("CreditsDisplay"));
 
 			playButton.CallDeferred(Button.MethodName.GrabFocus);
 
@@ -83,6 +84,11 @@ namespace TheWizardCoder.Displays
 		public void ShowControls()
 		{
 			ChangeSubdisplay("Controls");
+		}
+
+		public void ShowCredits()
+		{
+			ChangeSubdisplay("Credits");
 		}
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bkmomdkodys8p"]
+[gd_scene load_steps=12 format=3 uid="uid://bkmomdkodys8p"]
 
 [ext_resource type="Script" path="res://scripts/displays/MainMenuDisplay.cs" id="1_bltqf"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="1_rbxpk"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://d2g5a1s11robp" path="res://scenes/subdisplays/mainmenu/main_menu_saved_games.tscn" id="6_drqyd"]
 [ext_resource type="PackedScene" uid="uid://b62mtle3y15o2" path="res://scenes/subdisplays/mainmenu/main_menu_options_menu.tscn" id="7_3t87n"]
 [ext_resource type="PackedScene" uid="uid://dqeyfgob3oyld" path="res://scenes/subdisplays/mainmenu/main_menu_controls_menu.tscn" id="8_1jpdt"]
+[ext_resource type="PackedScene" uid="uid://xhjttm8ohy7a" path="res://scenes/displays/credits_display.tscn" id="11_cbv8g"]
 
 [node name="MainMenuDisplay" type="CanvasLayer"]
 follow_viewport_enabled = true
@@ -41,9 +42,9 @@ texture = ExtResource("4_4lcj8")
 [node name="MainMenuRect" type="NinePatchRect" parent="Main"]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 384.0
+offset_top = 362.0
 offset_right = 84.0
-offset_bottom = 423.0
+offset_bottom = 413.0
 scale = Vector2(2, 2)
 texture = ExtResource("2_y37u4")
 region_rect = Rect2(0, 0, 16, 16)
@@ -58,7 +59,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 68.0
-offset_bottom = 39.0
+offset_bottom = 52.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
@@ -74,7 +75,7 @@ theme_override_constants/separation = 0
 [node name="PlayButton" type="Button" parent="Main/MainMenuRect/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_top = NodePath("../OptionsButton")
+focus_neighbor_top = NodePath("../CreditsButton")
 focus_neighbor_bottom = NodePath("../OptionsButton")
 mouse_filter = 2
 theme = ExtResource("1_rbxpk")
@@ -84,12 +85,21 @@ text = "Play"
 [node name="OptionsButton" type="Button" parent="Main/MainMenuRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../PlayButton")
-focus_neighbor_bottom = NodePath("../PlayButton")
+focus_neighbor_bottom = NodePath("../CreditsButton")
 mouse_filter = 2
 theme = ExtResource("1_rbxpk")
 theme_override_font_sizes/font_size = 36
 text = "Options
 "
+
+[node name="CreditsButton" type="Button" parent="Main/MainMenuRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../OptionsButton")
+focus_neighbor_bottom = NodePath("../PlayButton")
+mouse_filter = 2
+theme = ExtResource("1_rbxpk")
+theme_override_font_sizes/font_size = 36
+text = "Credits"
 
 [node name="SavedGamesMenu" parent="." node_paths=PackedStringArray("confirmation", "Transition") instance=ExtResource("6_drqyd")]
 visible = false
@@ -105,11 +115,16 @@ visible = false
 [node name="ControlsMenu" parent="." instance=ExtResource("8_1jpdt")]
 visible = false
 
+[node name="CreditsDisplay" parent="." instance=ExtResource("11_cbv8g")]
+visible = false
+
 [connection signal="pressed" from="Main/MainMenuRect/MarginContainer/VBoxContainer/PlayButton" to="." method="ShowSavedGamesMenu"]
 [connection signal="pressed" from="Main/MainMenuRect/MarginContainer/VBoxContainer/OptionsButton" to="." method="ShowOptions"]
+[connection signal="pressed" from="Main/MainMenuRect/MarginContainer/VBoxContainer/CreditsButton" to="." method="ShowCredits"]
 [connection signal="BackButtonTrigerred" from="SavedGamesMenu" to="." method="ShowMainMenu"]
 [connection signal="FileDeleted" from="DeleteFileConfirmation" to="SavedGamesMenu" method="OnFileDeleted"]
 [connection signal="visibility_changed" from="DeleteFileConfirmation" to="SavedGamesMenu" method="OnFileDeleted"]
 [connection signal="OnBackButtonPressed" from="OptionsMenu" to="." method="ShowMainMenu"]
 [connection signal="OnControlsButtonPressed" from="OptionsMenu" to="." method="ShowControls"]
 [connection signal="OnBackButtonPressed" from="ControlsMenu" to="." method="ShowOptions"]
+[connection signal="BackButtonTriggered" from="CreditsDisplay" to="." method="ShowMainMenu"]

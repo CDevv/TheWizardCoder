@@ -18,27 +18,45 @@ namespace TheWizardCoder.Abstractions
             global = GetNode<Global>("/root/Global");
         }
 
+        /// <summary>
+        /// Show this display.
+        /// </summary>
         public abstract void ShowDisplay();
         public virtual void UpdateDisplay()
         {
             
         }
         
+        /// <summary>
+        /// Hide this display.
+        /// </summary>
         public virtual void HideDisplay()
         {
             Hide();
         }
 
+        /// <summary>
+        /// Add a subdisplay to this <c>Display</c>
+        /// </summary>
+        /// <param name="name">Friendly name for this subdisplay</param>
+        /// <param name="subdisplay">The subdisplay object itself</param>
         public void AddSubdisplay(string name, Display subdisplay)
         {
             Subdisplays.Add(name, subdisplay);
         }
 
+        /// <summary>
+        /// Show a sibdisplay by its name
+        /// </summary>
+        /// <param name="name">Friendly name of the subdisplay</param>
         public void ShowSubdisplay(string name)
         {
             Subdisplays[name].ShowDisplay();
         }
 
+        /// <summary>
+        /// Hide all subdisplays that this <c>Display</c> contains
+        /// </summary>
         public void HideAllSubdisplays()
         {
             foreach (var item in Subdisplays)
@@ -47,12 +65,19 @@ namespace TheWizardCoder.Abstractions
             }
         }
 
+        /// <summary>
+        /// Switch visibility to another subdisplay. After this operation only the chosen subdisplay will be shown.
+        /// </summary>
+        /// <param name="name"></param>
         public void ChangeSubdisplay(string name)
         {
             HideAllSubdisplays();
             ShowSubdisplay(name);
         }
 
+        /// <summary>
+        /// Call <c>UpdateDisplay()</c> for each subdisplay that this <c>Display</c> contains.
+        /// </summary>
         public void UpdateAllSubdisplays()
         {
             foreach (var item in Subdisplays)
