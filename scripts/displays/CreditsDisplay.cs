@@ -9,20 +9,20 @@ public partial class CreditsDisplay : Display
 
 	private Button backButton;
 
-    public override void _Ready()
-    {
-        backButton = GetNode<Button>("%Back");
-    }
+	public override void _Ready()
+	{
+		backButton = GetNode<Button>("%Back");
+	}
 
-    private void OnBackButton()
+	private void OnBackButton()
 	{
 		Hide();
 		EmitSignal(SignalName.BackButtonTriggered);
 	}
 
-    public override void ShowDisplay()
-    {
+	public override void ShowDisplay()
+	{
 		Show();
-        backButton.GrabFocus();
-    }
+		backButton.GrabFocus();
+	}
 }

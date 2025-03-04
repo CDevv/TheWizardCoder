@@ -14,6 +14,12 @@ namespace TheWizardCoder.Data
 
         private const int BaseLevelPoints = 10;
 
+        private int initialHealth;
+        private int initialMana;
+        private int initialAttackPoints;
+        private int initialDefensePoint;
+        private int initialAgilityPoints;
+
         public Global Global { get; set; }
 
         public virtual string Name { get; set; }
@@ -25,9 +31,12 @@ namespace TheWizardCoder.Data
         public int DefensePoints { get; set; }
         public int AgilityPoints { get; set; }
         public Array<string> MagicSpells { get; set; }
+        public Array<string> Armours { get; set; }
+        public Array<string> EquippedArmours { get; set; }
         public CharacterType Type { get; set; }
         public int Level { get; set; } = 1;
         public int LevelPoints { get; set; }
+        public ArmourEffects ArmourEffects { get; set; }
         public Dictionary<int, Array<CharacterAction>> Behaviour { get; set; }
 
         private Dictionary<string, Variant> dict;
@@ -56,6 +65,27 @@ namespace TheWizardCoder.Data
                 Type = Enum.Parse<CharacterType>((string)dict["Type"]);
                 Level = 1;
                 LevelPoints = 0;
+
+                ArmourEffects = new ArmourEffects();
+                if (dict.ContainsKey("Armour"))
+                {
+                    Armours = (Array<string>)dict["Armours"];
+                }
+                else
+                {
+                    Armours = new();
+                }
+
+                EquippedArmours = new();
+
+                initialHealth = MaxHealth;
+                initialMana = MaxPoints;
+                initialAttackPoints = AttackPoints;
+                initialDefensePoint = DefensePoints;
+                initialAgilityPoints = AgilityPoints;
+
+                //test
+                Armours.Add("Nullable");
 
                 if (Type == CharacterType.Enemy)
                 {
@@ -187,6 +217,91 @@ namespace TheWizardCoder.Data
         public string GetRandomMagicSpell()
         {
             return MagicSpells.PickRandom();
+        }
+
+        public void AddArmourToInventory(string name)
+        {
+            if (!Armours.Contains(name))
+            {
+                Armours.Add(name);
+            }
+        }
+
+        public void EquipArmour(string name)
+        {
+            if (Armours.Contains(name) && !EquippedArmours.Contains(name))
+            {
+                EquippedArmours.Add(name);
+
+                Armour armour = Global.Armours[name];
+                if (armour != null)
+                {
+                    switch (armour.EffectType)
+                    {
+                        case BattleEffectType.Defense:
+                            ArmourEffects.Defense += armour.Effect;
+                            break;
+                        case BattleEffectType.Attack:
+                            ArmourEffects.Attack += armour.Effect;
+                            break;
+                        case BattleEffectType.Mana:
+                            ArmourEffects.Mana += armour.Effect;
+                            break;
+                        case BattleEffectType.Speed:
+                            ArmourEffects.Agility += armour.Effect;
+                            break;
+                        case BattleEffectType.Health:
+                            ArmourEffects.Health += armour.Effect;
+                            break;
+                    }
+                }
+            }
+        }
+
+        public void UnequipArmour(string name)
+        {
+            if (Armours.Contains(name) && EquippedArmours.Contains(name))
+            {
+                EquippedArmours.Remove(name);
+
+                Armour armour = Global.Armours[name];
+
+                if (armour != null)
+                {
+                    switch (armour.EffectType)
+                    {
+                        case BattleEffectType.Defense:
+                            ArmourEffects.Defense -= armour.Effect;
+                            break;
+                        case BattleEffectType.Attack:
+                            ArmourEffects.Attack -= armour.Effect;
+                            break;
+                        case BattleEffectType.Mana:
+                            ArmourEffects.Mana -= armour.Effect;
+                            break;
+                        case BattleEffectType.Speed:
+                            ArmourEffects.Agility -= armour.Effect;
+                            break;
+                        case BattleEffectType.Health:
+                            ArmourEffects.Health -= armour.Effect;
+                            break;
+                    }
+                }
+            }
+        }
+
+        public bool HasEquippedArmour(string name)
+        {
+            return EquippedArmours.Contains(name);
+        }
+
+        public void ApplyArmourEffects()
+        {
+            MaxHealth = initialHealth + ArmourEffects.Health;
+            MaxPoints = initialMana + ArmourEffects.Mana;
+            AttackPoints = initialAttackPoints + ArmourEffects.Attack;
+            DefensePoints = initialDefensePoint + ArmourEffects.Defense;
+            AgilityPoints = initialAgilityPoints + ArmourEffects.Agility;
         }
     }
 }

@@ -173,5 +173,29 @@ namespace TheWizardCoder.Utils
 
             return gameIntroStrings;
         }
+
+        public System.Collections.Generic.Dictionary<string, Armour> LoadArmours()
+        {
+            System.Collections.Generic.Dictionary<string, Armour> armours = new();
+
+            Variant jsonData = GetJsonData("res://info/armours.json");
+            Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
+
+            foreach (var item in parsedData)
+            {
+                var dict = item.Value;
+
+                string name = item.Key;
+                string description = (string)dict["Description"];
+                int effect = (int)dict["Effect"];
+                BattleEffectType type = Enum.Parse<BattleEffectType>((string)dict["EffectType"]);
+
+                Armour armour = new(name, description, effect, type);
+
+                armours.Add(name, armour);
+            }
+
+            return armours;
+        }
     }
 }

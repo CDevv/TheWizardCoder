@@ -29,7 +29,7 @@ namespace TheWizardCoder.Autoload
 		public bool StairsGoUp { get; set; } = true;
 		public bool IsInCutscene { get; set; } = false;
 		public bool IsFishing { get; set; } = false;
-        public SaveFileData PlayerData 
+		public SaveFileData PlayerData 
 		{ 
 			get { return SaveFiles.PlayerData; }
 		}
@@ -40,9 +40,10 @@ namespace TheWizardCoder.Autoload
 		public System.Collections.Generic.Dictionary<string, MagicSpell> MagicSpells { get; private set; } = new();
 		public System.Collections.Generic.Dictionary<string, Character> Characters { get; private set; } = new();
 		public System.Collections.Generic.Dictionary<string, Shop> Shops { get; private set; } = new();
-		public System.Collections.Generic.Dictionary<string, string> GameIntroStrings { get; private set; } = new();
+        public System.Collections.Generic.Dictionary<string, Armour> Armours { get; private set; } = new();
+        public System.Collections.Generic.Dictionary<string, string> GameIntroStrings { get; private set; } = new();
 		public CodeProblem FishingProblemData { get; private set; }
-        public int[] ReverseDirections { get; } = { 1, 0, 3, 2 };
+		public int[] ReverseDirections { get; } = { 1, 0, 3, 2 };
 
 		public override void _Ready()
 		{
@@ -68,31 +69,32 @@ namespace TheWizardCoder.Autoload
 			MagicSpells = DataLoader.LoadMagicSpells();
 			Characters = DataLoader.LoadCharacters();
 			Shops = DataLoader.LoadShops();
+			Armours = DataLoader.LoadArmours();
 
 			LoadFishingProblemData();
-        }
+		}
 
 		private void LoadFishingProblemData()
 		{
-            Variant jsonData = DataLoader.GetJsonData("res://info/fishing_problem.json");
-            var dict = (Dictionary<string, Variant>)jsonData;
+			Variant jsonData = DataLoader.GetJsonData("res://info/fishing_problem.json");
+			var dict = (Dictionary<string, Variant>)jsonData;
 
-            string uniqueIdentifier = (string)dict["UniqueIdentifier"];
-            string code = (string)dict["Code"];
-            var items = new Array<string>((string[])dict["Items"]);
+			string uniqueIdentifier = (string)dict["UniqueIdentifier"];
+			string code = (string)dict["Code"];
+			var items = new Array<string>((string[])dict["Items"]);
 
-            var solvableAreasVectors = new Dictionary<string, Vector2>();
-            var solvableAreas = (Dictionary<string, Variant>)dict["SolvableAreas"];
-            foreach (var item in solvableAreas)
-            {
-                int[] arr = (int[])item.Value;
-                Vector2 vector = new Vector2(arr[0], arr[1]);
+			var solvableAreasVectors = new Dictionary<string, Vector2>();
+			var solvableAreas = (Dictionary<string, Variant>)dict["SolvableAreas"];
+			foreach (var item in solvableAreas)
+			{
+				int[] arr = (int[])item.Value;
+				Vector2 vector = new Vector2(arr[0], arr[1]);
 
-                solvableAreasVectors[item.Key] = vector;
-            }
+				solvableAreasVectors[item.Key] = vector;
+			}
 
-            FishingProblemData = new(uniqueIdentifier, code, items, solvableAreasVectors);
-        }
+			FishingProblemData = new(uniqueIdentifier, code, items, solvableAreasVectors);
+		}
 
 		/// <summary>
 		/// Add an item to the player's inventory.
@@ -159,17 +161,17 @@ namespace TheWizardCoder.Autoload
 		/// <param name="direction"></param>
 		public void ChangeRoom(string room, string playerLocation, Direction direction)
 		{
-            LocationMarkerName = playerLocation;
-            PlayerDirection = direction;
+			LocationMarkerName = playerLocation;
+			PlayerDirection = direction;
 
-            string fileName = $"res://scenes/rooms/{room}.tscn";
-            GetTree().ChangeSceneToFile(fileName);
-        }
+			string fileName = $"res://scenes/rooms/{room}.tscn";
+			GetTree().ChangeSceneToFile(fileName);
+		}
 
 		/// <summary>
 		/// Change the current scene to the Main Menu.
 		/// </summary>
-        public void GoToMainMenu()
+		public void GoToMainMenu()
 		{
 			GetTree().ChangeSceneToFile("res://scenes/rooms/main_menu.tscn");
 		}

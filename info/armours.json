@@ -1,0 +1,7 @@
+{
+	"Nullable": {
+		"Description": "Desc.",
+		"Effect": 10,
+		"EffectType": "Attack"
+	}
+}

@@ -31,6 +31,7 @@ namespace TheWizardCoder.Displays
 			AddSubdisplay("PartyMembers", GetNode<PartyMembersList>("PartyMembersList"));
 			AddSubdisplay("Status", GetNode<CharacterStatus>("CharacterStatus"));
 			AddSubdisplay("Magic", GetNode<CharacterMagicSpells>("CharacterMagic"));
+			AddSubdisplay("Armour", GetNode<CharacterArmour>("CharacterArmour"));
 
 			HideAllSubdisplays();
 			Hide();
@@ -109,7 +110,28 @@ namespace TheWizardCoder.Displays
 			ChangeSubdisplay("Controls");
 		}
 
-		private void OnItemPressed(int index)
+        private void OnStatusMenu()
+        {
+            level = 1;
+            action = MenuAction.Stats;
+            ChangeSubdisplay("PartyMembers");
+        }
+
+        private void OnMagicMenu()
+        {
+            level = 1;
+            action = MenuAction.Magic;
+            ChangeSubdisplay("PartyMembers");
+        }
+
+		private void OnArmourMenu()
+		{
+			level = 1;
+			action = MenuAction.Armour;
+			ChangeSubdisplay("PartyMembers");
+		}
+
+        private void OnItemPressed(int index)
 		{
 			string itemName = global.PlayerData.Inventory[index];
 			Item item = global.ItemDescriptions[itemName];
@@ -146,19 +168,7 @@ namespace TheWizardCoder.Displays
             }
         }
 
-		private void OnStatusMenu()
-		{
-			level = 1;
-			action = MenuAction.Stats;
-			ChangeSubdisplay("PartyMembers");
-		}
-
-		private void OnMagicMenu()
-		{
-			level = 1;
-			action = MenuAction.Magic;
-			ChangeSubdisplay("PartyMembers");
-		}
+		
 
 		private void OnCharacterPressed(bool isProtagonist, int allyIndex)
 		{
@@ -204,6 +214,12 @@ namespace TheWizardCoder.Displays
 				case MenuAction.Magic:
 					HideAllSubdisplays();
 					((CharacterMagicSpells)Subdisplays["Magic"]).ShowDisplay(character);
+
+					break;
+
+				case MenuAction.Armour:
+					HideAllSubdisplays();
+					((CharacterArmour)Subdisplays["Armour"]).ShowDisplay(character);
 
 					break;
 			}

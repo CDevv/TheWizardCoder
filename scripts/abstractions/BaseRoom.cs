@@ -103,9 +103,9 @@ namespace TheWizardCoder.Abstractions
 			{
 				foreach (Character ally in global.PlayerData.Allies)
 				{
-					var allyCharacter = Player.AddAlly(ally.Name, true);
-					allyCharacter.PlayIdleAnimation(global.PlayerDirection);
-				}
+                    var allyCharacter = Player.AddAlly(ally.Name, true);
+                    allyCharacter.PlayIdleAnimation(global.PlayerDirection);
+                }
 			}
 			Player.DistanceWalked = 0;
 			

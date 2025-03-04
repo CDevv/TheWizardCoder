@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://de21qftn035us"]
+[gd_scene load_steps=12 format=3 uid="uid://de21qftn035us"]
 
 [ext_resource type="Script" path="res://scripts/displays/GameDisplay.cs" id="1_6dgqm"]
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_8qvuk"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ody0k6mcrmk7" path="res://scenes/subdisplays/gamemenu/game_menu_controls_menu.tscn" id="9_imgrl"]
 [ext_resource type="PackedScene" uid="uid://dkuycnlm3he16" path="res://scenes/subdisplays/gamemenu/character_magic.tscn" id="10_13uox"]
 [ext_resource type="PackedScene" uid="uid://prxu22vjqfni" path="res://scenes/subdisplays/gamemenu/party_members_list.tscn" id="10_foxtn"]
+[ext_resource type="PackedScene" uid="uid://b5kxmesdo8to2" path="res://scenes/subdisplays/gamemenu/character_armour.tscn" id="11_kc0ml"]
 
 [node name="GameDisplay" type="CanvasLayer"]
 follow_viewport_enabled = true
@@ -65,16 +66,26 @@ text = "Status"
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../Status")
-focus_neighbor_bottom = NodePath("../Options")
+focus_neighbor_bottom = NodePath("../Armour")
 mouse_filter = 2
 theme = ExtResource("4_sk2au")
 theme_override_font_sizes/font_size = 32
 text = "Magic"
 
-[node name="Options" type="Button" parent="MenuRect/OptionsMargins/VBoxContainer"]
+[node name="Armour" type="Button" parent="MenuRect/OptionsMargins/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../Magic")
+focus_neighbor_bottom = NodePath("../Options")
+mouse_filter = 2
+theme = ExtResource("4_sk2au")
+theme_override_font_sizes/font_size = 32
+text = "Armour"
+
+[node name="Options" type="Button" parent="MenuRect/OptionsMargins/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../Armour")
 focus_neighbor_bottom = NodePath("../ItemsButton")
 mouse_filter = 2
 theme = ExtResource("4_sk2au")
@@ -103,6 +114,9 @@ visible = false
 visible = false
 
 [node name="CharacterMagic" parent="." instance=ExtResource("10_13uox")]
+visible = false
+
+[node name="CharacterArmour" parent="." instance=ExtResource("11_kc0ml")]
 visible = false
 
 [node name="GoldRect" type="NinePatchRect" parent="."]
@@ -137,6 +151,7 @@ text = "Gold: 00000"
 [connection signal="pressed" from="MenuRect/OptionsMargins/VBoxContainer/ItemsButton" to="." method="OnItemsMenu"]
 [connection signal="pressed" from="MenuRect/OptionsMargins/VBoxContainer/Status" to="." method="OnStatusMenu"]
 [connection signal="pressed" from="MenuRect/OptionsMargins/VBoxContainer/Magic" to="." method="OnMagicMenu"]
+[connection signal="pressed" from="MenuRect/OptionsMargins/VBoxContainer/Armour" to="." method="OnArmourMenu"]
 [connection signal="pressed" from="MenuRect/OptionsMargins/VBoxContainer/Options" to="." method="OnOptionsMenu"]
 [connection signal="ItemPressed" from="InventoryMenu" to="." method="OnItemPressed"]
 [connection signal="OnControlsButtonPressed" from="OptionsMenu" to="." method="OnControlsMenu"]

@@ -1,0 +1,161 @@
+[gd_scene load_steps=7 format=3 uid="uid://b5kxmesdo8to2"]
+
+[ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_4ev5f"]
+[ext_resource type="Script" path="res://scripts/subdisplays/CharacterArmour.cs" id="1_ksu7n"]
+[ext_resource type="PackedScene" uid="uid://capppjgr8n1ew" path="res://scenes/ui/text_button.tscn" id="2_pgq0l"]
+[ext_resource type="SpriteFrames" uid="uid://c3e5witb4onuf" path="res://assets/characters/secondary_portraits.tres" id="2_uuy5p"]
+[ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="3_rb3qo"]
+[ext_resource type="SpriteFrames" uid="uid://d0q5psj5bn44m" path="res://assets/ui/spriteframes/stats-icons.tres" id="6_4o3e6"]
+
+[node name="CharacterArmour" type="CanvasLayer"]
+script = ExtResource("1_ksu7n")
+TextButtonTemplate = ExtResource("2_pgq0l")
+
+[node name="Container" type="NinePatchRect" parent="."]
+offset_left = 184.0
+offset_top = 72.0
+offset_right = 380.0
+offset_bottom = 204.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_4ev5f")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Portrait" type="AnimatedSprite2D" parent="Container"]
+unique_name_in_owner = true
+position = Vector2(24, 24)
+sprite_frames = ExtResource("2_uuy5p")
+animation = &"Nolan"
+
+[node name="NameLabel" type="Label" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 44.0
+offset_top = 8.0
+offset_right = 84.0
+offset_bottom = 31.0
+theme = ExtResource("3_rb3qo")
+text = "Label"
+
+[node name="HealthEffect" type="Label" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 102.0
+offset_top = 8.0
+offset_right = 122.0
+offset_bottom = 21.0
+theme = ExtResource("3_rb3qo")
+text = "+00"
+
+[node name="MarginContainer" type="MarginContainer" parent="Container"]
+layout_mode = 0
+offset_top = 44.0
+offset_right = 392.0
+offset_bottom = 220.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ArmoursGridContainer" type="GridContainer" parent="Container/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 2
+
+[node name="HealthIcon" type="AnimatedSprite2D" parent="Container"]
+position = Vector2(94, 16)
+sprite_frames = ExtResource("6_4o3e6")
+frame = 4
+
+[node name="ManaEffect" type="Label" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 136.0
+offset_top = 8.0
+offset_right = 156.0
+offset_bottom = 21.0
+theme = ExtResource("3_rb3qo")
+text = "+00"
+
+[node name="ManaIcon" type="AnimatedSprite2D" parent="Container"]
+position = Vector2(128, 16)
+sprite_frames = ExtResource("6_4o3e6")
+frame = 2
+
+[node name="AgilityEffect" type="Label" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 172.0
+offset_top = 8.0
+offset_right = 192.0
+offset_bottom = 21.0
+theme = ExtResource("3_rb3qo")
+text = "+00"
+
+[node name="AgilityIcon" type="AnimatedSprite2D" parent="Container"]
+position = Vector2(164, 16)
+sprite_frames = ExtResource("6_4o3e6")
+frame = 3
+
+[node name="DefenseEffect" type="Label" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 172.0
+offset_top = 28.0
+offset_right = 192.0
+offset_bottom = 41.0
+theme = ExtResource("3_rb3qo")
+text = "+00"
+
+[node name="DefenseIcon" type="AnimatedSprite2D" parent="Container"]
+position = Vector2(164, 36)
+sprite_frames = ExtResource("6_4o3e6")
+
+[node name="AttackEffect" type="Label" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 136.0
+offset_top = 28.0
+offset_right = 156.0
+offset_bottom = 41.0
+theme = ExtResource("3_rb3qo")
+text = "+00"
+
+[node name="AttackIcon" type="AnimatedSprite2D" parent="Container"]
+position = Vector2(128, 36)
+sprite_frames = ExtResource("6_4o3e6")
+frame = 1
+
+[node name="DescriptionRect" type="NinePatchRect" parent="."]
+unique_name_in_owner = true
+offset_left = 184.0
+offset_top = 352.0
+offset_right = 380.0
+offset_bottom = 408.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_4ev5f")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="DescriptionRect"]
+layout_mode = 0
+offset_right = 196.0
+offset_bottom = 56.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Description" type="Label" parent="DescriptionRect/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 40)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_rb3qo")
+autowrap_mode = 3
