@@ -131,7 +131,6 @@ DialogueTitle = "niko"
 
 [node name="Dudeley" parent="." index="21" instance=ExtResource("7_ipt30")]
 z_index = 2
-y_sort_enabled = false
 position = Vector2(1040, 1136)
 DialogueResource = ExtResource("6_7mst3")
 DialogueTitle = "dudeley_point"

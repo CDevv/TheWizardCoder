@@ -43,10 +43,12 @@ namespace TheWizardCoder.Data
 
         public Character()
         {
-
+            Armours = new();
+            EquippedArmours = new();
+            ArmourEffects = new();
         }
 
-        public Character(Dictionary<string, Variant> dict, Global global)
+        public Character(Dictionary<string, Variant> dict, Global global) : this()
         {
             Global = global;
             this.dict = dict;
@@ -65,19 +67,12 @@ namespace TheWizardCoder.Data
                 Type = Enum.Parse<CharacterType>((string)dict["Type"]);
                 Level = 1;
                 LevelPoints = 0;
-
-                ArmourEffects = new ArmourEffects();
+             
                 if (dict.ContainsKey("Armour"))
                 {
                     Armours = (Array<string>)dict["Armours"];
                 }
-                else
-                {
-                    Armours = new();
-                }
-
-                EquippedArmours = new();
-
+                
                 initialHealth = MaxHealth;
                 initialMana = MaxPoints;
                 initialAttackPoints = AttackPoints;

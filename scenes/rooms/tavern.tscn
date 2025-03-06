@@ -70,8 +70,8 @@ tracks/3/path = NodePath("Player")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 2.1, 2.5, 3.6, 4, 4.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 2.1, 2.5, 3.6, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "values": [{
 "args": [1],
 "method": &"PlayIdleAnimation"
@@ -87,9 +87,6 @@ tracks/3/keys = {
 }, {
 "args": [1],
 "method": &"PlayIdleAnimation"
-}, {
-"args": ["tavern_barrels_room", "EnterMarker", 1],
-"method": &"TransitionToRoomName"
 }]
 }
 tracks/4/type = "value"
@@ -137,6 +134,7 @@ libraries = {
 }
 
 [node name="Camera" parent="." index="6"]
+position = Vector2(704, 284)
 limit_right = 864
 
 [node name="ColorRect" type="ColorRect" parent="." index="9"]

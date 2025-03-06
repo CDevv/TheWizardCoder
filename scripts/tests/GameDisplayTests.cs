@@ -66,6 +66,8 @@ namespace TheWizardCoder.Tests
             await runner.AwaitIdleFrame();
             runner.SimulateActionPressed("ui_down");
             await runner.AwaitIdleFrame();
+            runner.SimulateActionPressed("ui_down");
+            await runner.AwaitIdleFrame();
             runner.SimulateActionPressed("ui_accept");
             await runner.AwaitIdleFrame();
 

@@ -16,7 +16,8 @@ namespace TheWizardCoder.Rooms
 				await ShowDialogue(DialogueResource, "berry_1");
 				await PlayCutscene("berry_1");
 				global.PlayerData.HasMetBerry = true;
-			}
+				TransitionToRoom("tavern_barrels_room", "EnterMarker", Enums.Direction.Up);
+            }
 		}
 	}
 }
