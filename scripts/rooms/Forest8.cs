@@ -4,7 +4,7 @@ using TheWizardCoder.Abstractions;
 
 namespace TheWizardCoder.Rooms
 {
-    public partial class Forest8 : BaseRoom
+    public partial class Forest8 : ForestRoom
     {
         public override void OnReady()
         {

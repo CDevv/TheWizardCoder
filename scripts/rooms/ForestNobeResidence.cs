@@ -6,7 +6,7 @@ using TheWizardCoder.Interactables;
 
 namespace TheWizardCoder.Rooms
 {
-    public partial class ForestNobeResidence : BaseRoom
+    public partial class ForestNobeResidence : ForestRoom
     {
         private Warper cabinWarper;
         private DialoguePoint dialoguePoint;

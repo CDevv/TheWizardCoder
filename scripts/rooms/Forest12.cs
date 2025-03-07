@@ -2,7 +2,7 @@ using Godot;
 using System;
 using TheWizardCoder.Abstractions;
 
-public partial class Forest12 : BaseRoom
+public partial class Forest12 : ForestRoom
 {
 	public override void OnReady()
 	{

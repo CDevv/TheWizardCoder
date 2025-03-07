@@ -9,7 +9,7 @@ using TheWizardCoder.Interactables;
 
 namespace TheWizardCoder.Rooms
 {
-    public partial class Forest15 : BaseRoom
+    public partial class Forest15 : ForestRoom
     {
         [Export]
         public Resource DialogueResource { get; set; }

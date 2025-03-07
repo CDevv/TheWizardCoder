@@ -79,9 +79,6 @@ namespace TheWizardCoder.Data
                 initialDefensePoint = DefensePoints;
                 initialAgilityPoints = AgilityPoints;
 
-                //test
-                Armours.Add("Nullable");
-
                 if (Type == CharacterType.Enemy)
                 {
                     if (dict.ContainsKey("Behaviour"))
