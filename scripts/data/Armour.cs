@@ -11,13 +11,15 @@ namespace TheWizardCoder.Data
 	{
 		public string Name { get; private set; }
 		public string Description { get; private set; }
-		public int Effect { get; private set; }
+        public ArmourType Type { get; set; }
+        public int Effect { get; private set; }
 		public BattleEffectType EffectType { get; private set; }
 
-		public Armour(string name, string description, int effect, BattleEffectType effectType)
+		public Armour(string name, string description, ArmourType type, int effect, BattleEffectType effectType)
 		{
 			Name = name;
 			Description = description;
+			Type = type;
 			Effect = effect;
 			EffectType = effectType;
 

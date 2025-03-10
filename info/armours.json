@@ -1,6 +1,13 @@
 {
 	"Nullable": {
 		"Description": "Desc.",
+		"Type": "PrimaryWeapon",
+		"Effect": 10,
+		"EffectType": "Attack"
+	},
+	"Nullable2": {
+		"Description": "Desc.",
+		"Type": "PrimaryWeapon",
 		"Effect": 10,
 		"EffectType": "Attack"
 	}

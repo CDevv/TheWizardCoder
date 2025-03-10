@@ -8,9 +8,13 @@
 [node name="Vindi13" instance=ExtResource("1_2f52m")]
 y_sort_enabled = true
 
+[node name="Camera" parent="." index="6"]
+limit_right = 2080
+limit_bottom = 800
+
 [node name="Player" parent="." index="16" instance=ExtResource("2_yop60")]
 z_index = 1
-position = Vector2(1456, 768)
+position = Vector2(40, 240)
 
 [node name="TileMap" type="TileMap" parent="." index="17"]
 y_sort_enabled = true

@@ -51,8 +51,9 @@ text = "+00"
 
 [node name="MarginContainer" type="MarginContainer" parent="Container"]
 layout_mode = 0
+offset_left = 100.0
 offset_top = 44.0
-offset_right = 392.0
+offset_right = 292.0
 offset_bottom = 220.0
 scale = Vector2(0.5, 0.5)
 theme_override_constants/margin_left = 8
@@ -60,10 +61,42 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ArmoursGridContainer" type="GridContainer" parent="Container/MarginContainer"]
+[node name="ItemsContainer" type="GridContainer" parent="Container/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-columns = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Container"]
+layout_mode = 0
+offset_top = 44.0
+offset_right = 200.0
+offset_bottom = 220.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="SlotsContainer" type="GridContainer" parent="Container/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PrimaryWeapon" parent="Container/MarginContainer2/SlotsContainer" instance=ExtResource("2_pgq0l")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../SecondaryArmour")
+focus_neighbor_bottom = NodePath("../PrimaryArmour")
+text = "Primary Weapon"
+
+[node name="PrimaryArmour" parent="Container/MarginContainer2/SlotsContainer" instance=ExtResource("2_pgq0l")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../PrimaryWeapon")
+focus_neighbor_bottom = NodePath("../SecondaryArmour")
+text = "Primary Armour"
+
+[node name="SecondaryArmour" parent="Container/MarginContainer2/SlotsContainer" instance=ExtResource("2_pgq0l")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../PrimaryArmour")
+focus_neighbor_bottom = NodePath("../PrimaryWeapon")
+text = "Secondary Arm"
 
 [node name="HealthIcon" type="AnimatedSprite2D" parent="Container"]
 position = Vector2(94, 16)
@@ -159,3 +192,10 @@ layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("3_rb3qo")
 autowrap_mode = 3
+
+[connection signal="focus_entered" from="Container/MarginContainer2/SlotsContainer/PrimaryWeapon" to="." method="OnIndexFocusEntered" binds= [0]]
+[connection signal="pressed" from="Container/MarginContainer2/SlotsContainer/PrimaryWeapon" to="." method="FocusOnFirstItem"]
+[connection signal="focus_entered" from="Container/MarginContainer2/SlotsContainer/PrimaryArmour" to="." method="OnIndexFocusEntered" binds= [1]]
+[connection signal="pressed" from="Container/MarginContainer2/SlotsContainer/PrimaryArmour" to="." method="FocusOnFirstItem"]
+[connection signal="focus_entered" from="Container/MarginContainer2/SlotsContainer/SecondaryArmour" to="." method="OnIndexFocusEntered" binds= [2]]
+[connection signal="pressed" from="Container/MarginContainer2/SlotsContainer/SecondaryArmour" to="." method="FocusOnFirstItem"]

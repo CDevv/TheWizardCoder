@@ -114,6 +114,19 @@ namespace TheWizardCoder.Data
             Gold = 0;
         }
 
+        public void EnsureDefaults(Global global)
+        {
+            if (!IsSaveEmpty)
+            {
+                if (Stats.Armours.Count == 0)
+                {
+                    Array<string> characterArmours = global.Characters[Stats.Name].Armours;
+
+                    Stats.Armours = characterArmours;
+                }
+            }
+        }
+
         public void AddToInventory(string item, bool onlyOne = false)
         {
             if (onlyOne)

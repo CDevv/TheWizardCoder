@@ -32,7 +32,7 @@ namespace TheWizardCoder.Data
         public int AgilityPoints { get; set; }
         public Array<string> MagicSpells { get; set; }
         public Array<string> Armours { get; set; }
-        public Array<string> EquippedArmours { get; set; }
+        public Dictionary<int, string> EquippedArmours { get; set; }
         public CharacterType Type { get; set; }
         public int Level { get; set; } = 1;
         public int LevelPoints { get; set; }
@@ -70,7 +70,7 @@ namespace TheWizardCoder.Data
              
                 if (dict.ContainsKey("Armour"))
                 {
-                    Armours = (Array<string>)dict["Armours"];
+                    Armours = (Array<string>)dict["Armour"];
                 }
                 
                 initialHealth = MaxHealth;
@@ -219,11 +219,11 @@ namespace TheWizardCoder.Data
             }
         }
 
-        public void EquipArmour(string name)
+        public void EquipArmour(int index, string name)
         {
-            if (Armours.Contains(name) && !EquippedArmours.Contains(name))
+            if (Armours.Contains(name))
             {
-                EquippedArmours.Add(name);
+                EquippedArmours[index] = name;
 
                 Armour armour = Global.Armours[name];
                 if (armour != null)
@@ -250,13 +250,14 @@ namespace TheWizardCoder.Data
             }
         }
 
-        public void UnequipArmour(string name)
+        public void UnequipArmour(int index)
         {
-            if (Armours.Contains(name) && EquippedArmours.Contains(name))
+            if (!string.IsNullOrEmpty(EquippedArmours[index]))
             {
-                EquippedArmours.Remove(name);
-
+                string name = EquippedArmours[index];
                 Armour armour = Global.Armours[name];
+
+                EquippedArmours[index] = string.Empty;
 
                 if (armour != null)
                 {
@@ -282,9 +283,9 @@ namespace TheWizardCoder.Data
             }
         }
 
-        public bool HasEquippedArmour(string name)
+        public bool HasEquippedArmour(int index)
         {
-            return EquippedArmours.Contains(name);
+            return EquippedArmours.ContainsKey(index);
         }
 
         public void ApplyArmourEffects()

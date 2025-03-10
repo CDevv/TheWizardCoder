@@ -3,6 +3,7 @@ using Godot.Collections;
 using System;
 using TheWizardCoder.Abstractions;
 using TheWizardCoder.Data;
+using TheWizardCoder.Enums;
 
 namespace TheWizardCoder.Subdisplays
 {
@@ -13,6 +14,10 @@ namespace TheWizardCoder.Subdisplays
         private Color equippedColor = new("00ab00");
         private Color equippedColorHover = new("00f000");
 
+        private string primaryWeaponDesc = "Primary Weapon: ";
+        private string primaryArmourDesc = "Primary Armour: ";
+        private string secondaryArmourDesc = "Secondary Armour: ";
+
         [Export]
         public PackedScene TextButtonTemplate { get; set; }
 
@@ -20,6 +25,7 @@ namespace TheWizardCoder.Subdisplays
         private Label name;
         private GridContainer container;
         private Label description;
+        private Button primaryWeapon;
 
         private Label healthLabel;
         private Label manaLabel;
@@ -27,6 +33,8 @@ namespace TheWizardCoder.Subdisplays
         private Label attackLabel;
         private Label defenseLabel;
 
+        private Dictionary<int, string> slotDescriptions;
+        private ArmourType currentArmourType;
         private Character character;
         private Button firstButton;
 
@@ -36,14 +44,20 @@ namespace TheWizardCoder.Subdisplays
 
             portrait = GetNode<AnimatedSprite2D>("%Portrait");
             name = GetNode<Label>("%NameLabel");
-            container = GetNode<GridContainer>("%ArmoursGridContainer");
+            container = GetNode<GridContainer>("%ItemsContainer");
             description = GetNode<Label>("%Description");
+            primaryWeapon = GetNode<Button>("%PrimaryWeapon");
 
             healthLabel = GetNode<Label>("%HealthEffect");
             manaLabel = GetNode<Label>("%ManaEffect");
             agilityLabel = GetNode<Label>("%AgilityEffect");
             attackLabel = GetNode<Label>("%AttackEffect");
             defenseLabel = GetNode<Label>("%DefenseEffect");
+
+            slotDescriptions = new Dictionary<int, string>();
+            slotDescriptions[(int)ArmourType.PrimaryWeapon] = primaryWeaponDesc;
+            slotDescriptions[(int)ArmourType.PrimaryArmour] = primaryArmourDesc;
+            slotDescriptions[(int)ArmourType.SecondaryArmour] = secondaryArmourDesc;
         }
 
         public override void ShowDisplay()
@@ -58,14 +72,15 @@ namespace TheWizardCoder.Subdisplays
             portrait.Animation = character.Name;
             name.Text = character.Name;
 
-            description.Text = "No Armours.";
+            description.Text = "No Armour.";
 
-            ClearContainer();
-            PopulateContainer();
+            currentArmourType = ArmourType.PrimaryWeapon;
+
             UpdateEffectLabels();
 
             Show();
-            FocusOnFirstItem();
+            
+            primaryWeapon.GrabFocus();
         }
 
         public override void UpdateDisplay()
@@ -80,6 +95,7 @@ namespace TheWizardCoder.Subdisplays
 
         private void ClearContainer()
         {
+            firstButton = null;
             Array<Node> nodes = container.GetChildren();
 
             foreach (var item in nodes)
@@ -92,10 +108,25 @@ namespace TheWizardCoder.Subdisplays
         {
             for (int i = 0; i < character.Armours.Count; i++)
             {
-                Button currentArmour = AddItem(character.Armours[i]);
-                if (i == 0)
+                string armourName = character.Armours[i];
+                Armour armour = global.Armours[armourName];
+
+                if (armour.Type == currentArmourType)
                 {
-                    firstButton = currentArmour;
+                    Button currentArmour = AddItem(armourName);
+                    if (firstButton == null)
+                    {
+                        firstButton = currentArmour;
+                    }
+
+                    if (character.EquippedArmours.ContainsKey((int)currentArmourType))
+                    {
+                        if (character.EquippedArmours[(int)currentArmourType] == armourName)
+                        {
+                            currentArmour.Set("theme_override_colors/font_color", equippedColor);
+                            currentArmour.Set("theme_override_colors/font_focus_color", equippedColorHover);
+                        }
+                    }
                 }
             }
         }
@@ -115,12 +146,6 @@ namespace TheWizardCoder.Subdisplays
 
             button.Pressed += () => OnArmourPressed(button, armour.Name);
 
-            if (character.HasEquippedArmour(name))
-            {
-                button.Set("theme_override_colors/font_color", equippedColor);
-                button.Set("theme_override_colors/font_focus_color", equippedColorHover);
-            }
-
             container.AddChild(button);
 
             return button;
@@ -138,6 +163,34 @@ namespace TheWizardCoder.Subdisplays
             }
         }
 
+        private void OnIndexFocusEntered(int index)
+        {
+            currentArmourType = (ArmourType)index;
+            string slotDescription = slotDescriptions[index];
+
+            ClearContainer();
+            PopulateContainer();
+
+            if (character.EquippedArmours.ContainsKey(index))
+            {
+                if (string.IsNullOrEmpty(character.EquippedArmours[index]))
+                {
+                    description.Text = $"{slotDescription}None";
+                }
+                else
+                {
+                    string armourName = character.EquippedArmours[index];
+                    Armour armour = global.Armours[armourName];
+
+                    description.Text = $"{slotDescription}{armour.Name}";
+                }
+            }
+            else
+            {
+                description.Text = $"{slotDescription}None";
+            }
+        }
+
         private void UpdateEffectLabels()
         {
             healthLabel.Text = $"+{character.ArmourEffects.Health}";
@@ -149,20 +202,20 @@ namespace TheWizardCoder.Subdisplays
 
         private void OnArmourPressed(Button button, string name)
         {
-            if (character.HasEquippedArmour(name))
-            {
-                character.UnequipArmour(name);
+            int index = (int)currentArmourType;
 
-                button.Set("theme_override_colors/font_color", unequippedColor);
-                button.Set("theme_override_colors/font_focus_color", unequippedColorHover);
-            }
-            else
+            if (character.HasEquippedArmour(index))
             {
-                character.EquipArmour(name);
-
-                button.Set("theme_override_colors/font_color", equippedColor);
-                button.Set("theme_override_colors/font_focus_color", equippedColorHover);
+                character.UnequipArmour(index);
             }
+            
+            character.EquipArmour(index, name);
+
+            string indexName = currentArmourType.ToString();
+            Button indexButton = GetNode<Button>($"%{indexName}");
+
+            indexButton.Text = name;
+            indexButton.GrabFocus();
 
             character.ApplyArmourEffects();
             UpdateEffectLabels();
