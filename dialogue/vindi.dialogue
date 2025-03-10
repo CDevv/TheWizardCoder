@@ -354,6 +354,17 @@ if PlayerHasFollower():
 	Gertrude: [#portrait=0] Yeah, it's pretty nice!
 => END!
 
+~ fred_point
+Fred: [#portrait=0] There's a temple right here but I am not sure why.
+Fred: [#portrait=0] I think someone had a cult. I don't even know what is it about.
+if PlayerHasFollower():
+	Gertrude: [#portrait=0] Cult?
+	Fred: [#portrait=0] Yes.
+	Gertrude: [#portrait=0] Eugh..
+else:
+	Fred: [#portrait=0] If I remember correctly there is another one that looks the same in a forest just across the ocean.
+=> END!
+
 ~ amy_point
 if GetPlayerData("SolvedHotelRoom"):
 	Nolan: [#portrait=0] It was fixed..
@@ -367,4 +378,12 @@ else:
 	Amy: [#portrait=0] Hmm.. yes, actually.
 	Amy: [#portrait=0] There is a room upstairs that has some strange black holes..
 	Amy: [#portrait=0] Can you look into that?
+=> END!
+
+~ curly_point
+Nolan: [#portrait=0] What are you doing here?
+Curly: [#portrait=0] Searching for my jam jar!
+Nolan: [#portrait=0] In here?
+Curly: [#portrait=0] Yes!
+Nolan: [#portrait=0] Okay..
 => END!

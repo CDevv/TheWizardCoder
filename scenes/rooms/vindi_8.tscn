@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://pg4lt7xbt1ru"]
+[gd_scene load_steps=15 format=3 uid="uid://pg4lt7xbt1ru"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_lb3gd"]
 [ext_resource type="Script" path="res://scripts/rooms/Vindi8.cs" id="2_w7lj6"]
@@ -9,6 +9,7 @@
 [ext_resource type="SpriteFrames" uid="uid://bofoatlx8u0r4" path="res://assets/characters/movement/spriteframes/craig.tres" id="5_561uj"]
 [ext_resource type="Resource" uid="uid://ukx1i3qsx6q2" path="res://dialogue/vindi.dialogue" id="5_jqg78"]
 [ext_resource type="PackedScene" uid="uid://doyfot0kgcxa2" path="res://scenes/components/snow_particles.tscn" id="5_n4akj"]
+[ext_resource type="SpriteFrames" uid="uid://clh6whg0ths6r" path="res://assets/characters/movement/spriteframes/fred.tres" id="8_cnsic"]
 [ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/components/save_point.tscn" id="10_px50d"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_bs5pw"]
@@ -61,7 +62,18 @@ position = Vector2(0, -32)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("5_561uj")
 
-[node name="Section6Warper" parent="." index="18" instance=ExtResource("4_vu3je")]
+[node name="Fred" parent="." index="18" instance=ExtResource("4_4hrn8")]
+z_index = 1
+position = Vector2(1384, 736)
+DialogueResource = ExtResource("5_jqg78")
+DialogueTitle = "fred_point"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Fred" index="2"]
+position = Vector2(0, -32)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("8_cnsic")
+
+[node name="Section6Warper" parent="." index="19" instance=ExtResource("4_vu3je")]
 z_index = 2
 position = Vector2(-16, 320)
 scale = Vector2(1, 10)
@@ -69,7 +81,7 @@ TargetRoomName = "vindi_6"
 TargetLocation = "Section8Marker"
 PlayerDirection = 2
 
-[node name="Section7Warper" parent="." index="19" instance=ExtResource("4_vu3je")]
+[node name="Section7Warper" parent="." index="20" instance=ExtResource("4_vu3je")]
 z_index = 2
 position = Vector2(504, -16)
 scale = Vector2(10, 1)
@@ -77,7 +89,7 @@ TargetRoomName = "vindi_7"
 TargetLocation = "Section8Marker"
 PlayerDirection = 1
 
-[node name="Section9Warper" parent="." index="20" instance=ExtResource("4_vu3je")]
+[node name="Section9Warper" parent="." index="21" instance=ExtResource("4_vu3je")]
 z_index = 2
 position = Vector2(1648, 800)
 scale = Vector2(1, 6)
@@ -85,26 +97,26 @@ TargetRoomName = "vindi_9"
 TargetLocation = "Section8Marker"
 PlayerDirection = 3
 
-[node name="CraigWarper" parent="." index="21" instance=ExtResource("4_vu3je")]
+[node name="CraigWarper" parent="." index="22" instance=ExtResource("4_vu3je")]
 z_index = 2
 position = Vector2(560, 560)
 TargetRoomName = "craig_house"
 TargetLocation = "EnterMarker"
 PlayerDirection = 1
 
-[node name="Section6Marker" type="Marker2D" parent="." index="22"]
+[node name="Section6Marker" type="Marker2D" parent="." index="23"]
 position = Vector2(24, 333)
 
-[node name="Section7Marker" type="Marker2D" parent="." index="23"]
+[node name="Section7Marker" type="Marker2D" parent="." index="24"]
 position = Vector2(508, 56)
 
-[node name="Section9Marker" type="Marker2D" parent="." index="24"]
+[node name="Section9Marker" type="Marker2D" parent="." index="25"]
 position = Vector2(1592, 816)
 
-[node name="CraigMarker" type="Marker2D" parent="." index="25"]
+[node name="CraigMarker" type="Marker2D" parent="." index="26"]
 position = Vector2(560, 608)
 
-[node name="RoomCollision" type="StaticBody2D" parent="." index="26"]
+[node name="RoomCollision" type="StaticBody2D" parent="." index="27"]
 
 [node name="Wall1" type="CollisionShape2D" parent="RoomCollision" index="0"]
 shape = SubResource("SegmentShape2D_bs5pw")
@@ -115,14 +127,14 @@ shape = SubResource("SegmentShape2D_hbpkr")
 [node name="Wall3" type="CollisionShape2D" parent="RoomCollision" index="2"]
 shape = SubResource("SegmentShape2D_kmel2")
 
-[node name="SnowParticles" parent="." index="28" instance=ExtResource("5_n4akj")]
+[node name="SnowParticles" parent="." index="29" instance=ExtResource("5_n4akj")]
 z_index = 3
 position = Vector2(472, 0)
 
-[node name="SnowParticles2" parent="." index="29" instance=ExtResource("5_n4akj")]
+[node name="SnowParticles2" parent="." index="30" instance=ExtResource("5_n4akj")]
 z_index = 3
 position = Vector2(1160, 0)
 
-[node name="SavePoint" parent="." index="30" instance=ExtResource("10_px50d")]
+[node name="SavePoint" parent="." index="31" instance=ExtResource("10_px50d")]
 z_index = 1
 position = Vector2(344, 256)

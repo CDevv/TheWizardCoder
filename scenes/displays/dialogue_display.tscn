@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://b8wix4lm5g767"]
+[gd_scene load_steps=73 format=3 uid="uid://b8wix4lm5g767"]
 
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_q5vyp"]
 [ext_resource type="Script" path="res://scripts/displays/DialogueDisplay.cs" id="1_u23wf"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://c2fafoom31inb" path="res://assets/characters/portraits/craig.png" id="6_jx80f"]
 [ext_resource type="Texture2D" uid="uid://dwddyqemmghcc" path="res://assets/characters/portraits/gregory.png" id="7_kq7ba"]
 [ext_resource type="Texture2D" uid="uid://iw1srdb7s8lk" path="res://assets/characters/portraits/fred.png" id="8_2r6qf"]
+[ext_resource type="Texture2D" uid="uid://jw8ffnlgkvdc" path="res://assets/characters/portraits/curly.png" id="8_q2tew"]
 [ext_resource type="Texture2D" uid="uid://k0tu1vy0o781" path="res://assets/characters/portraits/gerald.png" id="8_vyhfr"]
 [ext_resource type="Texture2D" uid="uid://5evvqmuv2ujj" path="res://assets/characters/portraits/nobe.png" id="10_ye061"]
 [ext_resource type="Texture2D" uid="uid://bqa0e4rd37uk1" path="res://assets/characters/portraits/johnson.png" id="11_pwq53"]
@@ -259,6 +260,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"craig",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_q2tew")
+}],
+"loop": true,
+"name": &"curly",
 "speed": 5.0
 }, {
 "frames": [{

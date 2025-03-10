@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2dpwk6p1w706"
-path="res://.godot/imported/juniorbug.png-b4afe3130f7a719a86df857d0b302371.ctex"
+uid="uid://jw8ffnlgkvdc"
+path="res://.godot/imported/curly.png-3cdd26c1c917b56e9c427f295a02ee25.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/juniorbug.png"
-dest_files=["res://.godot/imported/juniorbug.png-b4afe3130f7a719a86df857d0b302371.ctex"]
+source_file="res://assets/characters/portraits/curly.png"
+dest_files=["res://.godot/imported/curly.png-3cdd26c1c917b56e9c427f295a02ee25.ctex"]
 
 [params]
 
