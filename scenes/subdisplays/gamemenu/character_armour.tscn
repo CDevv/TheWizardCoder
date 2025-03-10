@@ -84,19 +84,19 @@ layout_mode = 2
 layout_mode = 2
 focus_neighbor_top = NodePath("../SecondaryArmour")
 focus_neighbor_bottom = NodePath("../PrimaryArmour")
-text = "Primary Weapon"
+text = "_______"
 
 [node name="PrimaryArmour" parent="Container/MarginContainer2/SlotsContainer" instance=ExtResource("2_pgq0l")]
 layout_mode = 2
 focus_neighbor_top = NodePath("../PrimaryWeapon")
 focus_neighbor_bottom = NodePath("../SecondaryArmour")
-text = "Primary Armour"
+text = "_______"
 
 [node name="SecondaryArmour" parent="Container/MarginContainer2/SlotsContainer" instance=ExtResource("2_pgq0l")]
 layout_mode = 2
 focus_neighbor_top = NodePath("../PrimaryArmour")
 focus_neighbor_bottom = NodePath("../PrimaryWeapon")
-text = "Secondary Arm"
+text = "_______"
 
 [node name="HealthIcon" type="AnimatedSprite2D" parent="Container"]
 position = Vector2(94, 16)

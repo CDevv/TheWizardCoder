@@ -67,17 +67,11 @@ namespace TheWizardCoder.Data
                 Type = Enum.Parse<CharacterType>((string)dict["Type"]);
                 Level = 1;
                 LevelPoints = 0;
-             
-                if (dict.ContainsKey("Armour"))
-                {
-                    Armours = (Array<string>)dict["Armour"];
-                }
-                
-                initialHealth = MaxHealth;
-                initialMana = MaxPoints;
-                initialAttackPoints = AttackPoints;
-                initialDefensePoint = DefensePoints;
-                initialAgilityPoints = AgilityPoints;
+
+                InitializeArmours(dict);
+                InitializeDefaults();
+
+                ApplyArmourEffects();
 
                 if (Type == CharacterType.Enemy)
                 {
@@ -87,6 +81,33 @@ namespace TheWizardCoder.Data
                     }
                 }
             }
+        }
+
+        public void InitializeArmours(Dictionary<string, Variant> dict)
+        {
+            if (dict.ContainsKey("Armour"))
+            {
+                Armours = (Array<string>)dict["Armour"];
+            }
+
+            if (dict.ContainsKey("EquippedArmour"))
+            {
+                Array<string> equippedArmoursArr = (Array<string>)dict["EquippedArmour"];
+
+                for (int i = 0; i < equippedArmoursArr.Count; i++)
+                {
+                    EquipArmour(i, equippedArmoursArr[i]);
+                }
+            }
+        }
+
+        public void InitializeDefaults()
+        {
+            initialHealth = MaxHealth;
+            initialMana = MaxPoints;
+            initialAttackPoints = AttackPoints;
+            initialDefensePoint = DefensePoints;
+            initialAgilityPoints = AgilityPoints;
         }
 
         private void FetchBehaviour(Variant variant)
@@ -252,6 +273,11 @@ namespace TheWizardCoder.Data
 
         public void UnequipArmour(int index)
         {
+            if (!EquippedArmours.ContainsKey(index))
+            {
+                return;
+            }
+
             if (!string.IsNullOrEmpty(EquippedArmours[index]))
             {
                 string name = EquippedArmours[index];
@@ -285,7 +311,21 @@ namespace TheWizardCoder.Data
 
         public bool HasEquippedArmour(int index)
         {
-            return EquippedArmours.ContainsKey(index);
+            if (EquippedArmours.ContainsKey(index))
+            {
+                if (string.IsNullOrEmpty(EquippedArmours[index]))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void ApplyArmourEffects()

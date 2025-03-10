@@ -3,6 +3,7 @@ using Godot.Collections;
 using System;
 using TheWizardCoder.Abstractions;
 using TheWizardCoder.Data;
+using TheWizardCoder.Displays;
 using TheWizardCoder.Enums;
 
 namespace TheWizardCoder.Subdisplays
@@ -14,18 +15,25 @@ namespace TheWizardCoder.Subdisplays
         private Color equippedColor = new("00ab00");
         private Color equippedColorHover = new("00f000");
 
-        private string primaryWeaponDesc = "Primary Weapon: ";
-        private string primaryArmourDesc = "Primary Armour: ";
-        private string secondaryArmourDesc = "Secondary Armour: ";
+        private string primaryWeaponDesc = "Primary Weapon";
+        private string primaryArmourDesc = "Primary Armour";
+        private string secondaryArmourDesc = "Secondary Armour";
 
         [Export]
         public PackedScene TextButtonTemplate { get; set; }
+        [Export]
+        public GameDisplay GameDisplay { get; set; }
+        [Export]
+        public ControlsDisplay Controls { get; set; }
 
         private AnimatedSprite2D portrait;
         private Label name;
         private GridContainer container;
         private Label description;
+
         private Button primaryWeapon;
+        private Button primaryArmour;
+        private Button secondaryArmour;
 
         private Label healthLabel;
         private Label manaLabel;
@@ -34,6 +42,7 @@ namespace TheWizardCoder.Subdisplays
         private Label defenseLabel;
 
         private Dictionary<int, string> slotDescriptions;
+        private Array<Button> slotButtons;
         private ArmourType currentArmourType;
         private Character character;
         private Button firstButton;
@@ -46,7 +55,10 @@ namespace TheWizardCoder.Subdisplays
             name = GetNode<Label>("%NameLabel");
             container = GetNode<GridContainer>("%ItemsContainer");
             description = GetNode<Label>("%Description");
+
             primaryWeapon = GetNode<Button>("%PrimaryWeapon");
+            primaryArmour = GetNode<Button>("%PrimaryArmour");
+            secondaryArmour = GetNode<Button>("%SecondaryArmour");
 
             healthLabel = GetNode<Label>("%HealthEffect");
             manaLabel = GetNode<Label>("%ManaEffect");
@@ -58,6 +70,38 @@ namespace TheWizardCoder.Subdisplays
             slotDescriptions[(int)ArmourType.PrimaryWeapon] = primaryWeaponDesc;
             slotDescriptions[(int)ArmourType.PrimaryArmour] = primaryArmourDesc;
             slotDescriptions[(int)ArmourType.SecondaryArmour] = secondaryArmourDesc;
+
+            slotButtons = new Array<Button>();
+            slotButtons.Add(primaryWeapon);
+            slotButtons.Add(primaryArmour);
+            slotButtons.Add(secondaryArmour);
+        }
+
+        public override void _Input(InputEvent @event)
+        {
+            if (Visible)
+            {
+                if (Input.IsActionJustPressed("secondary"))
+                {
+                    if (GameDisplay.Level == 1)
+                    {
+                        int slotIndex = (int)currentArmourType;
+
+                        character.UnequipArmour(slotIndex);
+                        character.ApplyArmourEffects();
+                        UpdateEffectLabels();
+
+                        string indexName = currentArmourType.ToString();
+                        Button indexButton = GetNode<Button>($"%{indexName}");
+                        indexButton.Text = "_______";
+
+                        description.Text = $"{slotDescriptions[slotIndex]}: None";
+
+                        ClearContainer();
+                        PopulateContainer();
+                    }
+                }
+            }
         }
 
         public override void ShowDisplay()
@@ -77,6 +121,7 @@ namespace TheWizardCoder.Subdisplays
             currentArmourType = ArmourType.PrimaryWeapon;
 
             UpdateEffectLabels();
+            UpdateSlotButtons();
 
             Show();
             
@@ -91,6 +136,12 @@ namespace TheWizardCoder.Subdisplays
                 PopulateContainer();
                 UpdateEffectLabels();
             }
+        }
+
+        public void FocusOnFirstSlot()
+        {
+            firstButton = null;
+            primaryWeapon.GrabFocus();
         }
 
         private void ClearContainer()
@@ -155,39 +206,13 @@ namespace TheWizardCoder.Subdisplays
         {
             if (firstButton != null)
             {
+                GameDisplay.Level = 2;
                 firstButton.GrabFocus();
-            }
-            else
-            {
-                description.Text = "No Armour.";
-            }
-        }
 
-        private void OnIndexFocusEntered(int index)
-        {
-            currentArmourType = (ArmourType)index;
-            string slotDescription = slotDescriptions[index];
+                Controls.ChangeXLabel("Go Back");
+                Controls.ChangeZLabel("Equip");
 
-            ClearContainer();
-            PopulateContainer();
-
-            if (character.EquippedArmours.ContainsKey(index))
-            {
-                if (string.IsNullOrEmpty(character.EquippedArmours[index]))
-                {
-                    description.Text = $"{slotDescription}None";
-                }
-                else
-                {
-                    string armourName = character.EquippedArmours[index];
-                    Armour armour = global.Armours[armourName];
-
-                    description.Text = $"{slotDescription}{armour.Name}";
-                }
-            }
-            else
-            {
-                description.Text = $"{slotDescription}None";
+                Controls.HideQLabel();
             }
         }
 
@@ -198,6 +223,22 @@ namespace TheWizardCoder.Subdisplays
             agilityLabel.Text = $"+{character.ArmourEffects.Agility}";
             attackLabel.Text = $"+{character.ArmourEffects.Attack}";
             defenseLabel.Text = $"+{character.ArmourEffects.Defense}";
+        }
+
+        private void UpdateSlotButtons()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                int slotIndex = i;
+                if (character.HasEquippedArmour(slotIndex))
+                {
+                    slotButtons[slotIndex].Text = character.EquippedArmours[slotIndex];
+                }
+                else
+                {
+                    slotButtons[slotIndex].Text = "_______";
+                }
+            }
         }
 
         private void OnArmourPressed(Button button, string name)
@@ -219,6 +260,42 @@ namespace TheWizardCoder.Subdisplays
 
             character.ApplyArmourEffects();
             UpdateEffectLabels();
+        }
+
+        private void OnIndexFocusEntered(int index)
+        {
+            GameDisplay.Level = 1;
+
+            Controls.ChangeXLabel("Go Back");
+            Controls.ChangeZLabel("Select");
+
+            Controls.ShowQLabel();
+            Controls.ChangeQLabel("Unequip");
+
+            currentArmourType = (ArmourType)index;
+            string slotDescription = slotDescriptions[index];
+
+            ClearContainer();
+            PopulateContainer();
+
+            if (character.EquippedArmours.ContainsKey(index))
+            {
+                if (string.IsNullOrEmpty(character.EquippedArmours[index]))
+                {
+                    description.Text = $"{slotDescription}: None";
+                }
+                else
+                {
+                    string armourName = character.EquippedArmours[index];
+                    Armour armour = global.Armours[armourName];
+
+                    description.Text = $"{slotDescription}: {armour.Name}";
+                }
+            }
+            else
+            {
+                description.Text = $"{slotDescription}: None";
+            }
         }
     }
 }

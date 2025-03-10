@@ -10,7 +10,9 @@ namespace TheWizardCoder.Subdisplays
 	{
 		[Signal]
 		public delegate void ItemPressedEventHandler(int index);
-		[Export]
+        [Export]
+        public ControlsDisplay Controls { get; set; }
+        [Export]
 		public PackedScene ItemButtonTemplate { get; set; }
 
 		private GridContainer itemsContainer;
@@ -64,16 +66,22 @@ namespace TheWizardCoder.Subdisplays
 			descriptionRect.Show();
 			noItemsButton.Hide();
 
-			Button item = itemsContainer.GetChildOrNull<Button>(0);
+            Controls.ChangeXLabel("Go Back");
+
+            Button item = itemsContainer.GetChildOrNull<Button>(0);
 			if (item == null)
 			{
 				descriptionRect.Hide();
 				noItemsButton.Show();
 				noItemsButton.GrabFocus();
+
+				Controls.ChangeZLabel("");
 			}
 			else
 			{
 				item.GrabFocus();
+
+				Controls.ChangeZLabel("Use Item");
 			}
 		}
 	}

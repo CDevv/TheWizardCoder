@@ -124,6 +124,20 @@ namespace TheWizardCoder.Data
 
                     Stats.Armours = characterArmours;
                 }
+
+                if (Stats.EquippedArmours.Count == 0)
+                {
+                    Stats.InitializeDefaults();
+
+                    Godot.Collections.Dictionary<int, string> characterEquippedArmours = global.Characters[Stats.Name].EquippedArmours;
+
+                    for (int i = 0; i < characterEquippedArmours.Count; i++)
+                    {
+                        Stats.EquipArmour(i, characterEquippedArmours[i]);
+                    }
+
+                    Stats.ApplyArmourEffects();
+                }
             }
         }
 

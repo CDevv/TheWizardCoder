@@ -18,7 +18,10 @@ namespace TheWizardCoder.Subdisplays
 		[Export]
 		public PackedScene PartyMemberPackedScene;
 
-		private CharacterPartyMember partyMember;
+        [Export]
+        public ControlsDisplay Controls { get; set; }
+
+        private CharacterPartyMember partyMember;
 		private Marker2D basePos;
 
 		private List<CharacterPartyMember> partyMembers = new();
@@ -40,6 +43,9 @@ namespace TheWizardCoder.Subdisplays
 		{
 			Show();
 			partyMember.GrabFocus();
+
+			Controls.ChangeXLabel("Go Back");
+			Controls.ChangeZLabel("Select");
 		}
 
 		public override void UpdateDisplay()

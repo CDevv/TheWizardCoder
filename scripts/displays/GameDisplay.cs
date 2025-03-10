@@ -15,8 +15,15 @@ namespace TheWizardCoder.Displays
 		private Button itemsButton;
 		private AudioStreamPlayer audioPlayer;
 		private Label gold;
+		private ControlsDisplay controls;
 		private MenuAction action;
 		private int itemIndex;
+
+		public int Level
+		{ 
+			get { return level; }
+			set { level = value; }
+		}
 
 		public override void _Ready()
 		{
@@ -24,6 +31,7 @@ namespace TheWizardCoder.Displays
 			itemsButton = GetNode<Button>("%ItemsButton");
 			audioPlayer = GetNode<AudioStreamPlayer>("AudioPlayer");
 			gold = GetNode<Label>("%GoldLabel");
+			controls = GetNode<ControlsDisplay>("ControlsDisplay");
 
 			AddSubdisplay("Inventory", GetNode<InventoryDisplay>("%InventoryMenu"));
 			AddSubdisplay("Options", GetNode<OptionsMenu>("%OptionsMenu"));
@@ -33,6 +41,7 @@ namespace TheWizardCoder.Displays
 			AddSubdisplay("Magic", GetNode<CharacterMagicSpells>("CharacterMagic"));
 			AddSubdisplay("Armour", GetNode<CharacterArmour>("CharacterArmour"));
 
+			controls.Hide();
 			HideAllSubdisplays();
 			Hide();
 			UpdateAllSubdisplays();
@@ -55,6 +64,7 @@ namespace TheWizardCoder.Displays
 							global.CanWalk = true;
 							Hide();
 							HideAllSubdisplays();
+							controls.Hide();
 						}
 						else
 						{
@@ -67,10 +77,21 @@ namespace TheWizardCoder.Displays
 						HideAllSubdisplays();
 						Subdisplays["PartyMembers"].Show();
 						itemsButton.GrabFocus();
+
+						controls.ChangeXLabel("Close");
+						controls.ChangeZLabel("Confirm");
+						controls.HideQLabel();
 						break;
 					case 2:
-						OnOptionsMenu();
-						break;
+                        if (action == MenuAction.Options)
+                        {
+                            OnOptionsMenu();
+                        }
+						else if (action == MenuAction.Armour)
+                        {
+                            ((CharacterArmour)Subdisplays["Armour"]).FocusOnFirstSlot();
+                        }
+                        break;
 					default:
 						break;
 				}
@@ -80,6 +101,7 @@ namespace TheWizardCoder.Displays
 		public override void ShowDisplay()
 		{
 			Show();
+			controls.Show();
 			HideAllSubdisplays();
 			UpdateDisplay();
 			Subdisplays["PartyMembers"].Show();
@@ -102,6 +124,7 @@ namespace TheWizardCoder.Displays
 		{
 			level = 1;
 			ChangeSubdisplay("Options");
+			action = MenuAction.Options;
 		}
 
 		public void OnControlsMenu()
@@ -209,11 +232,17 @@ namespace TheWizardCoder.Displays
 					HideAllSubdisplays();
 					((CharacterStatus)Subdisplays["Status"]).ShowDisplay(character);
 
-					break;
+                    controls.ChangeXLabel("Go Back");
+                    controls.ChangeZLabel("");
+
+                    break;
 
 				case MenuAction.Magic:
 					HideAllSubdisplays();
 					((CharacterMagicSpells)Subdisplays["Magic"]).ShowDisplay(character);
+
+					controls.ChangeXLabel("Go Back");
+					controls.ChangeZLabel("");
 
 					break;
 

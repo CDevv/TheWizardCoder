@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://n0ed07fgussd"]
+
+[ext_resource type="Script" path="res://scripts/subdisplays/ControlsDisplay.cs" id="1_7hlxx"]
+[ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="1_42bmk"]
+[ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="2_s11bo"]
+
+[node name="ControlsDisplay" type="CanvasLayer"]
+script = ExtResource("1_7hlxx")
+
+[node name="Rect" type="NinePatchRect" parent="."]
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 168.0
+offset_bottom = 32.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_42bmk")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="XContainer" type="MarginContainer" parent="Rect"]
+layout_mode = 0
+offset_right = 152.0
+offset_bottom = 48.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="XControl" type="Label" parent="Rect/XContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_s11bo")
+theme_override_font_sizes/font_size = 32
+text = "[X] Close"
+
+[node name="ZContainer" type="MarginContainer" parent="Rect"]
+layout_mode = 0
+offset_left = 76.0
+offset_right = 228.0
+offset_bottom = 48.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ZControl" type="Label" parent="Rect/ZContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_s11bo")
+theme_override_font_sizes/font_size = 32
+text = "[Z] Confirm"
+
+[node name="QContainer" type="MarginContainer" parent="Rect"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 152.0
+offset_right = 304.0
+offset_bottom = 48.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="QControl" type="Label" parent="Rect/QContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_s11bo")
+theme_override_font_sizes/font_size = 32
+text = "[Q] Action"

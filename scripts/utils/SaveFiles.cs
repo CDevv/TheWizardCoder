@@ -87,8 +87,6 @@ namespace TheWizardCoder.Utils
 				string savedData = (string)readSave.GetVar();
 				data = JsonConvert.DeserializeObject<SaveFileData>(savedData, new JsonSerializerSettings() { ObjectCreationHandling = ObjectCreationHandling.Replace, NullValueHandling = NullValueHandling.Ignore });
 				data.IsSaveEmpty = false;
-
-				data.EnsureDefaults(Global);
 			}
 			else
 			{
@@ -106,6 +104,7 @@ namespace TheWizardCoder.Utils
 			PlayerData = data;
 			PlayerData.LastSaved = DateTime.Now;
 			PlayerData.Stats.Global = Global;
+			PlayerData.EnsureDefaults(Global);
 
 			if (data.IsSaveEmpty)
 			{

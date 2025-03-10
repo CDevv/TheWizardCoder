@@ -67,9 +67,9 @@ namespace TheWizardCoder.Autoload
             GameIntroStrings = DataLoader.LoadGameIntro();
             ItemDescriptions = DataLoader.LoadItems();
             MagicSpells = DataLoader.LoadMagicSpells();
+            Armours = DataLoader.LoadArmours();
             Characters = DataLoader.LoadCharacters();
             Shops = DataLoader.LoadShops();
-            Armours = DataLoader.LoadArmours();
 
             LoadFishingProblemData();
         }
