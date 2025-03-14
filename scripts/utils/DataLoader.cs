@@ -188,8 +188,9 @@ namespace TheWizardCoder.Utils
                 ArmourType armourType = Enum.Parse<ArmourType>((string)dict["Type"]);
                 int effect = (int)dict["Effect"];
                 BattleEffectType effectType = Enum.Parse<BattleEffectType>((string)dict["EffectType"]);
+                int price = (int)dict["Price"];
 
-                Armour armour = new(name, description, armourType, effect, effectType);
+                Armour armour = new(name, description, armourType, effect, effectType, price);
 
                 armours.Add(name, armour);
             }

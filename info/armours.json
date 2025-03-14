@@ -3,12 +3,14 @@
 		"Description": "Desc.",
 		"Type": "PrimaryWeapon",
 		"Effect": 10,
-		"EffectType": "Attack"
+		"EffectType": "Attack",
+		"Price": 10,
 	},
 	"Nullable2": {
 		"Description": "Desc.",
 		"Type": "PrimaryWeapon",
 		"Effect": 10,
-		"EffectType": "Attack"
+		"EffectType": "Attack",
+		"Price": 10
 	}
 }

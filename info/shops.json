@@ -11,6 +11,12 @@
 			"Fireball", "Fireball2", "Varti", "Magi-hibble"
 		]
 	},
+	"TestArmour":{
+		"Type": "Armour",
+		"Items": [
+			"Nullable"
+		]
+	},
 	"NobeShop":{
 		"Type": "Item",
 		"Items": [

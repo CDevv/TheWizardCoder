@@ -187,12 +187,17 @@ z_index = 2
 position = Vector2(208, 464)
 ShopName = "TestShop"
 
-[node name="ShopPoint2" parent="." index="31" instance=ExtResource("14_0us7x")]
+[node name="ShopPoint3" parent="." index="31" instance=ExtResource("14_0us7x")]
+z_index = 2
+position = Vector2(464, 464)
+ShopName = "TestArmour"
+
+[node name="ShopPoint2" parent="." index="32" instance=ExtResource("14_0us7x")]
 z_index = 2
 position = Vector2(336, 464)
 ShopName = "TestMagic"
 
-[node name="ZenDummy" parent="." index="33"]
+[node name="ZenDummy" parent="." index="34"]
 position = Vector2(524, 224)
 DialogueResource = ExtResource("8_bj7jj")
 DialogueTitle = "demo"
@@ -200,7 +205,7 @@ DialogueTitle = "demo"
 [node name="Sprite" parent="ZenDummy" index="2"]
 position = Vector2(0, -32)
 
-[node name="GroundItem" parent="." index="35" instance=ExtResource("15_d8wuq")]
+[node name="GroundItem" parent="." index="36" instance=ExtResource("15_d8wuq")]
 z_index = 1
 position = Vector2(360, 216)
 ItemName = "item"
@@ -210,6 +215,6 @@ position = Vector2(0, -8)
 scale = Vector2(2, 2)
 texture = ExtResource("16_0qwho")
 
-[node name="Mirror" parent="." index="37" instance=ExtResource("17_v187j")]
+[node name="Mirror" parent="." index="38" instance=ExtResource("17_v187j")]
 position = Vector2(240, 224)
 scale = Vector2(2, 2)

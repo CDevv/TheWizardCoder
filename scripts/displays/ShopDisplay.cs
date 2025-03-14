@@ -88,7 +88,18 @@ public partial class ShopDisplay : Display
 
         Show();
         Shop = global.Shops[shopId];
-        background.Texture = ResourceLoader.Load<Texture2D>($"res://assets/shops/{Shop.Name}.png");
+
+        string backgroundImagePath = $"res://assets/shops/{Shop.Name}.png";
+
+        if (ResourceLoader.Exists(backgroundImagePath))
+        {
+            background.Texture = ResourceLoader.Load<Texture2D>($"res://assets/shops/{Shop.Name}.png");
+        }
+        else
+        {
+            background.Texture = ResourceLoader.Load<Texture2D>($"res://assets/shops/TestShop.png");
+        }
+
 
         UpdateDisplay();
         itemsContainer.Hide();
@@ -164,6 +175,22 @@ public partial class ShopDisplay : Display
             description.Text = item.Description;
             priceLabel.Text = $"Price: {item.Price}";
             possessionLabel.Text = $"Possesion: {possession}";
+        }
+        else if (Shop.Type == ShopType.Armour)
+        {
+            Armour armour = global.Armours[itemName];
+
+            description.Text = armour.Description;
+            priceLabel.Text = $"Price: {armour.Price}";
+
+            if (global.PlayerData.Stats.OwnsArmour(armour.Name))
+            {
+                possessionLabel.Text = "Owned";
+            }
+            else
+            {
+                possessionLabel.Text = "Not Owned";
+            }
         }
         else
         {
@@ -257,7 +284,7 @@ public partial class ShopDisplay : Display
 
     private void OnSellButton()
     {
-        if (Shop.Type == ShopType.Magic) return;
+        if (Shop.Type == ShopType.Magic || Shop.Type == ShopType.Armour) return;
 
         level = 1;
 
@@ -284,6 +311,9 @@ public partial class ShopDisplay : Display
                 break;
             case ShopType.Magic:
                 OnMagicSpell(index, itemName, shopAction);
+                break;
+            case ShopType.Armour:
+                OnArmour(index, itemName, shopAction);
                 break;
         }
     }
@@ -342,6 +372,22 @@ public partial class ShopDisplay : Display
         else
         {
             OnItem(index, spellName, shopAction);
+        }
+    }
+
+    private void OnArmour(int index, string name, ShopAction shopAction)
+    {
+        Armour armour = global.Armours[name];
+
+        if (shopAction == ShopAction.Buy)
+        {
+            if (!global.PlayerData.Stats.OwnsArmour(armour.Name) && global.PlayerData.Gold >= armour.Price)
+            {
+                global.PlayerData.Gold -= armour.Price;
+                global.PlayerData.Stats.AddArmourToInventory(armour.Name);
+                UpdateDisplay();
+                ShowDisplay();
+            }
         }
     }
 

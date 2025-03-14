@@ -2,6 +2,6 @@
 {
     public enum ShopType
     {
-        Item, Magic
+        Item, Magic, Armour
     }
 }

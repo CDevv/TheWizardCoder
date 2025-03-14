@@ -328,6 +328,11 @@ namespace TheWizardCoder.Data
             }
         }
 
+        public bool OwnsArmour(string name)
+        {
+            return Armours.Contains(name);
+        }
+
         public void ApplyArmourEffects()
         {
             MaxHealth = initialHealth + ArmourEffects.Health;
