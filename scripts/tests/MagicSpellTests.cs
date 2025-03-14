@@ -2,8 +2,6 @@
 using TheWizardCoder.Data;
 using TheWizardCoder.Enums;
 using static GdUnit4.Assertions;
-using Moq;
-using Godot;
 
 namespace TheWizardCoder.Tests
 {

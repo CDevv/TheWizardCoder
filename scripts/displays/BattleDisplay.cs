@@ -1,12 +1,8 @@
-using DialogueManagerRuntime;
 using Godot;
 using Godot.Collections;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
-using TheWizardCoder.Autoload;
+using System.Threading.Tasks;
 using TheWizardCoder.Abstractions;
 using TheWizardCoder.Data;
 using TheWizardCoder.Enums;
@@ -15,218 +11,218 @@ using TheWizardCoder.UI;
 
 namespace TheWizardCoder.Displays
 {
-	public partial class BattleDisplay : Display
-	{
-		private Vector2 startingPoint = new Vector2(16, 408);
+    public partial class BattleDisplay : Display
+    {
+        private Vector2 startingPoint = new Vector2(16, 408);
 
-		[Signal]
-		public delegate void BattleEndedEventHandler();
-		[Signal]
-		public delegate void TurnFinishedEventHandler();
+        [Signal]
+        public delegate void BattleEndedEventHandler();
+        [Signal]
+        public delegate void TurnFinishedEventHandler();
 
-		[Export]
-		public Resource TutorialDialogueResource { get; set; }
-		[Export]
-		public PackedScene CharacterRectScene { get; set; }
-		[Export]
-		public PackedScene EnemySpriteScene { get; set; }
-		[Export]
-		public AlliesContainer Allies { get; private set; }
-		[Export]
-		public EnemiesContainer Enemies { get; private set; }
+        [Export]
+        public Resource TutorialDialogueResource { get; set; }
+        [Export]
+        public PackedScene CharacterRectScene { get; set; }
+        [Export]
+        public PackedScene EnemySpriteScene { get; set; }
+        [Export]
+        public AlliesContainer Allies { get; private set; }
+        [Export]
+        public EnemiesContainer Enemies { get; private set; }
 
-		public bool IsBattleEnded { get; private set; } = false;
-		public bool IsTutorial { get; set; } = false;
+        public bool IsBattleEnded { get; private set; } = false;
+        public bool IsTutorial { get; set; } = false;
 
-		private BattleOptions battleOptions;
-		private EnemyHealthBar enemyHealthContainer;
-		private TextureProgressBar enemyHealthBar;
-		private DamageIndicator damageIndicator;
-		private Marker2D enemySpritePoint;
-		private Button invisButton;
-		private TextureRect backgroundRect;
-		private bool lockBattleOptions = false;
+        private BattleOptions battleOptions;
+        private EnemyHealthBar enemyHealthContainer;
+        private TextureProgressBar enemyHealthBar;
+        private DamageIndicator damageIndicator;
+        private Marker2D enemySpritePoint;
+        private Button invisButton;
+        private TextureRect backgroundRect;
+        private bool lockBattleOptions = false;
 
         public BattleOptions BattleOptions => battleOptions;
 
-		public override void _Ready()
-		{
-			base._Ready();
-			battleOptions = GetNode<BattleOptions>("BattleOptions");
-			enemyHealthContainer = GetNode<EnemyHealthBar>("EnemyHealthBar");
-			damageIndicator = GetNode<DamageIndicator>("DamageIndicator");
-			enemySpritePoint = GetNode<Marker2D>("EnemySpritePoint");
-			invisButton = GetNode<Button>("InvisButton");
-			backgroundRect = GetNode<TextureRect>("Background");
-		}
+        public override void _Ready()
+        {
+            base._Ready();
+            battleOptions = GetNode<BattleOptions>("BattleOptions");
+            enemyHealthContainer = GetNode<EnemyHealthBar>("EnemyHealthBar");
+            damageIndicator = GetNode<DamageIndicator>("DamageIndicator");
+            enemySpritePoint = GetNode<Marker2D>("EnemySpritePoint");
+            invisButton = GetNode<Button>("InvisButton");
+            backgroundRect = GetNode<TextureRect>("Background");
+        }
 
-		public override void _Input(InputEvent inputEvent)
-		{
+        public override void _Input(InputEvent inputEvent)
+        {
             if (!Visible)
             {
-				return;
+                return;
             }
 
             if (Input.IsActionJustPressed("ui_cancel"))
-			{
+            {
                 if (!lockBattleOptions)
                 {
                     battleOptions.ShowOptions();
                 }
             }
-		}
+        }
 
-		public override void ShowDisplay()
-		{
-			ShowDisplay(new() {"Glitch"}, backgroundRect.Texture);
-		}
+        public override void ShowDisplay()
+        {
+            ShowDisplay(new() { "Glitch" }, backgroundRect.Texture);
+        }
 
-		public void ShowDisplay(Array<string> enemies)
-		{
-			ShowDisplay(enemies, backgroundRect.Texture);
-		}
+        public void ShowDisplay(Array<string> enemies)
+        {
+            ShowDisplay(enemies, backgroundRect.Texture);
+        }
 
-		public async void ShowDisplay(Array<string> enemies, Texture2D background)
-		{
-			lockBattleOptions = false;
-			IsBattleEnded = false;
-			backgroundRect.Texture = background;
+        public async void ShowDisplay(Array<string> enemies, Texture2D background)
+        {
+            lockBattleOptions = false;
+            IsBattleEnded = false;
+            backgroundRect.Texture = background;
 
-			//Add allies
-			Allies.AddCharacter(global.PlayerData.Stats);
-			if (global.PlayerData.Allies.Count > 0)
-			{
-				foreach (Character ally in global.PlayerData.Allies)
-				{
-					Allies.AddCharacter(ally);
-				}
-			}
+            //Add allies
+            Allies.AddCharacter(global.PlayerData.Stats);
+            if (global.PlayerData.Allies.Count > 0)
+            {
+                foreach (Character ally in global.PlayerData.Allies)
+                {
+                    Allies.AddCharacter(ally);
+                }
+            }
 
-			//Add enemies
-			foreach (string enemyName in enemies)
-			{
-				Character newEnemy = global.Characters[enemyName];
-				Enemies.AddCharacter(newEnemy);
-			}
+            //Add enemies
+            foreach (string enemyName in enemies)
+            {
+                Character newEnemy = global.Characters[enemyName];
+                Enemies.AddCharacter(newEnemy);
+            }
 
-			global.CurrentRoom.TransitionRect.PlayAnimation();
-			await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
-			Show();
-			battleOptions.ShowDisplay();
-			global.CurrentRoom.TransitionRect.PlayAnimationBackwards();
+            global.CurrentRoom.TransitionRect.PlayAnimation();
+            await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
+            Show();
+            battleOptions.ShowDisplay();
+            global.CurrentRoom.TransitionRect.PlayAnimationBackwards();
 
-			if (IsTutorial)
-			{
+            if (IsTutorial)
+            {
 
-				await global.CurrentRoom.ShowDialogue(TutorialDialogueResource, "tutorial_battle_0");
-				global.GameDisplayEnabled = false;
-			}
+                await global.CurrentRoom.ShowDialogue(TutorialDialogueResource, "tutorial_battle_0");
+                global.GameDisplayEnabled = false;
+            }
 
-			Allies.StartTurn();
-		}
+            Allies.StartTurn();
+        }
 
-		private void Clear()
-		{
-			for (int i = 0; i < Allies.Characters.Count; i++)
-			{
-				Character character = Allies.Characters[i];
-				if (character.Health <= 0)
-				{
-					character.Health = 5;
-				}
-			}
+        private void Clear()
+        {
+            for (int i = 0; i < Allies.Characters.Count; i++)
+            {
+                Character character = Allies.Characters[i];
+                if (character.Health <= 0)
+                {
+                    character.Health = 5;
+                }
+            }
 
-			Allies.Clear();
-			Enemies.Clear();
-		}
+            Allies.Clear();
+            Enemies.Clear();
+        }
 
-		public async Task Routine()
-		{
-			lockBattleOptions = true;
+        public async Task Routine()
+        {
+            lockBattleOptions = true;
 
-			invisButton.GrabFocus();
+            invisButton.GrabFocus();
 
-			List<CharacterBattleState> participants = new();
-			participants.AddRange(Allies.BattleStates);
-			participants.AddRange(Enemies.BattleStates);
-			participants = participants.OrderByDescending((p) => p.Character.AgilityPoints).ToList();
+            List<CharacterBattleState> participants = new();
+            participants.AddRange(Allies.BattleStates);
+            participants.AddRange(Enemies.BattleStates);
+            participants = participants.OrderByDescending((p) => p.Character.AgilityPoints).ToList();
 
-			foreach (CharacterBattleState participant in participants)
-			{
-				switch (participant.Character.Type)
-				{
-					case CharacterType.Ally:
-						await Allies.Turn(participant.InternalIndex);
-						break;
-					case CharacterType.Enemy:
-						await Enemies.Turn(participant.InternalIndex);
-						break;
-				}
+            foreach (CharacterBattleState participant in participants)
+            {
+                switch (participant.Character.Type)
+                {
+                    case CharacterType.Ally:
+                        await Allies.Turn(participant.InternalIndex);
+                        break;
+                    case CharacterType.Enemy:
+                        await Enemies.Turn(participant.InternalIndex);
+                        break;
+                }
 
-				if (Enemies.GetTotalHealth() <= 0)
-				{
-					HideDisplay();
-					return;
-				}
-				else if (Allies.GetTotalHealth() <= 0)
-				{
-					IsBattleEnded = true;
-					global.CurrentRoom.TransitionRect.PlayAnimation();
-					await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
+                if (Enemies.GetTotalHealth() <= 0)
+                {
+                    HideDisplay();
+                    return;
+                }
+                else if (Allies.GetTotalHealth() <= 0)
+                {
+                    IsBattleEnded = true;
+                    global.CurrentRoom.TransitionRect.PlayAnimation();
+                    await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
 
-					global.CurrentRoom.GameOverDisplay.ShowDisplay();
-					Clear();
-				}
-				else
-				{
-					Allies.StartTurn();
-				}
-			}
+                    global.CurrentRoom.GameOverDisplay.ShowDisplay();
+                    Clear();
+                }
+                else
+                {
+                    Allies.StartTurn();
+                }
+            }
 
-			if (Visible)
-			{
-				EmitSignal(SignalName.TurnFinished);
-			}
+            if (Visible)
+            {
+                EmitSignal(SignalName.TurnFinished);
+            }
 
-			lockBattleOptions = false;
-		}
+            lockBattleOptions = false;
+        }
 
-		public override async void HideDisplay()
-		{
-			IsBattleEnded = true;
-			IsTutorial = false;
-			lockBattleOptions = true;
+        public override async void HideDisplay()
+        {
+            IsBattleEnded = true;
+            IsTutorial = false;
+            lockBattleOptions = true;
 
-			int wonGold = Allies.Characters.Sum(x => x.AttackPoints * x.Level);
+            int wonGold = Allies.Characters.Sum(x => x.AttackPoints * x.Level);
 
-			battleOptions.ShowInfoLabel($"You won! {wonGold} Gold and {Allies.CollectedExperiences[0]} EXP obtained.");			
+            battleOptions.ShowInfoLabel($"You won! {wonGold} Gold and {Allies.CollectedExperiences[0]} EXP obtained.");
 
-			await StartTransition();
-			
-			Hide();
-			battleOptions.HideDisplay();	
+            await StartTransition();
 
-			global.CanWalk = true;
-			global.GameDisplayEnabled = true;
-			await EndTransition();
-			EmitSignal(SignalName.BattleEnded);
+            Hide();
+            battleOptions.HideDisplay();
 
-			Allies.AwardExperience();
-			global.PlayerData.Gold += wonGold;
-			Clear();
-		}
+            global.CanWalk = true;
+            global.GameDisplayEnabled = true;
+            await EndTransition();
+            EmitSignal(SignalName.BattleEnded);
 
-		private async Task StartTransition()
-		{
-			SceneTreeTimer timer = GetTree().CreateTimer(2);
-			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
-			global.CurrentRoom.TransitionRect.PlayAnimation();
-			await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
-		}
+            Allies.AwardExperience();
+            global.PlayerData.Gold += wonGold;
+            Clear();
+        }
 
-		private async Task EndTransition()
-		{
-			global.CurrentRoom.TransitionRect.PlayAnimationBackwards();
-		}
-	}
+        private async Task StartTransition()
+        {
+            SceneTreeTimer timer = GetTree().CreateTimer(2);
+            await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
+            global.CurrentRoom.TransitionRect.PlayAnimation();
+            await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
+        }
+
+        private async Task EndTransition()
+        {
+            global.CurrentRoom.TransitionRect.PlayAnimationBackwards();
+        }
+    }
 }

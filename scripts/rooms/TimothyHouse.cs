@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using TheWizardCoder.Abstractions;
 
 public partial class TimothyHouse : BaseRoom
@@ -16,7 +15,7 @@ public partial class TimothyHouse : BaseRoom
             await PlayCutscene("timothy_intro");
             await ShowDialogue(DialogueResource, "timothy_intro");
 
-            global.PlayerData.VisitedTimothyHouse = true;  
+            global.PlayerData.VisitedTimothyHouse = true;
         }
     }
 }

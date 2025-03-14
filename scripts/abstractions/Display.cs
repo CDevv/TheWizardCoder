@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 using TheWizardCoder.Autoload;
 
@@ -24,9 +23,9 @@ namespace TheWizardCoder.Abstractions
         public abstract void ShowDisplay();
         public virtual void UpdateDisplay()
         {
-            
+
         }
-        
+
         /// <summary>
         /// Hide this display.
         /// </summary>

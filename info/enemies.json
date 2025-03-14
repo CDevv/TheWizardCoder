@@ -8,9 +8,7 @@
 		"DefensePoints": 5,
 		"AgilityPoints": 10,
 		"MagicSpells": ["Fireball"],
-		"Type": "Ally",
-		"Armour": ["Nullable", "Nullable2"],
-		"EquippedArmour": ["Nullable"]
+		"Type": "Ally"
 	},
 	"ZenDummy": {
 		"Health": 20,

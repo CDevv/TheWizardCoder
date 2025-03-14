@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
-using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using TheWizardCoder.Autoload;
-using TheWizardCoder.Enums;
 
 namespace TheWizardCoder.Data
 {
@@ -27,7 +25,7 @@ namespace TheWizardCoder.Data
         private Array<string> magicSpells = new();
 
         public Array<string> Inventory
-        {      
+        {
             get
             {
                 return inventory;
@@ -39,7 +37,7 @@ namespace TheWizardCoder.Data
         }
 
         public Array<string> MagicSpells
-        {      
+        {
             get
             {
                 return Stats.MagicSpells;
@@ -101,7 +99,7 @@ namespace TheWizardCoder.Data
         public SaveFileData(Character stats)
         {
             IsSaveEmpty = true;
-            
+
             StartedOn = DateTime.Now;
             LastSaved = DateTime.Now;
             TimeSpent = TimeSpan.Zero;

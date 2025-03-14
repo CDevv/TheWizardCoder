@@ -1,6 +1,6 @@
 namespace TheWizardCoder.Enums
 {
-    public enum SaveFileAction 
+    public enum SaveFileAction
     {
         Load, Delete
     }

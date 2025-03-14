@@ -1,16 +1,14 @@
-using Godot;
-using System;
 using TheWizardCoder.Abstractions;
 
 public partial class FishingDisplay : Display
 {
     public override void ShowDisplay()
     {
-		Show();
+        Show();
     }
 
     public override void HideDisplay()
     {
-		Hide();
+        Hide();
     }
 }

@@ -1,8 +1,8 @@
 ﻿using GdUnit4;
+using Moq;
 using TheWizardCoder.Data;
 using TheWizardCoder.Enums;
 using static GdUnit4.Assertions;
-using Moq;
 
 namespace TheWizardCoder.Tests
 {

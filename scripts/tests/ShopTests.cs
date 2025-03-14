@@ -1,10 +1,8 @@
 ﻿using GdUnit4;
+using Godot.Collections;
 using TheWizardCoder.Data;
 using TheWizardCoder.Enums;
 using static GdUnit4.Assertions;
-using Moq;
-using Godot;
-using Godot.Collections;
 
 namespace TheWizardCoder.Tests
 {

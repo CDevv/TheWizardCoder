@@ -1,8 +1,6 @@
-using System;
-using System.Xml.Linq;
 using Godot;
 using Godot.Collections;
-using Moq;
+using System;
 using TheWizardCoder.Autoload;
 using TheWizardCoder.Data;
 using TheWizardCoder.Enums;
@@ -13,31 +11,31 @@ namespace TheWizardCoder.Utils
     {
         private Global Global { get; set; }
 
-		public DataLoader(Global global)
-		{
-			Global = global;
-		}
+        public DataLoader(Global global)
+        {
+            Global = global;
+        }
 
         public Variant GetJsonData(string fileName)
         {
             if (!FileAccess.FileExists(fileName))
-			{
-				GD.PrintErr($"{fileName} does not exist");
-				return new Json();
-			}
+            {
+                GD.PrintErr($"{fileName} does not exist");
+                return new Json();
+            }
 
-			using var data = FileAccess.Open(fileName, FileAccess.ModeFlags.Read);
-			string jsonString = data.GetAsText();
+            using var data = FileAccess.Open(fileName, FileAccess.ModeFlags.Read);
+            string jsonString = data.GetAsText();
 
-			Json json = new Json();
-			Error jsonError = json.Parse(jsonString);
+            Json json = new Json();
+            Error jsonError = json.Parse(jsonString);
 
-			if (jsonError != Error.Ok)
-			{
-				GD.PrintErr($"Json parse error: {jsonError}");
-			}
+            if (jsonError != Error.Ok)
+            {
+                GD.PrintErr($"Json parse error: {jsonError}");
+            }
 
-			return json.Data;
+            return json.Data;
         }
 
         public System.Collections.Generic.Dictionary<string, Item> LoadItems()
@@ -45,13 +43,13 @@ namespace TheWizardCoder.Utils
             System.Collections.Generic.Dictionary<string, Item> items = new();
 
             Variant jsonData = GetJsonData("res://info/item_descriptions.json");
-			Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
+            Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
 
-			foreach (var pair in parsedData)
-			{
-				var dict = pair.Value;
+            foreach (var pair in parsedData)
+            {
+                var dict = pair.Value;
 
-				string name = pair.Key;
+                string name = pair.Key;
                 string description = (string)dict["Description"];
                 int effect = (int)dict["Effect"];
                 ItemType type = Enum.Parse<ItemType>((string)dict["Type"]);
@@ -61,17 +59,17 @@ namespace TheWizardCoder.Utils
                 if (dict.ContainsKey("Price"))
                 {
                     int price = (int)dict["Price"];
-					item.MakeSellable(price);
+                    item.MakeSellable(price);
                 }
 
                 if (type == ItemType.Key || type == ItemType.Magic)
-				{
-					string[] data = (string[])dict["AdditionalData"];
+                {
+                    string[] data = (string[])dict["AdditionalData"];
                     item.AddAdditionalData(data);
                 }
 
                 items.Add(item.Name, item);
-			}
+            }
 
             return items;
         }
@@ -81,11 +79,11 @@ namespace TheWizardCoder.Utils
             System.Collections.Generic.Dictionary<string, MagicSpell> magicSpells = new();
 
             Variant jsonData = GetJsonData("res://info/magic_descriptions.json");
-			Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
+            Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
 
-			foreach (var pair in parsedData)
-			{
-				var dict = pair.Value;
+            foreach (var pair in parsedData)
+            {
+                var dict = pair.Value;
 
                 string name = (string)dict["Name"];
                 string description = (string)dict["Description"];
@@ -104,7 +102,7 @@ namespace TheWizardCoder.Utils
                 }
 
                 magicSpells.Add(pair.Key, magicSpell);
-			}
+            }
 
             return magicSpells;
         }
@@ -114,19 +112,19 @@ namespace TheWizardCoder.Utils
             System.Collections.Generic.Dictionary<string, Shop> shops = new();
 
             Variant jsonData = GetJsonData("res://info/shops.json");
-			Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
+            Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
 
-			foreach (var pair in parsedData)
-			{
-				var dict = pair.Value;
+            foreach (var pair in parsedData)
+            {
+                var dict = pair.Value;
 
                 string name = pair.Key;
                 ShopType type = Enum.Parse<ShopType>((string)dict["Type"]);
                 Array<string> items = (Array<string>)dict["Items"];
 
                 Shop shop = new(name, type, items);
-				shops.Add(pair.Key, shop);
-			}
+                shops.Add(pair.Key, shop);
+            }
 
             return shops;
         }
@@ -136,25 +134,25 @@ namespace TheWizardCoder.Utils
             System.Collections.Generic.Dictionary<string, Character> characters = new();
 
             Variant jsonData = GetJsonData("res://info/enemies.json");
-			Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
+            Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
 
-			foreach (var pair in parsedData)
-			{
-				Dictionary<string, Variant> dict = pair.Value;
+            foreach (var pair in parsedData)
+            {
+                Dictionary<string, Variant> dict = pair.Value;
 
-				if (pair.Value != null)
-				{
-					dict["Name"] = pair.Key;
+                if (pair.Value != null)
+                {
+                    dict["Name"] = pair.Key;
 
-					Character character = new(dict, Global);
-					characters.Add(pair.Key, character);
+                    Character character = new(dict, Global);
+                    characters.Add(pair.Key, character);
 
-					if (character.Type == CharacterType.Enemy)
-					{
-						ResourceLoader.LoadThreadedRequest($"res://assets/battle/enemies/{pair.Key}.png");
-					}
-				}
-			}
+                    if (character.Type == CharacterType.Enemy)
+                    {
+                        ResourceLoader.LoadThreadedRequest($"res://assets/battle/enemies/{pair.Key}.png");
+                    }
+                }
+            }
 
             return characters;
         }
@@ -164,12 +162,12 @@ namespace TheWizardCoder.Utils
             System.Collections.Generic.Dictionary<string, string> gameIntroStrings = new();
 
             Variant jsonData = GetJsonData("res://info/game_intro.json");
-			Dictionary<string, string> parsedData = (Dictionary<string, string>)jsonData;
+            Dictionary<string, string> parsedData = (Dictionary<string, string>)jsonData;
 
-			foreach (var item in parsedData)
-			{
-				gameIntroStrings[item.Key] = item.Value;
-			}
+            foreach (var item in parsedData)
+            {
+                gameIntroStrings[item.Key] = item.Value;
+            }
 
             return gameIntroStrings;
         }

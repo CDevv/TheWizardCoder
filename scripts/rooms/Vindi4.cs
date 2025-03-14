@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 using TheWizardCoder.Abstractions;
 using TheWizardCoder.Data;
@@ -100,7 +99,7 @@ namespace TheWizardCoder.Rooms
                         await ToSignal(tween, Tween.SignalName.Finished);
 
                         string nodeName = $"%Trunk{num}";
-                        Sprite2D trunk = GetNodeOrNull<Sprite2D>(nodeName);                      
+                        Sprite2D trunk = GetNodeOrNull<Sprite2D>(nodeName);
 
                         if (trunk != null)
                         {

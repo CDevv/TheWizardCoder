@@ -1,8 +1,6 @@
 ﻿using GdUnit4;
 using TheWizardCoder.Data;
-using TheWizardCoder.Enums;
 using static GdUnit4.Assertions;
-using Moq;
 
 namespace TheWizardCoder.Tests
 {
@@ -71,7 +69,7 @@ namespace TheWizardCoder.Tests
         [TestCase(10, 100)]
         public void GetMaxLevelPointsExpected(int level, int expected)
         {
-            Character character = new() { Level = level};
+            Character character = new() { Level = level };
             int result = character.GetMaxLevelPoints();
             AssertBool(result == expected).IsTrue();
         }

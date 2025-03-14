@@ -1,13 +1,9 @@
 using Godot;
 using Godot.Collections;
-using System;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+using TheWizardCoder.Abstractions;
 using TheWizardCoder.Data;
 using TheWizardCoder.Enums;
-using TheWizardCoder.Abstractions;
 using TheWizardCoder.Utils;
-using Moq;
 
 namespace TheWizardCoder.Autoload
 {
@@ -29,8 +25,8 @@ namespace TheWizardCoder.Autoload
         public bool StairsGoUp { get; set; } = true;
         public bool IsInCutscene { get; set; } = false;
         public bool IsFishing { get; set; } = false;
-        public SaveFileData PlayerData 
-        { 
+        public SaveFileData PlayerData
+        {
             get { return SaveFiles.PlayerData; }
         }
         public SaveFileHelper SaveFiles { get; private set; }
@@ -48,7 +44,7 @@ namespace TheWizardCoder.Autoload
         public override void _Ready()
         {
             try
-            {			
+            {
                 DataLoader = new(this);
                 LoadData();
                 SaveFiles = new(this);

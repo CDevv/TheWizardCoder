@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using TheWizardCoder.Abstractions;
 
 namespace TheWizardCoder.Interactables
@@ -7,14 +6,14 @@ namespace TheWizardCoder.Interactables
     public partial class SwitchBlock : Interactable
     {
         private readonly Color redColor = new(255, 0, 0);
-	    private readonly Color greenColor = new(0, 255, 0);
+        private readonly Color greenColor = new(0, 255, 0);
 
         [Signal]
         public delegate void PushedEventHandler();
 
         private bool value;
-        public bool Value 
-        { 
+        public bool Value
+        {
             get { return value; }
             set
             {
@@ -32,7 +31,7 @@ namespace TheWizardCoder.Interactables
                 }
             }
         }
-        
+
         private ColorRect colorRect;
 
         public override void _Ready()

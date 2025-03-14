@@ -1,12 +1,11 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using TheWizardCoder.Abstractions;
-using TheWizardCoder.Interactables;
-using TheWizardCoder.Enums;
-using TheWizardCoder.Data;
-using TheWizardCoder.Utils;
 using System.Threading.Tasks;
+using TheWizardCoder.Abstractions;
+using TheWizardCoder.Data;
+using TheWizardCoder.Enums;
+using TheWizardCoder.Interactables;
 using TheWizardCoder.UI;
 
 public partial class RaftWater : BaseRoom
@@ -178,7 +177,7 @@ public partial class RaftWater : BaseRoom
             if (collision == null)
             {
                 global.CurrentRoom.Player.Position += velocity;
-                
+
                 if (Player.HasFollower)
                 {
                     global.CurrentRoom.Gertrude.Position += velocity;
@@ -314,7 +313,7 @@ public partial class RaftWater : BaseRoom
         if (playSecondCutscene)
         {
             await TweenRaft(new Vector2(3932, 1144), 1f);
-            
+
             if (Player.HasFollower)
             {
                 AnimationPlayer.Play("water_2", -1, 0.5f);
@@ -384,7 +383,7 @@ public partial class RaftWater : BaseRoom
         Tween tween = GetTree().CreateTween();
         tween.SetParallel();
 
-        tween.TweenProperty(raft, "position", position, duration);   
+        tween.TweenProperty(raft, "position", position, duration);
 
         if (Player.HasFollower)
         {

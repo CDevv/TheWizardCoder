@@ -1,6 +1,5 @@
 using Godot;
 using Godot.Collections;
-using System;
 using TheWizardCoder.Abstractions;
 using TheWizardCoder.Data;
 using TheWizardCoder.Displays;
@@ -124,7 +123,7 @@ namespace TheWizardCoder.Subdisplays
             UpdateSlotButtons();
 
             Show();
-            
+
             primaryWeapon.GrabFocus();
         }
 
@@ -249,7 +248,7 @@ namespace TheWizardCoder.Subdisplays
             {
                 character.UnequipArmour(index);
             }
-            
+
             character.EquipArmour(index, name);
 
             string indexName = currentArmourType.ToString();

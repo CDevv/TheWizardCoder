@@ -1,4 +1,3 @@
-using System;
 using Godot;
 using Godot.Collections;
 using TheWizardCoder.Enums;
@@ -21,9 +20,9 @@ namespace TheWizardCoder.Data
             {"up", new InputEventKey(){Keycode = Key.Up, PhysicalKeycode = Key.Up}}
         };
 
-        public Dictionary<string, InputEvent> Controls 
+        public Dictionary<string, InputEvent> Controls
         {
-            get 
+            get
             {
                 return controls;
             }
@@ -88,7 +87,7 @@ namespace TheWizardCoder.Data
             {
                 case WindowSize.Size640by480:
                     windowWidth = 640;
-                    windowHeight = 480;        
+                    windowHeight = 480;
                     break;
                 case WindowSize.Size1280by960:
                     windowWidth = 1280;
@@ -114,7 +113,7 @@ namespace TheWizardCoder.Data
             {
                 case WindowSize.Size640by480:
                     windowWidth = 640;
-                    windowHeight = 480;        
+                    windowHeight = 480;
                     break;
                 case WindowSize.Size1280by960:
                     windowWidth = 1280;
@@ -136,7 +135,7 @@ namespace TheWizardCoder.Data
             if (value)
             {
                 DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
-            }   
+            }
             else
             {
                 DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
