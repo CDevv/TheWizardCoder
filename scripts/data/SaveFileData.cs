@@ -2,6 +2,7 @@ using Godot;
 using Godot.Collections;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TheWizardCoder.Autoload;
 
 namespace TheWizardCoder.Data
@@ -113,7 +114,7 @@ namespace TheWizardCoder.Data
             SceneDefaultMarker = "AfterCutsceneMarker";
 
             Stats = stats;
-            Gold = 100;
+            Gold = 0;
         }
 
         public void EnsureDefaults(Global global)
@@ -186,6 +187,11 @@ namespace TheWizardCoder.Data
         public bool OwnsArmour(string name)
         {
             return Armours.Contains(name);
+        }
+
+        public bool HasEquippedArmour(string name)
+        {
+            return Stats.HasEquippedArmour(name) || Allies.Where(x => x.HasEquippedArmour(name)).Any();
         }
     }
 }

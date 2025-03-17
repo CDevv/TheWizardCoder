@@ -173,9 +173,14 @@ namespace TheWizardCoder.Subdisplays
                     {
                         if (character.EquippedArmours[(int)currentArmourType] == armourName)
                         {
-                            currentArmour.Set("theme_override_colors/font_color", equippedColor);
-                            currentArmour.Set("theme_override_colors/font_focus_color", equippedColorHover);
+                            
                         }
+                    }
+
+                    if (global.PlayerData.HasEquippedArmour(armourName))
+                    {
+                        currentArmour.Set("theme_override_colors/font_color", equippedColor);
+                        currentArmour.Set("theme_override_colors/font_focus_color", equippedColorHover);
                     }
                 }
             }
@@ -249,12 +254,15 @@ namespace TheWizardCoder.Subdisplays
                 character.UnequipArmour(index);
             }
 
-            character.EquipArmour(index, name);
-
             string indexName = currentArmourType.ToString();
             Button indexButton = GetNode<Button>($"%{indexName}");
 
-            indexButton.Text = name;
+            if (!global.PlayerData.HasEquippedArmour(name))
+            {
+                character.EquipArmour(index, name);
+                indexButton.Text = name;
+            }
+
             indexButton.GrabFocus();
 
             character.ApplyArmourEffects();

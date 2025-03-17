@@ -119,10 +119,9 @@ namespace TheWizardCoder.Utils
                 var dict = pair.Value;
 
                 string name = pair.Key;
-                ShopType type = Enum.Parse<ShopType>((string)dict["Type"]);
                 Array<string> items = (Array<string>)dict["Items"];
 
-                Shop shop = new(name, type, items);
+                Shop shop = new(name, items);
                 shops.Add(pair.Key, shop);
             }
 

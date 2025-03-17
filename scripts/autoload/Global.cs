@@ -45,8 +45,6 @@ namespace TheWizardCoder.Autoload
         {
             try
             {
-                
-                
                 DataLoader = new(this);
                 LoadData();
                 SaveFiles = new(this);
@@ -229,6 +227,21 @@ namespace TheWizardCoder.Autoload
             CanWalk = false;
             GameDisplayEnabled = false;
             CurrentRoom.ShopDisplay.ShowDisplay(shopName);
+        }
+
+        public bool ItemExists(string name)
+        {
+            return ItemDescriptions.ContainsKey(name);
+        }
+
+        public bool MagicSpellExists(string name)
+        {
+            return MagicSpells.ContainsKey(name);
+        }
+
+        public bool ArmourExists(string name)
+        {
+            return Armours.ContainsKey(name);
         }
     }
 }

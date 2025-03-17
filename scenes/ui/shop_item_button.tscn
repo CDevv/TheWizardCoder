@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dktgsifhqw55e"]
+
+[ext_resource type="PackedScene" uid="uid://capppjgr8n1ew" path="res://scenes/ui/text_button.tscn" id="1_om1rg"]
+[ext_resource type="Script" path="res://scripts/ui/ShopItemButton.cs" id="2_kt723"]
+
+[node name="ShopItemButton" instance=ExtResource("1_om1rg")]
+script = ExtResource("2_kt723")

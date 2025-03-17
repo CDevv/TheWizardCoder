@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://behqc54w4kgkd"]
 
 [ext_resource type="Script" path="res://scripts/displays/ShopDisplay.cs" id="1_ruwgr"]
-[ext_resource type="PackedScene" uid="uid://capppjgr8n1ew" path="res://scenes/ui/text_button.tscn" id="2_sl7en"]
+[ext_resource type="PackedScene" uid="uid://dktgsifhqw55e" path="res://scenes/ui/shop_item_button.tscn" id="2_rhyre"]
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="2_wxo1j"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="3_l20tj"]
 [ext_resource type="PackedScene" uid="uid://t7m2o5fcqxvv" path="res://scenes/ui/int_field.tscn" id="5_6m2lq"]
 
 [node name="ShopDisplay" type="CanvasLayer"]
 script = ExtResource("1_ruwgr")
-TextButtonPackedScene = ExtResource("2_sl7en")
+TextButtonPackedScene = ExtResource("2_rhyre")
 
 [node name="ShopBackground" type="TextureRect" parent="."]
 offset_right = 640.0

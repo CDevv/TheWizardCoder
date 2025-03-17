@@ -1,36 +1,30 @@
 {
 	"TestShop":{
-		"Type": "Item",
 		"Items": [
 			"item", "Apple"
 		]
 	},
 	"TestMagic":{
-		"Type": "Magic",
 		"Items": [
-			"Fireball", "Fireball2", "Varti", "Magi-hibble"
+			"Fireball", "Fireball2", "Varti", "Magi-hibble", "Nullable"
 		]
 	},
 	"TestArmour":{
-		"Type": "Armour",
 		"Items": [
 			"Nullable"
 		]
 	},
 	"NobeShop":{
-		"Type": "Item",
 		"Items": [
 			"Apple", "Apple Juice", "Purple Fruit"
 		]
 	},
 	"GeraldShop":{
-		"Type": "Item",
 		"Items": [
 			"Cyanberry", "Rounded Bread", "Cyanberry Pie", "Pretzel"
 		]
 	},
 	"JohnsonShop":{
-		"Type": "Magic",
 		"Items": [
 			"Magi-hibble"
 		]

@@ -344,6 +344,25 @@ namespace TheWizardCoder.Data
             }
         }
 
+        public bool HasEquippedArmour(string name)
+        {
+            bool result = false;
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (EquippedArmours.ContainsKey(i))
+                {
+                    if (EquippedArmours[i] == name)
+                    {
+                        result = true;
+                        break;
+                    }
+                }
+            }
+
+            return result;
+        }
+
         public void ApplyArmourEffects()
         {
             MaxHealth = initialHealth + ArmourEffects.Health;

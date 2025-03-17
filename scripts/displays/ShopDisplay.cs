@@ -142,13 +142,27 @@ namespace TheWizardCoder.Displays
 
         private Button AddItem(int index, string itemName, ShopAction shopAction)
         {
-            Button newItem = TextButtonPackedScene.Instantiate<Button>();
+            ShopItemButton newItem = TextButtonPackedScene.Instantiate<ShopItemButton>();
             newItem.Text = itemName;
+            newItem.ItemName = itemName;
 
-            newItem.Pressed += () => OnItemButton(index, itemName, shopAction);
+            if (global.ItemExists(itemName))
+            {
+                newItem.ItemType = ShopType.Item;
+            }
+            else if (global.MagicSpellExists(itemName))
+            {
+                newItem.ItemType = ShopType.Magic;
+            }
+            else if (global.ArmourExists(itemName))
+            {
+                newItem.ItemType = ShopType.Armour;
+            }
+
+            newItem.Pressed += () => OnItemButton(index, newItem, shopAction);
             newItem.FocusEntered += () =>
             {
-                ShowDescription(itemName);
+                ShowDescription(newItem);
             };
 
             itemsContainer.AddChild(newItem);
@@ -165,46 +179,34 @@ namespace TheWizardCoder.Displays
             }
         }
 
-        private void ShowDescription(string itemName)
+        private void ShowDescription(ShopItemButton itemButton)
         {
             descriptionRect.Show();
 
-            if (Shop.Type == ShopType.Item)
-            {
-                int possession = global.PlayerData.Inventory.Count(x => x == itemName);
-                Item item = global.ItemDescriptions[itemName];
+            string itemName = itemButton.ItemName;
 
-                description.Text = item.Description;
-                priceLabel.Text = $"Price: {item.Price}";
-                possessionLabel.Text = $"Possesion: {possession}";
-            }
-            else if (Shop.Type == ShopType.Armour)
+            if (itemButton.ItemType == ShopType.Item)
             {
-                Armour armour = global.Armours[itemName];
-
-                description.Text = armour.Description;
-                priceLabel.Text = $"Price: {armour.Price}";
-
-                if (global.PlayerData.OwnsArmour(armour.Name))
-                {
-                    possessionLabel.Text = "Owned";
-                }
-                else
-                {
-                    possessionLabel.Text = "Not Owned";
-                }
+                ShowItemDescription(itemName);
             }
-            else
+            else if (itemButton.ItemType == ShopType.Armour)
             {
-                if (global.ItemDescriptions.ContainsKey(itemName))
-                {
-                    ShowMagicItemDescription(itemName);
-                }
-                else
-                {
-                    ShowMagicSpellDescription(itemName);
-                }
+                ShowArmourDescription(itemName);
             }
+            else if (itemButton.ItemType == ShopType.Magic)
+            {
+                ShowMagicSpellDescription(itemName);
+            }
+        }
+
+        private void ShowItemDescription(string itemName)
+        {
+            int possession = global.PlayerData.Inventory.Count(x => x == itemName);
+            Item item = global.ItemDescriptions[itemName];
+
+            description.Text = item.Description;
+            priceLabel.Text = $"Price: {item.Price}";
+            possessionLabel.Text = $"Possesion: {possession}";
         }
 
         private void ShowMagicSpellDescription(string name)
@@ -223,14 +225,21 @@ namespace TheWizardCoder.Displays
             }
         }
 
-        private void ShowMagicItemDescription(string name)
+        private void ShowArmourDescription(string armourName)
         {
-            int possession = global.PlayerData.Inventory.Count(x => x == name);
-            Item item = global.ItemDescriptions[name];
+            Armour armour = global.Armours[armourName];
 
-            description.Text = item.Description;
-            priceLabel.Text = $"Price: {item.Price}";
-            possessionLabel.Text = $"Possesion: {possession}";
+            description.Text = armour.Description;
+            priceLabel.Text = $"Price: {armour.Price}";
+
+            if (global.PlayerData.OwnsArmour(armour.Name))
+            {
+                possessionLabel.Text = "Owned";
+            }
+            else
+            {
+                possessionLabel.Text = "";
+            }
         }
 
         private Button UpdateShopItems()
@@ -286,8 +295,6 @@ namespace TheWizardCoder.Displays
 
         private void OnSellButton()
         {
-            if (Shop.Type == ShopType.Magic || Shop.Type == ShopType.Armour) return;
-
             level = 1;
 
             shopHint.Hide();
@@ -304,24 +311,25 @@ namespace TheWizardCoder.Displays
             }
         }
 
-        private void OnItemButton(int index, string itemName, ShopAction shopAction)
+        private void OnItemButton(int index, ShopItemButton itemButton, ShopAction shopAction)
         {
-            switch (Shop.Type)
+            switch (itemButton.ItemType)
             {
                 case ShopType.Item:
-                    OnItem(index, itemName, shopAction);
+                    OnItem(index, itemButton, shopAction);
                     break;
                 case ShopType.Magic:
-                    OnMagicSpell(index, itemName, shopAction);
+                    OnMagicSpell(index, itemButton, shopAction);
                     break;
                 case ShopType.Armour:
-                    OnArmour(index, itemName, shopAction);
+                    OnArmour(index, itemButton, shopAction);
                     break;
             }
         }
 
-        private void OnItem(int index, string itemName, ShopAction shopAction)
+        private void OnItem(int index, ShopItemButton itemButton, ShopAction shopAction)
         {
+            string itemName = itemButton.ItemName;
             Item item = global.ItemDescriptions[itemName];
 
             switch (shopAction)
@@ -345,41 +353,29 @@ namespace TheWizardCoder.Displays
             }
         }
 
-        private void OnMagicSpell(int index, string spellName, ShopAction shopAction)
+        private void OnMagicSpell(int index, ShopItemButton itemButton, ShopAction shopAction)
         {
-            ShopType type = ShopType.Magic;
+            string spellName = itemButton.ItemName;
+            MagicSpell magicSpell = global.MagicSpells[spellName];
 
-            if (global.ItemDescriptions.Any(x => x.Key == spellName))
+            if (shopAction == ShopAction.Sell || global.PlayerData.MagicSpells.Contains(spellName))
             {
-                type = ShopType.Item;
+                return;
             }
 
-            if (type == ShopType.Magic)
+            if (magicSpell.ShopPrice <= global.PlayerData.Gold)
             {
-                MagicSpell magicSpell = global.MagicSpells[spellName];
-
-                if (shopAction == ShopAction.Sell || global.PlayerData.MagicSpells.Contains(spellName))
-                {
-                    return;
-                }
-
-                if (magicSpell.ShopPrice <= global.PlayerData.Gold)
-                {
-                    global.PlayerData.Gold -= magicSpell.ShopPrice;
-                    global.PlayerData.AddMagicSpell(spellName);
-                    UpdateDisplay();
-                    ShowDisplay();
-                }
-            }
-            else
-            {
-                OnItem(index, spellName, shopAction);
+                global.PlayerData.Gold -= magicSpell.ShopPrice;
+                global.PlayerData.AddMagicSpell(spellName);
+                UpdateDisplay();
+                ShowDisplay();
             }
         }
 
-        private void OnArmour(int index, string name, ShopAction shopAction)
+        private void OnArmour(int index, ShopItemButton itemButton, ShopAction shopAction)
         {
-            Armour armour = global.Armours[name];
+            string armourName = itemButton.ItemName;
+            Armour armour = global.Armours[armourName];
 
             if (shopAction == ShopAction.Buy)
             {
