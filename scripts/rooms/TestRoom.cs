@@ -12,7 +12,6 @@ namespace TheWizardCoder.Rooms
         private async void TestCutscene()
         {
             await PlayCutscene("test_anim");
-            //testDummy.MakeFollower();
             global.CurrentRoom.Player.AddAlly("ZenDummy", false);
         }
     }

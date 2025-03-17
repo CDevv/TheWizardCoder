@@ -1,4 +1,4 @@
-﻿namespace TheWizardCoder
+﻿namespace TheWizardCoder.Enums
 {
     public enum MagicSpellType
     {

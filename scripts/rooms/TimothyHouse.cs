@@ -1,21 +1,24 @@
 using Godot;
 using TheWizardCoder.Abstractions;
 
-public partial class TimothyHouse : BaseRoom
+namespace TheWizardCoder.Rooms
 {
-    [Export]
-    public Resource DialogueResource { get; set; }
-
-    public override async void OnReady()
+    public partial class TimothyHouse : BaseRoom
     {
-        base.OnReady();
+        [Export]
+        public Resource DialogueResource { get; set; }
 
-        if (!global.PlayerData.VisitedTimothyHouse)
+        public override async void OnReady()
         {
-            await PlayCutscene("timothy_intro");
-            await ShowDialogue(DialogueResource, "timothy_intro");
+            base.OnReady();
 
-            global.PlayerData.VisitedTimothyHouse = true;
+            if (!global.PlayerData.VisitedTimothyHouse)
+            {
+                await PlayCutscene("timothy_intro");
+                await ShowDialogue(DialogueResource, "timothy_intro");
+
+                global.PlayerData.VisitedTimothyHouse = true;
+            }
         }
     }
 }
