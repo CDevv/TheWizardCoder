@@ -12,5 +12,12 @@
 		"Effect": 10,
 		"EffectType": "Attack",
 		"Price": 10
+	},
+	"Wooden Wand": {
+		"Description": "Desc.",
+		"Type": "PrimaryWeapon",
+		"Effect": 8,
+		"EffectType": "Attack",
+		"Price": 10
 	}
 }

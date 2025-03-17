@@ -4,11 +4,12 @@
 		"MaxHealth": 50,
 		"Points": 10,
 		"MaxPoints": 10,
-		"AttackPoints": 10,
+		"AttackPoints": 2,
 		"DefensePoints": 5,
 		"AgilityPoints": 10,
 		"MagicSpells": ["Fireball"],
-		"Type": "Ally"
+		"Type": "Ally",
+		"EquippedArmour": ["Wooden Wand"]
 	},
 	"ZenDummy": {
 		"Health": 20,

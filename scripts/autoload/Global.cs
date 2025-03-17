@@ -45,6 +45,8 @@ namespace TheWizardCoder.Autoload
         {
             try
             {
+                
+                
                 DataLoader = new(this);
                 LoadData();
                 SaveFiles = new(this);

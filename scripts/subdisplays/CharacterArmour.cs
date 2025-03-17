@@ -156,9 +156,9 @@ namespace TheWizardCoder.Subdisplays
 
         private void PopulateContainer()
         {
-            for (int i = 0; i < character.Armours.Count; i++)
+            for (int i = 0; i < global.PlayerData.Armours.Count; i++)
             {
-                string armourName = character.Armours[i];
+                string armourName = global.PlayerData.Armours[i];
                 Armour armour = global.Armours[armourName];
 
                 if (armour.Type == currentArmourType)

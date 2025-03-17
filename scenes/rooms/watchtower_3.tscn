@@ -6,7 +6,7 @@
 [ext_resource type="TileSet" uid="uid://clhrfovy5lcgu" path="res://tilesets/houses_interiors.tres" id="3_jp5oc"]
 [ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="3_x2hly"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_blwe3"]
-[ext_resource type="PackedScene" uid="uid://c0exi6balg5um" path="res://scenes/components/actor.tscn" id="6_3c3t7"]
+[ext_resource type="PackedScene" uid="uid://bk3a4lc0i5uwk" path="res://scenes/components/actor.tscn" id="6_3c3t7"]
 [ext_resource type="SpriteFrames" uid="uid://b7q7c8vycomy0" path="res://assets/characters/movement/spriteframes/linton.tres" id="7_cmpgl"]
 
 [sub_resource type="Animation" id="Animation_760qk"]
@@ -326,7 +326,7 @@ y_sort_enabled = true
 script = ExtResource("2_pohr3")
 DialogueResource = ExtResource("3_x2hly")
 
-[node name="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" parent="." index="5"]
 libraries = {
 "": SubResource("AnimationLibrary_7ino5")
 }
@@ -340,7 +340,16 @@ color = Color(0, 0, 0, 1)
 z_index = 2
 position = Vector2(320, 340)
 
-[node name="TileMap" type="TileMap" parent="." index="12"]
+[node name="Linton" parent="." index="12" instance=ExtResource("6_3c3t7")]
+z_index = 2
+position = Vector2(320, 264)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Linton" index="2"]
+position = Vector2(0, -32)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("7_cmpgl")
+
+[node name="TileMap" type="TileMap" parent="." index="13"]
 y_sort_enabled = true
 scale = Vector2(2, 2)
 tile_set = ExtResource("3_jp5oc")
@@ -358,7 +367,7 @@ layer_2/tile_data = PackedInt32Array()
 layer_3/name = "floor"
 layer_3/tile_data = PackedInt32Array(786437, 0, 16, 786447, 655360, 11, 786436, 720896, 11, 524293, 0, 12, 327695, 786432, 11, 327684, 851968, 11, 196613, 0, 11, 262149, 0, 13, 327685, 0, 13, 393221, 0, 13, 458757, 0, 13, 262150, 0, 13, 327686, 0, 13, 393222, 0, 13, 458758, 0, 13, 262151, 0, 13, 327687, 0, 13, 393223, 0, 13, 458759, 0, 13, 262152, 0, 13, 327688, 0, 13, 393224, 0, 13, 458760, 0, 13, 262153, 0, 13, 458761, 0, 13, 262154, 0, 13, 458762, 0, 13, 262155, 0, 13, 327691, 0, 13, 393227, 0, 13, 458763, 0, 13, 262156, 0, 13, 327692, 0, 13, 393228, 0, 13, 458764, 0, 13, 262157, 0, 13, 327693, 0, 13, 393229, 0, 13, 458765, 0, 13, 262158, 0, 13, 327694, 0, 13, 393230, 0, 13, 458766, 0, 13, 393231, 0, 13, 393220, 0, 13, 589829, 262144, 13, 655365, 262144, 14, 720901, 196608, 13, 589830, 65536, 14, 655366, 196608, 14, 720902, 262144, 13, 589831, 131072, 13, 655367, 65536, 13, 720903, 196608, 13, 589832, 262144, 13, 655368, 131072, 13, 720904, 196608, 14, 589833, 131072, 14, 655369, 262144, 13, 720905, 262144, 13, 589834, 262144, 14, 655370, 65536, 13, 720906, 65536, 13, 589835, 131072, 13, 655371, 131072, 14, 720907, 131072, 13, 589836, 196608, 13, 655372, 196608, 14, 720908, 65536, 14, 589837, 262144, 13, 655373, 65536, 13, 589838, 65536, 14, 655374, 262144, 14, 720909, 983040, 9, 393225, 327680, 13)
 
-[node name="StairsCollision" type="StaticBody2D" parent="." index="13"]
+[node name="StairsCollision" type="StaticBody2D" parent="." index="14"]
 z_index = 4
 
 [node name="Wall1" type="CollisionShape2D" parent="StairsCollision" index="0"]
@@ -370,7 +379,7 @@ shape = SubResource("SegmentShape2D_as8ts")
 [node name="Wall3" type="CollisionShape2D" parent="StairsCollision" index="2"]
 shape = SubResource("SegmentShape2D_pqdnp")
 
-[node name="RoomCollision" type="StaticBody2D" parent="." index="14"]
+[node name="RoomCollision" type="StaticBody2D" parent="." index="15"]
 z_index = 4
 
 [node name="Wall1" type="CollisionShape2D" parent="RoomCollision" index="0"]
@@ -409,20 +418,12 @@ shape = SubResource("SegmentShape2D_jtout")
 [node name="Wall12" type="CollisionShape2D" parent="RoomCollision" index="11"]
 shape = SubResource("SegmentShape2D_2rr3g")
 
-[node name="Warper" parent="." index="15" instance=ExtResource("4_blwe3")]
+[node name="Warper" parent="." index="16" instance=ExtResource("4_blwe3")]
 z_index = 4
 position = Vector2(448, 376)
 scale = Vector2(1.8, 0.25)
 TargetRoomName = "watchtower_2"
 TargetLocation = "Floor3Marker"
 
-[node name="Floor2Marker" type="Marker2D" parent="." index="16"]
+[node name="Floor2Marker" type="Marker2D" parent="." index="17"]
 position = Vector2(448, 340)
-
-[node name="Linton" parent="." index="17" instance=ExtResource("6_3c3t7")]
-position = Vector2(320, 264)
-
-[node name="Sprite" type="AnimatedSprite2D" parent="Linton" index="2"]
-position = Vector2(0, -32)
-scale = Vector2(2, 2)
-sprite_frames = ExtResource("7_cmpgl")

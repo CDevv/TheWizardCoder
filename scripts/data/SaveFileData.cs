@@ -48,6 +48,8 @@ namespace TheWizardCoder.Data
             }
         }
 
+        public List<string> Armours { get; set; } = new();
+
         public List<Character> Allies { get; set; } = new();
 
         public bool TestCodeProblem { get; set; } = false;
@@ -98,6 +100,8 @@ namespace TheWizardCoder.Data
 
         public SaveFileData(Character stats)
         {
+            Armours = new();
+
             IsSaveEmpty = true;
 
             StartedOn = DateTime.Now;
@@ -109,33 +113,28 @@ namespace TheWizardCoder.Data
             SceneDefaultMarker = "AfterCutsceneMarker";
 
             Stats = stats;
-            Gold = 0;
+            Gold = 100;
         }
 
         public void EnsureDefaults(Global global)
         {
-            if (!IsSaveEmpty)
+            if (Armours.Count == 0)
             {
-                if (Stats.Armours.Count == 0)
-                {
-                    Array<string> characterArmours = global.Characters[Stats.Name].Armours;
+                AddArmour("Wooden Wand");
+            }
 
-                    Stats.Armours = characterArmours;
+            if (Stats.EquippedArmours.Count == 0)
+            {
+                Stats.InitializeDefaults();
+
+                Godot.Collections.Dictionary<int, string> characterEquippedArmours = global.Characters[Stats.Name].EquippedArmours;
+
+                for (int i = 0; i < characterEquippedArmours.Count; i++)
+                {
+                    Stats.EquipArmour(i, characterEquippedArmours[i]);
                 }
 
-                if (Stats.EquippedArmours.Count == 0)
-                {
-                    Stats.InitializeDefaults();
-
-                    Godot.Collections.Dictionary<int, string> characterEquippedArmours = global.Characters[Stats.Name].EquippedArmours;
-
-                    for (int i = 0; i < characterEquippedArmours.Count; i++)
-                    {
-                        Stats.EquipArmour(i, characterEquippedArmours[i]);
-                    }
-
-                    Stats.ApplyArmourEffects();
-                }
+                Stats.ApplyArmourEffects();
             }
         }
 
@@ -177,6 +176,16 @@ namespace TheWizardCoder.Data
         public void RemoveMagicSpell(string name)
         {
             Stats.MagicSpells.Remove(name);
+        }
+
+        public void AddArmour(string name)
+        {
+            Armours.Add(name);
+        }
+
+        public bool OwnsArmour(string name)
+        {
+            return Armours.Contains(name);
         }
     }
 }

@@ -96,7 +96,7 @@ namespace TheWizardCoder.Data
 
                 for (int i = 0; i < equippedArmoursArr.Count; i++)
                 {
-                    EquipArmour(i, equippedArmoursArr[i]);
+                    EquipArmour(i, equippedArmoursArr[i], false);
                 }
             }
         }
@@ -242,7 +242,23 @@ namespace TheWizardCoder.Data
 
         public void EquipArmour(int index, string name)
         {
-            if (Armours.Contains(name))
+            EquipArmour(index, name, true);
+        }
+
+        private void EquipArmour(int index, string name, bool checkPlayerData)
+        {
+            bool pass = false;
+
+            if (!checkPlayerData)
+            {
+                pass = true;
+            }
+            else if (Global.PlayerData.Armours.Contains(name))
+            {
+                pass = true;
+            }
+
+            if (pass)
             {
                 EquippedArmours[index] = name;
 
@@ -326,11 +342,6 @@ namespace TheWizardCoder.Data
             {
                 return false;
             }
-        }
-
-        public bool OwnsArmour(string name)
-        {
-            return Armours.Contains(name);
         }
 
         public void ApplyArmourEffects()

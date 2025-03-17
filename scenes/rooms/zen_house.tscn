@@ -246,7 +246,18 @@ color = Color(0, 0, 0, 1)
 z_index = 1
 position = Vector2(352, 224)
 
-[node name="TileMap" type="TileMap" parent="." index="11"]
+[node name="Zen" parent="." index="11" instance=ExtResource("6_1uugv")]
+z_index = 1
+position = Vector2(275, 152)
+DialogueResource = ExtResource("7_h6001")
+DialogueTitle = "zen_point"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Zen" index="2"]
+position = Vector2(0, -32)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("8_21sgk")
+
+[node name="TileMap" type="TileMap" parent="." index="12"]
 y_sort_enabled = true
 scale = Vector2(2, 2)
 tile_set = ExtResource("3_1ycko")
@@ -258,10 +269,10 @@ layer_0/tile_data = PackedInt32Array(262149, 327680, 3, 262151, 458752, 3, 26215
 layer_1/name = "floor"
 layer_1/tile_data = PackedInt32Array(196613, 196608, 2, 196614, 196608, 2, 196615, 196608, 2, 196616, 196608, 2, 196617, 196608, 2, 196618, 196608, 2, 196619, 196608, 2, 131077, 196608, 1, 131078, 196608, 1, 131079, 196608, 1, 131080, 196608, 1, 131081, 196608, 1, 131082, 196608, 1, 131083, 196608, 1, 65547, 196608, 1, 65546, 196608, 1, 65545, 196608, 1, 65544, 196608, 1, 65543, 196608, 1, 65542, 196608, 1, 65541, 196608, 1, 262149, 65536, 0, 327685, 131072, 0, 393221, 65536, 2, 458757, 0, 1, 524293, 131072, 2, 589829, 131072, 1, 655365, 0, 0, 720901, 131072, 0, 786437, 0, 4, 262150, 131072, 1, 327686, 0, 2, 393222, 131072, 0, 458758, 131072, 0, 524294, 0, 0, 589830, 65536, 0, 655366, 0, 1, 720902, 131072, 0, 786438, 65536, 2, 262151, 65536, 0, 327687, 131072, 1, 393223, 131072, 1, 458759, 0, 0, 524295, 0, 0, 589831, 65536, 2, 655367, 65536, 1, 720903, 0, 2, 786439, 131072, 0, 262152, 0, 0, 327688, 65536, 0, 393224, 0, 1, 458760, 131072, 1, 524296, 0, 0, 589832, 0, 1, 655368, 0, 0, 720904, 0, 0, 786440, 0, 2, 262153, 131072, 2, 327689, 65536, 2, 393225, 65536, 2, 458761, 131072, 2, 524297, 0, 0, 589833, 65536, 2, 655369, 131072, 0, 720905, 131072, 1, 786441, 65536, 1, 262154, 0, 2, 327690, 0, 2, 393226, 0, 0, 458762, 65536, 0, 524298, 65536, 0, 589834, 131072, 1, 655370, 0, 0, 720906, 131072, 0, 786442, 65536, 1, 262155, 0, 2, 327691, 0, 0, 393227, 65536, 0, 458763, 65536, 2, 524299, 131072, 2, 589835, 131072, 1, 655371, 131072, 1, 720907, 0, 2, 786443, 65536, 4, 393228, 262144, 4, 327692, 196608, 4)
 
-[node name="EnterHouseMarker" type="Marker2D" parent="." index="12"]
+[node name="EnterHouseMarker" type="Marker2D" parent="." index="13"]
 position = Vector2(352, 224)
 
-[node name="RoomCollision" type="StaticBody2D" parent="." index="13"]
+[node name="RoomCollision" type="StaticBody2D" parent="." index="14"]
 
 [node name="Wall1" type="CollisionShape2D" parent="RoomCollision" index="0"]
 shape = SubResource("SegmentShape2D_p4qp1")
@@ -278,14 +289,14 @@ shape = SubResource("SegmentShape2D_d3vqa")
 [node name="Wall5" type="CollisionShape2D" parent="RoomCollision" index="4"]
 shape = SubResource("SegmentShape2D_qwetc")
 
-[node name="Warper" parent="." index="14" instance=ExtResource("4_5nhse")]
+[node name="Warper" parent="." index="15" instance=ExtResource("4_5nhse")]
 position = Vector2(416, 200)
 scale = Vector2(1, 1.5)
 TargetRoomName = "village_1"
 TargetLocation = "ZenHouseMarker"
 PlayerDirection = 3
 
-[node name="Basket" type="AnimatedSprite2D" parent="." index="15"]
+[node name="Basket" type="AnimatedSprite2D" parent="." index="16"]
 position = Vector2(312, 120)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_qygsj")
@@ -295,16 +306,6 @@ sprite_frames = SubResource("SpriteFrames_qygsj")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Basket/BasketCollision" index="0"]
 position = Vector2(1, 7)
 shape = SubResource("RectangleShape2D_o0v1m")
-
-[node name="Zen" parent="." index="16" instance=ExtResource("6_1uugv")]
-position = Vector2(275, 152)
-DialogueResource = ExtResource("7_h6001")
-DialogueTitle = "zen_point"
-
-[node name="Sprite" type="AnimatedSprite2D" parent="Zen" index="2"]
-position = Vector2(0, -32)
-scale = Vector2(2, 2)
-sprite_frames = ExtResource("8_21sgk")
 
 [node name="Glitch" type="Sprite2D" parent="." index="17"]
 position = Vector2(184, 216)

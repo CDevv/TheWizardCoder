@@ -15,6 +15,7 @@ namespace TheWizardCoder.Utils
         {
             Global = global;
             PlayerData = new(global.Characters["Nolan"]);
+            PlayerData.EnsureDefaults(global);
         }
 
         public void CreateSaveFile(string fileName, string saveName)

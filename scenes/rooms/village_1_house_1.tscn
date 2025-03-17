@@ -33,7 +33,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." index="11" instance=ExtResource("2_7s6wu")]
 z_index = 1
-position = Vector2(496, 304)
+position = Vector2(160, 328)
 
 [node name="TileMap" type="TileMap" parent="." index="12"]
 y_sort_enabled = true
