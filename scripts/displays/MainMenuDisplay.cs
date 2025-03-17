@@ -13,8 +13,13 @@ namespace TheWizardCoder.Displays
         private Control options;
         private Button playButton;
         private Button loadButton;
+        private Button invisButton;
         private bool waitingInput = false;
         private string actionName;
+
+        private string currentMenu = string.Empty;
+
+        public int Level { get; set; } = 0;
 
         public override void _Ready()
         {
@@ -23,6 +28,7 @@ namespace TheWizardCoder.Displays
             transition = GetNode<TransitionRect>("TransitionRect");
             main = GetNode<Control>("Main");
             playButton = GetNode<Button>("%PlayButton");
+            invisButton = GetNode<Button>("InvisButton");
 
             AddSubdisplay("SavedGames", GetNode<MainMenuSavedGames>("SavedGamesMenu"));
             AddSubdisplay("Options", GetNode<OptionsMenu>("OptionsMenu"));
@@ -45,6 +51,26 @@ namespace TheWizardCoder.Displays
                     waitingInput = false;
                 }
             }
+
+            if (Input.IsActionJustPressed("ui_cancel"))
+            {
+                if (Level == 1)
+                {
+                    ShowMainMenu();
+                }
+                else if (Level == 2)
+                {
+                    if (currentMenu == "controls")
+                    {
+                        currentMenu = string.Empty;
+                        ShowOptions();
+                    }
+                    else
+                    {
+                        ShowSavedGamesMenu();
+                    }
+                }
+            }
         }
 
         public override async void ShowDisplay()
@@ -62,6 +88,7 @@ namespace TheWizardCoder.Displays
 
         public void ShowMainMenu()
         {
+            Level = 0;
             main.Show();
             HideAllSubdisplays();
             playButton.GrabFocus();
@@ -70,23 +97,29 @@ namespace TheWizardCoder.Displays
 
         public void ShowSavedGamesMenu()
         {
+            Level = 1;
             main.Hide();
             ChangeSubdisplay("SavedGames");
         }
 
         public void ShowOptions()
         {
+            Level = 1;
             main.Hide();
             ChangeSubdisplay("Options");
         }
 
         public void ShowControls()
         {
+            currentMenu = "controls";
+            Level = 2;
             ChangeSubdisplay("Controls");
         }
 
         public void ShowCredits()
         {
+            invisButton.GrabFocus();
+            Level = 1;
             ChangeSubdisplay("Credits");
         }
     }

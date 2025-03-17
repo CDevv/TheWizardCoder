@@ -6,11 +6,9 @@ public partial class CreditsDisplay : Display
     [Signal]
     public delegate void BackButtonTriggeredEventHandler();
 
-    private Button backButton;
 
     public override void _Ready()
     {
-        backButton = GetNode<Button>("%Back");
     }
 
     private void OnBackButton()
@@ -22,6 +20,5 @@ public partial class CreditsDisplay : Display
     public override void ShowDisplay()
     {
         Show();
-        backButton.GrabFocus();
     }
 }

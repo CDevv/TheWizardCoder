@@ -34,13 +34,12 @@ theme_override_constants/margin_bottom = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="OptionsRect/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 32
 alignment = 1
 
 [node name="LoadButton" type="Button" parent="OptionsRect/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_left = NodePath("../GoBackButton")
 focus_neighbor_top = NodePath(".")
 focus_neighbor_right = NodePath("../DeleteButton")
 focus_neighbor_bottom = NodePath(".")
@@ -53,25 +52,11 @@ text = "Load"
 layout_mode = 2
 focus_neighbor_left = NodePath("../LoadButton")
 focus_neighbor_top = NodePath(".")
-focus_neighbor_right = NodePath("../GoBackButton")
 focus_neighbor_bottom = NodePath(".")
 mouse_filter = 2
 theme = ExtResource("3_27vlr")
 theme_override_font_sizes/font_size = 36
 text = "Delete"
-
-[node name="GoBackButton" type="Button" parent="OptionsRect/MarginContainer/HBoxContainer"]
-layout_direction = 3
-layout_mode = 2
-focus_neighbor_left = NodePath("../DeleteButton")
-focus_neighbor_top = NodePath(".")
-focus_neighbor_right = NodePath("../LoadButton")
-focus_neighbor_bottom = NodePath(".")
-mouse_filter = 2
-theme = ExtResource("3_27vlr")
-theme_override_font_sizes/font_size = 36
-text = "Go Back
-"
 
 [node name="Save1" parent="." instance=ExtResource("4_2vmto")]
 unique_name_in_owner = true
@@ -102,7 +87,6 @@ focus_neighbor_bottom = NodePath("../Save1")
 
 [connection signal="pressed" from="OptionsRect/MarginContainer/HBoxContainer/LoadButton" to="." method="OnLoadButton"]
 [connection signal="pressed" from="OptionsRect/MarginContainer/HBoxContainer/DeleteButton" to="." method="OnDeleteButton"]
-[connection signal="pressed" from="OptionsRect/MarginContainer/HBoxContainer/GoBackButton" to="." method="OnBackButton"]
 [connection signal="pressed" from="Save1" to="." method="OnSaveButton" binds= [1]]
 [connection signal="pressed" from="Save2" to="." method="OnSaveButton" binds= [2]]
 [connection signal="pressed" from="Save3" to="." method="OnSaveButton" binds= [3]]

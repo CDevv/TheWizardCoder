@@ -1,6 +1,7 @@
 using Godot;
 using TheWizardCoder.Abstractions;
 using TheWizardCoder.Data;
+using TheWizardCoder.Displays;
 using TheWizardCoder.Enums;
 using TheWizardCoder.UI;
 
@@ -17,6 +18,8 @@ namespace TheWizardCoder.Subdisplays
         public DeleteFileConfirmation confirmation;
         [Export]
         public TransitionRect Transition;
+        [Export]
+        public MainMenuDisplay MainMenu { get; set; }
 
         private Button loadButton;
         private SaveFileOption[] saveButtons = new SaveFileOption[3];
@@ -33,11 +36,16 @@ namespace TheWizardCoder.Subdisplays
             };
         }
 
-        public override void _UnhandledInput(InputEvent @event)
+        public override void _Input(InputEvent @event)
         {
             if (Input.IsActionPressed("ui_cancel"))
             {
-                loadButton.GrabFocus();
+                if (MainMenu.Level == 3)
+                {
+                    MainMenu.Level = 2;
+                    loadButton.GrabFocus();
+                    confirmation.HideDisplay();
+                }
             }
         }
 
@@ -67,12 +75,14 @@ namespace TheWizardCoder.Subdisplays
         {
             mode = SaveFileAction.Load;
             saveButtons[0].GrabFocus();
+            MainMenu.Level = 3;
         }
 
         private void OnDeleteButton()
         {
             mode = SaveFileAction.Delete;
             saveButtons[0].GrabFocus();
+            MainMenu.Level = 3;
         }
 
         private async void OnSaveButton(int saveNumber)

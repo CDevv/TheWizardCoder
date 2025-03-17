@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bkmomdkodys8p"]
+[gd_scene load_steps=13 format=3 uid="uid://bkmomdkodys8p"]
 
 [ext_resource type="Script" path="res://scripts/displays/MainMenuDisplay.cs" id="1_bltqf"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="1_rbxpk"]
 [ext_resource type="PackedScene" uid="uid://dqgxo8eebarbi" path="res://scenes/ui/transition_rect.tscn" id="2_l65rp"]
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="2_y37u4"]
+[ext_resource type="PackedScene" uid="uid://n0ed07fgussd" path="res://scenes/subdisplays/gamemenu/controls_display.tscn" id="3_67kn4"]
 [ext_resource type="Texture2D" uid="uid://b280jc176eg22" path="res://assets/ui/titlebg.png" id="3_j35pe"]
 [ext_resource type="Texture2D" uid="uid://c01a02c4hikf2" path="res://assets/ui/gamelogo.png" id="4_4lcj8"]
 [ext_resource type="PackedScene" uid="uid://gkilwd8fd2s7" path="res://scenes/subdisplays/mainmenu/delete_file_confirmation.tscn" id="6_ddegt"]
@@ -16,9 +17,15 @@
 follow_viewport_enabled = true
 script = ExtResource("1_bltqf")
 
+[node name="InvisButton" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
 [node name="TransitionRect" parent="." instance=ExtResource("2_l65rp")]
 layer = 2
 visible = false
+
+[node name="ControlsDisplay" parent="." instance=ExtResource("3_67kn4")]
 
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 640.0
@@ -101,10 +108,11 @@ theme = ExtResource("1_rbxpk")
 theme_override_font_sizes/font_size = 36
 text = "Credits"
 
-[node name="SavedGamesMenu" parent="." node_paths=PackedStringArray("confirmation", "Transition") instance=ExtResource("6_drqyd")]
+[node name="SavedGamesMenu" parent="." node_paths=PackedStringArray("confirmation", "Transition", "MainMenu") instance=ExtResource("6_drqyd")]
 visible = false
 confirmation = NodePath("../DeleteFileConfirmation")
 Transition = NodePath("../TransitionRect")
+MainMenu = NodePath("..")
 
 [node name="DeleteFileConfirmation" parent="." instance=ExtResource("6_ddegt")]
 visible = false
@@ -127,4 +135,3 @@ visible = false
 [connection signal="OnBackButtonPressed" from="OptionsMenu" to="." method="ShowMainMenu"]
 [connection signal="OnControlsButtonPressed" from="OptionsMenu" to="." method="ShowControls"]
 [connection signal="OnBackButtonPressed" from="ControlsMenu" to="." method="ShowOptions"]
-[connection signal="BackButtonTriggered" from="CreditsDisplay" to="." method="ShowMainMenu"]

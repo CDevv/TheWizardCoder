@@ -23,17 +23,6 @@ namespace TheWizardCoder.Subdisplays
             rightButton = GetNode<ControlSelectButton>("%RightButton");
         }
 
-        public override void _Input(InputEvent @event)
-        {
-            if (Input.IsActionJustPressed("ui_cancel"))
-            {
-                if (Visible)
-                {
-                    EmitSignal(SignalName.OnBackButtonPressed);
-                }
-            }
-        }
-
         public override void ShowDisplay()
         {
             Show();

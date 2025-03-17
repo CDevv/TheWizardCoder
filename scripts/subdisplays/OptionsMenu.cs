@@ -50,7 +50,7 @@ namespace TheWizardCoder.Subdisplays
 
         public void FocusFirst()
         {
-            resolutionsButton.GrabFocus();
+            resolutionsButton.CallDeferred(Button.MethodName.GrabFocus);
         }
 
         public void OnWindowSizeChanged(int optionId)

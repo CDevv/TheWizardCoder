@@ -29,7 +29,7 @@ offset_top = 12.0
 offset_right = 300.0
 offset_bottom = 41.0
 scale = Vector2(0.5, 0.5)
-focus_neighbor_top = NodePath("../BackButton")
+focus_neighbor_top = NodePath("../AutoSprintCheckBox")
 focus_neighbor_bottom = NodePath("../FullscreenCheckBox")
 mouse_filter = 2
 theme = ExtResource("3_boxau")
@@ -75,18 +75,6 @@ theme = ExtResource("3_boxau")
 theme_override_font_sizes/font_size = 36
 text = "AutoSprint"
 
-[node name="BackButton" type="Button" parent="OptionsRect"]
-layout_mode = 0
-offset_top = 156.0
-offset_right = 408.0
-offset_bottom = 188.0
-scale = Vector2(0.5, 0.5)
-focus_neighbor_top = NodePath("../AutoSprintCheckBox")
-focus_neighbor_bottom = NodePath("../ResolutionOptions")
-theme = ExtResource("3_boxau")
-theme_override_font_sizes/font_size = 36
-text = "Back"
-
 [node name="ControlsButton" type="Button" parent="OptionsRect"]
 layout_mode = 0
 offset_left = 12.0
@@ -120,10 +108,9 @@ offset_right = -112.0
 offset_bottom = -104.0
 scale = Vector2(0.5, 0.5)
 focus_neighbor_top = NodePath("../ControlsButton")
-focus_neighbor_bottom = NodePath("../BackButton")
+focus_neighbor_bottom = NodePath("../ResolutionOptions")
 
 [connection signal="item_selected" from="OptionsRect/ResolutionOptions" to="." method="OnWindowSizeChanged"]
-[connection signal="pressed" from="OptionsRect/BackButton" to="." method="OnBackButton"]
 [connection signal="pressed" from="OptionsRect/ControlsButton" to="." method="OnControlsPage"]
 [connection signal="Toggled" from="OptionsRect/FullscreenCheckBox" to="." method="OnFullscreenToggled"]
 [connection signal="Toggled" from="OptionsRect/AutoSprintCheckBox" to="." method="OnAutoSprintToggled"]
