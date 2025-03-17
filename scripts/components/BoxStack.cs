@@ -2,46 +2,50 @@ using Godot;
 using System.Collections.Generic;
 using TheWizardCoder.Utils;
 
-public partial class BoxStack : Node2D
+namespace TheWizardCoder.Components
 {
-    private const int BoxGapY = 24;
-
-    [Export]
-    public PackedScene BoxScene { get; set; }
-
-    private Stack<Sprite2D> boxes = new Stack<Sprite2D>();
-    public int Count { get { return boxes.Count; } }
-
-    public void AddBox()
+    public partial class BoxStack : Node2D
     {
-        Sprite2D box = BoxScene.Instantiate<Sprite2D>();
-        box.Modulate = ColorHelper.GetRandom();
+        private const int BoxGapY = 24;
 
-        if (boxes.Count > 0)
+        [Export]
+        public PackedScene BoxScene { get; set; }
+
+        private Stack<Sprite2D> boxes = new Stack<Sprite2D>();
+        public int Count { get { return boxes.Count; } }
+
+        public void AddBox()
         {
-            Vector2 newBoxPosition = boxes.Peek().Position + new Vector2(0, -BoxGapY);
-            box.Position = newBoxPosition;
-        }
-        else
-        {
-            box.Position = Position - new Vector2(0, -16);
+            Sprite2D box = BoxScene.Instantiate<Sprite2D>();
+            box.Modulate = ColorHelper.GetRandom();
+
+            if (boxes.Count > 0)
+            {
+                Vector2 newBoxPosition = boxes.Peek().Position + new Vector2(0, -BoxGapY);
+                box.Position = newBoxPosition;
+            }
+            else
+            {
+                box.Position = Position - new Vector2(0, -16);
+            }
+
+            AddChild(box);
+            boxes.Push(box);
         }
 
-        AddChild(box);
-        boxes.Push(box);
+        public void RemoveBox()
+        {
+            boxes.Pop().QueueFree();
+        }
+
+        public void ClearBoxes()
+        {
+            foreach (var box in boxes)
+            {
+                box.QueueFree();
+            }
+            boxes.Clear();
+        }
     }
 
-    public void RemoveBox()
-    {
-        boxes.Pop().QueueFree();
-    }
-
-    public void ClearBoxes()
-    {
-        foreach (var box in boxes)
-        {
-            box.QueueFree();
-        }
-        boxes.Clear();
-    }
 }

@@ -1,19 +1,22 @@
 using Godot;
 using TheWizardCoder.Abstractions;
 
-public partial class CodeMessagePoint : Interactable
+namespace TheWizardCoder.Interactables
 {
-    [Export(PropertyHint.MultilineText)]
-    public string CodeText { get; set; }
-
-    public override void _Ready()
+    public partial class CodeMessagePoint : Interactable
     {
-        base._Ready();
-    }
+        [Export(PropertyHint.MultilineText)]
+        public string CodeText { get; set; }
 
-    public override void Action()
-    {
+        public override void _Ready()
+        {
+            base._Ready();
+        }
 
-        global.CurrentRoom.CodeMessage.ShowDisplay(CodeText);
+        public override void Action()
+        {
+
+            global.CurrentRoom.CodeMessage.ShowDisplay(CodeText);
+        }
     }
 }

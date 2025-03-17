@@ -1,50 +1,54 @@
 using Godot;
 using TheWizardCoder.Abstractions;
+using TheWizardCoder.UI;
 
-public partial class LevelUpDisplay : Display
+namespace TheWizardCoder.Displays
 {
-    private LevelUpOption healthOption;
-    private LevelUpOption magicOption;
-    private AnimationPlayer animationPlayer;
-
-    public override void _Ready()
+    public partial class LevelUpDisplay : Display
     {
-        base._Ready();
-        animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-        healthOption = GetNode<LevelUpOption>("HealthOption");
-        magicOption = GetNode<LevelUpOption>("MagicOption");
-    }
+        private LevelUpOption healthOption;
+        private LevelUpOption magicOption;
+        private AnimationPlayer animationPlayer;
 
-    public override void ShowDisplay()
-    {
-        global.CanWalk = false;
-        global.GameDisplayEnabled = false;
-        healthOption.SetText($"Increase Max HP\n{global.PlayerData.Stats.MaxHealth} -> {global.PlayerData.Stats.MaxHealth + 5}");
-        magicOption.SetText($"Increase Max MP\n{global.PlayerData.Stats.MaxPoints} -> {global.PlayerData.Stats.MaxPoints + 5}");
-        healthOption.GrabFocus();
-        Show();
-        animationPlayer.Play("show");
-    }
+        public override void _Ready()
+        {
+            base._Ready();
+            animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+            healthOption = GetNode<LevelUpOption>("HealthOption");
+            magicOption = GetNode<LevelUpOption>("MagicOption");
+        }
 
-    public override async void HideDisplay()
-    {
-        animationPlayer.PlayBackwards("show");
-        await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
-        Hide();
+        public override void ShowDisplay()
+        {
+            global.CanWalk = false;
+            global.GameDisplayEnabled = false;
+            healthOption.SetText($"Increase Max HP\n{global.PlayerData.Stats.MaxHealth} -> {global.PlayerData.Stats.MaxHealth + 5}");
+            magicOption.SetText($"Increase Max MP\n{global.PlayerData.Stats.MaxPoints} -> {global.PlayerData.Stats.MaxPoints + 5}");
+            healthOption.GrabFocus();
+            Show();
+            animationPlayer.Play("show");
+        }
 
-        global.CanWalk = true;
-        global.GameDisplayEnabled = true;
-    }
+        public override async void HideDisplay()
+        {
+            animationPlayer.PlayBackwards("show");
+            await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
+            Hide();
 
-    private void IncreaseMaxHealth()
-    {
-        global.PlayerData.Stats.SetMaxHealth(global.PlayerData.Stats.MaxHealth + 5);
-        HideDisplay();
-    }
+            global.CanWalk = true;
+            global.GameDisplayEnabled = true;
+        }
 
-    private void IncreaseMaxPoints()
-    {
-        global.PlayerData.Stats.SetMaxPoints(global.PlayerData.Stats.MaxPoints + 5);
-        HideDisplay();
+        private void IncreaseMaxHealth()
+        {
+            global.PlayerData.Stats.SetMaxHealth(global.PlayerData.Stats.MaxHealth + 5);
+            HideDisplay();
+        }
+
+        private void IncreaseMaxPoints()
+        {
+            global.PlayerData.Stats.SetMaxPoints(global.PlayerData.Stats.MaxPoints + 5);
+            HideDisplay();
+        }
     }
 }

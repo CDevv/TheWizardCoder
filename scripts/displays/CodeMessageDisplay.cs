@@ -1,50 +1,54 @@
 using Godot;
 using TheWizardCoder.Abstractions;
 
-public partial class CodeMessageDisplay : Display
+namespace TheWizardCoder.Displays
 {
-    private CodeEdit codeText;
-    private AnimationPlayer animationPlayer;
-
-    public override void _Ready()
+    public partial class CodeMessageDisplay : Display
     {
-        base._Ready();
-        codeText = GetNode<CodeEdit>("%CodeEdit");
-        animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-    }
+        private CodeEdit codeText;
+        private AnimationPlayer animationPlayer;
 
-    public override void _Process(double delta)
-    {
-        if (Input.IsActionPressed("ui_cancel"))
+        public override void _Ready()
         {
-            if (Visible)
+            base._Ready();
+            codeText = GetNode<CodeEdit>("%CodeEdit");
+            animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        }
+
+        public override void _Process(double delta)
+        {
+            if (Input.IsActionPressed("ui_cancel"))
             {
-                HideDisplay();
+                if (Visible)
+                {
+                    HideDisplay();
+                }
             }
+        }
+
+        public override void ShowDisplay()
+        {
+            ShowDisplay(codeText.Text);
+        }
+
+        public void ShowDisplay(string code)
+        {
+            global.CanWalk = false;
+            global.GameDisplayEnabled = false;
+
+            codeText.Text = code;
+            Show();
+            animationPlayer.Play("show");
+        }
+
+        public override async void HideDisplay()
+        {
+            animationPlayer.PlayBackwards("show");
+            await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
+            Hide();
+            global.CanWalk = true;
+            global.GameDisplayEnabled = true;
         }
     }
 
-    public override void ShowDisplay()
-    {
-        ShowDisplay(codeText.Text);
-    }
-
-    public void ShowDisplay(string code)
-    {
-        global.CanWalk = false;
-        global.GameDisplayEnabled = false;
-
-        codeText.Text = code;
-        Show();
-        animationPlayer.Play("show");
-    }
-
-    public override async void HideDisplay()
-    {
-        animationPlayer.PlayBackwards("show");
-        await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
-        Hide();
-        global.CanWalk = true;
-        global.GameDisplayEnabled = true;
-    }
 }

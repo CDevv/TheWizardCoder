@@ -1,62 +1,65 @@
 using Godot;
 
-public partial class IntField : Button
+namespace TheWizardCoder.UI
 {
-    public int Value { get; private set; } = 1;
-
-    private AnimatedSprite2D leftArrow;
-    private AnimatedSprite2D rightArrow;
-
-    private bool isFocused = false;
-
-    public override void _Ready()
+    public partial class IntField : Button
     {
-        leftArrow = GetNode<AnimatedSprite2D>("Left");
-        rightArrow = GetNode<AnimatedSprite2D>("Right");
+        public int Value { get; private set; } = 1;
 
-        Text = $"{Value}";
-    }
+        private AnimatedSprite2D leftArrow;
+        private AnimatedSprite2D rightArrow;
 
-    public override void _Process(double delta)
-    {
-        if (isFocused)
+        private bool isFocused = false;
+
+        public override void _Ready()
         {
-            if (Input.IsActionJustPressed("ui_left"))
+            leftArrow = GetNode<AnimatedSprite2D>("Left");
+            rightArrow = GetNode<AnimatedSprite2D>("Right");
+
+            Text = $"{Value}";
+        }
+
+        public override void _Process(double delta)
+        {
+            if (isFocused)
             {
-                if (Value > 1)
+                if (Input.IsActionJustPressed("ui_left"))
                 {
-                    Value--;
-                    Text = $"{Value}";
+                    if (Value > 1)
+                    {
+                        Value--;
+                        Text = $"{Value}";
+                    }
                 }
-            }
-            if (Input.IsActionJustPressed("ui_right"))
-            {
-                if (Value < 99)
+                if (Input.IsActionJustPressed("ui_right"))
                 {
-                    Value++;
-                    Text = $"{Value}";
+                    if (Value < 99)
+                    {
+                        Value++;
+                        Text = $"{Value}";
+                    }
                 }
             }
         }
-    }
 
-    public void Reset()
-    {
-        Value = 1;
-        Text = $"{Value}";
-    }
+        public void Reset()
+        {
+            Value = 1;
+            Text = $"{Value}";
+        }
 
-    private void OnFocusEntered()
-    {
-        isFocused = true;
-        leftArrow.Play();
-        rightArrow.Play();
-    }
+        private void OnFocusEntered()
+        {
+            isFocused = true;
+            leftArrow.Play();
+            rightArrow.Play();
+        }
 
-    private void OnFocusExited()
-    {
-        isFocused = false;
-        leftArrow.Stop();
-        rightArrow.Stop();
+        private void OnFocusExited()
+        {
+            isFocused = false;
+            leftArrow.Stop();
+            rightArrow.Stop();
+        }
     }
 }

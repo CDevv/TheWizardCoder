@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using TheWizardCoder.Components;
 using TheWizardCoder.Enums;
 
 namespace TheWizardCoder.Data

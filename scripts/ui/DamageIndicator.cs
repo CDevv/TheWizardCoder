@@ -9,7 +9,6 @@ namespace TheWizardCoder.UI
 
         private AnimationPlayer player;
 
-        // Called when the node enters the scene tree for the first time.
         public override void _Ready()
         {
             player = GetNode<AnimationPlayer>("AnimationPlayer");
@@ -17,11 +16,6 @@ namespace TheWizardCoder.UI
             {
                 EmitSignal(SignalName.AnimationFinished);
             };
-        }
-
-        // Called every frame. 'delta' is the elapsed time since the previous frame.
-        public override void _Process(double delta)
-        {
         }
 
         public void PlayAnimation(int num, Vector2 position, Color color)

@@ -20,7 +20,7 @@
 		"DefensePoints": 5,
 		"AgilityPoints": 2,
 		"MagicSpells": ["Hibble"],
-		"Type": "Ally",
+		"Type": "Ally"
 	},
 	"Glitch": {
 		"Health": 30,
@@ -42,7 +42,7 @@
 		"DefensePoints": 5,
 		"AgilityPoints": 5,
 		"MagicSpells": [],
-		"Type": "Enemy",
+		"Type": "Enemy"
 	},
 	"JuniorBug": {
 		"Health": 15,
@@ -53,7 +53,7 @@
 		"DefensePoints": 2,
 		"AgilityPoints": 5,
 		"MagicSpells": [],
-		"Type": "Enemy",
+		"Type": "Enemy"
 	},
 	"LagMan": {
 		"Health": 50,
@@ -78,6 +78,6 @@
 		"DefensePoints": 5,
 		"AgilityPoints": 5,
 		"MagicSpells": ["Hibble"],
-		"Type": "Ally",
+		"Type": "Ally"
 	}
 }

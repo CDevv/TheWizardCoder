@@ -1,14 +1,17 @@
 using TheWizardCoder.Abstractions;
 
-public partial class FishingDisplay : Display
+namespace TheWizardCoder.Displays
 {
-    public override void ShowDisplay()
+    public partial class FishingDisplay : Display
     {
-        Show();
-    }
+        public override void ShowDisplay()
+        {
+            Show();
+        }
 
-    public override void HideDisplay()
-    {
-        Hide();
+        public override void HideDisplay()
+        {
+            Hide();
+        }
     }
 }
