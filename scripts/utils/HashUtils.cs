@@ -36,8 +36,8 @@ namespace TheWizardCoder.Utils
 
             for (int i = 0; i < b.Length; i++)
             {
-                var b1 = a[i];
-                var b2 = b[i];
+                byte b1 = a[i];
+                byte b2 = b[i];
                 if (b1 != b2)
                 {
                     return false;

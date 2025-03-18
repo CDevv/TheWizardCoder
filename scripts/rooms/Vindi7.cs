@@ -36,7 +36,7 @@ namespace TheWizardCoder.Rooms
 
             barriers = new Array<Sprite2D>();
             Array<Node> barriersNodes = GetTree().GetNodesInGroup("barrier");
-            foreach (var item in barriersNodes)
+            foreach (Node item in barriersNodes)
             {
                 Sprite2D barrierSprite = (Sprite2D)item;
                 barriers.Add(barrierSprite);
@@ -105,7 +105,7 @@ namespace TheWizardCoder.Rooms
 
         private void HideBarriers()
         {
-            foreach (var item in barriers)
+            foreach (Sprite2D item in barriers)
             {
                 item.Hide();
             }

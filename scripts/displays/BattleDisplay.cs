@@ -13,7 +13,7 @@ namespace TheWizardCoder.Displays
 {
     public partial class BattleDisplay : Display
     {
-        private Vector2 startingPoint = new Vector2(16, 408);
+        private Vector2 startingPoint = new(16, 408);
 
         [Signal]
         public delegate void BattleEndedEventHandler();
@@ -204,7 +204,7 @@ namespace TheWizardCoder.Displays
 
             global.CanWalk = true;
             global.GameDisplayEnabled = true;
-            await EndTransition();
+            EndTransition();
             EmitSignal(SignalName.BattleEnded);
 
             Allies.AwardExperience();
@@ -220,7 +220,7 @@ namespace TheWizardCoder.Displays
             await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
         }
 
-        private async Task EndTransition()
+        private void EndTransition()
         {
             global.CurrentRoom.TransitionRect.PlayAnimationBackwards();
         }

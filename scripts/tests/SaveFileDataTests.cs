@@ -15,7 +15,7 @@ namespace TheWizardCoder.Tests
         [TestCase("Kris")]
         public void ValidConstructorCalls(string characterName)
         {
-            Mock<Character> character = new Mock<Character>();
+            Mock<Character> character = new();
             character.SetupGet(c => c.Name).Returns(characterName);
 
             SaveFileData saveFileData = new(character.Object);

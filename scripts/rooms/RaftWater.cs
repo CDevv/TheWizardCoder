@@ -103,7 +103,7 @@ namespace TheWizardCoder.Rooms
             boxTypeFuncs[(int)ChallengeTextBoxType.AddTwoBoxes] = () => { boxStack.AddBox(); boxStack.AddBox(); };
             boxTypeFuncs[(int)ChallengeTextBoxType.AddFiveBoxes] = () =>
             {
-                for (var i = 0; i < 5; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     boxStack.AddBox();
                 }
@@ -112,7 +112,7 @@ namespace TheWizardCoder.Rooms
             boxTypeFuncs[(int)ChallengeTextBoxType.RemoveTwoBoxes] = () => { boxStack.RemoveBox(); boxStack.RemoveBox(); };
             boxTypeFuncs[(int)ChallengeTextBoxType.AddSevenBoxes] = () =>
             {
-                for (var i = 0; i < 7; i++)
+                for (int i = 0; i < 7; i++)
                 {
                     boxStack.AddBox();
                 }
@@ -154,11 +154,11 @@ namespace TheWizardCoder.Rooms
 
         private void InitChallenges()
         {
-            var data = (Godot.Collections.Dictionary<string, Variant>)global.DataLoader.GetJsonData("res://info/raft_water_challenges.json");
+            Godot.Collections.Dictionary<string, Variant> data = (Godot.Collections.Dictionary<string, Variant>)global.DataLoader.GetJsonData("res://info/raft_water_challenges.json");
 
-            foreach (var item in data)
+            foreach (KeyValuePair<string, Variant> item in data)
             {
-                var challengeData = (Godot.Collections.Dictionary<string, Variant>)item.Value;
+                Godot.Collections.Dictionary<string, Variant> challengeData = (Godot.Collections.Dictionary<string, Variant>)item.Value;
                 RaftWaterChallenge challenge = new(challengeData);
                 challenges.Add(challenge);
             }
@@ -176,7 +176,7 @@ namespace TheWizardCoder.Rooms
                 Vector2 velocity = Input.GetVector("left", "right", "up", "down").Normalized();
                 velocity *= RaftSpeed;
 
-                var collision = raft.MoveAndCollide(velocity);
+                KinematicCollision2D collision = raft.MoveAndCollide(velocity);
 
                 if (collision == null)
                 {
@@ -267,7 +267,7 @@ namespace TheWizardCoder.Rooms
 
         private void ClearTextBoxes()
         {
-            foreach (var item in challengeBoxes)
+            foreach (TextBoxInteractable item in challengeBoxes)
             {
                 item.QueueFree();
             }
@@ -286,7 +286,7 @@ namespace TheWizardCoder.Rooms
             conditionText.Text = $"if ({challenges[currentChallenge].ConditionString})";
 
             ClearTextBoxes();
-            for (var i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 ChallengeTextBoxType chosenType = challenges[currentChallenge].BoxTypes[i];
                 SpawnTextBox(i, chosenType);

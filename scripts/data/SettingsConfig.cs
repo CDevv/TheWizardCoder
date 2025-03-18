@@ -30,12 +30,12 @@ namespace TheWizardCoder.Data
 
         public void SaveSettings()
         {
-            ConfigFile configFile = new ConfigFile();
+            ConfigFile configFile = new();
 
             configFile.SetValue("General", "WindowSize", (int)WindowSize);
             configFile.SetValue("General", "Fullscreen", Fullscreen);
 
-            foreach (var item in controls)
+            foreach (System.Collections.Generic.KeyValuePair<string, InputEvent> item in controls)
             {
                 configFile.SetValue("Controls", item.Key, item.Value);
             }
@@ -47,7 +47,7 @@ namespace TheWizardCoder.Data
 
         public void LoadSettings()
         {
-            ConfigFile configFile = new ConfigFile();
+            ConfigFile configFile = new();
 
             Error err = configFile.Load("user://options.cfg");
 
@@ -59,7 +59,7 @@ namespace TheWizardCoder.Data
             WindowSize = (WindowSize)(int)configFile.GetValue("General", "WindowSize");
             Fullscreen = (bool)configFile.GetValue("General", "Fullscreen");
 
-            foreach (var item in controls)
+            foreach (System.Collections.Generic.KeyValuePair<string, InputEvent> item in controls)
             {
                 controls[item.Key] = (InputEvent)configFile.GetValue("Controls", item.Key);
             }
@@ -72,7 +72,7 @@ namespace TheWizardCoder.Data
             ChangeWindowSize(WindowSize);
 
             ToggleFullscreen(Fullscreen);
-            foreach (var item in controls)
+            foreach (System.Collections.Generic.KeyValuePair<string, InputEvent> item in controls)
             {
                 ChangeControl(item.Key, item.Value);
             }

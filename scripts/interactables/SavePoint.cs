@@ -6,7 +6,7 @@ namespace TheWizardCoder.Interactables
     {
         public override void Action()
         {
-            var savedGames = global.CurrentRoom.SavedGamesDisplay;
+            Displays.SavedGamesDisplay savedGames = global.CurrentRoom.SavedGamesDisplay;
             savedGames.UpdateDisplay();
             savedGames.ShowDisplay();
         }

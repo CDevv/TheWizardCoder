@@ -228,7 +228,7 @@ namespace TheWizardCoder.Abstractions
         public int GetTotalHealth()
         {
             int result = 0;
-            foreach (var item in Characters)
+            foreach (Character item in Characters)
             {
                 result += item.Health;
             }

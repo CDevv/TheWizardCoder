@@ -276,7 +276,7 @@ namespace TheWizardCoder.Subdisplays
             ClearInventoryContainer();
 
             Array<Node> magicSpellsButtons = magicContainer.GetChildren();
-            foreach (var item in magicSpellsButtons)
+            foreach (Node item in magicSpellsButtons)
             {
                 item.QueueFree();
             }
@@ -285,7 +285,7 @@ namespace TheWizardCoder.Subdisplays
         private void ClearInventoryContainer()
         {
             Array<Node> itemButtons = itemsContainer.GetChildren();
-            foreach (var item in itemButtons)
+            foreach (Node item in itemButtons)
             {
                 item.QueueFree();
             }

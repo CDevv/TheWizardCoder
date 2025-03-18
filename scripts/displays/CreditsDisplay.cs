@@ -8,11 +8,6 @@ namespace TheWizardCoder.Displays
         [Signal]
         public delegate void BackButtonTriggeredEventHandler();
 
-
-        public override void _Ready()
-        {
-        }
-
         private void OnBackButton()
         {
             Hide();

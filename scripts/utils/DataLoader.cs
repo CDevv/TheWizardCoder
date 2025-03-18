@@ -24,10 +24,10 @@ namespace TheWizardCoder.Utils
                 return new Json();
             }
 
-            using var data = FileAccess.Open(fileName, FileAccess.ModeFlags.Read);
+            using FileAccess data = FileAccess.Open(fileName, FileAccess.ModeFlags.Read);
             string jsonString = data.GetAsText();
 
-            Json json = new Json();
+            Json json = new();
             Error jsonError = json.Parse(jsonString);
 
             if (jsonError != Error.Ok)
@@ -45,16 +45,16 @@ namespace TheWizardCoder.Utils
             Variant jsonData = GetJsonData("res://info/item_descriptions.json");
             Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
 
-            foreach (var pair in parsedData)
+            foreach (System.Collections.Generic.KeyValuePair<string, Dictionary<string, Variant>> pair in parsedData)
             {
-                var dict = pair.Value;
+                Dictionary<string, Variant> dict = pair.Value;
 
                 string name = pair.Key;
                 string description = (string)dict["Description"];
                 int effect = (int)dict["Effect"];
                 ItemType type = Enum.Parse<ItemType>((string)dict["Type"]);
 
-                Item item = new Item(name, description, effect, type);
+                Item item = new(name, description, effect, type);
 
                 if (dict.ContainsKey("Price"))
                 {
@@ -81,9 +81,9 @@ namespace TheWizardCoder.Utils
             Variant jsonData = GetJsonData("res://info/magic_descriptions.json");
             Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
 
-            foreach (var pair in parsedData)
+            foreach (System.Collections.Generic.KeyValuePair<string, Dictionary<string, Variant>> pair in parsedData)
             {
-                var dict = pair.Value;
+                Dictionary<string, Variant> dict = pair.Value;
 
                 string name = (string)dict["Name"];
                 string description = (string)dict["Description"];
@@ -93,7 +93,7 @@ namespace TheWizardCoder.Utils
                 CharacterType targetType = Enum.Parse<CharacterType>((string)dict["TargetType"]);
                 MagicSpellType spellType = Enum.Parse<MagicSpellType>((string)dict["Type"]);
 
-                MagicSpell magicSpell = new MagicSpell(name, description, effect, cost, shopPrice, targetType, spellType);
+                MagicSpell magicSpell = new(name, description, effect, cost, shopPrice, targetType, spellType);
 
                 if (magicSpell.SpellType == MagicSpellType.ApplyBattleEffect)
                 {
@@ -114,9 +114,9 @@ namespace TheWizardCoder.Utils
             Variant jsonData = GetJsonData("res://info/shops.json");
             Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
 
-            foreach (var pair in parsedData)
+            foreach (System.Collections.Generic.KeyValuePair<string, Dictionary<string, Variant>> pair in parsedData)
             {
-                var dict = pair.Value;
+                Dictionary<string, Variant> dict = pair.Value;
 
                 string name = pair.Key;
                 Array<string> items = (Array<string>)dict["Items"];
@@ -135,7 +135,7 @@ namespace TheWizardCoder.Utils
             Variant jsonData = GetJsonData("res://info/enemies.json");
             Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
 
-            foreach (var pair in parsedData)
+            foreach (System.Collections.Generic.KeyValuePair<string, Dictionary<string, Variant>> pair in parsedData)
             {
                 Dictionary<string, Variant> dict = pair.Value;
 
@@ -163,7 +163,7 @@ namespace TheWizardCoder.Utils
             Variant jsonData = GetJsonData("res://info/game_intro.json");
             Dictionary<string, string> parsedData = (Dictionary<string, string>)jsonData;
 
-            foreach (var item in parsedData)
+            foreach (System.Collections.Generic.KeyValuePair<string, string> item in parsedData)
             {
                 gameIntroStrings[item.Key] = item.Value;
             }
@@ -178,9 +178,9 @@ namespace TheWizardCoder.Utils
             Variant jsonData = GetJsonData("res://info/armours.json");
             Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
 
-            foreach (var item in parsedData)
+            foreach (System.Collections.Generic.KeyValuePair<string, Dictionary<string, Variant>> item in parsedData)
             {
-                var dict = item.Value;
+                Dictionary<string, Variant> dict = item.Value;
 
                 string name = item.Key;
                 string description = (string)dict["Description"];

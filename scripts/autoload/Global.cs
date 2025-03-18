@@ -73,18 +73,18 @@ namespace TheWizardCoder.Autoload
         private void LoadFishingProblemData()
         {
             Variant jsonData = DataLoader.GetJsonData("res://info/fishing_problem.json");
-            var dict = (Dictionary<string, Variant>)jsonData;
+            Dictionary<string, Variant> dict = (Dictionary<string, Variant>)jsonData;
 
             string uniqueIdentifier = (string)dict["UniqueIdentifier"];
             string code = (string)dict["Code"];
-            var items = new Array<string>((string[])dict["Items"]);
+            Array<string> items = new((string[])dict["Items"]);
 
-            var solvableAreasVectors = new Dictionary<string, Vector2>();
-            var solvableAreas = (Dictionary<string, Variant>)dict["SolvableAreas"];
-            foreach (var item in solvableAreas)
+            Dictionary<string, Vector2> solvableAreasVectors = new();
+            Dictionary<string, Variant> solvableAreas = (Dictionary<string, Variant>)dict["SolvableAreas"];
+            foreach (System.Collections.Generic.KeyValuePair<string, Variant> item in solvableAreas)
             {
                 int[] arr = (int[])item.Value;
-                Vector2 vector = new Vector2(arr[0], arr[1]);
+                Vector2 vector = new(arr[0], arr[1]);
 
                 solvableAreasVectors[item.Key] = vector;
             }

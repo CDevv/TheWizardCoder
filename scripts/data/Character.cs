@@ -113,16 +113,16 @@ namespace TheWizardCoder.Data
         private void FetchBehaviour(Variant variant)
         {
             Behaviour = new();
-            var dict = (Dictionary<string, Variant>)variant;
+            Dictionary<string, Variant> dict = (Dictionary<string, Variant>)variant;
 
-            foreach (var item in dict)
+            foreach (System.Collections.Generic.KeyValuePair<string, Variant> item in dict)
             {
                 int healthLevel = int.Parse(item.Key);
 
-                var possibleActionsStrings = (Array<string>)item.Value;
-                Array<CharacterAction> possibleActions = new Array<CharacterAction>();
+                Array<string> possibleActionsStrings = (Array<string>)item.Value;
+                Array<CharacterAction> possibleActions = new();
 
-                foreach (var actionString in possibleActionsStrings)
+                foreach (string actionString in possibleActionsStrings)
                 {
                     CharacterAction action = Enum.Parse<CharacterAction>(actionString);
                     possibleActions.Add(action);
@@ -206,7 +206,7 @@ namespace TheWizardCoder.Data
                 bool found = false;
                 System.Collections.Generic.KeyValuePair<int, Array<CharacterAction>> pair = new();
 
-                foreach (var item in Behaviour)
+                foreach (System.Collections.Generic.KeyValuePair<int, Array<CharacterAction>> item in Behaviour)
                 {
                     if (Health <= item.Key)
                     {

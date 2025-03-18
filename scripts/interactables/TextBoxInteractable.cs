@@ -29,7 +29,7 @@ namespace TheWizardCoder.Interactables
 
         public override void _PhysicsProcess(double delta)
         {
-            Vector2 velocity = new Vector2(-BoxSpeed, 0);
+            Vector2 velocity = new(-BoxSpeed, 0);
             Vector2 newPosition = Position + velocity;
 
             if (newPosition.X > HorizontalPositionLimit)
@@ -55,7 +55,7 @@ namespace TheWizardCoder.Interactables
         {
             if (consoleBoxText != null)
             {
-                Vector2 shapeSize = new Vector2(consoleBoxText.Size.X, consoleBoxText.Size.Y);
+                Vector2 shapeSize = new(consoleBoxText.Size.X, consoleBoxText.Size.Y);
 
                 RectangleShape2D newShape = new();
                 newShape.Size = shapeSize;

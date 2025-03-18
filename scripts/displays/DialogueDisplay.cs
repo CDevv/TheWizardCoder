@@ -204,7 +204,7 @@ namespace TheWizardCoder.Displays
             }
 
             //Set up audio
-            var audioStream = GD.Load<AudioStream>($"res://sounds/voices/base_voice.wav");
+            AudioStream audioStream = GD.Load<AudioStream>($"res://sounds/voices/base_voice.wav");
             audioPlayer.Set("stream", audioStream);
 
             hasResponses = line.Responses.Count > 0;
@@ -265,11 +265,6 @@ namespace TheWizardCoder.Displays
             }
             buttons[buttons.Count - 1].FocusNeighborTop = buttons[buttons.Count - 2].GetPath();
             buttons[buttons.Count - 1].FocusNeighborBottom = buttons[0].GetPath();
-
-            //GD.Print(buttons.Sum(x => x.Size.Y) / 2);
-            //responsesRect.Size = new Vector2(buttons.Max(x => x.Size.X), buttons.Sum(x => x.Size.Y) / 2) + new Vector2(8, 8);
-            //responsesRect.Size /= new Vector2(1, 2);
-            //GD.Print(responsesRect.Size);
         }
 
         private void ClearResponses()

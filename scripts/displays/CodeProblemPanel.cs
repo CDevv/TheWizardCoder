@@ -29,9 +29,9 @@ namespace TheWizardCoder.Displays
         private AnimationPlayer animationPlayer;
         private int itemCount = 0;
         private int areasCount = 0;
-        private List<PickableButton> buttonItems = new List<PickableButton>();
-        private List<PickableButtonArea> areas = new List<PickableButtonArea>();
-        private List<CodeProblemItem> items = new List<CodeProblemItem>();
+        private List<PickableButton> buttonItems = new();
+        private List<PickableButtonArea> areas = new();
+        private List<CodeProblemItem> items = new();
 
         public List<CodeProblemItem> ProblemItems
         {
@@ -98,7 +98,7 @@ namespace TheWizardCoder.Displays
                 }
             }
 
-            foreach (var item in areas)
+            foreach (KeyValuePair<string, Vector2> item in areas)
             {
                 AddArea(item.Key, item.Value);
             }
@@ -110,7 +110,7 @@ namespace TheWizardCoder.Displays
         {
             PickableButton button = PickableButtonScene.Instantiate<PickableButton>();
 
-            Vector2 buttonPosition = new Vector2(baseListRect.GlobalPosition.X, baseListRect.GlobalPosition.Y + (itemCount * 32));
+            Vector2 buttonPosition = new(baseListRect.GlobalPosition.X, baseListRect.GlobalPosition.Y + (itemCount * 32));
             button.GlobalPosition = buttonPosition;
             AddChild(button);
             buttonItems.Add(button);
@@ -128,7 +128,7 @@ namespace TheWizardCoder.Displays
             area.ButtonRemoved += () => OnAreaButtonRemoved(currentIndex);
             areas.Add(area);
 
-            CodeProblemItem item = new CodeProblemItem();
+            CodeProblemItem item = new();
             item.CurrentAnswer = "";
             item.CorrectAnswer = correctAnswer;
             item.IsSolved = false;
@@ -195,7 +195,7 @@ namespace TheWizardCoder.Displays
         private bool AreAllAreasSolved()
         {
             int solvedCount = 0;
-            foreach (var item in items)
+            foreach (CodeProblemItem item in items)
             {
                 if (item.IsSolved)
                 {

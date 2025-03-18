@@ -106,40 +106,13 @@ namespace TheWizardCoder.UI
                     string currentMagicSpellName = currentEnemy.GetRandomMagicSpell();
                     MagicSpell currentMagicSpell = global.MagicSpells[currentMagicSpellName];
 
-
-
-                    switch (currentMagicSpell.TargetType)
+                    if (currentMagicSpell.TargetType == CharacterType.Enemy)
                     {
-                        case CharacterType.Enemy:
-                            await OnMagicSpellEnemyTarget(index, targetIndex, currentMagicSpell);
-
-                            break;
-                        case CharacterType.Ally:
-                            await OnMagicSpellAllyTarget(index, targetIndex, currentMagicSpell);
-
-                            break;
+                        await OnMagicSpellEnemyTarget(index, targetIndex, currentMagicSpell);
                     }
 
                     break;
                 default:
-                    break;
-            }
-        }
-
-        private async Task OnMagicSpellAllyTarget(int currentEnemyIndex, int targetIndex, MagicSpell spell)
-        {
-            string targetName = Allies.Characters[targetIndex].Name;
-
-            Character currentEnemy = Characters[currentEnemyIndex];
-            string enemyName = currentEnemy.Name;
-
-            switch (spell.SpellType)
-            {
-                case MagicSpellType.Attack:
-                    break;
-                case MagicSpellType.Heal:
-                    break;
-                case MagicSpellType.ApplyBattleEffect:
                     break;
             }
         }
@@ -217,13 +190,13 @@ namespace TheWizardCoder.UI
         public override void Clear()
         {
             base.Clear();
-            foreach (var item in enemySprites)
+            foreach (EnemySprite item in enemySprites)
             {
                 item.QueueFree();
             }
             enemySprites = new();
 
-            foreach (var item in enemyCards)
+            foreach (CharacterRect item in enemyCards)
             {
                 item.QueueFree();
             }

@@ -148,7 +148,7 @@ namespace TheWizardCoder.Subdisplays
             firstButton = null;
             Array<Node> nodes = container.GetChildren();
 
-            foreach (var item in nodes)
+            foreach (Node item in nodes)
             {
                 item.QueueFree();
             }
@@ -173,7 +173,7 @@ namespace TheWizardCoder.Subdisplays
                     {
                         if (character.EquippedArmours[(int)currentArmourType] == armourName)
                         {
-                            
+
                         }
                     }
 

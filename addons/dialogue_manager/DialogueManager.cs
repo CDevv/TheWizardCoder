@@ -91,7 +91,7 @@ namespace DialogueManagerRuntime
         {
             if (instance != null) return instance;
 
-            var tree = Engine.GetMainLoop();
+            MainLoop tree = Engine.GetMainLoop();
             int x = 0;
 
             // Try and find the singleton for a few seconds
@@ -114,7 +114,7 @@ namespace DialogueManagerRuntime
         public static async Task<DialogueLine?> GetNextDialogueLine(Resource dialogueResource, string key = "", Array<Variant>? extraGameStates = null)
         {
             Instance.Call("_bridge_get_next_dialogue_line", dialogueResource, key, extraGameStates ?? new Array<Variant>());
-            var result = await Instance.ToSignal(Instance, "bridge_get_next_dialogue_line_completed");
+            Variant[] result = await Instance.ToSignal(Instance, "bridge_get_next_dialogue_line_completed");
 
             if ((RefCounted)result[0] == null) return null;
 
@@ -193,7 +193,7 @@ namespace DialogueManagerRuntime
             }
             else
             {
-                var value = (Variant)info.Invoke(thing, _args);
+                Variant value = (Variant)info.Invoke(thing, _args);
                 EmitSignal(SignalName.Resolved, value);
             }
         }
@@ -238,7 +238,7 @@ namespace DialogueManagerRuntime
             set => translation_key = value;
         }
 
-        private Array<DialogueResponse> responses = new Array<DialogueResponse>();
+        private Array<DialogueResponse> responses = new();
         public Array<DialogueResponse> Responses
         {
             get => responses;
@@ -250,27 +250,27 @@ namespace DialogueManagerRuntime
             get => time;
         }
 
-        private Dictionary pauses = new Dictionary();
+        private Dictionary pauses = new();
         public Dictionary Pauses
         {
             get => pauses;
         }
 
-        private Dictionary speeds = new Dictionary();
+        private Dictionary speeds = new();
         public Dictionary Speeds
         {
             get => speeds;
         }
 
-        private Array<Godot.Collections.Array> inline_mutations = new Array<Godot.Collections.Array>();
+        private Array<Godot.Collections.Array> inline_mutations = new();
         public Array<Godot.Collections.Array> InlineMutations
         {
             get => inline_mutations;
         }
 
-        private Array<Variant> extra_game_states = new Array<Variant>();
+        private Array<Variant> extra_game_states = new();
 
-        private Array<string> tags = new Array<string>();
+        private Array<string> tags = new();
         public Array<string> Tags
         {
             get => tags;
@@ -289,7 +289,7 @@ namespace DialogueManagerRuntime
             time = (string)data.Get("time");
             tags = (Array<string>)data.Get("tags");
 
-            foreach (var response in (Array<RefCounted>)data.Get("responses"))
+            foreach (RefCounted response in (Array<RefCounted>)data.Get("responses"))
             {
                 responses.Add(new DialogueResponse(response));
             }
@@ -299,7 +299,7 @@ namespace DialogueManagerRuntime
         public string GetTagValue(string tagName)
         {
             string wrapped = $"{tagName}=";
-            foreach (var tag in tags)
+            foreach (string tag in tags)
             {
                 if (tag.StartsWith(wrapped))
                 {
@@ -354,7 +354,7 @@ namespace DialogueManagerRuntime
             set => translation_key = value;
         }
 
-        private Array<string> tags = new Array<string>();
+        private Array<string> tags = new();
         public Array<string> Tags
         {
             get => tags;
@@ -372,7 +372,7 @@ namespace DialogueManagerRuntime
         public string GetTagValue(string tagName)
         {
             string wrapped = $"{tagName}=";
-            foreach (var tag in tags)
+            foreach (string tag in tags)
             {
                 if (tag.StartsWith(wrapped))
                 {

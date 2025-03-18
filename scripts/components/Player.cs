@@ -113,7 +113,7 @@ namespace TheWizardCoder.Components
                 }
             }
 
-            var collision = MoveAndCollide(velocity);
+            KinematicCollision2D collision = MoveAndCollide(velocity);
             DistanceWalked += Position.DistanceTo(Position + velocity);
 
             if (Follower != null && collision == null)
@@ -142,7 +142,7 @@ namespace TheWizardCoder.Components
                     return;
                 }
 
-                var overlappingAreas = interactableFinder.GetOverlappingAreas();
+                Godot.Collections.Array<Area2D> overlappingAreas = interactableFinder.GetOverlappingAreas();
                 if (overlappingAreas.Count > 0)
                 {
                     if (global.CanWalk)

@@ -1,6 +1,5 @@
 using Godot;
 using TheWizardCoder.Autoload;
-using TheWizardCoder.Components;
 using TheWizardCoder.Enums;
 
 namespace TheWizardCoder.Components

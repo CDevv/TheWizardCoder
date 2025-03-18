@@ -58,7 +58,7 @@ namespace TheWizardCoder.Abstractions
         /// </summary>
         public void HideAllSubdisplays()
         {
-            foreach (var item in Subdisplays)
+            foreach (KeyValuePair<string, Display> item in Subdisplays)
             {
                 item.Value.Hide();
             }
@@ -79,7 +79,7 @@ namespace TheWizardCoder.Abstractions
         /// </summary>
         public void UpdateAllSubdisplays()
         {
-            foreach (var item in Subdisplays)
+            foreach (KeyValuePair<string, Display> item in Subdisplays)
             {
                 item.Value.UpdateDisplay();
             }

@@ -10,9 +10,9 @@ namespace TheWizardCoder.UI
         [Signal]
         public delegate void PressedEventHandler();
 
-        private Color currentCharacterColor = new Color(255, 255, 255, 0.2f);
-        private Color invisibleColor = new Color(255, 255, 255, 0);
-        private Color focusColor = new Color(255, 255, 255, 0.5f);
+        private Color currentCharacterColor = new(255, 255, 255, 0.2f);
+        private Color invisibleColor = new(255, 255, 255, 0);
+        private Color focusColor = new(255, 255, 255, 0.5f);
         private AnimatedSprite2D sprite;
         private Label nameLabel;
         private Label healthLabel;

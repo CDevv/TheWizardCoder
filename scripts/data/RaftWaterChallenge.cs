@@ -26,9 +26,9 @@ namespace TheWizardCoder.Data
         )
         {
             string[] titles = (string[])dict["BoxTypes"];
-            for (var i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
-                var boxType = Enum.Parse<ChallengeTextBoxType>(titles[i]);
+                ChallengeTextBoxType boxType = Enum.Parse<ChallengeTextBoxType>(titles[i]);
                 BoxTypes[i] = boxType;
             }
 

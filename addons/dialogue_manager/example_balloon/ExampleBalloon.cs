@@ -15,7 +15,7 @@ namespace DialogueManagerRuntime
         VBoxContainer responsesMenu;
 
         Resource resource;
-        Array<Variant> temporaryGameStates = new Array<Variant>();
+        Array<Variant> temporaryGameStates = new();
         bool isWaitingForInput = false;
         bool willHideBalloon = false;
 

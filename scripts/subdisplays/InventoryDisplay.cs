@@ -36,7 +36,7 @@ namespace TheWizardCoder.Subdisplays
         public override void UpdateDisplay()
         {
             Array<Node> oldNodes = itemsContainer.GetChildren();
-            foreach (var item in oldNodes)
+            foreach (Node item in oldNodes)
             {
                 item.QueueFree();
             }

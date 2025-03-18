@@ -85,7 +85,7 @@ namespace TheWizardCoder.UI
             alliesCards[CurrentCharacter - 1].HideBackground();
         }
 
-        public async override Task Turn(int i)
+        public override async Task Turn(int i)
         {
             if (BattleDisplay.IsBattleEnded)
             {
@@ -150,7 +150,7 @@ namespace TheWizardCoder.UI
                             int effect = int.Parse(item.AdditionalData[3]);
                             bool isNegative = bool.Parse(item.AdditionalData[4]);
 
-                            BattleEffect battleEffect = new BattleEffect(action, targetType, turns, effect, isNegative);
+                            BattleEffect battleEffect = new(action, targetType, turns, effect, isNegative);
                             await ApplyBattleEffect(state.Target, battleEffect);
 
                             break;
@@ -222,7 +222,7 @@ namespace TheWizardCoder.UI
                 damage = Mathf.Clamp(damage - battleState.Character.DefensePoints, 0, damage);
             }
 
-            base.DamageCharacter(index, damage);
+            Characters[index].RemoveHealth(damage);
             await DisplayHealthChange(index, -damage);
         }
 

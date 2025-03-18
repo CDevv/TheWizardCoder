@@ -100,7 +100,7 @@ namespace TheWizardCoder.Abstractions
             {
                 foreach (Character ally in global.PlayerData.Allies)
                 {
-                    var allyCharacter = Player.AddAlly(ally.Name, true);
+                    Actor allyCharacter = Player.AddAlly(ally.Name, true);
                     allyCharacter.PlayIdleAnimation(global.PlayerDirection);
                 }
             }

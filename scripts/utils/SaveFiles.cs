@@ -20,7 +20,7 @@ namespace TheWizardCoder.Utils
 
         public void CreateSaveFile(string fileName, string saveName)
         {
-            SaveFileData data = new SaveFileData(Global.Characters["Nolan"]);
+            SaveFileData data = new(Global.Characters["Nolan"]);
             data.FileName = fileName;
             data.SaveName = saveName;
             data.Stats.Global = null;
@@ -46,7 +46,7 @@ namespace TheWizardCoder.Utils
 
             SaveFileData data = Global.PlayerData;
             data.Stats.Global = null;
-            for (var i = 0; i < data.Allies.Count; i++)
+            for (int i = 0; i < data.Allies.Count; i++)
             {
                 data.Allies[i].Global = null;
             }
@@ -65,7 +65,7 @@ namespace TheWizardCoder.Utils
 
         public SaveFileData ReadSaveFile(string saveName)
         {
-            SaveFileData data = new SaveFileData(Global.Characters["Nolan"]);
+            SaveFileData data = new(Global.Characters["Nolan"]);
 
             if (!FileAccess.FileExists($"user://{saveName}.wand"))
             {
@@ -75,7 +75,7 @@ namespace TheWizardCoder.Utils
             }
 
             //Get expected hash
-            using var hashFile = FileAccess.Open($"user://{saveName}.ini", FileAccess.ModeFlags.Read);
+            using FileAccess hashFile = FileAccess.Open($"user://{saveName}.ini", FileAccess.ModeFlags.Read);
             byte[] expectedHash = (byte[])hashFile.GetVar();
             hashFile.Close();
 
@@ -84,7 +84,7 @@ namespace TheWizardCoder.Utils
 
             if (HashUtils.CompareHashes(actualHash, expectedHash))
             {
-                using var readSave = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Read);
+                using FileAccess readSave = FileAccess.Open($"user://{saveName}.wand", FileAccess.ModeFlags.Read);
                 string savedData = (string)readSave.GetVar();
                 data = JsonConvert.DeserializeObject<SaveFileData>(savedData, new JsonSerializerSettings() { ObjectCreationHandling = ObjectCreationHandling.Replace, NullValueHandling = NullValueHandling.Ignore });
                 data.IsSaveEmpty = false;

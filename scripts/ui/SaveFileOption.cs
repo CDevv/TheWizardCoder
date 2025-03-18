@@ -5,8 +5,8 @@ namespace TheWizardCoder.UI
 {
     public partial class SaveFileOption : Button
     {
-        private Color normalColor = new Color(255, 255, 255);
-        private Color focusedColor = new Color(255, 255, 255, .5f);
+        private Color normalColor = new(255, 255, 255);
+        private Color focusedColor = new(255, 255, 255, .5f);
 
         private Label saveNameLabel;
         private Label locationLabel;
@@ -49,7 +49,7 @@ namespace TheWizardCoder.UI
 
         public void ShowData(SaveFileData saveFile)
         {
-            var duration = saveFile.TimeSpent;
+            System.TimeSpan duration = saveFile.TimeSpent;
             if (saveFile.IsSaveEmpty)
             {
                 ShowAsEmptyFile();

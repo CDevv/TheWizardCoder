@@ -36,7 +36,7 @@ namespace TheWizardCoder.Rooms
 
             List<CodeProblemItem> items = new(CodeProblemPanel.LastProblemItems);
 
-            foreach (var item in items)
+            foreach (CodeProblemItem item in items)
             {
                 GD.Print(item.CurrentAnswer);
             }
@@ -44,7 +44,7 @@ namespace TheWizardCoder.Rooms
             if (items.Count == 3)
             {
                 Vector2 basePosition = selectionBox.Position;
-                Vector2 baseVelocity = new Vector2(0, 32);
+                Vector2 baseVelocity = new(0, 32);
                 int multiplier = 0;
                 int num = 0;
                 int conditionNum = -1;

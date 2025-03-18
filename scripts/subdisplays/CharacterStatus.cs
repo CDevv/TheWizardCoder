@@ -70,7 +70,7 @@ namespace TheWizardCoder.Subdisplays
 
         private void OnHealthLabelResized()
         {
-            Vector2 healthIconPosition = new Vector2(health.Position.X - (8), health.Position.Y + (health.Size.Y / 3));
+            Vector2 healthIconPosition = new(health.Position.X - (8), health.Position.Y + (health.Size.Y / 3));
             healthIcon.Position = healthIconPosition;
         }
 
@@ -78,7 +78,7 @@ namespace TheWizardCoder.Subdisplays
         {
             if (points != null)
             {
-                Vector2 manaIconPosition = new Vector2(points.Position.X - 8, points.Position.Y + (points.Size.Y / 3));
+                Vector2 manaIconPosition = new(points.Position.X - 8, points.Position.Y + (points.Size.Y / 3));
                 manaIcon.Position = manaIconPosition;
             }
         }

@@ -11,7 +11,7 @@ namespace TheWizardCoder.Components
         [Export]
         public PackedScene BoxScene { get; set; }
 
-        private Stack<Sprite2D> boxes = new Stack<Sprite2D>();
+        private Stack<Sprite2D> boxes = new();
         public int Count { get { return boxes.Count; } }
 
         public void AddBox()
@@ -40,7 +40,7 @@ namespace TheWizardCoder.Components
 
         public void ClearBoxes()
         {
-            foreach (var box in boxes)
+            foreach (Sprite2D box in boxes)
             {
                 box.QueueFree();
             }

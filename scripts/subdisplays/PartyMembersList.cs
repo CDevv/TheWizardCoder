@@ -56,7 +56,7 @@ namespace TheWizardCoder.Subdisplays
                 partyMembers[i].ApplyData(characterData[i]);
             }
 
-            foreach (var ally in global.PlayerData.Allies)
+            foreach (Character ally in global.PlayerData.Allies)
             {
                 if (!characterData.Contains(ally))
                 {

@@ -107,7 +107,7 @@ namespace TheWizardCoder.UI
             {
                 float min = int.MaxValue;
 
-                foreach (var area in areas)
+                foreach (Area2D area in areas)
                 {
                     PickableButtonArea buttonArea = (PickableButtonArea)area;
                     float distance = Position.DistanceTo(buttonArea.Position);
