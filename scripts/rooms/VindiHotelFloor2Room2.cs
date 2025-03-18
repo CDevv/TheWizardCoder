@@ -103,17 +103,17 @@ namespace TheWizardCoder.Rooms
                     selectCell.Position = cellBasePosition;
                     selectCell.Show();
 
-                    for (int i = 0; i < chosenColumns; i++)
+                    for (int row = 0; row < chosenRows; row++)
                     {
-                        for (int j = 0; j < chosenRows; j++)
+                        for (int column = 0; column < chosenColumns; column++)
                         {
-                            Vector2 newPosition = cellBasePosition + new Vector2(i * 32, j * 32);
+                            Vector2 newPosition = cellBasePosition + new Vector2(column * 32, row * 32);
 
                             Tween tween = GetTree().CreateTween();
                             tween.TweenProperty(selectCell, "position", newPosition, 0.5);
                             await ToSignal(tween, Tween.SignalName.Finished);
 
-                            string glitchName = $"Glitch[{TileSetXOffset + i},{TileSetYOffset + j}]";
+                            string glitchName = $"Glitch[{TileSetXOffset + column},{TileSetYOffset + row}]";
 
                             Sprite2D glitch = GetNodeOrNull<Sprite2D>(glitchName);
 

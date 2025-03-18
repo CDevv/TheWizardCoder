@@ -57,9 +57,6 @@ script = ExtResource("2_eh4xc")
 SceneFileName = "second_room"
 LocationName = "TestRoom"
 
-[node name="BattleDisplay" parent="." index="2"]
-TutorialDialogueResource = null
-
 [node name="ColorRect" type="ColorRect" parent="." index="3"]
 z_index = -1
 offset_right = 1280.0
@@ -69,7 +66,6 @@ color = Color(0, 0, 0, 1)
 [node name="Player" parent="." index="4" instance=ExtResource("3_bjkae")]
 z_index = 1
 position = Vector2(251, 282)
-SnippetsResource = null
 
 [node name="TileMap" type="TileMap" parent="." index="5"]
 y_sort_enabled = true

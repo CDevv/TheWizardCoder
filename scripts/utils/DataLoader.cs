@@ -132,7 +132,7 @@ namespace TheWizardCoder.Utils
         {
             System.Collections.Generic.Dictionary<string, Character> characters = new();
 
-            Variant jsonData = GetJsonData("res://info/enemies.json");
+            Variant jsonData = GetJsonData("res://info/characters.json");
             Dictionary<string, Dictionary<string, Variant>> parsedData = (Dictionary<string, Dictionary<string, Variant>>)jsonData;
 
             foreach (System.Collections.Generic.KeyValuePair<string, Dictionary<string, Variant>> pair in parsedData)
