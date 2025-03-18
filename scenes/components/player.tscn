@@ -1,8 +1,7 @@
-[gd_scene load_steps=37 format=3 uid="uid://dk58pi6w8qy72"]
+[gd_scene load_steps=36 format=3 uid="uid://dk58pi6w8qy72"]
 
 [ext_resource type="Texture2D" uid="uid://dhrgn37kqbfws" path="res://assets/characters/movement/wizard.png" id="1_e1ryk"]
 [ext_resource type="Script" path="res://scripts/components/Player.cs" id="1_ed4f5"]
-[ext_resource type="Resource" uid="uid://du7t8kt5vs0jl" path="res://dialogue/snippets.dialogue" id="2_8rpsy"]
 [ext_resource type="Texture2D" uid="uid://ej73cgate0jw" path="res://assets/characters/movement/wizardextra.png" id="2_md4m4"]
 [ext_resource type="SpriteFrames" uid="uid://cg22r6lkovku6" path="res://assets/characters/movement/spriteframes/nolan.tres" id="4_a4wl8"]
 
@@ -983,7 +982,6 @@ node_connections = [&"Extra", 0, &"Animation", &"TimeScale", 0, &"Transition", &
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ed4f5")
-SnippetsResource = ExtResource("2_8rpsy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false

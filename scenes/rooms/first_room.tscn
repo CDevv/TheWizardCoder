@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d2saopq748u80"]
+[gd_scene load_steps=17 format=3 uid="uid://d2saopq748u80"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_e1o4e"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="1_m6ahu"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="6_4o6l1"]
 [ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/components/save_point.tscn" id="8_5r6ba"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="9_od3ub"]
-[ext_resource type="Resource" uid="uid://dxv3wga5qop3d" path="res://dialogue/nolan_house.dialogue" id="9_qmulg"]
 [ext_resource type="Texture2D" uid="uid://b25d8akulcu0u" path="res://assets/props/homebed-awake.png" id="11_xs4nt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p5w6j"]
@@ -173,7 +172,7 @@ _data = {
 [node name="FirstRoom" instance=ExtResource("1_e1o4e")]
 y_sort_enabled = true
 script = ExtResource("2_ykuq1")
-DialogueResource = ExtResource("9_qmulg")
+DialogueResource = null
 SceneFileName = "first_room"
 LocationName = "Home"
 DefaultMarkerName = "AfterCutsceneMarker"
@@ -228,13 +227,11 @@ polygon = PackedVector2Array(160, 160, 144, 160, 144, 400, 208, 400, 208, 432, 2
 z_index = 1
 position = Vector2(280, 192)
 scale = Vector2(2, 1.5)
-DialogueResource = ExtResource("9_qmulg")
 DialogueTitle = "lamp"
 
 [node name="BedDialoguePoint" parent="." index="11" instance=ExtResource("6_4o6l1")]
 position = Vector2(192, 224)
 scale = Vector2(3, 3)
-DialogueResource = ExtResource("9_qmulg")
 DialogueTitle = "bed"
 
 [node name="Bed" type="StaticBody2D" parent="." index="12"]
