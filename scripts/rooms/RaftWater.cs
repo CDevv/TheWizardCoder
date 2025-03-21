@@ -9,6 +9,7 @@ using TheWizardCoder.Displays;
 using TheWizardCoder.Enums;
 using TheWizardCoder.Interactables;
 using TheWizardCoder.UI;
+using TheWizardCoder.Utils;
 
 namespace TheWizardCoder.Rooms
 {
@@ -154,7 +155,7 @@ namespace TheWizardCoder.Rooms
 
         private void InitChallenges()
         {
-            Godot.Collections.Dictionary<string, Variant> data = (Godot.Collections.Dictionary<string, Variant>)global.DataLoader.GetJsonData("res://info/raft_water_challenges.json");
+            Godot.Collections.Dictionary<string, Variant> data = (Godot.Collections.Dictionary<string, Variant>)DataLoader.GetJsonData("res://info/raft_water_challenges.json");
 
             foreach (KeyValuePair<string, Variant> item in data)
             {

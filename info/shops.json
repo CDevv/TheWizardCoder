@@ -6,7 +6,7 @@
 	},
 	"TestMagic":{
 		"Items": [
-			"Fireball", "Fireball2", "Varti", "Magi-hibble", "Nullable"
+			"Fireball", "Fireball2", "Varti", "Magi-hibble", "Nullable", "Mage Coat"
 		]
 	},
 	"TestArmour":{
@@ -26,7 +26,7 @@
 	},
 	"JohnsonShop":{
 		"Items": [
-			"Magi-hibble"
+			"Magi-hibble", "Verti", "Mage Coat"
 		]
 	}
 }

@@ -14,10 +14,17 @@
 		"Price": 10
 	},
 	"Wooden Wand": {
-		"Description": "Desc.",
+		"Description": "A basic wooden wand.",
 		"Type": "PrimaryWeapon",
 		"Effect": 8,
 		"EffectType": "Attack",
 		"Price": 10
+	},
+	"Mage Coat": {
+		"Description": "A mage coat that boosts defence by +5.",
+		"Type": "PrimaryArmour",
+		"Effect": 5,
+		"EffectType": "Defense",
+		"Price": 15
 	}
 }

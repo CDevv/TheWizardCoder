@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TheWizardCoder.Autoload;
+using TheWizardCoder.Utils;
 
 namespace TheWizardCoder.Data
 {
@@ -121,7 +122,13 @@ namespace TheWizardCoder.Data
         {
             if (Armours.Count == 0)
             {
-                AddArmour("Wooden Wand");
+                var defaultArmoursData = (Godot.Collections.Dictionary<string, Variant>)DataLoader.GetJsonData("res://info/default_armours.json");
+                var armourNames = (Array<string>)defaultArmoursData["DefaultArmours"];
+
+                foreach (string item in armourNames)
+                {
+                    AddArmour(item);
+                }
             }
 
             if (Stats.EquippedArmours.Count == 0)

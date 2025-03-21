@@ -7,16 +7,9 @@ using TheWizardCoder.Enums;
 
 namespace TheWizardCoder.Utils
 {
-    public class DataLoader
+    public static class DataLoader
     {
-        private Global Global { get; set; }
-
-        public DataLoader(Global global)
-        {
-            Global = global;
-        }
-
-        public Variant GetJsonData(string fileName)
+        public static Variant GetJsonData(string fileName)
         {
             if (!FileAccess.FileExists(fileName))
             {
@@ -38,7 +31,7 @@ namespace TheWizardCoder.Utils
             return json.Data;
         }
 
-        public System.Collections.Generic.Dictionary<string, Item> LoadItems()
+        public static System.Collections.Generic.Dictionary<string, Item> LoadItems()
         {
             System.Collections.Generic.Dictionary<string, Item> items = new();
 
@@ -74,7 +67,7 @@ namespace TheWizardCoder.Utils
             return items;
         }
 
-        public System.Collections.Generic.Dictionary<string, MagicSpell> LoadMagicSpells()
+        public static System.Collections.Generic.Dictionary<string, MagicSpell> LoadMagicSpells()
         {
             System.Collections.Generic.Dictionary<string, MagicSpell> magicSpells = new();
 
@@ -107,7 +100,7 @@ namespace TheWizardCoder.Utils
             return magicSpells;
         }
 
-        public System.Collections.Generic.Dictionary<string, Shop> LoadShops()
+        public static System.Collections.Generic.Dictionary<string, Shop> LoadShops()
         {
             System.Collections.Generic.Dictionary<string, Shop> shops = new();
 
@@ -128,7 +121,7 @@ namespace TheWizardCoder.Utils
             return shops;
         }
 
-        public System.Collections.Generic.Dictionary<string, Character> LoadCharacters()
+        public static System.Collections.Generic.Dictionary<string, Character> LoadCharacters(Global global)
         {
             System.Collections.Generic.Dictionary<string, Character> characters = new();
 
@@ -143,7 +136,7 @@ namespace TheWizardCoder.Utils
                 {
                     dict["Name"] = pair.Key;
 
-                    Character character = new(dict, Global);
+                    Character character = new(dict, global);
                     characters.Add(pair.Key, character);
 
                     if (character.Type == CharacterType.Enemy)
@@ -156,7 +149,7 @@ namespace TheWizardCoder.Utils
             return characters;
         }
 
-        public System.Collections.Generic.Dictionary<string, string> LoadGameIntro()
+        public static System.Collections.Generic.Dictionary<string, string> LoadGameIntro()
         {
             System.Collections.Generic.Dictionary<string, string> gameIntroStrings = new();
 
@@ -171,7 +164,7 @@ namespace TheWizardCoder.Utils
             return gameIntroStrings;
         }
 
-        public System.Collections.Generic.Dictionary<string, Armour> LoadArmours()
+        public static System.Collections.Generic.Dictionary<string, Armour> LoadArmours()
         {
             System.Collections.Generic.Dictionary<string, Armour> armours = new();
 
