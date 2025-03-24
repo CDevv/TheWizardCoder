@@ -34,6 +34,7 @@ namespace TheWizardCoder.Utils
             hashFile.StoreVar(hash);
             hashFile.Close();
 
+            data.EnsureDefaults(Global);
             PlayerData = data;
         }
 

@@ -49,9 +49,9 @@ texture = ExtResource("4_4lcj8")
 [node name="MainMenuRect" type="NinePatchRect" parent="Main"]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 362.0
+offset_top = 330.0
 offset_right = 84.0
-offset_bottom = 413.0
+offset_bottom = 397.0
 scale = Vector2(2, 2)
 texture = ExtResource("2_y37u4")
 region_rect = Rect2(0, 0, 16, 16)
@@ -62,13 +62,8 @@ patch_margin_bottom = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="Main/MainMenuRect"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 68.0
-offset_bottom = 52.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 136.0
+offset_bottom = 132.0
 scale = Vector2(0.5, 0.5)
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
@@ -82,7 +77,7 @@ theme_override_constants/separation = 0
 [node name="PlayButton" type="Button" parent="Main/MainMenuRect/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_top = NodePath("../CreditsButton")
+focus_neighbor_top = NodePath("../QuitButton")
 focus_neighbor_bottom = NodePath("../OptionsButton")
 mouse_filter = 2
 theme = ExtResource("1_rbxpk")
@@ -102,11 +97,20 @@ text = "Options
 [node name="CreditsButton" type="Button" parent="Main/MainMenuRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../OptionsButton")
-focus_neighbor_bottom = NodePath("../PlayButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
 mouse_filter = 2
 theme = ExtResource("1_rbxpk")
 theme_override_font_sizes/font_size = 36
 text = "Credits"
+
+[node name="QuitButton" type="Button" parent="Main/MainMenuRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../CreditsButton")
+focus_neighbor_bottom = NodePath("../PlayButton")
+mouse_filter = 2
+theme = ExtResource("1_rbxpk")
+theme_override_font_sizes/font_size = 36
+text = "Quit"
 
 [node name="SavedGamesMenu" parent="." node_paths=PackedStringArray("confirmation", "Transition", "MainMenu") instance=ExtResource("6_drqyd")]
 visible = false
@@ -129,6 +133,7 @@ visible = false
 [connection signal="pressed" from="Main/MainMenuRect/MarginContainer/VBoxContainer/PlayButton" to="." method="ShowSavedGamesMenu"]
 [connection signal="pressed" from="Main/MainMenuRect/MarginContainer/VBoxContainer/OptionsButton" to="." method="ShowOptions"]
 [connection signal="pressed" from="Main/MainMenuRect/MarginContainer/VBoxContainer/CreditsButton" to="." method="ShowCredits"]
+[connection signal="pressed" from="Main/MainMenuRect/MarginContainer/VBoxContainer/QuitButton" to="." method="QuitGame"]
 [connection signal="BackButtonTrigerred" from="SavedGamesMenu" to="." method="ShowMainMenu"]
 [connection signal="FileDeleted" from="DeleteFileConfirmation" to="SavedGamesMenu" method="OnFileDeleted"]
 [connection signal="visibility_changed" from="DeleteFileConfirmation" to="SavedGamesMenu" method="OnFileDeleted"]

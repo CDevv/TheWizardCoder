@@ -122,5 +122,10 @@ namespace TheWizardCoder.Displays
             Level = 1;
             ChangeSubdisplay("Credits");
         }
+
+        public void QuitGame()
+        {
+            global.QuitGame();
+        }
     }
 }

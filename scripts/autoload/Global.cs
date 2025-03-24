@@ -37,6 +37,7 @@ namespace TheWizardCoder.Autoload
         public System.Collections.Generic.Dictionary<string, Shop> Shops { get; private set; } = new();
         public System.Collections.Generic.Dictionary<string, Armour> Armours { get; private set; } = new();
         public System.Collections.Generic.Dictionary<string, string> GameIntroStrings { get; private set; } = new();
+        public System.Collections.Generic.Dictionary<string, Character> CharactersInitial { get; private set; } = new();
         public CodeProblem FishingProblemData { get; private set; }
         public int[] ReverseDirections { get; } = { 1, 0, 3, 2 };
 
@@ -44,6 +45,8 @@ namespace TheWizardCoder.Autoload
         {
             try
             {
+                GetTree().AutoAcceptQuit = false;
+
                 LoadData();
                 SaveFiles = new(this);
 
@@ -56,6 +59,12 @@ namespace TheWizardCoder.Autoload
             }
         }
 
+        public void QuitGame()
+        {
+            GetTree().Root.PropagateNotification((int)NotificationWMCloseRequest);
+            GetTree().Quit();
+        }
+
         private void LoadData()
         {
             GameIntroStrings = DataLoader.LoadGameIntro();
@@ -63,6 +72,8 @@ namespace TheWizardCoder.Autoload
             MagicSpells = DataLoader.LoadMagicSpells();
             Armours = DataLoader.LoadArmours();
             Characters = DataLoader.LoadCharacters(this);
+            CharactersInitial = new(Characters);
+
             Shops = DataLoader.LoadShops();
 
             LoadFishingProblemData();

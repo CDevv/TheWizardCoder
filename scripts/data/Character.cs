@@ -14,11 +14,11 @@ namespace TheWizardCoder.Data
 
         private const int BaseLevelPoints = 10;
 
-        private int initialHealth;
-        private int initialMana;
-        private int initialAttackPoints;
-        private int initialDefensePoint;
-        private int initialAgilityPoints;
+        public int InitialHealth {  get; private set; }
+        public int InitialMana { get; private set; }
+        public int InitialAttackPoints { get; private set; }
+        public int InitialDefensePoint { get; private set; }
+        public int InitialAgilityPoints { get; private set; }
 
         public Global Global { get; set; }
 
@@ -85,11 +85,6 @@ namespace TheWizardCoder.Data
 
         public void InitializeArmours(Dictionary<string, Variant> dict)
         {
-            if (dict.ContainsKey("Armour"))
-            {
-                Armours = (Array<string>)dict["Armour"];
-            }
-
             if (dict.ContainsKey("EquippedArmour"))
             {
                 Array<string> equippedArmoursArr = (Array<string>)dict["EquippedArmour"];
@@ -103,11 +98,22 @@ namespace TheWizardCoder.Data
 
         public void InitializeDefaults()
         {
-            initialHealth = MaxHealth;
-            initialMana = MaxPoints;
-            initialAttackPoints = AttackPoints;
-            initialDefensePoint = DefensePoints;
-            initialAgilityPoints = AgilityPoints;
+            if (Global.Characters.Count > 0)
+            {
+                InitialHealth = Global.CharactersInitial[Name].InitialHealth;
+                InitialMana = Global.CharactersInitial[Name].InitialMana;
+                InitialAttackPoints = Global.CharactersInitial[Name].InitialAttackPoints;
+                InitialDefensePoint = Global.CharactersInitial[Name].InitialDefensePoint;
+                InitialAgilityPoints = Global.CharactersInitial[Name].InitialAgilityPoints;
+            }
+            else
+            {
+                InitialHealth = MaxHealth;
+                InitialMana = MaxPoints;
+                InitialAttackPoints = AttackPoints;
+                InitialDefensePoint = DefensePoints;
+                InitialAgilityPoints = AgilityPoints;
+            }
         }
 
         private void FetchBehaviour(Variant variant)
@@ -365,11 +371,11 @@ namespace TheWizardCoder.Data
 
         public void ApplyArmourEffects()
         {
-            MaxHealth = initialHealth + ArmourEffects.Health;
-            MaxPoints = initialMana + ArmourEffects.Mana;
-            AttackPoints = initialAttackPoints + ArmourEffects.Attack;
-            DefensePoints = initialDefensePoint + ArmourEffects.Defense;
-            AgilityPoints = initialAgilityPoints + ArmourEffects.Agility;
+            MaxHealth = InitialHealth + ArmourEffects.Health;
+            MaxPoints = InitialMana + ArmourEffects.Mana;
+            AttackPoints = InitialAttackPoints + ArmourEffects.Attack;
+            DefensePoints = InitialDefensePoint + ArmourEffects.Defense;
+            AgilityPoints = InitialAgilityPoints + ArmourEffects.Agility;
         }
     }
 }

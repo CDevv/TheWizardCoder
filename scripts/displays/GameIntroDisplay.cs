@@ -101,7 +101,7 @@ namespace TheWizardCoder.Displays
                     }
                     else
                     {
-                        char keyChar = (char)inputKey.Unicode;
+                        char keyChar = (char)inputKey.PhysicalKeycode;
                         if (char.IsLetter(keyChar))
                         {
                             userInput += inputKey.AsTextKeycode();

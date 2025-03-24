@@ -49,7 +49,7 @@ theme_override_constants/separation = 0
 [node name="ItemsButton" type="Button" parent="MenuRect/OptionsMargins/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_top = NodePath("../Options")
+focus_neighbor_top = NodePath("../Quit")
 focus_neighbor_bottom = NodePath("../Status")
 mouse_filter = 2
 theme = ExtResource("4_sk2au")
@@ -90,11 +90,21 @@ text = "Armour"
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../Armour")
-focus_neighbor_bottom = NodePath("../ItemsButton")
+focus_neighbor_bottom = NodePath("../Quit")
 mouse_filter = 2
 theme = ExtResource("4_sk2au")
 theme_override_font_sizes/font_size = 32
 text = "Options"
+
+[node name="Quit" type="Button" parent="MenuRect/OptionsMargins/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../Options")
+focus_neighbor_bottom = NodePath("../ItemsButton")
+mouse_filter = 2
+theme = ExtResource("4_sk2au")
+theme_override_font_sizes/font_size = 32
+text = "Quit"
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_bgthx")
@@ -161,6 +171,7 @@ text = "Gold: 00000"
 [connection signal="pressed" from="MenuRect/OptionsMargins/VBoxContainer/Magic" to="." method="OnMagicMenu"]
 [connection signal="pressed" from="MenuRect/OptionsMargins/VBoxContainer/Armour" to="." method="OnArmourMenu"]
 [connection signal="pressed" from="MenuRect/OptionsMargins/VBoxContainer/Options" to="." method="OnOptionsMenu"]
+[connection signal="pressed" from="MenuRect/OptionsMargins/VBoxContainer/Quit" to="." method="QuitGame"]
 [connection signal="ItemPressed" from="InventoryMenu" to="." method="OnItemPressed"]
 [connection signal="OnControlsButtonPressed" from="OptionsMenu" to="." method="OnControlsMenu"]
 [connection signal="CharacterPressed" from="PartyMembersList" to="." method="OnCharacterPressed"]

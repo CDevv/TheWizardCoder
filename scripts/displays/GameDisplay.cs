@@ -188,8 +188,6 @@ namespace TheWizardCoder.Displays
             }
         }
 
-
-
         private void OnCharacterPressed(bool isProtagonist, int allyIndex)
         {
             Character character;
@@ -249,6 +247,11 @@ namespace TheWizardCoder.Displays
 
                     break;
             }
+        }
+
+        public void QuitGame()
+        {
+            global.QuitGame();
         }
     }
 }

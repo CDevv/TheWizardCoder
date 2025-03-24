@@ -120,6 +120,9 @@ namespace TheWizardCoder.Data
 
         public void EnsureDefaults(Global global)
         {
+            Stats.Global = global;
+            Stats.InitializeDefaults();
+
             if (Armours.Count == 0)
             {
                 var defaultArmoursData = (Godot.Collections.Dictionary<string, Variant>)DataLoader.GetJsonData("res://info/default_armours.json");
@@ -133,8 +136,6 @@ namespace TheWizardCoder.Data
 
             if (Stats.EquippedArmours.Count == 0)
             {
-                Stats.InitializeDefaults();
-
                 Godot.Collections.Dictionary<int, string> characterEquippedArmours = global.Characters[Stats.Name].EquippedArmours;
 
                 for (int i = 0; i < characterEquippedArmours.Count; i++)

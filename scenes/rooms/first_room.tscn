@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://d2saopq748u80"]
+[gd_scene load_steps=18 format=3 uid="uid://d2saopq748u80"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_e1o4e"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="1_m6ahu"]
 [ext_resource type="Script" path="res://scripts/rooms/FirstRoom.cs" id="2_ykuq1"]
+[ext_resource type="Resource" uid="uid://dxv3wga5qop3d" path="res://dialogue/nolan_house.dialogue" id="3_u0ba2"]
 [ext_resource type="Texture2D" uid="uid://ctposucfw7y80" path="res://assets/props/bed-sheet.png" id="4_d8756"]
 [ext_resource type="TileSet" uid="uid://bxvx8pmnaw0ed" path="res://tilesets/nolan_house.tres" id="4_w5xs7"]
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="6_4o6l1"]
@@ -172,7 +173,7 @@ _data = {
 [node name="FirstRoom" instance=ExtResource("1_e1o4e")]
 y_sort_enabled = true
 script = ExtResource("2_ykuq1")
-DialogueResource = null
+DialogueResource = ExtResource("3_u0ba2")
 SceneFileName = "first_room"
 LocationName = "Home"
 DefaultMarkerName = "AfterCutsceneMarker"
