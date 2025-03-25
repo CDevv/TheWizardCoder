@@ -19,6 +19,7 @@ namespace TheWizardCoder.Rooms
                 await PlayCutscene("linton_2");
                 await ShowDialogue(DialogueResource, "linton_2");
                 await PlayCutscene("linton_3");
+                TransitionToRoom("village_4", "WatchtowerMarker", Enums.Direction.Down);
             }
             else
             {

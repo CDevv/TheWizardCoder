@@ -154,17 +154,11 @@ namespace TheWizardCoder.Displays
 
         private void OnAreaButtonRemoved(int index)
         {
-            if (Point != null)
+            if (items.Count > index)
             {
-                if (!Point.Active)
-                {
-                    if (items.Count > index)
-                    {
-                        items[index].CurrentAnswer = "";
-                        items[index].IsSolved = false;
-                        EmitSignal(SignalName.ProblemItemsChanged);
-                    }
-                }
+                items[index].CurrentAnswer = "";
+                items[index].IsSolved = false;
+                EmitSignal(SignalName.ProblemItemsChanged);
             }
         }
 

@@ -9,6 +9,7 @@ namespace TheWizardCoder.UI
         [Signal]
         public delegate void ButtonRemovedEventHandler();
 
+        [Export]
         public string ButtonText { get; set; }
         public bool Taken { get; set; } = false;
     }
