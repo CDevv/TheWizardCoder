@@ -1,18 +1,21 @@
 using Godot;
 using TheWizardCoder.Abstractions;
 using TheWizardCoder.Data;
+using TheWizardCoder.Enums;
 using TheWizardCoder.UI;
 
 namespace TheWizardCoder.Displays
 {
     public partial class SavedGamesDisplay : Display
     {
+        private bool selectingSave = false;
         private string selectedSaveFileName;
         private SaveFileOption save1button;
         private SaveFileOption save2button;
         private SaveFileOption save3button;
         private Button saveButton;
         private Button closeButton;
+        private SaveFileAction action;
 
         public override void _Ready()
         {
@@ -22,6 +25,28 @@ namespace TheWizardCoder.Displays
             save3button = GetNode<SaveFileOption>("Save3");
             saveButton = GetNode<Button>("%SaveButton");
             closeButton = GetNode<Button>("%CloseButton");
+        }
+
+        public override void _Input(InputEvent @event)
+        {
+            if (Input.IsActionJustPressed("ui_cancel"))
+            {
+                if (Visible)
+                {
+                    if (selectingSave)
+                    {
+                        saveButton.GrabFocus();
+                        selectingSave = false;
+                    }
+                }
+            }
+        }
+
+        public override void ShowDisplay()
+        {
+            global.GameDisplayEnabled = false;
+            Show();
+            saveButton.GrabFocus();
         }
 
         public override void UpdateDisplay()
@@ -36,15 +61,17 @@ namespace TheWizardCoder.Displays
             }
         }
 
-        public override void ShowDisplay()
-        {
-            global.GameDisplayEnabled = false;
-            Show();
-            saveButton.GrabFocus();
-        }
-
         public void OnSaveButton()
         {
+            selectingSave = true;
+            action = SaveFileAction.Save;
+            save1button.GrabFocus();
+        }
+
+        public void OnLoadButton()
+        {
+            selectingSave = true;
+            action = SaveFileAction.Load;
             save1button.GrabFocus();
         }
 
@@ -57,9 +84,17 @@ namespace TheWizardCoder.Displays
 
         public void OnSaveOption(string saveName)
         {
-            global.SaveFiles.UpdateSaveFile(saveName);
+            if (action == SaveFileAction.Save)
+            {
+                global.SaveFiles.UpdateSaveFile(saveName);
+            }
+            else if (action == SaveFileAction.Load)
+            {
+                global.SaveFiles.LoadSaveFile(saveName);
+                global.ChangeRoom(global.PlayerData.SceneFileName, global.PlayerData.SceneDefaultMarker, Direction.Down);
+            }
+
             OnCloseButton();
         }
-
     }
 }

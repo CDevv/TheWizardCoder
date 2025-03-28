@@ -44,7 +44,7 @@ namespace TheWizardCoder.Displays
             UpdateAllSubdisplays();
         }
 
-        public override void _UnhandledInput(InputEvent @event)
+        public override void _Input(InputEvent @event)
         {
             if (!global.GameDisplayEnabled || global.IsInCutscene || global.IsInShop)
             {
