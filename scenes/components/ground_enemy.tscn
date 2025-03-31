@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/components/GroundEnemy.cs" id="1_wfmpi"]
 [ext_resource type="SpriteFrames" uid="uid://phvtxqaj4s25" path="res://assets/enemies/spriteframes/Glitch.tres" id="2_jj1tj"]
-[ext_resource type="PackedScene" uid="uid://ceblrxu7x4fvc" path="res://scenes/components/battle_point.tscn" id="3_6pedj"]
+[ext_resource type="PackedScene" uid="uid://ceblrxu7x4fvc" path="res://scenes/interactables/battle_point.tscn" id="3_6pedj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yjrg5"]
 radius = 128.0

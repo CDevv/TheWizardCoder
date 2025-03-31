@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_gb2o6"]
 [ext_resource type="TileSet" uid="uid://b5gmhkessquy0" path="res://tilesets/forest_environment.tres" id="3_1j6p8"]
 [ext_resource type="Resource" uid="uid://podtp1v3v8iu" path="res://dialogue/forest.dialogue" id="3_cmcn2"]
-[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_iug7p"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/interactables/warper.tscn" id="4_iug7p"]
 [ext_resource type="Texture2D" uid="uid://bhb7cg74mxmyy" path="res://assets/props/raft.png" id="5_k7cq8"]
-[ext_resource type="PackedScene" uid="uid://mmm0k3msmmm5" path="res://scenes/components/cutscene_point.tscn" id="7_4yj6y"]
+[ext_resource type="PackedScene" uid="uid://mmm0k3msmmm5" path="res://scenes/interactables/cutscene_point.tscn" id="7_4yj6y"]
 
 [sub_resource type="Animation" id="Animation_2ui8h"]
 resource_name = "forest_final_1"

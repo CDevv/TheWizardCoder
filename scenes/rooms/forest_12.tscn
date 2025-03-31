@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_5tigq"]
 [ext_resource type="Script" path="res://scripts/rooms/Forest12.cs" id="2_n2sdk"]
 [ext_resource type="TileSet" uid="uid://b5gmhkessquy0" path="res://tilesets/forest_environment.tres" id="3_t6wso"]
-[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_o6lkv"]
-[ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/components/save_point.tscn" id="6_1e4sf"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/interactables/warper.tscn" id="4_o6lkv"]
+[ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/interactables/save_point.tscn" id="6_1e4sf"]
 
 [node name="Forest12" instance=ExtResource("1_f0rwf")]
 y_sort_enabled = true

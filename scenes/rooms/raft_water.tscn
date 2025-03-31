@@ -5,13 +5,13 @@
 [ext_resource type="Script" path="res://scripts/rooms/RaftWater.cs" id="2_cb5y6"]
 [ext_resource type="TileSet" uid="uid://b5gmhkessquy0" path="res://tilesets/forest_environment.tres" id="3_3wde4"]
 [ext_resource type="Resource" uid="uid://bky44uy3y8eq8" path="res://dialogue/raft_water.dialogue" id="3_vn362"]
-[ext_resource type="PackedScene" uid="uid://rvoayeto0hni" path="res://scenes/components/text_box_interactable.tscn" id="4_d6m5c"]
+[ext_resource type="PackedScene" uid="uid://rvoayeto0hni" path="res://scenes/interactables/text_box_interactable.tscn" id="4_d6m5c"]
 [ext_resource type="Texture2D" uid="uid://bhb7cg74mxmyy" path="res://assets/props/raft.png" id="4_ropwh"]
 [ext_resource type="PackedScene" uid="uid://max4o366gqrj" path="res://scenes/components/box_stack.tscn" id="7_yom75"]
-[ext_resource type="PackedScene" uid="uid://difw3tkd13yu0" path="res://scenes/components/console_box_text.tscn" id="9_lt87v"]
+[ext_resource type="PackedScene" uid="uid://difw3tkd13yu0" path="res://scenes/ui/console_box_text.tscn" id="9_lt87v"]
 [ext_resource type="PackedScene" uid="uid://3lov8fa64e3" path="res://scenes/displays/raft_sunk_display.tscn" id="10_of6yc"]
-[ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/components/save_point.tscn" id="11_r68u4"]
-[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="12_q1f2i"]
+[ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/interactables/save_point.tscn" id="11_r68u4"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/interactables/warper.tscn" id="12_q1f2i"]
 
 [sub_resource type="Animation" id="Animation_or61g"]
 resource_name = "water_1"

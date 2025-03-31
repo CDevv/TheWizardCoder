@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/displays/BattleDisplay.cs" id="1_py1kc"]
 [ext_resource type="PackedScene" uid="uid://iglkgt85o6wb" path="res://scenes/ui/enemy_sprite.tscn" id="3_xj7hs"]
-[ext_resource type="PackedScene" uid="uid://cil04fbnlnhn3" path="res://scenes/components/character_rect.tscn" id="3_xy74d"]
+[ext_resource type="PackedScene" uid="uid://cil04fbnlnhn3" path="res://scenes/ui/character_rect.tscn" id="3_xy74d"]
 [ext_resource type="PackedScene" uid="uid://bpiouthd683jq" path="res://scenes/ui/enemy_health_bar.tscn" id="6_s2ji1"]
 [ext_resource type="Texture2D" uid="uid://bkcqub1bq0kvx" path="res://assets/battle/backgrounds/battle-bg.png" id="7_4rtm4"]
 [ext_resource type="PackedScene" uid="uid://dbc02qtax1to" path="res://scenes/ui/allies_container.tscn" id="8_xfudy"]

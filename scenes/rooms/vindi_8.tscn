@@ -5,12 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_wlgji"]
 [ext_resource type="TileSet" uid="uid://dqirfdrc3jlyd" path="res://tilesets/vindi_env.tres" id="3_lrfwm"]
 [ext_resource type="PackedScene" uid="uid://bk3a4lc0i5uwk" path="res://scenes/components/actor.tscn" id="4_4hrn8"]
-[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_vu3je"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/interactables/warper.tscn" id="4_vu3je"]
 [ext_resource type="SpriteFrames" uid="uid://bofoatlx8u0r4" path="res://assets/characters/movement/spriteframes/craig.tres" id="5_561uj"]
 [ext_resource type="Resource" uid="uid://ukx1i3qsx6q2" path="res://dialogue/vindi.dialogue" id="5_jqg78"]
 [ext_resource type="PackedScene" uid="uid://doyfot0kgcxa2" path="res://scenes/components/snow_particles.tscn" id="5_n4akj"]
 [ext_resource type="SpriteFrames" uid="uid://clh6whg0ths6r" path="res://assets/characters/movement/spriteframes/fred.tres" id="8_cnsic"]
-[ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/components/save_point.tscn" id="10_px50d"]
+[ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/interactables/save_point.tscn" id="10_px50d"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_bs5pw"]
 a = Vector2(1280, 0)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://rvoayeto0hni"]
 
-[ext_resource type="PackedScene" uid="uid://difw3tkd13yu0" path="res://scenes/components/console_box_text.tscn" id="1_axnub"]
+[ext_resource type="PackedScene" uid="uid://difw3tkd13yu0" path="res://scenes/ui/console_box_text.tscn" id="1_axnub"]
 [ext_resource type="Script" path="res://scripts/interactables/TextBoxInteractable.cs" id="1_lmt7h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bq5om"]

@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_d10el"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_h36mt"]
 [ext_resource type="TileSet" uid="uid://clhrfovy5lcgu" path="res://tilesets/houses_interiors.tres" id="3_jqcmy"]
-[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_xgklm"]
-[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="5_8ii8n"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/interactables/warper.tscn" id="4_xgklm"]
+[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/interactables/dialogue_point.tscn" id="5_8ii8n"]
 [ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="6_x1l51"]
-[ext_resource type="PackedScene" uid="uid://b5a45cgte66g5" path="res://scenes/components/chest.tscn" id="7_ws68g"]
+[ext_resource type="PackedScene" uid="uid://b5a45cgte66g5" path="res://scenes/interactables/chest.tscn" id="7_ws68g"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_uvme0"]
 a = Vector2(96, 96)

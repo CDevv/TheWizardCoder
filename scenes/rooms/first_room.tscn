@@ -6,9 +6,9 @@
 [ext_resource type="Resource" uid="uid://dxv3wga5qop3d" path="res://dialogue/nolan_house.dialogue" id="3_u0ba2"]
 [ext_resource type="Texture2D" uid="uid://ctposucfw7y80" path="res://assets/props/bed-sheet.png" id="4_d8756"]
 [ext_resource type="TileSet" uid="uid://bxvx8pmnaw0ed" path="res://tilesets/nolan_house.tres" id="4_w5xs7"]
-[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="6_4o6l1"]
-[ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/components/save_point.tscn" id="8_5r6ba"]
-[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="9_od3ub"]
+[ext_resource type="PackedScene" uid="uid://bjynvky1n76b2" path="res://scenes/interactables/save_point.tscn" id="7_gxbe0"]
+[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/interactables/dialogue_point.tscn" id="8_85lo7"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/interactables/warper.tscn" id="10_ep5e8"]
 [ext_resource type="Texture2D" uid="uid://b25d8akulcu0u" path="res://assets/props/homebed-awake.png" id="11_xs4nt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p5w6j"]
@@ -216,7 +216,7 @@ metadata/_aseprite_wizard_interface_config_ = {
 "output_section": false
 }
 
-[node name="SavePoint" parent="." index="8" instance=ExtResource("8_5r6ba")]
+[node name="SavePoint" parent="." index="8" instance=ExtResource("7_gxbe0")]
 position = Vector2(416, 192)
 
 [node name="RoomCollision" type="StaticBody2D" parent="." index="9"]
@@ -224,14 +224,14 @@ position = Vector2(416, 192)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomCollision" index="0"]
 polygon = PackedVector2Array(160, 160, 144, 160, 144, 400, 208, 400, 208, 432, 288, 432, 288, 400, 464, 400, 464, 168, 448, 168, 448, 384, 272, 384, 272, 416, 224, 416, 224, 384, 160, 384, 160, 384)
 
-[node name="LampDialoguePoint" parent="." index="10" instance=ExtResource("6_4o6l1")]
+[node name="LampDialoguePoint" parent="." index="10" instance=ExtResource("8_85lo7")]
 z_index = 1
 position = Vector2(280, 192)
 scale = Vector2(2, 1.5)
 DialogueResource = ExtResource("3_u0ba2")
 DialogueTitle = "lamp"
 
-[node name="BedDialoguePoint" parent="." index="11" instance=ExtResource("6_4o6l1")]
+[node name="BedDialoguePoint" parent="." index="11" instance=ExtResource("8_85lo7")]
 position = Vector2(192, 224)
 scale = Vector2(3, 3)
 DialogueResource = ExtResource("3_u0ba2")
@@ -255,7 +255,7 @@ position = Vector2(248, 376)
 [node name="AfterCutsceneMarker" type="Marker2D" parent="." index="16"]
 position = Vector2(240, 208)
 
-[node name="Warper" parent="." index="17" instance=ExtResource("9_od3ub")]
+[node name="Warper" parent="." index="17" instance=ExtResource("10_ep5e8")]
 position = Vector2(248, 416)
 TargetRoomName = "first_floor"
 TargetLocation = "DoorMarker"

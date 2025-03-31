@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_u3uxm"]
 [ext_resource type="TileSet" uid="uid://cci1mfiwm4w6e" path="res://tilesets/forest_buildings_interiors.tres" id="3_aqt4b"]
 [ext_resource type="Resource" uid="uid://podtp1v3v8iu" path="res://dialogue/forest.dialogue" id="3_cauah"]
-[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_gty4g"]
-[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="7_cifly"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/interactables/warper.tscn" id="4_gty4g"]
+[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/interactables/dialogue_point.tscn" id="7_cifly"]
 
 [sub_resource type="Animation" id="Animation_l0o80"]
 resource_name = "gertrude_1"

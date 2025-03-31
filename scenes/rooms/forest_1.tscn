@@ -4,9 +4,9 @@
 [ext_resource type="TileSet" uid="uid://b5gmhkessquy0" path="res://tilesets/forest_environment.tres" id="2_4kb6i"]
 [ext_resource type="Script" path="res://scripts/rooms/Forest1.cs" id="2_6hjdj"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="3_74ghn"]
-[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_5x3c7"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/interactables/warper.tscn" id="4_5x3c7"]
 [ext_resource type="PackedScene" uid="uid://d38oq7utuerxp" path="res://scenes/components/ground_enemy.tscn" id="5_khl1p"]
-[ext_resource type="PackedScene" uid="uid://bcec1jvlgi5m4" path="res://scenes/components/code_message_point.tscn" id="6_6qfby"]
+[ext_resource type="PackedScene" uid="uid://bcec1jvlgi5m4" path="res://scenes/interactables/code_message_point.tscn" id="6_6qfby"]
 [ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="7_napuu"]
 
 [node name="Forest1" instance=ExtResource("1_jqh4t")]

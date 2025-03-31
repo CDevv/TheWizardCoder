@@ -4,14 +4,14 @@
 [ext_resource type="Script" path="res://scripts/rooms/ZenHouse.cs" id="2_1auo6"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_kf2x7"]
 [ext_resource type="TileSet" uid="uid://clhrfovy5lcgu" path="res://tilesets/houses_interiors.tres" id="3_1ycko"]
-[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/components/warper.tscn" id="4_5nhse"]
+[ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/interactables/warper.tscn" id="4_5nhse"]
 [ext_resource type="Texture2D" uid="uid://bobyoupoe6ukp" path="res://assets/props/basket.png" id="5_4drfq"]
 [ext_resource type="PackedScene" uid="uid://bk3a4lc0i5uwk" path="res://scenes/components/actor.tscn" id="6_1uugv"]
 [ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="7_h6001"]
 [ext_resource type="SpriteFrames" uid="uid://bep08a0upkydb" path="res://assets/characters/movement/spriteframes/zenith.tres" id="8_21sgk"]
 [ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="10_5j3uc"]
-[ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/components/code_problem_point.tscn" id="11_1n5do"]
-[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/components/dialogue_point.tscn" id="12_di0gj"]
+[ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/interactables/code_problem_point.tscn" id="11_1n5do"]
+[ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/interactables/dialogue_point.tscn" id="12_di0gj"]
 
 [sub_resource type="Animation" id="Animation_hoyvw"]
 resource_name = "code_solved"
