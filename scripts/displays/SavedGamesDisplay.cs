@@ -1,5 +1,6 @@
 using Godot;
 using TheWizardCoder.Abstractions;
+using TheWizardCoder.Autoload;
 using TheWizardCoder.Data;
 using TheWizardCoder.Enums;
 using TheWizardCoder.UI;
@@ -14,7 +15,6 @@ namespace TheWizardCoder.Displays
         private SaveFileOption save2button;
         private SaveFileOption save3button;
         private Button saveButton;
-        private Button closeButton;
         private SaveFileAction action;
 
         public override void _Ready()
@@ -24,7 +24,6 @@ namespace TheWizardCoder.Displays
             save2button = GetNode<SaveFileOption>("Save2");
             save3button = GetNode<SaveFileOption>("Save3");
             saveButton = GetNode<Button>("%SaveButton");
-            closeButton = GetNode<Button>("%CloseButton");
         }
 
         public override void _Input(InputEvent @event)
@@ -37,6 +36,11 @@ namespace TheWizardCoder.Displays
                     {
                         saveButton.GrabFocus();
                         selectingSave = false;
+                    }
+                    else
+                    {
+                        global.SetDeferred(Global.PropertyName.GameDisplayEnabled, true);
+                        HideDisplay();
                     }
                 }
             }
@@ -59,6 +63,12 @@ namespace TheWizardCoder.Displays
                 SaveFileData save1data = global.SaveFiles.ReadSaveFile(fileName);
                 button.ShowData(save1data);
             }
+        }
+
+        public override void HideDisplay()
+        {
+            Hide();
+            global.CanWalk = true;
         }
 
         public void OnSaveButton()

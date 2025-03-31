@@ -53,44 +53,47 @@ namespace TheWizardCoder.Displays
 
             if (Input.IsActionJustPressed("ui_cancel"))
             {
-                switch (level)
+                if (global.GameDisplayEnabled)
                 {
-                    case 0:
-                        if (Visible)
-                        {
-                            global.CanWalk = true;
-                            Hide();
+                    switch (level)
+                    {
+                        case 0:
+                            if (Visible)
+                            {
+                                global.CanWalk = true;
+                                Hide();
+                                HideAllSubdisplays();
+                                controls.Hide();
+                            }
+                            else
+                            {
+                                global.CanWalk = false;
+                                ShowDisplay();
+                            }
+                            break;
+                        case 1:
+                            level = 0;
                             HideAllSubdisplays();
-                            controls.Hide();
-                        }
-                        else
-                        {
-                            global.CanWalk = false;
-                            ShowDisplay();
-                        }
-                        break;
-                    case 1:
-                        level = 0;
-                        HideAllSubdisplays();
-                        Subdisplays["PartyMembers"].Show();
-                        itemsButton.GrabFocus();
+                            Subdisplays["PartyMembers"].Show();
+                            itemsButton.GrabFocus();
 
-                        controls.ChangeXLabel("Close");
-                        controls.ChangeZLabel("Confirm");
-                        controls.HideQLabel();
-                        break;
-                    case 2:
-                        if (action == MenuAction.Options)
-                        {
-                            OnOptionsMenu();
-                        }
-                        else if (action == MenuAction.Armour)
-                        {
-                            ((CharacterArmour)Subdisplays["Armour"]).FocusOnFirstSlot();
-                        }
-                        break;
-                    default:
-                        break;
+                            controls.ChangeXLabel("Close");
+                            controls.ChangeZLabel("Confirm");
+                            controls.HideQLabel();
+                            break;
+                        case 2:
+                            if (action == MenuAction.Options)
+                            {
+                                OnOptionsMenu();
+                            }
+                            else if (action == MenuAction.Armour)
+                            {
+                                ((CharacterArmour)Subdisplays["Armour"]).FocusOnFirstSlot();
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
