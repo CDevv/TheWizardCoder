@@ -22,8 +22,6 @@ namespace TheWizardCoder.Components
         public Direction Direction { get; private set; }
         public const int DefaultSpeed = 2;
         private Global global;
-        private AnimationPlayer animationPlayer;
-        private AnimationTree animationTree;
         private Area2D interactableFinder;
         private Vector2 lastDirection;
         private AnimatedSprite2D animatedSprite;
@@ -47,10 +45,7 @@ namespace TheWizardCoder.Components
         public override void _Ready()
         {
             global = GetNode<Global>("/root/Global");
-            animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-            animationTree = GetNode<AnimationTree>("AnimationTree");
             interactableFinder = GetNode<Area2D>("InteractableFinder");
-
             animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 
             DistanceWalked = 0;
@@ -219,12 +214,10 @@ namespace TheWizardCoder.Components
             if (Input.IsActionPressed("sprint"))
             {
                 IsSprinting = true;
-                animationTree.Set("parameters/TimeScale/scale", 2);
             }
             else
             {
                 IsSprinting = false;
-                animationTree.Set("parameters/TimeScale/scale", 1);
             }
         }
 
