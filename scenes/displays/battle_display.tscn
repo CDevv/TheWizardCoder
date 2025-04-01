@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://t2oe67lsq1j2"]
+[gd_scene load_steps=15 format=3 uid="uid://t2oe67lsq1j2"]
 
 [ext_resource type="Script" path="res://scripts/displays/BattleDisplay.cs" id="1_py1kc"]
+[ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="2_scu7s"]
 [ext_resource type="PackedScene" uid="uid://iglkgt85o6wb" path="res://scenes/ui/enemy_sprite.tscn" id="3_xj7hs"]
 [ext_resource type="PackedScene" uid="uid://cil04fbnlnhn3" path="res://scenes/ui/character_rect.tscn" id="3_xy74d"]
 [ext_resource type="PackedScene" uid="uid://bpiouthd683jq" path="res://scenes/ui/enemy_health_bar.tscn" id="6_s2ji1"]
@@ -20,6 +21,7 @@
 
 [node name="BattleDisplay" type="CanvasLayer" node_paths=PackedStringArray("Allies", "Enemies")]
 script = ExtResource("1_py1kc")
+TutorialDialogueResource = ExtResource("2_scu7s")
 CharacterRectScene = ExtResource("3_xy74d")
 EnemySpriteScene = ExtResource("3_xj7hs")
 Allies = NodePath("AlliesContainer")

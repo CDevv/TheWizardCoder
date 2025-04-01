@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ddwumkhu3bon7"]
+[gd_scene load_steps=26 format=3 uid="uid://ddwumkhu3bon7"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_ujid1"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_ehys0"]
@@ -443,10 +443,38 @@ tracks/16/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_evmra"]
+resource_name = "hide_linton"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Linton:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Glitch:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_psa2p"]
 _data = {
 "code_solved": SubResource("Animation_m84pa"),
 "final_pos": SubResource("Animation_l5odc"),
+"hide_linton": SubResource("Animation_evmra"),
 "linton_4": SubResource("Animation_ceunq"),
 "linton_5": SubResource("Animation_gndkv"),
 "linton_6": SubResource("Animation_tfx0q"),
@@ -477,13 +505,13 @@ libraries = {
 }
 
 [node name="Camera" parent="." index="6"]
-position = Vector2(968, 717)
+position = Vector2(1200, 792)
 limit_right = 2240
 limit_bottom = 1952
 
 [node name="Player" parent="." index="10" instance=ExtResource("2_ehys0")]
 z_index = 1
-position = Vector2(968, 760)
+position = Vector2(1200, 792)
 
 [node name="TileMap" type="TileMap" parent="." index="11"]
 y_sort_enabled = true
@@ -539,7 +567,6 @@ position = Vector2(1200, 832)
 position = Vector2(2200, 832)
 
 [node name="Glitch" type="Sprite2D" parent="." index="19"]
-modulate = Color(1, 1, 1, 0)
 z_index = 2
 position = Vector2(1176, 712)
 scale = Vector2(2, 2)
@@ -574,7 +601,6 @@ position = Vector2(1368, 752)
 
 [node name="Linton" parent="." index="22" instance=ExtResource("9_hrcjo")]
 z_index = 1
-position = Vector2(928, 760)
 DialogueResource = ExtResource("3_3hq0k")
 DialogueTitle = "linton_point"
 DefaultDirection = 1
