@@ -114,6 +114,15 @@ namespace TheWizardCoder.Displays
             UpdateAllSubdisplays();
         }
 
+        public override void HideDisplay()
+        {
+            level = 0;
+            base.HideDisplay();
+            HideAllSubdisplays();
+            controls.Hide();
+            global.CanWalk = true;
+        }
+
         public void OnItemsMenu()
         {
             level = 1;
@@ -168,25 +177,14 @@ namespace TheWizardCoder.Displays
             }
             else if (item.Type == ItemType.Key)
             {
-                if (item.AdditionalData.Length > 0)
+                if (item.Equippable)
                 {
-                    if (item.AdditionalData[0] == "Display")
-                    {
-                        global.CurrentRoom.Get(item.AdditionalData[1]).As<Node>().Call("ShowDisplay", item.AdditionalData[2]);
-                    }
-                    else if (item.AdditionalData[0] == "RoomMethod")
-                    {
-                        global.CurrentRoom.Call(item.AdditionalData[1], item.AdditionalData[2]);
-                    }
-                    else if (item.AdditionalData[0] == "PlayerMethod")
-                    {
-                        global.CurrentRoom.Player.Call(item.AdditionalData[1], item.AdditionalData[2]);
-                        global.CanWalk = true;
-                    }
-
-                    level = 0;
+                    global.CurrentRoom.Player.EquipItem(item);
+                }
+                else
+                {
+                    item.OnUsed.Call();
                     HideDisplay();
-                    HideAllSubdisplays();
                 }
             }
         }

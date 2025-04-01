@@ -1,4 +1,5 @@
 using System;
+using TheWizardCoder.Autoload;
 using TheWizardCoder.Enums;
 
 namespace TheWizardCoder.Data
@@ -12,6 +13,9 @@ namespace TheWizardCoder.Data
         public int Price { get; set; }
         public bool Sellable { get; set; }
         public string[] AdditionalData { get; set; }
+        public GameAction OnUsed { get; set; }
+        public GameAction OnEquipped { get; set; }
+        public bool Equippable { get; set; }
 
         public Item(string name, string description, int effect, ItemType type)
         {
@@ -37,9 +41,15 @@ namespace TheWizardCoder.Data
             }
         }
 
-        public void AddAdditionalData(string[] data)
+        public void SetOnUsed(Global global, string[] data)
         {
             AdditionalData = data;
+            OnUsed = new GameAction(global, data);
+        }
+
+        public void SetOnEquipped(Global global, string[] data)
+        {
+            OnEquipped = new GameAction(global, data);
         }
     }
 }

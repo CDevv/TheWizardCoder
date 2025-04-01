@@ -70,7 +70,7 @@ namespace TheWizardCoder.Tests
             Item item = new("Test Item", "Test Description", 10, ItemType.Key);
 
             string[] additionalData = { item1, item2, item3 };
-            item.AddAdditionalData(additionalData);
+            item.AdditionalData = additionalData;
 
             AssertBool(item.AdditionalData.Length == 3).IsTrue();
             AssertArray(item.AdditionalData).ContainsExactly(additionalData);

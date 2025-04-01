@@ -21,12 +21,6 @@ namespace TheWizardCoder.Components
         public delegate void AnimationFinishedEventHandler();
         public Direction Direction { get; private set; }
         public const int DefaultSpeed = 2;
-        private Global global;
-        private Area2D interactableFinder;
-        private Vector2 lastDirection;
-        private AnimatedSprite2D animatedSprite;
-        private Vector2 normalPosition = new(0, -35);
-        private Vector2 equippedPosition = new(0, -22);
 
         public Actor Follower { get; set; }
         public bool HasFollower { get; set; } = false;
@@ -37,9 +31,14 @@ namespace TheWizardCoder.Components
         public new Vector2 Velocity { get; private set; }
         public bool IsSprinting { get; private set; } = false;
 
+        private Global global;
+        private Area2D interactableFinder;
+        private Vector2 lastDirection;
+        private AnimatedSprite2D animatedSprite;
+        private Vector2 normalPosition = new(0, -35);
+        private Vector2 equippedPosition = new(0, -22);
         private bool isItemEquipped = false;
         private string equippedItem;
-
         private bool itemIsInUse = false;
 
         public override void _Ready()
@@ -221,16 +220,31 @@ namespace TheWizardCoder.Components
             }
         }
 
-        public void EquipItem(string item)
+        /// <summary>
+        /// Set an item in the Player's inventory as equipped.
+        /// </summary>
+        /// <remarks>
+        /// <see cref="Player.EquipItem(string)"/> may be used in item_descriptions.json to define an item's behaviour when being used
+        /// This 'Fishing Rod' item sets itself as equipped when the player 'uses' it using [Z] or [Enter] in the Inventory menu
+        /// <code>
+        /// "Fishing Rod":{
+		/// "Description":"Catch fish!",
+		/// "Type": "Key",
+		/// "Effect": 0,
+		/// "Price": 25,
+		/// "AdditionalData": ["PlayerMethod", "EquipItem", "Fishing Rod"]
+        /// }
+        /// </code>
+        /// </remarks>
+        /// <param name="item">Name of the item</param>
+        public void EquipItem(Item item)
         {
             global.GameDisplayEnabled = false;
             isItemEquipped = true;
-            equippedItem = item;
+            equippedItem = item.Name;
+            global.CurrentRoom.GameDisplay.HideDisplay();
 
-            if (item == "Fishing Rod")
-            {
-                global.CurrentRoom.ShowDisplay("FishingDisplay");
-            }
+            item.OnEquipped.Call();
         }
 
         public async Task Unequip()

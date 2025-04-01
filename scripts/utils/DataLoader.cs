@@ -31,7 +31,7 @@ namespace TheWizardCoder.Utils
             return json.Data;
         }
 
-        public static System.Collections.Generic.Dictionary<string, Item> LoadItems()
+        public static System.Collections.Generic.Dictionary<string, Item> LoadItems(Global global)
         {
             System.Collections.Generic.Dictionary<string, Item> items = new();
 
@@ -57,8 +57,22 @@ namespace TheWizardCoder.Utils
 
                 if (type == ItemType.Key || type == ItemType.Magic)
                 {
-                    string[] data = (string[])dict["AdditionalData"];
-                    item.AddAdditionalData(data);
+                    if (dict.ContainsKey("AdditionalData"))
+                    {
+                        string[] data = (string[])dict["AdditionalData"];
+                        item.SetOnUsed(global, data);
+                    }
+
+                    if (dict.ContainsKey("OnEquipped"))
+                    {
+                        string[] onEquippedArr = (string[])dict["OnEquipped"];
+                        item.SetOnEquipped(global, onEquippedArr);
+                    }
+                }
+
+                if (dict.ContainsKey("Equippable"))
+                {
+                    item.Equippable = dict["Equippable"].AsBool();
                 }
 
                 items.Add(item.Name, item);

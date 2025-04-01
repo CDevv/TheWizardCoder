@@ -68,7 +68,7 @@ namespace TheWizardCoder.Autoload
         private void LoadData()
         {
             GameIntroStrings = DataLoader.LoadGameIntro();
-            ItemDescriptions = DataLoader.LoadItems();
+            ItemDescriptions = DataLoader.LoadItems(this);
             MagicSpells = DataLoader.LoadMagicSpells();
             Armours = DataLoader.LoadArmours();
             Characters = DataLoader.LoadCharacters(this);
