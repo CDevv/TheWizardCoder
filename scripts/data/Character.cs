@@ -401,5 +401,31 @@ namespace TheWizardCoder.Data
             DefensePoints = InitialDefensePoint + ArmourEffects.Defense;
             AgilityPoints = InitialAgilityPoints + ArmourEffects.Agility;
         }
+
+        public void ApplyBattleEffect(BattleEffect effect)
+        {
+            int multiplier = effect.IsNegative ? -1 : 1;
+
+            switch (effect.Action)
+            {
+                case BattleEffectType.Attack:
+                    AttackPoints += effect.Effect * multiplier;
+                    break;
+                case BattleEffectType.Defense:
+                    DefensePoints += effect.Effect * multiplier;
+                    break;
+                case BattleEffectType.Mana:
+                    MaxPoints += effect.Effect * multiplier;
+                    Points = MaxPoints;
+                    break;
+                case BattleEffectType.Speed:
+                    AgilityPoints += effect.Effect * multiplier;
+                    break;
+                case BattleEffectType.Health:
+                    MaxHealth += effect.Effect * multiplier;
+                    Health = MaxHealth;
+                    break;
+            }
+        }
     }
 }

@@ -12,6 +12,8 @@ namespace TheWizardCoder.Data
         public List<Character> Characters { get; private set; } = new();
         public List<CharacterBattleState> BattleStates { get; private set; } = new();
 
+        public int Count => Characters.Count;
+
         /// <summary>
         /// Add a character to this container.
         /// </summary>
@@ -30,6 +32,11 @@ namespace TheWizardCoder.Data
             return BattleStates.Find(x => x.Character == character);
         }
 
+        public CharacterBattleState GetCharacterState(int index)
+        {
+            return BattleStates[index];
+        }
+
         public Character FromIndex(int index)
         {
             return Characters[index];
@@ -42,24 +49,26 @@ namespace TheWizardCoder.Data
             BattleStates.RemoveAt(index);
         }
 
-        public void AddHealth(int index, int health)
+        public void ChangeHealth(int index, int health)
         {
-            Characters[index].AddHealth(health);
+            Characters[index].ChangeHealth(health);
         }
 
-        public void RemoveHealth(int index, int health)
+        public void ChangeMana(int index, int mana)
         {
-            Characters[index].RemoveHealth(health);
+            Characters[index].ChangeMana(mana);
         }
 
-        public void AddMana(int index, int mana)
+        public void ApplyBattleEffect(int index, BattleEffect battleEffect)
         {
-            Characters[index].AddMana(mana);
-        }
+            if (BattleStates[index].HasBattleEffect)
+            {
+                return;
+            }
 
-        public void RemoveMana(int index, int mana)
-        {
-            Characters[index].RemoveMana(mana);
+            BattleStates[index].BattleEffect = battleEffect;
+            BattleStates[index].HasBattleEffect = true;
+            Characters[index].ApplyBattleEffect(battleEffect);
         }
 
         public IEnumerator<Character> GetEnumerator()

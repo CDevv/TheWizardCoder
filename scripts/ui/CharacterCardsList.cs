@@ -59,7 +59,7 @@ namespace TheWizardCoder.UI
             }
         }
 
-        public async Task TweenDamage(int index, int health, int maxHealth, int healthChange)
+        public async Task TweenDamage(int index, int healthChange)
         {
             Color backgroundColor = new(0, 255, 0);
             if (healthChange < 0)
@@ -67,16 +67,16 @@ namespace TheWizardCoder.UI
                 backgroundColor = new(255, 0, 0);
             }
 
-            Cards[index].SetHealthValue(health, maxHealth);
+            Cards[index].SetHealthValue();
             DamageIndicator.PlayAnimation(healthChange, Cards[index].Position + new Vector2(64, 0), backgroundColor);
             await Cards[index].TweenDamage(backgroundColor);
         }
 
-        public async Task TweenManaChange(int index, int points, int change)
+        public async Task TweenManaChange(int index, int change)
         {
             Color backgroundColor = new("ff30ff00");
-
-            Cards[index].SetPointsValue(points);
+       
+            Cards[index].SetPointsValue();
             DamageIndicator.PlayAnimation(change, Cards[index].Position + new Vector2(64, 0), backgroundColor);
             await Cards[index].TweenDamage(backgroundColor);
         }

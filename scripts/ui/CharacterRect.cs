@@ -24,6 +24,8 @@ namespace TheWizardCoder.UI
         private Label effectTurns;
         private bool focused = false;
 
+        private Character character;
+
         public override void _Ready()
         {
             FocusMode = FocusModeEnum.All;
@@ -40,6 +42,8 @@ namespace TheWizardCoder.UI
 
         public void ApplyData(Character data)
         {
+            character = data;
+
             SetNameText(data.Name);
             SetHealthValue(data.Health, data.MaxHealth);
             SetPointsValue(data.Points);
@@ -66,15 +70,28 @@ namespace TheWizardCoder.UI
 
         public void SetHealthValue(int value, int maxValue)
         {
-            healthLabel.Text = $"{value}/{maxValue} HP";
+            healthLabel.Text = $"{character.Health}/{character.MaxHealth} HP";
 
             healthBar.MaxValue = maxValue;
             healthBar.Value = value;
         }
 
+        public void SetHealthValue()
+        {
+            healthLabel.Text = $"{character.Health}/{character.MaxHealth} HP";
+
+            healthBar.MaxValue = character.MaxHealth;
+            healthBar.Value = character.Health;
+        }
+
         public void SetPointsValue(int value)
         {
             pointsLabel.Text = $"{value} MP";
+        }
+
+        public void SetPointsValue()
+        {
+            pointsLabel.Text = $"{character.Points} MP";
         }
 
         public void ShowAsCurrentCharacter()
