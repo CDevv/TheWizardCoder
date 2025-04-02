@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bia2aspqvs62q"]
+
+[ext_resource type="Script" path="res://scripts/ui/CharacterCardsList.cs" id="1_086cc"]
+[ext_resource type="PackedScene" uid="uid://cil04fbnlnhn3" path="res://scenes/ui/character_rect.tscn" id="2_c5x6x"]
+
+[node name="CharacterCardsList" type="Control"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+script = ExtResource("1_086cc")
+CharacterRectScene = ExtResource("2_c5x6x")

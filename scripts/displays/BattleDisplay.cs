@@ -113,7 +113,6 @@ namespace TheWizardCoder.Displays
 
             if (IsTutorial)
             {
-
                 await global.CurrentRoom.ShowDialogue(TutorialDialogueResource, "tutorial_battle_0");
                 global.GameDisplayEnabled = false;
             }

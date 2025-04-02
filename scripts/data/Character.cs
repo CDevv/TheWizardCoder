@@ -156,6 +156,18 @@ namespace TheWizardCoder.Data
             Health = newValue;
         }
 
+        public void ChangeHealth(int value)
+        {
+            if (value > 0)
+            {
+                AddHealth(value);
+            }
+            else
+            {
+                RemoveHealth(value);
+            }
+        }
+
         public void AddMana(int value)
         {
             int newValue = Mathf.Clamp(Points + value, 0, MaxPoints);
@@ -166,6 +178,18 @@ namespace TheWizardCoder.Data
         {
             int newValue = Mathf.Clamp(Points - value, 0, MaxPoints);
             Points = newValue;
+        }
+
+        public void ChangeMana(int value)
+        {
+            if (value > 0)
+            {
+                AddMana(value);
+            }
+            else
+            {
+                RemoveMana(value);
+            }
         }
 
         public void AddLevelPoints(int value)
