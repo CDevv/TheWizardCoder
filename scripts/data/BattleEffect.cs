@@ -29,5 +29,16 @@ namespace TheWizardCoder.Data
                 throw new ArgumentException("Effect cannot be negative.");
             }
         }
+
+        public static BattleEffect FromArray(string[] arr)
+        {
+            BattleEffectType action = Enum.Parse<BattleEffectType>(arr[0]);
+            CharacterType targetType = Enum.Parse<CharacterType>(arr[1]);
+            int turns = int.Parse(arr[2]);
+            int effect = int.Parse(arr[3]);
+            bool isNegative = bool.Parse(arr[4]);
+
+            return new BattleEffect(action, targetType, turns, effect, isNegative);
+        }
     }
 }

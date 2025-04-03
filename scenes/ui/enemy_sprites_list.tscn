@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbmtwx30607rd"]
+
+[ext_resource type="Script" path="res://scripts/ui/EnemySpritesList.cs" id="1_mpdq0"]
+[ext_resource type="PackedScene" uid="uid://iglkgt85o6wb" path="res://scenes/ui/enemy_sprite.tscn" id="2_8vfrd"]
+
+[node name="EnemySpritesList" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_mpdq0")
+EnemySpriteScene = ExtResource("2_8vfrd")

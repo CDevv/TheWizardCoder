@@ -53,9 +53,11 @@ namespace TheWizardCoder.Subdisplays
         }
 
         public abstract void AddCharacter(Character character);
-        public abstract Task DisplayHealthChange(int index, int change);
-        public abstract Task DisplayManaChange(int index, int change);
-        public abstract Task DisplayBattleEffect(int index, BattleEffect battleEffect);
+        public abstract void FocusOnFirst();
+        public abstract Task ChangeHealth(int index, int change);
+        public abstract Task ChangeMana(int index, int change);
+        public abstract Task ApplyBattleEffect(int index, BattleEffect battleEffect);
+        public abstract Task DefendCharacter(int index);
         public async Task OnTurn(int index)
         {
             if (BattleDisplay.IsBattleEnded)
@@ -66,15 +68,50 @@ namespace TheWizardCoder.Subdisplays
             Character ally = Characters[index];
             CharacterBattleState state = Characters.GetCharacterState(ally);
 
-
             if (ally.Health <= 0)
             {
                 return;
             }
 
-            await SelectAction(state);
+            await SelectAction(index);
         }
 
-        public abstract Task SelectAction(CharacterBattleState state);
+        public abstract Task SelectAction(int index);
+
+        public async void PassToNext()
+        {
+            CurrentCharacter++;
+            if (CurrentCharacter >= Characters.Count)
+            {
+                OnNextCharacterPassed();
+                CurrentCharacter = 0;
+                await BattleDisplay.Routine();
+            }
+            else
+            {
+                OnNextCharacterPassed();
+                if (Characters[CurrentCharacter].Health > 0)
+                {
+                    StartTurn();
+                }
+                else
+                {
+                    CurrentCharacter++;
+
+                    if (CurrentCharacter < Characters.Count)
+                    {
+                        StartTurn();
+                    }
+                    else
+                    {
+                        CurrentCharacter = 0;
+                        await BattleDisplay.Routine();
+                    }
+                }
+            }
+        }
+
+        public abstract void OnNextCharacterPassed();
+        public abstract void StartTurn();
     }
 }

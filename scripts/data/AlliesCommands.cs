@@ -6,65 +6,106 @@ using System.Threading.Tasks;
 using TheWizardCoder.Autoload;
 using TheWizardCoder.Subdisplays;
 using TheWizardCoder.Enums;
+using static Godot.WebSocketPeer;
 
 namespace TheWizardCoder.Data
 {
     public class AlliesCommands
     {
         private Global global;
-        private AlliesSideDisplay alliesSideDisplay;
+        private AlliesSideDisplay allies;
         private BattleOptions battleOptions;
 
         public AlliesCommands(Global global, AlliesSideDisplay alliesSideDisplay)
         {
             this.global = global;
-            this.alliesSideDisplay = alliesSideDisplay;
+            this.allies = alliesSideDisplay;
             battleOptions = alliesSideDisplay.BattleOptions;
         }
 
-        public async Task OnAttack(Character ally)
+        public async Task OnAttack(int index, Character ally)
         {
-            //alliesSideDisplay.BattleOptions.ShowInfoLabel($"{ally.Name} attacks {Enemies.Characters[state.Target].Name}!");
+            CharacterBattleState state = allies.Characters.GetCharacterState(index);
 
-            alliesSideDisplay.AddExperience(ally, ally.Level);
+            allies.BattleOptions.ShowInfoLabel($"{ally.Name} attacks {allies.Enemies.Characters[state.Target].Name}!");
+
+            await allies.Enemies.ChangeHealth(index, ally.AttackPoints);
+
+            allies.AddExperience(ally, ally.Level);
         }
 
-        public async Task OnDefend()
+        public async Task OnDefend(int index, Character ally)
         {
-
+            await allies.DefendCharacter(index);
         }
 
-        public async Task OnItem(int index)
+        public async Task OnItem(int index, Character ally)
         {
-            CharacterBattleState healerState = alliesSideDisplay.Characters.GetCharacterState(index);
+            CharacterBattleState healerState = allies.Characters.GetCharacterState(index);
             int healerIndex = index;
 
             string itemName = global.PlayerData.Inventory[healerState.ActionModifier];
             Item item = global.ItemDescriptions[itemName];
 
-            Character target = alliesSideDisplay.Characters.BattleStates[healerState.Target].Character;
+            Character target = allies.Characters.BattleStates[healerState.Target].Character;
 
             if (healerState.Target == healerIndex)
             {
-                battleOptions.ShowInfoLabel($"{healerState.Character.Name} gave {itemName} to themselves!");
+                battleOptions.ShowInfoLabel($"{ally.Name} gave {itemName} to themselves!");
             }
             else
             {
-                battleOptions.ShowInfoLabel($"{healerState.Character.Name} gave {itemName} to {target.Name}!");
+                battleOptions.ShowInfoLabel($"{ally.Name} gave {itemName} to {target.Name}!");
             }
 
             switch (item.Type)
             {
                 case ItemType.Heal:
-                    await alliesSideDisplay.DisplayHealthChange(healerState.Target, item.Effect);
+                    await allies.ChangeHealth(healerState.Target, item.Effect);
                     break;
                 case ItemType.Mana:
-                    await alliesSideDisplay.DisplayManaChange(healerState.Target, item.Effect);
+                    await allies.ChangeMana(healerState.Target, item.Effect);
                     break;
                 case ItemType.Magic:
-                    
+                    BattleEffect effect = BattleEffect.FromArray(item.AdditionalData);
+                    await allies.ApplyBattleEffect(index, effect);
                     break;
             }
+        }
+
+        public async Task OnMagic(int index, Character ally)
+        {
+            CharacterBattleState state = allies.Characters.GetCharacterState(ally);
+
+            string currentMagicSpellName = ally.MagicSpells[state.ActionModifier];
+            MagicSpell currentMagicSpell = global.MagicSpells[currentMagicSpellName];
+
+            await allies.ChangeMana(index, currentMagicSpell.Cost);
+
+            if (currentMagicSpell.TargetType == CharacterType.Enemy)
+            {
+                string enemyName = allies.Enemies.Characters[state.Target].Name;
+                allies.BattleOptions.ShowInfoLabel($"{ally.Name} casted {currentMagicSpellName} on {enemyName}!");
+
+                await allies.Enemies.ChangeHealth(state.Target, -currentMagicSpell.Effect);
+            }
+            else if (currentMagicSpell.TargetType == CharacterType.Ally)
+            {
+                string healedAllyName = allies.Characters[state.Target].Name;
+
+                if (ally.Name == healedAllyName)
+                {
+                    allies.BattleOptions.ShowInfoLabel($"{ally.Name} casted {currentMagicSpellName} on themselves!");
+                }
+                else
+                {
+                    allies.BattleOptions.ShowInfoLabel($"{ally.Name} casted {currentMagicSpellName} on {healedAllyName}!");
+                }
+
+                await allies.ChangeHealth(state.Target, currentMagicSpell.Effect);
+            }
+
+            allies.AddExperience(index, ally.Level + 2);
         }
     }
 }

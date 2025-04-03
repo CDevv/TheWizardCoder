@@ -17,9 +17,9 @@ namespace TheWizardCoder.UI
 
         [Export]
         public PackedScene CharacterRectScene { get; set; }
-        public BattleDisplay BattleDisplay { get; set; }
         public DamageIndicator DamageIndicator { get; set; }
         public Array<CharacterRect> Cards { get; private set; }
+        public bool NegativeY { get; set; } = false;
 
         public override void _Ready()
         {
@@ -32,9 +32,19 @@ namespace TheWizardCoder.UI
             int currentIndex = Cards.Count - 1;
 
             CharacterRect rect = CharacterRectScene.Instantiate<CharacterRect>();
-            BattleDisplay.AddChild(rect);
+            rect.Name = $"Card-{character.Name}";
+            AddChild(rect);
 
-            rect.Position = Position - new Vector2(0, currentIndex * (rect.Size.Y + 4) * 2);
+            Vector2 vector = new Vector2(0, currentIndex * (rect.Size.Y + 4) * 2);
+            if (NegativeY)
+            {
+                rect.Position = Position + vector;
+            }
+            else
+            {
+                rect.Position = Position - vector;
+            }
+
             rect.ApplyData(character);
             rect.Pressed += () => OnCharacterCardPressed(currentIndex);
 

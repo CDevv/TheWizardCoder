@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://md5y5i42pw81"]
+
+[ext_resource type="PackedScene" uid="uid://bia2aspqvs62q" path="res://scenes/ui/character_cards_list.tscn" id="1_3l8ih"]
+[ext_resource type="PackedScene" uid="uid://cbmtwx30607rd" path="res://scenes/ui/enemy_sprites_list.tscn" id="2_xgieh"]
+
+[node name="EnemiesSideDisplay" type="CanvasLayer"]
+
+[node name="CardsList" parent="." instance=ExtResource("1_3l8ih")]
+offset_left = 448.0
+offset_top = -472.0
+offset_right = 448.0
+offset_bottom = -472.0
+
+[node name="SpritesList" parent="." instance=ExtResource("2_xgieh")]
+offset_left = 320.0
+offset_top = 208.0
+offset_right = 320.0
+offset_bottom = 208.0
