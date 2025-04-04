@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheWizardCoder.Data;
+using TheWizardCoder.Enums;
 using TheWizardCoder.UI;
 
 namespace TheWizardCoder.Subdisplays
@@ -16,19 +17,19 @@ namespace TheWizardCoder.Subdisplays
 
         private CharacterCardsList cardsList;
         private EnemySpritesList sprites;
+        private EnemiesCommands commands;
 
         [Export]
         public AlliesSideDisplay Allies { get; set; }
-        [Export]
-        public DamageIndicator DamageIndicator { get; set; }
 
         public CharacterCardsList CardsList => cardsList;
 
         public override void _Ready()
         {
             base._Ready();
+            commands = new EnemiesCommands(global, this);
+
             cardsList = GetNode<CharacterCardsList>("CardsList");
-            CardsList.DamageIndicator = DamageIndicator;
             cardsList.NegativeY = true;
 
             sprites = GetNode<EnemySpritesList>("SpritesList");
@@ -37,39 +38,86 @@ namespace TheWizardCoder.Subdisplays
 
         public override void AddCharacter(Character character)
         {
-            Characters.AddCharacter(character);
-            cardsList.AddCharacter(character);
-            sprites.AddSprite(character);
+            Character enemy = character.Clone();
+
+            Characters.AddCharacter(enemy);
+            cardsList.AddCharacter(enemy);
+            sprites.AddSprite(enemy);
         }
 
-        public override Task ApplyBattleEffect(int index, BattleEffect battleEffect)
+        public override async Task ApplyBattleEffect(int index, BattleEffect battleEffect)
         {
-            throw new NotImplementedException();
+            SceneTreeTimer timer = GetTree().CreateTimer(3);
+            await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
+
+            Characters.ApplyBattleEffect(index, battleEffect);
+
+            cardsList[index].ShowEffectIndicator(battleEffect.Action, battleEffect.Effect, battleEffect.IsNegative);
+            cardsList[index].UpdateTurnsLabel(battleEffect.Turns);
         }
 
-        public override Task ChangeHealth(int index, int change)
+        public override void UpdateBattleEffect(int index)
         {
-            throw new NotImplementedException();
+            BattleEffect battleEffect = Characters.BattleStates[index].BattleEffect;
+            cardsList[index].UpdateTurnsLabel(battleEffect.Turns);
         }
 
-        public override Task ChangeMana(int index, int change)
+        public override void RemoveBattleEffect(int index)
         {
-            throw new NotImplementedException();
+            Characters.RemoveBattleEffect(index);
+            cardsList[index].HideEffectIndicator();
         }
 
-        public override Task DefendCharacter(int index)
+        public override async Task ChangeHealth(int index, int change)
         {
-            throw new NotImplementedException();
+            sprites.ShowHealthBar(index, change, Characters[index]);
+            Characters.ChangeHealth(index, change);          
+            await cardsList.TweenDamage(index, change);
+        }
+
+        public override async Task ChangeMana(int index, int change)
+        {
+            Characters.ChangeMana(index, change);
+            await cardsList.TweenManaChange(index, change);
+
+            SceneTreeTimer timer = GetTree().CreateTimer(3);
+            await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
+        }
+
+        public override async Task DefendCharacter(int index)
+        {
+            BattleOptions.ShowInfoLabel($"{Characters[index].Name} defends!");
+            SceneTreeTimer timer = GetTree().CreateTimer(3);
+            await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
         }
 
         public override void FocusOnFirst()
         {
-            throw new NotImplementedException();
+            sprites.FocusOnFirst();
         }
 
-        public override Task SelectAction(int index)
+        public override async Task SelectAction(int index)
         {
-            throw new NotImplementedException();
+            Character character = Characters[index];
+
+            int targetIndex = Allies.Characters.GetRandomCharacter();
+            Character ally = Allies.Characters[targetIndex];
+
+            CharacterAction action = character.ChooseBehaviour();
+
+            switch (action)
+            {
+                case CharacterAction.Attack:
+                    await commands.OnAttack(index, character, targetIndex, ally);
+                    break;
+                case CharacterAction.Defend:
+                    break;
+                case CharacterAction.Items:
+                    break;
+                case CharacterAction.Magic:
+                    await commands.OnMagic(index, character, targetIndex, ally);
+                    break;
+            }
         }
 
         public override void OnNextCharacterPassed()
@@ -79,7 +127,13 @@ namespace TheWizardCoder.Subdisplays
 
         public override void StartTurn()
         {
-            throw new NotImplementedException();
+        }
+
+        public override void Clear()
+        {
+            Characters.Clear();
+            cardsList.Clear();
+            sprites.Clear();
         }
     }
 }

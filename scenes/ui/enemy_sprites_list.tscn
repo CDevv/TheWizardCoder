@@ -1,10 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbmtwx30607rd"]
+[gd_scene load_steps=4 format=3 uid="uid://cbmtwx30607rd"]
 
 [ext_resource type="Script" path="res://scripts/ui/EnemySpritesList.cs" id="1_mpdq0"]
 [ext_resource type="PackedScene" uid="uid://iglkgt85o6wb" path="res://scenes/ui/enemy_sprite.tscn" id="2_8vfrd"]
+[ext_resource type="PackedScene" uid="uid://bpiouthd683jq" path="res://scenes/ui/enemy_health_bar.tscn" id="3_c2ntt"]
 
 [node name="EnemySpritesList" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_mpdq0")
 EnemySpriteScene = ExtResource("2_8vfrd")
+
+[node name="HealthBar" parent="." instance=ExtResource("3_c2ntt")]
+visible = false
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 112.0
+offset_bottom = 16.0

@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://md5y5i42pw81"]
+[gd_scene load_steps=4 format=3 uid="uid://md5y5i42pw81"]
 
+[ext_resource type="Script" path="res://scripts/subdisplays/EnemiesSideDisplay.cs" id="1_0ewsn"]
 [ext_resource type="PackedScene" uid="uid://bia2aspqvs62q" path="res://scenes/ui/character_cards_list.tscn" id="1_3l8ih"]
 [ext_resource type="PackedScene" uid="uid://cbmtwx30607rd" path="res://scenes/ui/enemy_sprites_list.tscn" id="2_xgieh"]
 
 [node name="EnemiesSideDisplay" type="CanvasLayer"]
+script = ExtResource("1_0ewsn")
 
 [node name="CardsList" parent="." instance=ExtResource("1_3l8ih")]
 offset_left = 448.0

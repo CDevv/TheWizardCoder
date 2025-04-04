@@ -17,8 +17,6 @@ namespace TheWizardCoder.Subdisplays
         private AlliesInputObserver observer;
 
         [Export]
-        public DamageIndicator DamageIndicator { get; set; }
-        [Export]
         public EnemiesSideDisplay Enemies { get; set; }
 
         public CharacterCardsList CardsList => cardsList;
@@ -30,7 +28,8 @@ namespace TheWizardCoder.Subdisplays
             observer = new AlliesInputObserver(global, this);
 
             cardsList = GetNode<CharacterCardsList>("CardsList");
-            cardsList.DamageIndicator = DamageIndicator;
+
+            cardsList.CharacterCardPressed += (int index) => observer.OnCharacterCardPressed(index);
 
             BattleOptions.FightButtonTriggered += () => observer.OnAttackButton();
             BattleOptions.DefenseButtonTriggered += () => observer.OnDefendButton();
@@ -44,6 +43,7 @@ namespace TheWizardCoder.Subdisplays
         {
             Characters.AddCharacter(character);
             cardsList.AddCharacter(character);
+            CollectedExperience.Add(0);
         }
 
         public override async Task ApplyBattleEffect(int index, BattleEffect battleEffect)
@@ -57,8 +57,28 @@ namespace TheWizardCoder.Subdisplays
             cardsList[index].UpdateTurnsLabel(battleEffect.Turns);
         }
 
+        public override void UpdateBattleEffect(int index)
+        {
+            BattleEffect battleEffect = Characters.BattleStates[index].BattleEffect;
+            cardsList[index].UpdateTurnsLabel(battleEffect.Turns);
+        }
+
+        public override void RemoveBattleEffect(int index)
+        {
+            Characters.RemoveBattleEffect(index);
+            cardsList[index].HideEffectIndicator();
+        }
+
         public override async Task ChangeHealth(int index, int change)
         {
+            if (Characters.BattleStates[index].Action == Enums.CharacterAction.Defend)
+            {
+                if (change < 0)
+                {
+                    change = -Mathf.Clamp(-change - Characters[index].DefensePoints, 0, -change);
+                }
+            }
+
             Characters.ChangeHealth(index, change);
             await cardsList.TweenDamage(index, change);
         }
@@ -66,14 +86,20 @@ namespace TheWizardCoder.Subdisplays
         public override async Task ChangeMana(int index, int change)
         {
             Characters.ChangeMana(index, change);
-            await cardsList.TweenManaChange(index, change);
 
-            SceneTreeTimer timer = GetTree().CreateTimer(3);
-            await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
+            if (change > 0)
+            {
+                await cardsList.TweenManaChange(index, change);
+            }
+            else
+            {
+                cardsList.SetManaValue(index);
+            }
         }
 
         public override async Task DefendCharacter(int index)
         {
+            Characters.DefendCharacter(index);
             BattleOptions.ShowInfoLabel($"{Characters[index].Name} defends!");
             SceneTreeTimer timer = GetTree().CreateTimer(3);
             await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
@@ -116,6 +142,12 @@ namespace TheWizardCoder.Subdisplays
             cardsList[CurrentCharacter].ShowAsCurrentCharacter();
             BattleOptions.UpdateDisplay(Characters[CurrentCharacter]);
             BattleOptions.ShowOptions();
+        }
+
+        public override void Clear()
+        {
+            Characters.Clear();
+            cardsList.Clear();
         }
     }
 }

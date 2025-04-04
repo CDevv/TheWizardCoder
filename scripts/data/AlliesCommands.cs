@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TheWizardCoder.Autoload;
 using TheWizardCoder.Subdisplays;
 using TheWizardCoder.Enums;
-using static Godot.WebSocketPeer;
+using Godot;
 
 namespace TheWizardCoder.Data
 {
@@ -28,9 +28,7 @@ namespace TheWizardCoder.Data
             CharacterBattleState state = allies.Characters.GetCharacterState(index);
 
             allies.BattleOptions.ShowInfoLabel($"{ally.Name} attacks {allies.Enemies.Characters[state.Target].Name}!");
-
-            await allies.Enemies.ChangeHealth(index, ally.AttackPoints);
-
+            await allies.Enemies.ChangeHealth(state.Target, -ally.AttackPoints);
             allies.AddExperience(ally, ally.Level);
         }
 
@@ -47,6 +45,7 @@ namespace TheWizardCoder.Data
             string itemName = global.PlayerData.Inventory[healerState.ActionModifier];
             Item item = global.ItemDescriptions[itemName];
 
+            GD.Print(healerState.Target);
             Character target = allies.Characters.BattleStates[healerState.Target].Character;
 
             if (healerState.Target == healerIndex)
@@ -67,10 +66,14 @@ namespace TheWizardCoder.Data
                     await allies.ChangeMana(healerState.Target, item.Effect);
                     break;
                 case ItemType.Magic:
+                    GD.Print(item.AdditionalData);
                     BattleEffect effect = BattleEffect.FromArray(item.AdditionalData);
+                    GD.Print(effect.Effect);
                     await allies.ApplyBattleEffect(index, effect);
                     break;
             }
+
+            global.RemoveFromInventory(itemName);
         }
 
         public async Task OnMagic(int index, Character ally)
@@ -80,7 +83,7 @@ namespace TheWizardCoder.Data
             string currentMagicSpellName = ally.MagicSpells[state.ActionModifier];
             MagicSpell currentMagicSpell = global.MagicSpells[currentMagicSpellName];
 
-            await allies.ChangeMana(index, currentMagicSpell.Cost);
+            await allies.ChangeMana(index, -currentMagicSpell.Cost);
 
             if (currentMagicSpell.TargetType == CharacterType.Enemy)
             {

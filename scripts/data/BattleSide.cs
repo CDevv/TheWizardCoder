@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Godot;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheWizardCoder.Displays;
+using TheWizardCoder.Enums;
 
 namespace TheWizardCoder.Data
 {
@@ -26,6 +28,18 @@ namespace TheWizardCoder.Data
             Characters.Add(character);
             CharacterBattleState characterBattleState = new(character, currentIndex);
             BattleStates.Add(characterBattleState);
+        }
+
+        public int GetRandomCharacter()
+        {
+            int index = (int)(GD.Randi() % Characters.Count);
+
+            while (Characters[index].Health <= 0)
+            {
+                index = (int)(GD.Randi() % Characters.Count);
+            }
+
+            return index;
         }
 
         public CharacterBattleState GetCharacterState(Character character)
@@ -70,6 +84,34 @@ namespace TheWizardCoder.Data
             BattleStates[index].BattleEffect = battleEffect;
             BattleStates[index].HasBattleEffect = true;
             Characters[index].ApplyBattleEffect(battleEffect);
+        }
+
+        public void RemoveBattleEffect(int index)
+        {
+            BattleStates[index].HasBattleEffect = false;
+            Characters[index].RemoveBattleEffect(BattleStates[index].BattleEffect);
+            BattleStates[index].BattleEffect = null;
+        }
+
+        public void DefendCharacter(int index)
+        {
+            BattleStates[index].Action = CharacterAction.Defend;
+        }
+
+        public int GetTotalHealth()
+        {
+            int result = 0;
+            foreach (Character character in Characters)
+            {
+                result += character.Health;
+            }
+            return result;
+        }
+
+        public void Clear()
+        {
+            Characters.Clear();
+            BattleStates.Clear();
         }
 
         public IEnumerator<Character> GetEnumerator()

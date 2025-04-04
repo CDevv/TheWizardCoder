@@ -13,8 +13,6 @@ namespace TheWizardCoder.Displays
 {
     public partial class BattleDisplay : Display
     {
-        private Vector2 startingPoint = new(16, 408);
-
         [Signal]
         public delegate void BattleEndedEventHandler();
         [Signal]
@@ -23,22 +21,14 @@ namespace TheWizardCoder.Displays
         [Export]
         public Resource TutorialDialogueResource { get; set; }
         [Export]
-        public PackedScene CharacterRectScene { get; set; }
+        public AlliesSideDisplay Allies { get; private set; }
         [Export]
-        public PackedScene EnemySpriteScene { get; set; }
-        [Export]
-        public AlliesContainer Allies { get; private set; }
-        [Export]
-        public EnemiesContainer Enemies { get; private set; }
+        public EnemiesSideDisplay Enemies { get; private set; }
 
         public bool IsBattleEnded { get; private set; } = false;
         public bool IsTutorial { get; set; } = false;
 
         private BattleOptions battleOptions;
-        private EnemyHealthBar enemyHealthContainer;
-        private TextureProgressBar enemyHealthBar;
-        private DamageIndicator damageIndicator;
-        private Marker2D enemySpritePoint;
         private Button invisButton;
         private TextureRect backgroundRect;
         private bool lockBattleOptions = false;
@@ -49,9 +39,6 @@ namespace TheWizardCoder.Displays
         {
             base._Ready();
             battleOptions = GetNode<BattleOptions>("BattleOptions");
-            enemyHealthContainer = GetNode<EnemyHealthBar>("EnemyHealthBar");
-            damageIndicator = GetNode<DamageIndicator>("DamageIndicator");
-            enemySpritePoint = GetNode<Marker2D>("EnemySpritePoint");
             invisButton = GetNode<Button>("InvisButton");
             backgroundRect = GetNode<TextureRect>("Background");
         }
@@ -109,6 +96,8 @@ namespace TheWizardCoder.Displays
             await ToSignal(global.CurrentRoom.TransitionRect, TransitionRect.SignalName.AnimationFinished);
             Show();
             battleOptions.ShowDisplay();
+            Allies.Show();
+            Enemies.Show();
             global.CurrentRoom.TransitionRect.PlayAnimationBackwards();
 
             if (IsTutorial)
@@ -142,8 +131,8 @@ namespace TheWizardCoder.Displays
             invisButton.GrabFocus();
 
             List<CharacterBattleState> participants = new();
-            participants.AddRange(Allies.BattleStates);
-            participants.AddRange(Enemies.BattleStates);
+            participants.AddRange(Allies.Characters.BattleStates);
+            participants.AddRange(Enemies.Characters.BattleStates);
             participants = participants.OrderByDescending((p) => p.Character.AgilityPoints).ToList();
 
             foreach (CharacterBattleState participant in participants)
@@ -151,19 +140,19 @@ namespace TheWizardCoder.Displays
                 switch (participant.Character.Type)
                 {
                     case CharacterType.Ally:
-                        await Allies.Turn(participant.InternalIndex);
+                        await Allies.OnTurn(participant.InternalIndex);
                         break;
                     case CharacterType.Enemy:
-                        await Enemies.Turn(participant.InternalIndex);
+                        await Enemies.OnTurn(participant.InternalIndex);
                         break;
                 }
 
-                if (Enemies.GetTotalHealth() <= 0)
+                if (Enemies.Characters.GetTotalHealth() <= 0)
                 {
                     HideDisplay();
                     return;
                 }
-                else if (Allies.GetTotalHealth() <= 0)
+                else if (Allies.Characters.GetTotalHealth() <= 0)
                 {
                     IsBattleEnded = true;
                     global.CurrentRoom.TransitionRect.PlayAnimation();
@@ -171,6 +160,8 @@ namespace TheWizardCoder.Displays
 
                     global.CurrentRoom.GameOverDisplay.ShowDisplay();
                     Clear();
+                    Allies.Hide();
+                    Enemies.Hide();
                 }
                 else
                 {
@@ -194,7 +185,7 @@ namespace TheWizardCoder.Displays
 
             int wonGold = Allies.Characters.Sum(x => x.AttackPoints * x.Level);
 
-            battleOptions.ShowInfoLabel($"You won! {wonGold} Gold and {Allies.CollectedExperiences[0]} EXP obtained.");
+            battleOptions.ShowInfoLabel($"You won! {wonGold} Gold and {Allies.CollectedExperience[0]} EXP obtained.");
 
             await StartTransition();
 

@@ -72,7 +72,12 @@ namespace TheWizardCoder.Data
         public void OnEnemyPressed(int index)
         {
             allies.Characters.BattleStates[allies.CurrentCharacter].Target = index;
+            allies.PassToNext();
+        }
 
+        public void OnCharacterCardPressed(int index)
+        {
+            allies.Characters.BattleStates[allies.CurrentCharacter].Target = index;
             allies.PassToNext();
         }
     }

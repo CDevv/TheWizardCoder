@@ -14,13 +14,13 @@
 [ext_resource type="PackedScene" uid="uid://bap5mf0chx1uc" path="res://scenes/displays/code_message_display.tscn" id="10_vippa"]
 [ext_resource type="PackedScene" uid="uid://dh3hemp3t81x5" path="res://scenes/displays/level_up_display.tscn" id="11_c8vxm"]
 [ext_resource type="SpriteFrames" uid="uid://baxuf0ifo3bd4" path="res://assets/characters/movement/spriteframes/gertrude.tres" id="13_e7w2n"]
-[ext_resource type="PackedScene" path="res://scenes/displays/fishing_display.tscn" id="15_mrb4s"]
+[ext_resource type="PackedScene" uid="uid://d4l7knv3bdq7b" path="res://scenes/displays/fishing_display.tscn" id="15_mrb4s"]
 
 [node name="BaseRoom" type="Node2D"]
 script = ExtResource("1_rfc1d")
 
 [node name="TransitionRect" parent="." instance=ExtResource("4_qu4y4")]
-layer = 2
+layer = 10
 visible = false
 
 [node name="GameDisplay" parent="." instance=ExtResource("1_hid6f")]

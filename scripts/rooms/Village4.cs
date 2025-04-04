@@ -109,7 +109,7 @@ namespace TheWizardCoder.Rooms
 
         private async void ProgressCheckpointOne()
         {
-            switch (global.CurrentRoom.BattleDisplay.Allies.BattleStates[0].Action)
+            switch (global.CurrentRoom.BattleDisplay.Allies.Characters.BattleStates[0].Action)
             {
                 case CharacterAction.Attack:
                     NextTutorialStep();
@@ -127,7 +127,7 @@ namespace TheWizardCoder.Rooms
 
         private async void ProgressCheckpointTwo()
         {
-            switch (global.CurrentRoom.BattleDisplay.Allies.BattleStates[0].Action)
+            switch (global.CurrentRoom.BattleDisplay.Allies.Characters.BattleStates[0].Action)
             {
                 case CharacterAction.Defend:
                     NextTutorialStep();
@@ -145,7 +145,7 @@ namespace TheWizardCoder.Rooms
 
         private async void ProgressCheckpointThree()
         {
-            switch (global.CurrentRoom.BattleDisplay.Allies.BattleStates[0].Action)
+            switch (global.CurrentRoom.BattleDisplay.Allies.Characters.BattleStates[0].Action)
             {
                 case CharacterAction.Attack:
                     NextTutorialStep();

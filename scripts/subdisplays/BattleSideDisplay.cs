@@ -57,6 +57,8 @@ namespace TheWizardCoder.Subdisplays
         public abstract Task ChangeHealth(int index, int change);
         public abstract Task ChangeMana(int index, int change);
         public abstract Task ApplyBattleEffect(int index, BattleEffect battleEffect);
+        public abstract void RemoveBattleEffect(int index);
+        public abstract void UpdateBattleEffect(int index);
         public abstract Task DefendCharacter(int index);
         public async Task OnTurn(int index)
         {
@@ -65,12 +67,23 @@ namespace TheWizardCoder.Subdisplays
                 return;
             }
 
-            Character ally = Characters[index];
-            CharacterBattleState state = Characters.GetCharacterState(ally);
+            Character character = Characters[index];
+            CharacterBattleState state = Characters.GetCharacterState(character);
 
-            if (ally.Health <= 0)
+            if (character.Health <= 0)
             {
                 return;
+            }
+
+            if (state.HasBattleEffect)
+            {
+                state.BattleEffect.Turns--;
+                UpdateBattleEffect(index);
+
+                if (state.BattleEffect.Turns == 0)
+                {
+                    RemoveBattleEffect(index);
+                }
             }
 
             await SelectAction(index);
@@ -113,5 +126,6 @@ namespace TheWizardCoder.Subdisplays
 
         public abstract void OnNextCharacterPassed();
         public abstract void StartTurn();
+        public abstract void Clear();
     }
 }

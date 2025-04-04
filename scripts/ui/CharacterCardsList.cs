@@ -17,6 +17,7 @@ namespace TheWizardCoder.UI
 
         [Export]
         public PackedScene CharacterRectScene { get; set; }
+        public PackedScene DamageIndicatorScene { get; set; }
         public DamageIndicator DamageIndicator { get; set; }
         public Array<CharacterRect> Cards { get; private set; }
         public bool NegativeY { get; set; } = false;
@@ -24,25 +25,27 @@ namespace TheWizardCoder.UI
         public override void _Ready()
         {
             base._Ready();
+
             Cards = new Array<CharacterRect>();
+            DamageIndicator = GetNode<DamageIndicator>("DamageIndicator");
         }
 
         public void AddCharacter(Character character)
         {
-            int currentIndex = Cards.Count - 1;
+            int currentIndex = Cards.Count;
 
             CharacterRect rect = CharacterRectScene.Instantiate<CharacterRect>();
             rect.Name = $"Card-{character.Name}";
             AddChild(rect);
 
-            Vector2 vector = new Vector2(0, currentIndex * (rect.Size.Y + 4) * 2);
+            Vector2 vector = new Vector2(0, (currentIndex) * (rect.Size.Y + 4) * 2);
             if (NegativeY)
             {
-                rect.Position = Position + vector;
+                rect.Position = vector;
             }
             else
             {
-                rect.Position = Position - vector;
+                rect.Position = -vector;
             }
 
             rect.ApplyData(character);
@@ -91,9 +94,23 @@ namespace TheWizardCoder.UI
             await Cards[index].TweenDamage(backgroundColor);
         }
 
+        public void SetManaValue(int index)
+        {
+            Cards[index].SetPointsValue();
+        }
+
         public void OnCharacterCardPressed(int index)
         {
             EmitSignal(SignalName.CharacterCardPressed, index);
+        }
+
+        public void Clear()
+        {
+            foreach (var item in Cards)
+            {
+                item.QueueFree();
+            }
+            Cards.Clear();
         }
 
         public CharacterRect this[int index]

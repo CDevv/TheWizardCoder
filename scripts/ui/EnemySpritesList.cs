@@ -17,9 +17,17 @@ namespace TheWizardCoder.UI
         public delegate void EnemyPressedEventHandler(int index);
 
         private Array<EnemySprite> sprites;
+        private EnemyHealthBar healthBar;
 
         [Export]
         public PackedScene EnemySpriteScene { get; set; }
+
+        public override void _Ready()
+        {
+            base._Ready();
+            sprites = new Array<EnemySprite>();
+            healthBar = GetNode<EnemyHealthBar>("HealthBar");
+        }
 
         public void AddSprite(Character character)
         {
@@ -28,14 +36,38 @@ namespace TheWizardCoder.UI
             EnemySprite enemySprite = EnemySpriteScene.Instantiate<EnemySprite>();
             AddChild(enemySprite);
 
-            enemySprite.Position = Position;
+            enemySprite.Position = Vector2.Zero;
             enemySprite.ApplyData(character);
-            enemySprite.ButtonPressed += () =>
-            {
-                //EmitSignal(SignalName.EnemyPressed, currentIndex);
-            };
+            enemySprite.ButtonPressed += () => OnEnemySpritePressed(currentIndex);
 
             sprites.Add(enemySprite);
+        }
+
+        public void ShowHealthBar(int index, int change, Character character)
+        {
+            Vector2 baseSize = healthBar.Size;
+            Vector2 offset = new(baseSize.X / 2, baseSize.Y / 2);
+            healthBar.Position = sprites[index].Position - offset;
+            healthBar.ShowHealthBar(character.Health, character.Health + change, character.MaxHealth);
+        }
+
+        public void FocusOnFirst()
+        {
+            sprites[0].GrabFocus();
+        }
+
+        public void Clear()
+        {
+            foreach (var item in sprites)
+            {
+                item.QueueFree();
+            }
+            sprites.Clear();
+        }
+
+        public void OnEnemySpritePressed(int index)
+        {
+            EmitSignal(SignalName.EnemyPressed, index);
         }
 
         public IEnumerator<EnemySprite> GetEnumerator()
