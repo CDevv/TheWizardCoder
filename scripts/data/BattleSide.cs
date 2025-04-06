@@ -110,6 +110,14 @@ namespace TheWizardCoder.Data
 
         public void Clear()
         {
+            for (int i = 0; i < Characters.Count; i++)
+            {
+                if (BattleStates[i].HasBattleEffect)
+                {
+                    RemoveBattleEffect(i);
+                }
+            }
+
             Characters.Clear();
             BattleStates.Clear();
         }

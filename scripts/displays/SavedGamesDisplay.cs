@@ -94,7 +94,7 @@ namespace TheWizardCoder.Displays
 
         public void OnCloseButton()
         {
-            Hide();
+            HideDisplay();
             global.CanWalk = true;
             global.GameDisplayEnabled = true;
         }

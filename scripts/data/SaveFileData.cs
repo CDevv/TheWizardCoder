@@ -24,7 +24,6 @@ namespace TheWizardCoder.Data
         public Character Stats { get; set; }
         public int Gold { get; set; }
         private Array<string> inventory = new();
-        private Array<string> magicSpells = new();
 
         public Array<string> Inventory
         {
@@ -179,7 +178,10 @@ namespace TheWizardCoder.Data
 
         public void AddMagicSpell(string name)
         {
-            Stats.MagicSpells.Add(name);
+            if (!Stats.MagicSpells.Contains(name))
+            {
+                Stats.MagicSpells.Add(name);
+            }
         }
 
         public void RemoveMagicSpell(string name)

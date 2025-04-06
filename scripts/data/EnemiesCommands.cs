@@ -53,7 +53,7 @@ namespace TheWizardCoder.Data
                         }
                         else
                         {
-                            await allies.ApplyBattleEffect(targetIndex, magicSpell.BattleEffect);
+                            await allies.ApplyBattleEffect(targetIndex, magicSpell.BattleEffect.Clone());
                         }
 
                         break;

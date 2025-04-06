@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Linq;
 using TheWizardCoder.Autoload;
 using TheWizardCoder.Enums;
 
@@ -114,6 +115,8 @@ namespace TheWizardCoder.Data
                 InitialDefensePoint = DefensePoints;
                 InitialAgilityPoints = AgilityPoints;
             }
+
+            MagicSpells = new Array<string>(MagicSpells.Distinct());
         }
 
         private void FetchBehaviour(Variant variant)

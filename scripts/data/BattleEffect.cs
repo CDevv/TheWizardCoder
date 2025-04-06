@@ -40,5 +40,10 @@ namespace TheWizardCoder.Data
 
             return new BattleEffect(action, targetType, turns, effect, isNegative);
         }
+
+        public BattleEffect Clone()
+        {
+            return new BattleEffect(Action, TargetType, Turns, Effect, IsNegative);
+        }
     }
 }
