@@ -48,6 +48,7 @@ layer = 6
 visible = false
 
 [node name="Dialogue" parent="." instance=ExtResource("6_wcmrr")]
+layer = 2
 visible = false
 
 [node name="GameOverDisplay" parent="." instance=ExtResource("8_w5sia")]

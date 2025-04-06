@@ -3,6 +3,7 @@ using TheWizardCoder.Abstractions;
 using TheWizardCoder.Autoload;
 using TheWizardCoder.Data;
 using TheWizardCoder.Enums;
+using TheWizardCoder.Subdisplays;
 using TheWizardCoder.UI;
 
 namespace TheWizardCoder.Displays
@@ -15,6 +16,7 @@ namespace TheWizardCoder.Displays
         private SaveFileOption save2button;
         private SaveFileOption save3button;
         private Button saveButton;
+        private ControlsDisplay controls;
         private SaveFileAction action;
 
         public override void _Ready()
@@ -24,6 +26,9 @@ namespace TheWizardCoder.Displays
             save2button = GetNode<SaveFileOption>("Save2");
             save3button = GetNode<SaveFileOption>("Save3");
             saveButton = GetNode<Button>("%SaveButton");
+            controls = GetNode<ControlsDisplay>("ControlsDisplay");
+
+            controls.HideDisplay();
         }
 
         public override void _Input(InputEvent @event)
@@ -50,6 +55,7 @@ namespace TheWizardCoder.Displays
         {
             global.GameDisplayEnabled = false;
             Show();
+            controls.Show();
             saveButton.GrabFocus();
         }
 
@@ -68,6 +74,7 @@ namespace TheWizardCoder.Displays
         public override void HideDisplay()
         {
             Hide();
+            controls.HideDisplay();
             global.CanWalk = true;
         }
 

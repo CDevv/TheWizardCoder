@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dc44aibe82cqn"]
+[gd_scene load_steps=6 format=3 uid="uid://dc44aibe82cqn"]
 
 [ext_resource type="Script" path="res://scripts/displays/SavedGamesDisplay.cs" id="1_q5563"]
 [ext_resource type="PackedScene" uid="uid://bshn67cvbvii5" path="res://scenes/ui/save_file_option.tscn" id="2_hq5uw"]
 [ext_resource type="Texture2D" uid="uid://csexipk23remd" path="res://assets/ui/baseui.png" id="3_f7ehm"]
 [ext_resource type="Theme" uid="uid://db7w42eb47dby" path="res://themes/main_theme.tres" id="4_0wjab"]
+[ext_resource type="PackedScene" uid="uid://n0ed07fgussd" path="res://scenes/subdisplays/gamemenu/controls_display.tscn" id="5_rbrng"]
 
 [node name="SavedGamesDisplay" type="CanvasLayer"]
 script = ExtResource("1_q5563")
@@ -81,6 +82,9 @@ mouse_filter = 2
 theme = ExtResource("4_0wjab")
 theme_override_font_sizes/font_size = 36
 text = "Load"
+
+[node name="ControlsDisplay" parent="." instance=ExtResource("5_rbrng")]
+visible = false
 
 [connection signal="pressed" from="Save1" to="." method="OnSaveOption" binds= ["save1"]]
 [connection signal="pressed" from="Save2" to="." method="OnSaveOption" binds= ["save2"]]
