@@ -162,6 +162,7 @@ namespace TheWizardCoder.Displays
                     Clear();
                     Allies.Hide();
                     Enemies.Hide();
+                    battleOptions.Hide();
                 }
                 else
                 {
@@ -190,6 +191,8 @@ namespace TheWizardCoder.Displays
             await StartTransition();
 
             Hide();
+            Allies.Hide();
+            Enemies.Hide();
             battleOptions.HideDisplay();
 
             global.CanWalk = true;

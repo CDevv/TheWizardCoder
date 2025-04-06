@@ -7,6 +7,7 @@
 [node name="EnemySpritesList" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+mouse_filter = 2
 script = ExtResource("1_mpdq0")
 EnemySpriteScene = ExtResource("2_8vfrd")
 

@@ -20,7 +20,7 @@
 script = ExtResource("1_rfc1d")
 
 [node name="TransitionRect" parent="." instance=ExtResource("4_qu4y4")]
-layer = 10
+layer = 5
 visible = false
 
 [node name="GameDisplay" parent="." instance=ExtResource("1_hid6f")]
@@ -44,6 +44,7 @@ limit_right = 640
 limit_bottom = 480
 
 [node name="CodeProblemPanel" parent="." instance=ExtResource("6_244tq")]
+layer = 6
 visible = false
 
 [node name="Dialogue" parent="." instance=ExtResource("6_wcmrr")]

@@ -49,6 +49,7 @@ visible = false
 [node name="InvisButton" type="Button" parent="."]
 offset_right = 8.0
 offset_bottom = 8.0
+mouse_filter = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_74etw")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_jm34i")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_t1bdu")

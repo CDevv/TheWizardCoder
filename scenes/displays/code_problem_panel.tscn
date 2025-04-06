@@ -149,7 +149,7 @@ color = Color(0.0784314, 0.133333, 0.0784314, 1)
 
 [node name="PickableButton" parent="ItemsRect" instance=ExtResource("3_s8dc8")]
 visible = false
-position = Vector2(8, 8)
+position = Vector2(8, 168)
 scale = Vector2(0.5, 0.5)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

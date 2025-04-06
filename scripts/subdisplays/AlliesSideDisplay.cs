@@ -147,6 +147,7 @@ namespace TheWizardCoder.Subdisplays
         public override void Clear()
         {
             Characters.Clear();
+            CollectedExperience.Clear();
             cardsList.Clear();
         }
     }

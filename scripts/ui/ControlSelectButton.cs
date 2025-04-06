@@ -1,4 +1,5 @@
 using Godot;
+using System.Linq;
 using TheWizardCoder.Autoload;
 
 namespace TheWizardCoder.UI
@@ -10,10 +11,18 @@ namespace TheWizardCoder.UI
         private InputEventKey selectedControl;
         private bool waitingInput = false;
         private Global global;
+        private Key[] disallowedKeys;
 
         public override void _Ready()
         {
             global = GetNode<Global>("/root/Global");
+
+            disallowedKeys = new Key[]
+            {
+                Key.Z,
+                Key.X,
+                Key.Q
+            };
 
             InputEventKey eventKey = (InputEventKey)global.Settings.Controls[ActionName];
             Text = eventKey.AsTextKeycode();
@@ -25,9 +34,19 @@ namespace TheWizardCoder.UI
             {
                 if (@event is InputEventKey && @event.IsPressed())
                 {
-                    Text = ((InputEventKey)@event).AsTextKeycode();
-                    global.Settings.ChangeControl(ActionName, @event);
-                    global.Settings.SaveSettings();
+                    InputEventKey eventKey = (InputEventKey)@event;
+                    if (IsKeyAllowed(eventKey.PhysicalKeycode))
+                    {
+                        Text = eventKey.AsTextKeycode();
+                        global.Settings.ChangeControl(ActionName, @event);
+                        global.Settings.SaveSettings();                    
+                    }
+                    else
+                    {
+                        InputEventKey currentKey = (InputEventKey)global.Settings.Controls[ActionName];
+                        Text = currentKey.AsTextKeycode();
+                    }
+
                     waitingInput = false;
                 }
             }
@@ -37,6 +56,15 @@ namespace TheWizardCoder.UI
         {
             Text = "Waiting for input..";
             waitingInput = true;
+        }
+
+        private bool IsKeyAllowed(Key key)
+        {
+            if (disallowedKeys.Contains(key))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
