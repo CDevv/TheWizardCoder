@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_if4ef"]
 [ext_resource type="Script" path="res://scripts/rooms/TavernBarrelsRoom.cs" id="2_mx4en"]
 [ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="3_cb2u5"]
-[ext_resource type="TileSet" uid="uid://clhrfovy5lcgu" path="res://tilesets/houses_interiors.tres" id="3_w0hq8"]
+[ext_resource type="TileSet" uid="uid://clhrfovy5lcgu" path="res://tilesets/village_houses_interiors.tres" id="3_w0hq8"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/interactables/warper.tscn" id="4_l2p8p"]
 [ext_resource type="PackedScene" uid="uid://bk3a4lc0i5uwk" path="res://scenes/components/actor.tscn" id="5_fppg3"]
 [ext_resource type="SpriteFrames" uid="uid://bmnwdib5t7mxq" path="res://assets/characters/movement/spriteframes/berry.tres" id="6_hi0d1"]

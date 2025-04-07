@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_k3jai"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_laksc"]
 [ext_resource type="Script" path="res://scripts/rooms/Tavern.cs" id="2_nc0um"]
-[ext_resource type="TileSet" uid="uid://clhrfovy5lcgu" path="res://tilesets/houses_interiors.tres" id="3_5p0mu"]
+[ext_resource type="TileSet" uid="uid://clhrfovy5lcgu" path="res://tilesets/village_houses_interiors.tres" id="3_5p0mu"]
 [ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="3_r2aa2"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/interactables/warper.tscn" id="4_p74cn"]
 [ext_resource type="PackedScene" uid="uid://bk3a4lc0i5uwk" path="res://scenes/components/actor.tscn" id="5_ioijf"]

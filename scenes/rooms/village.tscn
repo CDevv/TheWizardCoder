@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://bnrpcmnrkhx3q"]
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_6off3"]
-[ext_resource type="TileSet" uid="uid://bnilncsva6t64" path="res://tilesets/env.tres" id="2_483cr"]
+[ext_resource type="TileSet" uid="uid://bnilncsva6t64" path="res://tilesets/village_environment.tres" id="2_483cr"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="3_3an4a"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/interactables/warper.tscn" id="4_l1utu"]
 [ext_resource type="PackedScene" uid="uid://wj04chm4vh08" path="res://scenes/components/stairs_area.tscn" id="5_pf8dv"]

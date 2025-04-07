@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_lnd3s"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_qupqs"]
-[ext_resource type="TileSet" uid="uid://dqirfdrc3jlyd" path="res://tilesets/vindi_env.tres" id="3_p2412"]
+[ext_resource type="TileSet" uid="uid://dqirfdrc3jlyd" path="res://tilesets/vindi_environment.tres" id="3_p2412"]
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/interactables/dialogue_point.tscn" id="4_vr2es"]
 [ext_resource type="Resource" uid="uid://ukx1i3qsx6q2" path="res://dialogue/vindi.dialogue" id="5_qnt3h"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/interactables/warper.tscn" id="6_utj8t"]

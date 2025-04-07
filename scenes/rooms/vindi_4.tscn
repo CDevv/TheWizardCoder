@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d2hm4l4jkf1yg" path="res://assets/ui/parallax-vindi.png" id="2_v8m6p"]
 [ext_resource type="Script" path="res://scripts/rooms/Vindi4.cs" id="2_yxlvp"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="3_73jxe"]
-[ext_resource type="TileSet" uid="uid://dqirfdrc3jlyd" path="res://tilesets/vindi_env.tres" id="4_t8ngs"]
+[ext_resource type="TileSet" uid="uid://dqirfdrc3jlyd" path="res://tilesets/vindi_environment.tres" id="4_t8ngs"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/interactables/warper.tscn" id="5_eepc4"]
 [ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/interactables/code_problem_point.tscn" id="6_evcuj"]
 [ext_resource type="Texture2D" uid="uid://dst5d1rkkrar8" path="res://assets/props/glitch.png" id="7_vwq77"]

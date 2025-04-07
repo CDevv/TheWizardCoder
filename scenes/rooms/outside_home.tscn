@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_l3dni"]
 [ext_resource type="Script" path="res://scripts/rooms/OutsideHome.cs" id="2_acc8b"]
-[ext_resource type="TileSet" uid="uid://bnilncsva6t64" path="res://tilesets/env.tres" id="2_aeeoo"]
+[ext_resource type="TileSet" uid="uid://bnilncsva6t64" path="res://tilesets/village_environment.tres" id="2_aeeoo"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="3_rbhxw"]
 [ext_resource type="Resource" uid="uid://dxv3wga5qop3d" path="res://dialogue/nolan_house.dialogue" id="3_tbp4q"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/interactables/warper.tscn" id="4_qdfit"]

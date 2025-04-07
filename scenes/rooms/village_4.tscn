@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_ehys0"]
 [ext_resource type="Script" path="res://scripts/rooms/Village4.cs" id="2_yr3rd"]
 [ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="3_3hq0k"]
-[ext_resource type="TileSet" uid="uid://bnilncsva6t64" path="res://tilesets/env.tres" id="3_bfau6"]
+[ext_resource type="TileSet" uid="uid://bnilncsva6t64" path="res://tilesets/village_environment.tres" id="3_bfau6"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/interactables/warper.tscn" id="4_yvi7c"]
 [ext_resource type="PackedScene" uid="uid://bmwn0c57lgamm" path="res://scenes/interactables/code_problem_point.tscn" id="7_nooi4"]
 [ext_resource type="Texture2D" uid="uid://b3oca77ienxgc" path="res://assets/props/star-glitch.png" id="7_ugdfg"]

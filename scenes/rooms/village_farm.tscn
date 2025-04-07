@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bb1itrnd1e8am" path="res://scenes/components/base_room.tscn" id="1_xd11b"]
 [ext_resource type="PackedScene" uid="uid://dk58pi6w8qy72" path="res://scenes/components/player.tscn" id="2_6625t"]
 [ext_resource type="Script" path="res://scripts/rooms/VillageFarm.cs" id="2_qfxx8"]
-[ext_resource type="TileSet" uid="uid://bnilncsva6t64" path="res://tilesets/env.tres" id="3_nggho"]
+[ext_resource type="TileSet" uid="uid://bnilncsva6t64" path="res://tilesets/village_environment.tres" id="3_nggho"]
 [ext_resource type="PackedScene" uid="uid://vk3ye6s5pp5" path="res://scenes/interactables/warper.tscn" id="4_q4jss"]
 [ext_resource type="PackedScene" uid="uid://cxpy82ff52bmm" path="res://scenes/interactables/dialogue_point.tscn" id="5_hwpiv"]
 [ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="6_eeq7a"]
