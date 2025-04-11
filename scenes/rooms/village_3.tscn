@@ -35,11 +35,6 @@ b = Vector2(968, 352)
 y_sort_enabled = true
 script = ExtResource("2_wb2jq")
 
-[node name="BattleDisplay" parent="." index="2"]
-TutorialDialogueResource = null
-CharacterRectScene = null
-EnemySpriteScene = null
-
 [node name="Camera" parent="." index="6"]
 limit_right = 1888
 limit_bottom = 1952
