@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://t2oe67lsq1j2"]
+[gd_scene load_steps=11 format=3 uid="uid://t2oe67lsq1j2"]
 
 [ext_resource type="Script" path="res://scripts/displays/BattleDisplay.cs" id="1_py1kc"]
 [ext_resource type="Resource" uid="uid://bcn3ls3g7w8ns" path="res://dialogue/village.dialogue" id="2_scu7s"]
-[ext_resource type="PackedScene" uid="uid://bpiouthd683jq" path="res://scenes/ui/enemy_health_bar.tscn" id="6_s2ji1"]
 [ext_resource type="Texture2D" uid="uid://bkcqub1bq0kvx" path="res://assets/battle/backgrounds/battle-bg.png" id="7_4rtm4"]
 [ext_resource type="PackedScene" uid="uid://cevwsglbjkiip" path="res://scenes/subdisplays/battle/battle_options.tscn" id="9_py3yx"]
 [ext_resource type="PackedScene" uid="uid://ccx6jf26pb221" path="res://scenes/subdisplays/battle/allies_side_display.tscn" id="11_ykhas"]
@@ -42,9 +41,6 @@ visible = false
 Allies = NodePath("../AlliesSideDisplay")
 BattleDisplay = NodePath("..")
 BattleOptions = NodePath("../BattleOptions")
-
-[node name="EnemyHealthBar" parent="." instance=ExtResource("6_s2ji1")]
-visible = false
 
 [node name="InvisButton" type="Button" parent="."]
 offset_right = 8.0
